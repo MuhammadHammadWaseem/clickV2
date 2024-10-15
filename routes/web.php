@@ -23,6 +23,9 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/contact', [WebController::class, 'contact'])->name('about');
     Route::get('/blog', [WebController::class, 'blog'])->name('about');
     Route::get('/tutorial', [WebController::class, 'tutorial'])->name('about');
-    Route::get('/sendcontact', [WebController::class, 'sendcontact'])->name('sendcontact');
 });
-
+Route::get('/blog', [WebController::class, 'blog'])->name('blog.index');
+Route::get('/blog/{slug}', [WebController::class,'blogshow'])->name('blog.show');
+Route::get('/all/blog', [WebController::class,'blogshowall'])->name('blog.all');
+Route::get('/blogs/search', [WebController::class,'blogsearch'])->name('blogs.search');
+Route::match(['get', 'post'], '/sendcontact', [WebController::class, 'postcontact'])->name('sendcontact');
