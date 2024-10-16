@@ -16,23 +16,30 @@ use App\Http\Middleware\AuthCheck;
 */
 
 Route::get('/lang/{lang}', [WebController::class, 'lang'])->name('lang.switch');
+
 Route::group(['as' => 'web.'], function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/events', [WebController::class, 'events'])->name('events');
     Route::get('/features', [WebController::class, 'features'])->name('features');
     Route::get('/about', [WebController::class, 'about'])->name('about');
-    Route::get('/contact', [WebController::class, 'contact'])->name('about');
-    Route::get('/blog', [WebController::class, 'blog'])->name('about');
-    Route::get('/tutorial', [WebController::class, 'tutorial'])->name('about');
-    Route::get('/register', [WebController::class, 'register']);
-    Route::post('/register', [WebController::class, 'register_store']);
-    Route::get('/success', [WebController::class, 'success'])->name('success');
-    Route::get('/login', [WebController::class, 'login'])->name('login');
-    Route::get('/logout', [WebController::class, 'logout']);
-    Route::post('/login ', [WebController::class, 'login_success']);
+    Route::get('/contact', [WebController::class, 'contact'])->name('contact');
+    Route::get('/blog', [WebController::class, 'blog'])->name('blog');
+    Route::get('/tutorial', [WebController::class, 'tutorial'])->name('tutorial');
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/register', [WebController::class, 'register']);
+        Route::post('/register', [WebController::class, 'register_store']);
+        Route::get('/login', [WebController::class, 'login'])->name('login');
+        Route::post('/login', [WebController::class, 'login_success']);
+        Route::get('/reset', [WebController::class, 'reset']);
+        Route::post('/recoverp', [WebController::class, 'dorecover']);
+    });
+
+    Route::get('/logout', [WebController::class, 'logout'])->name('logout');
     Route::get('/confirm/{code}', [WebController::class, 'confirm']);
-    Route::get('/reset', [WebController::class, 'reset']);
-    Route::post('/recoverp', [WebController::class, 'dorecover']);
+    Route::get('/success', [WebController::class, 'success'])->name('success');
+
+    // Blog routes
     Route::get('/blog', [WebController::class, 'blog'])->name('blog.index');
     Route::get('/blog/{slug}', [WebController::class, 'blogshow'])->name('blog.show');
     Route::get('/all/blog', [WebController::class, 'blogshowall'])->name('blog.all');

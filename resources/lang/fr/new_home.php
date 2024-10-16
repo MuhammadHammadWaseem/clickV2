@@ -10,6 +10,7 @@ return [
     'About'  => 'À propos de',
     'Contact'  => 'Contactez',
     'Login'  => 'Connexion',
+    'Logout'  => 'Déconnexion',
     'Privacy Policy'  => 'Politique de confidentialité',
     'Terms of Use'  => 'Conditions d\'utilisation',
     'Copyright © 2022.All Rights Reserved By'  => 'droits d\'auteur © 2022.Tous droits réservés par',
@@ -60,6 +61,6 @@ return [
     'Enough? start planning!'  => 'Suffisant? commencez à planifier !',
     'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY'  => 'Maintenant que vous avez lu tous les avantages, amusons-nous le jour de VOTRE MARIAGE',
     'GET STARTED NOW'  => 'COMMENCEZ MAINTENANT',
-
-    'test' => 'abcd'
+    'test' => 'abcd',
+    'Panel' => 'Panneau'
 ];

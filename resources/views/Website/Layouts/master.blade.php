@@ -60,12 +60,20 @@
                         @endforeach
                     </div>
                     </li>
-                    <span class="header-buttons">
-                        <button class="login"> <a href="/login" style="text-decoration: none; color:black;">
-                                {{ __('new_home.Login') }}</a> </button>
-                        <a class="register" href="/register"
-                            style="text-decoration: none; color:black;">{{ __('new_home.Register') }}</a>
-                    </span>
+                    @guest
+                        <span class="header-buttons">
+                            <button class="login"> <a href="/login" style="text-decoration: none; color:black;">
+                                    {{ __('new_home.Login') }}</a> </button>
+                            <a class="register" href="/register"
+                                style="text-decoration: none; color:black;">{{ __('new_home.Register') }}</a>
+                        </span>
+                    @endguest
+                    @auth
+                        <span class="header-buttons">
+                            <button class="login"> <a href="{{ route('panel.panel') }}" style="text-decoration: none; color:black;">{{ __('new_home.Panel') }}</a> </button>
+                            <button class="login"> <a href="{{ route('web.logout') }}" style="text-decoration: none; color:black;">{{ __('new_home.Logout') }}</a> </button>
+                        </span>
+                    @endauth
 
                     <button class="nav-toggler">
                         <span>
