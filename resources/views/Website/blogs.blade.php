@@ -157,7 +157,7 @@
 
         <div class="testimonial"
             style="padding:0px !important; margin: 40px!important; border: 0px; text-align: center !important;">
-            <a href="{{ route('blog.all') }}" class="mt-5" style="">All Blogs</a>
+            <a href="{{ route('web.blog.all') }}" class="mt-5" style="">All Blogs</a>
         </div>
 
         <div class="heading-text hs-border">
@@ -184,7 +184,7 @@
         $('#search').on('input', function() {
             var query = $(this).val();
             $.ajax({
-                url: "{{ route('blogs.search') }}",
+                url: "{{ route('web.blogs.search') }}",
                 type: "GET",
                 data: {
                     query: query

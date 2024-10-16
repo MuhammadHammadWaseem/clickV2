@@ -25,20 +25,16 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/tutorial', [WebController::class, 'tutorial'])->name('about');
     Route::get('/register', [WebController::class, 'register']);
     Route::post('/register', [WebController::class, 'register_store']);
-    Route::get('/success',[WebController::class,'success'])->name('success');
+    Route::get('/success', [WebController::class, 'success'])->name('success');
     Route::get('/login', [WebController::class, 'login']);
     Route::post('/login ', [WebController::class, 'login_success']);
     Route::get('/confirm/{code}', [WebController::class, 'confirm']);
     Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
     Route::get('/reset', [WebController::class, 'reset']);
-
     Route::post('/recoverp', [WebController::class, 'dorecover']);
-
-
-
+    Route::get('/blog', [WebController::class, 'blog'])->name('blog.index');
+    Route::get('/blog/{slug}', [WebController::class, 'blogshow'])->name('blog.show');
+    Route::get('/all/blog', [WebController::class, 'blogshowall'])->name('blog.all');
+    Route::get('/blogs/search', [WebController::class, 'blogsearch'])->name('blogs.search');
+    Route::match(['get', 'post'], '/sendcontact', [WebController::class, 'postcontact'])->name('sendcontact');
 });
-Route::get('/blog', [WebController::class, 'blog'])->name('blog.index');
-Route::get('/blog/{slug}', [WebController::class,'blogshow'])->name('blog.show');
-Route::get('/all/blog', [WebController::class,'blogshowall'])->name('blog.all');
-Route::get('/blogs/search', [WebController::class,'blogsearch'])->name('blogs.search');
-Route::match(['get', 'post'], '/sendcontact', [WebController::class, 'postcontact'])->name('sendcontact');
