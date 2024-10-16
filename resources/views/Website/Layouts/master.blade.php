@@ -70,7 +70,7 @@
                     @endguest
                     @auth
                         <span class="header-buttons">
-                            <a class="register" href="{{ route('panel.panel') }}" style="text-decoration: none; color:black;">{{ __('new_home.Panel') }}</a>
+                            <a class="register" href="{{ route('panel.index') }}" style="text-decoration: none; color:black;">{{ __('new_home.Panel') }}</a>
                             <button class="login"> <a href="{{ route('web.logout') }}" style="text-decoration: none; color:black;">{{ __('new_home.Logout') }}</a> </button>
                         </span>
                     @endauth
