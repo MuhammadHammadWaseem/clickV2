@@ -38,3 +38,8 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/blogs/search', [WebController::class, 'blogsearch'])->name('blogs.search');
     Route::match(['get', 'post'], '/sendcontact', [WebController::class, 'postcontact'])->name('sendcontact');
 });
+
+// <====================================== PANEL ======================================> \\
+Route::group(['as' => 'panel.'], function () {
+
+});

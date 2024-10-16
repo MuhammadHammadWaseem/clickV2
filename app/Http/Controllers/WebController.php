@@ -196,7 +196,7 @@ class WebController extends Controller
     public function openPanel(Request $req)
     {
         $eventList = DB::table('event_type')->get();
-        return view('Website.panel.panel', ['eventList' => $eventList]);
+        return view('Panel.index', ['eventList' => $eventList]);
     }
 
     public function reset(Request $req)
