@@ -193,13 +193,6 @@ class WebController extends Controller
             return '';
     }
 
-    public function openPanel(Request $req)
-    {
-        dd(Auth::check());
-        $eventList = DB::table('event_type')->get();
-        return view('Panel.index', ['eventList' => $eventList]);
-    }
-
     public function reset(Request $req)
     {
         $eventList = DB::table('event_type')->get();

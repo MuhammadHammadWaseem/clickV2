@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthCheck;
@@ -52,6 +53,6 @@ Route::group(['as' => 'web.'], function () {
 // <====================================== PANEL ======================================> \\
 Route::group(['as' => 'panel.'], function () {
     Route::middleware([AuthCheck::class])->group(function () {
-        Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
+        Route::get('/panel', [PanelController::class, 'index'])->name('index');
     });
 });
