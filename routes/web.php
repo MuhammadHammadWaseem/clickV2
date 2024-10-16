@@ -33,6 +33,8 @@ Route::group(['as' => 'web.'], function () {
         Route::post('/login', [WebController::class, 'login_success']);
         Route::get('/reset', [WebController::class, 'reset']);
         Route::post('/recoverp', [WebController::class, 'dorecover']);
+        Route::get('/new-password/{code}', [WebController::class, 'newPassword']);
+        Route::post('/changep', [WebController::class, 'changep']);
     });
 
     Route::get('/logout', [WebController::class, 'logout'])->name('logout');

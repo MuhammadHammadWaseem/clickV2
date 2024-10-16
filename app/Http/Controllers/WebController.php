@@ -226,5 +226,21 @@ class WebController extends Controller
         Auth::logout();
         return redirect('/');
     }
+    public function newPassword()
+    {
+        return view('Website.auth.newPassword');
+    }
+
+    public function changep(Request $request)
+	{
+		$user = User::where('confirmation_code', $request->code)->first();
+		if ($user) {
+			$user->password = password_hash($request->newp, PASSWORD_DEFAULT);
+			$user->save();
+			$user->refresh();
+			return 1;
+		} else
+			return 0;
+	}
 }
 

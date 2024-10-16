@@ -13,7 +13,7 @@
 			<td>
 				<table width="595"  align="center" style="background:white; text-align:center; border-radius:20px;">
 					<tr>
-						<td><img moz-do-not-send="false" src="https://clickinvitation.com//assets/images/logo/logoNewGolden.png" alt="VivoQui" height="42"></td>
+						<td><img moz-do-not-send="false" src="{{ env('APP_URL') }}/assets/images/logo/logoNewGolden.png" alt="VivoQui" height="42"></td>
 
 					</tr>
 				</table>
@@ -24,7 +24,7 @@
 							<br>
 							To confirm your email address, please click on the following link:
 							<br><br>
-                            <a href="http://127.0.0.1:8000/confirm/{{$confirmation_code}}">Click here to confirm your email</a>
+                            <a href="{{ env('APP_URL') }}/confirm/{{$confirmation_code}}">Click here to confirm your email</a>
 							<br><br>
 							For any info please write to <a href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>
 							<br>
@@ -42,8 +42,8 @@
 							<p> This is an automated message please do not reply.<br>
 								clickinvitation.com <?php  echo date('Y'); ?>. All rights reserved.<br>
 								<a style="color:white;"  href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a style="color:white;" href="https://clickinvitation.com/privacy-policy">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a style="color:white;" href="https://clickinvitation.com/termos-of-use">Terms and Conditions</a>
+								<a style="color:white;" href="{{ env('APP_URL') }}/privacy-policy">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a style="color:white;" href="{{ env('APP_URL') }}/termos-of-use">Terms and Conditions</a>
 							</p>
 						</td>
 
