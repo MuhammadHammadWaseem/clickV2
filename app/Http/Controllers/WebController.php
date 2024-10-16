@@ -6,15 +6,16 @@ use Carbon\Carbon;
 use App\Models\Blog;
 use App\Models\User;
 use App\Mail\ContactMail;
+use App\Mail\RecoverSent;
 use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
+use App\Jobs\RecoverEmailJob;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-use App\Mail\RecoverSent;
 
 
 
@@ -201,18 +202,27 @@ class WebController extends Controller
 
     public function dorecover(Request $request)
     {
-
         if ($request->has('emailrec')) {
-
             $result = User::select('confirmation_code')->where('email', '=', $request->emailrec)->first();
+
             if ($result) {
-                Mail::to($request->emailrec)->send(new RecoverSent($result->confirmation_code));
+                $details = [
+                    'email' => $request->emailrec,
+                    'confirmation_code' => $result->confirmation_code,
+                ];
+
+                // Dispatch the job to send the recovery email
+                dispatch(new RecoverEmailJob($details));
+
                 return 1;
-            } else
+            } else {
                 return 0;
-        } else
+            }
+        } else {
             return 0;
+        }
     }
+
 
     public function logout()
     {
