@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AuthCheck;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,8 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/register', [WebController::class, 'register']);
     Route::post('/register', [WebController::class, 'register_store']);
     Route::get('/success', [WebController::class, 'success'])->name('success');
-    Route::get('/login', [WebController::class, 'login']);
+    Route::get('/login', [WebController::class, 'login'])->name('login');
+    Route::get('/logout', [WebController::class, 'logout']);
     Route::post('/login ', [WebController::class, 'login_success']);
     Route::get('/confirm/{code}', [WebController::class, 'confirm']);
     Route::get('/reset', [WebController::class, 'reset']);
@@ -40,5 +42,7 @@ Route::group(['as' => 'web.'], function () {
 
 // <====================================== PANEL ======================================> \\
 Route::group(['as' => 'panel.'], function () {
-    Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
+    Route::middleware([AuthCheck::class])->group(function () {
+        Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
+    });
 });

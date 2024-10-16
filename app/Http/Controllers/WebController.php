@@ -195,6 +195,7 @@ class WebController extends Controller
 
     public function openPanel(Request $req)
     {
+        dd(Auth::check());
         $eventList = DB::table('event_type')->get();
         return view('Panel.index', ['eventList' => $eventList]);
     }
@@ -218,6 +219,12 @@ class WebController extends Controller
                 return 0;
         } else
             return 0;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }
 
