@@ -29,7 +29,6 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/login', [WebController::class, 'login']);
     Route::post('/login ', [WebController::class, 'login_success']);
     Route::get('/confirm/{code}', [WebController::class, 'confirm']);
-    Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
     Route::get('/reset', [WebController::class, 'reset']);
     Route::post('/recoverp', [WebController::class, 'dorecover']);
     Route::get('/blog', [WebController::class, 'blog'])->name('blog.index');
@@ -41,5 +40,5 @@ Route::group(['as' => 'web.'], function () {
 
 // <====================================== PANEL ======================================> \\
 Route::group(['as' => 'panel.'], function () {
-
+    Route::get('/panel', [WebController::class, 'openPanel'])->name('panel');
 });
