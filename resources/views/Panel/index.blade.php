@@ -14,6 +14,30 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <!-- Toaster CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <style>
+        .pagination-btn.active {
+            background-color: #A9967D;
+            color: white;
+            border: 1px solid #A9967D;
+            cursor: not-allowed;
+            /* Optional: to show it's the current page */
+        }
+
+        .pagination-btn {
+            color: #A9967D;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 0 2px;
+            border: 1px solid #A9967D;
+        }
+
+        .pagination-btn.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,248 +58,51 @@
 
                     </div>
                     <div class="table-box">
-                        <table>
-                            <tr>
-                                <th>Created</th>
-                                <th>Timings</th>
-                                <th>Event Title</th>
-                                <th>Actions</th>
-                            </tr>
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                        <table id="events-table">
+                            <thead>
+                                <tr>
+                                    <th>Created</th>
+                                    <th>Timings</th>
+                                    <th>Event Title</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
 
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            <tbody id="tbody">
+                                {{-- @forelse($events as $event)
+                                    <tr>
+                                        <td>{{ $event->created_at->toDateString() }}</td>
 
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                                        <td>{{ $event->date }}</td>
 
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a>
-                                            </li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2023-05-11</td>
-                                <td>2 : 10 AM</td>
-                                <td>TEST WEDDING</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                                        <td>{{ $event->name }} {{ $event->type }}</td>
+                                        <td>
+                                            <div class="edit-delet">
+                                                <ul>
+                                                    <li><a href="#"><img src="assets/images/edit.png"
+                                                                alt=""></a>
+                                                    </li>
+                                                    <li><a href="#"><img src="assets/images/delet.png"
+                                                                alt=""></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <p>No items found.</p>
+                                @endforelse --}}
+                            </tbody>
                         </table>
 
                     </div>
+
                     <div class="table-content-pagination">
-                        <ul>
-                            <li><a href="#" class="activ">&lt;</a></li>
-                            <li><a href="#" class="activ">01</a></li>
-                            <li><a href="#">02</a></li>
-                            <li><a href="#">03</a></li>
-                            <li><a href="#">04</a></li>
-                            <li><a href="#" class="activ">&gt;</a></li>
+                        <ul id="pagination-links">
+                            <!-- Pagination links will be dynamically inserted here -->
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -288,7 +115,6 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -299,16 +125,21 @@
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </div>
                     <div class="main-form-box">
-                        <form>
-                            <input type="text" placeholder="Title ( Max 25 Characters )" required>
-                            <input type="date" placeholder="Date">
-                            <input type="text" placeholder="Event Type">
-
+                        <form id="eventTitle">
+                            @csrf
+                            <input type="text" name="title" placeholder="Title ( Max 25 Characters )" required>
+                            <input type="date" name="date" placeholder="Date" required>
+                            <select name="type" required>
+                                <option selected disabled>Select Type</option>
+                                @foreach ($eventList as $data)
+                                    <option value="{{ $data->id_eventtype }}">{{ $data->title }}</option>
+                                @endforeach
+                            </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="submit-btn">Save changes</button>
+                    <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
+                    <button type="button" id="submitForm" class="submit-btn">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -348,7 +179,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Go to Dashboard</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Create New Event</button>
+                        data-target="#exampleModalCenter" data-dismiss="modal">Create New Event</button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
@@ -382,14 +213,132 @@
     </div>
 
 
+
     <script src="{{ asset('assets/Panel/js/wow-animate.js') }}"></script>
     <script src="{{ asset('assets/Panel/js/lib.js') }}"></script>
     <script src="{{ asset('assets/Panel/js/custom.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+    <!-- Toaster JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script type="text/javascript">
+        // Function to load events with pagination
+        function loadEvents(page = 1) {
+            $.ajax({
+                url: '{{ route('panel.index') }}?page=' + page, // Adjust the route
+                type: 'GET',
+                success: function(response) {
+                    // Empty the current table rows
+                    $('#tbody').empty();
+
+                    // Loop through the events and append them to the table
+                    response.events.forEach(function(event) {
+                        var newRow = `
+                        <tr>
+                        <td>${new Date(event.created_at).toLocaleDateString()}</td>
+                        <td>${event.date}</td>
+                        <td>${event.name} ${event.type}</td>
+                        <td>
+                            <div class="edit-delet">
+                                <ul>
+                                    <li><a href="#"><img src="assets/images/edit.png" alt=""></a></li>
+                                    <li><a href="#"><img src="assets/images/delet.png" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>`;
+                        $('#tbody').append(newRow);
+                    });
+
+                    // Update pagination links and mark the current page as active
+                    $('#pagination-links').html(response.pagination);
+
+                    // Add the 'active' class to the correct page number
+                    $('#pagination-links li').removeClass('active'); // Remove 'active' class from all buttons
+                    $('#pagination-links li[data-page="' + response.currentPage + '"]').addClass(
+                        'active'); // Add 'active' to the current page
+                },
+                error: function(xhr) {
+                    toastr.error('Error fetching events. Please try again.');
+                }
+            });
+        }
+
+        // Load events on page load (first page)
+        loadEvents();
+
+        // Event listener for pagination links
+        $(document).on('click', '.pagination-btn', function(e) {
+            e.preventDefault();
+            if ($(this).hasClass('disabled')) return; // Do nothing if the button is disabled
+
+            var page = $(this).data('page'); // Get the page number from the data attribute
+            loadEvents(page); // Load events for the clicked page
+        });
+
+
         $(document).on('ready', function() {
-            $('#exampleModalCenter02').modal('show');
+            $('#submitForm').on('click', function() {
+                var form = $('#eventTitle'); // The form
+                var formData = form.serialize(); // Serialize the form data
+
+                $.ajax({
+                    url: '{{ route('panel.event.store') }}', // Replace with your form submission URL
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            // Show success message
+                            toastr.success(response.message);
+
+                            // Close modal
+                            $("#closeModal").trigger("click");
+
+                            // Reset form
+                            form[0].reset();
+
+                            // Get the event data from the response
+                            var event = response.event;
+
+                            // Create a new row for the event and append it to tbody
+                            var newRow = `
+                            <tr>
+                                <td>${event.created_at.split('T')[0]}</td> <!-- Format the created_at field -->
+                                <td>${event.date}</td>
+                                <td>${event.name} ${event.type}</td>
+                                <td>
+                                    <div class="edit-delet">
+                                        <ul>
+                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a></li>
+                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>`;
+
+                            // Append the new row to the tbody
+                            $('#tbody').append(newRow);
+
+                        } else {
+                            toastr.error("An error occurred while creating the event.");
+                        }
+                    },
+                    error: function(xhr) {
+                        var errors = xhr.responseJSON.errors;
+
+                        // Display validation errors using Toaster
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                toastr.error(errors[key][0]); // Show first error message
+                            }
+                        }
+                    }
+                });
+            });
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+            myModal.show();
+
             wow = new WOW({
                 animateClass: 'animated',
                 offset: 100,

@@ -54,5 +54,6 @@ Route::group(['as' => 'web.'], function () {
 Route::group(['as' => 'panel.'], function () {
     Route::middleware([AuthCheck::class])->group(function () {
         Route::get('/panel', [PanelController::class, 'index'])->name('index');
+        Route::post('store', [PanelController::class, 'store'])->name('event.store');
     });
 });
