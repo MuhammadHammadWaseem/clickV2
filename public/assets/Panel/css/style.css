@@ -1468,11 +1468,17 @@ button.btn.btn-primary.t-btn.t-btn-dark:hover {
 .box-styling.management-plan .two-plan-details-align {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
 }
 
 .box-styling.management-plan .two-plan-details-align .three-things-align ul {
   display: flex;
   column-gap: 25px;
+  flex-wrap: wrap;
+  row-gap: 20px;
 }
 
 .box-styling.management-plan .two-plan-details-align .three-things-align ul li:nth-child(1) {
@@ -1830,7 +1836,22 @@ header .langauge-person .person-box .nav-box ul li img {
 .box-styling form input {
   height: 40px;
 }
+.login-section .left-main-box .main-form .text h2 {
+  font-size: 30px;
+}
 
+.login-section .left-main-box .main-form .text p {
+  font-size: 17px;
+}
+
+.login-section .left-main-box .main-form form input {
+  height: 40px;
+}
+
+.login-section .left-main-box .main-form form button {
+  font-size: 20px;
+  width: 210px;
+}
 
 
 }
@@ -1878,8 +1899,8 @@ header .langauge-person .person-box .nav-box ul li img {
 }
 
 
-.main-dashboard-sec .left-menu-dash ul li a {
-  font-size: 12px;
+  .main-dashboard-sec .left-menu-dash ul li a {
+    font-size: 14px;
 }
 .main-dashboard-sec .left-menu-dash ul li {
   padding-left: 15px;
@@ -1924,6 +1945,38 @@ header .langauge-person .person-box .nav-box ul li img {
   max-width: 100%;
 }
 
+.box-styling.your-web-page.reminders.tutorials ul.nav.nav-tabs {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.login-section .left-main-box .main-form.main-form-reg {
+  padding-top: 50px;
+}
+
+.login-section .left-main-box .main-form form label p {
+  font-size: 15px;
+}
+
+.login-section .left-main-box .main-form .text p {
+  font-size: 15px;
+}
+
+.login-section .left-main-box .main-form form label input {
+  height: 16px;
+  width: 19px;
+}
+
+.two-btns-login-register {
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 10px;}
+
+.login-section .left-main-box .main-form form button {
+  width: 100%;
+}
+
 }
 
 @media (min-width: 1200px) and (max-width: 1300px){
@@ -1938,6 +1991,9 @@ header .langauge-person .person-box .nav-box ul li img {
 }
 
 @media only screen and (max-width: 1199px) {
+  .box-styling.management-plan {
+    height: auto;
+}
 
   .box-styling.preview.actions .three-inputs .box input {
     height: 100px;
@@ -2013,9 +2069,53 @@ header .langauge-person .person-box .nav-box ul li img {
   margin-left: -10px;
 }
 
+.main-dashboard-sec .left-menu-dash ul li a {
+  font-size: 11px;
+}
+
+.box-styling.management-plan .management-plan-box .box img {
+  max-width: 50%;
+}
+
+.box-styling.your-web-page.reminders.tutorials ul.nav.nav-tabs a.nav-link {
+  font-size: 14px;
+}
+
+.events-lists-sec-01 .text.text-center h2 {
+  font-size: 35px;
+}
+
+.events-lists-sec-01 .text.text-center p {
+  font-size: 16px;
+}
+
+.t-btn {
+  font-size: 16px;
+}
+
+.modal-01 .modal-body .text h2 {
+  font-size: 20px;
+}
+
+.modal-01 .modal-body .text p {
+  font-size: 16px;
+}
+
+.modal-01.modal-02 .modal-listing-box ul li a {
+  font-size: 15px;
+}
+
+.modal-01 .modal-footer button {
+  font-size: 15px;
+}
+
 }
 
 @media only screen and (max-width: 1024px) {
+
+  .t-btn {
+    font-size: 14px;
+}
 
   .box-styling.event-photos-gallery.meal-details .meal-box h6 {
     font-size: 14px;
@@ -2114,9 +2214,31 @@ header .langauge-person .person-box .nav-box ul li img {
   padding: 5px 15px 0px 15px;
 }
 
+.box-styling.management-plan .management-plan-box .box {
+  width: 22.8%;
+}
+
+.box-styling.your-web-page.reminders.tutorials ul.nav.nav-tabs {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+  justify-content: center;
+}
+
+.login-section .left-main-box .main-form .text h2 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.login-section .left-main-box .main-form.main-form-reg {padding-top: 100px;}
+
 }
 
 @media only screen and (max-width: 991px) {
+
+  .box-styling.management-plan .management-plan-box .box img {
+    max-width: 50%;
+}
 
   .message .box-styling.preview.actions .three-inputs .box label {
     font-size: 23px;
@@ -2347,9 +2469,84 @@ display: none;
   margin-left: 10px;
 }
 
+.box-styling.management-plan .management-plan-box .box {
+  width: 22.8%;
+}
+.box-styling.your-web-page.reminders.tutorials .main-youtube-iframe iframe {
+  height: 300px;
+}
+
+.login-section .col-lg-8.col-md-8.p-0 {
+  display: none;
+}
+
+.login-section .col-lg-4.col-md-4.p-0 {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+.login-section .left-main-box .main-form .text h2 {
+  text-align: center;
+}
+
+.login-section .left-main-box .main-form .text p {
+  text-align: center;
+}
+
+.two-btns-login-register {
+  align-items: stretch;
+}
+
+.login-section .left-main-box .main-form form button {
+  max-width: 100% !important;
+}
+
+.table-content-pagination ul li {
+  height: 25px;
+  width: 25px;
+}
+
+.table-content-pagination ul li a {
+  font-size: 13px;
+}
+
 }
 
 @media only screen and (max-width: 767px) {
+
+  .box-styling.management-plan .two-plan-details-align .three-things-align ul {
+    display: flex;
+    column-gap: 15px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+  .box-styling.management-plan .two-plan-details-align {
+    column-gap: 0;
+    row-gap: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-styling.management-plan .two-plan-details-align .three-things-align ul li {
+    display: flex;
+    align-items: center;
+}
+
+.box-styling .text h2 {
+    text-align: center;
+}
+
+.box-styling.table-management .text p {
+    text-align: center;
+}
+
+  .box-styling.management-plan .management-plan-box .box {
+    width: 30%;
+  }
 
   .box-styling.preview.actions .three-inputs .box input {
     height: 80px;
@@ -2595,10 +2792,73 @@ display: none;
 }
 .tablet_mode_logo{
   display: none;
+
+
 }
+
+.box-styling.your-web-page.reminders.tutorials ul.nav.nav-tabs {
+  justify-content: center;
+}
+.events-lists-sec-01 .text.text-center h2 {
+  font-size: 30px;
+}
+
+.events-lists-sec-01 .text.text-center p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.events-lists-sec-01 .text.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.events-lists-sec-01 .table-box {
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.events-lists-sec-01 .table-box table {
+  width: 700px;
+}
+
+.events-lists-sec-01 .table-box::-webkit-scrollbar {
+  height: 5px;
+}
+
+.table-content-pagination ul {column-gap: 25px;}
+
+.table-content-pagination ul li {
+  height: 20px;
+  width: 20px;
+}
+
+.table-content-pagination ul li a {
+  font-size: 12px;
+  padding: 3px 8px;
+}
+
 }
 
 @media only screen and (max-width: 575px) {
+
+  .box-styling.management-plan .management-plan-box .box h6 {
+    font-size: 15px;
+}
+
+.box-styling.management-plan .management-plan-box .box p {
+    font-size: 14px;
+}
+
+.box-styling.management-plan .management-plan-box .box img {
+    max-width: 80%;
+}
+
+.box-styling.management-plan .management-plan-box .box {
+  row-gap: 4px;
+  width: 46%;
+}
 
   .login-section .left-main-box .main-form .text h2 {
     text-align: center;
@@ -2725,6 +2985,84 @@ header .langauge-person .person-box .nav-box ul li img {
 .main-dashboard-sec .col-lg-10.col-md-10 {
   margin-top: 10px;
 }
+
+.tablemanagment .box-styling.event-photos-gallery .two-things-align {
+  flex-direction: row;
+  align-items: center;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list .table-box {
+  overflow-x: scroll;
+
+}
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list .table-box::-webkit-scrollbar {
+  height: 5px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list .table-box table {
+  width: 600px;
+}
+
+.box-styling {
+  height: 95%;
+}
+
+.toturial .nav-tabs .nav-item {
+  width: 100%;
+  text-align: center;
+}
+
+.events-lists-sec-01 .text.text-center h2 {
+  font-size: 25px;
+}
+
+.events-lists-sec-01 .text.text-center p {
+  font-size: 13px;
+}
+
+.events-lists-sec-01 .table-box table tr td {
+  font-size: 14px;
+}
+
+.events-lists-sec-01 .table-content-pagination ul {
+  column-gap: 7px !important;
+}
+
+.table-content-pagination ul li {
+  height: 20px;
+  width: 20px;
+}
+
+.table-content-pagination ul li a {
+  font-size: 11px;
+  padding: 3px;
+  border-width: 2px;
+  border-radius:5px;
+}
+.modal-01 .modal-body .text h2 {
+  text-align: center;
+}
+
+.modal-01 .modal-body .text p {
+  text-align: center;
+  font-size: 13px;
+}
+
+.modal-01.modal-02 .modal-listing-box ul li a {
+  font-size: 13px;
+}
+
+.modal-01.modal-02 .modal-listing-box ul {
+  row-gap: 15px;
+}
+
+.modal-01 .modal-footer {
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: stretch;
+  justify-content: center;
+}
+
 }
 
 @media only screen and (max-width: 375px) {
@@ -2777,5 +3115,9 @@ header .langauge-person .person-box .nav-box ul li img {
 }
 header .langauge-person .language-box .nav-box ul li a {
   height: 35px;
+}
+
+.events-lists-sec-01 .table-content-pagination ul {
+  column-gap: 2px !important;
 }
 }
