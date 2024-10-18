@@ -12,6 +12,7 @@ class RegisterMail extends Mailable
     use Queueable, SerializesModels;
 
     public $confirmation_code;
+
     /**
      * Create a new message instance.
      *
@@ -32,6 +33,6 @@ class RegisterMail extends Mailable
         return $this->from('info@clickinvitation.com')
                     ->view('mails.register')
                     ->subject('Welcome to Click Invitation')
-                    ->with(['confirmation_code', $this->confirmation_code]);
+                    ->with(['confirmation_code' => $this->confirmation_code]);
     }
 }

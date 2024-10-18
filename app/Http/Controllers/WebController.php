@@ -10,6 +10,7 @@ use App\Mail\RecoverSent;
 use App\Mail\RegisterMail;
 use Illuminate\Http\Request;
 use App\Jobs\RecoverEmailJob;
+use App\Jobs\RegisterEmailJob;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -110,50 +111,55 @@ class WebController extends Controller
 
 
     public function register_store(Request $request)
-    {
+{
+    // Check if the email already exists
+    $result1 = User::where('email', $request->emailreg)->first();
 
-        $result1 = User::where('email', $request->emailreg)->first();
+    if ($result1 != null) {
+        return 2; // Email already exists
+    } else {
+        // Get the user's IP address
+        $ip = '';
 
-        if ($result1 != null)
-            return 2;
-        else {
-
-            $ip = '';
-
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                $ip = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
-            }
-
-            $current = Carbon::now()->addDays(5);
-            ;
-            $dateExp = $current->format('Y-m-d');
-
-            $user = new User;
-
-            $user->name = $request->firstnamereg;
-            $user->surname = $request->surnamereg;
-            $user->email = $request->emailreg;
-            $user->phone = $request->phonereg;
-            $user->role = 1;
-            $user->confirmation_code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
-            $user->language = '';
-            $user->active = 0;
-            $user->password = password_hash($request->passwordreg, PASSWORD_DEFAULT);
-            $user->ip = $ip;
-            $user->trail = 1;
-            $user->trail_date = $dateExp;
-
-            $user->save();
-
-            Mail::to($user->email)->send(new RegisterMail($user->confirmation_code));
-
-            return 1;
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
         }
+
+        // Set trial expiration date (5 days from now)
+        $current = Carbon::now()->addDays(5);
+        $dateExp = $current->format('Y-m-d');
+
+        // Create a new user
+        $user = new User;
+        $user->name = $request->firstnamereg;
+        $user->surname = $request->surnamereg;
+        $user->email = $request->emailreg;
+        $user->phone = $request->phonereg;
+        $user->role = 1;
+        $user->confirmation_code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
+        $user->language = '';
+        $user->active = 0;
+        $user->password = password_hash($request->passwordreg, PASSWORD_DEFAULT);
+        $user->ip = $ip;
+        $user->trail = 1;
+        $user->trail_date = $dateExp;
+
+        // Save the user to the database
+        $user->save();
+
+        // Dispatch the RegisterEmailJob to send the email asynchronously
+        RegisterEmailJob::dispatch([
+            'email' => $user->email,
+            'confirmation_code' => $user->confirmation_code
+        ]);
+        
+        return 1; // Registration successful
     }
+}
     public function success()
     {
         return view('Website.auth.success');
