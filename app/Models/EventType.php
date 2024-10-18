@@ -9,4 +9,6 @@ class EventType extends Model
 {
     use HasFactory;
     protected $table = "event_type";
+
+    protected $guarded = [];
 }
