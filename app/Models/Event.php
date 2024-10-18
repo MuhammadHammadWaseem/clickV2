@@ -79,4 +79,10 @@ class Event extends Model
     public $incrementing = true;
     protected $keyType = 'int';
     public $timestamps = true;
+
+    public function eventType() {
+        return $this->belongsTo(EventType::class, 'type_id', 'id_eventtype');
+    }
+    
+    
 }

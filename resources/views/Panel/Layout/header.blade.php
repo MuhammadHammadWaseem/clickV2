@@ -13,7 +13,7 @@
                                     <div class="two-things-inline">
                                         <h2>Menu</h2>
                                         <div class="tablet_mode_logo ">
-                                            <a href="#"><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
+                                            <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
                                            </div>
                                     </div>
                                 <ul>
@@ -34,7 +34,7 @@
                         </div>
                    </div>
                    <div class="main_mobile_logo">
-                    <a href="#"><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
+                    <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
                    </div>
                    <div class="two_boxex_align">
                     <div class="langauge-person">
@@ -46,7 +46,7 @@
                                         <li><a href="#">Events</a></li>
                                         <li><a href="#">Guest List</a></li>
                                         <li><a href="#">Contact Info</a></li>
-                                        <li><a href="#">Sign Out</a></li>
+                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                     </ul>
                                     </li>
                                 </ul>
@@ -60,7 +60,7 @@
                                             <li><a href="#">Events</a></li>
                                             <li><a href="#">Guest List</a></li>
                                             <li><a href="#">Contact Info</a></li>
-                                            <li><a href="#">Sign Out</a></li>
+                                            <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -79,7 +79,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6">
                 <div class="main-logo">
-                    <a href="#" ><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
+                    <a href="{{ route('panel.index') }}" ><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -92,7 +92,7 @@
                                     <li><a href="#">Events</a></li>
                                     <li><a href="#">Guest List</a></li>
                                     <li><a href="#">Contact Info</a></li>
-                                    <li><a href="#">Sign Out</a></li>
+                                    <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                 </ul>
                                 </li>
                             </ul>
@@ -106,7 +106,7 @@
                                         <li><a href="#">Events</a></li>
                                         <li><a href="#">Guest List</a></li>
                                         <li><a href="#">Contact Info</a></li>
-                                        <li><a href="#">Sign Out</a></li>
+                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                     </ul>
                                 </li>
                             </ul>

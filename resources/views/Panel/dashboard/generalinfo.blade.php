@@ -15,7 +15,6 @@
                     </div>
                 </div>
             </div>
-            {{-- {{ dd($event) }} --}}
             <div class="col-lg-6 col-md-12">
                 <div class="box-styling edit-event">
                     <div class="text">
@@ -31,70 +30,74 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="box-styling person-details">
-                    <div class="text">
-                        <h2>Groom Details</h2>
-                        <div class="person-box">
-                            <div class="avatar-upload">
-                                <div class="avatar-edit">
-                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="groom_img" />
-                                    <label for="imageUpload"></label>
-                                </div>
-                                <div class="avatar-preview">
-                                    <div id="imagePreview"
-                                        @if (file_exists(public_path($event->imggroom))) style="background-image: url('{{ asset($event->imggroom) }}');"
+            @if ($event->eventType->couple_event == '1')
+                <div class="col-lg-6 col-md-12">
+                    <div class="box-styling person-details">
+                        <div class="text">
+                            <h2>Groom Details</h2>
+                            <div class="person-box">
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                            name="groom_img" />
+                                        <label for="imageUpload"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview"
+                                            @if (file_exists(public_path($event->imggroom))) style="background-image: url('{{ asset($event->imggroom) }}');"
                                         @else
                                             style="background-image: url('{{ asset('assets/Panel/images/bride-img.png') }}');" @endif>
+                                        </div>
+
                                     </div>
 
                                 </div>
-
+                                <input type="text" placeholder="First Name" name="groomfname"
+                                    value="{{ $event->groomfname }}">
+                                <input type="text" placeholder="Last Namee" name="groomlname"
+                                    value="{{ $event->groomlname }}">
+                                <textarea placeholder="Message Here" name="groomsummary">{{ $event->groomsummary }}</textarea>
                             </div>
-                            <input type="text" placeholder="First Name" name="groomfname"
-                                value="{{ $event->groomfname }}">
-                            <input type="text" placeholder="Last Namee" name="groomlname"
-                                value="{{ $event->groomlname }}">
-                            <textarea placeholder="Message Here" name="groomsummary">{{ $event->groomsummary }}</textarea>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="box-styling person-details">
-                    <div class="text">
-                        <h2>Bride Details</h2>
-                        <div class="person-box">
+                <div class="col-lg-6 col-md-12">
+                    <div class="box-styling person-details">
+                        <div class="text">
+                            <h2>Bride Details</h2>
+                            <div class="person-box">
 
-                            <div class="avatar-upload">
-                                <div class="avatar-edit">
-                                    <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" name="bride_img" />
-                                    <label for="imageUpload2"></label>
-                                </div>
-                                <div class="avatar-preview">
-                                    <div id="imagePreview2"
-                                        @if (file_exists(public_path($event->imgbride))) style="background-image: url('{{ asset($event->imgbride) }}');"
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit">
+                                        <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg"
+                                            name="bride_img" />
+                                        <label for="imageUpload2"></label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview2"
+                                            @if (file_exists(public_path($event->imgbride))) style="background-image: url('{{ asset($event->imgbride) }}');"
                                         @else
                                             style="background-image: url('{{ asset('assets/Panel/images/groom-img.png') }}');" @endif>
+                                        </div>
                                     </div>
                                 </div>
+                                <input type="text" placeholder="First Name" name="bridefname"
+                                    value="{{ $event->groomlname }}">
+                                <input type="text" placeholder="Last Namee" name="bridelname"
+                                    value="{{ $event->bridelname }}">
+                                <textarea placeholder="Message Here" name="bridesummary">{{ $event->bridesummary }}</textarea>
+
                             </div>
-                            <input type="text" placeholder="First Name" name="bridefname"
-                                value="{{ $event->groomlname }}">
-                            <input type="text" placeholder="Last Namee" name="bridelname"
-                                value="{{ $event->bridelname }}">
-                            <textarea placeholder="Message Here" name="bridesummary">{{ $event->bridesummary }}</textarea>
+
 
                         </div>
-
-
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="col-lg-12 col-md-12">
                 <div class="box-styling relationship-story">
                     <div class="text">
-                        <h2>Relationship Story</h2>
+                        <h2>@if ($event->eventType->couple_event == '1')Relationship Story @elseif ($event->eventType->couple_event == '0') EVENT SUMMARY @endif</h2>
                         <textarea placeholder="Type Here" name="story">{{ $event->summary }}</textarea>
                     </div>
                 </div>
