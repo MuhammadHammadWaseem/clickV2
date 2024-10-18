@@ -65,9 +65,10 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('store', [PanelController::class, 'store'])->name('store');
 
             Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
-
+            Route::post('/{id}/store/images', [WebPageController::class, 'storeImages'])->name('store.images');
             // Meals Route without nesting another 'as'
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
+            Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
         });
     });
 });
