@@ -625,7 +625,7 @@ input[type=number] {
   margin-top: 30px;
 }
 
-.box-styling form {
+.box-styling form,.box-styling  .person-box {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -637,7 +637,7 @@ input[type=number] {
   column-gap: 10px;
 }
 
-.box-styling form input {
+.box-styling form input,.box-styling input {
   background-color: #EDEDED;
   border: 2px solid #999999;
   border-radius: 16px;
@@ -661,7 +661,7 @@ input[type=number] {
   color: white;
 }
 
-.box-styling form textarea {
+.box-styling form textarea,.box-styling textarea  {
   width: 100%;
   height: 100px;
   border-radius: 10px;
@@ -737,7 +737,7 @@ input[type=number] {
 .box-styling.person-details {
   height: 95%;
 }
-.box-styling.person-details form {
+.box-styling.person-details .person-box {
   display: flex;
   align-items: center;
 }

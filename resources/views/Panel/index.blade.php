@@ -234,6 +234,8 @@
 
                     // Loop through the events and append them to the table
                     response.events.forEach(function(event) {
+                        var openPanelUrl = '{{ route('panel.openPanel', ':id') }}'.replace(':id', event
+                            .id);
                         var newRow = `
                         <tr>
                         <td>${new Date(event.created_at).toLocaleDateString()}</td>
@@ -242,8 +244,8 @@
                         <td>
                             <div class="edit-delet">
                                 <ul>
-                                    <li><a href="#"><img src="assets/images/edit.png" alt=""></a></li>
-                                    <li><a href="#"><img src="assets/images/delet.png" alt=""></a></li>
+                                    <li><a href="${openPanelUrl}"><img src="assets/images/edit.png" alt=""></a></li>
+                                    <li><a href="#" onclick="deleteEvent(${event.id})"><img src="assets/images/delet.png" alt=""></a></li>
                                 </ul>
                             </div>
                         </td>
@@ -263,6 +265,28 @@
                     toastr.error('Error fetching events. Please try again.');
                 }
             });
+        }
+
+        function deleteEvent(eventId) {
+            if (confirm("Are you sure you want to delete this event?")) {
+                fetch(`/event/delete/${eventId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token for security
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            loadEvents();
+                        } else {
+                            alert("Failed to delete the event.");
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
         }
 
         // Load events on page load (first page)

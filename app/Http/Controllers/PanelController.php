@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
+use Carbon\Carbon;
+use App\Models\Event;
 use App\Models\EventType;
 use Illuminate\Http\Request;
-use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class PanelController extends Controller
 {
@@ -57,7 +60,7 @@ private function customPagination($events)
         if ($request->ajax()) {
             // Pass the current page number to the view to highlight it
             $pagination = $this->customPagination($events);
-    
+
             return response()->json([
                 'events' => $events->items(),
                 'pagination' => $pagination,
@@ -143,4 +146,153 @@ private function customPagination($events)
         ], 200);
 
     }
+
+    public function openPanel($id)
+    {
+        $event = Event::where('id', $id)
+        ->where('id_user', Auth::id())
+        ->first();
+        if ($event) {
+            $event->date = Carbon::parse($event->date)->format('Y-m-d\TH:i');
+            return view('Panel.dashboard.generalinfo',compact('event'));
+        } else {
+            return redirect()->route('panel.index')->with('error', 'Event not found.');
+        }
+    }
+    public function updateEvent(Request $request, $id)
+    {
+
+        // Validate the incoming request
+        $validator = Validator::make($request->all(), [
+            'event' => 'required|string|max:25',
+            'event_date' => 'required|date',
+            'groom_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'bride_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "Validation failed",
+                "success" => false,
+                "errors" => $validator->errors()
+            ], 422);
+        }
+
+        // Find the event belonging to the logged-in user
+        $event = Event::where('id', $id)->first();
+
+        // Check if the event was found
+        if (!$event) {
+            return response()->json([
+                "message" => "Event not found or you are not authorized.",
+                "success" => false,
+            ], 404);
+        }
+
+        // Fetch the event type title
+        $eventType = EventType::where('id_eventtype', $event->type_id)->first();
+        if (!$eventType) {
+            return response()->json([
+                "message" => "Event type not found.",
+                "success" => false,
+            ], 404);
+        }
+        // Update the event data
+        $event->type = $eventType->title;
+        $event->type_id = $eventType->id_eventtype;
+        $event->name = $request->event;
+        $event->date = $request->event_date;
+
+        // Update the remaining fields (setting defaults where necessary)
+        $event->code = $event->code ?? substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
+        $event->coupon_code = $request->coupon_code ?? $event->coupon_code;
+        $event->bridefname = $request->bridefname ?? $event->bridefname;
+        $event->bridelname = $request->bridelname ?? $event->bridelname;
+        $event->bridesummary = $request->bridesummary ?? $event->bridesummary;
+        $event->groomfname = $request->groomfname ?? $event->groomfname;
+        $event->groomlname = $request->groomlname ?? $event->groomlname;
+        $event->groomsummary = $request->groomsummary ?? $event->groomsummary;
+        $event->summary = $request->story ?? $event->summary;
+        $event->boolcerimony = $request->boolcerimony ?? $event->boolcerimony;
+        $event->ceraddress = $request->ceraddress ?? $event->ceraddress;
+        $event->cercountry = $request->cercountry ?? $event->cercountry;
+        $event->cerprovince = $request->cerprovince ?? $event->cerprovince;
+        $event->cercity = $request->cercity ?? $event->cercity;
+        $event->cerpc = $request->cerpc ?? $event->cerpc;
+        $event->certime = $request->event_time ?? $event->certime;
+        $event->cerdesc = $request->ceremony_description ?? $event->cerdesc;
+        $event->boolreception = $request->boolreception ?? $event->boolreception;
+        $event->recaddress = $request->recaddress ?? $event->recaddress;
+        $event->reccountry = $request->reccountry ?? $event->reccountry;
+        $event->recprovince = $request->recprovince ?? $event->recprovince;
+        $event->reccity = $request->reccity ?? $event->reccity;
+        $event->recpc = $request->recpc ?? $event->recpc;
+        $event->rectime = $request->rectime ?? $event->rectime;
+        $event->recdesc = $request->recdesc ?? $event->recdesc;
+        $event->boolparty = $request->boolparty ?? $event->boolparty;
+        $event->parname = $request->parname ?? $event->parname;
+        $event->paraddress = $request->paraddress ?? $event->paraddress;
+        $event->parcountry = $request->parcountry ?? $event->parcountry;
+        $event->parprovince = $request->parprovince ?? $event->parprovince;
+        $event->parcity = $request->parcity ?? $event->parcity;
+        $event->parpc = $request->parpc ?? $event->parpc;
+        $event->partime = $request->partime ?? $event->partime;
+        $event->pardesc = $request->pardesc ?? $event->pardesc;
+
+        // Handle groom image upload
+        if ($request->hasFile('groom_img')) {
+            if ($event->imggroom) {
+                Storage::disk('public')->delete('groom/' . $event->imggroom);
+            }
+
+            $groomImage = $request->file('groom_img');
+            $groomImageName = time() . '_groom.' . $groomImage->getClientOriginalExtension();
+            Storage::disk('public')->put('groom/' . $groomImageName, file_get_contents($groomImage));
+            $event->imggroom = $groomImageName;
+        }
+
+        // Handle bride image upload
+        if ($request->hasFile('bride_img')) {
+            if ($event->imgbride) {
+                Storage::disk('public')->delete('bride/' . $event->imgbride);
+            }
+
+            $brideImage = $request->file('bride_img');
+            $brideImageName = time() . '_bride.' . $brideImage->getClientOriginalExtension();
+            Storage::disk('public')->put('bride/' . $brideImageName, file_get_contents($brideImage));
+            $event->imgbride = $brideImageName;
+        }
+
+        // Save the updated event
+        $event->save();
+
+        return response()->json([
+            "message" => "Event updated successfully",
+            "success" => true,
+            "event" => $event
+        ], 200);
+    }
+    public function deleteEvent($id)
+    {
+        // Validate the ID to ensure it exists
+        $event = Event::where('id',$id);
+        if (!$event) {
+            return response()->json([
+                "message" => "Event not found.",
+                "success" => false
+            ], 404);
+        }
+
+        // Delete the event
+        $event->delete();
+
+        return response()->json([
+            "message" => "Event deleted successfully",
+            "success" => true
+        ], 200);
+    }
+
+
+
 }
