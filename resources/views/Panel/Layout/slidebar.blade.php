@@ -1,3 +1,7 @@
+@php
+    use App\Helpers\GeneralHelper;
+    $eventId = GeneralHelper::getEventId();
+@endphp
 
 <div class="col-lg-2 col-md-2" id="sidebar" >
     <div class="left-menu-dash">
@@ -6,8 +10,8 @@
                 <button id="toggleBtn" class="btn btn-primary mt-3"> <i class="fa fa-angle-right" aria-hidden="true"></i></button>
             </div>
         <ul>
-            <li class="general-active"><a href="#" ><img src="{{ asset('assets/images/General-Info.png')}}" alt="">General Info</a></li>
-            <li><a href="#"><img src="{{ asset('assets/images/Web-Page.png')}}" alt="">Web Page</a></li>
+            <li class="general-active"><a href="{{ route('panel.event.generalInfos', ['id' => $eventId]) }}" ><img src="{{ asset('assets/images/General-Info.png')}}" alt="">General Info</a></li>
+            <li><a href="{{ route('panel.event.webpage', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Web-Page.png')}}" alt="">Web Page</a></li>
             <li><a href="#"><img src="{{ asset('assets/images/Meals.png')}}" alt="">Meals</a></li>
             <li><a href="#"><img src="{{ asset('assets/images/Gift-Suggestions.png')}}" alt="">Gift Suggestions</a></li>
             <li><a href="#"><img src="{{ asset('assets/images/Invitations.png')}}" alt="">Invitations</a></li>

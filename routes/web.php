@@ -4,6 +4,7 @@ use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthCheck;
+use App\Http\Controllers\WebPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/updateEvent/{id}', [PanelController::class, 'updateEvent'])->name('updateEvent');
             Route::delete('/delete/{id}', [PanelController::class, 'deleteEvent'])->name('delete');
             Route::post('store', [PanelController::class, 'store'])->name('store');
+
+            Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
         });
     });
 });

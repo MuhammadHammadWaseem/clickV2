@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\GeneralHelper;
+use App\Models\PhotoGallery;
+use App\Models\VideoGallery;
 
 class PanelController extends Controller
 {
@@ -153,6 +156,8 @@ class PanelController extends Controller
             ->where('id_user', Auth::id())
             ->first();
         if ($event) {
+            // Store event ID in the session
+            GeneralHelper::setEventId($id);
             $event->date = Carbon::parse($event->date)->format('Y-m-d\TH:i');
             return view('Panel.dashboard.generalinfo', compact('event'));
         } else {
@@ -325,7 +330,5 @@ class PanelController extends Controller
             "success" => true
         ], 200);
     }
-
-
 
 }

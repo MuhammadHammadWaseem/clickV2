@@ -67,7 +67,7 @@ $(".event-slider-single").slick({
 
 document.querySelectorAll('ul li a').forEach(function (a, index) {
     a.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent default action of the link
+        // event.preventDefault(); // Prevent default action of the link
 
         // Remove 'active-li' class from all <li> elements
         document.querySelectorAll('ul li').forEach(function (li) {
@@ -83,7 +83,7 @@ document.querySelectorAll('ul li a').forEach(function (a, index) {
         });
 
         // Show the corresponding content row
-        document.querySelectorAll('.content-row')[index].classList.add('active-row');
+        // document.querySelectorAll('.content-row')[index].classList.add('active-row');
     });
 });
 
