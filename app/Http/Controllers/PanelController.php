@@ -14,43 +14,43 @@ use Illuminate\Support\Facades\Storage;
 class PanelController extends Controller
 {
     // Helper function to create custom pagination
-private function customPagination($events)
-{
-    $pagination = '';
-    $currentPage = $events->currentPage();
-    $lastPage = $events->lastPage();
+    private function customPagination($events)
+    {
+        $pagination = '';
+        $currentPage = $events->currentPage();
+        $lastPage = $events->lastPage();
 
-    // Previous Button
-    $pagination .= '<li>';
-    if ($currentPage > 1) {
-        $pagination .= '<a href="#" class="pagination-btn" data-page="' . ($currentPage - 1) . '">&lt;</a>';
-    } else {
-        $pagination .= '<a href="#" class="pagination-btn disabled">&lt;</a>';
-    }
-    $pagination .= '</li>';
-
-    // Page Numbers
-    for ($i = 1; $i <= $lastPage; $i++) {
+        // Previous Button
         $pagination .= '<li>';
-        if ($i == $currentPage) {
-            $pagination .= '<a href="#" class="pagination-btn active" data-page="' . $i . '">' . str_pad($i, 2, '0', STR_PAD_LEFT) . '</a>';
+        if ($currentPage > 1) {
+            $pagination .= '<a href="#" class="pagination-btn" data-page="' . ($currentPage - 1) . '">&lt;</a>';
         } else {
-            $pagination .= '<a href="#" class="pagination-btn" data-page="' . $i . '">' . str_pad($i, 2, '0', STR_PAD_LEFT) . '</a>';
+            $pagination .= '<a href="#" class="pagination-btn disabled">&lt;</a>';
         }
         $pagination .= '</li>';
-    }
 
-    // Next Button
-    $pagination .= '<li>';
-    if ($currentPage < $lastPage) {
-        $pagination .= '<a href="#" class="pagination-btn" data-page="' . ($currentPage + 1) . '">&gt;</a>';
-    } else {
-        $pagination .= '<a href="#" class="pagination-btn disabled">&gt;</a>';
-    }
-    $pagination .= '</li>';
+        // Page Numbers
+        for ($i = 1; $i <= $lastPage; $i++) {
+            $pagination .= '<li>';
+            if ($i == $currentPage) {
+                $pagination .= '<a href="#" class="pagination-btn active" data-page="' . $i . '">' . str_pad($i, 2, '0', STR_PAD_LEFT) . '</a>';
+            } else {
+                $pagination .= '<a href="#" class="pagination-btn" data-page="' . $i . '">' . str_pad($i, 2, '0', STR_PAD_LEFT) . '</a>';
+            }
+            $pagination .= '</li>';
+        }
 
-    return $pagination;
-}
+        // Next Button
+        $pagination .= '<li>';
+        if ($currentPage < $lastPage) {
+            $pagination .= '<a href="#" class="pagination-btn" data-page="' . ($currentPage + 1) . '">&gt;</a>';
+        } else {
+            $pagination .= '<a href="#" class="pagination-btn disabled">&gt;</a>';
+        }
+        $pagination .= '</li>';
+
+        return $pagination;
+    }
 
     public function index(Request $request)
     {
@@ -147,21 +147,20 @@ private function customPagination($events)
 
     }
 
-    public function openPanel($id)
+    public function generalInfos($id)
     {
-        $event = Event::where('id', $id)
-        ->where('id_user', Auth::id())
-        ->first();
+        $event = Event::where('id_event', $id)
+            ->where('id_user', Auth::id())
+            ->first();
         if ($event) {
             $event->date = Carbon::parse($event->date)->format('Y-m-d\TH:i');
-            return view('Panel.dashboard.generalinfo',compact('event'));
+            return view('Panel.dashboard.generalinfo', compact('event'));
         } else {
             return redirect()->route('panel.index')->with('error', 'Event not found.');
         }
     }
     public function updateEvent(Request $request, $id)
     {
-
         // Validate the incoming request
         $validator = Validator::make($request->all(), [
             'event' => 'required|string|max:25',
@@ -180,7 +179,7 @@ private function customPagination($events)
         }
 
         // Find the event belonging to the logged-in user
-        $event = Event::where('id', $id)->first();
+        $event = Event::where('id_event', $id)->first();
 
         // Check if the event was found
         if (!$event) {
@@ -220,8 +219,8 @@ private function customPagination($events)
         $event->cerprovince = $request->cerprovince ?? $event->cerprovince;
         $event->cercity = $request->cercity ?? $event->cercity;
         $event->cerpc = $request->cerpc ?? $event->cerpc;
-        $event->certime = $request->event_time ?? $event->certime;
-        $event->cerdesc = $request->ceremony_description ?? $event->cerdesc;
+        $event->certime = $request->certime ?? $event->certime;
+        $event->cerdesc = $request->cerdesc ?? $event->cerdesc;
         $event->boolreception = $request->boolreception ?? $event->boolreception;
         $event->recaddress = $request->recaddress ?? $event->recaddress;
         $event->reccountry = $request->reccountry ?? $event->reccountry;
@@ -241,27 +240,61 @@ private function customPagination($events)
         $event->pardesc = $request->pardesc ?? $event->pardesc;
 
         // Handle groom image upload
+
         if ($request->hasFile('groom_img')) {
-            if ($event->imggroom) {
-                Storage::disk('public')->delete('groom/' . $event->imggroom);
+            // Define the directory where the image will be saved
+            $directory = public_path('event-images/' . $event->id_event);
+
+            // Check if the directory exists, if not, create it with appropriate permissions
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
             }
 
-            $groomImage = $request->file('groom_img');
-            $groomImageName = time() . '_groom.' . $groomImage->getClientOriginalExtension();
-            Storage::disk('public')->put('groom/' . $groomImageName, file_get_contents($groomImage));
-            $event->imggroom = $groomImageName;
+            // Define the filename as groom.jpg
+            $filename = 'groom.jpg';
+
+            // Check if groom.jpg already exists in the folder and delete it
+            $oldImagePath = $directory . '/' . $filename;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath); // Delete the old image
+            }
+
+            // Get the uploaded file
+            $file = $request->file('groom_img');
+
+            // Move the new file to the directory with the name groom.jpg
+            $file->move($directory, $filename);
+
+            // Optionally, save the image path in the database (assuming you have a 'groom_img' column in the 'events' table)
+            $event->imggroom = 'event-images/' . $event->id_event . '/' . $filename;
         }
 
-        // Handle bride image upload
         if ($request->hasFile('bride_img')) {
-            if ($event->imgbride) {
-                Storage::disk('public')->delete('bride/' . $event->imgbride);
+            // Define the directory where the image will be saved
+            $directory = public_path('event-images/' . $event->id_event);
+
+            // Check if the directory exists, if not, create it with appropriate permissions
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
             }
 
-            $brideImage = $request->file('bride_img');
-            $brideImageName = time() . '_bride.' . $brideImage->getClientOriginalExtension();
-            Storage::disk('public')->put('bride/' . $brideImageName, file_get_contents($brideImage));
-            $event->imgbride = $brideImageName;
+            // Define the filename as groom.jpg
+            $filename = 'bride.jpg';
+
+            // Check if groom.jpg already exists in the folder and delete it
+            $oldImagePath = $directory . '/' . $filename;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath); // Delete the old image
+            }
+
+            // Get the uploaded file
+            $file = $request->file('bride_img');
+
+            // Move the new file to the directory with the name groom.jpg
+            $file->move($directory, $filename);
+
+            // Optionally, save the image path in the database (assuming you have a 'bride_img' column in the 'events' table)
+            $event->imgbride = 'event-images/' . $event->id_event . '/' . $filename;
         }
 
         // Save the updated event
@@ -276,7 +309,7 @@ private function customPagination($events)
     public function deleteEvent($id)
     {
         // Validate the ID to ensure it exists
-        $event = Event::where('id',$id);
+        $event = Event::where('id_event', $id);
         if (!$event) {
             return response()->json([
                 "message" => "Event not found.",

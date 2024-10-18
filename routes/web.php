@@ -54,9 +54,12 @@ Route::group(['as' => 'web.'], function () {
 Route::group(['as' => 'panel.'], function () {
     Route::middleware([AuthCheck::class])->group(function () {
         Route::get('/panel', [PanelController::class, 'index'])->name('index');
-        Route::get('/openPanel/{id}', [PanelController::class, 'openPanel'])->name('openPanel');
-        Route::post('/updateEvent/{id}', [PanelController::class,'updateEvent'])->name('updateEvent');
-        Route::delete('/event/delete/{id}', [PanelController::class, 'deleteEvent'])->name('event.delete');
-        Route::post('store', [PanelController::class, 'store'])->name('event.store');
+        //EVENT
+        Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
+            Route::get('/{id}/general-infos', [PanelController::class, 'generalInfos'])->name('generalInfos');
+            Route::post('/updateEvent/{id}', [PanelController::class, 'updateEvent'])->name('updateEvent');
+            Route::delete('/delete/{id}', [PanelController::class, 'deleteEvent'])->name('delete');
+            Route::post('store', [PanelController::class, 'store'])->name('store');
+        });
     });
 });

@@ -20,21 +20,21 @@
                                     <li class="general-active"><a href="#" ><img src="{{ asset('assets/images/General-Info.png')}}" alt="">General Info</a></li>
                                     <li><a href="#"><img src="{{ asset('assets/Panel/images/Web-Page.png')}}" alt="">Web Page</a></li>
                                     <li><a href="#"><img src="{{ asset('assets/Panel/images/Meals.png')}}" alt="">Meals</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Gift-Suggestions.png')}}" alt="">Gift Suggestions</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Invitations.png')}}" alt="">Invitations</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Guest-List.png')}}" alt="">Guest List</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Tables-Management.png')}}" alt="">Tables  Management</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Event-Photos.png')}}" alt="">Event Photos</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Reminders.png')}}" alt="">Reminders</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Custom-Messages.png')}}" alt="">Custom Messages</a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/Panelimages/Tutorials.png')}}" alt="">Tutorials</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Gift-Suggestions.png')}}" alt="">Gift Suggestions</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Invitations.png')}}" alt="">Invitations</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Guest-List.png')}}" alt="">Guest List</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Tables-Management.png')}}" alt="">Tables  Management</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Event-Photos.png')}}" alt="">Event Photos</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Reminders.png')}}" alt="">Reminders</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Custom-Messages.png')}}" alt="">Custom Messages</a></li>
+                                    <li><a href="#"><img src="{{ asset('assets/Panel/images/Tutorials.png')}}" alt="">Tutorials</a></li>
                                 </ul>
                             </div>
                             </div>
                         </div>
                    </div>
                    <div class="main_mobile_logo">
-                    <a href="#"><img src="{{ asset('assets/dashboard-logo.png')}}" alt=""></a>
+                    <a href="#"><img src="{{ asset('assets/images/dashboard-logo.png')}}" alt=""></a>
                    </div>
                    <div class="two_boxex_align">
                     <div class="langauge-person">
