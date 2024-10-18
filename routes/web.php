@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\PanelController;
-use App\Http\Controllers\WebController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthCheck;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\MealController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebPageController;
 
 /*
@@ -55,7 +56,8 @@ Route::group(['as' => 'web.'], function () {
 Route::group(['as' => 'panel.'], function () {
     Route::middleware([AuthCheck::class])->group(function () {
         Route::get('/panel', [PanelController::class, 'index'])->name('index');
-        //EVENT
+
+        // EVENT
         Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
             Route::get('/{id}/general-infos', [PanelController::class, 'generalInfos'])->name('generalInfos');
             Route::post('/updateEvent/{id}', [PanelController::class, 'updateEvent'])->name('updateEvent');
@@ -63,6 +65,10 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('store', [PanelController::class, 'store'])->name('store');
 
             Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
+
+            // Meals Route without nesting another 'as'
+            Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
         });
     });
 });
+
