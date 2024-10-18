@@ -9,4 +9,5 @@ class PhotoGallery extends Model
 {
     use HasFactory;
     protected $table = "photogallery";
+    public $timestamps = false;
 }
