@@ -10,7 +10,7 @@ class MealController extends Controller
 {
     public function index(){
         $eventId = GeneralHelper::getEventId();
-        $meals = Meal::where('id_event', $eventId);
+        $meals = Meal::where('id_event', $eventId)->get();
         return view('Panel.dashboard.meals',compact('meals'));
     }
 
@@ -30,6 +30,31 @@ class MealController extends Controller
             // Flash error message if something goes wrong
             return redirect()->back()->with('error', 'Failed to create meal. Please try again.');
         }
+    }
+   // In MealController.php
+
+    public function edit($id)
+    {
+        dd($id);
+        $meal = Meal::find($id);
+
+        if (!$meal) {
+            return response()->json(['error' => 'Meal not found'], 404);
+        }
+
+        // Return the meal data as JSON for the modal
+        return response()->json($meal);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $meal = Meal::findOrFail($id);
+        $meal->name = $request->name;
+        $meal->description = $request->description;
+        $meal->id_event = $request->id_event;
+        $meal->save();
+
+        return response()->json(['success' => 'Meal updated successfully!']);
     }
 
 }

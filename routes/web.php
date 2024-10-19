@@ -66,10 +66,15 @@ Route::group(['as' => 'panel.'], function () {
 
             Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
             Route::post('/{id}/store/images', [WebPageController::class, 'storeImages'])->name('store.images');
-            // Meals Route without nesting another 'as'
+
+            // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
             Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
+           // Edit meal route (fetch meal data)
+            Route::get('/meal/{id}/edit', [MealController::class, 'edit'])->name('meals.edit');
+            // Update meal route (submit form)
+            Route::post('/meal/{id}/update', [MealController::class, 'update'])->name('meals.update');
+
         });
     });
 });
-
