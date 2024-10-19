@@ -72,9 +72,8 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
             Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
            // Edit meal route (fetch meal data)
-            Route::get('/meal/{id}/edit', [MealController::class, 'edit'])->name('meals.edit');
-            // Update meal route (submit form)
-            Route::post('/meal/{id}/update', [MealController::class, 'update'])->name('meals.update');
+           Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
+           Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
 
         });
     });

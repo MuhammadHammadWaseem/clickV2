@@ -11,6 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Click Invitation Dashboard</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="favicon.png" sizes="32x32">
         <link rel="stylesheet" href="{{ asset('assets/css/lib.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">

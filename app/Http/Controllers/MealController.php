@@ -35,26 +35,32 @@ class MealController extends Controller
 
     public function edit($id)
     {
-        dd($id);
         $meal = Meal::find($id);
 
         if (!$meal) {
             return response()->json(['error' => 'Meal not found'], 404);
         }
-
         // Return the meal data as JSON for the modal
         return response()->json($meal);
     }
 
     public function update(Request $request, $id)
     {
+        // Validate input if necessary
+        $request->validate([
+            'namemeal' => 'required|string|max:25',
+            'descriptionmeal' => 'nullable|string',
+            'id_event' => 'required|integer', // Assuming you need an event ID
+        ]);
+
         $meal = Meal::findOrFail($id);
-        $meal->name = $request->name;
-        $meal->description = $request->description;
-        $meal->id_event = $request->id_event;
+        $meal->name = $request->namemeal; // Ensure this name matches your form's input name
+        $meal->description = $request->descriptionmeal;
+        $meal->id_event = $request->id_event; // Make sure this is set correctly
         $meal->save();
 
         return response()->json(['success' => 'Meal updated successfully!']);
     }
+
 
 }
