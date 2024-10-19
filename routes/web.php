@@ -66,6 +66,7 @@ Route::group(['as' => 'panel.'], function () {
 
             Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
             Route::post('/{id}/store/images', [WebPageController::class, 'storeImages'])->name('store.images');
+            Route::post('/{id}/delete/images', [WebPageController::class, 'deleteImages'])->name('delete.images');
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');

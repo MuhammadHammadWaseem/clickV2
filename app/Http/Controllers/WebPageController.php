@@ -41,7 +41,7 @@ class WebPageController extends Controller
             foreach ($request->file('gall') as $photo) {
                 if ($photo->isValid()) {
                     // Create a new Photogallery record
-                    $photogallery = new Photogallery;
+                    $photogallery = new PhotoGallery;
                     $photogallery->id_event = $request->idevent;
                     $photogallery->guestCode = $request->guestCode ?? null;
                     $photogallery->save();
@@ -57,6 +57,20 @@ class WebPageController extends Controller
             return response()->json(['success' => 'Photos uploaded successfully!', 'photos' => $newImages]);
         } else {
             return response()->json(['error' => 'No files uploaded.'], 400);
+        }
+    }
+
+    public function deleteImages(Request $request)
+    {
+        dd($request->all());
+        $photogallery = PhotoGallery::where('id_photogallery', $request->idphoto)->first();
+        if ($photogallery && $photogallery->id_event == $request->idevent) {
+            $photogallery->delete();
+            if (file_exists('public/event-images/' . $request->idevent . '/photogallery/' . $request->idphoto . '.jpg')) {
+
+                unlink('public/event-images/' . $request->idevent . '/photogallery/' . $request->idphoto . '.jpg');
+            }
+            return 1;
         }
     }
 

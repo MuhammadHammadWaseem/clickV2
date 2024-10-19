@@ -48,7 +48,7 @@
                                     <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                         alt="">
                                 </a>
-                                <a href="">Delete</a>
+                                <a href="{{ route('panel.event.delete.images',['id'=> $photo->id_photogallery]) }}">Delete</a>
                             </div>
                         @empty
                             <p>No items found.</p>
@@ -218,7 +218,7 @@
                                         data-fancybox="images" tabindex="0">
                                         <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
                                     </a>
-                                    <a>Delete</a>
+                                    <a href="{{ url('event/$event->id_event/delete/images') }}">Delete</a>
                                 </div>`;
 
                             $('.main-event-gallery-box').append(newImage);
