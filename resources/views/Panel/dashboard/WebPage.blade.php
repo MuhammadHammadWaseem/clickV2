@@ -48,6 +48,7 @@
                                     <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                         alt="">
                                 </a>
+                                <a href="">Delete</a>
                             </div>
                         @empty
                             <p>No items found.</p>
@@ -113,20 +114,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="text">
-                        <form action="{{ route('panel.event.store.images', ['id' => $event->id_event]) }}" method="post"
-                            enctype="multipart/form-data">
+                <form id="uploadPhotosForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="text">
                             @csrf
                             <input type="file" id="gall" name="gall[]" multiple accept="image/*" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
-                            <button type="submit">Submit</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="saveImagesModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -176,9 +176,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Go to Dashboard</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don't</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Create New Event</button>
+                        data-target="#exampleModalCenter"><a class="text-light" href="{{ route('panel.event.meals',['id'=> $event->id_event]) }}">Yes, Add Meals</a></button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
@@ -188,6 +188,71 @@
 
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            $("#saveImagesModal").on("click",function(){
+                var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+                myModal.show();
+            });
+
+            $('#uploadPhotosForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent the form from submitting normally
+
+                // Create a FormData object to handle file uploads
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('panel.event.store.images', ['id' => $event->id_event]) }}", // Your Laravel route
+                    type: 'POST',
+                    data: formData,
+                    contentType: false, // Tells jQuery not to set the content type
+                    processData: false, // Prevents jQuery from converting the form data into a query string
+                    success: function(response) {
+                        console.log(response);
+                        $("#gall").val(''); // Clear input field
+
+                        // Append the new images to the gallery
+                        response.photos.forEach(function(photoId) {
+                            var newImage = `
+                                <div class="box">
+                                    <a href="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg"
+                                        data-fancybox="images" tabindex="0">
+                                        <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
+                                    </a>
+                                    <a>Delete</a>
+                                </div>`;
+
+                            $('.main-event-gallery-box').append(newImage);
+
+                        });
+
+                        $("#closeBtn").click();
+
+                        // Trigger the modal to show success message
+                        // $('#exampleModalCenter03').modal('show');
+
+                        var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter03'));
+                        myModal.show();
+
+                    },
+                    error: function(xhr) {
+                        $("#gall").val(''); // Clear input field
+
+                        if (xhr.status === 422) {
+                            // Validation error - extract and display errors
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, value) {
+                                toastr.error(value[0]); // Show error using Toastr
+                            });
+                        } else {
+                            // General error handling
+                            toastr.error('Failed to upload photos. Please try again.');
+                            console.error(xhr.responseText);
+                        }
+                    }
+                });
+            });
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("toggleBtn").addEventListener("click", function() {
                 var sidebar = document.getElementById("sidebar");

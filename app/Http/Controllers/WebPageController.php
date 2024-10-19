@@ -19,36 +19,45 @@ class WebPageController extends Controller
         $photogallery = PhotoGallery::where('id_event', $event->id_event)->get();
         $videogallery = VideoGallery::where('id_event', $event->id_event)->get();
 
-        return view('Panel.dashboard.WebPage',compact('event','photogallery','videogallery'));
+        return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery'));
     }
 
     public function storeImages(Request $request)
     {
+        $request->validate([
+            'gall.*' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048', // Adjust file size as needed
+        ]);
+
         if ($request->hasFile('gall')) {
-            if (!file_exists('public/event-images/' . $request->idevent . '/photogallery')) {
-                mkdir('public/event-images/' . $request->idevent . '/photogallery', 0777, true);
+            $eventFolder = public_path('event-images/' . $request->idevent . '/photogallery');
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
             }
-            // dd($request->file('gall'), $request->idevent, $request->guestCode);
+
+            $newImages = [];
 
             foreach ($request->file('gall') as $photo) {
-                // dd($request->file('gall'));
                 if ($photo->isValid()) {
+                    // Create a new Photogallery record
                     $photogallery = new Photogallery;
                     $photogallery->id_event = $request->idevent;
                     $photogallery->guestCode = $request->guestCode ?? null;
                     $photogallery->save();
 
-                    $fileName = $photo->getClientOriginalName();
-                    $photo->move(public_path('event-images/' . $request->idevent . '/photogallery'), $photogallery->id_photogallery . ".jpg");
+                    // Store image ID in the newImages array
+                    $newImages[] = $photogallery->id_photogallery;
+
+                    // Move uploaded file to the appropriate folder
+                    $photo->move($eventFolder, $photogallery->id_photogallery . ".jpg");
                 }
             }
-            if (count($request->file('gall')) > 2) {
-                session()->flash('success', 'Your Photos has been successfully uploaded! Enjoy the party!');
-                return redirect()->back();
-            } else {
-                session()->flash('success', 'Your Photo has been successfully uploaded! Enjoy the party!');
-                return redirect()->back();
-            }
+
+            return response()->json(['success' => 'Photos uploaded successfully!', 'photos' => $newImages]);
+        } else {
+            return response()->json(['error' => 'No files uploaded.'], 400);
         }
     }
+
 }
