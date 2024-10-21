@@ -20,7 +20,7 @@
             <li><a href="#"><img src="{{ asset('assets/images/Event-Photos.png')}}" alt="">Event Photos</a></li>
             <li><a href="#"><img src="{{ asset('assets/images/Reminders.png')}}" alt="">Reminders</a></li>
             <li><a href="#"><img src="{{ asset('assets/images/Custom-Messages.png')}}" alt="">Custom Messages</a></li>
-            <li><a href="#"><img src="{{ asset('assets/images/Tutorials.png')}}" alt="">Tutorials</a></li>
+            <li><a href="{{ route('panel.event.tutorial', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Tutorials.png')}}" alt="">Tutorials</a></li>
         </ul>
     </div>
 </div>

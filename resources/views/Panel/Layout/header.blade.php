@@ -53,7 +53,7 @@
                                         <li><a href="#"><img
                                                     src="{{ asset('assets/Panel/images/Custom-Messages.png') }}"
                                                     alt="">Custom Messages</a></li>
-                                        <li><a href="#"><img
+                                        <li><a href="{{ route('panel.event.tutorial', ['id' => $eventId]) }}"><img
                                                     src="{{ asset('assets/Panel/images/Tutorials.png') }}"
                                                     alt="">Tutorials</a></li>
                                     </ul>

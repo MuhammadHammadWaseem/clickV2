@@ -8,6 +8,7 @@ use App\Http\Controllers\GiftSuggestion;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebPageController;
+use App\Http\Controllers\TutorialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,9 @@ Route::group(['as' => 'panel.'], function () {
             Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
 
             Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
+            
+            // tutorial
+            Route::get('{id}/tutorial', [TutorialController::class, 'index'])->name('tutorial');
         });
     });
 });
