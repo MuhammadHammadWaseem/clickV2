@@ -74,7 +74,7 @@ Route::group(['as' => 'panel.'], function () {
            // Edit meal route (fetch meal data)
            Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
            Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
-
+           Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
         });
     });
 });

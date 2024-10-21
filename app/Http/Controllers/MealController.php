@@ -61,6 +61,12 @@ class MealController extends Controller
 
         return response()->json(['success' => 'Meal updated successfully!']);
     }
+        public function destroy($id){
+            $meal = Meal::findOrFail($id);
+            $meal->delete();
 
+            return response()->json(['success' => 'Meal deleted successfully']);
+
+        }
 
 }

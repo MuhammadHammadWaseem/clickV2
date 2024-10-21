@@ -1,5 +1,24 @@
 @extends('Panel.layout.master')
+<style>
+    .box-styling.event-photos-gallery.meal-details .meal-box .three-align-things {
+        display: flex;
+        column-gap: 30px;
+        align-items: flex-start !important;
+        margin-bottom: 20px;
+        flex-direction: column;
+        row-gap: 10px;
+    }
 
+    .box-styling.event-photos-gallery.meal-details .meal-box .three-align-things .tw0-boxex-align-in {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+<!-- Include Toastr CSS and JS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -52,16 +71,22 @@
                         @foreach ($meals as $meal)
                             <div class="meal-box">
                                 <div class="three-align-things">
-                                    <h6>{{ $meal->name ?? '' }}</h6>
+                                    <div class="tw0-boxex-align-in">
+                                        <h6>{{ $meal->name ?? '' }}</h6>
+                                        <!-- Edit button (use data-id to store the meal id) -->
+                                        <button type="button" class="editMeal" data-toggle="modal" data-target="#editMeal"
+                                            data-id="{{ $meal->id_meal }}">
+                                            <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
+                                        </button>
+                                        <button class="deleteMeal" data-id="{{ $meal->id_meal }}" type="button">
+                                            <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
+                                        </button>
+
+                                    </div>
+                                    {{-- <h6>{{ $meal->name ?? '' }}</h6> --}}
                                     <p>{{ $meal->description ?? '' }}</p>
                                     <input type="hidden" id="event_id" value="{{ $meal->id_meal }}"
                                         data-id="{{ $meal->id_meal }}">
-                                    <!-- Edit button (use data-id to store the meal id) -->
-                                    <button type="button" class="editMeal" data-toggle="modal" data-target="#editMeal"
-                                        data-id="{{ $meal->id_meal }}">
-                                        <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
-                                    </button>
-                                    <button><img src="{{ asset('assets/images/delet-icon.png') }}" alt=""></button>
                                 </div>
                             </div>
                         @endforeach
@@ -142,6 +167,31 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade modal-01 modal-02 modal-03" id="deleteModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>Are you sure you want to delete this meal?</h2>
+                        <p>This action cannot be undone.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -155,8 +205,6 @@
             // When the edit button is clicked
             $(document).on('click', '.editMeal', function() {
                 var mealId = $(this).data('id'); // Get the meal ID
-                console.log(mealId);
-
                 $.ajax({
                     url: "{{ route('panel.event.meals.edit', '') }}/" + mealId,
                     type: 'GET',
@@ -189,10 +237,10 @@
                     data: formData,
                     success: function(response) {
                         // Close the modal
-                        $('#editMeal').modal('hide');
-
-                        // Optionally, show success message or refresh the meal list
-                        alert('Meal updated successfully');
+                        var myModal = new bootstrap.Modal(document.getElementById(
+                            'editMeal'));
+                        myModal.show();
+                        toastr.success('Meal update successfully!');
                         location.reload(); // Refresh the page or update the DOM
                     },
                     error: function(xhr) {
@@ -202,5 +250,59 @@
                 });
             });
         });
+
+
+
+        // Handle the actual deletion when "Yes, Delete" is clicked in the modal
+        var mealIdToDelete = null;
+
+        // Open the delete confirmation modal
+        $(document).on('click', '.deleteMeal', function(e) {
+            e.preventDefault();
+            mealIdToDelete = $(this).data('id'); // Store the meal ID for later deletion
+            var myModal = new bootstrap.Modal(document.getElementById('deleteModal')); // Get the modal
+            myModal.show(); // Show the delete confirmation modal
+        });
+
+        // Handle the actual deletion when "Yes, Delete" is clicked in the modal
+        $('#confirmDelete').on('click', function() {
+            if (mealIdToDelete) {
+                var deleteUrl = "{{ route('panel.event.meals.destroy', ':id') }}"; // Use meal ID in the route
+                deleteUrl = deleteUrl.replace(':id',
+                mealIdToDelete); // Replace the placeholder with the actual meal ID
+
+                $.ajax({
+                    url: deleteUrl, // URL to delete the meal
+                    type: 'DELETE', // HTTP method for deletion
+                    data: {
+                        "_token": "{{ csrf_token() }}", // CSRF token for protection
+                    },
+                    success: function(response) {
+                        // Hide the confirmation modal after successful deletion
+                        var myModal = new bootstrap.Modal(document.getElementById(
+                            'deleteModal'));
+                        myModal.hide(); // Hide the modal
+                        toastr.success('Meal deleted successfully!');
+
+                        setTimeout(function() {
+                            location.reload(); // Reload the page after 2 seconds
+                        }, 2000); // Adjust the delay as needed
+                    },
+                    error: function(xhr) {
+                        toastr.error('Something went wrong, please try again later.');
+                    }
+                });
+            }
+        });
     </script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000",
+        };
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 @endsection
