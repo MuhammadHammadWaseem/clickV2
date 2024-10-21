@@ -9,4 +9,9 @@ class Table extends Model
 {
     use HasFactory;
     protected $table = "tables";
+    protected $fillable = [
+    'name','number','guest_number','id_event'
+    ];
+    protected $primaryKey = 'id_table';
+    public $timestamps = false;
 }

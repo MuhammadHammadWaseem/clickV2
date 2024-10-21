@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\WebsiteController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
@@ -8,7 +7,9 @@ use App\Http\Controllers\GiftSuggestion;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebPageController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\TutorialController;
+use App\Http\Controllers\GuestListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +85,16 @@ Route::group(['as' => 'panel.'], function () {
             Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
 
             Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
-            
+
             // tutorial
             Route::get('{id}/tutorial', [TutorialController::class, 'index'])->name('tutorial');
+
+
+            Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list');
+            Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
+            Route::get('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
+            Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
+            Route::post('{id}/guests/update', [GuestListController::class, 'update'])->name('guests.update');
         });
     });
 });
