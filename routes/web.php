@@ -3,6 +3,7 @@
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\GiftSuggestion;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\WebPageController;
@@ -75,6 +76,8 @@ Route::group(['as' => 'panel.'], function () {
            Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
            Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
            Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
+
+           Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
         });
     });
 });
