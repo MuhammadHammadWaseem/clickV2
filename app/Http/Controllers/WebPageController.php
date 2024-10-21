@@ -60,17 +60,16 @@ class WebPageController extends Controller
         }
     }
 
-    public function deleteImages(Request $request)
+    public function deleteImages(Request $request, $id)
     {
-        dd($request->all());
-        $photogallery = PhotoGallery::where('id_photogallery', $request->idphoto)->first();
+        $photogallery = PhotoGallery::where('id_photogallery', $id)->first();
         if ($photogallery && $photogallery->id_event == $request->idevent) {
             $photogallery->delete();
-            if (file_exists('public/event-images/' . $request->idevent . '/photogallery/' . $request->idphoto . '.jpg')) {
+            if (file_exists('public/event-images/' . $request->eventId . '/photogallery/' . $request->idphoto . '.jpg')) {
 
-                unlink('public/event-images/' . $request->idevent . '/photogallery/' . $request->idphoto . '.jpg');
+                unlink('public/event-images/' . $request->eventId . '/photogallery/' . $request->idphoto . '.jpg');
             }
-            return 1;
+            return response()->json(['success' => 'Photos Deleted successfully!']);
         }
     }
 

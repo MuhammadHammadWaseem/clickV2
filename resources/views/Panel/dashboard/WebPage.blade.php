@@ -48,7 +48,8 @@
                                     <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                         alt="">
                                 </a>
-                                <a href="{{ route('panel.event.delete.images',['id'=> $photo->id_photogallery]) }}">Delete</a>
+                                <button type="button" class="delete-image-btn"
+                                    data-id="{{ $photo->id_photogallery }}" data-eventId="{{ $photo->id_event }}">Delete</button>
                             </div>
                         @empty
                             <p>No items found.</p>
@@ -149,7 +150,34 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="saveImagesModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="saveImagesModal" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
+                        <h2>You Want to Delete this image ?</h2>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="saveImagesModal" class="btn btn-secondary"
+                        data-dismiss="modal">No</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn">Yes</button>
                 </div>
             </div>
         </div>
@@ -178,18 +206,46 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don't</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter"><a class="text-light" href="{{ route('panel.event.meals',['id'=> $event->id_event]) }}">Yes, Add Meals</a></button>
+                        data-target="#exampleModalCenter"><a class="text-light"
+                            href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">Yes, Add
+                            Meals</a></button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter06" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                    <h2>Image Deleted Successfully</h2>
+                    <p>The image has been successfully deleted.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $("#saveImagesModal").on("click",function(){
+            $("#saveImagesModal").on("click", function() {
                 var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
                 myModal.show();
             });
@@ -218,7 +274,7 @@
                                         data-fancybox="images" tabindex="0">
                                         <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
                                     </a>
-                                    <a href="{{ url('event/$event->id_event/delete/images') }}">Delete</a>
+                                    <button type="button" class="delete-image-btn" data-id="${photoId}" data-eventId="${photoId.id_event}">Delete</button>
                                 </div>`;
 
                             $('.main-event-gallery-box').append(newImage);
@@ -230,7 +286,8 @@
                         // Trigger the modal to show success message
                         // $('#exampleModalCenter03').modal('show');
 
-                        var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter03'));
+                        var myModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter03'));
                         myModal.show();
 
                     },
@@ -285,6 +342,53 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+
+        $(document).on('click', '.delete-image-btn', function() {
+            var photoId = $(this).data('id');
+            var eventId = $(this).data('eventid');
+            console.log(eventId);
+
+            // Show confirmation modal
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+            myModal.show();
+
+            // When the "Yes" button is clicked in the confirmation modal
+            $('#exampleModalCenter05 .submit-btn').off('click').on('click', function() {
+                var deleteUrl =
+                "{{ route('panel.event.delete.images', ['id' => $photo->id_photogallery]) }}"; // Prepare the URL
+                deleteUrl = deleteUrl.replace(':photoId',
+                photoId); // Replace the placeholder with the actual photo ID
+
+                $.ajax({
+                    url: deleteUrl, // URL to delete the image
+                    type: 'POST', // HTTP method (delete)
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        eventId: eventId
+                    },
+                    success: function(response) {
+                        // Remove the photo box if delete was successful
+                        $('#photo-box-' + photoId).remove();
+                        toastr.success('Photo deleted successfully!');
+
+                        // Close the confirmation modal
+                        myModal.hide();
+
+                        // Show success modal
+                        var myModal2 = new bootstrap.Modal(document.getElementById('exampleModalCenter06'));
+                        myModal2.show();
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to delete the photo. Please try again.');
+                    }
+                });
+            });
+        });
+
+
+
+
         $("#imageUpload").change(function() {
             readURL(this);
         });
