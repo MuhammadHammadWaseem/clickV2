@@ -62,15 +62,28 @@ class WebPageController extends Controller
 
     public function deleteImages(Request $request, $id)
     {
+        // Find the photogallery entry by its ID
         $photogallery = PhotoGallery::where('id_photogallery', $id)->first();
-        if ($photogallery && $photogallery->id_event == $request->idevent) {
-            $photogallery->delete();
-            if (file_exists('public/event-images/' . $request->eventId . '/photogallery/' . $request->idphoto . '.jpg')) {
 
-                unlink('public/event-images/' . $request->eventId . '/photogallery/' . $request->idphoto . '.jpg');
+        if ($photogallery && $photogallery->id_event == $request->eventId) {
+            // Delete the database record
+            $photogallery->delete();
+
+            // Prepare the full path to the image
+            $imagePath = public_path('event-images/' . $request->eventId . '/photogallery/' . $id . '.jpg');
+
+            // Check if the file exists and delete it
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            } else {
+                return response()->json(['error' => 'File does not exist!'], 404);
             }
-            return response()->json(['success' => 'Photos Deleted successfully!']);
+
+            return response()->json(['success' => 'Photo deleted successfully!']);
         }
+
+        return response()->json(['error' => 'Photo not found or unauthorized!'], 403);
     }
+
 
 }

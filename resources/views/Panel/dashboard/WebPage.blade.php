@@ -1,6 +1,10 @@
 @extends('Panel.layout.master')
 
 @section('content')
+    @php
+        use App\Helpers\GeneralHelper;
+        $currentEventId = GeneralHelper::getEventId();
+    @endphp
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
             <div class="col-lg-12">
@@ -42,14 +46,14 @@
                     </div>
                     <div class="main-event-gallery-box">
                         @forelse ($photogallery as $photo)
-                            <div class="box">
+                            <div class="box" id="photo-box-{{ $photo->id_photogallery }}">
                                 <a href="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                     data-fancybox="images" tabindex="0">
                                     <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                         alt="">
                                 </a>
-                                <button type="button" class="delete-image-btn"
-                                    data-id="{{ $photo->id_photogallery }}" data-eventId="{{ $photo->id_event }}">Delete</button>
+                                <button type="button" class="delete-image-btn" data-id="{{ $photo->id_photogallery }}"
+                                    data-eventId="{{ $photo->id_event }}">Delete</button>
                             </div>
                         @empty
                             <p>No items found.</p>
@@ -217,29 +221,27 @@
 
 
     <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter06" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text">
-                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>Image Deleted Successfully</h2>
-                    <p>The image has been successfully deleted.</p>
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                        <h2>Image Deleted Successfully</h2>
+                        <p>The image has been successfully deleted.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
 @endsection
 
 @section('scripts')
@@ -268,13 +270,14 @@
 
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
+                            console.log(photoId);
                             var newImage = `
-                                <div class="box">
+                                <div class="box" id="${photoId}">
                                     <a href="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg"
                                         data-fancybox="images" tabindex="0">
                                         <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
                                     </a>
-                                    <button type="button" class="delete-image-btn" data-id="${photoId}" data-eventId="${photoId.id_event}">Delete</button>
+                                    <button type="button" class="delete-image-btn" data-id="${photoId}" data-eventId="{{ $currentEventId }}">Delete</button>
                                 </div>`;
 
                             $('.main-event-gallery-box').append(newImage);
@@ -355,10 +358,9 @@
 
             // When the "Yes" button is clicked in the confirmation modal
             $('#exampleModalCenter05 .submit-btn').off('click').on('click', function() {
-                var deleteUrl =
-                "{{ route('panel.event.delete.images', ['id' => $photo->id_photogallery]) }}"; // Prepare the URL
-                deleteUrl = deleteUrl.replace(':photoId',
-                photoId); // Replace the placeholder with the actual photo ID
+                var deleteUrl = "{{ route('panel.event.delete.images', ':photoId') }}";
+
+                deleteUrl = deleteUrl.replace(':photoId', photoId);
 
                 $.ajax({
                     url: deleteUrl, // URL to delete the image
@@ -376,7 +378,8 @@
                         myModal.hide();
 
                         // Show success modal
-                        var myModal2 = new bootstrap.Modal(document.getElementById('exampleModalCenter06'));
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter06'));
                         myModal2.show();
                     },
                     error: function(xhr) {
