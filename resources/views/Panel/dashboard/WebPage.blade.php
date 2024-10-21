@@ -53,10 +53,19 @@
                                         alt="">
                                 </a>
                                 <button type="button" class="delete-image-btn" data-id="{{ $photo->id_photogallery }}"
-                                    data-eventId="{{ $photo->id_event }}">Delete</button>
+                                    data-eventId="{{ $photo->id_event }}"><svg width="28" height="29"
+                                        viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+                                            fill="#F1F1F1" />
+                                        <path
+                                            d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+                                            fill="#F1F1F1" />
+                                    </svg>
+                                </button>
                             </div>
                         @empty
-                            <p>No items found.</p>
+                            <p id="NoItems">No items found.</p>
                         @endforelse
                     </div>
                     {{-- <div class="table-content-pagination">
@@ -72,40 +81,75 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="box-styling ceremony-box web-page-three-boxes">
+                <div class="box-styling ceremony-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
                         <h2>Ceremony</h2>
                         <p>This page is to review your page before you send the invitation out, so here you can
                             see the layout.</p>
-                        <button class="t-btn ">Add New </button>
-                        <img src="{{ asset('assets/Panel/images/event-photos-gallery.png') }}" alt="">
+                        <button class="t-btn" id="addCerImageBtn">Add New </button>
+                        @if (file_exists(public_path('event-images/' . $event->id_event . '/cerimg.jpg')))
+                            <img src="{{ asset('event-images/' . $event->id_event . '/cerimg.jpg') }}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="box-styling ceremony-box web-page-three-boxes">
+                <div class="box-styling reception-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
                         <h2>Recption</h2>
                         <p>This page is to review your page before you send the invitation out, so here you can
                             see the layout.</p>
-                        <button class="t-btn ">Add New </button>
-                        <img src="{{ asset('assets/Panel/images/event-photos-gallery.png') }}" alt="">
+                        <button class="t-btn" id="addRecImageBtn">Add New </button>
+                        @if (file_exists(public_path('event-images/' . $event->id_event . '/recimg.jpg')))
+                            <img src="{{ asset('event-images/' . $event->id_event . '/recimg.jpg') }}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="box-styling ceremony-box web-page-three-boxes">
+                <div class="box-styling party-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
                         <h2>Custome</h2>
                         <p>This page is to review your page before you send the invitation out, so here you can
                             see the layout.</p>
-                        <button class="t-btn ">Add New </button>
-                        <img src="{{ asset('assets/Panel/images/event-photos-gallery.png') }}" alt="">
+                        <button class="t-btn" id="addParImageBtn">Add New </button>
+                        @if (file_exists(public_path('event-images/' . $event->id_event . '/parimg.jpg')))
+                            <img src="{{ asset('event-images/' . $event->id_event . '/parimg.jpg') }}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+
+    {{-- Ceremony Modal --}}
+    <div class="modal fade modal-01 modal-02 modal-03" id="addCerImage" tabindex="-1" role="dialog"
+        aria-labelledby="addCerImageTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="uploadCerImageForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="text">
+                            @csrf
+                            <input type="file" id="cerimage" name="cerimage" multiple accept="image/*" />
+                            <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="button" id="closeCerModalBtn" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Modal -->
@@ -129,7 +173,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="closeBtn" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
@@ -242,6 +287,61 @@
             </div>
         </div>
     </div>
+
+    <!-- Reception Modal -->
+    <div class="modal fade" id="addRecImage" tabindex="-1" role="dialog" aria-labelledby="addRecImageTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="uploadRecImageForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="text">
+                            @csrf
+                            <input type="file" id="recimage" name="recimage" accept="image/*" />
+                            <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom (Party) Modal -->
+    <div class="modal fade" id="addParImage" tabindex="-1" role="dialog" aria-labelledby="addParImageTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="uploadParImageForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="text">
+                            @csrf
+                            <input type="file" id="parimage" name="parimage" accept="image/*" />
+                            <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="button" id="closeParModalBtn" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -265,14 +365,13 @@
                     contentType: false, // Tells jQuery not to set the content type
                     processData: false, // Prevents jQuery from converting the form data into a query string
                     success: function(response) {
-                        console.log(response);
                         $("#gall").val(''); // Clear input field
+                        $("#NoItems").hide();
 
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
-                            console.log(photoId);
                             var newImage = `
-                                <div class="box" id="${photoId}">
+                                <div class="box" id="photo-box-${photoId}">
                                     <a href="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg"
                                         data-fancybox="images" tabindex="0">
                                         <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
@@ -287,8 +386,6 @@
                         $("#closeBtn").click();
 
                         // Trigger the modal to show success message
-                        // $('#exampleModalCenter03').modal('show');
-
                         var myModal = new bootstrap.Modal(document.getElementById(
                             'exampleModalCenter03'));
                         myModal.show();
@@ -308,6 +405,137 @@
                             toastr.error('Failed to upload photos. Please try again.');
                             console.error(xhr.responseText);
                         }
+                    }
+                });
+            });
+
+            $(document).on('click', '#addCerImageBtn', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('addCerImage'));
+                myModal.show();
+            });
+            
+            $(document).on('click', '#addRecImageBtn', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('addRecImage'));
+                myModal.show();
+            });
+
+            $(document).on('click', '#addParImageBtn', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('addParImage'));
+                myModal.show();
+            });
+
+            // When the form is submitted
+            $('#uploadCerImageForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent the form from submitting the traditional way
+
+                // Create a FormData object to handle the file upload and other form data
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('panel.event.store.cerimage', ['id' => $event->id_event]) }}", // Your Laravel route for storing images
+                    type: 'POST', // HTTP method
+                    data: formData, // The form data
+                    contentType: false, // Do not set content-type header
+                    processData: false, // Do not process the data
+                    success: function(response) {
+                        // Handle success (e.g., display a success message or update the UI)
+                        console.log(response.img);
+                        $("#cerimage").val(''); // Clear the file input field after success
+                        toastr.success('Ceremony image uploaded successfully!');
+                        $('#closeCerModalBtn').click(); // Close the modal
+
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter03'));
+                        myModal2.show();
+
+                        if ($('.ceremony-new-box img').length > 0) {
+                            // Update the src of the existing image
+                            $('.ceremony-new-box img').attr('src', response.img + '?' +
+                                new Date()
+                                .getTime()); // Adding timestamp to avoid caching issues
+                        } else {
+                            // If image doesn't exist, create and append it
+                            $('.ceremony-new-box .text').append('<img src="' + response.img +
+                                '" alt="Ceremony Image">');
+                        }
+                    },
+                    error: function(xhr) {
+                        // Handle error (e.g., display error messages)
+                        toastr.error(
+                            'Failed to upload the Ceremony image. Please try again.');
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            $('#uploadRecImageForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('panel.event.store.recimage', ['id' => $event->id_event]) }}",
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Clear input field
+                        $("#recimage").val('');
+                        toastr.success('Reception image uploaded successfully!');
+                        $('#closeRecModalBtn').click();
+
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter03'));
+                        myModal2.show();
+
+                        // Update the reception image dynamically
+                        if ($('.reception-new-box img').length > 0) {
+                            $('.reception-new-box img').attr('src', response.img + '?' +
+                                new Date().getTime());
+                        } else {
+                            $('.reception-new-box .text').append('<img src="' + response.img +
+                                '" alt="Reception Image">');
+                        }
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to upload the reception image. Please try again.');
+                    }
+                });
+            });
+
+            // Custom (Party) Image Upload
+            $('#uploadParImageForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('panel.event.store.parimage', ['id' => $event->id_event]) }}",
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Clear input field
+                        $("#parimage").val('');
+                        toastr.success('Custom image uploaded successfully!');
+                        $('#closeParModalBtn').click();
+
+                        // Update the custom image dynamically
+                        if ($('.party-new-box img').length > 0) {
+                            $('.party-new-box img').attr('src', response.img + '?' + new Date()
+                                .getTime());
+                        } else {
+                            $('.party-new-box .text').append('<img src="' + response.img +
+                                '" alt="Custom Image">');
+                        }
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter03'));
+                        myModal2.show();
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to upload the custom image. Please try again.');
                     }
                 });
             });
@@ -350,7 +578,6 @@
         $(document).on('click', '.delete-image-btn', function() {
             var photoId = $(this).data('id');
             var eventId = $(this).data('eventid');
-            console.log(eventId);
 
             // Show confirmation modal
             var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));

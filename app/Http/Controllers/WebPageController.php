@@ -76,7 +76,7 @@ class WebPageController extends Controller
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             } else {
-                return response()->json(['error' => 'File does not exist!'], 404);
+                return response()->json(['success' => 'File does not exist!'], 404);
             }
 
             return response()->json(['success' => 'Photo deleted successfully!']);
@@ -85,5 +85,75 @@ class WebPageController extends Controller
         return response()->json(['error' => 'Photo not found or unauthorized!'], 403);
     }
 
+    public function storeCerImage(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+
+        if ($request->hasFile('cerimage')) {
+            $eventFolder = public_path('event-images/' . $request->idevent);
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
+            }
+
+            $cerImage = $request->file('cerimage');
+            $cerImage->move($eventFolder, "cerimg.jpg");
+
+            $event->cerimg = '/event-images/' . $request->idevent . '/' . "cerimg.jpg";
+            $event->save();
+
+            return response()->json(['success' => 'Ceremony Image uploaded successfully!', 'img' => $event->cerimg]);
+        } else {
+            return response()->json(['error' => 'No files uploaded.'], 400);
+        }
+    }
+    public function storeRecImage(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+
+        if ($request->hasFile('recimage')) {
+            $eventFolder = public_path('event-images/' . $request->idevent);
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
+            }
+
+            $cerImage = $request->file('recimage');
+            $cerImage->move($eventFolder, "recimg.jpg");
+
+            $event->recimg = '/event-images/' . $request->idevent . '/' . "recimg.jpg";
+            $event->save();
+
+            return response()->json(['success' => 'Reception Image uploaded successfully!', 'img' => $event->recimg]);
+        } else {
+            return response()->json(['error' => 'No files uploaded.'], 400);
+        }
+    }
+
+    public function storeParImage(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+
+        if ($request->hasFile('parimage')) {
+            $eventFolder = public_path('event-images/' . $request->idevent);
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
+            }
+
+            $cerImage = $request->file('parimage');
+            $cerImage->move($eventFolder, "parimg.jpg");
+
+            $event->parimg = '/event-images/' . $request->idevent . '/' . "parimg.jpg";
+            $event->save();
+
+            return response()->json(['success' => 'Reception Image uploaded successfully!', 'img' => $event->parimg]);
+        } else {
+            return response()->json(['error' => 'No files uploaded.'], 400);
+        }
+    }
 
 }

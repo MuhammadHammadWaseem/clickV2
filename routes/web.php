@@ -68,6 +68,9 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
             Route::post('/{id}/store/images', [WebPageController::class, 'storeImages'])->name('store.images');
             Route::post('/{id}/delete/images', [WebPageController::class, 'deleteImages'])->name('delete.images');
+            Route::post('/{id}/store/cerimage', [WebPageController::class, 'storeCerImage'])->name('store.cerimage');
+            Route::post('/{id}/store/recimage', [WebPageController::class, 'storeRecImage'])->name('store.recimage');
+            Route::post('/{id}/store/parimage', [WebPageController::class, 'storeParImage'])->name('store.parimage');
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
