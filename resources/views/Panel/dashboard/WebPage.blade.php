@@ -25,11 +25,16 @@
                             see the layout.</p>
                     </div>
                     <div class="iframe-box">
-                        <img src="{{ asset('assets/Panel/images/website-preview-iframe.png') }}" alt="">
+                        {{-- <img src="{{ asset('assets/Panel/images/website-preview-iframe.png') }}" alt=""> --}}
+                        <iframe src="{{ route('website', ['id' => $event->id_event]) }}" frameborder="0"></iframe>
                     </div>
                     <div class="two-btn-align">
-                        <button class="t-btn t-btn-gray">Website Information</button>
-                        <button class="t-btn">Visit Website</button>
+                        <button class="t-btn t-btn-gray"><a
+                                href="{{ route('panel.event.generalInfos', ['id' => $event->id_event]) }}"
+                                style="color:#777777;">Website Information</a></button>
+                        <button class="t-btn t-btn-gray" id="changeMainPhotoBtn">Change Main Photo</button>
+                        <button class="t-btn"><a href="{{ route('website', ['id' => $event->id_event]) }}"
+                                style="color:#ffffff;">Visit Website</a></button>
                     </div>
                 </div>
             </div>
@@ -335,7 +340,35 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeParModalBtn" class="btn btn-secondary"
+                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- Change Main Photo --}}
+    <div class="modal fade" id="changeMainPhoto" tabindex="-1" role="dialog" aria-labelledby="changeMainPhotoTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="{{ route('panel.event.changeMainPhoto', ['id' => $event->id_event]) }}"
+                    enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="text">
+                            @csrf
+                            <input type="file" id="mainimage" name="mainimage" accept="image/*" />
+                            <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="button" id="closeMainIamgeModalBtn" class="btn"
                             data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -413,7 +446,7 @@
                 var myModal = new bootstrap.Modal(document.getElementById('addCerImage'));
                 myModal.show();
             });
-            
+
             $(document).on('click', '#addRecImageBtn', function() {
                 var myModal = new bootstrap.Modal(document.getElementById('addRecImage'));
                 myModal.show();
@@ -421,6 +454,10 @@
 
             $(document).on('click', '#addParImageBtn', function() {
                 var myModal = new bootstrap.Modal(document.getElementById('addParImage'));
+                myModal.show();
+            });
+            $(document).on('click', '#changeMainPhotoBtn', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
                 myModal.show();
             });
 
@@ -654,5 +691,13 @@
                 }
             });
         }
+
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if ($errors->any())
+            toastr.error("{{ $errors->first() }}");
+        @endif
     </script>
 @endsection

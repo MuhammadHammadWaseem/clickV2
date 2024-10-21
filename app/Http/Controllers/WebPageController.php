@@ -59,6 +59,43 @@ class WebPageController extends Controller
             return response()->json(['error' => 'No files uploaded.'], 400);
         }
     }
+    public function storeUsersImages(Request $request)
+    {
+        $request->validate([
+            'gall.*' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048', // Adjust file size as needed
+        ]);
+
+        if ($request->hasFile('gall')) {
+            $eventFolder = public_path('event-images/' . $request->idevent . '/photogallery');
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
+            }
+
+            $newImages = [];
+
+            foreach ($request->file('gall') as $photo) {
+                if ($photo->isValid()) {
+                    // Create a new Photogallery record
+                    $photogallery = new PhotoGallery;
+                    $photogallery->id_event = $request->idevent;
+                    $photogallery->guestCode = $request->guestCode ?? null;
+                    $photogallery->save();
+
+                    // Store image ID in the newImages array
+                    $newImages[] = $photogallery->id_photogallery;
+
+                    // Move uploaded file to the appropriate folder
+                    $photo->move($eventFolder, $photogallery->id_photogallery . ".jpg");
+                }
+            }
+
+            return redirect()->back()->with(['success' => 'Image Uploaded Successfully!']);
+        } else {
+            return redirect()->back()->withErrors('No image was uploaded.');
+        }
+    }
 
     public function deleteImages(Request $request, $id)
     {
@@ -155,5 +192,33 @@ class WebPageController extends Controller
             return response()->json(['error' => 'No files uploaded.'], 400);
         }
     }
+
+    public function changeMainPhoto(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+
+        if ($request->file('mainimage')) {
+            $eventFolder = public_path('event-images/' . $request->idevent);
+
+            // Create directory if it doesn't exist
+            if (!file_exists($eventFolder)) {
+                mkdir($eventFolder, 0777, true);
+            }
+
+            // Store the uploaded image
+            $image = $request->file('mainimage');
+            $filename = time() . '.' . $image->extension();
+            $image->move($eventFolder, $filename);  // Move to the correct directory
+
+            // Update the event's main image
+            $event->mainimage = '/event-images/' . $request->idevent . '/' . $filename;
+            $event->save();
+
+            return redirect()->back()->with(['success' => 'Main Image Updated Successfully!']);
+        } else {
+            return redirect()->back()->withErrors('No image was uploaded.');
+        }
+    }
+
 
 }

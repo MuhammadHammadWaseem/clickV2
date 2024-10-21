@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebsiteController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
@@ -71,16 +72,22 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/{id}/store/cerimage', [WebPageController::class, 'storeCerImage'])->name('store.cerimage');
             Route::post('/{id}/store/recimage', [WebPageController::class, 'storeRecImage'])->name('store.recimage');
             Route::post('/{id}/store/parimage', [WebPageController::class, 'storeParImage'])->name('store.parimage');
+            Route::post('/{id}/change-main-photo', [WebPageController::class, 'changeMainPhoto'])->name('changeMainPhoto');
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
             Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
-           // Edit meal route (fetch meal data)
-           Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
-           Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
-           Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
+            // Edit meal route (fetch meal data)
+            Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
+            Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
+            Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
 
-           Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
+            Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
         });
     });
 });
+Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
+Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');
+Route::post('store/images/{id}', [WebPageController::class, 'storeUsersImages'])->name('store.users.images');
+
+
