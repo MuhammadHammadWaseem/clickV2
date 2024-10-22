@@ -44,7 +44,7 @@
                                         <li><a href="#"><img
                                                     src="{{ asset('assets/Panel/images/Tables-Management.png') }}"
                                                     alt="">Tables Management</a></li>
-                                        <li><a href="#"><img
+                                        <li><a href="{{ route('panel.event.photos', ['id' => $eventId]) }}"><img
                                                     src="{{ asset('assets/Panel/images/Event-Photos.png') }}"
                                                     alt="">Event Photos</a></li>
                                         <li><a href="#"><img

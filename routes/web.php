@@ -10,6 +10,7 @@ use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,10 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/{id}/store/recimage', [WebPageController::class, 'storeRecImage'])->name('store.recimage');
             Route::post('/{id}/store/parimage', [WebPageController::class, 'storeParImage'])->name('store.parimage');
             Route::post('/{id}/change-main-photo', [WebPageController::class, 'changeMainPhoto'])->name('changeMainPhoto');
+            Route::post('/store/videos', [WebPageController::class, 'storeVideos'])->name('store.videos');
+
+            // Photos
+            Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos');
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');

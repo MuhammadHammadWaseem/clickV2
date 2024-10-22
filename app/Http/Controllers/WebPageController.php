@@ -59,6 +59,49 @@ class WebPageController extends Controller
             return response()->json(['error' => 'No files uploaded.'], 400);
         }
     }
+
+    public function storeVideos(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+        if ($event) {
+            // Validate video file if it exists
+            if ($request->hasFile('vid')) {
+                $video = $request->file('vid');
+                $maxSize = 15 * 1024 * 1024; // 15 MB in bytes
+
+                if ($video->getSize() > $maxSize) {
+                    return response()->json(['error' => 'The video is too large to upload. Maximum size allowed is 15 MB.'], 422);
+                }
+
+                if (!file_exists('public/event-images/' . $request->idevent . '/videos')) {
+                    mkdir('public/event-images/' . $request->idevent . '/videos', 0777, true);
+                }
+
+                $filename = time() . '.' . $video->getClientOriginalExtension();
+                $video->move(public_path('event-images/' . $request->idevent . '/videos'), $filename);
+
+                // Save the video path to the event
+
+                $videogallery = new VideoGallery;
+                $videogallery->id_event = $request->idevent;
+                $videogallery->guest_code = $request->guest_code ?? null;
+                $videogallery->video = $filename;
+                $videogallery->save();
+
+                $uploadedVideo = 'event-images/' . $request->idevent . '/videos/'. $videogallery->video;
+
+                return response()->json([
+                    'success' => 'Videos uploaded successfully!',
+                    'videos' => $uploadedVideo
+                ]);
+            }
+
+            return redirect()->back();
+        } else
+            return response()->json(['error' => 'Event not found.'], 404);
+    }    
+
+    
     public function storeUsersImages(Request $request)
     {
         $request->validate([
