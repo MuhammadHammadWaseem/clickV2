@@ -549,15 +549,16 @@
             });
         });
 
-        function showGuest() {
+        function showGuest(page = 1) { // Accept page number as an argument
             var mealId = $('#idevent').val();
 
             $.ajax({
-                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
+                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "?page=" +
+                    page, // Pass the page parameter
                 type: "GET",
                 dataType: "json",
                 success: function(response) {
-                    var guests = response.guests; // Assuming the guest list is in the `guests` key
+                    var guests = response.guests;
 
                     // Clear the existing table body
                     $('#GuestList tbody').empty();
@@ -565,27 +566,26 @@
                     // Loop through the guests and append them to the table
                     guests.forEach(function(guest) {
                         var row = `
-                    <tr>
-                        <td>${guest.titleGuest} ${guest.name}</td>
-                        <td>${guest.phone}</td>
-                        <td>${guest.email}</td>
-                        <td>${guest.members_number} Members Left</td>
-                        <td>
-
-                            <div class="edit-delet">
-                                <ul>
-                                    <li><a href="#" class="edit-btn" data-id="${guest.id_guest }"><img src="{{ asset('assets/images/action-link.png') }}" alt="Edit"></a></li>
-                                    <li><a href="#"><img src="{{ asset('assets/images/action-delet.png') }}" alt=""></a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>${guest.titleGuest} ${guest.name}</td>
+                    <td>${guest.phone}</td>
+                    <td>${guest.email}</td>
+                    <td>${guest.members_number} Members Left</td>
+                    <td>
+                        <div class="edit-delet">
+                            <ul>
+                                <li><a href="#" class="edit-btn" data-id="${guest.id_guest}"><img src="{{ asset('assets/images/action-link.png') }}" alt="Edit"></a></li>
+                                <li><a href="#"><img src="{{ asset('assets/images/action-delet.png') }}" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
                 `;
                         $('#GuestList tbody').append(row); // Append each guest to the table body
                     });
 
-                    // If you need to handle pagination, you can create pagination logic here
-                    setupPagination(response.totalPages); // Assuming the response has totalPages key
+                    // Setup pagination
+                    setupPagination(response.totalPages, response.currentPage); // Pass total and current pages
                 },
                 error: function(xhr, status, error) {
                     console.error("An error occurred while fetching guests:", error);
@@ -593,27 +593,37 @@
             });
         }
 
-        // Example pagination function (you can adapt it to your needs)
-        function setupPagination(totalPages) {
-            var paginationHTML = '';
 
-            // Dynamically generate pagination based on the number of pages
-            for (var i = 1; i <= totalPages; i++) {
-                paginationHTML += `<li><a href="#" class="${i === 1 ? 'activ' : ''}" data-page="${i}">${i}</a></li>`;
+
+        // Example pagination function (you can adapt it to your needs)
+        function setupPagination(totalPages, currentPage) {
+            const paginationContainer = $('.table-content-pagination ul');
+            paginationContainer.empty(); // Clear existing pagination
+
+            // Previous button
+            if (currentPage > 1) {
+                paginationContainer.append(`<li><a href="#" onclick="showGuest(${currentPage - 1})">&lt;</a></li>`);
+            } else {
+                paginationContainer.append(`<li><a href="#" class="disabled">&lt;</a></li>`);
             }
 
-            // Replace the existing pagination with the new pagination HTML
-            $('.table-content-pagination ul').html(paginationHTML);
+            // Page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationContainer.append(`<li><a href="#" class="activ">${i}</a></li>`); // Current page
+                } else {
+                    paginationContainer.append(`<li><a href="#" onclick="showGuest(${i})">${i}</a></li>`); // Other pages
+                }
+            }
 
-            // Add click event listeners to the pagination links
-            $('.table-content-pagination ul li a').on('click', function(e) {
-                e.preventDefault();
-                var page = $(this).data('page');
-
-                // Fetch the corresponding page data (you need to modify your backend to handle page numbers)
-                fetchGuestPage(page);
-            });
+            // Next button
+            if (currentPage < totalPages) {
+                paginationContainer.append(`<li><a href="#" onclick="showGuest(${currentPage + 1})">&gt;</a></li>`);
+            } else {
+                paginationContainer.append(`<li><a href="#" class="disabled">&gt;</a></li>`);
+            }
         }
+
 
         // Fetch the corresponding page of guest data (this needs to be handled in your backend)
         function fetchGuestPage(page) {
@@ -690,7 +700,8 @@
 
                     // Set a hidden input to store the guest ID (if not already in the form)
                     if ($('#EditguestForm input[name="idguest"]').length == 0) {
-                        $('#EditguestForm').append('<input type="hidden" name="idguest" value="' + response
+                        $('#EditguestForm').append('<input type="hidden" name="idguest" value="' +
+                            response
                             .id_guest + '">');
                     } else {
                         $('#EditguestForm input[name="idguest"]').val(response.id_guest);
@@ -718,12 +729,12 @@
                 type: "POST",
                 data: formData,
                 success: function(response) {
-                        // Optionally reload guest list
-                        showGuest();
-                        toastr.success('Guest updated successfully');
-                            var myModal = new bootstrap.Modal(document.getElementById(
-                                'EditGuest'));
-                            myModal.hide();
+                    // Optionally reload guest list
+                    showGuest();
+                    toastr.success('Guest updated successfully');
+                    var myModal = new bootstrap.Modal(document.getElementById(
+                        'EditGuest'));
+                    myModal.hide();
 
                 },
                 error: function(xhr) {

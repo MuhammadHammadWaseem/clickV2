@@ -94,12 +94,15 @@ Route::group(['as' => 'panel.'], function () {
             // tutorial
             Route::get('{id}/tutorial', [TutorialController::class, 'index'])->name('tutorial');
 
-
+            // Guest
             Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list');
             Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
             Route::get('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
             Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
             Route::post('{id}/guests/update', [GuestListController::class, 'update'])->name('guests.update');
+
+            Route::post('{id}/importGuestFromOtherEvent', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
+            // Guest End
         });
     });
 });

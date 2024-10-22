@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Mail;
 
 class GuestListController extends Controller
 {
-    public function index(){
+    public function index() {
         $eventId = GeneralHelper::getEventId();
-        $meals = Meal::where('id_event', $eventId,)->get(['id_meal','name']);
-        return view('Panel.dashboard.guest-list',compact('meals'));
 
+        // Use paginate directly to get the paginated results
+        $meals = Meal::where('id_event', $eventId)->paginate(10, ['id_meal', 'name']);
+
+        return view('Panel.dashboard.guest-list', compact('meals'));
     }
+
     public function newguest(Request $request)
     {
         $request->validate([
@@ -134,14 +137,21 @@ class GuestListController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Guest added successfully!']);
     }
-        public function show(){
+
+        public function show(Request $request) {
             $eventId = GeneralHelper::getEventId();
+
+            // Set the current page from the request or default to 1
+            $currentPage = $request->input('page', 1);
+            $perPage = 10; // Number of items per page
+
             $guests = Guest::where('id_event', $eventId)
-            ->where(function ($query) {
-                $query->where('mainguest', 1)
-                      ->orWhere('mainguest', null);
-            })
-            ->get();
+                ->where(function ($query) {
+                    $query->where('mainguest', 1)
+                        ->orWhere('mainguest', null);
+                })
+                ->paginate($perPage, ['*'], 'page', $currentPage);
+
             foreach ($guests as $g) {
                 $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
                 foreach ($g->members as $gm) {
@@ -153,16 +163,12 @@ class GuestListController extends Controller
                         $gm->table = Table::where('id_table', $gm->id_table)->first();
                 }
             }
-            foreach ($guests as $g) {
-                if ($g->id_meal != 0)
-                    $g->meal = Meal::where('id_meal', $g->id_meal)->first();
-            }
-            foreach ($guests as $g) {
-                if ($g->id_table != 0)
-                    $g->table = Table::where('id_table', $g->id_table)->first();
-            }
-            return response()->json(['guests' => $guests]);
 
+            return response()->json([
+                'guests' => $guests->items(),
+                'totalPages' => $guests->lastPage(), // total number of pages
+                'currentPage' => $guests->currentPage() // current page number
+            ]);
         }
 
         public function edit($id)
@@ -178,25 +184,51 @@ class GuestListController extends Controller
         }
 
 
-public function update(Request $request)
-{
-    $guest = Guest::where('id_guest', $request->idguest)->first();
-    if ($guest) {
-        $guest->name = $request->name;
-        $guest->titleGuest = $request->title;
-        $guest->email = $request->email;
-        $guest->phone = $request->phone;
-        $guest->whatsapp = $request->whatsapp;
-        $guest->allergies =($request->allergies == "1") ? 1 : 0;
-        $guest->id_meal = $request->meal;
-        $guest->notes = $request->notes;
-        $guest->members_number = $request->members;
-        $guest->opened = ($request->confirm == "1") ? 1 : 0;
+        public function update(Request $request)
+        {
+            $guest = Guest::where('id_guest', $request->idguest)->first();
+            if ($guest) {
+                $guest->name = $request->name;
+                $guest->titleGuest = $request->title;
+                $guest->email = $request->email;
+                $guest->phone = $request->phone;
+                $guest->whatsapp = $request->whatsapp;
+                $guest->allergies =($request->allergies == "1") ? 1 : 0;
+                $guest->id_meal = $request->meal;
+                $guest->notes = $request->notes;
+                $guest->members_number = $request->members;
+                $guest->opened = ($request->confirm == "1") ? 1 : 0;
 
-        $guest->save();
-        return response()->json(["message" => "Guest added successfully!"]);
-    }
-    return response()->json(["message" => "Guest added successfully!"]);
-}
+                $guest->save();
+                return response()->json(["message" => "Guest added successfully!"]);
+            }
+            return response()->json(["message" => "Guest added successfully!"]);
+        }
 
+            public function importGuestFromOtherEvent(){
+                    $allevents = $request->allguests;
+                    foreach ($allevents as $ievent) {
+                        if ($ievent['guests'] != []) {
+                            foreach ($ievent['guests'] as $iguest) {
+                                if (array_key_exists('selected', $iguest) && $iguest['selected'] == 1) {
+                                    $guest = new Guest;
+                                    $guest->name = $iguest['name'];
+                                    $guest->phone = $iguest['phone'];
+                                    $guest->whatsapp = $iguest['whatsapp'];
+                                    $guest->email = $iguest['email'];
+                                    $guest->id_event = $request['idevent'];
+                                    $guest->allergies = $iguest['allergies'];
+                                    $guest->mainguest = 1;
+                                    $guest->parent_id_guest = 0;
+                                    $guest->members_number = $iguest['members_number'];
+                                    $guest->notes = $iguest['notes'];
+                                    $guest->code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
+                                    $guest->save();
+                                }
+                            }
+                        }
+                        return response()->json(["message" => "Guest added successfully!", "guests" => $allevents]);
+
+            }
+        }
 }
