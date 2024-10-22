@@ -95,6 +95,13 @@ Route::group(['as' => 'panel.'], function () {
             // tutorial
             Route::get('{id}/tutorial', [TutorialController::class, 'index'])->name('tutorial');
 
+            // Gift Suggestion
+            Route::get('{id}/gift-suggestion/show', [GiftSuggestion::class, 'show'])->name('gift.show');
+            Route::post('gift/gift-suggestion', [GiftSuggestion::class, 'store'])->name('gift.store');
+             Route::get('gift/gift-suggestion/edit/{id}', [GiftSuggestion::class, 'edit'])->name('gift.edit');
+             Route::post('gift/gift-suggestion/update/{id}', [GiftSuggestion::class, 'update'])->name('gift.update');
+             Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
+
             // Guest
             Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list');
             Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
