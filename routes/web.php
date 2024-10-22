@@ -108,8 +108,8 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
             Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
             Route::post('{id}/guests/update', [GuestListController::class, 'update'])->name('guests.update');
-
-            Route::post('{id}/importGuestFromOtherEvent', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
+            Route::get('{id}/guests/show-event', [GuestListController::class, 'allguests'])->name('guests.show-event');
+            Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
             // Guest End
         });
     });

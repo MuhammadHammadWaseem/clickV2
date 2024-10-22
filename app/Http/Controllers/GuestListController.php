@@ -9,6 +9,7 @@ use App\Models\Table;
 use App\Mail\GuestAttending;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class GuestListController extends Controller
@@ -205,30 +206,41 @@ class GuestListController extends Controller
             return response()->json(["message" => "Guest added successfully!"]);
         }
 
-            public function importGuestFromOtherEvent(){
+                public function importGuestFromOtherEvent(Request $request)
+                {
+
                     $allevents = $request->allguests;
                     foreach ($allevents as $ievent) {
-                        if ($ievent['guests'] != []) {
-                            foreach ($ievent['guests'] as $iguest) {
-                                if (array_key_exists('selected', $iguest) && $iguest['selected'] == 1) {
+                        // dd($ievent['id_guest']);
+                        // Check if 'guests' exists and is not empty
+                        // if (isset($ievent['guests']) && !empty($ievent['guests'])) {
+                        //     foreach ($ievent['guests'] as $iguest) {
+                        //         if (array_key_exists('selected', $iguest) && $iguest['selected'] == 1) {
                                     $guest = new Guest;
-                                    $guest->name = $iguest['name'];
-                                    $guest->phone = $iguest['phone'];
-                                    $guest->whatsapp = $iguest['whatsapp'];
-                                    $guest->email = $iguest['email'];
+                                    $guest->name = $ievent['name'];
+                                    $guest->phone = $ievent['phone'] ?? '';
+                                    $guest->whatsapp = $ievent['whatsapp'] ?? '';
+                                    $guest->email = $ievent['email'] ?? '';
                                     $guest->id_event = $request['idevent'];
-                                    $guest->allergies = $iguest['allergies'];
+                                    $guest->allergies = $ievent['allergies'];
                                     $guest->mainguest = 1;
                                     $guest->parent_id_guest = 0;
-                                    $guest->members_number = $iguest['members_number'];
-                                    $guest->notes = $iguest['notes'];
+                                    $guest->members_number = $ievent['members_number'];
+                                    $guest->notes = $ievent['notes'] ?? '';
                                     $guest->code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
                                     $guest->save();
                                 }
-                            }
-                        }
-                        return response()->json(["message" => "Guest added successfully!", "guests" => $allevents]);
+                    //         }
+                    //     }
+                    // }
+                    return response()->json(["message" => "Guest added successfully!", "guests" => $allevents]);
+                }
 
+            public function allguests(Request $request)
+            {
+                $events = Event::where('id_user', Auth::id())->where('id_event', '!=', $request->idevent)->get();
+                foreach ($events as $event)
+                    $event->guests = Guest::where('id_event', $event->id_event)->where('mainguest', 1)->get();
+                return response()->json(["guests" => $events]);;
             }
         }
-}

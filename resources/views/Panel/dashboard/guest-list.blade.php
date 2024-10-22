@@ -51,7 +51,7 @@
                     <div class="three-btns-align">
                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                             data-target="#AddGuest">Add Guest </button>
-                        <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
+                        <button type="button" class="btn btn-primary t-btn t-btn-dark" id="importModal" data-toggle="modal"
                             data-target="#exampleModalCenter02">Add From Other Events </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter03">Upload .CSV File </button>
@@ -430,47 +430,34 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
+
     <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter02" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Upload Form Another Event?</h2>
+                        <h2>Upload Guests From Another Event</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </div>
-                    <div class="modal-table-type-content">
-                        <div class="main-heading">
-                            <ul>
-                                <li>Name </li>
-                                <li># Of Guests</li>
-                                <li>Actions</li>
-                            </ul>
+                    <form id="GuestImportForm">
+                        <div class="modal-table-type-content" id="guestListItems">
+                            {{-- <div class="sub-main-content" >
+                            <!-- Dynamically inserted guest data will appear here -->
+                        </div> --}}
                         </div>
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="assets/images/user-plus.png" alt=""></a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter">Upload Guest</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -567,7 +554,7 @@
                     guests.forEach(function(guest) {
                         var row = `
                 <tr>
-                    <td>${guest.titleGuest} ${guest.name}</td>
+                    <td>${guest.titleGuest == null ? ' ' : guest.titleGuest} ${ guest.name}</td>
                     <td>${guest.phone}</td>
                     <td>${guest.email}</td>
                     <td>${guest.members_number} Members Left</td>
@@ -641,7 +628,7 @@
                     guests.forEach(function(guest) {
                         var row = `
                     <tr>
-                        <td>${guest.titleGuest} ${guest.name}</td>
+                        <td>${guest.titleGuest == null ? ' ' : guest.titleGuest + ' ' + guest.name}</td>
                         <td>${guest.phone}</td>
                         <td>${guest.email}</td>
                         <td>${guest.members_number} Members Left</td>
@@ -741,6 +728,98 @@
                     alert('Something went wrong: ' + xhr.responseText);
                 }
             });
+        });
+
+        $("#importModal").on("click", function() {
+            var mealId = $('#idevent').val();
+            $.ajax({
+                url: `/event/${mealId}/guests/show-event`,
+                method: 'GET',
+                dataType: "json",
+                success: function(response) {
+                    var guests = response.guests; // Main array of guests
+
+                    // Clear previous content
+                    $('#guestListItems').empty();
+
+                    // Check if 'guests' is an array
+                    if (Array.isArray(guests) && guests.length > 0) {
+                        // Loop through each guest
+                        guests.forEach(function(guest) {
+                            // Append main guest information
+                            var guestSection = `
+                    <div class="sub-main-content">
+                        <h3>Event: ${guest.name}</h3> <!-- Main guest name -->
+                        <div class="nested-guests">
+                            <h4>Guest List:</h4>
+                    `;
+
+                            // Check if nested guests array exists and is not empty
+                            if (Array.isArray(guest.guests) && guest.guests.length > 0) {
+                                guest.guests.forEach(function(nestedGuest, index) {
+                                    // Append nested guest names with checkboxes
+                                    guestSection += `
+                            <div class="w-100 mt-1">
+                                <input type="hidden" value="${JSON.stringify(nestedGuest)}" name="allguests" id="">
+                                <input type="checkbox" class="guest-checkbox" data-guest='${JSON.stringify(nestedGuest)}' id="guest_${index}">
+                                <label for="guest_${index}"><strong>Name:</strong> ${nestedGuest.name}</label>
+                            </div>
+                            `;
+                                });
+                            } else {
+                                guestSection += '<p>No additional guests found.</p>';
+                            }
+
+                            guestSection += '</div></div>';
+                            $('#guestListItems').append(guestSection);
+                        });
+                    } else {
+                        $('#guestListItems').append('<p>No guests found for this event.</p>');
+                    }
+                },
+                error: function(err) {
+                    console.error('Error fetching guest data:', err);
+                }
+            });
+        });
+
+        // Handle the "Upload Guest" button click
+        $(".submit-btn").on("click", function() {
+            var selectedGuests = [];
+
+            // Get all checked guests
+            $(".guest-checkbox:checked").each(function() {
+                var guestData = $(this).data('guest');
+                guestData.selected = 1; // Mark the guest as selected
+                selectedGuests.push(guestData);
+            });
+
+            var mealId = $('#idevent').val();
+            if (selectedGuests.length > 0) {
+                // Send selected guests to the backend
+                $.ajax({
+                    url: `/event/${mealId}/guests/import`,
+                    method: 'POST',
+                    dataType: "json",
+                    data: {
+                        allguests: selectedGuests,
+                        idevent: mealId, // Assuming this is the target event id
+                    },
+                    success: function(response) {
+                        showGuest();
+                        $('#GuestImportForm')[0].reset();
+                        var myModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter02'));
+                        myModal.hide();
+                        toastr.success("Guests imported successfully");
+                    },
+                    error: function(err) {
+                        console.error('Error importing guests:', err);
+                    }
+                });
+            } else {
+                alert('Please select at least one guest to import.');
+            }
         });
     </script>
 @endsection
