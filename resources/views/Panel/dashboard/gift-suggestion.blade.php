@@ -88,6 +88,53 @@
         </div>
     </div>
 
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter04" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                    <h2>Suggestion Deleted Successfully</h2>
+                    <p>Your gift suggestion has been successfully deleted.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                    <h2>Suggestion Edit Successfully</h2>
+                    <p>Your gift suggestion has been successfully edited.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter02"> Want To Send Invitations To Guests? </button> -->
     <!-- Modal -->
@@ -241,8 +288,6 @@
                             'exampleModalCenter03'));
                         successModal.show();
                         // location.reload(); // Optionally reload to see the new gift in the list
-
-
                     },
                     error: function(xhr) {
                         toastr.error('Failed to add gift. Please try again.');
@@ -292,9 +337,6 @@
                 }
             });
         }
-
-
-
 
         function bindEventListeners() {
             // Handle Edit Gift Modal
@@ -347,9 +389,6 @@
             });
         });
 
-
-
-
         // For Update Gift
         $('#editGiftForm').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
@@ -367,6 +406,9 @@
                 success: function(response) {
                     var myModal2 = new bootstrap.Modal(document.getElementById('editGiftModal'));
                     myModal2.hide(); // Hide the modal
+                    var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter05'));
+                        successModal.show();
                     $("#editModalCancelBtn").click();
                     toastr.success('Gift updated successfully!');
                     // location.reload(); // Comment this out to see if it refreshes
@@ -397,6 +439,9 @@
                     success: function(response) {
                         myModal.hide(); // Hide the modal
                         show();
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter04'));
+                        successModal.show();
                         toastr.success('Gift deleted successfully!');
                     },
                     error: function(xhr) {
