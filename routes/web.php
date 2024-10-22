@@ -77,6 +77,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/{id}/store/parimage', [WebPageController::class, 'storeParImage'])->name('store.parimage');
             Route::post('/{id}/change-main-photo', [WebPageController::class, 'changeMainPhoto'])->name('changeMainPhoto');
             Route::post('/store/videos', [WebPageController::class, 'storeVideos'])->name('store.videos');
+            Route::post('/delete/videos', [WebPageController::class, 'deleteVideo'])->name('delete.videos');
 
             // Photos
             Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos');

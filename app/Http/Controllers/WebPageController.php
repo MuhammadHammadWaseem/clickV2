@@ -89,17 +89,41 @@ class WebPageController extends Controller
                 $videogallery->save();
 
                 $uploadedVideo = 'event-images/' . $request->idevent . '/videos/'. $videogallery->video;
+                $id = $videogallery->id;
 
                 return response()->json([
                     'success' => 'Videos uploaded successfully!',
-                    'videos' => $uploadedVideo
+                    'videos' => $uploadedVideo,
+                    'id' => $id
                 ]);
             }
 
             return redirect()->back();
         } else
             return response()->json(['error' => 'Event not found.'], 404);
-    }    
+    }
+    
+    public function deleteVideo(Request $request)
+    {
+        $photogallery = VideoGallery::where('id', $request->id)->first();
+        if ($photogallery && $photogallery->id_event == $request->idevent) {
+            // Convert to absolute path using public_path helper
+            $videoPath = public_path('event-images/' . $request->idevent . '/videos/' . $photogallery->video);
+
+            // Delete the record from the database
+            $photogallery->delete();
+
+            // Check if the file exists and delete it
+            if (file_exists($videoPath)) {
+                unlink($videoPath);
+                return response()->json(['success' => 'Video deleted successfully'], 200);
+            } else {
+                return response()->json(['error' => 'File does not exist'], 404);
+            }
+        }
+
+        return response()->json(['error' => 'Video not found or unauthorized action'], 404);
+    }
 
     
     public function storeUsersImages(Request $request)
