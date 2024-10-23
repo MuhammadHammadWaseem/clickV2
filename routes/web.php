@@ -12,6 +12,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\reminderController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
+use App\Http\Controllers\TableSeatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,10 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
             Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
             Route::post('{id}/sendAcSm', [reminderController::class, 'sendAcSm'])->name('sendAcSm');
+
+
+            // Table eating
+            Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index');
 
         });
     });

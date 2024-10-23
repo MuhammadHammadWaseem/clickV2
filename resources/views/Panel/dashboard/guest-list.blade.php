@@ -511,26 +511,30 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         </div>
                         <div id="fileName" class="file-name"></div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="main-side-media">
-                    <div class="image-box">
-                        <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
-                    </div>
-                    <div class="main-youtube-iframe">
-                        <iframe width="100%" height="315"
-                            src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
                     </div>
                 </div>
+
+
+                <div class="col-8">
+                    <div class="main-side-media">
+                        <div class="image-box">
+                            <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
+                        </div>
+                        <div class="main-youtube-iframe">
+                            <iframe width="100%" height="315"
+                                src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
