@@ -1,4 +1,85 @@
 @extends('Panel.layout.master')
+<style>
+    .modal-dialog {
+        max-width: 1200px !important;
+    }
+
+    #exampleModalCenter03.modal-03 .modal-body .text {
+        align-items: flex-start;
+        display: flex;
+        text-align: start;
+        flex-direction: column;
+    }
+
+    #exampleModalCenter03.modal-03 .modal-body .text p {
+        text-align: left !important;
+    }
+
+    #exampleModalCenter03 .modal-body .text p {
+        padding: 0;
+    }
+
+    #exampleModalCenter03 .modal-footer {
+        padding: 16px 0 !important;
+        justify-content: flex-start;
+    }
+
+    .main-side-media {
+        margin-left: 20px;
+        border-left: 1px solid grey;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 20px;
+    }
+
+    .main-side-media .image-box {
+        justify-content: center !important;
+        display: flex;
+    }
+
+    .main-youtube-iframe {
+        border-radius: 10px;
+        overflow-x: hidden;
+        width: 90%;
+        margin: auto;
+    }
+
+    .upload-container {
+        width: 100%;
+        height: 300px;
+        border: 3px dashed #a58a6a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        cursor: pointer;
+        border-radius: 20px
+    }
+
+    .upload-container p {
+        font-size: 18px;
+        color: #a58a6a;
+    }
+
+    .upload-container input[type="file"] {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .file-name {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+</style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -403,33 +484,59 @@
         </div>
     </div>
 
-    <div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+
+
+    {{-- Modal for import guest csv --}}
+<div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
+role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-4">
                     <div class="text">
-                        <h2>Upload Form CSV</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>Upload CSV</h2>
+                        <p>Upload a CSV file with the columns: name, email, phone, whatsapp, nummembers, notes. Separated by Semicolon ( ; ).</p>
+                        <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download CSV Example</a>
                     </div>
-                    <form action="">
-                        <input type="file">
+                    <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
+                        <div class="upload-container" onclick="document.getElementById('fileInput').click();">
+                            <img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" />
+                            <input type="file" id="fileInput" name="csv_file" onchange="showFileName()" accept=".csv" required>
+                        </div>
+                        <div id="fileName" class="file-name"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="submit" class="submit-btn">Upload Guest List</button>
-                    </form>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="main-side-media">
+                    <div class="image-box">
+                        <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
+                    </div>
+                    <div class="main-youtube-iframe">
+                        <iframe width="100%" height="315"
+                            src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+
+
 
     <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter02" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -821,5 +928,33 @@
                 alert('Please select at least one guest to import.');
             }
         });
+
+
+        function showFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const fileNameDiv = document.getElementById('fileName');
+            const fileName = fileInput.files[0].name;
+            fileNameDiv.textContent = fileName;
+        }
+        document.getElementById('uploadCsvBtn').addEventListener('click', function () {
+        const formData = new FormData(document.getElementById('csvUploadForm'));
+
+        $.ajax({
+            url: "{{ route('panel.event.importFromCsvGuest', ['id' => $eventId]) }}",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                showGuest();
+                toastr.success("Guests imported successfully!");
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.log(xhr.responseText);
+                alert("Error uploading the file.");
+            }
+        });
+    });
     </script>
 @endsection

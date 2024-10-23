@@ -241,6 +241,54 @@ class GuestListController extends Controller
                 $events = Event::where('id_user', Auth::id())->where('id_event', '!=', $request->idevent)->get();
                 foreach ($events as $event)
                     $event->guests = Guest::where('id_event', $event->id_event)->where('mainguest', 1)->get();
-                return response()->json(["guests" => $events]);;
+                return response()->json(["guests" => $events]);
             }
-        }
+
+            public function importFromCsvGuest(Request $request, $id)
+            {
+                // Validate that the request has a file and it is a CSV
+                $request->validate([
+                    'csv_file' => 'required|mimes:csv,txt',
+                ]);
+
+                // Get the uploaded file
+                $file = $request->file('csv_file');
+
+                // Open the file and read its contents
+                if (($handle = fopen($file, 'r')) !== FALSE) {
+                    $header = null;
+                    $data = [];
+
+                    // Loop through the CSV file and extract rows
+                    while (($row = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                        if (!$header) {
+                            $header = $row; // Assuming first row is the header
+                        } else {
+                            $data[] = array_combine($header, $row); // Combine header with data rows
+                        }
+                    }
+                    fclose($handle);
+
+                    // Insert guests into the database
+                    foreach ($data as $g) {
+                        $guest = new Guest();
+                        $guest->name = $g['name'];
+                        $guest->email = $g['email'];
+                        $guest->phone = $g['phone'];
+                        $guest->whatsapp = $g['whatsapp'];
+                        $guest->mainguest = 1;
+                        $guest->parent_id_guest = 0;
+                        $guest->notes = $g['notes'];
+                        $guest->id_event = $id;
+                        $guest->members_number = $g['nummembers'];
+                        $guest->code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
+                        $guest->save();
+                    }
+
+                    return response()->json(["message" => "Guests imported successfully."]);
+                }
+
+                return response()->json(["error" => "Error processing the file."], 400);
+            }
+
+}

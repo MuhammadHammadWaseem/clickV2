@@ -110,6 +110,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/guests/update', [GuestListController::class, 'update'])->name('guests.update');
             Route::get('{id}/guests/show-event', [GuestListController::class, 'allguests'])->name('guests.show-event');
             Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
+            Route::post('importfcsv/{id}', [GuestListController::class, 'importFromCsvGuest'])->name('importFromCsvGuest');
             // Guest End
         });
     });
