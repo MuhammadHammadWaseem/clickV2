@@ -109,3 +109,16 @@ if (document.getElementById("toggleBtn")) {
         });
     });
 }
+
+
+    function toggleButtons() {
+        var checkBox = document.getElementById("two-sided-card");
+        var buttons = document.querySelector(".two-btn-align");
+        
+        // Toggle display based on checkbox status
+        if (checkBox.checked) {
+            buttons.style.display = "block";
+        } else {
+            buttons.style.display = "none";
+        }
+    }

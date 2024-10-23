@@ -1834,6 +1834,67 @@ transition:.5s;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.575) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 65px;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box button.btn.btn-primary.t-btn {
+  margin: 0;
+  padding: 7px 30px;
+  font-size: 14px;
+  margin-right: 10px;
+  background-color: #C09D2A !important;
+  border: 1px solid #C09D2A;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box button.btn.btn-primary.t-btn:first-child {
+  background-color: #ffffff !important;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box button.btn.btn-primary.t-btn:hover{
+  background-color: black !important;
+  color: white !important;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 240px;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 240px;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box .two-btn-align button:first-child {
+  background-color: white !important;
+  color: #C09D2A !important;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box .two-btn-align button:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box .input-check-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.two-outside-boxes .main-card-detaling-box .editing-options-box .two-thing-align .hide-and-show-box .input-check-box label {
+  margin: 0;
+  font-size: 14px;
+}
+
 
 @media only screen and (max-width: 1600px) {
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\reminderController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
 use App\Http\Controllers\TableSeatingController;
+use App\Http\Controllers\InvitationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,6 +124,9 @@ Route::group(['as' => 'panel.'], function () {
 
             // Table eating
             Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index');
+
+            //Invitation
+            Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');
 
         });
     });
