@@ -99,14 +99,14 @@
                     </div>
                     <div class="main-event-gallery-box" id="main-video-gallery-box">
                         @forelse ($videogallery as $video)
-                            <div class="box" id="photo-box-{{ $video->id }}">
+                            <div class="box" id="video-box-{{ $video->id }}">
                                 <video width="100%" height="200" controls>
                                     <source
                                         src="{{ asset('event-images/' . $video->id_event . '/videos/' . $video->video) }}"
                                         type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <button type="button" class="delete-video-btn" id="DeleteVidBtn" data-id="{{ $video->id }}"
+                                <button type="button" class="delete-video-btn" data-id="{{ $video->id }}"
                                     data-eventId="{{ $video->id_event }}"><svg width="28" height="29"
                                         viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -365,13 +365,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <img src="{{ asset('assets/Panel/images/action-delet.png') }}" alt="">
+                        <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
                         <h2>Do you want to delete this video?</h2>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter09" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                        <h2>Video Deleted Successfully</h2>
+                        <p>The Video has been successfully deleted.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -468,12 +490,12 @@
                             $('#addVideoModalCloseBtn').click(); // Close the modal
                             // Append the video to your page
                             var newVideo = `
-                                <div class="box">
+                                <div class="box" id="video-box-${response.id}">
                                     <video width="100%" height="200" controls>
                                         <source src="/${response.videos}" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
-                                    <button type="button" class="delete-video-btn t-btn" id="DeleteVidBtn" data-id="${response.id}"
+                                    <button type="button" class="delete-video-btn" data-id="${response.id}"
                                     data-eventId="{{ $event->id_event }}"><svg width="28" height="29"
                                         viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -494,50 +516,49 @@
                         console.error(xhr.responseText); // Log the error for debugging
                     }
                 });
+            });
 
-                $(document).on('click', '#DeleteVidBtn', function() {
-                    var videoId = $(this).data('id');
-                    var eventId = $(this).data('eventid');
+            $(document).on('click', '.delete-video-btn', function() {
+                var videoId = $(this).data('id');
+                var eventId = $(this).data('eventid');
 
-                    // Show confirmation modal
-                    var myModal = new bootstrap.Modal(document.getElementById(
-                        'exampleModalCenter08'));
-                    myModal.show();
+                // Show confirmation modal
+                var myModal = new bootstrap.Modal(document.getElementById(
+                    'exampleModalCenter08'));
+                myModal.show();
 
-                    // When the "Yes" button is clicked in the confirmation modal
-                    $('#exampleModalCenter05 .submit-btn').off('click').on('click', function() {
-                        var deleteUrl =
-                            "{{ route('panel.event.delete.videos', ['id' => ':videoId']) }}";
-                        deleteUrl = deleteUrl.replace(':videoId', videoId);
+                // When the "Yes" button is clicked in the confirmation modal
+                $('#exampleModalCenter08 .submit-btn').off('click').on('click', function() {
+                    var deleteUrl = "{{ route('panel.event.delete.videos', ':videoId') }}";
+                    deleteUrl = deleteUrl.replace(':videoId', videoId);
 
-                        $.ajax({
-                            url: deleteUrl, // URL to delete the video
-                            type: 'POST', // HTTP method
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                                idevent: eventId
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    // Remove the video box if delete was successful
-                                    $('#video-box-' + videoId).remove();
-                                    toastr.success(
-                                        'Video deleted successfully!');
+                    $.ajax({
+                        url: deleteUrl, // URL to delete the video
+                        type: 'POST', // HTTP method
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            idevent: eventId,
+                            id: videoId
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Remove the video box if delete was successful
+                                $('#video-box-' + videoId).remove();
+                                toastr.success('Video deleted successfully!');
+                                var myModal3 = new bootstrap.Modal(document.getElementById('exampleModalCenter09'));
+                                myModal3.show();
 
-                                    // Close the confirmation modal
-                                    myModal.hide();
-                                }
-                            },
-                            error: function(xhr) {
-                                toastr.error(
-                                    'Failed to delete the video. Please try again.'
-                                );
+                                // Close the confirmation modal
+                                myModal.hide();
                             }
-                        });
+                        },
+                        error: function(xhr) {
+                            toastr.error(
+                                'Failed to delete the video. Please try again.'
+                            );
+                        }
                     });
                 });
-
-
             });
 
 
