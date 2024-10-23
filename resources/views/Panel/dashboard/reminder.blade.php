@@ -194,7 +194,8 @@
                 var selectedGuests = [];
                 $(checkboxClass + ':checked').each(function() {
                     // Store only the guest ID, which you will attach to the checkbox data attribute
-                    var guestId = $(this).data('guest-id'); // Ensure you're using a data attribute with the ID
+                    var guestId = $(this).data(
+                        'guest-id'); // Ensure you're using a data attribute with the ID
                     if (guestId) {
                         selectedGuests.push(guestId); // Add the guest ID to the array
                     }
@@ -234,6 +235,7 @@
                         },
                         success: function(response) {
                             console.log(response);
+                            toastr.success("Email successfully send");
                         },
                         error: function(xhr) {
                             if (xhr.status === 422) {
@@ -254,16 +256,94 @@
                 }
             });
 
-            // When Send Whatsapp is clicked
             $('#send-whatsapp-btn').on('click', function() {
-                var selectedWhatsapps = getSelectedGuests('.whatsapp-checkbox');
+                var eventId = {{ $eventId }}; // The event ID
+                var selectedWhatsapps = getSelectedGuests(
+                    '.whatsapp-checkbox'); // Get selected WhatsApp guest IDs
+                console.log(selectedWhatsapps);
+
                 if (selectedWhatsapps.length > 0) {
                     console.log('Selected Guest IDs for WhatsApp:', selectedWhatsapps);
-                    // Here, you can handle the sending of WhatsApp messages logic
+
+                    $.ajax({
+                        url: "{{ route('panel.event.sendAcWhatsapp', ':id') }}".replace(':id',
+                            eventId), // Your WhatsApp route
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            guests: selectedWhatsapps, // Send the selected WhatsApp guest IDs in the request
+                            idevent: eventId // Send the event ID
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            toastr.success("WhatsApp message sent successfully");
+                        },
+                        error: function(xhr) {
+                            if (xhr.status === 422) {
+                                // Validation error - extract and display errors
+                                var errors = xhr.responseJSON.errors;
+                                $.each(errors, function(key, value) {
+                                    toastr.error(value[0]); // Show error using Toastr
+                                });
+                            } else {
+                                // General error handling
+                                toastr.error(
+                                    'Failed to send WhatsApp messages. Please try again.');
+                                console.error(xhr.responseText);
+                            }
+                        }
+                    });
                 } else {
                     alert('No guests selected for WhatsApp');
                 }
             });
+
+            $('#send-sms-btn').on('click', function() {
+                var eventId = {{ $eventId }}; // The event ID
+                var selectedPhones = getSelectedGuests(
+                '.phone-checkbox'); // Get selected phone numbers for SMS
+                console.log(selectedPhones);
+
+                if (selectedPhones.length > 0) {
+                    console.log('Selected Guest IDs for SMS:', selectedPhones);
+
+                    $.ajax({
+                        url: "{{ route('panel.event.sendAcSm', ':id') }}".replace(':id',
+                        eventId), // Your SMS route
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            guests: selectedPhones, // Send the selected phone numbers in the request
+                            idevent: eventId // Send the event ID
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            toastr.success("SMS sent successfully");
+                        },
+                        error: function(xhr) {
+                            if (xhr.status === 422) {
+                                // Validation error - extract and display errors
+                                var errors = xhr.responseJSON.errors;
+                                $.each(errors, function(key, value) {
+                                    toastr.error(value[0]); // Show error using Toastr
+                                });
+                            } else {
+                                // General error handling
+                                toastr.error('Failed to send SMS. Please try again.');
+                                console.error(xhr.responseText);
+                            }
+                        }
+                    });
+                } else {
+                    alert('No guests selected for SMS');
+                }
+            });
+
+
 
         });
     </script>

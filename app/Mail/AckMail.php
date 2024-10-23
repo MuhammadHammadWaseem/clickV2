@@ -22,7 +22,7 @@ class AckMail extends Mailable
     public $guest;
     public $cardId;
     public $lang;
-    public function __construct($email, $event, $guest, $cardId, $lang ,$fake)
+    public function __construct($email, $event, $guest, $cardId, $lang, $fake)
     {
         $this->email = $email;
         $this->event = $event;

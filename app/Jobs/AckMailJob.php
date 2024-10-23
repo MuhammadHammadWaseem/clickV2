@@ -41,7 +41,7 @@ class AckMailJob implements ShouldQueue
     public function handle(): void
     {
         // Ensure you pass all five parameters
-        $email = new AckMail($this->email,$this->fake, $this->event, $this->guest, $this->cardId, $this->lang);
+        $email = new AckMail($this->email, $this->event, $this->guest, $this->cardId, $this->lang, $this->fake);
         Mail::to($this->email)->send($email);
     }
 

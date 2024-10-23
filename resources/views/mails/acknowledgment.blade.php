@@ -48,10 +48,15 @@
                                                     <br>
 
                                                     <p style="font-size:16px;color:#0e0e0e;text-align:center">
-                                                            {!! html_entity_decode($event->atitle) !!}
-                                                            {!! html_entity_decode($event->asubtitle) !!}
-                                                            {!! html_entity_decode($event->atext) !!}
+                                                        @if (is_object($event))
+                                                            {{ strip_tags($event->atitle) }}
+                                                            {{ strip_tags($event->asubtitle) }}
+                                                            {{ strip_tags($event->atext) }}
+                                                        @else
+                                                            <span>Error: Invalid event data.</span>
+                                                        @endif
                                                     </p>
+
                                                     <br>
                                                     <br>
                                                     <br>

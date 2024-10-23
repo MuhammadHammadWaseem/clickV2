@@ -116,6 +116,9 @@ Route::group(['as' => 'panel.'], function () {
             // reminder
             Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder');
             Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
+            Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
+            Route::post('{id}/sendAcSm', [reminderController::class, 'sendAcSm'])->name('sendAcSm');
+
         });
     });
 });
