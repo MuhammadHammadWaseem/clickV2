@@ -3171,3 +3171,164 @@ header .langauge-person .language-box .nav-box ul li a {
   column-gap: 2px !important;
 }
 }
+
+
+#exampleModalCenter03 .modal-dialog {
+max-width: 1000px;
+margin: 1.75rem auto;
+}
+#exampleModalCenter03 .table-box{
+width: 100% !important;
+}
+
+#exampleModalCenter03 table {
+width: 100% !important;
+}
+
+#exampleModalCenter03 .table-box table tr td {
+border-top: 1px solid #AAAAAA;
+padding: 15px 0;
+}
+
+
+
+#exampleModalCenter03 .modal-footer {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+
+#exampleModalCenter03 .table-box table tr th {
+text-align: left;
+font-size: 17px;
+font-family: 'Poppins';
+padding: 15px 0;
+}
+
+#exampleModalCenter03 .table-box table tr td {
+text-align: left;
+}
+
+h5#exampleModalLongTitle {
+font-size: 30px;
+font-weight: 600;
+font-family: 'Poppins';
+}
+
+button.close.close_icon span {
+font-size: 30px;
+}
+
+input[type="checkbox"].check_box_style {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    background-color: #EDEDED;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: -3px;
+    margin-right: 5px;
+}
+
+input[type="checkbox"].check_box_style:checked {
+    background-color: #7B7BFF;
+}
+
+input[type="checkbox"].check_box_style:checked::after {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 6px;
+    top: 1.5px;
+    width: 6px;
+    height: 11px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.t-btn {
+background-color: #A9967D !important;
+color: white !important;
+font-size: 18px;
+padding: 8px 40px;
+border-radius: 15px;
+transition: .3s;
+border: navajowhite;
+}
+
+.t-btn:hover {
+background-color: #A9964B !important;
+color: white !important;
+}
+@media only screen and (max-width: 1024px){
+div#exampleModalCenter03 {
+z-index: 9999999999;
+}
+#exampleModalCenter03 .modal-content {
+width: 90%;
+margin: auto;
+}
+}
+@media only screen and (max-width: 991px){
+#exampleModalCenter03 .table-box {
+width: 100% !important;
+overflow: hidden;
+overflow-x: scroll;
+}
+
+#exampleModalCenter03 .table-box::-webkit-scrollbar {
+height: 5px;
+}
+#exampleModalCenter03 table {
+width: 700px !important;
+}
+
+h5#exampleModalLongTitle {
+font-size: 25px;
+}
+
+#exampleModalCenter03 .table-box table tr th {
+font-size: 15px;
+}
+
+#exampleModalCenter03 .table-box table tr td {
+font-size: 14px;
+}
+
+input[type="checkbox"].check_box_style {
+margin-bottom: -3px;
+}
+
+.modal-01 .modal-footer button {
+font-size: 15px;
+}
+}
+@media only screen and (max-width: 767px){
+
+.modal-01 .modal-footer button {
+font-size: 14px;
+}
+}
+@media only screen and (max-width: 575px){
+
+#exampleModalCenter03 .modal-footer {
+display: flex;
+flex-direction: column;
+row-gap: 5px;
+align-items: stretch;
+}
+
+#exampleModalCenter03 .modal-footer button {
+width: 100%;
+margin: 0;
+}
+
+h5#exampleModalLongTitle {
+font-size: 20px;
+}
+}

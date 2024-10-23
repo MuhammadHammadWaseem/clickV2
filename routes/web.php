@@ -6,11 +6,12 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\GiftSuggestion;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\reminderController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
-use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,9 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
             Route::post('importfcsv/{id}', [GuestListController::class, 'importFromCsvGuest'])->name('importFromCsvGuest');
             // Guest End
+            // reminder
+            Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder');
+            Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
         });
     });
 });
