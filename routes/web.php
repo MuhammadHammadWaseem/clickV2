@@ -124,7 +124,6 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
             Route::post('{id}/sendAcSms', [reminderController::class, 'sendAcSms'])->name('sendAcSms');
             Route::post('{id}/editsave', [reminderController::class, 'editsave'])->name('editsave');
-            Route::get('/mail-acknowledgment/{idguest}/{idevent}', [reminderController::class, 'ackWebPage'])->name('ackWebPage');
 
             //message
             Route::get('{id}/message', [messageController::class, 'index'])->name('message');
@@ -132,7 +131,6 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/sendSmsMail', [messageController::class, 'sendSmskMail'])->name('sendSmsMail');
             Route::post('{id}/sendSmsWhatsapp', [messageController::class, 'sendSmsWhatsapp'])->name('sendSmsWhatsapp');
             Route::post('{id}/sendSMSms', [messageController::class, 'sendSmSms'])->name('sendSmSms');
-            Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('mail.message');
 
 
 
@@ -151,6 +149,10 @@ Route::group(['as' => 'panel.'], function () {
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
 Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');
 Route::post('store/images/{id}', [WebPageController::class, 'storeUsersImages'])->name('store.users.images');
+Route::get('/mail-acknowledgment/{idguest}/{idevent}', [reminderController::class, 'ackWebPage'])->name('ackWebPage');
+Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('mail.message');
+
+
 
 Route::get('get-json', [InvitationController::class, 'getJson'])->name('get.jsone');
 Route::get('get-json/back', [InvitationController::class, 'getJsonBack'])->name('get.jsone.back');

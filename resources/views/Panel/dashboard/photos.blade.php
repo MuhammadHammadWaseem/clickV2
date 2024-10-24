@@ -1,5 +1,29 @@
 @extends('Panel.layout.master')
 
+<style>
+    .main-dashboard-sec .left-menu-dash ul li.poto-active a {
+        color: #C09D2A;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.poto-active img {
+        filter: none;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.poto-active {
+        background-color: #c09d2a29;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.poto-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
+</style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -185,7 +209,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="saveImagesModal" class="btn btn-secondary"
+                    <button type="button" id="successmodalCloseBtn1" class="btn btn-secondary"
                         data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -393,7 +417,33 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="successmodalCloseBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>Want To serve Your Guests a Meail ?</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1">Yes, Add Email</button>
+                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
         </div>
@@ -402,6 +452,12 @@
 
 @section('scripts')
     <script>
+        function hidemodel() {
+            $("#successmodalCloseBtn1").click();
+            var successModal = new bootstrap.Modal(document.getElementById(
+                'exampleModalCenter02'));
+            successModal.show();
+        }
         $(document).ready(function() {
 
             $('#uploadPhotosForm').on('submit', function(e) {
@@ -545,7 +601,8 @@
                                 // Remove the video box if delete was successful
                                 $('#video-box-' + videoId).remove();
                                 toastr.success('Video deleted successfully!');
-                                var myModal3 = new bootstrap.Modal(document.getElementById('exampleModalCenter09'));
+                                var myModal3 = new bootstrap.Modal(document
+                                    .getElementById('exampleModalCenter09'));
                                 myModal3.show();
 
                                 // Close the confirmation modal

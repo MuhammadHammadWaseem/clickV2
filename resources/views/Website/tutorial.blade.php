@@ -1,4 +1,5 @@
 @extends('Website.Layouts.master')
+
 @section('title')
     Step-by-Step Tutorials For Your Upcoming Next Event | Click
 @endsection
@@ -9,8 +10,34 @@
 
 @section('tags')
     <link rel="canonical" href="https://clickinvitation.com/tutorial">
+
 @endsection
 @section('content')
+<script>
+    .main-dashboard-sec .left-menu-dash ul li.tutoriar-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active {
+  background-color: #c09d2a29;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+</script>
     <div class="container">
         <div class="heading-text text-border tuts-heading">
             <h1>

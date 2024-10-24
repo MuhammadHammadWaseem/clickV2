@@ -1,5 +1,33 @@
 @extends('Panel.layout.master')
 
+
+<style>
+
+.main-dashboard-sec .left-menu-dash ul li.general-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.general-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.general-active {
+  background-color: #c09d2a29;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.general-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+</style>
+
 @section('content')
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
@@ -176,6 +204,31 @@
             </form>
         </div>
     </div>
+
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="assets/images/circle-check.png" alt="">
+                        <h2>Changes Uodated Successfully</h2>
+                        <p>Your event has been successfully updated.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -296,6 +349,9 @@
                     success: function(response) {
                         // Show success notification
                         toastr.success('Event updated successfully!');
+                        // var successModal = new bootstrap.Modal(document.getElementById(
+                        //     'exampleModalCenter05'));
+                        // successModal.show();
                         location.reload();
                     },
                     error: function(xhr) {

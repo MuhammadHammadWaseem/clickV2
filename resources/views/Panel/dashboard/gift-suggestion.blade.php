@@ -1,5 +1,30 @@
 @extends('Panel.layout.master')
+<style>
 
+    .main-dashboard-sec .left-menu-dash ul li.gift-active a {
+      color: #C09D2A;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.gift-active img {
+      filter: none;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.gift-active {
+      background-color: #c09d2a29;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.gift-active::after {
+      width: 5px;
+      height: 100%;
+      background-color: #C09D2A;
+      position: absolute;
+      left: 0;
+      right: 0;
+      content: "";
+      top: 0;
+    }
+
+    </style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -130,7 +155,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="closeMainModal"  data-dismiss="modal" >Close</button>
             </div>
         </div>
     </div>
@@ -157,7 +182,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Yes, Add Gift Suggestions</button>
+                        data-target="#exampleModalCenter1">Yes, Add Gift Suggestions</button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
@@ -267,6 +292,12 @@
 
 @section('scripts')
     <script>
+         function hidemodel() {
+            $("#closeMainModal1").click();
+            var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter02'));
+                        successModal.show();
+        }
         $(document).ready(function() {
             show();
             // Handle Add New Gift Modal
@@ -282,6 +313,7 @@
                     type: 'POST',
                     data: formData,
                     success: function(response) {
+                        toastr.success("Suggestion added successfully send");
                         myModal.hide();
                         $("#closeAddModal").click();
                         var successModal = new bootstrap.Modal(document.getElementById(

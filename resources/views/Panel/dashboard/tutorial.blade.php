@@ -1,6 +1,32 @@
 @extends('Panel.layout.master')
 
 @section('content')
+<style>
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active {
+  background-color: #c09d2a29;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.tutoriar-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+</style>
     @php
         use App\Helpers\GeneralHelper;
         $currentEventId = GeneralHelper::getEventId();
@@ -66,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>    
+                    </div>
             </div>
         </div>
     </div>

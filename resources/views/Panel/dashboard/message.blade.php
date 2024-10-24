@@ -9,6 +9,31 @@
             object-fit: contain;
             margin: 20px 0;
         }
+
+
+.main-dashboard-sec .left-menu-dash ul li.message-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.message-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.message-active {
+  background-color: #c09d2a29;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.message-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
     </style>
     @php
         use App\Helpers\GeneralHelper;
@@ -159,6 +184,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter08" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                    <h2>Message update Successfully</h2>
+                    <p>Your Message suggestion has been successfully updated.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 @section('scripts')
@@ -401,7 +449,9 @@
                 .then(data => {
                     if (data == 1) {
                         toastr.success("Changes saved successfully!");
-
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter08'));
+                        successModal.show();
                         const iframe = document.querySelector('iframe');
                     iframe.src = iframe.src;
                     } else {

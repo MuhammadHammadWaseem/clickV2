@@ -146,14 +146,12 @@
         </div>
     </div>
 
-    <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter02"> Create a New Event </button> -->
-    <!-- Modal -->
+
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -165,26 +163,30 @@
                     </div>
                     <div class="modal-listing-box">
                         <ul>
-                            <li><a href="#">Make Cards <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""> </a></li>
-                            <li><a href="#">Send Invitations <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""> </a></li>
-                            <li><a href="#">Make New Events <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""> </a></li>
-                            <li><a href="#">Manage Guest List <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""> </a></li>
+                            <li>
+                                <a href="#" onclick="hidemodel();">
+                                    Make Cards <img src="assets/images/modal-list-right-arow.png" alt="">
+                                </a>
+                            </li>
+                            <li><a href="#" onclick="hidemodel();" >Send Invitations <img src="assets/images/modal-list-right-arow.png"
+                                        alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();" >Make New Events <img src="assets/images/modal-list-right-arow.png"
+                                        alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();" >Manage Guest List <img src="assets/images/modal-list-right-arow.png"
+                                        alt=""></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Go to Dashboard</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMainModal">Go to
+                        Dashboard</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter" data-dismiss="modal">Create New Event</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter03"> Event Created Successfully </button> -->
     <!-- Modal -->
@@ -225,6 +227,11 @@
 
     <script type="text/javascript">
         // Function to load events with pagination
+
+        function hidemodel() {
+            $("#closeMainModal").click();
+        }
+
         function loadEvents(page = 1) {
             $.ajax({
                 url: '{{ route('panel.index') }}?page=' + page, // Adjust the route
@@ -343,7 +350,10 @@
                         if (response.success) {
                             // Show success message
                             toastr.success(response.message);
-
+                            //here
+                            var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter03'));
+                        successModal.show();
                             // Close modal
                             $("#closeModal").trigger("click");
 

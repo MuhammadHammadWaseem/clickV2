@@ -16,6 +16,33 @@
         justify-content: space-between;
         align-items: center;
     }
+
+
+    .main-dashboard-sec .left-menu-dash ul li.meals-active a {
+      color: #C09D2A;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.meals-active img {
+      filter: none;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.meals-active {
+      background-color: #c09d2a29;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.meals-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+
+
 </style>
 <!-- Include Toastr CSS and JS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -188,6 +215,29 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger" id="confirmDelete">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter03" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="assets/images/circle-check.png" alt="">
+                        <h2>Meal Added Successfully</h2>
+                        <p>Your meal has been successfully added.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
