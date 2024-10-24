@@ -1,91 +1,318 @@
 @extends('Panel.layout.master')
 <style>
-    .modal-dialog {
-        max-width: 1200px !important;
+    .accordion {
+        width: 100%;
+        background-color: #D9D9D9;
+        border: none;
+        outline: none;
+        text-align: left;
+        /* padding: 10px 15px; */
+        font-size: 18px;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.2s linear;
+        margin-top: 20px;
+        border-radius: 15px;
     }
 
-    #exampleModalCenter03.modal-03 .modal-body .text {
-        align-items: flex-start;
-        display: flex;
-        text-align: start;
-        flex-direction: column;
+    .accordion-content {
+        background-color: #D9D9D9;
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-in-out;
+        border-radius: 0px 0px 15px 15px;
+        margin-top: -40px;
     }
 
-    #exampleModalCenter03.modal-03 .modal-body .text p {
+
+    .accordian-table-content .table-box tr td,
+    .accordian-table-content .table-box tr th {
         text-align: left !important;
     }
 
-    #exampleModalCenter03 .modal-body .text p {
+    .accordian-table-content .table-box {
+        background: transparent !important;
+    }
+
+    .accordian-table-content .table-box {
+        margin: 0;
+    }
+
+    .accordion-content .table-box {
+        margin: 0px 0 15px 0;
+    }
+
+
+
+    .accordian-table-content .table-box tr {
         padding: 0;
+        border: none !important;
     }
 
-    #exampleModalCenter03 .modal-footer {
-        padding: 16px 0 !important;
-        justify-content: flex-start;
+    .accordian-table-content .table-box table tr td {
+        border: none !important;
+        padding: 10px 0 !important;
+        font-size: 16px;
     }
 
-    .main-side-media {
-        margin-left: 20px;
-        border-left: 1px solid grey;
-        height: 95%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        row-gap: 20px;
+    .accordian-table-content .table-box table tr td button.btn.btn-primary.t-btn.t-btn-theme {
+        font-size: 14px;
+        padding: 10px 40px;
     }
 
-    .main-side-media .image-box {
-        justify-content: center !important;
-        display: flex;
+    .accordion.is-open {
+        border-radius: 15px 15px 0px 0px !important;
     }
 
-    .main-youtube-iframe {
-        border-radius: 10px;
-        overflow-x: hidden;
-        width: 90%;
-        margin: auto;
+    .accordion .table-box {
+        padding: 0 20px !important;
     }
 
-    .upload-container {
-        width: 100%;
-        height: 300px;
-        border: 3px dashed #a58a6a;
-        display: flex;
-        justify-content: center;
+    .accordian-table-content .table-box tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         align-items: center;
-        flex-direction: column;
+    }
+
+    .accordion-content .table-box tr {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 1fr;
+        align-items: center;
+    }
+
+    .box-styling.guest-list {
+        margin-bottom: 0px;
+        padding-bottom: 20px;
+        height: max-content;
+    }
+
+    input[type="checkbox"].check_box_style {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px;
+        background-color: #EDEDED;
         position: relative;
         cursor: pointer;
-        border-radius: 20px
+        margin-bottom: -3px;
+        margin-right: 5px;
     }
 
-    .upload-container p {
-        font-size: 18px;
-        color: #a58a6a;
+    input[type="checkbox"].check_box_style:checked {
+        background-color: #7B7BFF;
     }
 
-    .upload-container input[type="file"] {
-        opacity: 0;
+    input[type="checkbox"].check_box_style:checked::after {
+        content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
+        display: block;
+        left: 6px;
+        top: 1.5px;
+        width: 6px;
+        height: 11px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
     }
 
-    .file-name {
-        margin-top: 10px;
-        font-size: 16px;
-        color: #333;
+    .after-line-effect {
+        position: relative;
+        font-size: 11px;
+        font-weight: 500;
+        color: #AAAAAA;
     }
+
+    .after-line-effect::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 94%;
+        top: 45%;
+        right: 0;
+        background: #AAAAAA;
+    }
+
+    .divider-line {
+        height: 2px;
+        background: #aaa;
+        margin: 10px 0;
+    }
+
+    .accordion-content .table-box table tr td:nth-child(3) {
+        padding-left: 50px !important;
+    }
+
+    .accordion-content .table-box table tr td:nth-child(4) {
+        display: flex;
+        justify-content: center;
+    }
+
+    .accordian-table-content .table-box tr th {
+        border-bottom: 1px solid #aaaaaa;
+        padding-bottom: 10px !important;
+        margin: 20px 0;
+    }
+
+    .box-styling.guest-list {
+        margin-bottom: 15px;
+    }
+
+    input[type="checkbox"].check_box_style {
+        padding: 0 !important;
+    }
+
+    .accordion .table-box {
+        margin: 30px 0 !important;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list {
+        background-color: #e0e0e033 !important;
+    }
+
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list {
+        height: max-content !important;
+    }
+
+
+    @media only screen and (max-width: 1500px) {
+        .accordian-table-content .table-box table tr td {
+            font-size: 12px;
+        }
+
+        .accordian-table-content .table-box table tr td button.btn.btn-primary.t-btn.t-btn-theme {
+            font-size: 12px;
+            padding: 4px 20px;
+        }
+
+        .accordian-table-content .table-box tr th {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+    }
+
+    @media only screen and (max-width: 1199px) {
+
+        .accordian-table-content {
+            overflow-x: scroll;
+        }
+
+        .accordian-table-content::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .accordian-table-content .table-box {
+            width: 960px;
+        }
+
+        .accordian-table-content .accordion {
+            width: 960px;
+        }
+
+        .accordian-table-content .accordion-content {
+            width: 960px;
+        }
+
+        .accordian_img_acces img {
+            max-width: 50% !important;
+        }
+
+    }
+
+    @media only screen and (max-width: 1024px) {}
+
+    @media only screen and (max-width: 991px) {
+
+        .after-line-effect::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 90%;
+            top: 45%;
+            right: 40px;
+            background: #AAAAAA;
+        }
+
+        .divider-line {
+            height: 2px;
+            background: #aaa;
+            margin: 10px 0;
+            width: 95.7%;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+
+        .accordian-table-content .table-box {
+            overflow: hidden !important;
+            width: 650px;
+        }
+
+        .accordian-table-content .accordion {
+            width: 650px;
+        }
+
+        .accordian-table-content .accordion-content {
+            width: 650px;
+        }
+
+        .t-btn {
+            width: 100%;
+        }
+
+        .accordian-table-content .table-box table tr td {
+            font-size: 10px;
+        }
+
+        .accordion-content li {
+            font-size: 10px;
+        }
+
+        .accordian-table-content .table-box tr th {
+            font-size: 10px;
+            margin: 10px 0;
+        }
+
+        .after-line-effect::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 85%;
+            top: 45%;
+            right: 30px;
+            background: #AAAAAA;
+        }
+
+        /* .modifier {
+
+        } */
+    }
+
+    @media only screen and (max-width: 575px) {}
 </style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
         $eventId = GeneralHelper::getEventId();
     @endphp
-
+    <div class="modifier"
+        style="position: fixed !important;bottom: 90px !important;right: 10px !important;border: 2px solid #f90;border-radius: 10px;text-align: center;padding: 5px 10px;background: #fff;z-index:3000 !important; display:none;">
+        <p class="ng-binding mb-3">0 GUEST(S) SELECTED</p>
+        <div class="button-group d-flex flex-column" style="gap:0.5rem;">
+            <button class="btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#editguestModal">EDIT</button>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delguestModal">DELETE</button>
+            <button class="btn btn-sm btn-primary">SEND INVITATION</button>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                data-bs-target="#declineguestModal">DECLINE</button>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#undeclineguestModal"
+                style="display: none;">UNDECLINE</button>
+        </div>
+    </div>
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
             <div class="col-lg-12">
@@ -131,8 +358,8 @@
                     </div>
                     <div class="three-btns-align">
                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                            data-target="#AddGuest">Add Guest </button>
-                        <button type="button" class="btn btn-primary t-btn t-btn-dark" id="importModal" data-toggle="modal"
+                            data-target="#exampleModalCenter01">Add Guest </button>
+                        <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter02">Add From Other Events </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter03">Upload .CSV File </button>
@@ -144,63 +371,48 @@
                     <div class="two-things-align">
                         <div class="text">
                             <h2>Guest List</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            </p>
                         </div>
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                                 data-target="#exampleModalCenter04">Export </button>
                             <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                                data-target="#exampleModalCenter05">Export Invitation QR Code </button>
+                                data-target="#exampleModalCenter05">Export Invitation QR
+                                Code </button>
                         </div>
                     </div>
 
-                    <div class="table-box">
-                        <table id="GuestList" class="display">
-                            <thead>
-                                <tr>
+                    <div class="accordian-table-content">
+
+                        <div class="table-box">
+                            <table>
+                                {{-- <tr>
                                     <th>Names</th>
                                     <th>Contact #</th>
                                     <th>Email Address</th>
                                     <th>Remaining Members</th>
                                     <th>Actions</th>
-                                </tr>
-                            </thead>
+                                </tr> --}}
+                            </table>
+                        </div>
+                        <div id="GuestList">
+                            <div class="tab" id="tableData">
 
-                            <tr>
-                                <td>Jhon Smith</td>
-                                <td>(XX) XXX XXXXXXX</td>
-                                <td>jhon@email.com</td>
-                                <td>07 Members Left </td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="{{ asset('assets/images/action-link.png') }}"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="{{ asset('assets/images/action-delet.png') }}"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="table-content-pagination single-pagination">
-                    <ul>
-                        <li><a href="#" class="activ">&lt;</a></li>
-                        <li><a href="#" class="activ">01</a></li>
-                        <li><a href="#">02</a></li>
-                        <li><a href="#">03</a></li>
-                        <li><a href="#">04</a></li>
-                        <li><a href="#" class="activ">&gt;</a></li>
-                    </ul>
+
                 </div>
             </div>
         </div>
+        {{-- <div class="col-md-12">
+            <div class="table-content-pagination single-pagination">
+                <ul>
 
+                </ul>
+            </div>
+        </div> --}}
     </div>
 
     <div class="modal fade modal-01 add-new-meal" id="AddGuest" tabindex="-1" role="dialog"
@@ -486,59 +698,63 @@
 
 
 
+
     {{-- Modal for import guest csv --}}
-<div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
-role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-4">
-                    <div class="text">
-                        <h2>Upload CSV</h2>
-                        <p>Upload a CSV file with the columns: name, email, phone, whatsapp, nummembers, notes. Separated by Semicolon ( ; ).</p>
-                        <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download CSV Example</a>
-                    </div>
-                    <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
-                        <div class="upload-container" onclick="document.getElementById('fileInput').click();">
-                            <img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" />
-                            <input type="file" id="fileInput" name="csv_file" onchange="showFileName()" accept=".csv" required>
-                        </div>
-                        <div id="fileName" class="file-name"></div>
-                    </form>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
-                    </div>
+    <div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="text">
+                                <h2>Upload CSV</h2>
+                                <p>Upload a CSV file with the columns: name, email, phone, whatsapp, nummembers, notes.
+                                    Separated by Semicolon ( ; ).</p>
+                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download CSV
+                                    Example</a>
+                            </div>
+                            <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
+                                <div class="upload-container" onclick="document.getElementById('fileInput').click();">
+                                    <img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" />
+                                    <input type="file" id="fileInput" name="csv_file" onchange="showFileName()"
+                                        accept=".csv" required>
+                                </div>
+                                <div id="fileName" class="file-name"></div>
+                            </form>
 
-
-                <div class="col-8">
-                    <div class="main-side-media">
-                        <div class="image-box">
-                            <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
+                            </div>
                         </div>
-                        <div class="main-youtube-iframe">
-                            <iframe width="100%" height="315"
-                                src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+                        <div class="col-8">
+                            <div class="main-side-media">
+                                <div class="image-box">
+                                    <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
+                                </div>
+                                <div class="main-youtube-iframe">
+                                    <iframe width="100%" height="315"
+                                        src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-
         </div>
     </div>
-</div>
-</div>
 
 
 
@@ -647,43 +863,89 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             });
         });
 
-        function showGuest(page = 1) { // Accept page number as an argument
+        function showGuest(page = 1) {
             var mealId = $('#idevent').val();
 
             $.ajax({
-                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "?page=" +
-                    page, // Pass the page parameter
+                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "?page=" + page,
                 type: "GET",
                 dataType: "json",
                 success: function(response) {
+                    console.log(response);
                     var guests = response.guests;
 
-                    // Clear the existing table body
-                    $('#GuestList tbody').empty();
+                    // Clear the existing accordions
+                    $('#GuestList').empty();
 
-                    // Loop through the guests and append them to the table
+                    // Loop through the guests and create accordion entries
                     guests.forEach(function(guest) {
-                        var row = `
-                <tr>
-                    <td>${guest.titleGuest == null ? ' ' : guest.titleGuest} ${ guest.name}</td>
-                    <td>${guest.phone}</td>
-                    <td>${guest.email}</td>
-                    <td>${guest.members_number} Members Left</td>
-                    <td>
-                        <div class="edit-delet">
-                            <ul>
-                                <li><a href="#" class="edit-btn" data-id="${guest.id_guest}"><img src="{{ asset('assets/images/action-link.png') }}" alt="Edit"></a></li>
-                                <li><a href="#"><img src="{{ asset('assets/images/action-delet.png') }}" alt=""></a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                `;
-                        $('#GuestList tbody').append(row); // Append each guest to the table body
+
+                        var accordion = `
+                <div class="accordion">
+                    <div class="table-box">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton()">
+
+                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}<br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                </td>
+                                <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                <td>${guest.notes || 'No Notes'}</td>
+                                <td><button type="button" class="btn btn-primary t-btn t-btn-theme">Add Members</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="accordion-content">
+                    <div class="table-box">
+                        <table>
+                            <p class="after-line-effect">Members</p>
+                            <tr>
+                                <td><strong>Member Details</strong></td>
+                                <td><strong>Note</strong></td>
+                                <td><strong>Other Details</strong></td>
+                                <td><strong>Attending Event</strong></td>
+                            </tr>`;
+
+                        guest.members.forEach(function(member) {
+                            accordion += `
+                            <tr class="divider-line"></tr>
+                            <tr>
+                                <td><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton()">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                <td>${member.notes || 'No Notes'}</td>
+                                <td>
+                                    <ul>
+                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                    </ul>
+                                </td>
+                                ${(member.opened === 2) ? `
+                                                    <td class="accordian_img_acces">
+                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                    </td>
+                                                ` : ''}
+                                ${(member.declined === 1) ? `
+                                                    <td class="accordian_img_acces">
+                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                    </td>
+                                                ` : ''}
+                            </tr>`;
+                        });
+
+                        accordion += `
+                        <tr class="divider-line"></tr>
+                    </table>
+                    </div>
+                </div>`;
+
+                        $('#GuestList').append(accordion); // Append each accordion to the list
                     });
 
-                    // Setup pagination
-                    setupPagination(response.totalPages, response.currentPage); // Pass total and current pages
+                    // Re-apply the accordion toggle functionality after adding new elements
+                    accordionFunctionality();
                 },
                 error: function(xhr, status, error) {
                     console.error("An error occurred while fetching guests:", error);
@@ -691,38 +953,24 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             });
         }
 
+        // Function to apply accordion toggle functionality
+        function accordionFunctionality() {
+            const accordionBtns = document.querySelectorAll(".accordion");
 
+            accordionBtns.forEach((accordion) => {
+                accordion.onclick = function() {
+                    this.classList.toggle("is-open");
+                    let content = this.nextElementSibling;
 
-        // Example pagination function (you can adapt it to your needs)
-        function setupPagination(totalPages, currentPage) {
-            const paginationContainer = $('.table-content-pagination ul');
-            paginationContainer.empty(); // Clear existing pagination
-
-            // Previous button
-            if (currentPage > 1) {
-                paginationContainer.append(`<li><a href="#" onclick="showGuest(${currentPage - 1})">&lt;</a></li>`);
-            } else {
-                paginationContainer.append(`<li><a href="#" class="disabled">&lt;</a></li>`);
-            }
-
-            // Page number buttons
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === currentPage) {
-                    paginationContainer.append(`<li><a href="#" class="activ">${i}</a></li>`); // Current page
-                } else {
-                    paginationContainer.append(`<li><a href="#" onclick="showGuest(${i})">${i}</a></li>`); // Other pages
-                }
-            }
-
-            // Next button
-            if (currentPage < totalPages) {
-                paginationContainer.append(`<li><a href="#" onclick="showGuest(${currentPage + 1})">&gt;</a></li>`);
-            } else {
-                paginationContainer.append(`<li><a href="#" class="disabled">&gt;</a></li>`);
-            }
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null; // If accordion is open, close it
+                    } else {
+                        content.style.maxHeight = content.scrollHeight +
+                            "px"; // If accordion is closed, open it
+                    }
+                };
+            });
         }
-
-
         // Fetch the corresponding page of guest data (this needs to be handled in your backend)
         function fetchGuestPage(page) {
             var mealId = $('#idevent').val();
@@ -940,25 +1188,66 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             const fileName = fileInput.files[0].name;
             fileNameDiv.textContent = fileName;
         }
-        document.getElementById('uploadCsvBtn').addEventListener('click', function () {
-        const formData = new FormData(document.getElementById('csvUploadForm'));
+        document.getElementById('uploadCsvBtn').addEventListener('click', function() {
+            const formData = new FormData(document.getElementById('csvUploadForm'));
 
-        $.ajax({
-            url: "{{ route('panel.event.importFromCsvGuest', ['id' => $eventId]) }}",
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                showGuest();
-                toastr.success("Guests imported successfully!");
-            },
-            error: function (xhr, status, error) {
-                // Handle error response
-                console.log(xhr.responseText);
-                alert("Error uploading the file.");
-            }
+            $.ajax({
+                url: "{{ route('panel.event.importFromCsvGuest', ['id' => $eventId]) }}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    showGuest();
+                    toastr.success("Guests imported successfully!");
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.log(xhr.responseText);
+                    alert("Error uploading the file.");
+                }
+            });
         });
+
+
+        // function showButton(id) {
+        //     console.log(id);
+        //     var a = document.querySelector(".modifier");
+        //     // a.style.display= "block";
+        //     if(a.style.display == "none"){
+        //         a.style.display = "block";
+        //     }else{
+        //         a.style.display = "none";
+        //     }
+        // }
+        function showButton() {
+    const checkboxes = document.querySelectorAll('.check_box_style');
+    const selectedIDs = [];
+
+    // Iterate through checkboxes to find selected ones
+    checkboxes.forEach(checkbox => {
+        console.log("Checkbox Data-ID:", checkbox.getAttribute('data-guest-id')); // Log the data-id
+        if (checkbox.checked) {
+            const id = checkbox.getAttribute('data-guest-id');
+            if (id) {
+                selectedIDs.push(id); // Only push if id is not undefined
+            }
+        }
     });
+
+    const modifierDiv = document.querySelector(".modifier");
+
+    if (selectedIDs.length > 0) {
+        modifierDiv.style.display = "block"; // Show the button group
+        console.log("Selected Guest IDs:", selectedIDs); // Log selected IDs
+    } else {
+        modifierDiv.style.display = "none"; // Hide the button group
+    }
+
+    // Optionally update the selected count display
+    const countDisplay = modifierDiv.querySelector('p');
+    countDisplay.textContent = `${selectedIDs.length} GUEST(S) SELECTED`;
+}
+
     </script>
 @endsection

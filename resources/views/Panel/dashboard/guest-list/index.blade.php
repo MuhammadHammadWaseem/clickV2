@@ -1,4 +1,83 @@
 @extends('Panel.layout.master')
+<style>
+
+
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
+    border-bottom: 1px solid #00000038;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details  .box {
+    width: 25%;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align {
+    display: flex;
+    flex-direction: column;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box {
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .bottom-box {
+    display: flex;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h6 {
+    color: #2A2A2A;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h5 {
+    color: #A9967D;
+    font-size: 15px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h4 {
+    font-size: 15px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box p {
+    font-size: 14px;
+}
+
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align {
+    display: flex;
+    gap: 10px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button {
+    background-color: #ff000000;
+    border-right: 1px solid #00000033;
+    padding-right: 10px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:last-child {
+    border: none;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:focus{
+    border-right: 1px solid #00000033 !important;
+}
+
+
+
+
+
+</style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -31,13 +110,13 @@
                         <div class="text">
                             <h2>Management Plan</h2>
                         </div>
-                        <div class="three-things-align">
+                        {{-- <div class="three-things-align">
                             <ul>
                                 <li>Total Guests : 5 ( 2 Seated )</li>
                                 <li>Total Number Of Table : 10</li>
-                                <li><a href="#" class="t-btn">Print Plan</a></li>
+
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="management-plan-box">
                         <div class="box">
@@ -57,10 +136,59 @@
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                                 data-target="#exampleModalCenter04">Add Table</button>
+                              <a href="#" class="t-btn">Print Plan</a>
                         </div>
                     </div>
 
-                    <div class="table-box">
+                    <div class="table-align-boxes">
+                        <div class="th-boxes">
+                            <div class="box">
+                               <h6> Table Name</h6>
+                            </div>
+                            <div class="box">
+                                <h6> Table #</h6>
+                             </div>
+                             <div class="box">
+                                <h6> Guest Allowed</h6>
+                             </div>
+                             <div class="box">
+                                <h6> Actions</h6>
+                             </div>
+                        </div>
+
+                        <div class="td-boxes-down-align">
+                            <div class="top-box">
+                                <div class="box">
+                                    <h5> Friends</h5>
+                                 </div>
+                                 <div class="box">
+                                    <h5> T01265</h5>
+                                 </div>
+                                 <div class="box">
+                                    <h5> Open 10 guest</h5>
+                                 </div>
+                                 <div class="box">
+                                   <div class="three-action-align">
+                                    <button>  <img src="{{ asset('assets/images/edit-icon.png') }}" alt=""></button>
+                                    <button>  <img src="{{ asset('assets/images/delet-icon.png') }}" alt=""></button>
+                                    <button>  <img src="{{ asset('assets/images/Invitations.png') }}" alt=""></button>
+                                   </div>
+                                 </div>
+                            </div>
+                            <div class="bottom-box">
+                                <div class="box">
+                                    <h4> Sitter</h4>
+                                    <p>Jhon Dalton</p>
+                                 </div>
+                                 <div class="box">
+                                    <h4> Meal</h4>
+                                    <p>Chicken</p>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="table-box">
                         <table>
                             <tr>
                                 <th>Table Name</th>
@@ -89,7 +217,8 @@
 
                         </table>
 
-                    </div>
+                    </div> --}}
+
                 </div>
             </div>
             <div class="col-md-12">

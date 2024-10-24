@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Meal;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Guest extends Model
 {
@@ -31,4 +33,15 @@ class Guest extends Model
     protected $table = "guests";
     protected $primaryKey = 'id_guest';
     public $timestamps = false;
+
+    public function meal()
+    {
+        return $this->belongsTo(Meal::class, 'id_meal');
+    }
+
+    public function table()
+    {
+        return $this->belongsTo(Table::class, 'id_table');
+    }
+
 }
