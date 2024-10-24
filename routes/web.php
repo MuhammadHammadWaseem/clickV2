@@ -163,3 +163,4 @@ Route::get('/get-animations', [InvitationController::class, 'getAnimations'])->n
 Route::get('/cardPreviewNew/{id}', [InvitationController::class, 'cardPreviewNew'])->name('cardPreviewNew');
 Route::get('get-csrf-token', [InvitationController::class, 'getCsrfToken'])->name('getCsrfToken');
 Route::get('get-template/{id}', [InvitationController::class, 'getTemplateWithId'])->name('getTemplate');
+Route::post('toggle-two-sided', [InvitationController::class, 'toggleTwoSided'])->name('toggleTwoSided');

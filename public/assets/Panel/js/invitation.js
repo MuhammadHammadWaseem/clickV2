@@ -173,11 +173,11 @@ function selectedObject(event) {
   if (event.target != null) {
     var selectBox = document.getElementById("font-selector2");
     var colorPicker = document.getElementById("colorPicker");
-
+    
     // Get the selected option value
     var optionValue = event.target.fontFamily;
     selectBox.value = optionValue;
-
+    
     // Get the selected color value
     var colorValue = event.target.fill;
     colorPicker.value = colorValue;
@@ -189,6 +189,7 @@ function selectedObject(event) {
   selectedText = event.target;
   clicktextshow();
   clickimgshow();
+
   document.addEventListener('keydown', function (event) {
     // Check if delete key was pressed
     if (event.key === 'Delete') {
@@ -208,8 +209,6 @@ function selectedObject(event) {
       redo();
     }
   });
-
-
 
   document.addEventListener('keydown', function (event) {
     const activeObject = canv.getActiveObject();
@@ -244,6 +243,7 @@ function uploadImageInCanvas(event) {
   const reader = new FileReader();
   reader.onload = function (e) {
     const imgObj = new Image();
+    imgObj.crossOrigin = "Anonymous";
     imgObj.src = e.target.result;
     imgObj.onload = function () {
       const image = new fabric.Image(imgObj);
@@ -1117,6 +1117,7 @@ document
     const reader = new FileReader();
     reader.onload = function (e) {
       const imgObj = new Image();
+      imgObj.crossOrigin = "Anonymous";
       imgObj.src = e.target.result;
       imgObj.onload = function () {
         const image = new fabric.Image(imgObj);
@@ -1818,6 +1819,7 @@ function generateCanvasImageFromJSON(jsonData) {
   canvas.width = canvasData.width;
   canvas.height = canvasData.height;
   const img = new Image();
+  img.crossOrigin = "Anonymous";
   img.src = canvasData.imageDataUrl;
   img.onload = function () {
     ctx.drawImage(img, 0, 0);
@@ -2212,12 +2214,6 @@ async function getapi() {
   this.token = data;
 }
 
-// Save Button
-var save1 = document.getElementById("save2");
-// save1.addEventListener("click", function () {
-//   saveData();
-// });
-
 function saveData() {
   const backElement = document.getElementById('back');
   if (backElement.checked) {
@@ -2290,13 +2286,6 @@ function saveAll() {
   const backElement = document.getElementById('back');
   if (backElement.checked) {
     console.log("Back is checked.");
-
-    document.getElementById("save1").innerHTML = `<svg width="41" height="40" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M25.1634 4.16669C13.6759 4.16669 4.33008 13.5125 4.33008 25C4.33008 36.4875 13.6759 45.8334 25.1634 45.8334C36.6509 45.8334 45.9967 36.4875 45.9967 25C45.9967 13.5125 36.6509 4.16669 25.1634 4.16669ZM25.1634 41.6667C15.9738 41.6667 8.49675 34.1896 8.49675 25C8.49675 15.8104 15.9738 8.33335 25.1634 8.33335C34.353 8.33335 41.8301 15.8104 41.8301 25C41.8301 34.1896 34.353 41.6667 25.1634 41.6667Z" fill="#C09D2A"/>
-  <path d="M20.9949 28.3063L16.2053 23.525L13.2637 26.475L20.9991 34.1938L34.9699 20.2229L32.0241 17.2771L20.9949 28.3063Z" fill="#C09D2A"/>
-  </svg> Saving...`;
-    document.getElementById("save1").classList.add("disabled-button");
-    document.getElementById("save1").disabled = true;
     var saveBtns = document.getElementsByClassName("SaveBtn");
     for (var i = 0; i < saveBtns.length; i++) {
       saveBtns[i].innerText = "Saving...";
@@ -2350,12 +2339,6 @@ function saveAll() {
   } else {
     console.log("Back is not checked.");
 
-    document.getElementById("save1").innerHTML = `<svg width="41" height="40" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M25.1634 4.16669C13.6759 4.16669 4.33008 13.5125 4.33008 25C4.33008 36.4875 13.6759 45.8334 25.1634 45.8334C36.6509 45.8334 45.9967 36.4875 45.9967 25C45.9967 13.5125 36.6509 4.16669 25.1634 4.16669ZM25.1634 41.6667C15.9738 41.6667 8.49675 34.1896 8.49675 25C8.49675 15.8104 15.9738 8.33335 25.1634 8.33335C34.353 8.33335 41.8301 15.8104 41.8301 25C41.8301 34.1896 34.353 41.6667 25.1634 41.6667Z" fill="#C09D2A"/>
-  <path d="M20.9949 28.3063L16.2053 23.525L13.2637 26.475L20.9991 34.1938L34.9699 20.2229L32.0241 17.2771L20.9949 28.3063Z" fill="#C09D2A"/>
-  </svg> Saving...`;
-    document.getElementById("save1").classList.add("disabled-button");
-    document.getElementById("save1").disabled = true;
     var saveBtns = document.getElementsByClassName("SaveBtn");
     for (var i = 0; i < saveBtns.length; i++) {
       saveBtns[i].innerText = "Saving...";
@@ -2371,6 +2354,7 @@ function saveAll() {
 
     const formData = new FormData();
     var filename = window.location.pathname.split("/")[2] + ".json";
+    console.log(filename);
     formData.append("json_blob", [json]);
     formData.append("event_id", window.location.pathname.split("/")[2]);
     formData.append("_token", this.token);
@@ -2383,12 +2367,6 @@ function saveAll() {
       .then((response) => {
         if (response.ok) {
           loadOldData2();
-          document.getElementById("save1").innerHTML = `<svg width="41" height="40" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25.1634 4.16669C13.6759 4.16669 4.33008 13.5125 4.33008 25C4.33008 36.4875 13.6759 45.8334 25.1634 45.8334C36.6509 45.8334 45.9967 36.4875 45.9967 25C45.9967 13.5125 36.6509 4.16669 25.1634 4.16669ZM25.1634 41.6667C15.9738 41.6667 8.49675 34.1896 8.49675 25C8.49675 15.8104 15.9738 8.33335 25.1634 8.33335C34.353 8.33335 41.8301 15.8104 41.8301 25C41.8301 34.1896 34.353 41.6667 25.1634 41.6667Z" fill="#C09D2A"/>
-        <path d="M20.9949 28.3063L16.2053 23.525L13.2637 26.475L20.9991 34.1938L34.9699 20.2229L32.0241 17.2771L20.9949 28.3063Z" fill="#C09D2A"/>
-        </svg> Saved`;
-          document.getElementById("save1").disabled = false;
-          document.getElementById("save1").classList.remove("disabled-button");
 
           document.getElementsByClassName("saveBtn").innerText = "Saved";
           for (var i = 0; i < saveBtns.length; i++) {
@@ -2441,6 +2419,7 @@ function loadCardImagesFromDB(data) {
     colDiv.className = "col-6 mb-3";
 
     const img = document.createElement("img");
+    img.crossOrigin = "Anonymous";
     img.src =
       "https://clickadmin.searchmarketingservices.online/eventcards/" + data[i].img;
     img.setAttribute("height", "200px");
@@ -2468,6 +2447,7 @@ for (let i = 0; i < stickers1.length; i++) {
   const colDiv = document.createElement("div");
   colDiv.className = "col-6 mb-3";
   const img = document.createElement("img");
+  img.crossOrigin = "Anonymous";
   img.src = stickers1[i];
   img.setAttribute("height", "200px");
   img.setAttribute("width", "200px");

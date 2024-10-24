@@ -346,19 +346,19 @@
                                 <div class="hide-and-show-box">
                                     <div class="input-check-box">
                                         <input type="checkbox" id="two_sided" class="check_box_style" name="two_sided"
-                                            value="Two Sided Card" onclick="toggleButtons(); toggleTwoSided();">
+                                            value="Two Sided Card" onclick="toggleButtons(); toggleTwoSided(this);">
                                         <label for="two_sided"> Two Sided Card</label>
                                     </div>
                                     <div class="two-btn-align" id="frontBackBox" style="display: none;">
 
                                         <div class="radio-box-related">
-                                            <input type="radio" id="front" name="fav_language" value="front"
+                                            <input type="radio" id="front" name="edit" value="front"
                                                 onchange="toggleSide(this)">
                                             <label for="front">Front</label>
                                         </div>
 
                                         <div class="radio-box-related">
-                                            <input type="radio" id="back" name="fav_language" value="back"
+                                            <input type="radio" id="back" name="edit" value="back"
                                                 onchange="toggleSide(this)">
                                             <label for="back">Back</label>
                                         </div>
@@ -770,9 +770,8 @@
                                             </ul>
                                         </div>
                                     </form>
-                                    <button type="button" class="btn btn-primary t-btn" id="save1"
-                                        onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03"> Save
-                                        Invitation Card
+                                    <button type="button" class="btn btn-primary t-btn SaveBtn" id="save1" onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03">
+                                        Save Invitation Card
                                     </button>
                                 </div>
                                 {{-- Text Editor --}}

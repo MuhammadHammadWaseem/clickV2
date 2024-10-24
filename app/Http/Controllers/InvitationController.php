@@ -201,6 +201,7 @@ class InvitationController extends Controller
         return response()->json(['data' => $templates]);
     }
 
+    private static $jsonFolderCreated = false;
     public function saveBlob(Request $request)
     {
         try {
@@ -308,5 +309,19 @@ class InvitationController extends Controller
     {
         $templates = DB::table('templates')->where('id', $id)->get();
         return response()->json(['data' => $templates]);
+    }
+
+    public function toggleTwoSided(Request $request)
+    {
+        $card = Card::where("id_event", $request->id_event)->get();
+        foreach ($card as $c) {
+            $c->two_sided = $request->two_sided;
+            $c->save();
+        }
+        if ($request->two_sided == 1) {
+            return response()->json(["message" => "Two Sided Enabled"], 200);
+        } else {
+            return response()->json(["message" => "Two Sided Disabled"], 200);
+        }
     }
 }
