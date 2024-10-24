@@ -242,6 +242,7 @@
                         myModal.show();
                         toastr.success('Meal update successfully!');
                         location.reload(); // Refresh the page or update the DOM
+
                     },
                     error: function(xhr) {
                         // Handle error

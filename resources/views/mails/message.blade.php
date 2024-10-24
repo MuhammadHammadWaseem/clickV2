@@ -50,7 +50,7 @@
                                                     <p style="font-size:16px;color:#0e0e0e;text-align:center">
                                                         @if (is_object($event))
                                                         {{-- {{ strip_tags($event->atitle) }} --}}
-                                                        <center>{!! html_entity_decode($event->atitle) !!}</center>
+                                                        <center>{!! html_entity_decode($event->mtitle) !!}</center>
                                                         @endif
                                                     </p>
                                                     <br>
@@ -58,7 +58,7 @@
                                                         @if (is_object($event))
                                                             {{-- {{ strip_tags($event->atext) }} --}}
                                                             <center>
-                                                                {!! html_entity_decode($event->asubtitle) !!}
+                                                                {!! html_entity_decode($event->msubtitle) !!}
                                                             </center>
                                                             @endif
                                                         </p>
@@ -67,7 +67,7 @@
                                                             @if (is_object($event))
                                                             {{-- {{ strip_tags($event->asubtitle) }} --}}
                                                             <center>
-                                                                {!! html_entity_decode($event->atext) !!}
+                                                                {!! html_entity_decode($event->mtext) !!}
                                                             </center>
                                                         @endif
                                                     </p>

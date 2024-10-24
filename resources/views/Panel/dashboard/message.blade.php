@@ -1,15 +1,15 @@
 @extends('Panel.layout.master')
 
 @section('content')
-<style>
-    .box-styling.preview.actions .action-iframe iframe {
-  border-radius: 10px;
-  width: 100%;
-  height: 100vh;
-  object-fit: contain;
-  margin: 20px 0;
-}
-</style>
+    <style>
+        .box-styling.preview.actions .action-iframe iframe {
+            border-radius: 10px;
+            width: 100%;
+            height: 100vh;
+            object-fit: contain;
+            margin: 20px 0;
+        }
+    </style>
     @php
         use App\Helpers\GeneralHelper;
         $eventId = GeneralHelper::getEventId();
@@ -20,10 +20,9 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page reminders">
                     <div class="text">
-                        <h2>Reminders</h2>
-                        <p class="bold-text-color-change">This is what your guest will get in the message you send.</p>
-                        <p>You can share a picture and send it to all at once with the link to upload their pictures so all
-                            memories of your event are shared in one private gallery on your web page.</p>
+                        <h2>Messages</h2>
+                        <p>You can send a thank you card/picture and tell everyone how grateful you were for their presence
+                            and more...Change the photo write your text and send.</p>
                     </div>
                 </div>
             </div>
@@ -37,21 +36,21 @@
                             data-target="#exampleModalCenter03">Send Mail </button>
                     </div>
                     <div class="action-iframe">
-                        {{-- <img src="assets/images/action-img-iframe.png" alt=""> --}}
-                        <iframe src="{{ url('/mail-acknowledgment/') }}/fake/{{ $eventId }}" frameborder="0"></iframe>
+                        <iframe src="{{ url('/mail-message/') }}/fake/{{ $eventId }}" frameborder="0"></iframe>
                     </div>
                     <div class="three-inputs">
-                        <div class="box" id="TitleEditor">
+                        <div class="box">
                             <label>Title</label>
-                            <textarea placeholder="Title" id="title">{{ $reminder[0]->atitle }}</textarea> <!-- Use a textarea -->
+                            <textarea placeholder="Title" id="title">{{ $message[0]->mtitle }}</textarea> <!-- Use a textarea -->
                         </div>
-                        <div class="box" id="SubtitleEditor">
+                        <div class="box">
                             <label>Subtitle</label>
-                            <textarea placeholder="Subtitle" id="subtitle">{{ $reminder[0]->asubtitle }}</textarea> <!-- Use a textarea -->
+                            <textarea placeholder="Subtitle" id="subtitle">{{ $message[0]->msubtitle }}</textarea> <!-- Use a textarea -->
                         </div>
-                        <div class="box" id="TextEditor">
+                        <div class="box">
                             <label>Text</label>
-                            <textarea placeholder="Text" id="text">{{ $reminder[0]->atext }}</textarea> <!-- Use a textarea -->
+                            <textarea placeholder="Text" id="text">{{ $message[0]->mtext }}</textarea> <!-- Use a textarea -->
+
                         </div>
                     </div>
                     <div class="text-right mt-3"> <!-- Aligns the button to the right -->
@@ -61,6 +60,8 @@
             </div>
         </div>
 
+    </div>
+    </div>
     </div>
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter03"> Images Added Successfully </button> -->
@@ -132,13 +133,38 @@
             </div>
         </div>
     </div>
+
+    <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter03"> Images Added Successfully </button> -->
+    <!-- Modal -->
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter03" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="assets/images/circle-check.png" alt="">
+                        <h2>Message Sent</h2>
+                        <p>Your message has been successfully sent.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 @section('scripts')
-    <script>
+    <script type="text/javascript">
         var titleEditor, subtitleEditor, textEditor;
         $(document).ready(function() {
-            // Initialize CKEditor on the Title, Subtitle, and Text fields
 
             ClassicEditor
                 .create(document.querySelector('#title'))
@@ -167,7 +193,6 @@
                     console.error('CKEditor error for Text:', error);
                 });
 
-            // Debugging
             console.log('CKEditor and data fetching script loaded');
 
             // Select all phone checkboxes
@@ -215,19 +240,6 @@
                 return selectedGuests;
             }
 
-
-            // When Send SMS is clicked
-            $('#send-sms-btn').on('click', function() {
-                var selectedPhones = getSelectedGuests('.phone-checkbox');
-                if (selectedPhones.length > 0) {
-                    console.log('Selected Guest IDs for SMS:', selectedPhones);
-                    // Here, you can handle the sending of SMS logic
-                } else {
-                    alert('No guests selected for SMS');
-                }
-            });
-
-            // When Send Email is clicked
             $('#send-email-btn').on('click', function() {
                 var eventId = {{ $eventId }};
                 var selectedEmails = getSelectedGuests('.email-checkbox');
@@ -235,7 +247,7 @@
                 if (selectedEmails.length > 0) {
                     console.log('Selected Guest IDs for Email:', selectedEmails);
                     $.ajax({
-                        url: "{{ route('panel.event.sendAckMail', ':id') }}".replace(':id',
+                        url: "{{ route('panel.event.sendSmsMail', ':id') }}".replace(':id',
                             eventId), // Your Laravel route
                         type: 'POST',
                         headers: {
@@ -278,7 +290,7 @@
                     console.log('Selected Guest IDs for WhatsApp:', selectedWhatsapps);
 
                     $.ajax({
-                        url: "{{ route('panel.event.sendAcWhatsapp', ':id') }}".replace(':id',
+                        url: "{{ route('panel.event.sendSmsWhatsapp', ':id') }}".replace(':id',
                             eventId), // Your WhatsApp route
                         type: 'POST',
                         headers: {
@@ -322,7 +334,7 @@
                     console.log('Selected Guest IDs for SMS:', selectedPhones);
 
                     $.ajax({
-                        url: "{{ route('panel.event.sendAcSms', ':id') }}".replace(':id',
+                        url: "{{ route('panel.event.sendSmSms', ':id') }}".replace(':id',
                             eventId), // Your SMS route
                         type: 'POST',
                         headers: {
@@ -356,7 +368,6 @@
             });
 
 
-
         });
 
         function updateData() {
@@ -367,19 +378,19 @@
 
             console.log("ddd", title);
             // Assuming you have a variable for the event ID
-            const eventId = '{{ $reminder[0]->id_event }}'; // Replace with actual event ID as needed
+            const eventId = '{{ $message[0]->id_event }}'; // Replace with actual event ID as needed
 
             // Prepare the data to be sent
             const formData = new FormData();
-            formData.append('atitle', title);
-            formData.append('asubtitle', subtitle);
-            formData.append('atext', text);
-            formData.append('idevent', {{ $eventId }});
+            formData.append('mtitle', title);
+            formData.append('msubtitle', subtitle);
+            formData.append('mtext', text);
+            formData.append('midevent', {{ $eventId }});
             // Add other data as needed
             // If you want to send a photo, include it here as well
             // formData.append('photo', <your_photo_data>);
 
-            fetch(`/event/${eventId}/editsave`, {
+            fetch(`/event/${eventId}/editsaveMessage`, {
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -390,6 +401,7 @@
                 .then(data => {
                     if (data == 1) {
                         toastr.success("Changes saved successfully!");
+
                         const iframe = document.querySelector('iframe');
                     iframe.src = iframe.src;
                     } else {

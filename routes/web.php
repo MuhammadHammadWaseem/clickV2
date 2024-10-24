@@ -7,13 +7,14 @@ use App\Http\Controllers\GiftSuggestion;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\messageController;
 use App\Http\Controllers\WebPageController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\reminderController;
 use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
-use App\Http\Controllers\TableSeatingController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\TableSeatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,11 +116,23 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
             Route::post('importfcsv/{id}', [GuestListController::class, 'importFromCsvGuest'])->name('importFromCsvGuest');
             // Guest End
+
             // reminder
             Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder');
             Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
             Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
-            Route::post('{id}/sendAcSm', [reminderController::class, 'sendAcSm'])->name('sendAcSm');
+            Route::post('{id}/sendAcSms', [reminderController::class, 'sendAcSms'])->name('sendAcSms');
+            Route::post('{id}/editsave', [reminderController::class, 'editsave'])->name('editsave');
+            Route::get('/mail-acknowledgment/{idguest}/{idevent}', [reminderController::class, 'ackWebPage'])->name('ackWebPage');
+
+            //message
+            Route::get('{id}/message', [messageController::class, 'index'])->name('message');
+            Route::post('{id}/editsaveMessage', [messageController::class, 'editsaveMessage'])->name('editsaveMessage');
+            Route::post('{id}/sendSmsMail', [messageController::class, 'sendSmskMail'])->name('sendSmsMail');
+            Route::post('{id}/sendSmsWhatsapp', [messageController::class, 'sendSmsWhatsapp'])->name('sendSmsWhatsapp');
+            Route::post('{id}/sendSMSms', [messageController::class, 'sendSmSms'])->name('sendSmSms');
+            Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('message');
+
 
 
             // Table eating
@@ -134,5 +147,3 @@ Route::group(['as' => 'panel.'], function () {
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
 Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');
 Route::post('store/images/{id}', [WebPageController::class, 'storeUsersImages'])->name('store.users.images');
-
-
