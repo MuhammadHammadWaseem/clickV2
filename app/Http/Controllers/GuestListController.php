@@ -223,13 +223,13 @@ class GuestListController extends Controller
             if ($guest) {
                 $guest->name = $request->name;
                 $guest->titleGuest = $request->title;
-                $guest->email = $request->email;
-                $guest->phone = $request->phone;
-                $guest->whatsapp = $request->whatsapp;
+                $guest->email = $request->email ?? '';
+                $guest->phone = $request->phone ?? '';
+                $guest->whatsapp = $request->whatsapp ?? '';
                 $guest->allergies =($request->allergies == "1") ? 1 : 0;
-                $guest->id_meal = $request->meal;
-                $guest->notes = $request->notes;
-                $guest->members_number = $request->members;
+                $guest->id_meal = $request->meal ?? 0;
+                $guest->notes = $request->notes ?? '';
+                $guest->members_number = $request->members ?? 0;
                 $guest->opened = ($request->confirm == "1") ? 1 : 0;
 
                 $guest->save();
@@ -322,5 +322,56 @@ class GuestListController extends Controller
 
                 return response()->json(["error" => "Error processing the file."], 400);
             }
+
+
+        public function deleteGuest(Request $request)
+    {
+        // Check if guestid or guestIds is provided
+        if (!$request->has('guestid') && !$request->has('guestIds')) {
+            return response()->json(["error" => "Guest ID not provided"], 400);
+        }
+
+        // If a single guest ID is provided
+        if ($request->has('guestid')) {
+            $guest = Guest::where('id_guest', $request['guestid'])->first();
+
+            // Check if guest exists
+            if ($guest) {
+                $event = Event::where('id_event', $request->idevent)->first();
+                if ($event && $event->id_user == Auth::id()) {
+                    // Delete child guests
+                    Guest::where('parent_id_guest', $request->guestid)->delete();
+                    // Delete the guest
+                    $guest->delete();
+                } else {
+                    return response()->json(["error" => "Event not found"], 400);
+                }
+            } else {
+                return response()->json(["error" => "Guest not found"], 400);
+            }
+        }
+        // If multiple guest IDs are provided
+        else {
+            $guests = Guest::whereIn('id_guest', $request['guestIds'])->get();
+            if ($guests->isEmpty()) {
+                return response()->json(["error" => "Guests not found"], 400);
+            }
+
+            $event = Event::where('id_event', $request->idevent)->first();
+            if ($event && $event->id_user == Auth::id()) {
+                // Delete all guests
+                foreach ($guests as $guest) {
+                    // Delete child guests
+                    Guest::where('parent_id_guest', $guest->id_guest)->delete();
+                    // Delete the guest
+                    $guest->delete();
+                }
+            } else {
+                return response()->json(["error" => "Event not found"], 400);
+            }
+        }
+
+        return response()->json(["success" => "Guests deleted successfully"], 200);
+    }
 
 }

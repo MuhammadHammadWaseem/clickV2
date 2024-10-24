@@ -115,6 +115,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('{id}/guests/show-event', [GuestListController::class, 'allguests'])->name('guests.show-event');
             Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
             Route::post('importfcsv/{id}', [GuestListController::class, 'importFromCsvGuest'])->name('importFromCsvGuest');
+            Route::post('{id}/delete/guest', [GuestListController::class, 'deleteGuest'])->name('deleteGuest');
             // Guest End
 
             // reminder
