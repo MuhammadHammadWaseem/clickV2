@@ -9,4 +9,6 @@ class CardsUpload extends Model
 {
     use HasFactory;
     protected $table = "cards_upload";
+    protected $fillable = ['id','id_eventtype','img','type'];
+    protected $primaryKey = "id";
 }

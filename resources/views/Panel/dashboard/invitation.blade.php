@@ -10,6 +10,16 @@
         border-radius: 10px;
     }
 
+    .font-color-styling input#colorPickersetting {
+        padding: 0 !important;
+        width: 200px;
+        height: 50px;
+        border: 0;
+        background: transparent;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
     .font-color-styling input#canvasColor {
         padding: 0 !important;
         width: 200px;
@@ -64,7 +74,7 @@
     }
 
     /* Hide the actual file input */
-    #uploadImage2 {
+    #uploadImage {
         display: none;
     }
 </style>
@@ -99,7 +109,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" id="previewModal" onclick="saveData()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -170,7 +180,7 @@
                                     d="M9.29688 14.0131H12.6302V10.6798H18.0502L13.7635 30.6798H9.29688V34.0131H22.6302V30.6798H18.8769L23.1635 10.6798H29.2969V14.0131H32.6302V7.34647H9.29688V14.0131Z"
                                     fill="#C09D2A" />
                             </svg>
-                            AddText
+                            Add Text
                         </a>
                     </div>
 
@@ -188,7 +198,7 @@
 
                     <div class="card-styling-box">
                         <a href="#">
-                            <div class="upload-container" onclick="document.getElementById('uploadImage2').click()">
+                            <div class="upload-container" onclick="document.getElementById('uploadImage').click()">
                                 <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -206,7 +216,7 @@
                         </a>
 
                         <!-- Hidden file input -->
-                        <input type="file" id="uploadImage2" onchange="uploadImageInCanvas(event)" accept="image/*">
+                        <input type="file" id="uploadImage" onchange="uploadImageInCanvas(event)" accept="image/*">
 
                     </div>
 
@@ -302,21 +312,22 @@
                                 <h3>Editing Options</h3>
                                 <div class="hide-and-show-box">
                                     <div class="input-check-box">
-                                        <input type="checkbox" id="two-sided-card" class="check_box_style"
-                                            name="two-sided-card" value="Two Sided Card" onclick="toggleButtons()">
-                                        <label for="two-sided-card"> Two Sided Card</label>
+                                        <input type="checkbox" id="two_sided" class="check_box_style" name="two_sided"
+                                            value="Two Sided Card" onclick="toggleButtons(); toggleTwoSided();">
+                                        <label for="two_sided"> Two Sided Card</label>
                                     </div>
-                                    <div class="two-btn-align" style="display: none;">
+                                    <div class="two-btn-align" id="frontBackBox" style="display: none;">
 
                                         <div class="radio-box-related">
-                                            <input type="radio" id="html" name="fav_language" value="HTML"
-                                                checked>
-                                            <label for="html">Front</label>
+                                            <input type="radio" id="front" name="fav_language" value="front"
+                                                onchange="toggleSide(this)">
+                                            <label for="front">Front</label>
                                         </div>
 
                                         <div class="radio-box-related">
-                                            <input type="radio" id="css" name="fav_language" value="CSS">
-                                            <label for="css">Back</label>
+                                            <input type="radio" id="back" name="fav_language" value="back"
+                                                onchange="toggleSide(this)">
+                                            <label for="back">Back</label>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +340,7 @@
                                 </div>
                                 <div class="input-box">
                                     <label for="font-styling">Font Styling</label>
-                                    <select id="font-selector2" onchange="changeFontStyle(this)" class="fontSelector1">
+                                    <select id="font-selector" onchange="changeFontStyle(this)" class="fontSelector1">
                                         <option value="arial" style="font-family: arial">Arial</option>
                                         <option value="Cinzel, serif" style="font-family: 'Cinzel', serif">Cinzel</option>
                                         <option value="Sackers, sans-serif" style="font-family: 'Sackers', sans-serif">
@@ -670,6 +681,126 @@
 
 
 
+    {{-- EXTRA Start --}}
+
+    <div class="row" id="imgDiv"></div>
+    <input type="hidden" id="id_card">
+    <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class=" modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Save Canva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="iframe" src="" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" sidebar" style="display: none;z-index: 1;">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end align-items-center h-100">
+                <button type="button" class="btn-close" aria-label="Close" onclick="closeSidebar()"></button>
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search for stickers">
+            <button id="btnSearch" class="btn btn-lg btn-secondary ">Search</button>
+        </div>
+        <div id="stickerList" onclick="clickONsticker()">
+        </div>
+    </div>
+
+    <!-- Animations Modal -->
+    <div class="modal fade" height="70vh" id="animationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Set Animations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row d-flex justify-content-center align-items-center" id="animationModalBody">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="saveAnimation()"
+                        data-bs-dismiss="modal">Save Animation</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="saveNoneOfThese()"
+                        data-bs-dismiss="modal">Non Animations</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Animations Modal -->
+
+    <div style="text-align: center;" id="bgImgData">
+        <label class="borderPc py-2">
+            <input type="radio" onclick="backgroundSelecetor(this.value)" name="test" value="bg4.webp"
+                id="bg4">
+
+            <img src="/assets/images/cardAnimation/bg4.webp" alt="Option 1">
+
+
+        </label>
+
+        <label class="borderPc py-2">
+            <input type="radio" onclick="backgroundSelecetor(this.value)" name="test" value="bg2.jpg"
+                id="bg2">
+            <img src="/assets/images/cardAnimation/bg2.jpg" alt="Option 2">
+        </label>
+
+
+        <label class="borderPc py-2">
+            <input type="radio" onclick="backgroundSelecetor(this.value)" name="test" value="bg3.jpg"
+                id="bg3">
+            <img src="/assets/images/cardAnimation/bg3.jpg" alt="Option 3">
+        </label>
+
+        <label class="borderPc py-2">
+            <input type="radio" onclick="backgroundSelecetor(this.value)" name="test" value="bg1.jpg"
+                id="bg1">
+            <img src="/assets/images/cardAnimation/bg1.jpg" alt="Option 4">
+        </label>
+    </div>
+
+    <!-- IframeModal -->
+    <!-- Modal -->
+    <div class="modal fade modal-for-view-cards" height="70vh" id="exampleModaliframe" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Your Card</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" style="height: 70vh;">
+                    <iframe id="iframe" height="100%" width="100%" src="" frameborder="0"></iframe>
+
+                    <p>You need to save the setting first</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- IframeModal Close -->
+
+    {{-- EXTRA End --}}
+
+
+
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter"> Would You To Have A Registry List </button> -->
     <div class="modal fade modal-01 add-new-meal" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -748,30 +879,71 @@
                                     placeholder="We Are Going To Marriage.">
                             </div>
                             <div class="box">
-                                <label for="font-styling">Guest Name’s Font Style</label>
-                                <select name="font-styling" id="font-styling">
-                                    <option value="font-styling">Font Styling</option>
-                                    <option value="font-styling-01">Font Styling-01</option>
-                                    <option value="font-styling-02">Font Styling-02</option>
-                                    <option value="font-styling-03">Font Styling-03</option>
+                                <label for="font-selectorsetting">Guest Name’s Font Style</label>
+                                <select id="font-selectorsetting" class="fontSelector1">
+                                    <option value="Abramo Serif" style="font-family: 'Abramo Serif';"
+                                        {{ $cardData->envTitleFont == 'Abramo Serif' ? 'selected' : '' }}>
+                                        Abramo Serif
+                                    </option>
+                                    <option value="Roboto-BlackItalic" style="font-family: 'Roboto-BlackItalic', cursive;"
+                                        {{ $cardData->envTitleFont == 'Roboto-BlackItalic' ? 'selected' : '' }}>
+                                        Roboto-BlackItalic
+                                    </option>
+                                    <option value="DancingScript-VariableFont_wght"
+                                        style="font-family: 'DancingScript-VariableFont_wght';"
+                                        {{ $cardData->envTitleFont == 'DancingScript-VariableFont_wght' ? 'selected' : '' }}>
+                                        DancingScript-VariableFont_wght
+                                    </option>
+                                    <option value="FrankRuhlLibre-VariableFont_wght"
+                                        style="font-family: 'FrankRuhlLibre-VariableFont_wght';"
+                                        {{ $cardData->envTitleFont == 'FrankRuhlLibre-VariableFont_wght' ? 'selected' : '' }}>
+                                        FrankRuhlLibre-VariableFont_wght
+                                    </option>
+                                    <option value="RacingSansOne-Regular" style="font-family: 'RacingSansOne-Regular';"
+                                        {{ $cardData->envTitleFont == 'RacingSansOne-Regular' ? 'selected' : '' }}>
+                                        RacingSansOne-Regular
+                                    </option>
+                                    <option value="PTSansNarrow-Regular" style="font-family: 'PTSansNarrow-Regular';"
+                                        {{ $cardData->envTitleFont == 'PTSansNarrow-Regular' ? 'selected' : '' }}>
+                                        PTSansNarrow-Regular
+                                    </option>
+                                    <option value="PTSansNarrow-Bold" style="font-family: 'PTSansNarrow-Bold';"
+                                        {{ $cardData->envTitleFont == 'PTSansNarrow-Bold' ? 'selected' : '' }}>
+                                        PTSansNarrow-Bold
+                                    </option>
+                                    <option value="Lobster-Regular" style="font-family: 'Lobster-Regular';"
+                                        {{ $cardData->envTitleFont == 'Lobster-Regular' ? 'selected' : '' }}>
+                                        Lobster-Regular
+                                    </option>
+                                    <option value="HerrVonMuellerhoff-Regular"
+                                        style="font-family: 'HerrVonMuellerhoff-Regular';"
+                                        {{ $cardData->envTitleFont == 'HerrVonMuellerhoff-Regular' ? 'selected' : '' }}>
+                                        HerrVonMuellerhoff-Regular
+                                    </option>
+                                    <option value="Eleganta_PERSONAL_USE_ONLY"
+                                        style="font-family: 'Eleganta_PERSONAL_USE_ONLY';"
+                                        {{ $cardData->envTitleFont == 'Eleganta_PERSONAL_USE_ONLY' ? 'selected' : '' }}>
+                                        Eleganta_PERSONAL_USE_ONLY
+                                    </option>
                                 </select>
                             </div>
+
                         </div>
                         <div class="three-inputes-align">
                             <div class="box">
-                                <label for="favcolor1">Guest Name’s Font Color</label>
-                                <input type="color" id="favcolor1" name="favcolor1"
+                                <label for="colorPickersetting">Guest Name’s Font Color</label>
+                                <input type="color" id="colorPickersetting" name="colorPickersetting"
                                     value="{{ $cardData->envTitleColor }}">
                             </div>
                             <div class="box">
-                                <label for="favcolor2">Envelope Inner Color</label>
-                                <input type="color" id="favcolor2" name="favcolor2"
-                                    value="{{ $cardData->cardColorIn }}">
+                                <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
+                                <input type="color" id="colorPickerenvelope_innersetting"
+                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn }}">
                             </div>
                             <div class="box">
-                                <label for="favcolor3">Envelope Outer Color</label>
-                                <input type="color" id="favcolor3" name="favcolor3"
-                                    value="{{ $cardData->cardColorOut }}">
+                                <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
+                                <input type="color" id="colorPickerenvelope_outsetting"
+                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">
@@ -798,12 +970,13 @@
                                     <label for="flexCheckChecked4"> Upload Event Photos</label>
                                 </div>
                                 <div class="box">
-                                    <input type="checkbox" id="flexCheckChecked5" name="flexCheckChecked5" value="">
+                                    <input type="checkbox" id="flexCheckChecked5" name="flexCheckChecked5"
+                                        value="">
                                     <label for="flexCheckChecked5"> Go to Website</label>
                                 </div>
                                 <div class="box">
-                                    <input type="checkbox" id="flexCheckChecked6"
-                                        name="flexCheckChecked6" value="">
+                                    <input type="checkbox" id="flexCheckChecked6" name="flexCheckChecked6"
+                                        value="">
                                     <label for="flexCheckChecked6"> Apologies For Not Attending</label>
                                 </div>
                             </div>
@@ -811,12 +984,15 @@
                         <div class="background-select">
                             <h3>Background</h3>
                             <div class="many-radio-boxes">
-                                @forelse ($cardData->cardImgs as $card)
-                                <div class="box">
-                                    <input type="radio" id="bg-{{ $card->id }}" name="background-select" value="{{ $card->img }}" {{ $cardData->bgName == $card->img ? "checked" : "" }}>
-                                    <label for="bg-{{ $card->id }}" style="width:100px;"><img src="https://clickadmin.searchmarketingservices.online/eventcards/{{ $card->img }}"
-                                            alt=""></label>
-                                </div>
+                                @forelse ($cardData->bgImgs as $card)
+                                    <div class="box">
+                                        <input type="radio" id="{{ $card->img }}" class="bgName"
+                                            name="background-select" value="{{ $card->img }}"
+                                            {{ $cardData->bgName == $card->img ? 'checked' : '' }}>
+                                        <label for="{{ $card->img }}" style="width:100px;"><img
+                                                src="https://clickadmin.searchmarketingservices.online/eventcards/{{ $card->img }}"
+                                                alt=""></label>
+                                    </div>
                                 @empty
                                     <p>No Cards!</p>
                                 @endforelse
@@ -826,9 +1002,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard Changes</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" data-dismiss="modal">Save
-                        Changes</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveSetting()"
+                        data-dismiss="modal">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -836,8 +1011,61 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/Panel/js/invitation.js') }}"></script>
     <script>
+        $("#previewModal").on("click", function() {
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModaliframe'));
+            myModal.show();
+        });
+        // function saveSetting() {
+        //     let rspvVal = "";
+        //     for (let index = 1; index <= 6; index++) {
+        //         if (document.getElementById("flexCheckChecked" + index).checked) {
+        //             rspvVal += "1,";
+        //         } else {
+        //             rspvVal += "0,";
+        //         }
+
+        //         AllBgname = document.getElementsByClassName("bgName");
+        //         var bgName;
+        //         for (let index = 0; index < AllBgname.length; index++) {
+        //             if (AllBgname[index].checked) {
+        //                 bgName = AllBgname[index].value;
+        //             }
+        //         }
+        //     }
+        //     let msg = document.getElementById("msgTitle").value;
+
+        //     $.ajax({
+        //         url: "{{ route('panel.event.invitation.setting.update', ['id' => $currentEventId]) }}",
+        //         type: "POST",
+        //         data: JSON.stringify({
+        //             _token: "{{ csrf_token() }}",
+        //             event_id: {{ $currentEventId }},
+        //             rsvp: rspvVal.substring(0, 11),
+        //             msg: msg,
+        //             bgName: bgName,
+        //             envTitleFont: document.getElementById("font-selectorsetting").value,
+        //             envTitleColor: document.getElementById("colorPickersetting").value,
+        //             colorOut: document.getElementById("colorPickerenvelope_outsetting").value,
+        //             colorIn: document.getElementById("colorPickerenvelope_innersetting").value,
+        //         }),
+        //         dataType: "json",
+        //         contentType: "application/json",
+        //         success: function(msg) {
+        //             console.log(msg);
+        //             if (msg.success == true) {
+        //                 toastr.success(msg.message);
+        //             } else {
+        //                 toastr.error('Something went wrong, please try again later.');
+        //             }
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.log(xhr.responseText);
+        //             var err = eval("(" + xhr.responseText + ")");
+        //         },
+        //     });
+        // }
+
         // const opacityRange = document.getElementById('opacityRange');
         // const maxRange = document.getElementById('maxRange');
         // const sliderRange = document.querySelector('.slider-range');
@@ -864,19 +1092,19 @@
 
 
 
-        function uploadImageInCanvas(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
+        // function uploadImageInCanvas(event) {
+        //     const file = event.target.files[0];
+        //     const reader = new FileReader();
 
-            // Preview the uploaded image in the custom upload container
-            reader.onload = function(e) {
-                document.getElementById('uploadPreview').src = e.target.result;
-            };
+        //     // Preview the uploaded image in the custom upload container
+        //     reader.onload = function(e) {
+        //         document.getElementById('uploadPreview').src = e.target.result;
+        //     };
 
-            if (file) {
-                reader.readAsDataURL(file);
-            }
-        }
+        //     if (file) {
+        //         reader.readAsDataURL(file);
+        //     }
+        // }
         let rsvpData = {!! json_encode($cardData->rsvp) !!}.split(",");
 
         rsvpData.forEach((element, key) => {
@@ -887,4 +1115,5 @@
             }
         });
     </script>
+    <script src="{{ asset('assets/Panel/js/invitation.js') }}"></script>
 @endsection

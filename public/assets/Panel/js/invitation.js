@@ -36,25 +36,19 @@ var redoStack = [];
 var maxUndoStackSize = 10000000;
 
 
-// window.addEventListener("load", () => {
-setTimeout(() => {
-  $(document).ready(function () {
-    canv = new fabric.Canvas("canvas", {
-      backgroundColor: "white",
-      width: 450,
-      height: 680,
-      preserveObjectStacking: true,
-    });
-    canv.on({
-      "mouse:down": selectedObject,
-    });
-    getapi();
-    handleJSONImport();
-    loadOldData2();
-  });
-}, 1000);
+canv = new fabric.Canvas("canvas", {
+  backgroundColor: "white",
+  width: 450,
+  height: 680,
+  preserveObjectStacking: true,
+});
+canv.on({
+  "mouse:down": selectedObject,
+});
 
-// });
+getapi();
+handleJSONImport();
+loadOldData2();
 
 canv.on('object:modified', saveState);
 canv.on('object:added', saveState);
@@ -361,16 +355,16 @@ function applyShadow() {
     saveAll();
   }
 }
-fontselector2.addEventListener("click", function fontselect2() {
-  const obj = canv.getActiveObject();
-  if (obj && obj.type === "textbox") {
-    const font = this.value;
-    obj.set({ fontFamily: font });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
+// fontselector2.addEventListener("click", function fontselect2() {
+//   const obj = canv.getActiveObject();
+//   if (obj && obj.type === "textbox") {
+//     const font = this.value;
+//     obj.set({ fontFamily: font });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
 
 function changeFontStyle(selectElement) {
   const obj = canv.getActiveObject();
@@ -555,11 +549,11 @@ function neonText() {
     obj.set({
       shadow: hasNeon
         ? {
-            color: '#FFD017',
-            blur: 20,
-            offsetX: 0,
-            offsetY: 0,
-          }
+          color: '#FFD017',
+          blur: 20,
+          offsetX: 0,
+          offsetY: 0,
+        }
         : null,
     });
     obj.set({ fill: hasNeon ? '#FFD017' : '#000000' });
@@ -589,11 +583,11 @@ function applyTextIce() {
     obj.set({
       shadow: isIced
         ? {
-            color: '#00FFFF',
-            blur: 10,
-            offsetX: 0,
-            offsetY: 0,
-          }
+          color: '#00FFFF',
+          blur: 10,
+          offsetX: 0,
+          offsetY: 0,
+        }
         : null,
     });
     obj.set({ fill: isIced ? '#00FFFF' : '#000000' });
@@ -611,11 +605,11 @@ function applyTextFire() {
     obj.set({
       shadow: isFired
         ? {
-            color: '#FF4500',
-            blur: 15,
-            offsetX: 0,
-            offsetY: 0,
-          }
+          color: '#FF4500',
+          blur: 15,
+          offsetX: 0,
+          offsetY: 0,
+        }
         : null,
     });
     obj.set({ fill: isFired ? '#FF4500' : '#000000' });
@@ -1117,32 +1111,6 @@ function applyTextShimmer() {
 /////////////////////////////////////////////////////////////////////////
 
 document
-  .getElementById("uploadImage2")
-  .addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const imgObj = new Image();
-      imgObj.src = e.target.result;
-      imgObj.onload = function () {
-        const image = new fabric.Image(imgObj);
-        // Adjust image size to fit the canvas if it's larger
-        if (image.width > canv.width || image.height > canv.height) {
-          const scaleFactor = Math.min(
-            canv.width / image.width,
-            canv.height / image.height
-          );
-          image.scale(scaleFactor);
-        }
-
-        canv.add(image);
-        saveState();
-      };
-    };
-    reader.readAsDataURL(file);
-  });
-
-document
   .getElementById("uploadImage")
   .addEventListener("change", function (event) {
     const file = event.target.files[0];
@@ -1168,21 +1136,21 @@ document
     reader.readAsDataURL(file);
   });
 
-document.getElementById("deleteBtn").addEventListener("click", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-  }
-});
+// document.getElementById("deleteBtn").addEventListener("click", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//   }
+// });
 
-document.querySelector(".deleteBtn2").addEventListener("click", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-  }
-});
+// document.querySelector(".deleteBtn2").addEventListener("click", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//   }
+// });
 
 function moveForward() {
   canv.renderAll();
@@ -1212,9 +1180,9 @@ function moveBackword() {
 // Undo
 var maxHistoryLength = 10;
 
-document.getElementById("undoBtn").addEventListener("click", function () {
-  undo();
-});
+// document.getElementById("undoBtn").addEventListener("click", function () {
+//   undo();
+// });
 
 function loadCanvasState() {
   canv.loadFromJSON(moveHistory[currentIndex], function () {
@@ -1233,9 +1201,9 @@ function saveCanvasState() {
 }
 
 // Redo
-document.getElementById("redoBtn").addEventListener("click", function () {
-  redo();
-})
+// document.getElementById("redoBtn").addEventListener("click", function () {
+//   redo();
+// })
 function giveRecordOfCard() {
   let record = [];
   for (let i = 0; i < canv._objects.length; i++) {
@@ -1321,24 +1289,24 @@ function textEffectsAnimationsBtn() {
 
 // ... (add more event listeners for other text effects)
 
-document.getElementById("opacityRange").addEventListener("input", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    obj.set({ opacity: parseFloat(this.value) / 100 });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
-document.getElementById("opacityRange2").addEventListener("input", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    obj.set({ opacity: parseFloat(this.value) / 100 });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
+// document.getElementById("opacityRange").addEventListener("input", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     obj.set({ opacity: parseFloat(this.value) / 100 });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
+// document.getElementById("opacityRange2").addEventListener("input", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     obj.set({ opacity: parseFloat(this.value) / 100 });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
 
 function changeOpacity(value) {
   const obj = canv.getActiveObject();
@@ -1371,33 +1339,33 @@ function addText() {
   textbox.hiddenTextarea.focus();
 }
 
-document
-  .getElementById("uploadSticker")
-  .addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const imgObj = new Image();
-      imgObj.src = e.target.result;
-      imgObj.onload = function () {
-        const sticker = new fabric.Image(imgObj);
+// document
+//   .getElementById("uploadSticker")
+//   .addEventListener("change", function (event) {
+//     const file = event.target.files[0];
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//       const imgObj = new Image();
+//       imgObj.src = e.target.result;
+//       imgObj.onload = function () {
+//         const sticker = new fabric.Image(imgObj);
 
-        // Adjust sticker size to fit the canvas if it's larger
-        if (sticker.width > canv.width || sticker.height > canv.height) {
-          const scaleFactor = Math.min(
-            canv.width / sticker.width,
-            canv.height / sticker.height
-          );
-          sticker.scale(scaleFactor);
-        }
+//         // Adjust sticker size to fit the canvas if it's larger
+//         if (sticker.width > canv.width || sticker.height > canv.height) {
+//           const scaleFactor = Math.min(
+//             canv.width / sticker.width,
+//             canv.height / sticker.height
+//           );
+//           sticker.scale(scaleFactor);
+//         }
 
-        canv.add(sticker);
-        saveState();
-        saveAll();
-      };
-    };
-    reader.readAsDataURL(file);
-  });
+//         canv.add(sticker);
+//         saveState();
+//         saveAll();
+//       };
+//     };
+//     reader.readAsDataURL(file);
+//   });
 
 // Undo
 
@@ -1420,67 +1388,67 @@ function saveCanvasState() {
 
 
 // Redo
-document.getElementById("redoBtn").addEventListener("click", function () {
-  redo();
-});
+// document.getElementById("redoBtn").addEventListener("click", function () {
+//   redo();
+// });
 
-document.querySelector(".deleteBtn").addEventListener("click", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-    saveAll();
-  }
-});
+// document.querySelector(".deleteBtn").addEventListener("click", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//     saveAll();
+//   }
+// });
 
-document.querySelector(".deleteBtn1").addEventListener("click", function () {
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-    saveAll();
-  }
-});
-document.querySelector(".deleteBtn2").addEventListener("click", function () {
+// document.querySelector(".deleteBtn1").addEventListener("click", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//     saveAll();
+//   }
+// });
+// document.querySelector(".deleteBtn2").addEventListener("click", function () {
 
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-    saveAll();
-  }
-});
-document.querySelector(".deleteBtn3").addEventListener("click", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//     saveAll();
+//   }
+// });
+// document.querySelector(".deleteBtn3").addEventListener("click", function () {
 
-  const obj = canv.getActiveObject();
-  if (obj) {
-    canv.remove(obj);
-    saveState();
-    saveAll();
-  }
-});
+//   const obj = canv.getActiveObject();
+//   if (obj) {
+//     canv.remove(obj);
+//     saveState();
+//     saveAll();
+//   }
+// });
 
-document.addEventListener("keydown", function (event) {
-  if (event.code === "Delete" || event.code === "Backspace") {
-    const obj = canv.getActiveObject();
-    if (obj) {
-      canv.remove(obj);
-      saveState();
-      saveAll();
-    }
-  }
-});
+// document.addEventListener("keydown", function (event) {
+//   if (event.code === "Delete" || event.code === "Backspace") {
+//     const obj = canv.getActiveObject();
+//     if (obj) {
+//       canv.remove(obj);
+//       saveState();
+//       saveAll();
+//     }
+//   }
+// });
 
 
-document.getElementById("canvasColor").addEventListener("input", function () {
-  const color = document.getElementById("canvasColor").value;
-  canv.setBackgroundColor(color, function () {
+// document.getElementById("canvasColor").addEventListener("input", function () {
+//   const color = document.getElementById("canvasColor").value;
+//   canv.setBackgroundColor(color, function () {
 
-    canv.renderAll();
-    saveState();
-    saveAll();
-  });
-});
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   });
+// });
 
 function chnageBGColor() {
   const color = document.getElementById("canvasColor").value;
@@ -1491,50 +1459,50 @@ function chnageBGColor() {
   });
 }
 
-document.getElementById("fontSelector").addEventListener("change", function () {
-  const obj = canv.getActiveObject();
-  if (obj && obj.type === "textbox") {
-    obj.set({ fontFamily: this.value });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
+// document.getElementById("fontSelector").addEventListener("change", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj && obj.type === "textbox") {
+//     obj.set({ fontFamily: this.value });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
 
-document.getElementById("textColor").addEventListener("input", function () {
-  const obj = canv.getActiveObject();
-  if (obj && obj.type === "textbox") {
-    obj.set({ fill: this.value });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
+// document.getElementById("textColor").addEventListener("input", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj && obj.type === "textbox") {
+//     obj.set({ fill: this.value });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
 
-document.getElementById("fontSize").addEventListener("input", function () {
-  const obj = canv.getActiveObject();
-  if (obj && obj.type === "textbox") {
-    obj.set({ fontSize: parseInt(this.value, 10) });
-    canv.renderAll();
-    saveState();
-    saveAll();
-  }
-});
+// document.getElementById("fontSize").addEventListener("input", function () {
+//   const obj = canv.getActiveObject();
+//   if (obj && obj.type === "textbox") {
+//     obj.set({ fontSize: parseInt(this.value, 10) });
+//     canv.renderAll();
+//     saveState();
+//     saveAll();
+//   }
+// });
 
-document.getElementById("saveBtn").addEventListener("click", function () {
-  alert("Work has been saved!");
-});
+// document.getElementById("saveBtn").addEventListener("click", function () {
+//   alert("Work has been saved!");
+// });
 
-document.getElementById("downloadBtn").addEventListener("click", function () {
-  const dataUrl = canv.toDataURL({
-    format: "png",
-    multiplier: 2, // Increase multiplier for higher resolution
-  });
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = "canvas_image.png";
-  link.click();
-});
+// document.getElementById("downloadBtn").addEventListener("click", function () {
+//   const dataUrl = canv.toDataURL({
+//     format: "png",
+//     multiplier: 2, // Increase multiplier for higher resolution
+//   });
+//   const link = document.createElement("a");
+//   link.href = dataUrl;
+//   link.download = "canvas_image.png";
+//   link.click();
+// });
 
 canv.on("selection:created", function (options) {
   updateControls(options.target);
@@ -1605,10 +1573,10 @@ function sidebarbackaddimg() {
 
 }
 
-trash.addEventListener("click", () => {
-  canv.remove(selectedText);
-  canv.renderAll();
-});
+// trash.addEventListener("click", () => {
+//   canv.remove(selectedText);
+//   canv.renderAll();
+// });
 
 function deleteSelected() {
   const obj = canv.getActiveObject();
@@ -1616,10 +1584,10 @@ function deleteSelected() {
   canv.renderAll();
 }
 
-trash2.addEventListener("click", () => {
-  canv.remove(selectedText);
-  canv.renderAll();
-});
+// trash2.addEventListener("click", () => {
+//   canv.remove(selectedText);
+//   canv.renderAll();
+// });
 
 function deleteImage() {
   canv.remove(selectedText);
@@ -1627,22 +1595,22 @@ function deleteImage() {
   canv.renderAll();
 }
 
-textalign.addEventListener("click", () => {
-  var center = "center";
-  selectedText.set({ textAlign: center });
-  canv.renderAll();
-});
+// textalign.addEventListener("click", () => {
+//   var center = "center";
+//   selectedText.set({ textAlign: center });
+//   canv.renderAll();
+// });
 
-textalignleft.addEventListener("click", () => {
-  var left = "left";
-  selectedText.set({ textAlign: left });
-  canv.renderAll();
-});
-textalignright.addEventListener("click", () => {
-  var right = "right";
-  selectedText.set({ textAlign: right });
-  canv.renderAll();
-});
+// textalignleft.addEventListener("click", () => {
+//   var left = "left";
+//   selectedText.set({ textAlign: left });
+//   canv.renderAll();
+// });
+// textalignright.addEventListener("click", () => {
+//   var right = "right";
+//   selectedText.set({ textAlign: right });
+//   canv.renderAll();
+// });
 
 function showTxtTool() {
   document.querySelector(".sidebaraddtext").style.display = "inline-block";
@@ -1705,30 +1673,30 @@ function changeTextColor2() {
 
 const fontSelector = document.getElementById("font-selector");
 const font = document.getElementById("font");
-fontSelector.addEventListener("click", function fontselect() {
-  // const selectedFont = this.value;
-  // font.style.fontFamily = selectedFont;
-  // selectedText.set({ fontFamily: selectedFont });
-  // canv.renderAll();
-});
+// fontSelector.addEventListener("click", function fontselect() {
+//   // const selectedFont = this.value;
+//   // font.style.fontFamily = selectedFont;
+//   // selectedText.set({ fontFamily: selectedFont });
+//   // canv.renderAll();
+// });
 
-clone.addEventListener("click", function cloneTxt() {
-  if (selectedText) {
-    var clonedText = new fabric.IText(selectedText.text, {
-      left: selectedText.left + 20,
-      top: selectedText.top + 20,
-      fontSize: selectedText.fontSize,
-      fill: selectedText.fill,
-      fontFamily: selectedText.fontFamily,
-    });
-    canv.add(clonedText);
-    clonedText.set("zIndex", 100);
-    canv.bringForward(clonedText);
-    canv.moveTo(object, clonedText);
-    canv.renderAll();
-  }
-  canv.renderAll();
-});
+// clone.addEventListener("click", function cloneTxt() {
+//   if (selectedText) {
+//     var clonedText = new fabric.IText(selectedText.text, {
+//       left: selectedText.left + 20,
+//       top: selectedText.top + 20,
+//       fontSize: selectedText.fontSize,
+//       fill: selectedText.fill,
+//       fontFamily: selectedText.fontFamily,
+//     });
+//     canv.add(clonedText);
+//     clonedText.set("zIndex", 100);
+//     canv.bringForward(clonedText);
+//     canv.moveTo(object, clonedText);
+//     canv.renderAll();
+//   }
+//   canv.renderAll();
+// });
 
 function downloadJSON() {
   const json = JSON.stringify(canv.toJSON());
@@ -1762,78 +1730,78 @@ function downloadSVG() {
   URL.revokeObjectURL(url);
 }
 
-export1.addEventListener("click", async () => {
-  try {
-    saveData();
-    const pdfDoc = await PDFLib.PDFDocument.create();
-    const page = pdfDoc.addPage([450, 680]);
+// export1.addEventListener("click", async () => {
+//   try {
+//     saveData();
+//     const pdfDoc = await PDFLib.PDFDocument.create();
+//     const page = pdfDoc.addPage([450, 680]);
 
-    const imgData = canv.toDataURL("image/png");
+//     const imgData = canv.toDataURL("image/png");
 
-    const image = await pdfDoc.embedPng(imgData);
-    const { width, height } = image.scale(1);
-    page.drawImage(image, {
-      x: 0,
-      y: 0,
-      width,
-      height,
-      opacity: 1,
-    });
+//     const image = await pdfDoc.embedPng(imgData);
+//     const { width, height } = image.scale(1);
+//     page.drawImage(image, {
+//       x: 0,
+//       y: 0,
+//       width,
+//       height,
+//       opacity: 1,
+//     });
 
-    const pdfBytes = await pdfDoc.save();
-    const pdfBlob = new Blob([pdfBytes], {
-      type: "application/pdf",
-    });
-    const downloadLink = document.createElement("a");
-    if (typeof window.URL.createObjectURL === "undefined") {
-      if (typeof webkitURL !== "undefined") {
-        window.URL = webkitURL;
-      } else {
-        throw new Error("Your browser does not support downloading files.");
-      }
-    }
-    downloadLink.href = window.URL.createObjectURL(pdfBlob);
-    downloadLink.download = "output.pdf";
-    downloadLink.click();
-  } catch (error) {
-    console.error("Error:", error);
-  }
-});
+//     const pdfBytes = await pdfDoc.save();
+//     const pdfBlob = new Blob([pdfBytes], {
+//       type: "application/pdf",
+//     });
+//     const downloadLink = document.createElement("a");
+//     if (typeof window.URL.createObjectURL === "undefined") {
+//       if (typeof webkitURL !== "undefined") {
+//         window.URL = webkitURL;
+//       } else {
+//         throw new Error("Your browser does not support downloading files.");
+//       }
+//     }
+//     downloadLink.href = window.URL.createObjectURL(pdfBlob);
+//     downloadLink.download = "output.pdf";
+//     downloadLink.click();
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// });
 
-var imageInput = document.getElementById("imageInput");
+// var imageInput = document.getElementById("imageInput");
 
-imageInput.addEventListener("change", function (e) {
-  var files = e.target.files;
+// imageInput.addEventListener("change", function (e) {
+//   var files = e.target.files;
 
-  if (files) {
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        var img = new Image();
-        img.src = event.target.result;
-        img.onload = function () {
-          const desiredWidth = 200;
-          const desiredHeight = 200;
-          img.scaleX = desiredWidth / img.width;
-          img.scaleY = desiredHeight / img.height;
-          var fabricImage = new fabric.Image(img, {
-            left: 100,
-            top: 100,
-            width: img.width,
-            height: img.height,
-            scaleX: img.scaleX,
-            scaleY: img.scaleY,
-            zIndex: 50,
-          });
-          addImageToCanvas(fabricImage);
-          fabricImage.set("zIndex", 50), fabricImage.sendToBack();
-        };
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-});
+//   if (files) {
+//     for (var i = 0; i < files.length; i++) {
+//       var file = files[i];
+//       var reader = new FileReader();
+//       reader.onload = function (event) {
+//         var img = new Image();
+//         img.src = event.target.result;
+//         img.onload = function () {
+//           const desiredWidth = 200;
+//           const desiredHeight = 200;
+//           img.scaleX = desiredWidth / img.width;
+//           img.scaleY = desiredHeight / img.height;
+//           var fabricImage = new fabric.Image(img, {
+//             left: 100,
+//             top: 100,
+//             width: img.width,
+//             height: img.height,
+//             scaleX: img.scaleX,
+//             scaleY: img.scaleY,
+//             zIndex: 50,
+//           });
+//           addImageToCanvas(fabricImage);
+//           fabricImage.set("zIndex", 50), fabricImage.sendToBack();
+//         };
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   }
+// });
 
 function addImageToCanvas(fabricImage) {
   canv.add(fabricImage);
@@ -1858,88 +1826,7 @@ function generateCanvasImageFromJSON(jsonData) {
 function handleJSONImport() {
   var id = window.location.pathname.split("/")[2];
   const backElement = document.getElementById('back');
-  const backElement2 = document.getElementById('back2');
   if (backElement.checked) {
-    console.log("Back is checked.");
-    console.log("Get Back Json.");
-    $.ajax({
-      type: "GET",
-      url: `/get-json/back?id=${id}`,
-      success: function (response) {
-        if (response) {
-          if (response.data == null) {
-            if (canv.backgroundImage == null) {
-              var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-              // Load the background image onto the canvas
-              fabric.Image.fromURL(imageUrl, function (img) {
-                // Adjust the image size to fit the canvas
-                img.scaleToWidth(canv.width);
-                img.scaleToHeight(canv.height);
-                canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                  // Set options as needed
-                  originX: 'left',
-                  originY: 'top'
-                });
-              });
-            }
-
-            if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-              addGroom();
-              addBride();
-              addAnd();
-              AddEvent();
-              AddTime();
-              AddPlace();
-              AddCity();
-            }
-          }
-        } else {
-        }
-        const file = response.data;
-        fetch(`/Json/${file}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then(function (data) {
-            const jsonData = data;
-
-            if (jsonData.objects.length == 1) {
-              // Check if the canvas has no iText instances
-              if (canv.backgroundImage == null) {
-                var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-                // Load the background image onto the canvas
-                fabric.Image.fromURL(imageUrl, function (img) {
-                  // Adjust the image size to fit the canvas
-                  img.scaleToWidth(canv.width);
-                  img.scaleToHeight(canv.height);
-                  canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                    // Set options as needed
-                    originX: 'left',
-                    originY: 'top'
-                  });
-                });
-              }
-
-              if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-                addGroom();
-                addBride();
-                addAnd();
-                AddEvent();
-                AddTime();
-                AddPlace();
-                AddCity();
-              }
-            } else {
-              canv.clear();
-              canv.loadFromJSON(jsonData, function () {
-                canv.requestRenderAll();
-              });
-            }
-
-          });
-      },
-    });
-  } else if (backElement2.checked) {
     console.log("Back is checked.");
     console.log("Get Back Json.");
     $.ajax({
@@ -2171,64 +2058,64 @@ function handleSVGImport(event) {
   }
 }
 
-addsticker.addEventListener("click", () => {
-  sideshow.style.display == "none"
-    ? (sideshow.style.display = "inline-block")
-    : (sideshow.style.display = "none");
-});
-document.getElementById("imageInput1").addEventListener("change", function (e) {
-  var fileInput = e.target;
-  var file = fileInput.files[0];
-  if (file) {
-    var reader = new FileReader();
+// addsticker.addEventListener("click", () => {
+//   sideshow.style.display == "none"
+//     ? (sideshow.style.display = "inline-block")
+//     : (sideshow.style.display = "none");
+// });
+// document.getElementById("imageInput1").addEventListener("change", function (e) {
+//   var fileInput = e.target;
+//   var file = fileInput.files[0];
+//   if (file) {
+//     var reader = new FileReader();
 
-    reader.onload = function (e) {
-      var imgURL = e.target.result;
+//     reader.onload = function (e) {
+//       var imgURL = e.target.result;
 
-      fabric.Image.fromURL(imgURL, function (img) {
-        canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-          scaleX: canv.width / img.width,
-          scaleY: canv.height / img.height,
-        });
-      });
-    };
+//       fabric.Image.fromURL(imgURL, function (img) {
+//         canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
+//           scaleX: canv.width / img.width,
+//           scaleY: canv.height / img.height,
+//         });
+//       });
+//     };
 
-    reader.readAsDataURL(file);
-  }
-});
+//     reader.readAsDataURL(file);
+//   }
+// });
 
 var API_KEY = "39819870-b0f877f9b101769c1f36d42d9";
 var resultsDiv = document.getElementById("stickerList");
 
-document.getElementById("btnSearch").addEventListener("click", (ev) => {
-  ev.preventDefault();
-  var searchTerm = document.getElementById("searchInput").value;
-  var URL = `https://pixabay.com/api/?key=39819870-b0f877f9b101769c1f36d42d9&q= ${encodeURIComponent(
-    searchTerm
-  )}&safeSearch=true`;
-  var spinner = `<div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
-  </div>`;
-  document.getElementById("btnSearch").innerHTML = spinner;
-  // fetch(URL)
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     var html = "<br>";
-  //     if (data.totalHits > 0) {
-  //       data.hits.forEach(function (hit, i) {
-  //         html += `<img src="${hit.previewURL}" alt="${hit.tags}" width="150px" height="150px"  style='z-index: -10'  >`;
-  //         stickers.push({ src: hit.previewURL });
-  //       });
-  //       resultsDiv.innerHTML = html;
-  //     } else {
-  //       resultsDiv.innerHTML = "No hits";
-  //     }
-  //     document.getElementById("btnSearch").innerText = `Search`;
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error fetching data:", error);
-  //   });
-});
+// document.getElementById("btnSearch").addEventListener("click", (ev) => {
+//   ev.preventDefault();
+//   var searchTerm = document.getElementById("searchInput").value;
+//   var URL = `https://pixabay.com/api/?key=39819870-b0f877f9b101769c1f36d42d9&q= ${encodeURIComponent(
+//     searchTerm
+//   )}&safeSearch=true`;
+//   var spinner = `<div class="spinner-border text-primary" role="status">
+//   <span class="visually-hidden">Loading...</span>
+//   </div>`;
+//   document.getElementById("btnSearch").innerHTML = spinner;
+//   // fetch(URL)
+//   //   .then((response) => response.json())
+//   //   .then((data) => {
+//   //     var html = "<br>";
+//   //     if (data.totalHits > 0) {
+//   //       data.hits.forEach(function (hit, i) {
+//   //         html += `<img src="${hit.previewURL}" alt="${hit.tags}" width="150px" height="150px"  style='z-index: -10'  >`;
+//   //         stickers.push({ src: hit.previewURL });
+//   //       });
+//   //       resultsDiv.innerHTML = html;
+//   //     } else {
+//   //       resultsDiv.innerHTML = "No hits";
+//   //     }
+//   //     document.getElementById("btnSearch").innerText = `Search`;
+//   //   })
+//   //   .catch((error) => {
+//   //     console.error("Error fetching data:", error);
+//   //   });
+// });
 
 function stickerLoad(data) {
   var spinner = `<div class="spinner-border text-primary" role="status">
@@ -2260,20 +2147,20 @@ function show() {
   }
 }
 
-resultsDiv.addEventListener("click", (event) => {
-  if (event.target.tagName === "IMG") {
-    const clickedImgSrc = event.target.src;
+// resultsDiv.addEventListener("click", (event) => {
+//   if (event.target.tagName === "IMG") {
+//     const clickedImgSrc = event.target.src;
 
-    const clickedSticker = stickers.find(
-      (sticker) => sticker.src === clickedImgSrc
-    );
+//     const clickedSticker = stickers.find(
+//       (sticker) => sticker.src === clickedImgSrc
+//     );
 
-    if (clickedSticker) {
-      addStickerToCanvas(clickedSticker);
-      sideshow.style.display = "none";
-    }
-  }
-});
+//     if (clickedSticker) {
+//       addStickerToCanvas(clickedSticker);
+//       sideshow.style.display = "none";
+//     }
+//   }
+// });
 
 
 function addStickerToCanvas(sticker) {
@@ -2311,7 +2198,7 @@ function addStickerToCanvas(sticker) {
 let token = "";
 async function getapi() {
   // Storing response
-  const response = await fetch("/get-csrf-token");
+  const response = await fetch("get-csrfToken");
 
   // Storing data in form of JSON
   var data = await response.text();
@@ -2321,13 +2208,12 @@ async function getapi() {
 
 // Save Button
 var save1 = document.getElementById("save2");
-save1.addEventListener("click", function () {
-  saveData();
-});
+// save1.addEventListener("click", function () {
+//   saveData();
+// });
 
 function saveData() {
   const backElement = document.getElementById('back');
-  const backElement2 = document.getElementById('back2');
   if (backElement.checked) {
     console.log("Back is checked.Preview");
     const json = JSON.stringify(canv.toJSON());
@@ -2359,169 +2245,43 @@ function saveData() {
         console.error("Error:", error);
       });
     // saveSetting();
-  } else if (backElement2.checked) {
-    console.log("Back is checked.");
-    console.log("Get Back Json.");
-    $.ajax({
-      type: "GET",
-      url: `/get-json/back?id=${id}`,
-      success: function (response) {
-        if (response) {
-          if (response.data == null) {
-            if (canv.backgroundImage == null) {
-              var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-              // Load the background image onto the canvas
-              fabric.Image.fromURL(imageUrl, function (img) {
-                // Adjust the image size to fit the canvas
-                img.scaleToWidth(canv.width);
-                img.scaleToHeight(canv.height);
-                canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                  // Set options as needed
-                  originX: 'left',
-                  originY: 'top'
-                });
-              });
-            }
-
-            if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-              addGroom();
-              addBride();
-              addAnd();
-              AddEvent();
-              AddTime();
-              AddPlace();
-              AddCity();
-            }
-          }
-        } else {
-        }
-        const file = response.data;
-        fetch(`/Json/${file}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then(function (data) {
-            const jsonData = data;
-
-            if (jsonData.objects.length == 1) {
-              // Check if the canvas has no iText instances
-              if (canv.backgroundImage == null) {
-                var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-                // Load the background image onto the canvas
-                fabric.Image.fromURL(imageUrl, function (img) {
-                  // Adjust the image size to fit the canvas
-                  img.scaleToWidth(canv.width);
-                  img.scaleToHeight(canv.height);
-                  canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                    // Set options as needed
-                    originX: 'left',
-                    originY: 'top'
-                  });
-                });
-              }
-
-              if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-                addGroom();
-                addBride();
-                addAnd();
-                AddEvent();
-                AddTime();
-                AddPlace();
-                AddCity();
-              }
-            } else {
-              canv.clear();
-              canv.loadFromJSON(jsonData, function () {
-                canv.requestRenderAll();
-              });
-            }
-
-          });
-      },
-    });
   } else {
     console.log("Back is not checked.");
     const json = JSON.stringify(canv.toJSON());
-  const blob = new Blob([json], { type: "application/json" });
+    const blob = new Blob([json], { type: "application/json" });
 
 
-  const formData = new FormData();
-  var filename = window.location.pathname.split("/")[2] + ".json";
-  const dataUrl = canv.toDataURL("image/png");
-  
-  formData.append("json_blob", [json]);
-  formData.append("event_id", window.location.pathname.split("/")[2]);
-  formData.append("_token", this.token);
-  formData.append("data_url", dataUrl);
-  // Make an HTTP POST request to a Laravel route
-  fetch("/save-blob", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      if (response.ok) {
-        loadOldData2();
-      } else {
-        console.error("Failed to save Blob data on the server.");
-      }
+    const formData = new FormData();
+    var filename = window.location.pathname.split("/")[2] + ".json";
+    const dataUrl = canv.toDataURL("image/png");
+
+    formData.append("json_blob", [json]);
+    formData.append("event_id", window.location.pathname.split("/")[2]);
+    formData.append("_token", this.token);
+    formData.append("data_url", dataUrl);
+    // Make an HTTP POST request to a Laravel route
+    fetch("/save-blob", {
+      method: "POST",
+      body: formData,
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-  // saveSetting();
+      .then((response) => {
+        if (response.ok) {
+          loadOldData2();
+        } else {
+          console.error("Failed to save Blob data on the server.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    // saveSetting();
   }
 }
 
-function saveSetting() {
-  let rspvVal = "";
-  for (let index = 1; index <= 6; index++) {
-    if (document.getElementById("flexCheckChecked" + index).checked) {
-      rspvVal += "1,";
-    } else {
-      rspvVal += "0,";
-    }
-
-    AllBgname = document.getElementsByClassName("bgName");
-    var bgName;
-    for (let index = 0; index < AllBgname.length; index++) {
-      if (AllBgname[index].checked) {
-        bgName = AllBgname[index].value;
-      }
-    }
-  }
-  let msg = document.getElementById("msgTitle").value;
-  getapi();
-
-  $.ajax({
-    type: "POST",
-    url: "/event/card",
-    data: JSON.stringify({
-      _token: this.token,
-      event_id: window.location.pathname.split("/")[2],
-      rsvp: rspvVal.substring(0, 11),
-      msg: msg,
-      bgName: bgName,
-      envTitleFont: document.getElementById("font-selectorsetting").value,
-      envTitleColor: document.getElementById("colorPickersetting").value,
-      colorOut: document.getElementById("colorPickerenvelope_outsetting").value,
-      colorIn: document.getElementById("colorPickerenvelope_innersetting")
-        .value,
-    }),
-    dataType: "json",
-    contentType: "application/json",
-    success: function (msg) {
-      $("#exampleModal").modal("hide");
-    },
-    error: function (xhr, status, error) {
-      var err = eval("(" + xhr.responseText + ")");
-    },
-  });
-}
 
 function saveAll() {
 
   const backElement = document.getElementById('back');
-  const backElement2 = document.getElementById('back2');
   if (backElement.checked) {
     console.log("Back is checked.");
 
@@ -2581,86 +2341,6 @@ function saveAll() {
     // saveSetting();
 
 
-  }else if (backElement2.checked) {
-    console.log("Back is checked.");
-    console.log("Get Back Json.");
-    $.ajax({
-      type: "GET",
-      url: `/get-json/back?id=${id}`,
-      success: function (response) {
-        if (response) {
-          if (response.data == null) {
-            if (canv.backgroundImage == null) {
-              var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-              // Load the background image onto the canvas
-              fabric.Image.fromURL(imageUrl, function (img) {
-                // Adjust the image size to fit the canvas
-                img.scaleToWidth(canv.width);
-                img.scaleToHeight(canv.height);
-                canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                  // Set options as needed
-                  originX: 'left',
-                  originY: 'top'
-                });
-              });
-            }
-
-            if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-              addGroom();
-              addBride();
-              addAnd();
-              AddEvent();
-              AddTime();
-              AddPlace();
-              AddCity();
-            }
-          }
-        } else {
-        }
-        const file = response.data;
-        fetch(`/Json/${file}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then(function (data) {
-            const jsonData = data;
-
-            if (jsonData.objects.length == 1) {
-              // Check if the canvas has no iText instances
-              if (canv.backgroundImage == null) {
-                var imageUrl = "https://clickadmin.searchmarketingservices.online/eventcards/1690902229.jpeg";
-                // Load the background image onto the canvas
-                fabric.Image.fromURL(imageUrl, function (img) {
-                  // Adjust the image size to fit the canvas
-                  img.scaleToWidth(canv.width);
-                  img.scaleToHeight(canv.height);
-                  canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-                    // Set options as needed
-                    originX: 'left',
-                    originY: 'top'
-                  });
-                });
-              }
-
-              if (!Array.isArray(canv._iTextInstances) || canv._iTextInstances.length === 0) {
-                addGroom();
-                addBride();
-                addAnd();
-                AddEvent();
-                AddTime();
-                AddPlace();
-                AddCity();
-              }
-            } else {
-              canv.clear();
-              canv.loadFromJSON(jsonData, function () {
-                canv.requestRenderAll();
-              });
-            }
-
-          });
-      },
-    });
   } else {
     console.log("Back is not checked.");
 
@@ -2763,42 +2443,42 @@ function loadCardImagesFromDB(data) {
     img.style.zIndex = "-10";
 
     stickers1.push(img);
-    img.addEventListener("click", (event) => {
-      const clickedImgSrc = event.target.src;
-      // Use the 'src' attribute for comparison
-      const clickedSticker = stickers1.find(
-        (sticker) => sticker.src === clickedImgSrc
-      );
-      if (clickedSticker) {
-        addStickerToCanvas1(clickedSticker.src);
-      }
-    });
+    // img.addEventListener("click", (event) => {
+    //   const clickedImgSrc = event.target.src;
+    //   // Use the 'src' attribute for comparison
+    //   const clickedSticker = stickers1.find(
+    //     (sticker) => sticker.src === clickedImgSrc
+    //   );
+    //   if (clickedSticker) {
+    //     addStickerToCanvas1(clickedSticker.src);
+    //   }
+    // });
 
     colDiv.appendChild(img);
     imgDiv.appendChild(colDiv);
   }
 }
-for (let i = 0; i < stickers1.length; i++) {
-  const colDiv = document.createElement("div");
-  colDiv.className = "col-6 mb-3";
-  const img = document.createElement("img");
-  img.src = stickers1[i];
-  img.setAttribute("height", "200px");
-  img.setAttribute("width", "200px");
-  img.setAttribute("id", `img_${i}`);
-  img.style.zIndex = "-10";
-  img.addEventListener("click", (event) => {
-    const clickedImgSrc = event.target.src;
-    const clickedSticker = stickers1.find(
-      (sticker) => sticker === clickedImgSrc
-    );
-    if (clickedSticker) {
-      addStickerToCanvas(clickedSticker);
-    }
-  });
-  colDiv.appendChild(img);
-  imgDiv.appendChild(colDiv);
-}
+// for (let i = 0; i < stickers1.length; i++) {
+//   const colDiv = document.createElement("div");
+//   colDiv.className = "col-6 mb-3";
+//   const img = document.createElement("img");
+//   img.src = stickers1[i];
+//   img.setAttribute("height", "200px");
+//   img.setAttribute("width", "200px");
+//   img.setAttribute("id", `img_${i}`);
+//   img.style.zIndex = "-10";
+//   // img.addEventListener("click", (event) => {
+//   //   const clickedImgSrc = event.target.src;
+//   //   const clickedSticker = stickers1.find(
+//   //     (sticker) => sticker === clickedImgSrc
+//   //   );
+//   //   if (clickedSticker) {
+//   //     addStickerToCanvas(clickedSticker);
+//   //   }
+//   // });
+//   colDiv.appendChild(img);
+//   imgDiv.appendChild(colDiv);
+// }
 // function addStickerToCanvas(sticker) {
 //   fabric.Image.fromURL(sticker, (img) => {
 //     img.set({
@@ -2809,9 +2489,9 @@ for (let i = 0; i < stickers1.length; i++) {
 //   }, { crossOrigin: 'Anonymous' });
 // }
 
-can.addEventListener("click", function () {
-  sideshow.style.display = "none";
-});
+// can.addEventListener("click", function () {
+//   sideshow.style.display = "none";
+// });
 
 function addStickerToCanvas1(sticker) {
   fabric.Image.fromURL(
@@ -2839,11 +2519,9 @@ function GetAnimations() {
         if (response.card.two_sided == 1) {
           document.getElementById("two_sided").checked = true;
           document.getElementById("frontBackBox").style.display = "block";
-          document.getElementById("frontBackBox2").style.display = "block";
         } else {
           document.getElementById("two_sided").checked = false;
           document.getElementById("frontBackBox").style.display = "none";
-          document.getElementById("frontBackBox2").style.display = "none";
         }
         var HTML = document.getElementById("animationModalBody");
         HTML.innerHTML = "";
@@ -2916,26 +2594,26 @@ async function loadOldData2() {
 
     document.getElementById("msgTitle").value = data.msgTitle;
 
-    document.getElementById("deleteBtn").addEventListener("click", function () {
-      const obj = canv.getActiveObject();
-      if (obj) {
-        canv.remove(obj);
-        saveState();
-      }
-    });
+    // document.getElementById("deleteBtn").addEventListener("click", function () {
+    //   const obj = canv.getActiveObject();
+    //   if (obj) {
+    //     canv.remove(obj);
+    //     saveState();
+    //   }
+    // });
 
-    document
-      .getElementById("downloadBtn3")
-      .addEventListener("click", function () {
-        const dataUrl = canv.toDataURL({
-          format: "png",
-          multiplier: 2, // Increase multiplier for higher resolution
-        });
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = "canvas_image.png";
-        link.click();
-      });
+    // document
+    //   .getElementById("downloadBtn3")
+    //   .addEventListener("click", function () {
+    //     const dataUrl = canv.toDataURL({
+    //       format: "png",
+    //       multiplier: 2, // Increase multiplier for higher resolution
+    //     });
+    //     const link = document.createElement("a");
+    //     link.href = dataUrl;
+    //     link.download = "canvas_image.png";
+    //     link.click();
+    //   });
 
 
     canv.on("selection:created", function (options) {
@@ -3326,14 +3004,12 @@ function loadCanvasState() {
 function toggleTwoSided(element) {
   if (element.checked === true) {
     document.getElementById("frontBackBox").style.display = "block";
-    document.getElementById("frontBackBox2").style.display = "block";
   } else {
     document.getElementById("back").checked = false;
 
     console.log("unchecked two sided");
     handleJSONImport();
     document.getElementById("frontBackBox").style.display = "none";
-    document.getElementById("frontBackBox2").style.display = "none";
   }
   var formData = new FormData();
   formData.append('_token', this.token);

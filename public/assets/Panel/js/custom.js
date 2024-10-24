@@ -112,7 +112,7 @@ if (document.getElementById("toggleBtn")) {
 
 
     function toggleButtons() {
-        var checkBox = document.getElementById("two-sided-card");
+        var checkBox = document.getElementById("two_sided");
         var buttons = document.querySelector(".two-btn-align");
         
         // Toggle display based on checkbox status

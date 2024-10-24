@@ -141,6 +141,9 @@ Route::group(['as' => 'panel.'], function () {
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');
+            Route::post('{id}/invitation/setting/update', [InvitationController::class, 'settingUpdate'])->name('invitation.setting.update');
+            Route::get('get-card/{event_id}', [InvitationController::class, 'getCard'])->name('getCard');
+            Route::get('{id}/get-csrfToken', [InvitationController::class, 'csrfToken'])->name('invitation.getCsrftoken');
 
         });
     });
@@ -148,3 +151,12 @@ Route::group(['as' => 'panel.'], function () {
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
 Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');
 Route::post('store/images/{id}', [WebPageController::class, 'storeUsersImages'])->name('store.users.images');
+
+Route::get('get-json', [InvitationController::class, 'getJson'])->name('get.jsone');
+Route::get('get-json/back', [InvitationController::class, 'getJsonBack'])->name('get.jsone.back');
+Route::get('get-templates/{id}', [InvitationController::class, 'getTemplates'])->name('get.template');
+Route::post('/save-blob', [InvitationController::class, 'saveBlob'])->name('saveBlob');
+Route::post('/save-blob/back', [InvitationController::class, 'saveBlobBack'])->name('saveBlobBack');
+Route::get('/get-animations', [InvitationController::class, 'getAnimations'])->name('getAnimations');
+Route::get('/cardPreviewNew/{id}', [InvitationController::class, 'cardPreviewNew'])->name('cardPreviewNew');
+Route::get('get-csrf-token', [InvitationController::class, 'getCsrfToken'])->name('getCsrfToken');
