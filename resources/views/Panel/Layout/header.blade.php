@@ -35,7 +35,7 @@
                                         <li><a href="#"><img
                                                     src="{{ asset('assets/Panel/images/Gift-Suggestions.png') }}"
                                                     alt="">Gift Suggestions</a></li>
-                                        <li><a href="#"><img
+                                        <li><a href="{{ route('panel.event.invitation', ['id' => $eventId]) }}"><img
                                                     src="{{ asset('assets/Panel/images/Invitations.png') }}"
                                                     alt="">Invitations</a></li>
                                         <li><a href="#"><img

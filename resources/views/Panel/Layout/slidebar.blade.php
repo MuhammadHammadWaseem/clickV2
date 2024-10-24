@@ -14,7 +14,7 @@
             <li><a href="{{ route('panel.event.webpage', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Web-Page.png')}}" alt="">Web Page</a></li>
             <li><a href="{{ route('panel.event.meals', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Meals.png') }}" alt="">Meals</a></li>
             <li><a href="{{ route('panel.event.gift', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Gift-Suggestions.png')}}" alt="">Gift Suggestions</a></li>
-            <li><a href="#"><img src="{{ asset('assets/images/Invitations.png')}}" alt="">Invitations</a></li>
+            <li><a href="{{ route('panel.event.invitation', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Invitations.png')}}" alt="">Invitations</a></li>
             <li><a href="{{ route('panel.event.guests-list', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Guest-List.png')}}" alt="">Guest List</a></li>
             <li><a href="{{ route('panel.event.guests.index', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Tables-Management.png')}}" alt="">Tables  Management</a></li>
             <li><a href="{{ route('panel.event.photos', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Event-Photos.png')}}" alt="">Event Photos</a></li>
