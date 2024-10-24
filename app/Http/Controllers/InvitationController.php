@@ -303,4 +303,10 @@ class InvitationController extends Controller
         }
         return view($animation[0]->file_animation_preview, ["cardData" => $cardData, "eventData" => $eventData]);
     }
+
+    public function getTemplateWithId($id)
+    {
+        $templates = DB::table('templates')->where('id', $id)->get();
+        return response()->json(['data' => $templates]);
+    }
 }

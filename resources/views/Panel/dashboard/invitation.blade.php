@@ -1,6 +1,6 @@
 @extends('Panel.layout.master')
 <style>
-    .font-color-styling input#favcolor1 {
+    .font-color-styling input#colorPicker {
         padding: 0 !important;
         width: 200px;
         height: 50px;
@@ -77,6 +77,39 @@
     #uploadImage {
         display: none;
     }
+
+
+    .two-things-align {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 20px;
+    }
+
+    .two-things-align div#txtTool .row img {
+        width: 100%;
+        height: 300px;
+    }
+
+    .two-things-align .two-btn-align {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .two-things-align .two-btn-align button {
+        margin: 0 !important;
+    }
+
+    .two-things-align div#txtTool {
+        height: 630px;
+        overflow: hidden;
+        overflow-y: scroll;
+        padding-right: 10px;
+        padding-top: 0px;
+        margin-top: 15px;
+    }
 </style>
 @section('content')
     @php
@@ -121,7 +154,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" id="undoBtn">
+                        <a href="#" id="undoBtn" onclick="undo()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -134,7 +167,7 @@
 
 
                     <div class="card-styling-box">
-                        <a href="#" id="redoBtn">
+                        <a href="#" id="redoBtn" onclick="redo()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -146,7 +179,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="sidebarbackaddimg()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -161,7 +194,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="addTemplate()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -173,7 +206,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="showTxtTool()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -185,7 +218,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="show()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -216,7 +249,7 @@
                         </a>
 
                         <!-- Hidden file input -->
-                        <input type="file" id="uploadImage" onchange="uploadImageInCanvas(event)" accept="image/*">
+                        <input type="file" id="uploadImage" accept="image/*">
 
                     </div>
 
@@ -309,7 +342,7 @@
                         <div class="editing-options-box">
 
                             <div class="two-thing-align">
-                                <h3>Editing Options</h3>
+                                <h3 id="dynamicHeading">Editing Options</h3>
                                 <div class="hide-and-show-box">
                                     <div class="input-check-box">
                                         <input type="checkbox" id="two_sided" class="check_box_style" name="two_sided"
@@ -333,343 +366,506 @@
                                 </div>
                             </div>
 
-                            <form action="">
-                                <div class="input-box">
-                                    <label for="">Enter Text</label>
-                                    <input type="text" placeholder="Text">
-                                </div>
-                                <div class="input-box">
-                                    <label for="font-styling">Font Styling</label>
-                                    <select id="font-selector" onchange="changeFontStyle(this)" class="fontSelector1">
-                                        <option value="arial" style="font-family: arial">Arial</option>
-                                        <option value="Cinzel, serif" style="font-family: 'Cinzel', serif">Cinzel</option>
-                                        <option value="Sackers, sans-serif" style="font-family: 'Sackers', sans-serif">
-                                            Sackers Gothic
-                                        </option>
-                                        <option value="Rama, sans-serif" style="font-family: 'Rama', sans-serif">Rama
-                                            Gothic</option>
-                                        <option value="CircularSpotify, sans-serif"
-                                            style="font-family: 'CircularSpotify', sans-serif">
-                                            CircularSpotify</option>
-                                        <option value="Anta, sans-serif" style="font-family: Anta;">Anta</option>
-                                        <option value="calig, Arial, sans-serif"
-                                            style="font-family: 'calig', Arial, sans-serif;">calig
-                                        </option>
-                                        <option value="BLOODY, sans-serif" style="font-family: 'BLOODY', sans-serif;">
-                                            BLOODY</option>
-                                        <option value="alsscrp, sans-serif" style="font-family: 'alsscrp', sans-serif;">
-                                            alsscrp</option>
-                                        <option value="Raleway-Thin, sans-serif"
-                                            style="font-family: 'Raleway-Thin', sans-serif;">
-                                            Raleway Regular</option>
-                                        <option value="Baskervville-Regular, sans-serif"
-                                            style="font-family: 'Baskervville-Regular', sans-serif;">Baskervville-Regular
-                                        </option>
-                                        <!-- <option value="GreatVibes-Regular, sans-serif" style="font-family: 'GreatVibes-Regular', sans-serif;">GreatVibes-Regular</option> -->
-                                        <option value="califr, sans-serif" style="font-family: 'califr', sans-serif;">
-                                            Califr</option>
-                                        <option value="califrragular, sans-serif"
-                                            style="font-family: 'califrragular', sans-serif;">
-                                            Califr Regular</option>
-                                        <option value="MiltonOneBold, sans-serif"
-                                            style="font-family: 'MiltonOneBold', sans-serif;">
-                                            MiltonOneBold</option>
-                                        <option value="CinzelDecorativeBold, sans-serif"
-                                            style="font-family: 'CinzelDecorativeBold', sans-serif;">Cinzel Decorative Bold
-                                        </option>
-                                        <option value="CinzelDecorativeRegular, sans-serif"
-                                            style="font-family: 'CinzelDecorativeRegular', sans-serif;">Cinzel Decorative
-                                            Regular
-                                        </option>
-                                        <option value="Agraham, sans-serif" style="font-family: 'Agraham', sans-serif;">
-                                            Agraham</option>
-                                        <option value="GloriousCopperDEMO, sans-serif"
-                                            style="font-family: 'GloriousCopperDEMO', sans-serif;">GloriousCopperDEMO
-                                        </option>
-                                        <option value="MettaDahlia, sans-serif"
-                                            style="font-family: 'MettaDahlia', sans-serif;">
-                                            MettaDahlia</option>
-                                        <option value="Darleston" style="font-family: 'Darleston';">Darleston</option>
-                                        <option value="GoogleMonsieurLaDoulaiseRegular"
-                                            style="font-family:GoogleMonsieurLaDoulaiseRegular">
-                                            GoogleMonsieurLaDoulaiseRegular</option>
-                                        <option value="DistantStroke, sans-serif"
-                                            style="font-family: 'DistantStroke', sans-serif;">
-                                            Distant_Stroke</option>
-                                        <option value="Vanity-Light, sans-serif"
-                                            style="font-family: 'Vanity-Light', sans-serif;">
-                                            Vanity-Light</option>
-                                        <option value="Amoun, sans-serif" style="font-family: 'Amoun', sans-serif;">Amoun
-                                        </option>
-                                        <option value="Moonflowers, sans-serif"
-                                            style="font-family: 'Moonflowers', sans-serif;">
-                                            Moonflowers</option>
-                                        <option value="ScarlettBusiat, sans-serif"
-                                            style="font-family: 'ScarlettBusiat', sans-serif;">
-                                            ScarlettBusiat</option>
-                                        <option value="MontserratLight, sans-serif"
-                                            style="font-family: 'MontserratLight', sans-serif;">
-                                            Montserrat Light</option>
-                                        <option value="BrockScript, sans-serif"
-                                            style="font-family: 'BrockScript', sans-serif;">
-                                            BrockScript</option>
+                            <div id="editor">
+
+                                {{-- Text Editor --}}
+                                <div class="sidebaraddtext">
+                                    <form action="">
+                                        <div class="input-box">
+                                            <label for="">Enter Text</label>
+                                            <input type="text" placeholder="Text">
+                                        </div>
+                                        <div class="input-box">
+                                            <label for="font-styling">Font Styling</label>
+                                            <select id="font-selector2" onchange="changeFontStyle(this)"
+                                                class="fontSelector1">
+                                                <option value="arial" style="font-family: arial">Arial</option>
+                                                <option value="Cinzel, serif" style="font-family: 'Cinzel', serif">Cinzel
+                                                </option>
+                                                <option value="Sackers, sans-serif"
+                                                    style="font-family: 'Sackers', sans-serif">
+                                                    Sackers Gothic
+                                                </option>
+                                                <option value="Rama, sans-serif" style="font-family: 'Rama', sans-serif">
+                                                    Rama
+                                                    Gothic</option>
+                                                <option value="CircularSpotify, sans-serif"
+                                                    style="font-family: 'CircularSpotify', sans-serif">
+                                                    CircularSpotify</option>
+                                                <option value="Anta, sans-serif" style="font-family: Anta;">Anta</option>
+                                                <option value="calig, Arial, sans-serif"
+                                                    style="font-family: 'calig', Arial, sans-serif;">calig
+                                                </option>
+                                                <option value="BLOODY, sans-serif"
+                                                    style="font-family: 'BLOODY', sans-serif;">
+                                                    BLOODY</option>
+                                                <option value="alsscrp, sans-serif"
+                                                    style="font-family: 'alsscrp', sans-serif;">
+                                                    alsscrp</option>
+                                                <option value="Raleway-Thin, sans-serif"
+                                                    style="font-family: 'Raleway-Thin', sans-serif;">
+                                                    Raleway Regular</option>
+                                                <option value="Baskervville-Regular, sans-serif"
+                                                    style="font-family: 'Baskervville-Regular', sans-serif;">
+                                                    Baskervville-Regular
+                                                </option>
+                                                <!-- <option value="GreatVibes-Regular, sans-serif" style="font-family: 'GreatVibes-Regular', sans-serif;">GreatVibes-Regular</option> -->
+                                                <option value="califr, sans-serif"
+                                                    style="font-family: 'califr', sans-serif;">
+                                                    Califr</option>
+                                                <option value="califrragular, sans-serif"
+                                                    style="font-family: 'califrragular', sans-serif;">
+                                                    Califr Regular</option>
+                                                <option value="MiltonOneBold, sans-serif"
+                                                    style="font-family: 'MiltonOneBold', sans-serif;">
+                                                    MiltonOneBold</option>
+                                                <option value="CinzelDecorativeBold, sans-serif"
+                                                    style="font-family: 'CinzelDecorativeBold', sans-serif;">Cinzel
+                                                    Decorative
+                                                    Bold
+                                                </option>
+                                                <option value="CinzelDecorativeRegular, sans-serif"
+                                                    style="font-family: 'CinzelDecorativeRegular', sans-serif;">Cinzel
+                                                    Decorative
+                                                    Regular
+                                                </option>
+                                                <option value="Agraham, sans-serif"
+                                                    style="font-family: 'Agraham', sans-serif;">
+                                                    Agraham</option>
+                                                <option value="GloriousCopperDEMO, sans-serif"
+                                                    style="font-family: 'GloriousCopperDEMO', sans-serif;">
+                                                    GloriousCopperDEMO
+                                                </option>
+                                                <option value="MettaDahlia, sans-serif"
+                                                    style="font-family: 'MettaDahlia', sans-serif;">
+                                                    MettaDahlia</option>
+                                                <option value="Darleston" style="font-family: 'Darleston';">Darleston
+                                                </option>
+                                                <option value="GoogleMonsieurLaDoulaiseRegular"
+                                                    style="font-family:GoogleMonsieurLaDoulaiseRegular">
+                                                    GoogleMonsieurLaDoulaiseRegular</option>
+                                                <option value="DistantStroke, sans-serif"
+                                                    style="font-family: 'DistantStroke', sans-serif;">
+                                                    Distant_Stroke</option>
+                                                <option value="Vanity-Light, sans-serif"
+                                                    style="font-family: 'Vanity-Light', sans-serif;">
+                                                    Vanity-Light</option>
+                                                <option value="Amoun, sans-serif"
+                                                    style="font-family: 'Amoun', sans-serif;">
+                                                    Amoun
+                                                </option>
+                                                <option value="Moonflowers, sans-serif"
+                                                    style="font-family: 'Moonflowers', sans-serif;">
+                                                    Moonflowers</option>
+                                                <option value="ScarlettBusiat, sans-serif"
+                                                    style="font-family: 'ScarlettBusiat', sans-serif;">
+                                                    ScarlettBusiat</option>
+                                                <option value="MontserratLight, sans-serif"
+                                                    style="font-family: 'MontserratLight', sans-serif;">
+                                                    Montserrat Light</option>
+                                                <option value="BrockScript, sans-serif"
+                                                    style="font-family: 'BrockScript', sans-serif;">
+                                                    BrockScript</option>
 
 
-                                        <option value="jandacelebrationscript, sans-serif"
-                                            style="font-family: 'jandacelebrationscript', sans-serif;">Janda Celebration
-                                            Script</option>
-                                        <option value="anydore, sans-serif" style="font-family: 'anydore', sans-serif;">
-                                            Anydore</option>
-                                        <option value="creattiondemo, sans-serif"
-                                            style="font-family: 'creattiondemo', sans-serif;">
-                                            Creattion Demo</option>
-                                        <option value="candy, sans-serif" style="font-family: 'candy', sans-serif;">Candy
-                                        </option>
-                                        <option value="weddingBells, sans-serif"
-                                            style="font-family: 'weddingBells', sans-serif;">
-                                            Wedding bells</option>
-                                        <option value="Blacksword, sans-serif"
-                                            style="font-family: 'Blacksword', sans-serif;">Blacksword
-                                        </option>
-                                        <option value="GabyDemo, sans-serif" style="font-family: 'GabyDemo', sans-serif;">
-                                            Gaby Demo
-                                        </option>
-                                        <option value="arbuckle-fat, sans-serif"
-                                            style="font-family: 'arbuckle-fat', sans-serif;">
-                                            Arbuckle Fat</option>
-                                        <option value="drSugiyamaRegular, sans-serif"
-                                            style="font-family: 'drSugiyamaRegular', sans-serif;">Dr Sugiyama Regular
-                                        </option>
-                                        <option value="CasablancaNoirPersonalUse, sans-serif"
-                                            style="font-family: 'CasablancaNoirPersonalUse', sans-serif;">Casablanca Noir
-                                            Personal Use
-                                        </option>
-                                        <option value="RegistaItalic, sans-serif"
-                                            style="font-family: 'RegistaItalic', sans-serif;">
-                                            Regista Italic</option>
-                                        <option value="CoalhandLueTRIAL, sans-serif"
-                                            style="font-family: 'CoalhandLueTRIAL', sans-serif;">Coalhand Lue</option>
-                                        <option value="MagentaRose, sans-serif"
-                                            style="font-family: 'MagentaRose', sans-serif;">Magenta
-                                            Rose</option>
-                                        <option value="Vonique92_D, sans-serif"
-                                            style="font-family: 'Vonique92_D', sans-serif;">
-                                            Vonique92_D</option>
-                                        <option value="VanityBoldNarrow, sans-serif"
-                                            style="font-family: 'VanityBoldNarrow', sans-serif;">VanityBoldNarrow</option>
-                                        <option value="KugileDemo, sans-serif"
-                                            style="font-family: 'KugileDemo', sans-serif;">KugileDemo
-                                        </option>
-                                        <option value="LovelyCoffee, sans-serif"
-                                            style="font-family: 'LovelyCoffee', sans-serif;">lovely
-                                            Coffe</option>
-                                        <option value="GreatVibesRegular, sans-serif"
-                                            style="font-family: 'GreatVibesRegular', sans-serif;">GreatVibes Regular
-                                        </option>
-                                        <option value="Atheniademo, sans-serif"
-                                            style="font-family: 'Atheniademo', sans-serif;">
-                                            Atheniademo</option>
+                                                <option value="jandacelebrationscript, sans-serif"
+                                                    style="font-family: 'jandacelebrationscript', sans-serif;">Janda
+                                                    Celebration
+                                                    Script</option>
+                                                <option value="anydore, sans-serif"
+                                                    style="font-family: 'anydore', sans-serif;">
+                                                    Anydore</option>
+                                                <option value="creattiondemo, sans-serif"
+                                                    style="font-family: 'creattiondemo', sans-serif;">
+                                                    Creattion Demo</option>
+                                                <option value="candy, sans-serif"
+                                                    style="font-family: 'candy', sans-serif;">
+                                                    Candy
+                                                </option>
+                                                <option value="weddingBells, sans-serif"
+                                                    style="font-family: 'weddingBells', sans-serif;">
+                                                    Wedding bells</option>
+                                                <option value="Blacksword, sans-serif"
+                                                    style="font-family: 'Blacksword', sans-serif;">Blacksword
+                                                </option>
+                                                <option value="GabyDemo, sans-serif"
+                                                    style="font-family: 'GabyDemo', sans-serif;">
+                                                    Gaby Demo
+                                                </option>
+                                                <option value="arbuckle-fat, sans-serif"
+                                                    style="font-family: 'arbuckle-fat', sans-serif;">
+                                                    Arbuckle Fat</option>
+                                                <option value="drSugiyamaRegular, sans-serif"
+                                                    style="font-family: 'drSugiyamaRegular', sans-serif;">Dr Sugiyama
+                                                    Regular
+                                                </option>
+                                                <option value="CasablancaNoirPersonalUse, sans-serif"
+                                                    style="font-family: 'CasablancaNoirPersonalUse', sans-serif;">
+                                                    Casablanca
+                                                    Noir
+                                                    Personal Use
+                                                </option>
+                                                <option value="RegistaItalic, sans-serif"
+                                                    style="font-family: 'RegistaItalic', sans-serif;">
+                                                    Regista Italic</option>
+                                                <option value="CoalhandLueTRIAL, sans-serif"
+                                                    style="font-family: 'CoalhandLueTRIAL', sans-serif;">Coalhand Lue
+                                                </option>
+                                                <option value="MagentaRose, sans-serif"
+                                                    style="font-family: 'MagentaRose', sans-serif;">Magenta
+                                                    Rose</option>
+                                                <option value="Vonique92_D, sans-serif"
+                                                    style="font-family: 'Vonique92_D', sans-serif;">
+                                                    Vonique92_D</option>
+                                                <option value="VanityBoldNarrow, sans-serif"
+                                                    style="font-family: 'VanityBoldNarrow', sans-serif;">VanityBoldNarrow
+                                                </option>
+                                                <option value="KugileDemo, sans-serif"
+                                                    style="font-family: 'KugileDemo', sans-serif;">KugileDemo
+                                                </option>
+                                                <option value="LovelyCoffee, sans-serif"
+                                                    style="font-family: 'LovelyCoffee', sans-serif;">lovely
+                                                    Coffe</option>
+                                                <option value="GreatVibesRegular, sans-serif"
+                                                    style="font-family: 'GreatVibesRegular', sans-serif;">GreatVibes
+                                                    Regular
+                                                </option>
+                                                <option value="Atheniademo, sans-serif"
+                                                    style="font-family: 'Atheniademo', sans-serif;">
+                                                    Atheniademo</option>
 
-                                        <option value="Evilof, sans-serif" style="font-family: 'Evilof', sans-serif;">
-                                            Evilof</option>
-                                        <option value="Landliebe, sans-serif"
-                                            style="font-family: 'Landliebe', sans-serif;">Landliebe
-                                        </option>
-                                        <option value="GREENFUZ, sans-serif" style="font-family: 'GREENFUZ', sans-serif;">
-                                            GREENFUZ
-                                        </option>
-                                        <option value="Headhunter-Regular, sans-serif"
-                                            style="font-family: 'Headhunter-Regular', sans-serif;">Headhunter Regular
-                                        </option>
-                                        <option value="victoria, sans-serif" style="font-family: 'victoria', sans-serif;">
-                                            victoria
-                                        </option>
-                                        <option value="Rock Salt, cursive" style="font-family: 'Rock Salt', cursive;">Rock
-                                            Salt</option>
-                                        <option value="playball, cursive" style="font-family: 'Playball', cursive;">
-                                            Playball</option>
-                                        <option value="Rammetto One, sans-serif"
-                                            style="font-family: 'Rammetto One', sans-serif;">
-                                            Playball</option>
-                                        <option value="Bungee Shade, sans-serif"
-                                            style="font-family: 'Bungee Shade', sans-serif;">Bungee
-                                            Shade</option>
-                                        <option value="HenryMorganHand, sans-serif"
-                                            style="font-family: 'HenryMorganHand', sans-serif;">
-                                            Henry MorganHand</option>
-                                        <option value="romeo, sans-serif" style="font-family: 'romeo', sans-serif;">Romeo
-                                        </option>
-                                        <option value="XTRAFLEX, sans-serif" style="font-family: 'XTRAFLEX', sans-serif;">
-                                            XTRAFLEX
-                                        </option>
-                                        <option value="DancingScript-Regular, sans-serif"
-                                            style="font-family: 'DancingScript-Regular', sans-serif;">DancingScript Regular
-                                        </option>
-                                        <option value="MountainsofChristmas, sans-serif"
-                                            style="font-family: 'MountainsofChristmas', sans-serif;">Mountains of Christmas
-                                        </option>
-                                        <option value="Kingthings_Foundation, sans-serif"
-                                            style="font-family: 'Kingthings_Foundation', sans-serif;">Kingthings_Foundation
-                                        </option>
-                                        <option value="Royalacid_o, sans-serif"
-                                            style="font-family: 'Royalacid_o', sans-serif;">
-                                            Royalacid_o</option>
-                                        <option value="Royalacid, sans-serif"
-                                            style="font-family: 'Royalacid', sans-serif;">Royalacid
-                                        </option>
-                                        <option value="OrotundCaps, sans-serif"
-                                            style="font-family: 'OrotundCaps', sans-serif;">
-                                            OrotundCaps</option>
-                                        <option value="qurve, sans-serif" style="font-family: 'qurve', sans-serif;">qurve
-                                        </option>
-                                        <option value="dephun2, sans-serif" style="font-family: 'dephun2', sans-serif;">
-                                            dephun2</option>
-                                        <option value="mysteron, sans-serif" style="font-family: 'mysteron', sans-serif;">
-                                            mysteron
-                                        </option>
-                                        <option value="LETSEAT, sans-serif" style="font-family: 'LETSEAT', sans-serif;">
-                                            LETSEAT</option>
-                                        <option value="energydimension, sans-serif"
-                                            style="font-family: 'energydimension', sans-serif;">
-                                            Energy Dimension</option>
-                                        <!-- <option value="Popups, sans-serif" style="font-family: 'Popups', sans-serif;">Popups</option> -->
-                                        <option value="dipedthick, sans-serif"
-                                            style="font-family: 'dipedthick', sans-serif;">dipedthick
-                                        </option>
+                                                <option value="Evilof, sans-serif"
+                                                    style="font-family: 'Evilof', sans-serif;">
+                                                    Evilof</option>
+                                                <option value="Landliebe, sans-serif"
+                                                    style="font-family: 'Landliebe', sans-serif;">Landliebe
+                                                </option>
+                                                <option value="GREENFUZ, sans-serif"
+                                                    style="font-family: 'GREENFUZ', sans-serif;">
+                                                    GREENFUZ
+                                                </option>
+                                                <option value="Headhunter-Regular, sans-serif"
+                                                    style="font-family: 'Headhunter-Regular', sans-serif;">Headhunter
+                                                    Regular
+                                                </option>
+                                                <option value="victoria, sans-serif"
+                                                    style="font-family: 'victoria', sans-serif;">
+                                                    victoria
+                                                </option>
+                                                <option value="Rock Salt, cursive"
+                                                    style="font-family: 'Rock Salt', cursive;">
+                                                    Rock
+                                                    Salt</option>
+                                                <option value="playball, cursive"
+                                                    style="font-family: 'Playball', cursive;">
+                                                    Playball</option>
+                                                <option value="Rammetto One, sans-serif"
+                                                    style="font-family: 'Rammetto One', sans-serif;">
+                                                    Playball</option>
+                                                <option value="Bungee Shade, sans-serif"
+                                                    style="font-family: 'Bungee Shade', sans-serif;">Bungee
+                                                    Shade</option>
+                                                <option value="HenryMorganHand, sans-serif"
+                                                    style="font-family: 'HenryMorganHand', sans-serif;">
+                                                    Henry MorganHand</option>
+                                                <option value="romeo, sans-serif"
+                                                    style="font-family: 'romeo', sans-serif;">
+                                                    Romeo
+                                                </option>
+                                                <option value="XTRAFLEX, sans-serif"
+                                                    style="font-family: 'XTRAFLEX', sans-serif;">
+                                                    XTRAFLEX
+                                                </option>
+                                                <option value="DancingScript-Regular, sans-serif"
+                                                    style="font-family: 'DancingScript-Regular', sans-serif;">DancingScript
+                                                    Regular
+                                                </option>
+                                                <option value="MountainsofChristmas, sans-serif"
+                                                    style="font-family: 'MountainsofChristmas', sans-serif;">Mountains of
+                                                    Christmas
+                                                </option>
+                                                <option value="Kingthings_Foundation, sans-serif"
+                                                    style="font-family: 'Kingthings_Foundation', sans-serif;">
+                                                    Kingthings_Foundation
+                                                </option>
+                                                <option value="Royalacid_o, sans-serif"
+                                                    style="font-family: 'Royalacid_o', sans-serif;">
+                                                    Royalacid_o</option>
+                                                <option value="Royalacid, sans-serif"
+                                                    style="font-family: 'Royalacid', sans-serif;">Royalacid
+                                                </option>
+                                                <option value="OrotundCaps, sans-serif"
+                                                    style="font-family: 'OrotundCaps', sans-serif;">
+                                                    OrotundCaps</option>
+                                                <option value="qurve, sans-serif"
+                                                    style="font-family: 'qurve', sans-serif;">
+                                                    qurve
+                                                </option>
+                                                <option value="dephun2, sans-serif"
+                                                    style="font-family: 'dephun2', sans-serif;">
+                                                    dephun2</option>
+                                                <option value="mysteron, sans-serif"
+                                                    style="font-family: 'mysteron', sans-serif;">
+                                                    mysteron
+                                                </option>
+                                                <option value="LETSEAT, sans-serif"
+                                                    style="font-family: 'LETSEAT', sans-serif;">
+                                                    LETSEAT</option>
+                                                <option value="energydimension, sans-serif"
+                                                    style="font-family: 'energydimension', sans-serif;">
+                                                    Energy Dimension</option>
+                                                <!-- <option value="Popups, sans-serif" style="font-family: 'Popups', sans-serif;">Popups</option> -->
+                                                <option value="dipedthick, sans-serif"
+                                                    style="font-family: 'dipedthick', sans-serif;">dipedthick
+                                                </option>
 
-                                        <option value="EB Garamond, serif" style="font-family: EB Garamond, serif">EB
-                                            Garamond</option>
-                                        <option value="Courier New, monospace"
-                                            style="font-family: Courier New, monospace">Courier New
-                                        </option>
-                                        <option value="Lobster, sans-serif" style="font-family: Lobster;">Lobster</option>
-                                        <option value="Lucida Console, monospace"
-                                            style="font-family: Lucida Console, monospace">Lucida
-                                            Console</option>
-                                        <option value="Montserrat, sans-serif"
-                                            style="font-family: Montserrat, sans-serif">Montserrat
-                                        </option>
-                                        <option value="Pacifico, cursive" style="font-family: Pacifico, cursive">Pacifico
-                                        </option>
-                                        <option value="PT Sans, sans-serif" style="font-family: PT Sans, sans-serif">PT
-                                            Sans</option>
-                                        <option value="Quicksand, sans-serif" style="font-family: Quicksand, sans-serif">
-                                            Quicksand
-                                        </option>
-                                        <option value="Roboto, sans-serif" style="font-family: Roboto, sans-serif">Roboto
-                                        </option>
-                                        <option value="Source Code Pro, monospace"
-                                            style="font-family: Source Code Pro, monospace">
-                                            Source Code Pro</option>
-                                        <option value="Ubuntu, sans-serif" style="font-family: Ubuntu, sans-serif">Ubuntu
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="text-styling-things">
-                                    <ul>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M21.3263 14.025C22.0824 13.0525 22.4951 11.8569 22.5 10.625C22.5 7.52375 19.9762 5 16.875 5H7.5V23.75H17.5C20.6012 23.75 23.125 21.2262 23.125 18.125C23.1233 17.3546 22.9627 16.5929 22.6532 15.8874C22.3437 15.1819 21.892 14.5479 21.3263 14.025ZM16.875 8.75C17.9088 8.75 18.75 9.59125 18.75 10.625C18.75 11.6588 17.9088 12.5 16.875 12.5H11.25V8.75H16.875ZM17.5 20H11.25V16.25H17.5C18.5338 16.25 19.375 17.0912 19.375 18.125C19.375 19.1588 18.5338 20 17.5 20Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M23.75 8.75V5H11.25V8.75H14.835L11.265 21.25H6.25V25H18.75V21.25H15.165L18.735 8.75H23.75Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M8.44774 10.9475L6.68024 9.18C5.66737 10.1937 4.88278 11.4122 4.37899 12.7538L6.72024 13.63C7.09868 12.6231 7.68762 11.7086 8.44774 10.9475ZM23.7502 16.2487C23.7543 14.9352 23.4973 13.6339 22.9943 12.4205C22.4914 11.207 21.7524 10.1055 20.8202 9.18C19.2542 7.60603 17.2043 6.60443 15.0002 6.33625V2.5L8.75024 7.5L15.0002 12.5V8.86125C16.5363 9.11492 17.9538 9.84469 19.0527 10.9475C19.7517 11.642 20.3058 12.4682 20.683 13.3785C21.0602 14.2887 21.253 15.2647 21.2502 16.25V16.2525C21.2502 16.665 21.209 17.0713 21.1427 17.4738C21.134 17.5275 21.129 17.5837 21.119 17.6375C20.8971 18.7902 20.4101 19.8755 19.6965 20.8075C19.4965 21.0687 19.2827 21.3225 19.0515 21.5538C18.7691 21.833 18.4648 22.0893 18.1415 22.32C17.2938 22.9406 16.3235 23.3732 15.2952 23.5888C15.1177 23.6263 14.939 23.6513 14.7577 23.675C14.6802 23.6863 14.6052 23.7012 14.5277 23.7087C13.735 23.79 12.9345 23.7465 12.1552 23.58L11.6252 26.0238C12.6655 26.2468 13.7345 26.3041 14.7927 26.1937C14.879 26.185 14.9652 26.1675 15.0515 26.1562C15.3077 26.1237 15.5627 26.0862 15.814 26.0337L15.8802 26.0225L15.879 26.0162C16.8125 25.8162 17.7119 25.4814 18.549 25.0225L18.5502 25.0237L18.5852 25C19.0269 24.7535 19.449 24.4736 19.8477 24.1625C20.1852 23.9012 20.5127 23.625 20.819 23.3188C21.129 23.01 21.4065 22.6775 21.6702 22.3375C21.6965 22.3025 21.7315 22.2712 21.7577 22.2362L21.7502 22.2312C22.3238 21.4695 22.784 20.6287 23.1165 19.735L23.1265 19.7388C23.1627 19.6413 23.189 19.5412 23.2215 19.4425C23.2677 19.305 23.3152 19.1662 23.3552 19.0262C23.4052 18.8512 23.4465 18.675 23.4865 18.4975C23.514 18.3738 23.5465 18.2538 23.569 18.1288C23.609 17.915 23.639 17.6988 23.664 17.4838C23.6765 17.3888 23.6927 17.2963 23.7015 17.2C23.7302 16.8888 23.7477 16.575 23.7477 16.2587C23.7502 16.2562 23.7502 16.2537 23.7502 16.2487ZM7.74649 20.7463L5.74649 22.2475C6.60663 23.3927 7.70148 24.3409 8.95774 25.0288L10.159 22.8362C9.21457 22.3202 8.39189 21.6075 7.74649 20.7463ZM6.25024 16.25C6.25024 16.0688 6.25649 15.8913 6.26899 15.7138L3.77649 15.535C3.6719 16.9671 3.87785 18.4049 4.38024 19.75L6.72149 18.8737C6.40833 18.0345 6.24871 17.1458 6.25024 16.25Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M11.25 26.25H26.25V3.75H3.75V26.25H11.25ZM23.75 21.25V23.75H16.25V16.25H23.75V21.25ZM18.75 6.25H23.75V13.75H16.25V6.25H18.75ZM6.25 8.75V6.25H13.75V13.75H6.25V8.75ZM6.25 23.75V16.25H13.75V23.75H6.25Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75ZM6.25 6.25H17.5L17.4963 17.5H6.25V6.25Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20ZM23.7463 23.75H12.5V12.5H23.75L23.7463 23.75Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#" id="deleteBtn"><svg width="30" height="30"
-                                                    viewBox="0 0 30 30" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M6.25 25C6.25 25.663 6.51339 26.2989 6.98223 26.7678C7.45107 27.2366 8.08696 27.5 8.75 27.5H21.25C21.913 27.5 22.5489 27.2366 23.0178 26.7678C23.4866 26.2989 23.75 25.663 23.75 25V10H26.25V7.5H21.25V5C21.25 4.33696 20.9866 3.70107 20.5178 3.23223C20.0489 2.76339 19.413 2.5 18.75 2.5H11.25C10.587 2.5 9.95107 2.76339 9.48223 3.23223C9.01339 3.70107 8.75 4.33696 8.75 5V7.5H3.75V10H6.25V25ZM11.25 5H18.75V7.5H11.25V5ZM10 10H21.25V25H8.75V10H10Z"
-                                                        fill="#4A4A4A" />
-                                                    <path
-                                                        d="M11.25 12.5H13.75V22.5H11.25V12.5ZM16.25 12.5H18.75V22.5H16.25V12.5Z"
-                                                        fill="#4A4A4A" />
-                                                </svg>
-                                            </a></li>
-                                    </ul>
-                                </div>
-                                <div class="font-size-styling">
-                                    <h4>Font Size</h4>
-                                    <ul>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M23.75 13.75H16.25V6.25H13.75V13.75H6.25V16.25H13.75V23.75H16.25V16.25H23.75V13.75Z"
-                                                        fill="#F1F1F1" />
-                                                </svg>
-                                            </a></li>
-                                        <li><a href="#"><svg width="30" height="30" viewBox="0 0 30 30"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
-                                                </svg>
-                                            </a></li>
-                                    </ul>
-                                </div>
-                                <div class="font-color-styling">
-                                    <h4>Font Size</h4>
-                                    <input type="color" id="favcolor1" name="favcolor1" value="#050505">
-                                    <h4>Background Color</h4>
-                                    <input type="color" id="canvasColor" name="favcolor1" value="#ffffff"
-                                        oninput="chnageBGColor()">
-                                </div>
+                                                <option value="EB Garamond, serif"
+                                                    style="font-family: EB Garamond, serif">EB
+                                                    Garamond</option>
+                                                <option value="Courier New, monospace"
+                                                    style="font-family: Courier New, monospace">Courier New
+                                                </option>
+                                                <option value="Lobster, sans-serif" style="font-family: Lobster;">Lobster
+                                                </option>
+                                                <option value="Lucida Console, monospace"
+                                                    style="font-family: Lucida Console, monospace">Lucida
+                                                    Console</option>
+                                                <option value="Montserrat, sans-serif"
+                                                    style="font-family: Montserrat, sans-serif">Montserrat
+                                                </option>
+                                                <option value="Pacifico, cursive" style="font-family: Pacifico, cursive">
+                                                    Pacifico
+                                                </option>
+                                                <option value="PT Sans, sans-serif"
+                                                    style="font-family: PT Sans, sans-serif">
+                                                    PT
+                                                    Sans</option>
+                                                <option value="Quicksand, sans-serif"
+                                                    style="font-family: Quicksand, sans-serif">
+                                                    Quicksand
+                                                </option>
+                                                <option value="Roboto, sans-serif"
+                                                    style="font-family: Roboto, sans-serif">
+                                                    Roboto
+                                                </option>
+                                                <option value="Source Code Pro, monospace"
+                                                    style="font-family: Source Code Pro, monospace">
+                                                    Source Code Pro</option>
+                                                <option value="Ubuntu, sans-serif"
+                                                    style="font-family: Ubuntu, sans-serif">
+                                                    Ubuntu
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="text-styling-things">
+                                            <ul>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M21.3263 14.025C22.0824 13.0525 22.4951 11.8569 22.5 10.625C22.5 7.52375 19.9762 5 16.875 5H7.5V23.75H17.5C20.6012 23.75 23.125 21.2262 23.125 18.125C23.1233 17.3546 22.9627 16.5929 22.6532 15.8874C22.3437 15.1819 21.892 14.5479 21.3263 14.025ZM16.875 8.75C17.9088 8.75 18.75 9.59125 18.75 10.625C18.75 11.6588 17.9088 12.5 16.875 12.5H11.25V8.75H16.875ZM17.5 20H11.25V16.25H17.5C18.5338 16.25 19.375 17.0912 19.375 18.125C19.375 19.1588 18.5338 20 17.5 20Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M23.75 8.75V5H11.25V8.75H14.835L11.265 21.25H6.25V25H18.75V21.25H15.165L18.735 8.75H23.75Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M8.44774 10.9475L6.68024 9.18C5.66737 10.1937 4.88278 11.4122 4.37899 12.7538L6.72024 13.63C7.09868 12.6231 7.68762 11.7086 8.44774 10.9475ZM23.7502 16.2487C23.7543 14.9352 23.4973 13.6339 22.9943 12.4205C22.4914 11.207 21.7524 10.1055 20.8202 9.18C19.2542 7.60603 17.2043 6.60443 15.0002 6.33625V2.5L8.75024 7.5L15.0002 12.5V8.86125C16.5363 9.11492 17.9538 9.84469 19.0527 10.9475C19.7517 11.642 20.3058 12.4682 20.683 13.3785C21.0602 14.2887 21.253 15.2647 21.2502 16.25V16.2525C21.2502 16.665 21.209 17.0713 21.1427 17.4738C21.134 17.5275 21.129 17.5837 21.119 17.6375C20.8971 18.7902 20.4101 19.8755 19.6965 20.8075C19.4965 21.0687 19.2827 21.3225 19.0515 21.5538C18.7691 21.833 18.4648 22.0893 18.1415 22.32C17.2938 22.9406 16.3235 23.3732 15.2952 23.5888C15.1177 23.6263 14.939 23.6513 14.7577 23.675C14.6802 23.6863 14.6052 23.7012 14.5277 23.7087C13.735 23.79 12.9345 23.7465 12.1552 23.58L11.6252 26.0238C12.6655 26.2468 13.7345 26.3041 14.7927 26.1937C14.879 26.185 14.9652 26.1675 15.0515 26.1562C15.3077 26.1237 15.5627 26.0862 15.814 26.0337L15.8802 26.0225L15.879 26.0162C16.8125 25.8162 17.7119 25.4814 18.549 25.0225L18.5502 25.0237L18.5852 25C19.0269 24.7535 19.449 24.4736 19.8477 24.1625C20.1852 23.9012 20.5127 23.625 20.819 23.3188C21.129 23.01 21.4065 22.6775 21.6702 22.3375C21.6965 22.3025 21.7315 22.2712 21.7577 22.2362L21.7502 22.2312C22.3238 21.4695 22.784 20.6287 23.1165 19.735L23.1265 19.7388C23.1627 19.6413 23.189 19.5412 23.2215 19.4425C23.2677 19.305 23.3152 19.1662 23.3552 19.0262C23.4052 18.8512 23.4465 18.675 23.4865 18.4975C23.514 18.3738 23.5465 18.2538 23.569 18.1288C23.609 17.915 23.639 17.6988 23.664 17.4838C23.6765 17.3888 23.6927 17.2963 23.7015 17.2C23.7302 16.8888 23.7477 16.575 23.7477 16.2587C23.7502 16.2562 23.7502 16.2537 23.7502 16.2487ZM7.74649 20.7463L5.74649 22.2475C6.60663 23.3927 7.70148 24.3409 8.95774 25.0288L10.159 22.8362C9.21457 22.3202 8.39189 21.6075 7.74649 20.7463ZM6.25024 16.25C6.25024 16.0688 6.25649 15.8913 6.26899 15.7138L3.77649 15.535C3.6719 16.9671 3.87785 18.4049 4.38024 19.75L6.72149 18.8737C6.40833 18.0345 6.24871 17.1458 6.25024 16.25Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M11.25 26.25H26.25V3.75H3.75V26.25H11.25ZM23.75 21.25V23.75H16.25V16.25H23.75V21.25ZM18.75 6.25H23.75V13.75H16.25V6.25H18.75ZM6.25 8.75V6.25H13.75V13.75H6.25V8.75ZM6.25 23.75V16.25H13.75V23.75H6.25Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75ZM6.25 6.25H17.5L17.4963 17.5H6.25V6.25Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20ZM23.7463 23.75H12.5V12.5H23.75L23.7463 23.75Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#" id="deleteBtn"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M6.25 25C6.25 25.663 6.51339 26.2989 6.98223 26.7678C7.45107 27.2366 8.08696 27.5 8.75 27.5H21.25C21.913 27.5 22.5489 27.2366 23.0178 26.7678C23.4866 26.2989 23.75 25.663 23.75 25V10H26.25V7.5H21.25V5C21.25 4.33696 20.9866 3.70107 20.5178 3.23223C20.0489 2.76339 19.413 2.5 18.75 2.5H11.25C10.587 2.5 9.95107 2.76339 9.48223 3.23223C9.01339 3.70107 8.75 4.33696 8.75 5V7.5H3.75V10H6.25V25ZM11.25 5H18.75V7.5H11.25V5ZM10 10H21.25V25H8.75V10H10Z"
+                                                                fill="#4A4A4A" />
+                                                            <path
+                                                                d="M11.25 12.5H13.75V22.5H11.25V12.5ZM16.25 12.5H18.75V22.5H16.25V12.5Z"
+                                                                fill="#4A4A4A" />
+                                                        </svg>
+                                                    </a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="font-size-styling">
+                                            <h4>Font Size</h4>
+                                            <ul>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M23.75 13.75H16.25V6.25H13.75V13.75H6.25V16.25H13.75V23.75H16.25V16.25H23.75V13.75Z"
+                                                                fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a href="#"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="font-color-styling">
+                                            <h4>Font Color</h4>
+                                            <input type="color" id="colorPicker" oninput="changeTextColor2()"
+                                                name="favcolor1" value="#050505">
+                                            <h4>Background Color</h4>
+                                            <input type="color" id="canvasColor" name="favcolor1" value="#ffffff"
+                                                oninput="chnageBGColor()">
+                                        </div>
 
-                                <div class="other-editing">
-                                    <h4>Opacity</h4>
-                                    <div class="slider-container">
-                                        <div class="range-slider">
-                                            <input type="range" id="opacityRange" min="0" max="100"
-                                                value="25" step="1" oninput="changeOpacity(this)">
+                                        <div class="other-editing">
+                                            <h4>Opacity</h4>
+                                            <div class="slider-container">
+                                                <div class="range-slider">
+                                                    <input type="range" id="opacityRange" min="0"
+                                                        max="100" value="25" step="1"
+                                                        oninput="changeOpacity(this)">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="other-editing">
+                                            <h4>Other Editing</h4>
+                                            <ul>
+                                                <li><a href="#">Flip Text</a></li>
+                                                <li><a href="#">Text Transform</a></li>
+                                                <li><a href="#">Letter Spacing</a></li>
+                                                <li><a href="#">Line Height</a></li>
+                                                <li><a href="#">Text Shadow</a></li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                    <button type="button" class="btn btn-primary t-btn" id="save1"
+                                        onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03"> Save
+                                        Invitation Card
+                                    </button>
+                                </div>
+                                {{-- Text Editor --}}
+
+
+                                {{-- Card Preview --}}
+                                <div id="sidebarbackgroundaddimg1" style="display: none;">
+                                    <div class="two-things-align">
+                                        <div class="two-btn-align">
+                                            <button onclick="moveForward()" class="moveForward btn btn-primary t-btn">Move
+                                                Forward</button>
+                                            <button onclick="moveBackword()"
+                                                class="moveBackword btn btn-primary t-btn">Move Backward</button>
+                                        </div>
+
+                                        <div id="txtTool" class="row  pt-3 pb-3">
+                                            <div class="row" id="imgDiv"></div>
                                         </div>
                                     </div>
                                 </div>
+                                {{-- Card Preview --}}
 
-                                <div class="other-editing">
-                                    <h4>Other Editing</h4>
-                                    <ul>
-                                        <li><a href="#">Flip Text</a></li>
-                                        <li><a href="#">Text Transform</a></li>
-                                        <li><a href="#">Letter Spacing</a></li>
-                                        <li><a href="#">Line Height</a></li>
-                                        <li><a href="#">Text Shadow</a></li>
-                                    </ul>
+                                {{-- Template Preview --}}
+                                <div id="viewTemplates" class="sidebaraddtext"
+                                    style="width: 30%; display: none; z-index: 2; position: absolute; right: 0; background: white; padding: 25px 30px; overflow-y: scroll;">
+                                    <h1 class="text-center" id="sidecustomizationtext"
+                                        style="color:rgb(129, 2, 129) ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                                        Customize a Templates</h1>
+                                    <div id="templates" class="row"
+                                        style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+                                    </div>
                                 </div>
-                            </form>
-                            <button type="button" class="btn btn-primary t-btn" data-toggle="modal"
-                                data-target="#exampleModalCenter03"> Save Invitation Card </button>
+                                {{-- Template Preview --}}
+
+                                {{-- Image Preview --}}
+                                <div class="sidebaraddimg" style="display: none;z-index: 2;">
+                                    <h1 class="text-center"
+                                        style="color:purple ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                                        Customization
+                                        the <br> Image</h1>
+                                    <div id="txtTool" class="row  pt-3 pb-3">
+                                        <div class="col-12">
+                                            <h5>Image Size&nbsp;</h5>
+                                        </div>
+                                        <div class="col-12  btn-toolbar mb-3" role="toolbar"
+                                            aria-label="Toolbar with button groups">
+                                            <div class="btn-group me-2" role="group" aria-label="First group">
+                                                <button type="button" class="btn btn-secondary " style="width: 95px;"
+                                                    onclick="increaseImageSize()">+</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    style="width: 95px; border-left: 2px solid black;"
+                                                    onclick="decreaseImageSize()">-</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-12">
+                                            <h5>Image Edit &nbsp; &nbsp;</h5>
+                                        </div>
+                                        <div class="col-12 mt-12">
+                                            <img src="/icon/trash-alt-svgrepo-com.svg" class="deleteBtn2"
+                                                onclick="deleteImage()" id="trash2" width="42px" height="42px"
+                                                style="margin-top: 5px;" alt="">
+                                        </div>
+                                        <div class="color-picker-container">
+                                            <label for="opacityRange2" class="color-picker-label">Opacity:</label>
+                                            <input type="range" id="opacityRange2" min="0" max="100"
+                                                step="10" value="100" class="color-picker"
+                                                oninput="changeOpacity(this)">
+                                        </div>
+
+                                        <button onclick="moveForward()" class="moveForward">Move Forward</button>
+                                        <button onclick="moveBackword()" class="moveBackword">Move Backward</button>
+                                    </div>
+                                </div>
+                                {{-- Image Preview --}}
+
+                                {{-- Sticker Preview --}}
+                                <div class="sidebar" style="display: none;z-index: 1;">
+                                    <div class="row">
+                                        <div class="col-md-12 d-flex justify-content-end align-items-center h-100">
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                onclick="closeSidebar()"></button>
+                                        </div>
+                                    </div>
+                                    <div class="search">
+                                        {{-- <input type="text" id="searchInput" placeholder="Search for stickers">
+                                        <button id="btnSearch" class="btn btn-lg btn-secondary ">Search</button> --}}
+                                    </div>
+                                    <div id="stickerList" onclick="clickONsticker()">
+                                    </div>
+                                </div>
+                                {{-- Sticker Preview --}}
+
+                            </div>
                         </div>
 
                     </div>
@@ -684,8 +880,10 @@
     {{-- EXTRA Start --}}
 
     <div class="row" id="imgDiv"></div>
+
+    <!-- Save Modal -->
     <input type="hidden" id="id_card">
-    <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class=" modal-content">
@@ -702,7 +900,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <!-- End Save Modal -->
 
     <div class=" sidebar" style="display: none;z-index: 1;">
         <div class="row">
@@ -776,21 +975,22 @@
 
     <!-- IframeModal -->
     <!-- Modal -->
-    <div class="modal fade modal-for-view-cards" height="70vh" id="exampleModaliframe" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+    <div class="modal fade modal-01 add-new-meal" id="exampleModaliframe" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Your Card</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body text-center" style="height: 70vh;">
+                <div class="modal-body">
                     <iframe id="iframe" height="100%" width="100%" src="" frameborder="0"></iframe>
-
                     <p>You need to save the setting first</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -875,57 +1075,58 @@
                         <div class="two-inline-inputes">
                             <div class="box">
                                 <label>Invitation Message Title</label>
-                                <input type="text" value="{{ $cardData->msgTitle }}" id="msgTitle"
+                                <input type="text" value="{{ $cardData->msgTitle ?? '' }}" id="msgTitle"
                                     placeholder="We Are Going To Marriage.">
                             </div>
                             <div class="box">
                                 <label for="font-selectorsetting">Guest Name’s Font Style</label>
                                 <select id="font-selectorsetting" class="fontSelector1">
                                     <option value="Abramo Serif" style="font-family: 'Abramo Serif';"
-                                        {{ $cardData->envTitleFont == 'Abramo Serif' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'Abramo Serif' ? 'selected' : '' }}>
                                         Abramo Serif
                                     </option>
                                     <option value="Roboto-BlackItalic" style="font-family: 'Roboto-BlackItalic', cursive;"
-                                        {{ $cardData->envTitleFont == 'Roboto-BlackItalic' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'Roboto-BlackItalic' ? 'selected' : '' }}>
                                         Roboto-BlackItalic
                                     </option>
                                     <option value="DancingScript-VariableFont_wght"
                                         style="font-family: 'DancingScript-VariableFont_wght';"
-                                        {{ $cardData->envTitleFont == 'DancingScript-VariableFont_wght' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'DancingScript-VariableFont_wght' ? 'selected' : '' }}>
                                         DancingScript-VariableFont_wght
                                     </option>
                                     <option value="FrankRuhlLibre-VariableFont_wght"
                                         style="font-family: 'FrankRuhlLibre-VariableFont_wght';"
-                                        {{ $cardData->envTitleFont == 'FrankRuhlLibre-VariableFont_wght' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'FrankRuhlLibre-VariableFont_wght' ? 'selected' : '' }}>
                                         FrankRuhlLibre-VariableFont_wght
                                     </option>
                                     <option value="RacingSansOne-Regular" style="font-family: 'RacingSansOne-Regular';"
-                                        {{ $cardData->envTitleFont == 'RacingSansOne-Regular' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'RacingSansOne-Regular' ? 'selected' : '' }}>
                                         RacingSansOne-Regular
                                     </option>
                                     <option value="PTSansNarrow-Regular" style="font-family: 'PTSansNarrow-Regular';"
-                                        {{ $cardData->envTitleFont == 'PTSansNarrow-Regular' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'PTSansNarrow-Regular' ? 'selected' : '' }}>
                                         PTSansNarrow-Regular
                                     </option>
                                     <option value="PTSansNarrow-Bold" style="font-family: 'PTSansNarrow-Bold';"
-                                        {{ $cardData->envTitleFont == 'PTSansNarrow-Bold' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'PTSansNarrow-Bold' ? 'selected' : '' }}>
                                         PTSansNarrow-Bold
                                     </option>
                                     <option value="Lobster-Regular" style="font-family: 'Lobster-Regular';"
-                                        {{ $cardData->envTitleFont == 'Lobster-Regular' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'Lobster-Regular' ? 'selected' : '' }}>
                                         Lobster-Regular
                                     </option>
                                     <option value="HerrVonMuellerhoff-Regular"
                                         style="font-family: 'HerrVonMuellerhoff-Regular';"
-                                        {{ $cardData->envTitleFont == 'HerrVonMuellerhoff-Regular' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'HerrVonMuellerhoff-Regular' ? 'selected' : '' }}>
                                         HerrVonMuellerhoff-Regular
                                     </option>
                                     <option value="Eleganta_PERSONAL_USE_ONLY"
                                         style="font-family: 'Eleganta_PERSONAL_USE_ONLY';"
-                                        {{ $cardData->envTitleFont == 'Eleganta_PERSONAL_USE_ONLY' ? 'selected' : '' }}>
+                                        {{ isset($cardData) && $cardData->envTitleFont == 'Eleganta_PERSONAL_USE_ONLY' ? 'selected' : '' }}>
                                         Eleganta_PERSONAL_USE_ONLY
                                     </option>
                                 </select>
+
                             </div>
 
                         </div>
@@ -933,17 +1134,17 @@
                             <div class="box">
                                 <label for="colorPickersetting">Guest Name’s Font Color</label>
                                 <input type="color" id="colorPickersetting" name="colorPickersetting"
-                                    value="{{ $cardData->envTitleColor }}">
+                                    value="{{ $cardData->envTitleColor ?? '' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
-                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn }}">
+                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn ?? '' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
-                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut }}">
+                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut ?? '' }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">
@@ -984,18 +1185,20 @@
                         <div class="background-select">
                             <h3>Background</h3>
                             <div class="many-radio-boxes">
-                                @forelse ($cardData->bgImgs as $card)
-                                    <div class="box">
-                                        <input type="radio" id="{{ $card->img }}" class="bgName"
-                                            name="background-select" value="{{ $card->img }}"
-                                            {{ $cardData->bgName == $card->img ? 'checked' : '' }}>
-                                        <label for="{{ $card->img }}" style="width:100px;"><img
-                                                src="https://clickadmin.searchmarketingservices.online/eventcards/{{ $card->img }}"
-                                                alt=""></label>
-                                    </div>
-                                @empty
-                                    <p>No Cards!</p>
-                                @endforelse
+                                @if (isset($cardData))
+                                    @forelse ($cardData->bgImgs as $card)
+                                        <div class="box">
+                                            <input type="radio" id="{{ $card->img }}" class="bgName"
+                                                name="background-select" value="{{ $card->img }}"
+                                                {{ $cardData->bgName == $card->img ? 'checked' : '' }}>
+                                            <label for="{{ $card->img }}" style="width:100px;"><img
+                                                    src="https://clickadmin.searchmarketingservices.online/eventcards/{{ $card->img }}"
+                                                    alt=""></label>
+                                        </div>
+                                    @empty
+                                        <p>No Cards!</p>
+                                    @endforelse
+                                @endif
                             </div>
                         </div>
                     </form>
@@ -1016,55 +1219,56 @@
             var myModal = new bootstrap.Modal(document.getElementById('exampleModaliframe'));
             myModal.show();
         });
-        // function saveSetting() {
-        //     let rspvVal = "";
-        //     for (let index = 1; index <= 6; index++) {
-        //         if (document.getElementById("flexCheckChecked" + index).checked) {
-        //             rspvVal += "1,";
-        //         } else {
-        //             rspvVal += "0,";
-        //         }
 
-        //         AllBgname = document.getElementsByClassName("bgName");
-        //         var bgName;
-        //         for (let index = 0; index < AllBgname.length; index++) {
-        //             if (AllBgname[index].checked) {
-        //                 bgName = AllBgname[index].value;
-        //             }
-        //         }
-        //     }
-        //     let msg = document.getElementById("msgTitle").value;
+        function saveSetting() {
+            let rspvVal = "";
+            for (let index = 1; index <= 6; index++) {
+                if (document.getElementById("flexCheckChecked" + index).checked) {
+                    rspvVal += "1,";
+                } else {
+                    rspvVal += "0,";
+                }
 
-        //     $.ajax({
-        //         url: "{{ route('panel.event.invitation.setting.update', ['id' => $currentEventId]) }}",
-        //         type: "POST",
-        //         data: JSON.stringify({
-        //             _token: "{{ csrf_token() }}",
-        //             event_id: {{ $currentEventId }},
-        //             rsvp: rspvVal.substring(0, 11),
-        //             msg: msg,
-        //             bgName: bgName,
-        //             envTitleFont: document.getElementById("font-selectorsetting").value,
-        //             envTitleColor: document.getElementById("colorPickersetting").value,
-        //             colorOut: document.getElementById("colorPickerenvelope_outsetting").value,
-        //             colorIn: document.getElementById("colorPickerenvelope_innersetting").value,
-        //         }),
-        //         dataType: "json",
-        //         contentType: "application/json",
-        //         success: function(msg) {
-        //             console.log(msg);
-        //             if (msg.success == true) {
-        //                 toastr.success(msg.message);
-        //             } else {
-        //                 toastr.error('Something went wrong, please try again later.');
-        //             }
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.log(xhr.responseText);
-        //             var err = eval("(" + xhr.responseText + ")");
-        //         },
-        //     });
-        // }
+                AllBgname = document.getElementsByClassName("bgName");
+                var bgName;
+                for (let index = 0; index < AllBgname.length; index++) {
+                    if (AllBgname[index].checked) {
+                        bgName = AllBgname[index].value;
+                    }
+                }
+            }
+            let msg = document.getElementById("msgTitle").value;
+
+            $.ajax({
+                url: "{{ route('panel.event.invitation.setting.update', ['id' => $currentEventId]) }}",
+                type: "POST",
+                data: JSON.stringify({
+                    _token: "{{ csrf_token() }}",
+                    event_id: {{ $currentEventId }},
+                    rsvp: rspvVal.substring(0, 11),
+                    msg: msg,
+                    bgName: bgName,
+                    envTitleFont: document.getElementById("font-selectorsetting").value,
+                    envTitleColor: document.getElementById("colorPickersetting").value,
+                    colorOut: document.getElementById("colorPickerenvelope_outsetting").value,
+                    colorIn: document.getElementById("colorPickerenvelope_innersetting").value,
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function(msg) {
+                    console.log(msg);
+                    if (msg.success == true) {
+                        toastr.success(msg.message);
+                    } else {
+                        toastr.error('Something went wrong, please try again later.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    var err = eval("(" + xhr.responseText + ")");
+                },
+            });
+        }
 
         // const opacityRange = document.getElementById('opacityRange');
         // const maxRange = document.getElementById('maxRange');
@@ -1105,7 +1309,7 @@
         //         reader.readAsDataURL(file);
         //     }
         // }
-        let rsvpData = {!! json_encode($cardData->rsvp) !!}.split(",");
+        let rsvpData = {!! json_encode($cardData->rsvp ?? '') !!}.split(",");
 
         rsvpData.forEach((element, key) => {
             if (element == 1) {

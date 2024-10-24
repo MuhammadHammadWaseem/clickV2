@@ -1985,6 +1985,19 @@ transition:.5s;
 }
 
 
+#exampleModaliframe .modal-dialog.modal-dialog-centered.modal-lg {
+  max-width: 100% !important;
+  height: 100vh !important;
+}
+
+#exampleModaliframe .modal-dialog.modal-dialog-centered.modal-lg .modal-content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+
 @media only screen and (max-width: 1600px) {
 
   .main-dashboard-sec .col-md-10.col-lg-11{

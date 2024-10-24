@@ -160,3 +160,4 @@ Route::post('/save-blob/back', [InvitationController::class, 'saveBlobBack'])->n
 Route::get('/get-animations', [InvitationController::class, 'getAnimations'])->name('getAnimations');
 Route::get('/cardPreviewNew/{id}', [InvitationController::class, 'cardPreviewNew'])->name('cardPreviewNew');
 Route::get('get-csrf-token', [InvitationController::class, 'getCsrfToken'])->name('getCsrfToken');
+Route::get('get-template/{id}', [InvitationController::class, 'getTemplateWithId'])->name('getTemplate');

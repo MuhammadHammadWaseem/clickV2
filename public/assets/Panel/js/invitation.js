@@ -1565,12 +1565,13 @@ function sideimg1() {
 }
 
 function sidebarbackaddimg() {
+  document.querySelector("#dynamicHeading").innerText = "Background Image";
+
   document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
   document.querySelector("#viewTemplates").style.display = "none";
   document.querySelector(".sidebaraddimg").style.display = "none";
-  document.querySelector("#sidebarbackgroundaddimg1").style.display =
-    "inline-block";
-
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
 }
 
 // trash.addEventListener("click", () => {
@@ -1613,8 +1614,11 @@ function deleteImage() {
 // });
 
 function showTxtTool() {
+  document.querySelector("#dynamicHeading").innerText = "Editing Options";
+
   document.querySelector(".sidebaraddtext").style.display = "inline-block";
   document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
   document.querySelector("#viewTemplates").style.display = "none";
   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
 }
@@ -2097,24 +2101,24 @@ var resultsDiv = document.getElementById("stickerList");
 //   <span class="visually-hidden">Loading...</span>
 //   </div>`;
 //   document.getElementById("btnSearch").innerHTML = spinner;
-//   // fetch(URL)
-//   //   .then((response) => response.json())
-//   //   .then((data) => {
-//   //     var html = "<br>";
-//   //     if (data.totalHits > 0) {
-//   //       data.hits.forEach(function (hit, i) {
-//   //         html += `<img src="${hit.previewURL}" alt="${hit.tags}" width="150px" height="150px"  style='z-index: -10'  >`;
-//   //         stickers.push({ src: hit.previewURL });
-//   //       });
-//   //       resultsDiv.innerHTML = html;
-//   //     } else {
-//   //       resultsDiv.innerHTML = "No hits";
-//   //     }
-//   //     document.getElementById("btnSearch").innerText = `Search`;
-//   //   })
-//   //   .catch((error) => {
-//   //     console.error("Error fetching data:", error);
-//   //   });
+//   fetch(URL)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       var html = "<br>";
+//       if (data.totalHits > 0) {
+//         data.hits.forEach(function (hit, i) {
+//           html += `<img src="${hit.previewURL}" alt="${hit.tags}" width="150px" height="150px"  style='z-index: -10'  >`;
+//           stickers.push({ src: hit.previewURL });
+//         });
+//         resultsDiv.innerHTML = html;
+//       } else {
+//         resultsDiv.innerHTML = "No hits";
+//       }
+//       document.getElementById("btnSearch").innerText = `Search`;
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching data:", error);
+//     });
 // });
 
 function stickerLoad(data) {
@@ -2139,12 +2143,14 @@ function stickerLoad(data) {
 
 }
 function show() {
-  if (sideshow.style.display == "inline-block") {
-    sideshow.style.display = "none";
-  } else {
-    sideshow.style.display = "inline-block";
-
-  }
+  document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
+  
+  sideshow.style.display = "inline-block";
+  
+  document.querySelector("#viewTemplates").style.display = "none";
+  document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
 }
 
 // resultsDiv.addEventListener("click", (event) => {
@@ -2443,42 +2449,42 @@ function loadCardImagesFromDB(data) {
     img.style.zIndex = "-10";
 
     stickers1.push(img);
-    // img.addEventListener("click", (event) => {
-    //   const clickedImgSrc = event.target.src;
-    //   // Use the 'src' attribute for comparison
-    //   const clickedSticker = stickers1.find(
-    //     (sticker) => sticker.src === clickedImgSrc
-    //   );
-    //   if (clickedSticker) {
-    //     addStickerToCanvas1(clickedSticker.src);
-    //   }
-    // });
+    img.addEventListener("click", (event) => {
+      const clickedImgSrc = event.target.src;
+      // Use the 'src' attribute for comparison
+      const clickedSticker = stickers1.find(
+        (sticker) => sticker.src === clickedImgSrc
+      );
+      if (clickedSticker) {
+        addStickerToCanvas1(clickedSticker.src);
+      }
+    });
 
     colDiv.appendChild(img);
     imgDiv.appendChild(colDiv);
   }
 }
-// for (let i = 0; i < stickers1.length; i++) {
-//   const colDiv = document.createElement("div");
-//   colDiv.className = "col-6 mb-3";
-//   const img = document.createElement("img");
-//   img.src = stickers1[i];
-//   img.setAttribute("height", "200px");
-//   img.setAttribute("width", "200px");
-//   img.setAttribute("id", `img_${i}`);
-//   img.style.zIndex = "-10";
-//   // img.addEventListener("click", (event) => {
-//   //   const clickedImgSrc = event.target.src;
-//   //   const clickedSticker = stickers1.find(
-//   //     (sticker) => sticker === clickedImgSrc
-//   //   );
-//   //   if (clickedSticker) {
-//   //     addStickerToCanvas(clickedSticker);
-//   //   }
-//   // });
-//   colDiv.appendChild(img);
-//   imgDiv.appendChild(colDiv);
-// }
+for (let i = 0; i < stickers1.length; i++) {
+  const colDiv = document.createElement("div");
+  colDiv.className = "col-6 mb-3";
+  const img = document.createElement("img");
+  img.src = stickers1[i];
+  img.setAttribute("height", "200px");
+  img.setAttribute("width", "200px");
+  img.setAttribute("id", `img_${i}`);
+  img.style.zIndex = "-10";
+  img.addEventListener("click", (event) => {
+    const clickedImgSrc = event.target.src;
+    const clickedSticker = stickers1.find(
+      (sticker) => sticker === clickedImgSrc
+    );
+    if (clickedSticker) {
+      addStickerToCanvas(clickedSticker);
+    }
+  });
+  colDiv.appendChild(img);
+  imgDiv.appendChild(colDiv);
+}
 // function addStickerToCanvas(sticker) {
 //   fabric.Image.fromURL(sticker, (img) => {
 //     img.set({
@@ -2489,9 +2495,9 @@ function loadCardImagesFromDB(data) {
 //   }, { crossOrigin: 'Anonymous' });
 // }
 
-// can.addEventListener("click", function () {
-//   sideshow.style.display = "none";
-// });
+can.addEventListener("click", function () {
+  sideshow.style.display = "none";
+});
 
 function addStickerToCanvas1(sticker) {
   fabric.Image.fromURL(
@@ -2575,9 +2581,7 @@ async function loadOldData2() {
   if (data.result != 0) {
 
     document.getElementById("id_card").value = data["id_card"];
-    document.getElementById(
-      "iframe"
-    ).src = `${window.location.origin}/cardPreviewNew/${data["id_card"]}`;
+    document.getElementById("iframe").src = `${window.location.origin}/cardPreviewNew/${data["id_card"]}`;
     if (data.bgImgs.length > 0) {
 
       // document.getElementById(data.bgName).checked = true;
@@ -2770,14 +2774,12 @@ function closeSidebar() {
 
 
 function addTemplate() {
-  if (document.querySelector("#viewTemplates").style.display == "inline-block") {
-    document.querySelector("#viewTemplates").style.display = "none";
-  } else {
-    document.querySelector("#viewTemplates").style.display = "inline-block";
-  }
-  // document.querySelector("#viewTemplates").style.display = "inline-block";
+  document.querySelector("#dynamicHeading").innerText = "Customize a Templates";
+
+  document.querySelector("#viewTemplates").style.display = "inline-block";
   document.querySelector(".sidebaraddimg").style.display = "none";
   document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
 
 }
