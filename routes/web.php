@@ -131,7 +131,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/sendSmsMail', [messageController::class, 'sendSmskMail'])->name('sendSmsMail');
             Route::post('{id}/sendSmsWhatsapp', [messageController::class, 'sendSmsWhatsapp'])->name('sendSmsWhatsapp');
             Route::post('{id}/sendSMSms', [messageController::class, 'sendSmSms'])->name('sendSmSms');
-            Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('message');
+            Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('mail.message');
 
 
 
