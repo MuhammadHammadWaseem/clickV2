@@ -1,5 +1,12 @@
 @extends('Panel.layout.master')
 <style>
+
+
+.editing-options-box {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
     .font-color-styling input#colorPicker {
         padding: 0 !important;
         width: 200px;
@@ -796,7 +803,7 @@
 
                                 {{-- Template Preview --}}
                                 <div id="viewTemplates" class="sidebaraddtext"
-                                    style="width: 30%; display: none; z-index: 2; position: absolute; right: 0; background: white; padding: 25px 30px; overflow-y: scroll;">
+                                    style="width: 100%; height:100%; display: none; z-index: 2; position: absolute; right: 0; left :0; background: white; padding: 25px 30px; overflow-y: scroll;">
                                     <h1 class="text-center" id="sidecustomizationtext"
                                         style="color:rgb(129, 2, 129) ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
                                         Customize a Templates</h1>
@@ -848,7 +855,7 @@
                                 {{-- Image Preview --}}
 
                                 {{-- Sticker Preview --}}
-                                <div class="sidebar" style="display: none;z-index: 1;">
+                                <div class="sidebar" style="display: none;z-index: 1; width: 100%; height:100%; overflow-y: scroll; position: absolute; right: 0; left :0; background: white; padding: 25px 30px;">
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-end align-items-center h-100">
                                             <button type="button" class="btn-close" aria-label="Close"
@@ -1133,17 +1140,17 @@
                             <div class="box">
                                 <label for="colorPickersetting">Guest Name’s Font Color</label>
                                 <input type="color" id="colorPickersetting" name="colorPickersetting"
-                                    value="{{ $cardData->envTitleColor ?? '' }}">
+                                    value="{{ $cardData->envTitleColor ?? '#rrggbb' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
-                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn ?? '' }}">
+                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn ?? '#rrggbb' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
-                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut ?? '' }}">
+                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut ?? '#rrggbb' }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">

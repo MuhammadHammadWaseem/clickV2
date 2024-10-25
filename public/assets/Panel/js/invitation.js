@@ -2410,14 +2410,14 @@ function saveAll() {
 //   imgDiv.appendChild(colDiv);
 // }
 
+const stickers1 = [];
 function loadCardImagesFromDB(data) {
-  const stickers1 = [];
-
+  
   var imgDiv = document.getElementById("imgDiv");
   for (let i = 0; i < data.length; i++) {
     const colDiv = document.createElement("div");
     colDiv.className = "col-6 mb-3";
-
+    
     const img = document.createElement("img");
     img.crossOrigin = "Anonymous";
     img.src =
@@ -2426,7 +2426,7 @@ function loadCardImagesFromDB(data) {
     img.setAttribute("width", "200px");
     img.setAttribute("id", `img_${i}`);
     img.style.zIndex = "-10";
-
+    
     stickers1.push(img);
     img.addEventListener("click", (event) => {
       const clickedImgSrc = event.target.src;
@@ -2443,6 +2443,7 @@ function loadCardImagesFromDB(data) {
     imgDiv.appendChild(colDiv);
   }
 }
+
 for (let i = 0; i < stickers1.length; i++) {
   const colDiv = document.createElement("div");
   colDiv.className = "col-6 mb-3";
