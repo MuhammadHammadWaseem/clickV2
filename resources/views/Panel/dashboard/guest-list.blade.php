@@ -301,7 +301,7 @@
         $eventId = GeneralHelper::getEventId();
     @endphp
     <div class="modifier" id="modifier"
-        style="position: fixed !important;bottom: 90px !important;right: 10px !important;border: 2px solid #f90;border-radius: 10px;text-align: center;padding: 5px 10px;background: #fff;z-index:3000 !important; display:none;">
+        style="position: fixed !important; bottom: 90px !important; right: 10px !important; border: 2px solid #f90; border-radius: 10px; text-align: center; padding: 5px 10px; background: #fff; z-index: 3000 !important; display:none;">
         <p class="ng-binding mb-3">0 GUEST(S) SELECTED</p>
         <div class="button-group d-flex flex-column" style="gap:0.5rem;" id="modifierButton">
             <button class="edit-btn btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#EditGuest"
@@ -310,13 +310,17 @@
                 style="display:none;" onclick="deleteGuest()">DELETE</button>
             <button class="btn btn-sm btn-danger delete-btn-all" data-bs-toggle="modal" data-bs-target="#delAllGuestsModal"
                 style="display:none;">DELETE ALL</button>
-            <button class="btn btn-sm btn-primary">SEND INVITATION</button>
-            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                data-bs-target="#declineguestModal">DECLINE</button>
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#SelectOptionstoDisplay">SEND
+                INVITATION</button>
+            <button class="btn btn-sm btn-danger decline-btn" data-bs-toggle="modal" data-bs-target="#declineguestModal"
+                onclick="declineGuest()" style="display:none;">DECLINE</button>
+            <button class="btn btn-sm btn-danger decline-all-btn" style="display:none;" onclick="declineAllGuests()">DECLINE
+                ALL</button>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#undeclineguestModal"
                 style="display: none;">UNDECLINE</button>
         </div>
     </div>
+
 
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
@@ -363,7 +367,7 @@
                     </div>
                     <div class="three-btns-align">
                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                            data-target="#exampleModalCenter01">Add Guest </button>
+                            data-target="#AddGuest">Add Guest </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter02">Add From Other Events </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
@@ -702,8 +706,64 @@
         </div>
     </div>
 
-
-
+    {{-- For Add Member  --}}
+    <div class="modal fade modal-01 add-new-meal" id="AddMember" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2 class="text-center">New Guest</h2>
+                    </div>
+                    <!-- Form start -->
+                    <form id="AddMemberForm">
+                        <!-- Name Input -->
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="member_name" name="name"
+                                placeholder="Enter name">
+                        </div>
+                        <input type="hidden" value="{{ $eventId }}" name="idevent" id="idevent">
+                        <input type="hidden" value="" name="parentidguest" id="parentidguest">
+                        <!-- Allergies Radio Button -->
+                        <div class="form-group">
+                            <label>Allergies</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesYes"
+                                    value="1">
+                                <label class="form-check-label" for="allergiesYes">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesNo"
+                                    value="0">
+                                <label class="form-check-label" for="allergiesNo">No</label>
+                            </div>
+                        </div>
+                        <!-- Select Meal -->
+                        <div class="form-group">
+                            <label for="meal">Select Meal</label>
+                            <select class="form-control" id="edit_meal" name="meal">
+                                @foreach ($meals as $meal)
+                                    <option value="{{ $meal->id_meal }}">{{ $meal->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+                    <!-- Form end -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary submit-btn" id="submitMemberForm">Yes, Manage
+                        Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{-- Modal for import guest csv --}}
     <div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
@@ -798,7 +858,10 @@
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter05"> Updated Successfully </button> -->
     <!-- Modal -->
-    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
+
+
+    {{-- Select Option To Display when click send invitation --}}
+    <div class="modal fade modal-01 modal-02 modal-03" id="SelectOptionstoDisplay" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -809,14 +872,79 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="text">
-                        <img src="assets/images/circle-check.png" alt="">
-                        <h2>Updated Successfully</h2>
-                        <p>Your changes has been successfully added.</p>
-                    </div>
+                    <form id="DisplaySaveOptionForm">
+                        <div class="text">
+                            <img src="assets/images/circle-check.png" alt="">
+                            <h2>Select Options to Display</h2>
+                            <div class="form-group">
+                                <label for="gift-suggestion">Gift Suggestions</label>
+                                <input type="checkbox" name="gift-suggestion" id="gift-suggestion">
+                            </div>
+                            <div class="form-group">
+                                <label for="at-reception-check-in">At the Reception Check-In</label>
+                                <input type="checkbox" name="at-reception-check-in" id="at-reception-check-in">
+                            </div>
+                            <div class="form-group">
+                                <label for="upload-your-photo">Upload your Photos</label>
+                                <input type="checkbox" name="upload-your-photo" id="upload-your-photo">
+                            </div>
+                            <div class="form-group">
+                                <label for="go-to-the-website">Go to the website</label>
+                                <input type="checkbox" name="go-to-the-website" id="go-to-the-website">
+                            </div>
+                            <div class="form-group">
+                                <label for="learn-how-RSVP-works">Learn How RSVP Works</label>
+                                <input type="checkbox" name="learn-how-RSVP-works" id="learn-how-RSVP-works">
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="closeDispalyModal"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="save-option"
+                        onclick="DisplayOptionSave()" data-toggle="modal" data-target="#SendInvitation">Save
+                        Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Select Option Send Invitation  Email Whatsapp SMS --}}
+    <div class="modal fade modal-01 modal-02 modal-03" id="SendInvitation" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="SendInvitationForm">
+                        <div class="text">
+                            <img src="assets/images/circle-check.png" alt="">
+                            <h2>Select Options to Display</h2>
+                            <div class="form-group">
+                                <label for="emailCheck">Email</label>
+                                <input type="checkbox" name="emailCheck" id="emailCheck">
+                            </div>
+                            <div class="form-group">
+                                <label for="smsCheck">SMS</label>
+                                <input type="checkbox" name="smsCheck" id="smsCheck">
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsappCheck">Whatsapp</label>
+                                <input type="checkbox" name="whatsappCheck" id="whatsappCheck">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="closeSendInvitationForm">Close</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="save-option"
+                        onclick="SendInvitation()">Save Changes</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -834,6 +962,7 @@
                 }
             });
 
+            // add Guest
             $('#submitGuestForm').on('click', function(e) {
                 var mealId = $('#idevent').val();
                 e.preventDefault();
@@ -850,8 +979,9 @@
                         if (response.success) {
                             toastr.success('Guest added successfully!');
                             $('#guestForm')[0].reset();
-                            var myModal = new bootstrap.Modal(document.getElementById(
-                                'AddGuest'));
+                            var myModal = new bootstrap.Modal(document
+                                .getElementById(
+                                    'AddGuest'));
                             myModal.hide();
                             showGuest();
                         } else {
@@ -867,6 +997,60 @@
                     }
                 });
             });
+
+
+            // Add Member
+            $(document).on('click', '#addMember', function() {
+                // Capture the parent guest ID from the button data attribute
+                var parentIdGuest = $(this).data('parentidguest-id');
+
+                // Open the modal (if you're showing the modal for adding members)
+                var myModal = new bootstrap.Modal(document.getElementById('AddGuest'));
+                myModal.hide(); // You should show the modal here
+
+                // Set the parent guest ID in a hidden field in the form
+                $('#parentidguest').val(parentIdGuest);
+                // Log the parent ID to verify it's working
+                console.log(parentIdGuest);
+                // Member form submission
+                $('#submitMemberForm').on('click', function(e) {
+                    var mealId = $('#idevent').val();
+                    e.preventDefault();
+
+                    // Get the form data
+                    var formData = $('#AddMemberForm').serialize();
+
+                    // Perform the AJAX request
+                    $.ajax({
+                        url: "{{ route('panel.event.guests-list.store', '') }}/" + mealId,
+                        type: 'POST',
+                        data: formData,
+                        parentIdGuest,
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success('Member added successfully!');
+                                $('#AddMemberForm')[0].reset();
+                                var myModal = new bootstrap.Modal(document
+                                    .getElementById('AddMember'));
+                                myModal.hide(); // Close the modal after success
+                                showGuest(); // Refresh the guest list
+                            } else {
+                                alert(response.message || 'Failed to add guest.');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle validation or server errors
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, value) {
+                                alert(key + ": " + value);
+                            });
+                        }
+                    });
+                });
+            });
+
+
         });
 
         function showGuest(page = 1) {
@@ -877,6 +1061,7 @@
                 type: "GET",
                 dataType: "json",
                 success: function(response) {
+                    console.log(response);
                     console.log(response);
                     var guests = response.guests;
 
@@ -893,13 +1078,15 @@
                             <tr>
                                 <td>
                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-
                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}<br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
                                 </td>
                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                 <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
                                 <td>${guest.notes || 'No Notes'}</td>
-                                <td><button type="button" class="btn btn-primary t-btn t-btn-theme">Add Members</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -929,15 +1116,15 @@
                                     </ul>
                                 </td>
                                 ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>
-                                                                                        ` : ''}
+                                                                                                                                                                            <td class="accordian_img_acces">
+                                                                                                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                                                                            </td>
+                                                                                                                                                                        ` : ''}
                                 ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>
-                                                                                        ` : ''}
+                                                                                                                                                                            <td class="accordian_img_acces">
+                                                                                                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                                                                            </td>
+                                                                                                                                                                        ` : ''}
                             </tr>`;
                         });
 
@@ -947,7 +1134,8 @@
                     </div>
                 </div>`;
 
-                        $('#GuestList').append(accordion); // Append each accordion to the list
+                        $('#GuestList').append(
+                            accordion); // Append each accordion to the list
                     });
 
                     // Re-apply the accordion toggle functionality after adding new elements
@@ -1057,7 +1245,8 @@
                     `;
 
                             // Check if nested guests array exists and is not empty
-                            if (Array.isArray(guest.guests) && guest.guests.length > 0) {
+                            if (Array.isArray(guest.guests) && guest.guests.length >
+                                0) {
                                 guest.guests.forEach(function(nestedGuest, index) {
                                     // Append nested guest names with checkboxes
                                     guestSection += `
@@ -1069,14 +1258,16 @@
                             `;
                                 });
                             } else {
-                                guestSection += '<p>No additional guests found.</p>';
+                                guestSection +=
+                                    '<p>No additional guests found.</p>';
                             }
 
                             guestSection += '</div></div>';
                             $('#guestListItems').append(guestSection);
                         });
                     } else {
-                        $('#guestListItems').append('<p>No guests found for this event.</p>');
+                        $('#guestListItems').append(
+                            '<p>No guests found for this event.</p>');
                     }
                 },
                 error: function(err) {
@@ -1143,6 +1334,7 @@
                 success: function(response) {
                     showGuest();
                     toastr.success("Guests imported successfully!");
+                    idArray = [];
                 },
                 error: function(xhr, status, error) {
                     // Handle error response
@@ -1156,13 +1348,52 @@
         let idArray = []; // Store selected guest IDs
         var clickedCheckbox = '';
 
+        // function showButton(event) {
+        //     var clickedCheckbox = event.target;
+        //     let selectedID = clickedCheckbox.getAttribute('data-guest-id');
+        //     const modifierDiv = document.querySelector(".modifier");
+        //     const editButton = document.querySelector('.edit-btn');
+        //     const deleteButtonSingle = document.querySelector('.delete-btn-single');
+        //     const deleteButtonAll = document.querySelector('.delete-btn-all');
+
+        //     // Add or remove the guest ID from the array based on the checkbox state
+        //     if (clickedCheckbox.checked && selectedID) {
+        //         if (!idArray.includes(selectedID)) {
+        //             idArray.push(selectedID); // Add selected guest ID to array
+        //         }
+        //     } else {
+        //         idArray = idArray.filter(id => id !== selectedID); // Remove unchecked guest ID from array
+        //     }
+
+        //     // Show or hide modifier buttons based on selections
+        //     if (idArray.length > 0) {
+        //         modifierDiv.style.display = "block"; // Show the buttons
+        //     } else {
+        //         modifierDiv.style.display = "none"; // Hide the buttons
+        //     }
+
+        //     // Show the "Edit" button only when one guest is selected
+        //     if (idArray.length === 1) {
+        //         editButton.style.display = "block";
+        //         deleteButtonSingle.style.display = "block";
+        //         deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
+        //     } else if (idArray.length > 1) {
+        //         editButton.style.display = "none"; // Hide Edit button for multiple selections
+        //         deleteButtonSingle.style.display = "none"; // Hide single Delete button
+        //         deleteButtonAll.style.display = "block"; // Show Delete All button
+        //     }
+
+        //     // Update the selected count display
+        //     const countDisplay = modifierDiv.querySelector('p');
+        //     countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
+
+        //     console.log("Selected Guest IDs:", idArray); // Log selected guest IDs
+        // }
+
         function showButton(event) {
             var clickedCheckbox = event.target;
             let selectedID = clickedCheckbox.getAttribute('data-guest-id');
             const modifierDiv = document.querySelector(".modifier");
-            const editButton = document.querySelector('.edit-btn');
-            const deleteButtonSingle = document.querySelector('.delete-btn-single');
-            const deleteButtonAll = document.querySelector('.delete-btn-all');
 
             // Add or remove the guest ID from the array based on the checkbox state
             if (clickedCheckbox.checked && selectedID) {
@@ -1180,24 +1411,83 @@
                 modifierDiv.style.display = "none"; // Hide the buttons
             }
 
-            // Show the "Edit" button only when one guest is selected
+            // Show or hide buttons based on the number of selected guests
+            const editButton = document.querySelector('.edit-btn');
+            const deleteButtonSingle = document.querySelector('.delete-btn-single');
+            const deleteButtonAll = document.querySelector('.delete-btn-all');
+            const declineButton = document.querySelector('.decline-btn');
+            const declineAllButton = document.querySelector('.decline-all-btn');
+
             if (idArray.length === 1) {
                 editButton.style.display = "block";
                 deleteButtonSingle.style.display = "block";
                 deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
+                declineButton.style.display = "block"; // Show Decline button for one guest
+                declineAllButton.style.display = "none"; // Hide Decline All
             } else if (idArray.length > 1) {
                 editButton.style.display = "none"; // Hide Edit button for multiple selections
                 deleteButtonSingle.style.display = "none"; // Hide single Delete button
                 deleteButtonAll.style.display = "block"; // Show Delete All button
+                declineButton.style.display = "none"; // Hide Decline button
+                declineAllButton.style.display = "block"; // Show Decline All button
             }
 
             // Update the selected count display
             const countDisplay = modifierDiv.querySelector('p');
             countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
-
             console.log("Selected Guest IDs:", idArray); // Log selected guest IDs
         }
 
+        // Decline all selected guests
+        function declineAllGuests() {
+            console.log(idArray);
+            if (idArray.length > 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Your route for declining all
+                    type: "POST",
+                    data: {
+                        guestIds: idArray,
+                        idevent: "{{ $eventId }}",
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
+                    success: function(response) {
+                        showGuest(); // Reload the guest list
+                        toastr.success('Selected guests declined successfully');
+                        $('#modifier').css('display', 'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.decline-all-btn').hide(); // Hide Decline All button
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr.responseText);
+                    }
+                });
+            }
+        }
+
+        // Decline all selected guests
+        function declineGuest() {
+            if (idArray.length === 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Use the same route for multiple declines
+                    type: "POST",
+                    data: {
+                        guestid: idArray[0], // Send a single guest ID
+                        idevent: "{{ $eventId }}", // Include event ID
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
+                    success: function(response) {
+                        showGuest(); // Reload the guest list
+                        toastr.success('Guests declined successfully');
+                        $('#modifier').css('display', 'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.delete-btn-all').hide(); // Hide delete all button
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr.responseText);
+                    }
+                });
+            }
+        }
 
         $(document).on('change', '.guest-checkbox', function() {
             const guestId = $(this).val();
@@ -1280,7 +1570,8 @@
 
                 // Fetch and populate modal with guest data
                 $.ajax({
-                    url: "{{ route('panel.event.guests.edit', ':id') }}".replace(':id', guestId),
+                    url: "{{ route('panel.event.guests.edit', ':id') }}".replace(':id',
+                        guestId),
                     type: "GET",
                     success: function(response) {
                         console.log(response);
@@ -1316,11 +1607,13 @@
 
                         // Store the guest ID in a hidden field (for submission)
                         $('#EditguestForm').find('input[name="idguest"]').remove();
-                        $('#EditguestForm').append('<input type="hidden" name="idguest" value="' +
+                        $('#EditguestForm').append(
+                            '<input type="hidden" name="idguest" value="' +
                             response.id_guest + '">');
 
                         // Open the modal
-                        var myModal = new bootstrap.Modal(document.getElementById('EditGuest'));
+                        var myModal = new bootstrap.Modal(document.getElementById(
+                            'EditGuest'));
                         myModal.show();
                     },
                     error: function(xhr, status, error) {
@@ -1329,5 +1622,143 @@
                 });
             }
         });
+
+        // /save Options in data abse while send invitation
+        // function DisplayOptionSave() {
+        //     var formData = $('#DisplaySaveOptionForm').serialize();
+        //     if (idArray.length === 1) {
+        //         $.ajax({
+        //             url: "{{ route('panel.event.saveOptions', ['id' => $eventId]) }}", // Use the same route for multiple declines
+        //             type: "POST",
+        //             data: {
+        //                 guestid: idArray[0], // Send a single guest ID
+        //                 idevent: "{{ $eventId }}", // Include event ID
+        //                 _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+        //                 formData:formData
+        //             },
+        //             success: function(response) {
+        //                 showGuest(); // Reload the guest list
+        //                 toastr.success('Display Options Saved');
+        //                 $('#DisplaySaveOptionForm')[0].reset();
+        //                 $('#modifier').css('display', 'none'); // Hide modifier section
+        //                 idArray = []; // Reset the selected guests array
+        //                 $('.delete-btn-all').hide(); // Hide delete all button
+        //             },
+        //             error: function(xhr) {
+        //                 alert('Something went wrong: ' + xhr.responseText);
+        //             }
+        //         });
+        //     }else{
+        //         $.ajax({
+        //             url: "{{ route('panel.event.saveOptions', ['id' => $eventId]) }}", // Your route for declining all
+        //             type: "POST",
+        //             data: {
+        //                 guestIds: idArray,
+        //                 idevent: "{{ $eventId }}",
+        //                 _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+        //                 formData:formData
+        //             },
+        //             success: function(response) {
+        //                 showGuest(); // Reload the guest list
+        //                 $('#DisplaySaveOptionForm')[0].reset();
+        //                 toastr.success('Selected Display Options Saved');
+        //                 $('#modifier').css('display', 'none'); // Hide modifier section
+        //                 idArray = []; // Reset the selected guests array
+        //                 $('.decline-all-btn').hide(); // Hide Decline All button
+        //             },
+        //             error: function(xhr) {
+        //                 alert('Something went wrong: ' + xhr.responseText);
+        //             }
+        //         });
+
+        //     }
+        // }
+
+        function DisplayOptionSave() {
+            var formData = {}; // Initialize an empty object to collect checked options
+
+            // Collect checked options only
+            $('#DisplaySaveOptionForm input[type="checkbox"]:checked').each(function() {
+                formData[$(this).attr('name')] = 1; // Set the value to 1 if checked
+            });
+
+            var dataToSend = {
+                idevent: "{{ $eventId }}", // Include event ID
+                _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+                formData: formData,
+                email: formData['emailCheck'] || false, // Set to false if not checked
+                sms: formData['smsCheck'] || false, // Set to false if not checked
+                whatsapp: formData['whatsappcheck'] || false
+                // Send the checked form options
+            };
+
+            if (idArray.length === 1) {
+                dataToSend.guestid = idArray[0]; // Send a single guest ID
+            } else {
+                dataToSend.guestIds = idArray; // Send multiple guest IDs
+            }
+
+            $.ajax({
+                url: "{{ route('panel.event.saveOptions', ['id' => $eventId]) }}", // Use the route for saving options
+                type: "POST",
+                data: dataToSend,
+                success: function(response) {
+                    showGuest(); // Reload the guest list
+                    toastr.success('Display Options Saved');
+                    $('#DisplaySaveOptionForm')[0].reset();
+                    $('#modifier').css('display', 'none'); // Hide modifier section
+                    $('.delete-btn-all').hide(); // Hide delete all button
+                    $("#closeDispalyModal").click();
+                },
+                error: function(xhr) {
+                    alert('Something went wrong: ' + xhr.responseText);
+                }
+            });
+        }
+
+        // save invitaion
+        function SendInvitation() {
+            console.log("click");
+
+            var formData = {}; // Initialize an empty object to collect checked options
+            // Collect checked options only
+            $('#SendInvitationForm input[type="checkbox"]:checked').each(function() {
+                formData[$(this).attr('name')] = 1; // Set the value to 1 if checked
+            });
+
+
+            // Preparing data to send to the backend
+            var dataToSend = {
+                idevent: "{{ $eventId }}", // Include the event ID
+                _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+                formData: formData // Send the checked form options
+            };
+
+            // Conditionally send single or multiple guest IDs
+            if (idArray.length === 1) {
+                dataToSend.guestid = idArray[0]; // Send a single guest ID
+            } else {
+                dataToSend.guestIds = idArray; // Send multiple guest IDs
+            }
+
+            console.log(dataToSend);
+            // Send data using AJAX
+            $.ajax({
+                url: "{{ route('panel.event.sendinvitations', ['id' => $eventId]) }}", // Replace with your route URL
+                method: 'POST',
+                data: dataToSend,
+                success: function(response) {
+                    showGuest(); // This function reloads the guest list or does a follow-up action
+                    toastr.success('Invitations sent successfully');
+                    $('#SendInvitationForm')[0].reset(); // Reset the form after success
+                    $("#closeSendInvitationForm").click();
+                    idArray = [];    // Close the modal (assuming this button closes it)
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while sending invitations');
+                }
+            });
+        }
     </script>
 @endsection

@@ -119,6 +119,11 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/guests/import', [GuestListController::class, 'importGuestFromOtherEvent'])->name('importGuestFromOtherEvent');
             Route::post('importfcsv/{id}', [GuestListController::class, 'importFromCsvGuest'])->name('importFromCsvGuest');
             Route::post('{id}/delete/guest', [GuestListController::class, 'deleteGuest'])->name('deleteGuest');
+            Route::post('{id}/decline/guest', [GuestListController::class, 'declineguest'])->name('declineguest');
+            Route::get('{id}/get-guests-qr/{date}', [GuestListController::class, 'getGuestqr'])->name('getGuestqr');
+            Route::post('{id}/get-guests-qr/{date}', [GuestListController::class, 'getGuestqr'])->name('getGuestqr');
+            Route::post('{id}/save-options', [GuestListController::class, 'saveOptions'])->name('saveOptions');
+            Route::post('{id}/send-invitations', [GuestListController::class, 'sendinvitations'])->name('sendinvitations');
             // Guest End
 
             // reminder
