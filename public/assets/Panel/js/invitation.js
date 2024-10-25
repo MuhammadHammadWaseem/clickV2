@@ -1137,13 +1137,13 @@ document
     reader.readAsDataURL(file);
   });
 
-// document.getElementById("deleteBtn").addEventListener("click", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//   }
-// });
+document.getElementById("deleteBtn").addEventListener("click", function () {
+  const obj = canv.getActiveObject();
+  if (obj) {
+    canv.remove(obj);
+    saveState();
+  }
+});
 
 // document.querySelector(".deleteBtn2").addEventListener("click", function () {
 //   const obj = canv.getActiveObject();
@@ -1629,7 +1629,7 @@ function increaseText() {
   var newFontSize = currentFontSize + 2;
   selectedText.set({ fontSize: newFontSize });
   canv.renderAll();
-  font_number.innerText = newFontSize;
+  // font_number.innerText = newFontSize;
 }
 
 function increaseImageSize() {
@@ -1658,7 +1658,7 @@ function decreaseText() {
   var newFontSize = currentFontSize - 2;
   selectedText.set({ fontSize: newFontSize });
   canv.renderAll();
-  font_number.innerText = newFontSize;
+  // font_number.innerText = newFontSize;
 }
 
 
@@ -2426,7 +2426,7 @@ function loadCardImagesFromDB(data) {
     img.setAttribute("width", "200px");
     img.setAttribute("id", `img_${i}`);
     img.style.zIndex = "-10";
-    
+
     stickers1.push(img);
     img.addEventListener("click", (event) => {
       const clickedImgSrc = event.target.src;
@@ -2579,13 +2579,13 @@ async function loadOldData2() {
 
     document.getElementById("msgTitle").value = data.msgTitle;
 
-    // document.getElementById("deleteBtn").addEventListener("click", function () {
-    //   const obj = canv.getActiveObject();
-    //   if (obj) {
-    //     canv.remove(obj);
-    //     saveState();
-    //   }
-    // });
+    document.getElementById("deleteBtn").addEventListener("click", function () {
+      const obj = canv.getActiveObject();
+      if (obj) {
+        canv.remove(obj);
+        saveState();
+      }
+    });
 
     // document
     //   .getElementById("downloadBtn3")

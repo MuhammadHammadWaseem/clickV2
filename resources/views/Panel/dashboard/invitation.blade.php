@@ -262,7 +262,7 @@
 
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="dublicateObject()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -274,7 +274,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="canvaClear()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -302,7 +302,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a href="#" onclick="dwnPDF()">
                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -312,8 +312,6 @@
                                     d="M14.5829 15.3579V11.1962H12.5021V15.3579H9.38086L13.5425 20.56L17.7042 15.3579H14.5829Z"
                                     fill="#C09D2A" />
                             </svg>
-
-
                             Download PDF
                         </a>
                     </div>
@@ -380,7 +378,7 @@
                                     <form action="">
                                         <div class="input-box">
                                             <label for="">Enter Text</label>
-                                            <input type="text" placeholder="Text">
+                                            <input type="text" id="textInput" placeholder="Text">
                                         </div>
                                         <div class="input-box">
                                             <label for="font-styling">Font Styling</label>
@@ -664,6 +662,9 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class="input-box">
+                                            <button type="button" onclick="addText()" class="btn t-btn mb-4">Add Text</button>
+                                        </div>
                                         <div class="text-styling-things">
                                             <ul>
                                                 <li><a href="#"><svg width="30" height="30"
@@ -730,7 +731,7 @@
                                         <div class="font-size-styling">
                                             <h4>Font Size</h4>
                                             <ul>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a href="#" onclick="increaseText()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -738,7 +739,7 @@
                                                                 fill="#F1F1F1" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a href="#" onclick="decreaseText()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
