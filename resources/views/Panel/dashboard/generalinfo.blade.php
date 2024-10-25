@@ -3,6 +3,17 @@
 
 <style>
 
+.main-dashboard-sec .left-menu-dash ul li.general-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
 .main-dashboard-sec .left-menu-dash ul li.general-active a {
   color: #C09D2A;
 }
@@ -15,16 +26,21 @@
   background-color: #c09d2a29;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
+.main-dashboard-sec .text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
+.box-styling .person-box {
+    height: -webkit-fill-available;
+    justify-content: space-between;
+}
+
+.box-styling.ceremony-box {
+    height: 98% !important;
+}
+
 
 </style>
 

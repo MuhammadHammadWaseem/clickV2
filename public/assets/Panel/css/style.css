@@ -508,17 +508,7 @@ header .langauge-person  .nav-box ul li.drop-down-link:hover ul {
   filter: none;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active a {
-  color: #C09D2A;
-}
 
-.main-dashboard-sec .left-menu-dash ul li.general-active img {
-  filter: none;
-}
-
-.main-dashboard-sec .left-menu-dash ul li.general-active {
-  background-color: #c09d2a29;
-}
 
 .main-dashboard-sec .left-menu-dash ul li:hover::after {
   width: 5px;
@@ -531,16 +521,6 @@ header .langauge-person  .nav-box ul li.drop-down-link:hover ul {
   top: 0;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
 
 .main-dashboard-sec .left-menu-dash ul li a img {
   transition: .3s;

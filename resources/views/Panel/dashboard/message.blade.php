@@ -2,6 +2,15 @@
 
 @section('content')
     <style>
+
+.ck.ck-reset.ck-editor.ck-rounded-corners {
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
+#save-btn {
+    width: 100%;
+}
         .box-styling.preview.actions .action-iframe iframe {
             border-radius: 10px;
             width: 100%;
@@ -79,7 +88,7 @@
                         </div>
                     </div>
                     <div class="text-right mt-3"> <!-- Aligns the button to the right -->
-                        <button type="button" class="btn btn-success" id="save-btn" onclick="updateData()">Save</button>
+                        <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">Save</button>
                     </div>
                 </div>
             </div>
