@@ -69,6 +69,11 @@ function getTemplates() {
         // Convert object to array of templates
         const templatesArray = Object.values(data);
 
+        if(data.data.length == 0){
+          $("#viewTemplates").append(`
+            <h3 class="text-center">No Templates Found!</h3>
+          `);
+        }
         // Use forEach to iterate over templates
         templatesArray.forEach((template) => {
           templates.empty();
@@ -1514,8 +1519,7 @@ function clicktextshow() {
   try {
     if (typeof selectedText.text === "string") {
       document.querySelector(".sidebaraddtext").style.display = "inline-block";
-      document.querySelector("#sidebarbackgroundaddimg1").style.display =
-        "none";
+      document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
       document.querySelector(".sidebaraddimg").style.display = "none";
 
       document.querySelector("#viewTemplates").style.display = "none";
@@ -1524,7 +1528,7 @@ function clicktextshow() {
     document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
     document.querySelector(".sidebaraddimg").style.display = "none";
 
-    document.querySelector(".sidebaraddtext").style.display = "none";
+    // document.querySelector(".sidebaraddtext").style.display = "none";
     document.querySelector("#viewTemplates").style.display = "none";
   }
 }
@@ -1534,8 +1538,7 @@ function clickimgshow() {
     if (selectedText._element.className == "canvas-img") {
       document.querySelector(".sidebaraddtext").style.display = "none";
       document.querySelector(".sidebaraddimg").style.display = "inline-block";
-      document.querySelector("#sidebarbackgroundaddimg1").style.display =
-        "none";
+      document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
       document.querySelector("#viewTemplates").style.display = "none";
     }
   } catch {
@@ -2015,15 +2018,16 @@ function canvaClear() {
 
 function dublicateObject() {
   var object = canv.getActiveObject();
-
-  object.clone(function (e) {
-    canv.add(
-      e.set({
-        left: object.left + 10,
-        top: object.top + 10,
-      })
-    );
-  });
+  if(object){ 
+    object.clone(function (e) {
+      canv.add(
+        e.set({
+          left: object.left + 10,
+          top: object.top + 10,
+        })
+      );
+    });
+  }
 }
 
 function handleSVGImport(event) {

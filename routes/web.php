@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthCheck;
+use App\Http\Middleware\payCheck;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\GiftSuggestion;
@@ -15,6 +16,7 @@ use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\GuestListController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TableSeatingController;
+use App\Http\Controllers\PayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,7 +144,9 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/invitation/setting/update', [InvitationController::class, 'settingUpdate'])->name('invitation.setting.update');
             Route::get('get-card/{event_id}', [InvitationController::class, 'getCard'])->name('getCard');
             Route::get('{id}/get-csrfToken', [InvitationController::class, 'csrfToken'])->name('invitation.getCsrftoken');
-
+            
+            // Pay
+            Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index');
         });
     });
 });
