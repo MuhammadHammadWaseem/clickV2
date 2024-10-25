@@ -236,8 +236,6 @@ function selectedObject(event) {
 
 
 function uploadImageInCanvas(event) {
-  console.log(event);
-  console.log(event.target.files[0]);
 
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -276,23 +274,13 @@ function uploadStamp(event) {
     contentType: false, // Prevent jQuery from overriding the Content-Type header
     success: function (response) {
       document.getElementById("uploadStamp").value = '';
-      console.log(response);
-      Swal.fire({
-        icon: 'success',
-        title: 'Stamp uploaded successfully',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      toastr.success('Stamp uploaded successfully!');
     },
     error: function (xhr, status, error) {
       document.getElementById("uploadStamp").value = '';
       console.error("Error:", error);
       // Handle the error
-      Swal.fire({
-        icon: 'error',
-        title: 'Error uploading stamp',
-        text: 'The file must be a file of type: jpeg, png, jpg.',
-      })
+      toastr.error('The file must be a file of type: jpeg, png, jpg.');
     },
   });
 }
@@ -1833,8 +1821,6 @@ function handleJSONImport() {
   var id = window.location.pathname.split("/")[2];
   const backElement = document.getElementById('back');
   if (backElement.checked) {
-    console.log("Back is checked.");
-    console.log("Get Back Json.");
     $.ajax({
       type: "GET",
       url: `/get-json/back?id=${id}`,
@@ -1913,8 +1899,6 @@ function handleJSONImport() {
       },
     });
   } else {
-    console.log("Back is not checked.");
-    console.log("Get Front Json.");
     $.ajax({
       type: "GET",
       url: `/get-json?id=${id}`,
@@ -2217,7 +2201,6 @@ async function getapi() {
 function saveData() {
   const backElement = document.getElementById('back');
   if (backElement.checked) {
-    console.log("Back is checked.Preview");
     const json = JSON.stringify(canv.toJSON());
     const blob = new Blob([json], { type: "application/json" });
 
@@ -2248,7 +2231,6 @@ function saveData() {
       });
     // saveSetting();
   } else {
-    console.log("Back is not checked.");
     const json = JSON.stringify(canv.toJSON());
     const blob = new Blob([json], { type: "application/json" });
 
@@ -2285,7 +2267,6 @@ function saveAll() {
 
   const backElement = document.getElementById('back');
   if (backElement.checked) {
-    console.log("Back is checked.");
     var saveBtns = document.getElementsByClassName("SaveBtn");
     for (var i = 0; i < saveBtns.length; i++) {
       saveBtns[i].innerText = "Saving...";
@@ -2337,8 +2318,6 @@ function saveAll() {
 
 
   } else {
-    console.log("Back is not checked.");
-
     var saveBtns = document.getElementsByClassName("SaveBtn");
     for (var i = 0; i < saveBtns.length; i++) {
       saveBtns[i].innerText = "Saving...";
@@ -2354,7 +2333,6 @@ function saveAll() {
 
     const formData = new FormData();
     var filename = window.location.pathname.split("/")[2] + ".json";
-    console.log(filename);
     formData.append("json_blob", [json]);
     formData.append("event_id", window.location.pathname.split("/")[2]);
     formData.append("_token", this.token);
@@ -2502,7 +2480,7 @@ function GetAnimations() {
       id_event: window.location.pathname.split("/")[2]
     },
     success: function (response) {
-      if (response) {
+      if (response.card) {
         if (response.card.two_sided == 1) {
           document.getElementById("two_sided").checked = true;
           document.getElementById("frontBackBox").style.display = "block";
@@ -2673,7 +2651,6 @@ function loadBgImagesFromDB(imgData) {
     type: "GET",
     url: "/event/get-card/" + window.location.pathname.split("/")[2],
     success: function (data) {
-      console.log("datass", data.bgName);
       selectedBackground = data.bgName;
 
       // After the background data is retrieved, render the images and set the selected one
@@ -2803,6 +2780,7 @@ function saveNoneOfThese() {
     contentType: "application/json",
     success: function (msg) {
       GetAnimations();
+      toastr.success('Animation Save Successfully!');
     },
     error: function (xhr, status, error) {
       var err = eval("(" + xhr.responseText + ")");
@@ -2988,8 +2966,6 @@ function toggleTwoSided(element) {
     document.getElementById("frontBackBox").style.display = "block";
   } else {
     document.getElementById("back").checked = false;
-
-    console.log("unchecked two sided");
     handleJSONImport();
     document.getElementById("frontBackBox").style.display = "none";
   }
@@ -3004,21 +2980,11 @@ function toggleTwoSided(element) {
     processData: false,
     contentType: false,
     success: function (response) {
-      console.log(response.message);
-      Swal.fire({
-        icon: 'success',
-        title: response.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
+      toastr.success(response.message);
     },
     error: function (xhr, status, error) {
       console.error("Error:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error updating two sided',
-        text: 'Something went wrong. Please try again.',
-      })
+      toastr.error("Something went wrong. Please try again.");
     },
   });
 
@@ -3026,19 +2992,13 @@ function toggleTwoSided(element) {
 
 function toggleSide(element) {
   if (element.id === 'front') {
-    // Add logic for editing the front side
-    console.log('Editing Front');
     handleJSONImport();
   } else if (element.id === 'front2') {
-    // Add logic for editing the front side
-    console.log('Editing Front');
     handleJSONImport();
   } else if (element.id === 'back') {
-    console.log('Editing Back');
     // Add logic for editing the back side
     handleJSONImport();
   } else if (element.id === 'back2') {
-    console.log('Editing Back');
     // Add logic for editing the back side
     handleJSONImport();
   }

@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="card-styling-box">
-                        <a href="#" type="button" data-toggle="modal" data-target="#exampleModalCenter02">
+                        <a type="button" data-toggle="modal" data-target="#exampleModalCenter02">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -220,7 +220,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" id="previewModal" onclick="saveData()">
+                        <a id="previewModal" onclick="saveData()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -232,7 +232,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" id="undoBtn" onclick="undo()">
+                        <a id="undoBtn" onclick="undo()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -245,7 +245,7 @@
 
 
                     <div class="card-styling-box">
-                        <a href="#" id="redoBtn" onclick="redo()">
+                        <a id="redoBtn" onclick="redo()">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -257,7 +257,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="sidebarbackaddimg()">
+                        <a onclick="sidebarbackaddimg()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -272,7 +272,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="addTemplate()">
+                        <a onclick="addTemplate()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -284,7 +284,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="showTxtTool()">
+                        <a onclick="showTxtTool()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -296,7 +296,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="show()">
+                        <a onclick="show()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -308,7 +308,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a>
                             <div class="upload-container" onclick="document.getElementById('uploadImage').click()">
                                 <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -333,7 +333,7 @@
 
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="dublicateObject()">
+                        <a onclick="dublicateObject()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -345,7 +345,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="canvaClear()">
+                        <a onclick="canvaClear()">
                             <svg width="41" height="41" viewBox="0 0 41 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -372,7 +372,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#" onclick="dwnPDF()">
+                        <a onclick="dwnPDF()">
                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -387,15 +387,18 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                        <a>
+
+                            <div class="upload-container" onclick="document.getElementById('uploadStamp').click()">
+                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M20.6891 9.65745C20.7131 9.47642 20.7255 9.29539 20.7255 9.11539C20.7255 6.64128 18.4959 4.65409 16.0218 4.99118C15.3008 3.70731 13.9275 2.87289 12.4022 2.87289C10.877 2.87289 9.50361 3.70731 8.7826 4.99118C6.30329 4.65409 4.07888 6.64128 4.07888 9.11539C4.07888 9.29539 4.09136 9.47642 4.11529 9.65745C2.83246 10.3785 1.99805 11.7528 1.99805 13.2771C1.99805 14.8013 2.83246 16.1757 4.11529 16.8967C4.09129 17.0764 4.07913 17.2574 4.07888 17.4387C4.07888 19.9128 6.30329 21.8959 8.7826 21.5629C9.50361 22.8468 10.877 23.6812 12.4022 23.6812C13.9275 23.6812 15.3008 22.8468 16.0218 21.5629C18.4959 21.8959 20.7255 19.9128 20.7255 17.4387C20.7255 17.2587 20.7131 17.0777 20.6891 16.8967C21.972 16.1757 22.8064 14.8013 22.8064 13.2771C22.8064 11.7528 21.972 10.3785 20.6891 9.65745ZM19.1889 15.2788L18.0423 15.5837L18.4939 16.6792C18.5927 16.9185 18.6447 17.1817 18.6447 17.4387C18.6447 18.5863 17.7115 19.5196 16.5639 19.5196C16.3069 19.5196 16.0447 19.4675 15.8044 19.3687L14.7078 18.9172L14.4029 20.0637C14.2855 20.5047 14.0257 20.8945 13.6639 21.1726C13.3021 21.4506 12.8585 21.6014 12.4022 21.6014C11.9459 21.6014 11.5023 21.4506 11.1405 21.1726C10.7787 20.8945 10.5189 20.5047 10.4015 20.0637L10.0967 18.9172L9.00005 19.3687C8.75903 19.4677 8.50109 19.5189 8.24055 19.5196C7.09297 19.5196 6.15971 18.5863 6.15971 17.4387C6.15971 17.1817 6.21173 16.9185 6.31057 16.6792L6.76211 15.5837L5.61558 15.2788C5.17564 15.1599 4.78712 14.8995 4.51008 14.5376C4.23304 14.1758 4.08291 13.7328 4.08291 13.2771C4.08291 12.8213 4.23304 12.3783 4.51008 12.0165C4.78712 11.6547 5.17564 11.3942 5.61558 11.2753L6.76211 10.9705L6.31057 9.8749C6.21154 9.6339 6.1603 9.37595 6.15971 9.11539C6.15971 7.96781 7.09297 7.03456 8.24055 7.03456C8.49753 7.03456 8.75971 7.08658 9.00005 7.18542L10.0967 7.63696L10.4015 6.49042C10.5189 6.04946 10.7787 5.65963 11.1405 5.38155C11.5023 5.10347 11.9459 4.95271 12.4022 4.95271C12.8585 4.95271 13.3021 5.10347 13.6639 5.38155C14.0257 5.65963 14.2855 6.04946 14.4029 6.49042L14.7078 7.63696L15.8044 7.18542C16.0447 7.08658 16.3069 7.03456 16.5639 7.03456C17.7115 7.03456 18.6447 7.96781 18.6447 9.11539C18.6447 9.37238 18.5927 9.6356 18.4939 9.8749L18.0423 10.9705L19.1889 11.2753C19.6288 11.3942 20.0173 11.6547 20.2943 12.0165C20.5714 12.3783 20.7215 12.8213 20.7215 13.2771C20.7215 13.7328 20.5714 14.1758 20.2943 14.5376C20.0173 14.8995 19.6288 15.1599 19.1889 15.2788Z"
                                     fill="#C09D2A" />
-                            </svg>
-
-                            Upload Stamp
+                                </svg>
+                                Upload Stamp
+                            </div>
+                            <input type="file" class="d-none" id="uploadStamp" onchange="uploadStamp(event)" accept="image/*">
                         </a>
                     </div>
 
@@ -904,9 +907,6 @@
                                 {{-- Template Preview --}}
                                 <div id="viewTemplates" class="sidebaraddtext"
                                     style="width: 100%; height:100%; display: none; z-index: 2; position: absolute; right: 0; left :0; background: white; padding: 25px 30px; overflow-y: scroll;">
-                                    <h1 class="text-center" id="sidecustomizationtext"
-                                        style="color:rgb(129, 2, 129) ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
-                                        Customize a Templates</h1>
                                     <div id="templates" class="row"
                                         style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
                                     </div>
@@ -1248,19 +1248,19 @@
                             <div class="box">
                                 <label for="colorPickersetting">Guest Name’s Font Color</label>
                                 <input type="color" id="colorPickersetting" name="colorPickersetting"
-                                    value="{{ $cardData->envTitleColor ?? '#rrggbb' }}">
+                                    value="{{ $cardData->envTitleColor ?? '#000000' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
                                     name="colorPickerenvelope_innersetting"
-                                    value="{{ $cardData->cardColorIn ?? '#rrggbb' }}">
+                                    value="{{ $cardData->cardColorIn ?? '#000000' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
                                     name="colorPickerenvelope_outsetting"
-                                    value="{{ $cardData->cardColorOut ?? '#rrggbb' }}">
+                                    value="{{ $cardData->cardColorOut ?? '#000000' }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">
@@ -1339,7 +1339,7 @@
             var myModal = new bootstrap.Modal(document.getElementById('animationModal'));
             myModal.show();
         });
-        
+
 
         function saveSetting() {
             let rspvVal = "";

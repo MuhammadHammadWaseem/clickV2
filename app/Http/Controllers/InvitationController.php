@@ -324,10 +324,54 @@ class InvitationController extends Controller
             return response()->json(["message" => "Two Sided Disabled"], 200);
         }
     }
-
     public function saveAnimation(Request $request)
     {
         $event = DB::table('events')->where('id_event', $request->event_id)->update(['id_animation' => $request->id_animation]);
         return response()->json(['message' => 'Success']);
+    }
+
+    public function uploadStamp(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'file' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as needed
+        ]);
+
+        // Retrieve the cards associated with the event
+        $cards = Card::where('id_event', $request->id_event)->get();
+
+        if ($request->hasFile('file')) {
+            // Directory where the stamps are stored
+            $path = public_path('event-images/' . $request->id_event . '/stamp');
+
+            // Create the directory if it doesn't exist
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            } else {
+                // Delete all files in the directory
+                $files = glob($path . '/*'); // Get all file names in the directory
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file); // Delete the file
+                    }
+                }
+            }
+
+            // Get the original name of the uploaded file
+            $fileName = $request->file('file')->getClientOriginalName();
+
+            // Loop through each card and update the stamp
+            foreach ($cards as $card) {
+                $card->stamp = $fileName;
+                $card->save();
+            }
+
+            // Move the uploaded file to the specified directory
+            $request->file('file')->move($path, $fileName);
+
+            return response()->json(['message' => 'Stamp uploaded successfully'], 200);
+        }
+
+        return response()->json(['success' => false], 400);
     }
 }

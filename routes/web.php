@@ -165,3 +165,4 @@ Route::get('get-csrf-token', [InvitationController::class, 'getCsrfToken'])->nam
 Route::get('get-template/{id}', [InvitationController::class, 'getTemplateWithId'])->name('getTemplate');
 Route::post('toggle-two-sided', [InvitationController::class, 'toggleTwoSided'])->name('toggleTwoSided');
 Route::post('animation-save', [InvitationController::class, 'saveAnimation'])->name('saveAnimation');
+Route::post('upload-stamp', [InvitationController::class, 'uploadStamp'])->name('uploadStamp');

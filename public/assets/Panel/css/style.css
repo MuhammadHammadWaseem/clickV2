@@ -1072,6 +1072,7 @@ header .langauge-person .person-box ul.drop-menu {
   color: #7A7A7A;
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .edit-cards-boxes .card-styling-box {
