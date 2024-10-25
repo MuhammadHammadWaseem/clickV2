@@ -106,6 +106,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('gift/gift-suggestion', [GiftSuggestion::class, 'store'])->name('gift.store');
              Route::get('gift/gift-suggestion/edit/{id}', [GiftSuggestion::class, 'edit'])->name('gift.edit');
              Route::post('gift/gift-suggestion/update/{id}', [GiftSuggestion::class, 'update'])->name('gift.update');
+             Route::post('gift/gift-suggestion/savetransfer/{id}', [GiftSuggestion::class, 'savetransfer'])->name('savetransfer');
              Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
 
             // Guest
@@ -144,7 +145,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/invitation/setting/update', [InvitationController::class, 'settingUpdate'])->name('invitation.setting.update');
             Route::get('get-card/{event_id}', [InvitationController::class, 'getCard'])->name('getCard');
             Route::get('{id}/get-csrfToken', [InvitationController::class, 'csrfToken'])->name('invitation.getCsrftoken');
-            
+
             // Pay
             Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index');
         });

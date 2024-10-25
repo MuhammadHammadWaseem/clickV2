@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gift;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
 
@@ -10,7 +11,9 @@ class GiftSuggestion extends Controller
 {
     // Fetch the list of gifts
     public function index(){
-        return view('Panel.dashboard.gift-suggestion');
+        $eventId = GeneralHelper::getEventId();
+        $event = Event::where('id_event',$eventId)->select('transfer_link','transfer_type')->first();
+        return view('Panel.dashboard.gift-suggestion',compact("event"));
     }
     public function show()
     {
@@ -73,6 +76,23 @@ class GiftSuggestion extends Controller
     return response()->json(['message' => 'Gift updated successfully!'], 200);
 }
 
+public function savetransfer(Request $request)
+{
+    $event=Event::where('id_event',$request->eventId)->first();
+    if($event){
+        $event->transfer_type=$request->transfertype;
+        $event->transfer_link=$request->transferlink;
+        $event->save();
+        return response()->json([
+            'success' => true,
+            'message' => "Updated Successfully"
+        ]);
+    }
+    return response()->json([
+        'success' => false,
+        'message' => "Error"
+    ]);
+}
 
     // Delete a gift
     public function destroy($id)

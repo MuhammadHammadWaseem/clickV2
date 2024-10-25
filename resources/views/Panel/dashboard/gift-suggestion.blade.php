@@ -1,30 +1,48 @@
 @extends('Panel.layout.master')
 <style>
+    .payment-transfer-box .three-things-align .payment-select-option select {
+        width: 200px;
+        padding: 10px 10px;
+        background: #ededed;
+        border-radius: 20px;
+        border: 2px solid #999999;
+    }
+
+    .payment-transfer-box .three-things-align {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        column-gap: 30px;
+    }
+
+    .payment-transfer-box {
+        margin-top: 20px !important;
+    }
 
     .main-dashboard-sec .left-menu-dash ul li.gift-active a {
-      color: #C09D2A;
+        color: #C09D2A;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.gift-active img {
-      filter: none;
+        filter: none;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.gift-active {
-      background-color: #c09d2a29;
+        background-color: #c09d2a29;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.gift-active::after {
-      width: 5px;
-      height: 100%;
-      background-color: #C09D2A;
-      position: absolute;
-      left: 0;
-      right: 0;
-      content: "";
-      top: 0;
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
     }
-
-    </style>
+</style>
 @section('content')
     @php
         use App\Helpers\GeneralHelper;
@@ -85,6 +103,29 @@
                 </div>
 
             </div>
+
+            <div class="col-lg-12">
+                <div class="payment-transfer-box box-styling">
+
+                    <div class="text">
+                        <h2>TRANSFER DATA</h2>
+                    </div>
+
+                    <div class="three-things-align">
+                        <div class="payment-select-option">
+                            <select id="transferType" required  name="type">
+                                <option value="TRANSFER TYPE"  {{ $event->transfer_type == "TRANSFER TYPE" ? "selected" : "" }}>TRANSFER TYPE</option>
+                                <option value="PAYPAL" {{ $event->transfer_type == "PAYPAL" ? "selected" : "" }}>PAYPAL</option>
+                                <option value="STRYPE" {{ $event->transfer_type == "STRYPE" ? "selected" : "" }}>STRYPE</option>
+                                <option value="INTERAC TRANSFER" {{ $event->transfer_type == "INTERAC TRANSFER" ? "selected" : "" }}>INTERAC TRANSFER</option>
+                            </select>
+                        </div>
+                        <input type="text" id="transferLink" placeholder="Enter link" required value="{{ $event->transfer_link }}" >
+                        <button class="t-btn btn btn-primary" id="saveTransferBtn" type="button">Save</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -107,59 +148,62 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="successmodalCloseBtn"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter04" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text">
-                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>Suggestion Deleted Successfully</h2>
-                    <p>Your gift suggestion has been successfully deleted.</p>
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                        <h2>Suggestion Deleted Successfully</h2>
+                        <p>Your gift suggestion has been successfully deleted.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="successmodalCloseBtn"
+                        data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text">
-                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>Suggestion Edit Successfully</h2>
-                    <p>Your gift suggestion has been successfully edited.</p>
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="closeMainModal"  data-dismiss="modal" >Close</button>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                        <h2>Suggestion Edit Successfully</h2>
+                        <p>Your gift suggestion has been successfully edited.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeMainModal"
+                        data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter02"> Want To Send Invitations To Guests? </button> -->
     <!-- Modal -->
@@ -282,7 +326,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="editModalCancelBtn" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" id="editModalCancelBtn"
+                        data-dismiss="modal">Cancel</button>
                     <button type="submit" class="submit-btn btn btn-primary" form="editGiftForm">Update Gift</button>
                 </div>
             </div>
@@ -292,11 +337,11 @@
 
 @section('scripts')
     <script>
-         function hidemodel() {
+        function hidemodel() {
             $("#closeMainModal1").click();
             var successModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter02'));
-                        successModal.show();
+                'exampleModalCenter02'));
+            successModal.show();
         }
         $(document).ready(function() {
             show();
@@ -328,7 +373,7 @@
             });
         });
 
-        $("#successmodalCloseBtn").on("click",function(){
+        $("#successmodalCloseBtn").on("click", function() {
             var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
             myModal.show();
         });
@@ -336,15 +381,15 @@
         function show() {
             var mealId = $('#event_id').val(); // Corrected line
             $.ajax({
-                    url: "{{ route('panel.event.gift.show', ':id') }}".replace(':id', mealId), // Ensure the correct URL
-                    type: 'GET',
-                    success: function(response) {
-                        console.log(response);
-                        var container = $('.meal-name-boxes');
-                        container.empty();
-                        var gifts = response.gifts;
-                        gifts.forEach(function(gift) {
-                            var mealBox = `
+                url: "{{ route('panel.event.gift.show', ':id') }}".replace(':id', mealId), // Ensure the correct URL
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    var container = $('.meal-name-boxes');
+                    container.empty();
+                    var gifts = response.gifts;
+                    gifts.forEach(function(gift) {
+                        var mealBox = `
                         <div class="meal-box">
                             <div class="three-align-things">
                                 <h6>${gift.name}</h6>
@@ -361,9 +406,9 @@
                             </div>
                         </div>
                     `;
-                            container.append(mealBox);
-                        });
-                    },
+                        container.append(mealBox);
+                    });
+                },
                 error: function(xhr) {
                     toastr.error('Failed to fetch gifts. Please try again.');
                 }
@@ -439,8 +484,8 @@
                     var myModal2 = new bootstrap.Modal(document.getElementById('editGiftModal'));
                     myModal2.hide(); // Hide the modal
                     var successModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter05'));
-                        successModal.show();
+                        'exampleModalCenter05'));
+                    successModal.show();
                     $("#editModalCancelBtn").click();
                     toastr.success('Gift updated successfully!');
                     // location.reload(); // Comment this out to see if it refreshes
@@ -481,6 +526,38 @@
                         toastr.error('Failed to delete gift. Please try again.');
                     }
                 });
+            });
+        });
+
+        $(document).on('click', '#saveTransferBtn', function() {
+            var transferType = $('#transferType').val();
+            var transferLink = $('#transferLink').val();
+            var eventId = "{{ $eventId }}"; // Use your event ID dynamically
+
+                console.log("transferType", transferType);
+                console.log("transferLink", transferLink);
+                console.log("eventId", eventId);
+            $.ajax({
+                url: "{{ route('panel.event.savetransfer', ':id') }}".replace(':id', eventId),
+                type: 'POST', // Change this to POST
+                data: {
+                    transfertype: transferType,
+                    transferlink: transferLink,
+                    eventId: eventId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    console.log(response.success);
+                    if (response.success == true) {
+                        toastr.success('Transfer data saved successfully!');
+                    } else {
+                        toastr.error('Failed to save transfer data. Please try again.');
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    toastr.error('An error occurred. Please try again.');
+                }
             });
         });
     </script>

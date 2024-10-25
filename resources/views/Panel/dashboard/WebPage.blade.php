@@ -59,7 +59,7 @@
                     <div class="two-btn-align">
                         <button class="t-btn t-btn-gray"><a
                                 href="{{ route('panel.event.generalInfos', ['id' => $event->id_event]) }}"
-                                style="color:#777777;">Website Information</a></button>
+                                style="color:#ffffff;">Website Information</a></button>
                         <button class="t-btn t-btn-gray" id="changeMainPhotoBtn">Change Main Photo</button>
                         <button class="t-btn"><a href="{{ route('website', ['id' => $event->id_event]) }}"
                                 style="color:#ffffff;">Visit Website</a></button>
@@ -429,6 +429,9 @@
                         $("#gall").val(''); // Clear input field
                         $("#NoItems").hide();
 
+                        const iframe = document.querySelector('iframe');
+                        iframe.src = iframe.src;
+
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
                             var newImage = `
@@ -665,6 +668,9 @@
                         // Remove the photo box if delete was successful
                         $('#photo-box-' + photoId).remove();
                         toastr.success('Photo deleted successfully!');
+
+                        const iframe = document.querySelector('iframe');
+                        iframe.src = iframe.src;
 
                         // Close the confirmation modal
                         myModal.hide();

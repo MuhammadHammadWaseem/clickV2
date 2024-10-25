@@ -44,10 +44,10 @@
 
     <section class="events-lists-sec-01">
         <div class="main-logo">
-            <a href="{{ route('panel.index') }}"><img src="assets/images/main-logo.png" alt=""></a>
+            <a href="{{ route('web.index') }}"><img src="assets/images/main-logo.png" alt=""></a>
         </div>
         <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-md-12">
                     <div class="text text-center">
                         <h2>Your Previous Events</h2>
