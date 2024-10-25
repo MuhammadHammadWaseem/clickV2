@@ -1,12 +1,83 @@
 @extends('Panel.layout.master')
 <style>
+    #txtTool h5 {
+        color: #7A7A7A !important;
+        font-size: 15px !important;
+        margin-bottom: 10px !important;
+        font-weight: 600 !important;
+        margin-top: 0px !important;
+    }
+
+    .other-editing-btn:hover {
+        color: white !important;
+        background-color: #c09d2a !important;
+    }
+
+    .three-things-align {
+        width: 100% !important;
+        padding: 0 15px;
+    }
+
+    #opacityRange2 {
+        width: -webkit-fill-available;
+    }
+
+    .color-picker-container {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin: 10px 0 !important;
+    }
+
+    label.color-picker-label {
+        margin: 0 !important;
+    }
+
+    .other-editing-btn {
+        background-color: #C9C9C9 !important;
+        color: #777777 !important;
+        font-size: 18px !important;
+        padding: 8px 25px !important;
+        border-radius: 10px !important;
+        transition: .3s !important;
+    }
+
+    .t-btn-styling {
+        background-color: #C09D2A !important;
+        border: 2px solid #AAAAAA !important;
+        border-radius: 10px !important;
+        padding: 10px 20px !important;
+        display: block;
+        color: white;
+        transition: .3s;
+        font-size: 25px !important;
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .t-btn-styling:hover {
+        background-color: black !important;
+        border-color: black !important;
+        transition: .2s;
+
+    }
+
+    .btn-group {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 15px;
+        margin-top: 20px;
+    }
 
 
-.editing-options-box {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-}
+
+    .editing-options-box {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+    }
+
     .font-color-styling input#colorPicker {
         padding: 0 !important;
         width: 200px;
@@ -286,7 +357,7 @@
                     </div>
 
                     <div class="card-styling-box">
-                        <a href="#">
+                        <a id="openAnimationModal">
                             <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -296,7 +367,6 @@
                                     d="M12.7058 8.55563C10.1027 8.55563 7.98438 10.6739 7.98438 13.277C7.98438 15.8802 10.1027 17.9985 12.7058 17.9985C15.3089 17.9985 17.4272 15.8802 17.4272 13.277C17.4272 10.6739 15.3089 8.55563 12.7058 8.55563ZM12.7058 15.9176C11.2502 15.9176 10.0652 14.7326 10.0652 13.277C10.0652 11.8215 11.2502 10.6365 12.7058 10.6365C14.1613 10.6365 15.3464 11.8215 15.3464 13.277C15.3464 14.7326 14.1613 15.9176 12.7058 15.9176Z"
                                     fill="#C09D2A" />
                             </svg>
-
                             Animations
                         </a>
                     </div>
@@ -663,11 +733,12 @@
                                             </select>
                                         </div>
                                         <div class="input-box">
-                                            <button type="button" onclick="addText()" class="btn t-btn mb-4">Add Text</button>
+                                            <button type="button" onclick="addText()" class="btn t-btn mb-4">Add
+                                                Text</button>
                                         </div>
                                         <div class="text-styling-things">
                                             <ul>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="boldBtn()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -675,7 +746,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="italicBtn()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -683,7 +754,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="textRotationBtn()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -691,7 +762,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="borderBtn()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -699,7 +770,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="moveForward()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -707,7 +778,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#"><svg width="30" height="30"
+                                                <li><a onclick="moveBackword()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -715,7 +786,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#" id="deleteBtn"><svg width="30" height="30"
+                                                <li><a id="deleteBtn"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -729,9 +800,9 @@
                                             </ul>
                                         </div>
                                         <div class="font-size-styling">
-                                            <h4>Font Size</h4>
+                                            <h4 class="disable-text-selection">Font Size</h4>
                                             <ul>
-                                                <li><a href="#" onclick="increaseText()"><svg width="30" height="30"
+                                                <li><a onclick="increaseText()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -739,7 +810,7 @@
                                                                 fill="#F1F1F1" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a href="#" onclick="decreaseText()"><svg width="30" height="30"
+                                                <li><a onclick="decreaseText()"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
@@ -748,16 +819,16 @@
                                             </ul>
                                         </div>
                                         <div class="font-color-styling">
-                                            <h4>Font Color</h4>
+                                            <h4 class="disable-text-selection">Font Color</h4>
                                             <input type="color" id="colorPicker" oninput="changeTextColor2()"
                                                 name="favcolor1" value="#050505">
-                                            <h4>Background Color</h4>
+                                            <h4 class="disable-text-selection">Background Color</h4>
                                             <input type="color" id="canvasColor" name="favcolor1" value="#ffffff"
                                                 oninput="chnageBGColor()">
                                         </div>
 
                                         <div class="other-editing">
-                                            <h4>Opacity</h4>
+                                            <h4 class="disable-text-selection">Opacity</h4>
                                             <div class="slider-container">
                                                 <div class="range-slider">
                                                     <input type="range" id="opacityRange" min="0"
@@ -770,20 +841,48 @@
                                         <div class="other-editing">
                                             <h4>Other Editing</h4>
                                             <ul>
-                                                <li><a href="#">Flip Text</a></li>
-                                                <li><a href="#">Text Transform</a></li>
-                                                <li><a href="#">Letter Spacing</a></li>
-                                                <li><a href="#">Line Height</a></li>
-                                                <li><a href="#">Text Shadow</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textFlipBtn()">Flip Text</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textTransformBtn()">Text Transform</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="letterSpacingBtn()">Letter Spacing</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="lineHeightBtn()">Line Height</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="shadowBtn()">Text Shadow</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textAlignmentBtn()">Text Alignment</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="neonText()">Text Neon Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextMirror()">Text Mirror</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextIce()">Text Ice Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextFire()">Text Fire Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextRainbow()">Text Rainbow Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextSparkle()">Text Sparkle Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyGradientStroke()">Text Gradient Stroke</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyShadowBlur()">Shadow Blur</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextHolographic()">Holographic Text</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextComic()">Text Comic</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextShimmer()">Text Shimmer</a></li>
                                             </ul>
                                         </div>
                                     </form>
-                                    <button type="button" class="btn btn-primary t-btn SaveBtn" id="save1" onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03">
+                                    {{-- <button type="button" class="btn btn-primary t-btn SaveBtn" id="save1" onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03">
                                         Save Invitation Card
-                                    </button>
+                                    </button> --}}
                                 </div>
                                 {{-- Text Editor --}}
-
 
                                 {{-- Card Preview --}}
                                 <div id="sidebarbackgroundaddimg1" style="display: none;">
@@ -816,10 +915,6 @@
 
                                 {{-- Image Preview --}}
                                 <div class="sidebaraddimg" style="display: none;z-index: 2;">
-                                    <h1 class="text-center"
-                                        style="color:purple ;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
-                                        Customization
-                                        the <br> Image</h1>
                                     <div id="txtTool" class="row  pt-3 pb-3">
                                         <div class="col-12">
                                             <h5>Image Size&nbsp;</h5>
@@ -827,36 +922,57 @@
                                         <div class="col-12  btn-toolbar mb-3" role="toolbar"
                                             aria-label="Toolbar with button groups">
                                             <div class="btn-group me-2" role="group" aria-label="First group">
-                                                <button type="button" class="btn btn-secondary " style="width: 95px;"
+                                                <button type="button" class="btn btn-secondary t-btn-styling"
                                                     onclick="increaseImageSize()">+</button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    style="width: 95px; border-left: 2px solid black;"
+                                                <button type="button" class="btn btn-secondary t-btn-styling"
                                                     onclick="decreaseImageSize()">-</button>
                                             </div>
                                         </div>
-                                        <div class="col-12 mt-12">
+                                        <div class="col-12">
                                             <h5>Image Edit &nbsp; &nbsp;</h5>
                                         </div>
-                                        <div class="col-12 mt-12">
-                                            <img src="/icon/trash-alt-svgrepo-com.svg" class="deleteBtn2"
+                                        <div class="col-12">
+                                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="deleteBtn2"
                                                 onclick="deleteImage()" id="trash2" width="42px" height="42px"
-                                                style="margin-top: 5px;" alt="">
-                                        </div>
-                                        <div class="color-picker-container">
-                                            <label for="opacityRange2" class="color-picker-label">Opacity:</label>
-                                            <input type="range" id="opacityRange2" min="0" max="100"
-                                                step="10" value="100" class="color-picker"
-                                                oninput="changeOpacity(this)">
+                                                style="margin-top: 5px; cursor: pointer;" alt="">
+                                                <path
+                                                    d="M6.25 25C6.25 25.663 6.51339 26.2989 6.98223 26.7678C7.45107 27.2366 8.08696 27.5 8.75 27.5H21.25C21.913 27.5 22.5489 27.2366 23.0178 26.7678C23.4866 26.2989 23.75 25.663 23.75 25V10H26.25V7.5H21.25V5C21.25 4.33696 20.9866 3.70107 20.5178 3.23223C20.0489 2.76339 19.413 2.5 18.75 2.5H11.25C10.587 2.5 9.95107 2.76339 9.48223 3.23223C9.01339 3.70107 8.75 4.33696 8.75 5V7.5H3.75V10H6.25V25ZM11.25 5H18.75V7.5H11.25V5ZM10 10H21.25V25H8.75V10H10Z"
+                                                    fill="#4A4A4A" />
+                                                <path
+                                                    d="M11.25 12.5H13.75V22.5H11.25V12.5ZM16.25 12.5H18.75V22.5H16.25V12.5Z"
+                                                    fill="#4A4A4A" />
+                                            </svg>
                                         </div>
 
-                                        <button onclick="moveForward()" class="moveForward">Move Forward</button>
-                                        <button onclick="moveBackword()" class="moveBackword">Move Backward</button>
+                                        <div class="three-things-align">
+                                            {{-- <div class="color-picker-container">
+                                                <input type="range" id="opacityRange2" min="0" max="100"
+                                                    step="10" value="100" class="color-picker"
+                                                    oninput="changeOpacity(this)">
+                                            </div> --}}
+                                            <div class="other-editing mb-3">
+                                                <h4>Opacity</h4>
+                                                <div class="slider-container">
+                                                    <div class="range-slider">
+                                                        <input type="range" id="opacityRange2" min="0"
+                                                            max="100" value="25" step="1"
+                                                            oninput="changeOpacity(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button onclick="moveForward()" class="moveForward other-editing-btn">Move
+                                                Forward</button>
+                                            <button onclick="moveBackword()" class="moveBackword other-editing-btn">Move
+                                                Backward</button>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- Image Preview --}}
 
                                 {{-- Sticker Preview --}}
-                                <div class="sidebar" style="display: none;z-index: 1; width: 100%; height:100%; overflow-y: scroll; position: absolute; right: 0; left :0; background: white; padding: 25px 30px;">
+                                <div class="sidebar"
+                                    style="display: none;z-index: 1; width: 100%; height:100%; overflow-y: scroll; position: absolute; right: 0; left :0; background: white; padding: 25px 30px;">
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-end align-items-center h-100">
                                             <button type="button" class="btn-close" aria-label="Close"
@@ -872,6 +988,11 @@
                                 </div>
                                 {{-- Sticker Preview --}}
 
+                                <button type="button" class="btn btn-primary t-btn SaveBtn" id="save1"
+                                    onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03">
+                                    Save Invitation Card
+                                </button>
+
                             </div>
                         </div>
 
@@ -885,30 +1006,10 @@
 
 
     {{-- EXTRA Start --}}
-
+    
     <div class="row" id="imgDiv"></div>
-
     <!-- Save Modal -->
     <input type="hidden" id="id_card">
-    {{-- <div class="modal fade" id="exampleModalSave" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class=" modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Save Canva</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <iframe id="iframe" src="" width="100%" height="100%" frameborder="0"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- End Save Modal -->
 
     <div class=" sidebar" style="display: none;z-index: 1;">
         <div class="row">
@@ -925,25 +1026,29 @@
     </div>
 
     <!-- Animations Modal -->
-    <div class="modal fade" height="70vh" id="animationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade modal-01 modal-02 modal-03" id="animationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Set Animations</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    {{-- <h5 class="modal-title" id="exampleModalLabel">Set Animations</h5> --}}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body text-center">
+                    <div class="text">
+                        <h2>Set Animations</h2>
+                    </div>
                     <div class="row d-flex justify-content-center align-items-center" id="animationModalBody">
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary" onclick="saveAnimation()"
-                        data-bs-dismiss="modal">Save Animation</button>
-                    <button type="button" class="btn btn-sm btn-warning" onclick="saveNoneOfThese()"
-                        data-bs-dismiss="modal">Non Animations</button>
+                    <button type="button" class="btn btn-secondary" id="closeAnimationModal"  data-dismiss="modal" aria-label="Close">Close</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"  data-dismiss="modal" aria-label="Close">Save Animation</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveNoneOfThese()"
+                    data-dismiss="modal" aria-label="Close">Non Animations</button>
                 </div>
             </div>
         </div>
@@ -993,7 +1098,9 @@
                 </div>
                 <div class="modal-body">
                     <iframe id="iframe" height="100%" width="100%" src="" frameborder="0"></iframe>
-                    <p>You need to save the setting first</p>
+                    <div class="text">
+                        <p class="text-center">You need to save the setting first</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1146,12 +1253,14 @@
                             <div class="box">
                                 <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
-                                    name="colorPickerenvelope_innersetting" value="{{ $cardData->cardColorIn ?? '#rrggbb' }}">
+                                    name="colorPickerenvelope_innersetting"
+                                    value="{{ $cardData->cardColorIn ?? '#rrggbb' }}">
                             </div>
                             <div class="box">
                                 <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
-                                    name="colorPickerenvelope_outsetting" value="{{ $cardData->cardColorOut ?? '#rrggbb' }}">
+                                    name="colorPickerenvelope_outsetting"
+                                    value="{{ $cardData->cardColorOut ?? '#rrggbb' }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">
@@ -1226,6 +1335,11 @@
             var myModal = new bootstrap.Modal(document.getElementById('exampleModaliframe'));
             myModal.show();
         });
+        $("#openAnimationModal").on("click", function() {
+            var myModal = new bootstrap.Modal(document.getElementById('animationModal'));
+            myModal.show();
+        });
+        
 
         function saveSetting() {
             let rspvVal = "";

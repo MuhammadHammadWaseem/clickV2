@@ -324,4 +324,10 @@ class InvitationController extends Controller
             return response()->json(["message" => "Two Sided Disabled"], 200);
         }
     }
+
+    public function saveAnimation(Request $request)
+    {
+        $event = DB::table('events')->where('id_event', $request->event_id)->update(['id_animation' => $request->id_animation]);
+        return response()->json(['message' => 'Success']);
+    }
 }

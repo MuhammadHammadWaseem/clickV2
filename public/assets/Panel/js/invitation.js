@@ -2780,12 +2780,11 @@ function saveAnimation() {
     dataType: "json",
     contentType: "application/json",
     success: function (msg) {
-
       GetAnimations();
+      toastr.success('Animation Save Successfully!');
     },
     error: function (xhr, status, error) {
       var err = eval("(" + xhr.responseText + ")");
-
     },
   });
 }
