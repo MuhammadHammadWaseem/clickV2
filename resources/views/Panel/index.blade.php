@@ -44,10 +44,10 @@
 
     <section class="events-lists-sec-01">
         <div class="main-logo">
-            <a href="index.html"><img src="assets/images/main-logo.png" alt=""></a>
+            <a href="{{ route('panel.index') }}"><img src="assets/images/main-logo.png" alt=""></a>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="row"> 
                 <div class="col-md-12">
                     <div class="text text-center">
                         <h2>Your Previous Events</h2>
@@ -121,14 +121,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Create a New Event</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2 class="text-center">Create a New Event</h2>
+                        <p class="text-center">You have 5 days full functional free trial</p>
                     </div>
                     <div class="main-form-box">
                         <form id="eventTitle">
                             @csrf
                             <input type="text" name="title" placeholder="Title ( Max 25 Characters )" required>
-                            <input type="date" name="date" placeholder="Date" required>
+                            <input type="datetime-local" name="date" placeholder="Date" required>
                             <select name="type" required>
                                 <option selected disabled>Select Type</option>
                                 @foreach ($eventList as $data)
@@ -348,6 +348,8 @@
                     data: formData,
                     success: function(response) {
                         if (response.success) {
+
+
                             // Show success message
                             toastr.success(response.message);
                             //here
@@ -362,6 +364,7 @@
 
                             // Get the event data from the response
                             var event = response.event;
+                            var openPanelUrl = '{{ route('panel.event.generalInfos', ':id') }}'.replace(':id', event.id_event);
 
                             // Create a new row for the event and append it to tbody
                             var newRow = `
@@ -372,8 +375,8 @@
                                 <td>
                                     <div class="edit-delet">
                                         <ul>
-                                            <li><a href="#"><img src="assets/images/edit.png" alt=""></a></li>
-                                            <li><a href="#"><img src="assets/images/delet.png" alt=""></a></li>
+                                            <li><a href="${openPanelUrl}"><img src="assets/images/edit.png" alt=""></a></li>
+                                            <li><a href="#" onclick="deleteEvent(${event.id_event})"><img src="assets/images/delet.png" alt=""></a></li>
                                         </ul>
                                     </div>
                                 </td>
