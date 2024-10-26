@@ -183,32 +183,66 @@ class GuestListController extends Controller
         public function show(Request $request)
         {
             $eventId = GeneralHelper::getEventId();
-
+            if($request->filter == "1"){
                 $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
-            foreach ($guests as $g) {
-                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
-                foreach ($g->members as $gm) {
-                    if ($gm->id_meal != 0)
-                        $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                foreach ($guests as $g) {
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+                    foreach ($g->members as $gm) {
+                        if ($gm->id_meal != 0)
+                            $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                    }
+                    foreach ($g->members as $gm) {
+                        if ($gm->id_table != 0)
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                    }
                 }
-                foreach ($g->members as $gm) {
-                    if ($gm->id_table != 0)
-                        $gm->table = Table::where('id_table', $gm->id_table)->first();
+                foreach ($guests as $g) {
+                    if ($g->id_meal != 0)
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
                 }
-            }
-            foreach ($guests as $g) {
-                if ($g->id_meal != 0)
-                    $g->meal = Meal::where('id_meal', $g->id_meal)->first();
-            }
-            foreach ($guests as $g) {
-                if ($g->id_table != 0)
-                    $g->table = Table::where('id_table', $g->id_table)->first();
-            }
+                foreach ($guests as $g) {
+                    if ($g->id_table != 0)
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                }
 
-            // Return the guests and pagination information as JSON
-            return response()->json([
-                'guests' => $guests,
-            ]);
+                // Return the guests and pagination information as JSON
+                return response()->json([
+                    'guests' => $guests,
+                ]);
+            }
+            if($request->filter == "checked-in"){
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
+                $CheckedIn = 0;
+                foreach ($guests as $g) {
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+
+                    $CheckedIn = $g->checkin;
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->checkin == 1) {
+                            $CheckedIn = 1;
+                        }
+                        if ($gm->id_meal != 0)
+                            $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                    }
+                    foreach ($g->members as $gm) {
+                        if ($gm->id_table != 0)
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                    }
+                    $g->CheckedIn = $CheckedIn;
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_meal != 0)
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_table != 0)
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                }
+                return response()->json([
+                    'guests' => $guests,
+                ]);
+            }
         }
 
         public function edit($id)
@@ -283,6 +317,55 @@ class GuestListController extends Controller
                 return response()->json(["guests" => $events]);
             }
 
+            // public function importFromCsvGuest(Request $request, $id)
+            // {
+            //     // Validate that the request has a file and it is a CSV
+            //     $request->validate([
+            //         'csv_file' => 'required|mimes:csv,txt',
+            //     ]);
+
+            //     // Get the uploaded file
+            //     $file = $request->file('csv_file');
+
+            //     // Open the file and read its contents
+            //     if (($handle = fopen($file, 'r')) !== FALSE) {
+            //         $header = null;
+            //         $data = [];
+
+            //         // Loop through the CSV file and extract rows
+            //         while (($row = fgetcsv($handle, 1000, ";")) !== FALSE) {
+            //             if (!$header) {
+            //                 $header = $row; // Assuming first row is the header
+            //             } else {
+            //                 $data[] = array_combine($header, $row); // Combine header with data rows
+            //             }
+            //         }
+            //         fclose($handle);
+
+            //         // Insert guests into the database
+            //         foreach ($data as $g) {
+            //             $guest = new Guest();
+            //             $guest->name = $g['name'];
+            //             $guest->email = $g['email'];
+            //             $guest->phone = $g['phone'];
+            //             $guest->whatsapp = $g['whatsapp'];
+            //             $guest->mainguest = 1;
+            //             $guest->parent_id_guest = 0;
+            //             $guest->notes = $g['notes'];
+            //             $guest->id_event = $id;
+            //             $guest->members_number = $g['nummembers'];
+            //             $guest->code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
+            //             $guest->save();
+            //         }
+
+            //         return response()->json(["message" => "Guests imported successfully."]);
+            //     }
+
+            //     return response()->json(["error" => "Error processing the file."], 400);
+            // }
+
+
+
             public function importFromCsvGuest(Request $request, $id)
             {
                 // Validate that the request has a file and it is a CSV
@@ -303,7 +386,10 @@ class GuestListController extends Controller
                         if (!$header) {
                             $header = $row; // Assuming first row is the header
                         } else {
-                            $data[] = array_combine($header, $row); // Combine header with data rows
+                            $combined = array_combine($header, $row);
+                            if ($combined) {
+                                $data[] = $combined; // Only add if the combination was successful
+                            }
                         }
                     }
                     fclose($handle);
@@ -311,17 +397,22 @@ class GuestListController extends Controller
                     // Insert guests into the database
                     foreach ($data as $g) {
                         $guest = new Guest();
-                        $guest->name = $g['name'];
-                        $guest->email = $g['email'];
-                        $guest->phone = $g['phone'];
-                        $guest->whatsapp = $g['whatsapp'];
+                        $guest->name = $g['name'] ?? null;
+                        $guest->email = $g['email'] ?? null;
+                        $guest->phone = $g['phone'] ?? null;
+                        $guest->whatsapp = $g['whatsapp'] ?? null;
                         $guest->mainguest = 1;
                         $guest->parent_id_guest = 0;
-                        $guest->notes = $g['notes'];
+                        $guest->notes = $g['notes'] ?? null;
                         $guest->id_event = $id;
-                        $guest->members_number = $g['nummembers'];
+                        $guest->members_number = $g['nummembers'] ?? null;
+                        $guest->allergies = $g['allergies'] ?? null; // Add this line
                         $guest->code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20);
-                        $guest->save();
+
+                        // Only save if a name is provided
+                        if (!is_null($guest->name)) {
+                            $guest->save();
+                        }
                     }
 
                     return response()->json(["message" => "Guests imported successfully."]);
@@ -331,7 +422,9 @@ class GuestListController extends Controller
             }
 
 
-        public function deleteGuest(Request $request)
+
+
+            public function deleteGuest(Request $request)
     {
         // Check if guestid or guestIds is provided
         if (!$request->has('guestid') && !$request->has('guestIds')) {

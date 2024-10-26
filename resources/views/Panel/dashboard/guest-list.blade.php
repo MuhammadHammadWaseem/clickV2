@@ -389,6 +389,17 @@
                             <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                                 data-target="#exampleModalCenter05">Export Invitation QR
                                 Code </button>
+                                <select onchange="showGuest(this.value)" class="form-select">
+                                    <option selected value="1">ALL</option>
+                                    <option value="checked-in">CHECKED-IN</option>
+                                    <option value="declined">DECLINED</option>
+                                    <option value="attending">CONFIRMED</option>
+                                    <option value="not-open">NOT OPEN</option>
+                                    <option value="opened">OPENED</option>
+                                    <option value="a-to-z">A to Z</option>
+                                    <option value="z-to-a">Z to A</option>
+                                </select>
+
                         </div>
                     </div>
 
@@ -555,7 +566,7 @@
                     <!-- Form end -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="AddGuestClose">Cancel</button>
                     <button type="submit" class="btn btn-primary submit-btn" id="submitGuestForm">Yes, Manage
                         Now</button>
                 </div>
@@ -577,7 +588,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">New Guest</h2>
+                        <h2 class="text-center">Edit Guest</h2>
                     </div>
                     <!-- Form start -->
                     <form id="EditguestForm">
@@ -698,7 +709,7 @@
                     <!-- Form end -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="EditGuestClose">Cancel</button>
                     <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">Yes, Manage
                         Now</button>
                 </div>
@@ -757,7 +768,7 @@
                     <!-- Form end -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="AddMemberClose">Cancel</button>
                     <button type="button" class="btn btn-primary submit-btn" id="submitMemberForm">Yes, Manage
                         Now</button>
                 </div>
@@ -848,7 +859,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Upload Guest</button>
+                        data-target="#">Upload Guest</button>
                 </div>
                 </form>
             </div>
@@ -955,7 +966,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            showGuest();
+            showGuest("1");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -979,11 +990,8 @@
                         if (response.success) {
                             toastr.success('Guest added successfully!');
                             $('#guestForm')[0].reset();
-                            var myModal = new bootstrap.Modal(document
-                                .getElementById(
-                                    'AddGuest'));
-                            myModal.hide();
-                            showGuest();
+                          $('#AddGuestClose').click();
+                            showGuest("1");
                         } else {
                             alert(response.message || 'Failed to add guest.');
                         }
@@ -1011,7 +1019,6 @@
                 // Set the parent guest ID in a hidden field in the form
                 $('#parentidguest').val(parentIdGuest);
                 // Log the parent ID to verify it's working
-                console.log(parentIdGuest);
                 // Member form submission
                 $('#submitMemberForm').on('click', function(e) {
                     var mealId = $('#idevent').val();
@@ -1031,10 +1038,8 @@
                             if (response.success) {
                                 toastr.success('Member added successfully!');
                                 $('#AddMemberForm')[0].reset();
-                                var myModal = new bootstrap.Modal(document
-                                    .getElementById('AddMember'));
-                                myModal.hide(); // Close the modal after success
-                                showGuest(); // Refresh the guest list
+                                $('#AddMemberClose').click(); // Close the modal after success
+                                showGuest("1"); // Refresh the guest list
                             } else {
                                 alert(response.message || 'Failed to add guest.');
                             }
@@ -1053,16 +1058,18 @@
 
         });
 
-        function showGuest(page = 1) {
+        function showGuest(filter) {
             var mealId = $('#idevent').val();
 
             $.ajax({
-                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "?page=" + page,
-                type: "GET",
+                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "&filter=" + filter,
+                type: "POST",
                 dataType: "json",
+                data: {
+                    filter: filter,
+                    _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
                 success: function(response) {
-                    console.log(response);
-                    console.log(response);
                     var guests = response.guests;
 
                     // Clear the existing accordions
@@ -1078,7 +1085,11 @@
                             <tr>
                                 <td>
                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}<br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                    <span class="${guest.CheckedIn == 0 ? 'd-none' : ''}">
+                                        <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                    </span>
                                 </td>
                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                 <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
@@ -1201,10 +1212,9 @@
                 data: formData,
                 success: function(response) {
                     // Optionally reload guest list
-                    showGuest();
+                    showGuest("1");
                     toastr.success('Guest updated successfully');
-                    var myModal = new bootstrap.Modal(document.getElementById('EditGuest'));
-                    myModal.hide();
+                    $('#EditGuestClose').click();
                     $('#modifier').css('display', 'none');
                     $('#modifierButton').css('display', 'none');
 
@@ -1220,7 +1230,8 @@
         });
 
 
-        $("#importModal").on("click", function() {
+
+        // Show Import Guest Using Modal
             var mealId = $('#idevent').val();
             $.ajax({
                 url: `/event/${mealId}/guests/show-event`,
@@ -1274,8 +1285,9 @@
                     console.error('Error fetching guest data:', err);
                 }
             });
-        });
 
+
+            // Upload Guest from other event 
         // Handle the "Upload Guest" button click
         $(".submit-btn").on("click", function() {
             var selectedGuests = [];
@@ -1299,11 +1311,9 @@
                         idevent: mealId, // Assuming this is the target event id
                     },
                     success: function(response) {
-                        showGuest();
+                        showGuest("1");
                         $('#GuestImportForm')[0].reset();
-                        var myModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter02'));
-                        myModal.hide();
+                     $('#exampleModalCenter02').click();
                         toastr.success("Guests imported successfully");
                     },
                     error: function(err) {
@@ -1332,13 +1342,13 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    showGuest();
+                    showGuest("1");
                     toastr.success("Guests imported successfully!");
                     idArray = [];
                 },
                 error: function(xhr, status, error) {
                     // Handle error response
-                    console.log(xhr.responseText);
+                    // console.log(xhr.responseText);
                     alert("Error uploading the file.");
                 }
             });
@@ -1435,12 +1445,10 @@
             // Update the selected count display
             const countDisplay = modifierDiv.querySelector('p');
             countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
-            console.log("Selected Guest IDs:", idArray); // Log selected guest IDs
         }
 
         // Decline all selected guests
         function declineAllGuests() {
-            console.log(idArray);
             if (idArray.length > 1) {
                 $.ajax({
                     url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Your route for declining all
@@ -1451,7 +1459,7 @@
                         _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
                     success: function(response) {
-                        showGuest(); // Reload the guest list
+                        showGuest("1"); // Reload the guest list
                         toastr.success('Selected guests declined successfully');
                         $('#modifier').css('display', 'none'); // Hide modifier section
                         idArray = []; // Reset the selected guests array
@@ -1476,7 +1484,7 @@
                         _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
                     success: function(response) {
-                        showGuest(); // Reload the guest list
+                        showGuest("1"); // Reload the guest list
                         toastr.success('Guests declined successfully');
                         $('#modifier').css('display', 'none'); // Hide modifier section
                         idArray = []; // Reset the selected guests array
@@ -1514,7 +1522,6 @@
 
         // Single delete button for one guest
         function deleteGuest() {
-            console.log(idArray);
             if (idArray.length === 1) {
                 $.ajax({
                     url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
@@ -1525,7 +1532,7 @@
                         _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
                     success: function(response) {
-                        showGuest(); // Reload the guest list
+                        showGuest("1"); // Reload the guest list
                         toastr.success('Guest deleted successfully');
                         $('#modifier').css('display', 'none'); // Hide modifier section
                         idArray = []; // Reset the selected guests array
@@ -1550,7 +1557,7 @@
                         _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
                     success: function(response) {
-                        showGuest(); // Reload the guest list
+                        showGuest("1"); // Reload the guest list
                         toastr.success('Guests deleted successfully');
                         $('#modifier').css('display', 'none'); // Hide modifier section
                         idArray = []; // Reset the selected guests array
@@ -1574,7 +1581,6 @@
                         guestId),
                     type: "GET",
                     success: function(response) {
-                        console.log(response);
                         $('#edit_title').val(response.titleGuest);
                         $('#edit_name').val(response.name);
                         $('#edit_email').val(response.email);
@@ -1703,7 +1709,7 @@
                 type: "POST",
                 data: dataToSend,
                 success: function(response) {
-                    showGuest(); // Reload the guest list
+                    showGuest("1"); // Reload the guest list
                     toastr.success('Display Options Saved');
                     $('#DisplaySaveOptionForm')[0].reset();
                     $('#modifier').css('display', 'none'); // Hide modifier section
@@ -1718,8 +1724,6 @@
 
         // save invitaion
         function SendInvitation() {
-            console.log("click");
-
             var formData = {}; // Initialize an empty object to collect checked options
             // Collect checked options only
             $('#SendInvitationForm input[type="checkbox"]:checked').each(function() {
@@ -1741,14 +1745,13 @@
                 dataToSend.guestIds = idArray; // Send multiple guest IDs
             }
 
-            console.log(dataToSend);
             // Send data using AJAX
             $.ajax({
                 url: "{{ route('panel.event.sendinvitations', ['id' => $eventId]) }}", // Replace with your route URL
                 method: 'POST',
                 data: dataToSend,
                 success: function(response) {
-                    showGuest(); // This function reloads the guest list or does a follow-up action
+                    showGuest("1"); // This function reloads the guest list or does a follow-up action
                     toastr.success('Invitations sent successfully');
                     $('#SendInvitationForm')[0].reset(); // Reset the form after success
                     $("#closeSendInvitationForm").click();

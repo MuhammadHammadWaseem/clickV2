@@ -112,7 +112,7 @@ Route::group(['as' => 'panel.'], function () {
             // Guest
             Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list');
             Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
-            Route::get('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
+            Route::post('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
             Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
             Route::post('{id}/guests/update', [GuestListController::class, 'update'])->name('guests.update');
             Route::get('{id}/guests/show-event', [GuestListController::class, 'allguests'])->name('guests.show-event');
