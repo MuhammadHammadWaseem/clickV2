@@ -153,6 +153,7 @@ Route::group(['as' => 'panel.'], function () {
 
             // Pay
             Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index');
+            Route::post('{id}/pay-datas', [PayController::class, 'paydatas'])->name('pay.get');
         });
     });
 });
