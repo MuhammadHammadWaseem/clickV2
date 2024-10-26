@@ -86,7 +86,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/delete/videos', [WebPageController::class, 'deleteVideo'])->name('delete.videos');
 
             // Photos
-            Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos');
+            Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos')->middleware('payCheck');
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
@@ -110,7 +110,7 @@ Route::group(['as' => 'panel.'], function () {
              Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
 
             // Guest
-            Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list');
+            Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list')->middleware('payCheck');
             Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
             Route::post('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
             Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
@@ -127,14 +127,14 @@ Route::group(['as' => 'panel.'], function () {
             // Guest End
 
             // reminder
-            Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder');
+            Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder')->middleware('payCheck');
             Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
             Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
             Route::post('{id}/sendAcSms', [reminderController::class, 'sendAcSms'])->name('sendAcSms');
             Route::post('{id}/editsave', [reminderController::class, 'editsave'])->name('editsave');
 
             //message
-            Route::get('{id}/message', [messageController::class, 'index'])->name('message');
+            Route::get('{id}/message', [messageController::class, 'index'])->name('message')->middleware('payCheck');
             Route::post('{id}/editsaveMessage', [messageController::class, 'editsaveMessage'])->name('editsaveMessage');
             Route::post('{id}/sendSmsMail', [messageController::class, 'sendSmskMail'])->name('sendSmsMail');
             Route::post('{id}/sendSmsWhatsapp', [messageController::class, 'sendSmsWhatsapp'])->name('sendSmsWhatsapp');
@@ -143,7 +143,7 @@ Route::group(['as' => 'panel.'], function () {
 
 
             // Table eating
-            Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index');
+            Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');

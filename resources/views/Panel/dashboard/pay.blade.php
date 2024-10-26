@@ -128,7 +128,8 @@
                             </div>
                             <div class="two-btn-form-align">
                                 <button>CANCEL</button>
-                                <button>PAY NOW</button>
+                                <button id="canBtn" class="d-none"><a id="can" class="text-white" href="">PAY NOW</a></button>
+                                <button id="usaBtn" class="d-none"><a id="usa" class="text-white" href="">PAY NOW</a></button>
                             </div>
 
                         </form>
@@ -218,6 +219,9 @@
                 console.log(response);
                 let res = JSON.parse(response);
 
+                $("#can").attr('href', res[0].linkcan);
+                $("#usa").attr('href', res[0].linkusa);
+
                 $("#canadaTable").empty();
                 $("#canadaTable").append(`
                     <tr>
@@ -274,6 +278,10 @@
             if (this.value == "canada") {
                 $("#usaTable").addClass("d-none");
                 $("#canadaTable").removeClass("d-none");
+                
+                $("#canBtn").removeClass("d-none");
+                $("#usaBtn").addClass("d-none");
+
                 $("#province").append(`
                 <select name="" id="">
                     <option selected disabled>Province*</option>
@@ -286,6 +294,10 @@
             if (this.value == "us") {
                 $("#usaTable").removeClass("d-none");
                 $("#canadaTable").addClass("d-none");
+
+                $("#canBtn").addClass("d-none");
+                $("#usaBtn").removeClass("d-none");
+
                 $("#province").append(`
                     <select name="" id="">
                         <option selected disabled>Province*</option>
