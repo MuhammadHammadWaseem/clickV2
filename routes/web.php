@@ -145,6 +145,7 @@ Route::group(['as' => 'panel.'], function () {
             // Table eating
             Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('payCheck');
             Route::get('{id}/get-tables', [TableSeatingController::class, 'showTables'])->name('get.tables')->middleware('payCheck');
+            Route::get('{id}/get-table-guest', [TableSeatingController::class, 'showTableGuest'])->name('get.table.guest')->middleware('payCheck');
             Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data')->middleware('payCheck');
             Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table')->middleware('payCheck');
             Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');

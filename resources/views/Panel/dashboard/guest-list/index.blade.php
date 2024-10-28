@@ -178,8 +178,6 @@
 
     </div>
 
-
-    <!-- <button  type="button" class="btn btn-primary t-btn t-btn-theme"  data-toggle="modal" data-target="#exampleModalCenter02">Friend’s Table </button> -->
     <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter04" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -245,8 +243,8 @@
         </div>
     </div>
 
-    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="deleteTableModal" tabindex="-1" role="dialog" aria-labelledby="deleteTableModalLabel"
-        aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="deleteTableModal" tabindex="-1"
+        role="dialog" aria-labelledby="deleteTableModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -263,7 +261,80 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeDeleteModal"
                         data-dismiss="modal">Cancel</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteTable">Yes, Delete</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteTable">Yes,
+                        Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter02" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>Guest Table</h2>
+                        <p>Guests of table <span id="dynamicTableName"></span></p>
+                    </div>
+                    <div class="modal-table-type-content">
+                        <div class="main-heading">
+                            <ul>
+                                <li>Name </li>
+                                <li># Of Guests</li>
+                                <li>Actions</li>
+                            </ul>
+                        </div>
+                        <div class="sub-main-content">
+                            <ul>
+                                <li>Test Event </li>
+                                <li>250 Guests</li>
+                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
+                                            alt=""></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-main-content">
+                            <ul>
+                                <li>Test Event </li>
+                                <li>250 Guests</li>
+                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
+                                            alt=""></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-main-content">
+                            <ul>
+                                <li>Test Event </li>
+                                <li>250 Guests</li>
+                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
+                                            alt=""></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-main-content">
+                            <ul>
+                                <li>Test Event </li>
+                                <li>250 Guests</li>
+                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
+                                            alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter">Upload Guest</button>
+                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
         </div>
@@ -272,6 +343,20 @@
 @section('scripts')
     <script>
         let tableToDelete = null;
+        let tableName = null;
+        let tableGuests = null;
+        let tableGuestLength = null;
+
+        $(document).on('click', '#openGuestModal', function() {
+            tableName = $(this).data('tablename');
+            tableGuests = $(this).data('tableguests');
+            tableGuestLength = $(this).data('tableguestlength');
+            $("#dynamicTableName").empty();
+            $("#dynamicTableName").append(`${tableName} (${tableGuestLength}/${tableGuests} Guests)`);
+
+            var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+            deleteModal.show();
+        });
 
         $(document).on('click', '.delete-table-btn', function() {
             tableToDelete = $(this).data('id'); // Get the table ID from the data-id attribute
@@ -304,6 +389,19 @@
             }
         });
 
+        function getGuests() {
+            $.ajax({
+                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr) {
+                    toastr.error('Failed to add gift. Please try again.');
+                }
+            });
+        }
+
 
         function getTable() {
             $.ajax({
@@ -323,10 +421,10 @@
                                     </div>
                                     <div class="box">
                                         ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                ` : `
-                                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                `}
+                                                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                            ` : `
+                                                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                            `}
                                     </div>
 
                                     <div class="box">
@@ -335,7 +433,7 @@
                                                     alt=""></button>
                                             <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
                                                     alt=""></button>
-                                            <button> <img src="{{ asset('assets/images/Invitations.png') }}"
+                                            <button id="openGuestModal" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
                                                     alt=""></button>
                                         </div>
                                     </div>
@@ -344,14 +442,14 @@
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                                        <p>${guest.name}</p>
-                                                                                    `).join('')}
+                                                                                                    <p>${guest.name}</p>
+                                                                                                `).join('')}
                                     </div>
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                                        <p>${guest.meal_name}</p>
-                                                                                    `).join('')}
+                                                                                                    <p>${guest.meal_name}</p>
+                                                                                                `).join('')}
                                     </div>
                                 </div>
 
@@ -421,6 +519,7 @@
 
         $(document).ready(function() {
             getTable();
+            getGuests();
 
             $('#addTableButton').click(function() {
                 // Collect form data

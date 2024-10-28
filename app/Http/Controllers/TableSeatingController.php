@@ -9,6 +9,7 @@ use App\Models\Guest;
 use App\Helpers\GeneralHelper;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Meal;
 
 class TableSeatingController extends Controller
 {
@@ -40,6 +41,38 @@ class TableSeatingController extends Controller
             'success' => true,
             'table' => $tables,
             'message' => 'Tables Get Successfully!'
+        ]);
+    }
+    public function showTableGuest($id)
+    {
+        $guests = DB::select('
+        SELECT *
+            FROM guests
+            WHERE (id_event = ' . $id . ') AND 
+            (
+                ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
+            )
+        ');
+
+        foreach ($guests as $guest) {
+
+            if ($guest->id_table != 0) {
+                $table = Table::where('id_table', $guest->id_table)->first();
+                if ($table)
+                    $guest->tablename = $table->name;
+            }
+            if ($guest->id_meal != null) {
+                $meal = Meal::where('id_meal', $guest->id_meal)->first();
+                if ($meal)
+                    $guest->mealName = $meal->name;
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'guests' => $guests,
+            'message' => 'Guests Get Successfully!'
         ]);
     }
 
@@ -124,7 +157,7 @@ class TableSeatingController extends Controller
         }
     }
 
-    public function deleteTable(Request $request,$id)
+    public function deleteTable(Request $request, $id)
     {
         $table = Table::where('id_table', $id)->first();
         if ($table) {
