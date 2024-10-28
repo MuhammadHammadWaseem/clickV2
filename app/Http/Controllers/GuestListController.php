@@ -182,15 +182,190 @@ class GuestListController extends Controller
 
         public function show(Request $request)
         {
+            // dd($request->all());
             $eventId = GeneralHelper::getEventId();
-            if($request->filter == "1"){
+
+            if ($request->filter == "1") {
                 $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
+
                 foreach ($guests as $g) {
                     $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+
                     foreach ($g->members as $gm) {
-                        if ($gm->id_meal != 0)
+                        if ($gm->id_meal != 0) {
                             $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                        }
+                        if ($gm->id_table != 0) {
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                        }
                     }
+
+                    if ($g->id_meal != 0) {
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                    }
+                    if ($g->id_table != 0) {
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                    }
+                }
+
+                return response()->json([
+                    'guests' => $guests,
+                ]);
+            }
+
+            if ($request->filter == "checked-in") {
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
+
+                foreach ($guests as $g) {
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+                    $CheckedIn = $g->checkin;
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->checkin == 1) {
+                            $CheckedIn = 1;
+                        }
+                        if ($gm->id_meal != 0) {
+                            $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                        }
+                        if ($gm->id_table != 0) {
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                        }
+                    }
+
+                    $g->CheckedIn = $CheckedIn;
+
+                    if ($g->id_meal != 0) {
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                    }
+                    if ($g->id_table != 0) {
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                    }
+                }
+
+                return response()->json([
+                    'guests' => $guests,
+                ]);
+            }
+
+            if($request->filter == "declined"){
+
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
+                    $isDeclined = 0;
+                    foreach ($guests as $g) {
+                        $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+
+                        $isDeclined = $g->declined;
+                        foreach ($g->members as $gm) {
+                            if ($gm->declined == 1) {
+                                $isDeclined = 1;
+                            }
+                            if ($gm->id_meal != 0)
+                                $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                        }
+                        foreach ($g->members as $gm) {
+                            if ($gm->id_table != 0)
+                                $gm->table = Table::where('id_table', $gm->id_table)->first();
+                        }
+                        $g->isDeclined = $isDeclined;
+                        }
+                        foreach ($guests as $g) {
+                            if ($g->id_meal != 0)
+                                $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                        }
+                        foreach ($guests as $g) {
+                            if ($g->id_table != 0)
+                                $g->table = Table::where('id_table', $g->id_table)->first();
+                        }
+                        return response()->json([
+                            'guests' => $guests,
+                        ]);
+            }
+
+            if($request->filter == "attending"){
+                $guests = Guest::where('id_event', $eventId)
+                ->where('mainguest', 1)
+                ->get();
+            foreach ($guests as $g) {
+                // Fetch members associated with the main guest
+                $g->members = Guest::where('id_event', $eventId)
+                    ->where('mainguest', 0)
+                    ->where('parent_id_guest', $g->id_guest)
+                    ->get();
+
+                // Initialize the new column
+                $g->hasOpenedTwo = 0;
+
+                if ($g->opened == 2) {
+                    $g->guestOpened = 1;
+                } else {
+                    $g->guestOpened = 0;
+                }
+
+                foreach ($g->members as $gm) {
+                    // Check if any member's 'opened' number is equal to 2
+                    if ($gm->opened == 2) {
+                        // If found, set the new column to true
+                        $g->hasOpenedTwo = 1;
+                        // Break the loop as we only need to find one member with 'opened' equal to 2
+                        break;
+                    }
+                }
+                foreach ($g->members as $gm) {
+                    if ($gm->id_meal != 0)
+                        $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                }
+                foreach ($g->members as $gm) {
+                    if ($gm->id_table != 0)
+                        $gm->table = Table::where('id_table', $gm->id_table)->first();
+                }
+
+                // Update properties for the main guest
+                $g->isDeclined = $g->checkin;
+                $g->CheckedIn = $g->declined;
+                $g->Attending = $g->declined != 1 && $g->checkin != 1;
+            }
+
+            // Fetch meal and table information for each guest
+            foreach ($guests as $g) {
+                if ($g->id_meal != 0)
+                    $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+            }
+            foreach ($guests as $g) {
+                if ($g->id_table != 0)
+                    $g->table = Table::where('id_table', $g->id_table)->first();
+            }
+
+            return response()->json([
+                'guests' => $guests,
+            ]);
+            }
+
+            if($request->filter == "not-open"){
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->whereNull('declined')->whereNull('opened')->get();
+                foreach ($guests as $g) {
+                    $NotConfim = 0;
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('declined')->whereNull('opened')->get();
+
+                    if ($g->opened) {
+
+                        $g->NotConfim = 1;
+                    } else {
+                        $g->NotConfim = 0;
+                    }
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->opened) {
+
+                            $gm->NotConfim = 1;
+                        } else {
+                            $gm->NotConfim = 0;
+                        }
+
+                        if ($gm->id_meal != 0)
+                            $gm->meal =Meal::where('id_meal', $gm->id_meal)->first();
+                    }
+
+
                     foreach ($g->members as $gm) {
                         if ($gm->id_table != 0)
                             $gm->table = Table::where('id_table', $gm->id_table)->first();
@@ -204,17 +379,64 @@ class GuestListController extends Controller
                     if ($g->id_table != 0)
                         $g->table = Table::where('id_table', $g->id_table)->first();
                 }
-
-                // Return the guests and pagination information as JSON
                 return response()->json([
                     'guests' => $guests,
                 ]);
             }
-            if($request->filter == "checked-in"){
-                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->get();
+
+
+            if($request->filter == "opened"){
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->where('opened', 1)->where('id_meal', null)->get();
+
+                foreach ($guests as $g) {
+                    $NotConfim = 0;
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('opened')->get();
+
+                    if ($g->opened) {
+
+                        $g->NotConfim = 1;
+                    } else {
+                        $g->NotConfim = 0;
+                    }
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->opened) {
+
+                            $gm->NotConfim = 1;
+                        } else {
+                            $gm->NotConfim = 0;
+                        }
+
+                        if ($gm->id_meal != 0)
+                            $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                    }
+
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->id_table != 0)
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                    }
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_meal != 0)
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_table != 0)
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                }
+                return response()->json([
+                    'guests' => $guests,
+                ]);
+            }
+
+            if($request->filter == "a-to-z"){
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)
+                ->orderBy('name', 'asc')->get();
                 $CheckedIn = 0;
                 foreach ($guests as $g) {
-                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)
+                    ->orderBy('name', 'asc')->get();
 
                     $CheckedIn = $g->checkin;
 
@@ -243,7 +465,43 @@ class GuestListController extends Controller
                     'guests' => $guests,
                 ]);
             }
-        }
+
+            if($request->filter == "z-to-a"){
+                $guests = Guest::where('id_event', $request->idevent)->where('mainguest', 1)
+                ->orderBy('name', 'desc')->get();
+                    $CheckedIn = 0;
+                    foreach ($guests as $g) {
+                    $g->members = Guest::where('id_event', $request->idevent)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)
+                    ->orderBy('name', 'desc')->get();
+
+                    $CheckedIn = $g->checkin;
+
+                    foreach ($g->members as $gm) {
+                        if ($gm->checkin == 1) {
+                            $CheckedIn = 1;
+                        }
+                        if ($gm->id_meal != 0)
+                            $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                    }
+                    foreach ($g->members as $gm) {
+                        if ($gm->id_table != 0)
+                            $gm->table = Table::where('id_table', $gm->id_table)->first();
+                    }
+                    $g->CheckedIn = $CheckedIn;
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_meal != 0)
+                        $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+                }
+                foreach ($guests as $g) {
+                    if ($g->id_table != 0)
+                        $g->table = Table::where('id_table', $g->id_table)->first();
+                }
+                return $guests;
+
+            }
+
+    }
 
         public function edit($id)
         {
