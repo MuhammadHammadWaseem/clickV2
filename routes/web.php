@@ -148,6 +148,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data')->middleware('payCheck');
             Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table')->middleware('payCheck');
             Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');
+            Route::post('{id}/delete-table', [TableSeatingController::class, 'deleteTable'])->name('delete.table')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');

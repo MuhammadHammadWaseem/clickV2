@@ -236,9 +236,34 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="closeEditModal"
+                        data-dismiss="modal">Close</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="saveEditTable">Save
                         Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="deleteTableModal" tabindex="-1" role="dialog" aria-labelledby="deleteTableModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>Confirm Deletion</h2>
+                        <p>Are you sure you want to delete this table?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeDeleteModal"
+                        data-dismiss="modal">Cancel</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteTable">Yes, Delete</button>
                 </div>
             </div>
         </div>
@@ -246,6 +271,40 @@
 @endsection
 @section('scripts')
     <script>
+        let tableToDelete = null;
+
+        $(document).on('click', '.delete-table-btn', function() {
+            tableToDelete = $(this).data('id'); // Get the table ID from the data-id attribute
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteTableModal'));
+            deleteModal.show();
+        });
+
+        $('#confirmDeleteTable').click(function() {
+            if (tableToDelete) {
+                var url = `{{ route('panel.event.delete.table', ':id') }}`.replace(':id', tableToDelete);
+                const tableData = {
+                    idevent: {{ $eventId }}
+                };
+                $.ajax({
+                    url: url, // Update with your route for deleting a table
+                    type: 'POST',
+                    data: tableData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $('#closeDeleteModal').click();
+                        getTable(); // Refresh the table list
+                        toastr.success('Table deleted successfully.');
+                    },
+                    error: function() {
+                        toastr.error('Failed to delete the table. Please try again.');
+                    }
+                });
+            }
+        });
+
+
         function getTable() {
             $.ajax({
                 url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
@@ -264,17 +323,17 @@
                                     </div>
                                     <div class="box">
                                         ${(table.guest_number - table.guests.length <= 0) ? `
-                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                ` : `
-                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                `}
+                                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                ` : `
+                                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                `}
                                     </div>
 
                                     <div class="box">
                                         <div class="three-action-align">
                                             <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
                                                     alt=""></button>
-                                            <button> <img src="{{ asset('assets/images/delet-icon.png') }}"
+                                            <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
                                                     alt=""></button>
                                             <button> <img src="{{ asset('assets/images/Invitations.png') }}"
                                                     alt=""></button>
@@ -285,14 +344,14 @@
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                        <p>${guest.name}</p>
-                                                                    `).join('')}
+                                                                                        <p>${guest.name}</p>
+                                                                                    `).join('')}
                                     </div>
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                        <p>${guest.meal_name}</p>
-                                                                    `).join('')}
+                                                                                        <p>${guest.meal_name}</p>
+                                                                                    `).join('')}
                                     </div>
                                 </div>
 
@@ -348,7 +407,7 @@
                 },
                 success: function(response) {
                     // Hide the modal and reload the tables list
-                    $('#editTableModal').modal('hide');
+                    $('#closeEditModal').click();
                     getTable(); // Call your function to refresh the table list
                     toastr.success('Table updated successfully.');
                 },

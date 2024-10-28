@@ -7,6 +7,8 @@ use App\Models\Table;
 use Illuminate\Support\Facades\DB;
 use App\Models\Guest;
 use App\Helpers\GeneralHelper;
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class TableSeatingController extends Controller
 {
@@ -114,11 +116,31 @@ class TableSeatingController extends Controller
                 'success' => true,
                 'message' => 'Table Updated Susseccfully!'
             ]);
-        } else{
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Table Not Found!'
             ]);
+        }
+    }
+
+    public function deleteTable(Request $request,$id)
+    {
+        $table = Table::where('id_table', $id)->first();
+        if ($table) {
+            $event = Event::where('id_event', $table->id_event)->first();
+            if ($event && $event->id_user == Auth::id()) {
+                $table->delete();
+                $guests = Guest::where('id_table', $id)->get();
+                foreach ($guests as $g) {
+                    $g->id_table = null;
+                    $g->save();
+                }
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
         }
     }
 
