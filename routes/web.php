@@ -104,10 +104,10 @@ Route::group(['as' => 'panel.'], function () {
             // Gift Suggestion
             Route::get('{id}/gift-suggestion/show', [GiftSuggestion::class, 'show'])->name('gift.show');
             Route::post('gift/gift-suggestion', [GiftSuggestion::class, 'store'])->name('gift.store');
-             Route::get('gift/gift-suggestion/edit/{id}', [GiftSuggestion::class, 'edit'])->name('gift.edit');
-             Route::post('gift/gift-suggestion/update/{id}', [GiftSuggestion::class, 'update'])->name('gift.update');
-             Route::post('gift/gift-suggestion/savetransfer/{id}', [GiftSuggestion::class, 'savetransfer'])->name('savetransfer');
-             Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
+            Route::get('gift/gift-suggestion/edit/{id}', [GiftSuggestion::class, 'edit'])->name('gift.edit');
+            Route::post('gift/gift-suggestion/update/{id}', [GiftSuggestion::class, 'update'])->name('gift.update');
+            Route::post('gift/gift-suggestion/savetransfer/{id}', [GiftSuggestion::class, 'savetransfer'])->name('savetransfer');
+            Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
 
             // Guest
             Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list')->middleware('payCheck');
@@ -144,6 +144,10 @@ Route::group(['as' => 'panel.'], function () {
 
             // Table eating
             Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('payCheck');
+            Route::get('{id}/get-tables', [TableSeatingController::class, 'showTables'])->name('get.tables')->middleware('payCheck');
+            Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data')->middleware('payCheck');
+            Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table')->middleware('payCheck');
+            Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');

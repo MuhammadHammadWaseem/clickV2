@@ -1,108 +1,100 @@
 @extends('Panel.layout.master')
 <style>
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
+        /* border-bottom: 1px solid #00000038; */
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box {
+        width: 25%;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box {
+        display: flex;
+        margin: 20px 0;
+        align-items: center;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .bottom-box {
+        display: flex;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h6 {
+        color: #2A2A2A;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h5 {
+        color: #A9967D;
+        font-size: 15px;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h4 {
+        font-size: 15px;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box p {
+        font-size: 14px;
+    }
 
 
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align {
+        display: flex;
+        gap: 10px;
+    }
 
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
-    border-bottom: 1px solid #00000038;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    margin-top: 20px;
-}
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button {
+        background-color: #ff000000;
+        border-right: 1px solid #00000033;
+        padding-right: 10px;
+    }
 
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes {
-    display: flex;
-    justify-content: space-between;
-}
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:last-child {
+        border: none;
+    }
 
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details  .box {
-    width: 25%;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align {
-    display: flex;
-    flex-direction: column;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box {
-    display: flex;
-    margin: 20px 0;
-    align-items: center;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .bottom-box {
-    display: flex;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h6 {
-    color: #2A2A2A;
-    font-size: 17px;
-    font-weight: 700;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h5 {
-    color: #A9967D;
-    font-size: 15px;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h4 {
-    font-size: 15px;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box p {
-    font-size: 14px;
-}
-
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align {
-    display: flex;
-    gap: 10px;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button {
-    background-color: #ff000000;
-    border-right: 1px solid #00000033;
-    padding-right: 10px;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:last-child {
-    border: none;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:focus{
-    border-right: 1px solid #00000033 !important;
-}
-
-
-
-
-.main-dashboard-sec .left-menu-dash ul li.table-active a {
-  color: #C09D2A;
-}
-
-.main-dashboard-sec .left-menu-dash ul li.table-active img {
-  filter: none;
-}
-
-.main-dashboard-sec .left-menu-dash ul li.table-active {
-  background-color: #c09d2a29;
-}
-
-.main-dashboard-sec .left-menu-dash ul li.table-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box .box .three-action-align button:focus {
+        border-right: 1px solid #00000033 !important;
+    }
 
 
 
 
+    .main-dashboard-sec .left-menu-dash ul li.table-active a {
+        color: #C09D2A;
+    }
 
+    .main-dashboard-sec .left-menu-dash ul li.table-active img {
+        filter: none;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.table-active {
+        background-color: #c09d2a29;
+    }
+
+    .main-dashboard-sec .left-menu-dash ul li.table-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 </style>
 @section('content')
     @php
@@ -136,13 +128,6 @@
                         <div class="text">
                             <h2>Management Plan</h2>
                         </div>
-                        {{-- <div class="three-things-align">
-                            <ul>
-                                <li>Total Guests : 5 ( 2 Seated )</li>
-                                <li>Total Number Of Table : 10</li>
-
-                            </ul>
-                        </div> --}}
                     </div>
                     <div class="management-plan-box">
                         <div class="box">
@@ -162,101 +147,31 @@
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                                 data-target="#exampleModalCenter04">Add Table</button>
-                              <a href="#" class="t-btn">Print Plan</a>
+                            <a href="#" class="t-btn">Print Plan</a>
                         </div>
                     </div>
 
                     <div class="table-align-boxes">
                         <div class="th-boxes">
                             <div class="box">
-                               <h6> Table Name</h6>
+                                <h6> Table Name</h6>
                             </div>
                             <div class="box">
                                 <h6> Table #</h6>
-                             </div>
-                             <div class="box">
+                            </div>
+                            <div class="box">
                                 <h6> Guest Allowed</h6>
-                             </div>
-                             <div class="box">
+                            </div>
+                            <div class="box">
                                 <h6> Actions</h6>
-                             </div>
+                            </div>
                         </div>
 
-                        <div class="td-boxes-down-align">
-                            <div class="top-box">
-                                <div class="box">
-                                    <h5> Friends</h5>
-                                 </div>
-                                 <div class="box">
-                                    <h5> T01265</h5>
-                                 </div>
-                                 <div class="box">
-                                    <h5> Open 10 guest</h5>
-                                 </div>
-                                 <div class="box">
-                                   <div class="three-action-align">
-                                    <button>  <img src="{{ asset('assets/images/edit-icon.png') }}" alt=""></button>
-                                    <button>  <img src="{{ asset('assets/images/delet-icon.png') }}" alt=""></button>
-                                    <button>  <img src="{{ asset('assets/images/Invitations.png') }}" alt=""></button>
-                                   </div>
-                                 </div>
-                            </div>
-                            <div class="bottom-box">
-                                <div class="box">
-                                    <h4> Sitter</h4>
-                                    <p>Jhon Dalton</p>
-                                 </div>
-                                 <div class="box">
-                                    <h4> Meal</h4>
-                                    <p>Chicken</p>
-                                 </div>
-                            </div>
+                        <div id="tableAppend">
                         </div>
+
                     </div>
 
-                    {{-- <div class="table-box">
-                        <table>
-                            <tr>
-                                <th>Table Name</th>
-                                <th>Table #</th>
-                                <th>Status</th>
-                                <th>Guests</th>
-                                <th>Actions</th>
-                            </tr>
-
-                            <tr>
-                                <td>Friends</td>
-                                <td>T01265</td>
-                                <td>Open</td>
-                                <td>10 Guests </td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="#"><img src="{{ asset('assets/images/edit-pencil.png') }}"
-                                                        alt=""></a></li>
-                                            <li><a href="#"><img src="{{ asset('assets/images/action-delet.png') }}"
-                                                        alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </table>
-
-                    </div> --}}
-
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="table-content-pagination single-pagination">
-                    <ul>
-                        <li><a href="#" class="activ">&lt;</a></li>
-                        <li><a href="#" class="activ">01</a></li>
-                        <li><a href="#">02</a></li>
-                        <li><a href="#">03</a></li>
-                        <li><a href="#">04</a></li>
-                        <li><a href="#" class="activ">&gt;</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -270,7 +185,6 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -278,182 +192,206 @@
                 <div class="modal-body">
                     <div class="text">
                         <h2>New Table</h2>
-                        {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                     </div>
                     <div class="main-form-box mt-3">
-                        <form id="createTable">
-                            <input type="number" placeholder="Table Number">
-                            <input type="text" placeholder="Table Name">
-                            <input type="number" placeholder="Max Guest">
-
+                        <form id="createTableForm">
+                            <input type="number" id="tableNumber" name="table_number" placeholder="Table Number" required>
+                            <input type="text" id="tableName" name="table_name" placeholder="Table Name" required>
+                            <input type="number" id="maxGuest" name="max_guest" placeholder="Max Guest" required>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Add Table</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                    <button type="button" class="btn btn-secondary" id="closeAddModalBtn"
+                        data-dismiss="modal">Close</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="addTableButton">Add Table</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-    <!-- <button  type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal" data-target="#exampleModalCenter01">Would You Like Manage Tables Manually? </button> -->
-
-
-
-    {{-- <div class="modal fade modal-01 add-new-meal" id="exampleModalCenter01" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="editTableModal" tabindex="-1" role="dialog"
+        aria-labelledby="editTableModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Would You Like Manage Tables Manually?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>Edit Table</h2>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="submit" class="submit-btn">Yes, Manage Now</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- <div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="text">
-                        <h2>Upload Form CSV</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    </div>
-                    <form action="">
-                        <input type="file">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="submit" class="submit-btn">Upload Guest List</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
-    <!-- Modal -->
-    {{-- <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter02" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="text">
-                        <h2>Upload Form Another Event?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    </div>
-                    <div class="modal-table-type-content">
-                        <div class="main-heading">
-                            <ul>
-                                <li>Name </li>
-                                <li># Of Guests</li>
-                                <li>Actions</li>
-                            </ul>
-                        </div>
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="assets/images/user-plus.png" alt=""></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="assets/images/user-plus.png" alt=""></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="assets/images/user-plus.png" alt=""></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="assets/images/user-plus.png" alt=""></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Upload Guest</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-
-    <!-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal"  data-target="#exampleModalCenter05"> Updated Successfully </button> -->
-    <!-- Modal -->
-    {{-- <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="text">
-                        <img src="assets/images/circle-check.png" alt="">
-                        <h2>Updated Successfully</h2>
-                        <p>Your changes has been successfully added.</p>
+                    <div class="main-form-box mt-3">
+                        <form id="editTableForm">
+                            <input type="hidden" id="editTableId">
+                            <label for="editTableName">Table Name</label>
+                            <input type="text" id="editTableName" name="table_name" required>
+                            <label for="editTableNumber">Table Number</label>
+                            <input type="number" id="editTableNumber" name="table_number" required>
+                            <label for="editMaxGuest">Max Guest</label>
+                            <input type="number" id="editMaxGuest" name="max_guest" required>
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="saveEditTable">Save
+                        Changes</button>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 @section('scripts')
+    <script>
+        function getTable() {
+            $.ajax({
+                url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
+                type: 'GET',
+                success: function(response) {
+                    $("#tableAppend").empty();
+                    response.table.forEach(table => {
+                        $("#tableAppend").append(`
+                            <div class="td-boxes-down-align">
+                                <div class="top-box">
+                                    <div class="box">
+                                        <h5>${table.name}</h5>
+                                    </div>
+                                    <div class="box">
+                                        <h5>${table.number}</h5>
+                                    </div>
+                                    <div class="box">
+                                        ${(table.guest_number - table.guests.length <= 0) ? `
+                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                ` : `
+                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                `}
+                                    </div>
+
+                                    <div class="box">
+                                        <div class="three-action-align">
+                                            <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
+                                                    alt=""></button>
+                                            <button> <img src="{{ asset('assets/images/delet-icon.png') }}"
+                                                    alt=""></button>
+                                            <button> <img src="{{ asset('assets/images/Invitations.png') }}"
+                                                    alt=""></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-box">
+                                    <div class="box">
+                                        ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
+                                        ${table.guests.map(guest => `
+                                                                        <p>${guest.name}</p>
+                                                                    `).join('')}
+                                    </div>
+                                    <div class="box">
+                                        ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
+                                        ${table.guests.map(guest => `
+                                                                        <p>${guest.meal_name}</p>
+                                                                    `).join('')}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr>
+                        `);
+                    });
+                },
+                error: function(xhr) {
+                    toastr.error('Failed to add gift. Please try again.');
+                }
+            });
+        }
+
+        $(document).on('click', '.edit-table-btn', function() {
+            const tableId = $(this).data('id'); // Assuming the button has a data-id attribute
+            var url = `{{ route('panel.event.get.table.data', ':id') }}`.replace(':id', tableId);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function(response) {
+                    // Populate the form with the current table data
+                    $('#editTableId').val(response.table.id_table);
+                    $('#editTableName').val(response.table.name);
+                    $('#editTableNumber').val(response.table.number);
+                    $('#editMaxGuest').val(response.table.guest_number);
+                    // Show the edit modal
+                    var successModal = new bootstrap.Modal(document.getElementById('editTableModal'));
+                    successModal.show();
+                },
+                error: function() {
+                    toastr.error('Failed to load table data.');
+                }
+            });
+        });
+
+        $('#saveEditTable').click(function() {
+            const tableId = $('#editTableId').val();
+            const tableData = {
+                table_name: $('#editTableName').val(),
+                table_number: $('#editTableNumber').val(),
+                max_guest: $('#editMaxGuest').val(),
+                idevent: {{ $eventId }}
+            };
+            var url = `{{ route('panel.event.edit.table', ':id') }}`.replace(':id', tableId);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: tableData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Hide the modal and reload the tables list
+                    $('#editTableModal').modal('hide');
+                    getTable(); // Call your function to refresh the table list
+                    toastr.success('Table updated successfully.');
+                },
+                error: function() {
+                    toastr.error('Failed to update the table. Please try again.');
+                }
+            });
+        });
+
+
+
+        $(document).ready(function() {
+            getTable();
+
+            $('#addTableButton').click(function() {
+                // Collect form data
+                const tableData = {
+                    id_event: {{ $eventId }},
+                    table_number: $('#tableNumber').val(),
+                    table_name: $('#tableName').val(),
+                    max_guest: $('#maxGuest').val()
+                };
+
+                // AJAX request to submit form data
+                $.ajax({
+                    url: "{{ route('panel.event.store.table', ['id' => $eventId]) }}", // Change this to your route
+                    type: 'POST',
+                    data: tableData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        toastr.success("Table created Successfully!")
+                        $("#closeAddModalBtn").click();
+                        $('#createTableForm')[0].reset(); // Clear the form
+                        getTable();
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        alert('An error occurred while adding the table');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

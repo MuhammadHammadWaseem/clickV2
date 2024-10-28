@@ -1470,7 +1470,7 @@ input[type="checkbox"].check_box_style:checked::after {
 .box-styling.guest-list {
   margin-bottom: 0px;
   padding-bottom: 20px;
-  height: 95%;
+  height: 100%;
 }
 
 button.btn.btn-primary.t-btn.t-btn-dark {
