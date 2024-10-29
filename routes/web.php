@@ -151,6 +151,8 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');
             Route::post('{id}/delete-table', [TableSeatingController::class, 'deleteTable'])->name('delete.table')->middleware('payCheck');
             Route::post('set-tables', [TableSeatingController::class, 'setTable'])->name('set.table')->middleware('payCheck');
+            Route::post('set-guest-seat', [TableSeatingController::class, 'settablesseat'])->name('settablesseat')->middleware('payCheck');
+            Route::post('remove-guest', [TableSeatingController::class, 'removeGuest'])->name('removeGuest')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');
@@ -184,3 +186,4 @@ Route::get('get-template/{id}', [InvitationController::class, 'getTemplateWithId
 Route::post('toggle-two-sided', [InvitationController::class, 'toggleTwoSided'])->name('toggleTwoSided');
 Route::post('animation-save', [InvitationController::class, 'saveAnimation'])->name('saveAnimation');
 Route::post('upload-stamp', [InvitationController::class, 'uploadStamp'])->name('uploadStamp');
+Route::get('/print-table/{idevent}', [TableSeatingController::class, 'print'])->name('print')->middleware('payCheck');
