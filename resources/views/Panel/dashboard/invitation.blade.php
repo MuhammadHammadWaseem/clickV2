@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 <style>
     #txtTool h5 {
         color: #7A7A7A !important;
@@ -1006,7 +1006,7 @@
 
 
     {{-- EXTRA Start --}}
-    
+
     <div class="row" id="imgDiv"></div>
     <!-- Save Modal -->
     <input type="hidden" id="id_card">

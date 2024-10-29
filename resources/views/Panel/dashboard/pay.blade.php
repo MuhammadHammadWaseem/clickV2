@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 <style>
     .box-styling select {
         background-color: #EDEDED;
@@ -278,7 +278,7 @@
             if (this.value == "canada") {
                 $("#usaTable").addClass("d-none");
                 $("#canadaTable").removeClass("d-none");
-                
+
                 $("#canBtn").removeClass("d-none");
                 $("#usaBtn").addClass("d-none");
 

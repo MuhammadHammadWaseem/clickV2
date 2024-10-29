@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 <style>
     .box-styling.event-photos-gallery.meal-details .meal-box .three-align-things {
         display: flex;

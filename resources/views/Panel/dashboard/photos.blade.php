@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 
 <style>
     .main-dashboard-sec .left-menu-dash ul li.poto-active a {

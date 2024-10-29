@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 <style>
     .payment-transfer-box .three-things-align .payment-select-option select {
         width: 200px;

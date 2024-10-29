@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 <style>
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
         /* border-bottom: 1px solid #00000038; */
@@ -405,7 +405,7 @@
                                 <ul>
                                     <li>${guest.titleGuest ?? ""} ${guest.name}</li>
                                     <li>${guest.mealName ?? "-"}</li>
-                                    ${(guest.id_table != 0) ? 
+                                    ${(guest.id_table != 0) ?
                                         `<li class="text-success">${guest.tablename}</li>`
                                         :
                                         `<li class="text-danger">Not Seated</li>`
@@ -437,7 +437,7 @@
                     <ul>
                         <li>${guest.titleGuest ?? ""} ${guest.name}</li>
                         <li>${guest.mealName ?? "-"}</li>
-                        ${(guest.id_table != 0) ? 
+                        ${(guest.id_table != 0) ?
                             `<li class="text-success">${guest.tablename}</li>`
                             :
                             `<li class="text-danger">Not Seated</li>`
