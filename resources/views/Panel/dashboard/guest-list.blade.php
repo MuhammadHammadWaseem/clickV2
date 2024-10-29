@@ -10,6 +10,14 @@
     align-items: stretch !important;
 }
 
+.box-styling.event-photos-gallery .two-things-align .two-btn-align select.form-select {
+    height: 40px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background: #ffffffb8;
+}
+
 #ExportQrModal .modal-body .text .form-group input#reservationDate {
     width: 100%;
     height: 40px;
