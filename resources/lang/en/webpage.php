@@ -26,8 +26,18 @@ return[
     see the layout.',
     'Submit' => 'Submit',
     'Close' => 'Close',
-    'Custome' => 'Custome',
-    'Custome' => 'Custome',
+    'Image Add Success Heading' => 'Images Added Successfully',
+    'Image Add Success Message' => 'Your images have been successfully added.',
+    'Delete Image' => 'You Want to Delete this image?',
+    'No' => 'No',
+    'Yes' => 'Yes',
+    'Serve Meal Button Text' => 'Want To Serve Your Guests a Meal?',
+    'Serve Meal Modal Heading' => 'Want To Serve Your Guests a Meal?',
+    'Serve Meal Modal Body Text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'Serve Meal Modal No Button' => 'No, I Don\'t',
+    'Serve Meal Modal Yes Button' => 'Yes, Add Meals',
+    'Image Delete Success Heading' => 'Image Deleted Successfully',
+    'Image Delete Success Message' => 'The image has been successfully deleted.',
 
 
 

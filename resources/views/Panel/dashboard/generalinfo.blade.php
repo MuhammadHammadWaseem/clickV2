@@ -231,12 +231,12 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="assets/images/circle-check.png" alt="">
-                        <h2>Changes Uodated Successfully</h2>
-                        <p>Your event has been successfully updated.</p>
+                        <h2>{{ __('genralInfo.Update Success Heading') }}</h2>
+                        <p>{{ __('genralInfo.Update Success Message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.Close') }}</button>
                 </div>
             </div>
         </div>

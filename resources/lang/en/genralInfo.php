@@ -25,9 +25,9 @@ return[
     'Event Date' => 'Event Date',
     'Type Here' => 'Type Here',
     'location' => 'location',
-    'Meals' => 'Meals',
-    'Meals' => 'Meals',
-    'Meals' => 'Meals',
-    'Meals' => 'Meals',
-    'Meals' => 'Meals',
+    'Close' => 'Close',
+    'Update Success Heading' => 'Changes Updated Successfully',
+    'Update Success Message' => 'Your event has been successfully updated.',
+
+
 ];

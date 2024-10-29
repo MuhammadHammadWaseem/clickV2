@@ -219,13 +219,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Images Added Successfully</h2>
-                        <p>Your images has been successfully added.</p>
+                        <h2>{{ __('webpage.Image Add Success Heading') }}</h2>
+                        <p>{{ __('webpage.Image Add Success Message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="saveImagesModal" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('webpage.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -244,22 +244,21 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
-                        <h2>You Want to Delete this image ?</h2>
+                        <h2>{{ __('webpage.Delete Image') }}</h2>
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="saveImagesModal" class="btn btn-secondary"
-                        data-dismiss="modal">No</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn">Yes</button>
+                        data-dismiss="modal">{{ __('webpage.No') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Yes') }}</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02"> Want
-        To Serve Your Guests a Meal? </button>
+    <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02"> {{ __('webpage.Serve Meal Button Text') }} </button>
     <!-- Modal -->
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -273,16 +272,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Want To Serve Your Guests a Meal?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('webpage.Serve Meal Modal Heading') }}</h2>
+                        <p>{{ __('webpage.Serve Meal Modal Body Text') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don't</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('webpage.Serve Meal Modal No Button') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter"><a class="text-light"
-                            href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">Yes, Add
-                            Meals</a></button>
+                            href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">{{ __('webpage.Serve Meal Modal Yes Button') }}</a></button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
@@ -302,12 +300,12 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Image Deleted Successfully</h2>
-                        <p>The image has been successfully deleted.</p>
+                        <h2>{{ __('webpage.Image Delete Success Heading') }}</h2>
+                        <p>{{ __('webpage.Image Delete Success Message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('webpage.Close') }}</button>
                 </div>
             </div>
         </div>
