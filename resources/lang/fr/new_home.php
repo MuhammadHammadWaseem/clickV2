@@ -48,7 +48,6 @@ return [
     'Our platform will save you a lot of time calling or on road trips to invite guests. It will also save you time knowing who\'s attending or not, the number of guests, meal choices, and allergies'  => ' Notre plate-forme vous fera gagner beaucoup de temps lors d\'appels ou de déplacements en voiture pour inviter des invités. Cela vous fera également gagner du temps en sachant qui est présent ou non, le nombre d\'invités, les choix de repas et les allergies.',
     'Our Wedding Webpage Help You Relax on Your Big Day'  => 'Notre page Web de mariage vous aide à vous détendre lors de votre grand jour',
     'For only 99$ you will Have:'  => 'Pour seulement 99$ vous aurez :',
-    'Your event website, your invitation sent by email, whatsapp or text message, table organizer, private photo gallery, registry page, auto count, and check-in tool.'  => 'Votre site Web d\'événement, votre invitation envoyée par e-mail, whatsapp ou SMS, organisateur de table, galerie de photos privée, page de registre, comptage automatique et outil d\'enregistrement.',
     'Ultra Responsive Layouts'  => 'Mises en page ultra réactives',
     'Retina Ready Designs'  => 'Conceptions prêtes pour la rétine',
     'Advanced Admin Panel'  => 'Panneau d\'administration avancé',

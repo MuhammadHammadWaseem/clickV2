@@ -48,7 +48,6 @@ return [
     'Our platform will save you a lot of time calling or on road trips to invite guests. It will also save you time knowing who\'s attending or not, the number of guests, meal choices, and allergies'  => 'Our platform will save you a lot of time calling or on road trips to invite guests. It will also save you time knowing who\'s attending or not, the number of guests, meal choices, and allergies',
     'Our Wedding Webpage Help You Relax on Your Big Day'  => 'Our Wedding Webpage Help You Relax on Your Big Day',
     'For only 99$ you will Have:'  => 'For only 99$ you will Have:',
-    'Your event website, your invitation sent by email, whatsapp or text message, table organizer, private photo gallery, registry page, auto count, and check-in tool.'  => 'Your event website, your invitation sent by email, whatsapp or text message, table organizer, private photo gallery, registry page, auto count, and check-in tool.',
     'Ultra Responsive Layouts'  => 'Ultra Responsive Layouts',
     'Retina Ready Designs'  => 'Retina Ready Designs',
     'Advanced Admin Panel'  => 'Advanced Admin Panel',
@@ -62,6 +61,6 @@ return [
     'Enough? start planning!'  => 'Enough? start planning!',
     'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY'  => 'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY',
     'GET STARTED NOW'  => 'GET STARTED NOW'
-  
-    
+
+
 ];

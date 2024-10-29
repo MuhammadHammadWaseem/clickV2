@@ -364,6 +364,7 @@
                         var successModal = new bootstrap.Modal(document.getElementById(
                             'exampleModalCenter03'));
                         successModal.show();
+                        show();
                         // location.reload(); // Optionally reload to see the new gift in the list
                     },
                     error: function(xhr) {

@@ -1,10 +1,9 @@
 @extends('Website.Layouts.master')
 @section('title')
-    Click Invitation: Organize Your Events or Special Day
+{{ __('home.title') }}
 @endsection
 @section('description')
-    Click Invitation is the ultimate event organization tool that helps you effortlessly plan and manage your events or
-    special day. Let's organize your next event.
+{{ __('home.description') }}
 @endsection
 
 @section('tags')
@@ -18,19 +17,19 @@
 
         <div class="heading-text">
             <h1>
-                {{ __('Organize Your Event or Special Day') }}&
-                <span class="bold-text">{{ __('Immortalize') }}</span>
-                {{ __('Your Memories') }}
+                {{ __('home.Event Organization Heading') }}&
+                <span class="bold-text">{{ __('home.Immortalize Heading') }}</span>
+                {{ __('home.Your memory') }}
             </h1>
             <p>
-                {{ __('Digitize Your Invites, Control your guest List.') }}
+                {{ __('home.Invites Control Message') }}
             </p>
 
         </div>
 
         <div class="form-container">
-            <input type="email" placeholder="Enter your email address">
-            <a href="/register">Get Started</a>
+            <input type="email" placeholder="{{ __('home.Email Address Prompt') }}">
+            <a href="/register">{{ __('home.Get Started Button Text') }}</a>
         </div>
     </div>
     <div class="container">
@@ -46,15 +45,11 @@
         <div class="text-center">
 
             <h2>
-                {{ __(' Some of most') }} <span class="bold-text">{{ __('popular') }}</span>
-                {{ __('events by click invitation') }}
+                {{ __(' home.Some of Most') }} <span class="bold-text">{{ __('home.Popular') }}</span>
+                {{ __('home.Popular Events Subheading') }}
             </h2>
 
-            <p>
-                We're excited to invite you to experience the power of ClickInvitation with our exclusive 5-day free trial
-                offer. Unlike other platforms, we're committed to giving you a genuine taste of
-                what we offer, without asking for your credit card details upfront.
-            </p>
+            {{ __('home.Trial Offer Paragraph') }}
 
         </div>
 
@@ -70,7 +65,7 @@
 
                         </div>
 
-                        <h3>{{ __('Wedding Events') }}</h3>
+                        <h3>{{ __('home.Wedding Events') }}</h3>
 
                         <div>
                             <img src="assets/newimages/Group 12.png" alt="">
@@ -90,7 +85,7 @@
 
                             </div>
 
-                            <h3>{{ __('Anniversary Events') }}</h3>
+                            <h3>{{ __('home.Anniversary Events') }}</h3>
 
                             <div>
                                 <img src="assets/newimages/Group 12.png" alt="">
@@ -110,7 +105,7 @@
 
                             </div>
 
-                            <h3>{{ __('Baby Shower Events') }}</h3>
+                            <h3>{{ __('home.Baby Shower Events') }}</h3>
 
                             <div>
                                 <img src="assets/newimages/Group 12.png" alt="">
@@ -135,7 +130,7 @@
 
                             </div>
 
-                            <h3>{{ __('Corporate Events') }}</h3>
+                            <h3>{{ __('home.Corporate Events') }}</h3>
 
                             <div>
                                 <img src="assets/newimages/Group 12.png" alt="">
@@ -154,7 +149,7 @@
 
                             </div>
 
-                            <h3>{{ __('Baptism Events') }}</h3>
+                            <h3>{{ __('home.Baptism Events') }}</h3>
 
                             <div>
                                 <img src="assets/newimages/Group 12.png" alt="">
@@ -173,7 +168,7 @@
 
                             </div>
 
-                            <h3>Birthday Events</h3>
+                            <h3>{{ __('home.Birthday Events') }}</h3>
 
                             <div>
                                 <img src="assets/newimages/Group 12.png" alt="">
@@ -187,13 +182,13 @@
         </div>
 
         <a href="/events" class="view-more-events">
-            View Events <img src="assets/newimages/Group 12 (2).png" alt="">
+            {{ __('home.View Events') }} <img src="assets/newimages/Group 12 (2).png" alt="">
         </a>
 
 
         <div class="head-area">
             <h2 class="heading-center">
-                Some of the <span class="bold-text">features </span>that are going to blow you away
+                {{ __('home.Some of the') }} <span class="bold-text">{{ __('home.features') }} </span>{{ __('home.that are going') }}
             </h2>
         </div>
 
@@ -211,12 +206,11 @@
 
                             <div> <img src="assets/newimages/Group 16.png" alt=""></div>
                             <div>
-                                <h3>Access to Our Full Range of Stunning Templates</h3>
+                                <h3>{{ __('home.Template Access Heading') }}</h3>
                             </div>
                         </div>
                         <p class="text1">
-                            From elegant online wedding invitations to lively birthday designs, we have templates for every
-                            occasion. Get inspired and create something truly special.
+                            {{ __('home.Template Description') }}
 
                         </p>
 
@@ -228,13 +222,12 @@
 
                             <div> <img src="assets/newimages/icons.png" alt=""></div>
                             <div>
-                                <h3>Intuitive Customization</h3>
+                                <h3>{{ __('home.Intuitive Customization Heading') }}</h3>
                             </div>
                         </div>
 
                         <p class="text2">
-                            Personalize every aspect of your invitation – colors, fonts, images, and more. Our userfriendly
-                            editor ensures you can bring your vision to life effortlessly.
+                            {{ __('home.Customization Description') }}
                         </p>
                     </div>
 
@@ -250,12 +243,11 @@
 
                             <div> <img src="assets/newimages/Group 17.png" alt=""></div>
                             <div>
-                                <h3>Mobile-Friendly Invitations</h3>
+                                <h3>{{ __('home.Mobile Friendly Invitations Heading') }}</h3>
                             </div>
                         </div>
                         <p class="text4">
-                            Your invitations will shine on every device. Whether it's a smartphone, tablet, or desktop,
-                            your guests will be captivated from the moment they open your invite.
+                            {{ __('home.Mobile Friendly Invitations Description') }}
 
                         </p>
                     </div>
@@ -266,12 +258,11 @@
 
                             <div> <img src="assets/newimages/Vector (6).png" alt=""></div>
                             <div>
-                                <h3>Innovation Meets Simplicity</h3>
+                                <h3>{{ __('home.Innovation Meets Simplicity Heading') }}</h3>
                             </div>
                         </div>
                         <p class="text5">
-                            We combine cuSng-edge design with an intuitive platform, making it easy for both techsavvy users
-                            and beginners to create beautiful invitations.
+                            {{ __('home.Innovation Meets Simplicity Description') }}
 
                         </p>
 
@@ -287,12 +278,11 @@
 
                             <div> <img src="assets/newimages/Vector (5).png" alt=""></div>
                             <div>
-                                <h3>Easy Guest Management</h3>
+                                <h3>{{ __('home.Easy Guest Management Heading') }}</h3>
                             </div>
                         </div>
                         <p class="text3">
-                            Seamlessly manage your guest list and RSVPs. Say goodbye to the hassle of tracking
-                            responses manually.
+                            {{ __('home.Easy Guest Management Description') }}
 
                         </p>
 
@@ -304,12 +294,11 @@
 
                             <div> <img src="assets/newimages/Vector (7).png" alt=""></div>
                             <div>
-                                <h3>Unleash Your Creativity</h3>
+                                <h3>{{ __('home.Unleash Your Creativity Heading') }}</h3>
                             </div>
                         </div>
                         <p class="text6">
-                            Our tools empower you to bring your vision to life. From elegant to playful, you're in control
-                            of how your invitation looks and feels.
+                            {{ __('home.Unleash Your Creativity Description') }}
 
                         </p>
 
@@ -329,13 +318,10 @@
 
             <div class="head-area">
                 <h2 class="heading-center second">
-                    Some of our top invitations
-                    designs <span class="bold-text">recommended </span> by our users
+                    {{ __('home.Top Invitations Heading') }} <span class="bold-text">{{ __('home.Recommended') }} </span> {{ __('home.by our users') }}
                 </h2>
                 <p>
-                    Remember, each event type can have its own unique design elements, colors, and wording
-                    to suit the occasion. Make sure to tailor the content to match the tone and style of the event
-                    you're hosting
+                    {{ __('home.Event Design Reminder') }}
                 </p>
 
             </div>
@@ -380,13 +366,12 @@
     <div class="container">
 
         <a href="/events" class="view-more-events second">
-            View Events <img src="assets/newimages/Group 12 (2).png" alt="">
+            {{ __('home.View Events ') }}<img src="assets/newimages/Group 12 (2).png" alt="">
         </a>
 
         <div class="content-box">
             <h2 class="heading-center third">
-                TAKE A LOOK AT WHAT
-                OUT <span class="bold-text">CUSTOMERS </span> SAYS ABOUT US
+                {{ __('home.customer_feedback_part_1') }} <span class="bold-text">{{ __('home.customer_feedback_part_2') }} </span> {{ __('home.customer_feedback_part_3') }}
             </h2>
 
         </div>
@@ -401,7 +386,7 @@
                         <div class="testimonial-img"> <img src="assets/newimages/Component 6 (1).png" alt="">
                         </div>
                         <div class="testimonial-name">
-                            <h5>Sarah</h5>
+                            <h5>{{ __('home.testimonial_1_name') }}</h5>
                         </div>
                         <div class="testimonial-date">
                             <p>Dec 02 2021</p>
@@ -410,8 +395,7 @@
                     </div>
 
                     <div class="testimonial-text">
-                        <p>The baby shower invitations created on ClickInvitation were adorable and exactly what I
-                            envisioned. It added a special touch to our celebration.</p>
+                        <p>{{ __('home.testimonial_1_feedback') }}</p>
                     </div>
                 </div>
 
@@ -424,7 +408,7 @@
                         <div class="testimonial-img"> <img src="assets/newimages/Component 6 (1).png" alt="">
                         </div>
                         <div class="testimonial-name">
-                            <h5>Emily</h5>
+                            <h5>{{ __('home.testimonial_2_name') }}</h5>
                         </div>
                         <div class="testimonial-date">
                             <p>Dec 04 2021</p>
@@ -433,8 +417,7 @@
                     </div>
 
                     <div class="testimonial-text">
-                        <p> We used ClickInvitation for our engagement party, and it was a hit with our friends and family.
-                            The customization options allowed us to match the theme perfectly.</p>
+                        <p> {{ __('home.testimonial_2_feedback') }}</p>
 
                     </div>
                 </div>
@@ -448,15 +431,14 @@
                         <div class="testimonial-img"> <img src="assets/newimages/Component 6 (1).png" alt="">
                         </div>
                         <div class="testimonial-name">
-                            <h5>Jennifer</h5>
+                            <h5>{{ __('home.testimonial_3_name') }}</h5>
                         </div>
                         <div class="testimonial-date">
                             <p>Dec 06 2021</p>
                         </div>
                     </div>
                     <div class="testimonial-text">
-                        <p>The holiday party invitations from ClickInvitation helped us spread the festive cheer. It was
-                            effortless to create and share with our loved ones.</p>
+                        <p>{{ __('home.testimonial_3_feedback') }}</p>
                     </div>
                 </div>
 
@@ -469,7 +451,7 @@
                         <div class="testimonial-img"> <img src="assets/newimages/Component 6 (1).png" alt="">
                         </div>
                         <div class="testimonial-name">
-                            <h5>David</h5>
+                            <h5>{{ __('home.testimonial_4_name') }}</h5>
                         </div>
                         <div class="testimonial-date">
                             <p>Dec 03 2021</p>
@@ -478,8 +460,7 @@
                     </div>
 
                     <div class="testimonial-text">
-                        <p>Planning our company's annual gala was a breeze with ClickInvitation. The corporate event
-                            templates were professional, and the RSVP feature helped us manage attendance seamlessly.</p>
+                        <p>{{ __('home.testimonial_4_feedback') }}</p>
                     </div>
                 </div>
 
@@ -491,7 +472,7 @@
                         <div class="testimonial-img"> <img src="assets/newimages/Component 6 (1).png" alt="">
                         </div>
                         <div class="testimonial-name">
-                            <h5>Michael</h5>
+                            <h5>{{ __('home.testimonial_5_name') }}</h5>
                         </div>
                         <div class="testimonial-date">
                             <p>Dec 05 2021</p>
@@ -500,8 +481,7 @@
                     </div>
 
                     <div class="testimonial-text">
-                        <p>I organized a charity fundraiser and relied on ClickInvitation for all our digital invites. The
-                            platform's simplicity and affordability were a lifesaver.</p>
+                        <p>{{ __('home.testimonial_5_feedback') }}</p>
                     </div>
                 </div>
 
