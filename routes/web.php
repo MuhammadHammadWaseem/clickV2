@@ -122,7 +122,6 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/delete/guest', [GuestListController::class, 'deleteGuest'])->name('deleteGuest');
             Route::post('{id}/decline/guest', [GuestListController::class, 'declineguest'])->name('declineguest');
             Route::get('{id}/get-guests-qr/{date}', [GuestListController::class, 'getGuestqr'])->name('getGuestqr');
-            Route::post('{id}/get-guests-qr/{date}', [GuestListController::class, 'getGuestqr'])->name('getGuestqrPost');
             Route::post('{id}/save-options', [GuestListController::class, 'saveOptions'])->name('saveOptions');
             Route::post('{id}/send-invitations', [GuestListController::class, 'sendinvitations'])->name('sendinvitations');
             // Guest End
@@ -209,4 +208,11 @@ Route::get('/check-in/{cardId}/{guestcode}/{lang}', [OperationController::class,
 Route::post('/show-opguests', [OperationController::class, 'showopguests']);
 Route::post('/change-check', [OperationController::class, 'changecheck']);
 Route::get('/add-photos/{cardId}/{guestcode}/{lang}', [OperationController::class, 'addphotos']);
-
+Route::post('/new-guest', [OperationController::class, 'newguest']);
+Route::get('/sendInvite-whatsapp', [OperationController::class, 'sendWhatsapp']);
+Route::get('/sendInvite-email', [OperationController::class, 'sendEmail']);
+Route::get('/sendInvite-sms', [OperationController::class, 'sendSMS']);
+Route::post('/save-images', [OperationController::class, 'saveimages']);
+Route::get('/sorry-cant/{cardId}/{guestcode}/{lang}', [OperationController::class, 'sorrycant']);
+Route::post('/decline', [OperationController::class, 'decline']);
+Route::get('/CheckInQr/{cId}/{gCode}/{lang}', [OperationController::class, 'CheckInQr']);

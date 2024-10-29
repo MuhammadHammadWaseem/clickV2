@@ -179,8 +179,6 @@ class WebPageController extends Controller
             // Check if the file exists and delete it
             if (file_exists($imagePath)) {
                 unlink($imagePath);
-            } else {
-                return response()->json(['success' => 'File does not exist!'], 404);
             }
 
             return response()->json(['success' => 'Photo deleted successfully!']);

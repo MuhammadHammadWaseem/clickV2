@@ -72,7 +72,7 @@
                         <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">Add
                             New</button>
                     </div>
-                    <div class="main-event-gallery-box">
+                    <div class="main-event-gallery-box" id="PhotoBox">
                         @forelse ($photogallery as $photo)
                             <div class="box" id="photo-box-{{ $photo->id_photogallery }}">
                                 <a href="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
@@ -93,7 +93,7 @@
                                 </button>
                             </div>
                         @empty
-                            <p>No Images!</p>
+                            <p id="noImages">No Images!</p>
                         @endforelse
                     </div>
                     {{-- <div class="table-content-pagination">
@@ -475,6 +475,7 @@
                     success: function(response) {
                         $("#gall").val(''); // Clear input field
                         $("#NoItems").hide();
+                        $("#noImages").hide();
 
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
@@ -497,7 +498,8 @@
                             </button>
                             </div>`;
 
-                            $('.main-event-gallery-box').append(newImage);
+                            // $('.main-event-gallery-box').append(newImage);
+                            $('#PhotoBox').append(newImage);
 
                         });
 

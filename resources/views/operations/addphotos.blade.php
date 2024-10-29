@@ -63,21 +63,21 @@
                     @endif
 
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="card mb-4">
                         <h4 class="card-header text-center"><i
                                 class="fal fa-camera-alt"></i>{{ __('addphotos.PHOTOS') }}</h4>
@@ -96,16 +96,9 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item" ng-class='{active:$first}'
                                         ng-repeat="photo in galleries">
-                                        <img ng-src="{{ env('APP_URL') }}/event-images/@{{ photo.id_event }}/photogallery/@{{ photo.id_photogallery }}.jpg"
+                                        <img ng-src="{{ env('APP_URL') }}event-images/@{{ photo.id_event }}/photogallery/@{{ photo.id_photogallery }}.jpg"
                                             height="700px" class="d-block w-100">
                                     </div>
-
-                                    <!--<div class="carousel-item">
-         <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
-        </div>
-        <div class="carousel-item">
-         <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
-        </div>-->
                                 </div>
                                 <button class="carousel-control-prev" type="button"
                                     data-bs-target="#carouselExampleControls" data-bs-slide="prev">
