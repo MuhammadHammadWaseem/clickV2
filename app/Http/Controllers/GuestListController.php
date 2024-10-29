@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitaion\EventsEnglish;
 use App\Mail\Invitaion\CorporateFrench;
 use App\Mail\Invitaion\CorporateEnglish;
-
+use Barryvdh\DomPDF\Facade as PDF;
 class GuestListController extends Controller
 {
     public function index() {
@@ -789,45 +789,46 @@ class GuestListController extends Controller
             }
         }
     }
-            public function getGuestqr($id, $date)
-            {
-                $guests = Guest::where('id_event', $id)->where('mainguest', 1)->get();
-                $date = Carbon::parse($date);
-                $eventDate = $date->format('F j, Y');
+    public function getGuestqr(Request $request)
+    {
+        $id = $request->idevent;
+        $date = $request->reservationDate;
+        $guests = Guest::where('id_event', $id)->where('mainguest', 1)->get();
+        $date = Carbon::parse($date);
+        $eventDate = $date->format('F j, Y');
+        require_once 'C:\xampp8.2\htdocs\clickV2\app/Http/Controllers/phpqrcode/qrlib.php';
 
-                require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
+        if ($guests->isNotEmpty()) {
+            $guestData = [];
+            $card = Card::where('id_event', $id)->first();
+            $lang = session('applocale', 'en'); // Default to 'en' if session is not set
 
-                if ($guests->isNotEmpty()) {
-                    $guestData = [];
-                    $card = Card::where('id_event', $id)->first();
-                    $lang = Session('applocale', 'en'); // Default to 'en' if session is not set
+            if ($card && $card->id_card) {
+                foreach ($guests as $g) {
+                    $guest_code = $g->code;
+                    $guest_name = $g->name;
+                    $guest_name_without_spaces = str_replace(' ', '', $guest_name);
+                    $url = url('/cardInvitations/' . $card->id_card . '/' . $guest_code . '/' . $guest_name_without_spaces . '/' . $lang);
+                    $qrcode = 'images/' . $g->id_guest . $guest_code . '.png';
 
-                    if ($card && $card->id_card) {
-                        foreach ($guests as $g) {
-                            $guest_code = $g->code;
-                            $guest_name = $g->name;
-                            $guest_name_without_spaces = str_replace(' ', '', $guest_name);
-                            $url = url('/cardInvitations/' . $card->id_card . '/' . $guest_code . '/' . $guest_name_without_spaces . '/' . $lang);
-                            $qrcode = 'images/' . $g->id_guest . $guest_code . '.png';
-
-                            if (!file_exists($qrcode)) {
-                                QRcode::png($url, $qrcode, 'H', 4, 4);
-                            }
-                            $guestData[] = [
-                                'name' => $guest_name,
-                                'qr_code_path' => $qrcode,
-                                'eventDate' => $eventDate,
-                            ];
-                        }
+                    if (!file_exists($qrcode)) {
+                        \QRcode::png($url, $qrcode, 'H', 4, 4);
                     }
-
-                    set_time_limit(600);
-                    $pdf = \Barryvdh\DomPDF\Facade::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
-                    return $pdf->download('tables.pdf');
-                } else {
-                    return response()->json(['message' => 'No guests found.']);
+                    $guestData[] = [
+                        'name' => $guest_name,
+                        'qr_code_path' => $qrcode,
+                        'eventDate' => $eventDate,
+                    ];
                 }
             }
+            set_time_limit(600);
+            $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
+            return $pdf->download('tables.pdf');
+        } else {
+            return response()->json(['message' => 'No guests found.']);
+        }
+    }
+
 
         // Save buttons when send invitaiton
         public function saveOptions(Request $req)
