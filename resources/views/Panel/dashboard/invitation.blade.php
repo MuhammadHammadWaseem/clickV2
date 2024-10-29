@@ -215,6 +215,62 @@
         padding-top: 0px;
         margin-top: 15px;
     }
+
+    .two-outside-boxes .main-card-detaling-box {
+    height: 780px !important;
+}
+
+
+
+#editor .sidebaraddtext {
+    overflow-y: scroll;
+    height: 580px;
+    overflow-x:none !important;
+}
+
+#editor .sidebaraddtext::-webkit-scrollbar{
+    width: 5px;
+}
+
+    @media only screen and (max-width: 575px){
+        .two-outside-boxes .main-card-box {
+        width: 100%;
+    }
+
+    .edit-cards-boxes {
+        column-gap: 10px !important;
+        row-gap: 10px !important;
+    }
+
+    .edit-cards-boxes .card-styling-box {
+        width: 23% !important;
+    }
+
+    .edit-cards-boxes .card-styling-box a {
+        height: 100px;
+        text-align: center !important;
+        font-size: 11px !important;
+    }
+
+    .box-styling .text p{
+        text-align: center !important;
+    }
+
+
+    #canvas{
+    position: absolute !important;
+    width: 388px !important;
+    height: 668px !important;
+    left: 0px !important;
+    top: 0px !important;
+    touch-action: none !important;
+    user-select: none !important;
+}
+
+.two-outside-boxes .main-card-box {
+        width: 100% !important;
+    }
+    }
 </style>
 @section('content')
     @php
