@@ -8,6 +8,7 @@
 
 	<title>{{$event->name}}</title>
 
+	<link rel="stylesheet" href="{{ asset('assets/pdfstyle.css') }}">
 	<style type="text/css">
 		<?php include 'assets/pdfstyle.css'; ?>
 		@page{ margin: 20px;}
@@ -71,7 +72,7 @@
 				@foreach($table->guests as $guest)
 				<tr>
 					<td>{{$guest->name}}</td>
-					<td>{{$guest->meal['name']}}</td>
+					<td>{{$guest->meal->name ?? ""}}</td>
 					<td>@if($guest->allergies)<strong>ALLERGY</strong><br>{{$guest->notes}} @else NO ALLERGY @endif</td>					
 				</tr>
 				<tr>

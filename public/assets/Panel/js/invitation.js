@@ -112,7 +112,7 @@ function getTemplatewithId(templateId) {
         const jsonData = JSON.parse(templateData.json);
         canv.clear();
         canv.loadFromJSON(jsonData, canv.renderAll.bind(canv));
-        updateCanvasHistory()
+        updateCanvasHistory();
       } else {
         console.error('No template data found.');
       }
@@ -2997,12 +2997,7 @@ function toggleTwoSided(element) {
 function toggleSide(element) {
   if (element.id === 'front') {
     handleJSONImport();
-  } else if (element.id === 'front2') {
-    handleJSONImport();
   } else if (element.id === 'back') {
-    // Add logic for editing the back side
-    handleJSONImport();
-  } else if (element.id === 'back2') {
     // Add logic for editing the back side
     handleJSONImport();
   }
