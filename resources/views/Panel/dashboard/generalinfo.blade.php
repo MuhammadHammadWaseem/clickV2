@@ -1,4 +1,4 @@
-@extends('Panel.layout.master')
+@extends('Panel.Layout.master')
 
 
 <style>
