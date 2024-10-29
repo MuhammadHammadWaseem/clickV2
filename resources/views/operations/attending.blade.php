@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="/assets/panelstyle.css">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
 
     <script src="/assets/jspanel/jquery.min.js"></script>
     <script src="/assets/jspanel/sortable.min.js"></script>
@@ -45,7 +46,7 @@
         .dropbtn {
             background-color: #4CAF50;
             color: white;
-            padding: 1px 7px;
+            padding: 7px 20px;
             font-size: 16px;
             border: none;
             cursor: pointer;
@@ -334,7 +335,7 @@
                         onclick="window.location.href = document.referrer;"><i class="fas fa-chevron-left"></i>
                     {{ __('attending.BACK TO INVITATION') }}</button> --}}
 
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center main-heading"><i
                                 class="fal fa-poll-people"></i>{{ __('attending.ATTENDING') }}</h4>
                         <div class="card-body groupdesc" style="font-size:13px;"
@@ -366,13 +367,13 @@
                                     </p>
                                 </div>
                                 <div class="col-md-2 col-12 text-end">
-                                    <button style="width: 100%" class="btn btn-outline-success btn-sm"
+                                    <button style="width: 100%" class="btn t-btn"
                                         data-bs-toggle="modal" ng-click="editdatag();" data-bs-target="#editguestModal">
                                         <i class="iconstyle  fa-edit"></i>
                                         <p>{{ __('attending.EDIT') }}</p>
                                     </button>
 
-                                    <button class="btn btn-outline-secondary btn-sm btn-md w-100 addm mb-1 mt-1"
+                                    <button class="btn t-btn btn-md w-100 addm mb-1 mt-1"
                                         data-bs-toggle="modal" ng-click="getguest(mygroup.id_guest)"
                                         data-bs-target="#editMemberModal"> <i class="iconstyle  fa-edit"></i>
                                         <p>{{ __('attending.EDIT MEMBER') }}</p>
@@ -381,7 +382,7 @@
 
                                     @if ($guest->declined == 1)
                                         <button style="width: 100%" id="confirm"
-                                            class="btn btn-outline-success btn-sm mb-1 mt-1"
+                                            class="btn t-btn mb-1 mt-1"
                                             ng-click="confirmGuest({{ $guest->id_guest }},{{ $guest->members_number }})"
                                             name="guest_id" value="{{ $guest->id_guest }}"><i
                                                 class="iconstyle  fa-check"></i>
@@ -404,7 +405,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <div class="card-body groupdesc"
                             style="display: flex;justify-content: space-between;flex-wrap: wrap;text-align: center;">
                             <h6>{{ __('attending.Add your Compagnons') }}
@@ -417,9 +418,9 @@
                                     data-bs-target="#tableLayout">{{ __('attending.Table Layout') }}</button>
                             @endif
                         </div>
-                    </div>
+                    </div>  
 
-                    <div class="card mb-4" style="overflow-y: unset!important; overflow: unset!important;">
+                    <div class="card mb-4 box-styling" style="overflow-y: unset!important; overflow: unset!important;">
                         <div class="card-body groupdesc">
                             <div ng-class="member.declined?'row align-items-center memberrow declined':'row align-items-center memberrow'"
                                 ng-repeat="member in members">
@@ -445,7 +446,7 @@
                                 </div>
                                 <div class="col-md-2 col-12 text-end">
                                     <div class="dropdown">
-                                        <button class="dropbtn">{{ __('attending.Actions') }}</button>
+                                        <button class="dropbtn t-btn">{{ __('attending.Actions') }}</button>
                                         <div class="dropdown-content">
                                             <button class="btns mb-1 mt-1" ng-click="editdata($index);"
                                                 data-bs-toggle="modal" data-bs-target="#editguestModal">
@@ -522,7 +523,7 @@
         <div class="container accordion" ng-repeat="n in [].constructor(nummembers - added) track by $index"
             id="accordionExample">
             <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
+                <div class="accordion-item box-styling">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseOne@{{ $index + 1 }}" aria-expanded="true"
@@ -597,7 +598,7 @@
                             </form>
                         </div>
                         <div class="mb-3" ng-hide="repeat">
-                            <button type="submit" form="nm" class="btn btn-dark"
+                            <button type="submit" form="nm" class="btn t-btn"
                                 onclick="if($('#nm')[0].checkValidity()) $('#newmemberModal').modal('hide')">{{ __('attending.Save Guest') }}</button>
                         </div>
                         <div class=" ng-hide" ng-show="repeat">
@@ -729,7 +730,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary w-auto"
                             data-bs-dismiss="modal">{{ __('attending.Close') }}</button>
-                        <button type="submit" id="UpdateGuest" class="btn btn-orange w-auto"
+                        <button type="submit" id="UpdateGuest" class="btn modal-t-btn w-auto"
                             onclick="if($('#eg')[0].checkValidity()) $('#editguestModal').modal('hide')">{{ __('attending.UPDATE GUEST') }}</button>
                     </div>
                     </form>
@@ -756,9 +757,9 @@
                     <div class="modal-body">
                         <p>{{ __('attending.Welcome to our Event!') }}</p>
                         <p>{{ __('attending.Please choose your own meal') }}</p>
-                        <button style="width: 100%" class="btn btn-outline-success btn-sm"
+                        <button style="width: 100%" class="btn modal-t-btn btn-sm"
                             ng-click="editdatag(); showMealModal();">
-                            <p>{{ __('attending.EDIT') }}</p>
+                            <p style="margin: 0">{{ __('attending.EDIT') }}</p>
                         </button>
                         {{-- <button type="button" class="btn btn-success btn-sm" id="editMeal"  data-bs-toggle="modal" ng-click="editdatag(); $('#editguestModal').modal('show');">Choose your meal</button> --}}
                     </div>
@@ -822,7 +823,7 @@
                     <div class="modal-footer" ng-hide="repeat">
                         <button type="button" class="btn btn-secondary w-auto"
                             data-bs-dismiss="modal">{{ __('attending.Close') }}</button>
-                        <button type="submit" form="eg" class="btn btn-orange w-auto"
+                        <button type="submit" form="eg" class="btn modal-t-btn w-auto"
                             onclick="if($('#eg')[0].checkValidity()) $('#editguestModal').modal('hide')">{{ __('attending.Edit Guest') }}</button>
                     </div>
                     <div class="modal-footer ng-hide" ng-show="repeat">
@@ -899,7 +900,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                             onclick="closeSendModel()">{{ __('attending.Close') }}</button>
-                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal"
+                        <button type="button" class="btn modal-t-btn" data-bs-dismiss="modal"
                             onclick="sendInvi();">{{ __('attending.Send') }}</button>
                     </div>
                 </div>

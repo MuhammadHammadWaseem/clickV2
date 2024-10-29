@@ -23,6 +23,7 @@
     <title>Click Invitation</title>
 
     <link rel="stylesheet" href="/assets/panelstyle.css">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
 
     <script src="/assets/jspanel/jquery.min.js"></script>
@@ -53,7 +54,7 @@
                 <div class="col-12">
                     <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()""><i
                             class="fas fa-chevron-left"></i>{{ __('giftsuggestion.BACK TO INVITATION') }}</button>
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i
                                 class="fal fa-gift"></i>{{ __('giftsuggestion.OUR GIFT SELECTION') }}</h4>
                         <div class="card-body mt-5">
@@ -65,7 +66,7 @@
                                     <a href="@{{ gift.link }}" target="_BLANK">{{ __('giftsuggestion.LINK') }}</a>
                                 </div>
                                 <div class="col-4 text-end" ng-show="!gift.id_pick">
-                                    <a class="btn btn-warning btn-sm" style="width: auto;"
+                                    <a class="btn t-btn" style="width: auto;"
                                         ng-click="$parent.idpick=gift.id_gift;" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal2">{{ __('giftsuggestion.SELECT GIFT') }}</a>
                                 </div>

@@ -23,6 +23,8 @@
     <title>Click Invitation</title>
 
     <link rel="stylesheet" href="/assets/panelstyle.css">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
+
     <link rel="shortcut icon" href="/assets/images/favicon2.png" type="image/x-icon">
 
     <script src="/assets/jspanel/jquery.min.js"></script>
@@ -78,7 +80,7 @@
                         </div>
                     @endif
 
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i
                                 class="fal fa-camera-alt"></i>{{ __('addphotos.PHOTOS') }}</h4>
                         <div class="card-body">
@@ -116,11 +118,11 @@
                 </div>
 
                 <div class="col-12 mt-5 photogallery">
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h5 class="card-header text-center">{{ __('addphotos.PHOTOGALLERY') }}</h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <button data-bs-toggle="modal" data-bs-target="#photogalleryModal"
-                                class="btn btn-success btn-sm mt-3 w-25 ms-5">ADD PHOTOS</button>
+                                class="btn t-btn mt-3 w-25 ms-5">ADD PHOTOS</button>
                         </div>
                         <div class="card-body">
                             {{-- <div class="photo" ng-show="index === 'MAIN'">
@@ -192,7 +194,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                <button type="submit" class="btn t-btn">Submit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -205,12 +207,12 @@
 
                 {{-- video --}}
                 <div class="col-12 mt-5 photogallery">
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         {{-- <h5 class="card-header text-center">{{ __('addphotos.PHOTOGALLERY') }}</h5> --}}
                         <h5 class="card-header text-center">VIDEO GALLERY</h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <button data-bs-toggle="modal" data-bs-target="#videogalleryModal"
-                                class="btn btn-success btn-sm mt-3 w-25 ms-5">ADD VIDEO</button>
+                                class="btn t-btn mt-3 w-25 ms-5">ADD VIDEO</button>
                         </div>
                         <div class="card-body">
                             <div class="photo" ng-repeat="photo in videogalleries">
@@ -245,7 +247,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                <button type="submit" class="btn t-btn">Submit</button>
                                             </div>
                                         </form>
                                     </div>

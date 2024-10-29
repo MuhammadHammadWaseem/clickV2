@@ -24,6 +24,8 @@
 
     <link rel="stylesheet" href="/assets/panelstyle.css">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
+
 
     <script src="/assets/jspanel/jquery.min.js"></script>
     <script src="/assets/jspanel/sortable.min.js"></script>
@@ -53,7 +55,7 @@
                 <div class="col-12">
                     <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()"><i
                             class="fas fa-chevron-left"></i>{{ __('sorrycant.BACK TO INVITATION') }}</button>
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i class="fal fa-clipboard-list-check"></i>
                             {{ __('sorrycant.DECLINE INVITE') }}</h4>
                         <div class="card-body mt-5">
@@ -79,7 +81,7 @@
                     </div>
 
                     @if ($guest->mainguest == 1)
-                        <div class="card mb-4">
+                        <div class="card mb-4 box-styling">
                             <div class="card-body groupdesc">
                                 <div ng-class="member.declined?'row align-items-center memberrow declined':'row align-items-center memberrow'"
                                     ng-repeat="member in members">
@@ -98,10 +100,10 @@
                                     </div>
                                     <div class="col-2 text-end">
                                         <button style="width:auto" ng-show="!member.declined"
-                                            class="btn btn-warning btn-sm"
+                                            class="btn t-btn"
                                             ng-click="$parent.decliner=member.id_guest; decline();">DECLINE</button>
                                         <button style="width:auto" ng-show="member.declined"
-                                            class="btn btn-warning btn-sm"
+                                            class="btn t-btn"
                                             ng-click="$parent.decliner=member.id_guest; decline();">UNDECLINE</button>
 
                                         <!--<button class="btn btn-warning btn-sm" ng-click="editdata($index);" data-bs-toggle="modal" data-bs-target="#editguestModal">{{ __('attending.EDIT') }}</button>

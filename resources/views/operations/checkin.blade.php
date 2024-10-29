@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="/assets/panelstyle.css">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
+
 
 
     <script src="/assets/jspanel/jquery.min.js"></script>
@@ -54,7 +56,7 @@
                 <div class="col-12 col-sm-9">
                     <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()""><i
                             class="fas fa-chevron-left"></i>{{ __('checkin.BACK TO INVITATION') }}</button>
-                    <div class="card mb-4">
+                    <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i
                                 class="fal fa-user-check"></i>{{ __('checkin.CHECK-IN') }}</h4>
                                 <h6 class="card-header text-center">Please confirm tour attendance and check in once you are at the reception hall the day of the event.</h2>

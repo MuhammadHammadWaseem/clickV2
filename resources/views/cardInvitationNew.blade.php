@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/fontstyle.css">
     <link rel="stylesheet" href="https://searchmarketingservices.online/fonts/index.css">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">
 </head>
 <div class="thisBody" style="display:none">
 
@@ -58,13 +59,13 @@
             </div>
         </div>
         @if ($card[0]->two_sided == 1)
-            <button id="flipButton" class="btn btn-primary">Flip Card</button>
+            <button id="flipButton" class="btn t-btn">Flip Card</button>
         @endif
     </div>
 
     @if ($card[0]->rsvp != '0,0,0,0,0,0')
         <!-- Button to submit RSVP -->
-        <a class="btn btn-primary extra-card" id="submit-rsvp" data-bs-toggle="offcanvas" href="#offcanvasExample"
+        <a class="btn t-btn extra-card " id="submit-rsvp" data-bs-toggle="offcanvas" href="#offcanvasExample"
             role="button" aria-controls="offcanvasExample"
             style="
      
@@ -79,7 +80,7 @@
  ">
             {{ __('cardinvit.SUBMIT YOUR RSVP') }}
         </a>
-        <a class="btn btn-success extra-card" id="checkin"
+        <a class="btn t-btn extra-card" id="checkin"
             href="{{ env('APP_URL') }}CheckInQr/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
             target="_blank"
             style="
