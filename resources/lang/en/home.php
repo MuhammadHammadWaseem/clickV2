@@ -65,7 +65,7 @@ return [
     'Immortalize Heading' => 'Immortalize',
     'Your memory' => 'Your Memories',
     'Invites Control Message' => 'Digitize Your Invites, Control your guest List.',
-    'Some of Most' => 'Some of most',
+    'Some_OF' => 'Some of most',
     'Popular' => 'Popular',
     'Popular Events Subheading' => 'Events by Click Invitation',
     'Wedding Events'=> 'Wedding Events',
@@ -182,5 +182,7 @@ return [
     'EFFORTLESS_EVENT_PLANNING_TITLE' => 'Effortless Event Planning',
     'EFFORTLESS_EVENT_PLANNING_DESCRIPTION' => "ClickInvitation streamlines every aspect of event planning, offering auto guest count, customizable invitations, and intuitive table and seating arrangement tools for seamless, stress-free celebrations. Personalize your event with our easy-to-use customization options or upload your own designs for unique, memorable invitations.",
     'DISCOVER_MORE_INFO_TEXT' => 'Discover More Info',
+    'event_checkin' => 'Seamless Event Check-In',
+
 
 ];

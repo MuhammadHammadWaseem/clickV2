@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use App\Models\GuestOption;
 use App\Models\Card;
+use PDF;
 
 class TableSeatingController extends Controller
 {
@@ -334,7 +335,7 @@ class TableSeatingController extends Controller
                 $ng = Guest::where('id_meal', $meal->id_meal)->where('id_table', '<>', 0)->count();
                 $meal->ng = $ng;
             }
-            return \Barryvdh\DomPDF\Facade::loadView('pdf', ['tables' => $tables, 'event' => $event, 'totguestseated' => $totguestseated, 'totallerseated' => $totallerseated, 'allmeals' => $allmeals, 'totfrees' => $totfrees, 'totguests' => $totguests])->stream('tables.pdf'); //, compact('data')   ->save('/var/www/html/pmao/public/pdftest/pippo.pdf');
+            return PDF::loadView('pdf', ['tables' => $tables, 'event' => $event, 'totguestseated' => $totguestseated, 'totallerseated' => $totallerseated, 'allmeals' => $allmeals, 'totfrees' => $totfrees, 'totguests' => $totguests])->stream('tables.pdf'); //, compact('data')   ->save('/var/www/html/pmao/public/pdftest/pippo.pdf');
             //return view('pdf')->with('tables',$tables)->with('event',$event);
         } else
             return redirect('/');

@@ -11,8 +11,7 @@
                     font-weight: 400;
                     color: #000000;
                     margin-bottom: 70px;">
-            ClickInvitation is an online platform that simplifies event planning by providing digital invitations for
-            all types of events.</p>
+            {{ __('footer.definition') }}</p>
     </div>
     <div class="pages">
 
@@ -20,14 +19,14 @@
                     font-size: 16px;
                     font-family: 'poppins';
                     font-weight: 600;">
-            Quick Links</h4>
+            {{ __('footer.Quick Links') }}</h4>
         <ul style="padding-top: 10px;">
-            <li class="liststylesn"><a class="quicklinksstyle" href="/events">Events</a></li>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/features">features</a></li>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/about">about</a></li>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/contact">contact</a></li>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/blog">Blogs</a></li>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/tutorial">Tutorial</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/events">{{ __('footer.events') }}</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/features">{{ __('footer.features') }}</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/about">{{ __('footer.about') }}</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/contact">{{ __('footer.contact') }}</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/blog">{{ __('footer.blogs') }}</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/tutorial">{{ __('footer.tutorial') }}</a></li>
         </ul>
     </div>
 
@@ -36,19 +35,19 @@
         <h4 style="
       font-size: 16px;
       font-family: 'poppins';
-      font-weight: 600;">Contact Us</h4>
+      font-weight: 600;">{{ __('footer.contact_us') }}</h4>
         <ul style="padding-top: 10px;">
             <li class="liststylesn">
                 <p
                     style="margin: 0 auto;
-        
-         
+
+
           font-family: 'poppins';
           font-size: 14px;
           font-weight: 400;
           color: #000000;
           ">
-                    Feel free to get in touch with us!
+                   {{ __('footer.contact_message') }}
                 </p>
             </li>
             <li class="liststylesn"><a class="quicklinksstyle" href="tel:+1(438)303-9948">+1 (438) 303-9948</a></li>
@@ -78,7 +77,8 @@ font-size: 14px;
 font-weight: 400;
 color: #000000;
 ">
-            Copyright © 2023 ClickInvitation. All rights reserved.</p>
+            {{ __('footer.Copyright') }} © 2023 ClickInvitation. {{ __('footer.all_rights_reserved') }}
+        </p>
     </div>
     <div class="pages">
         <p
@@ -89,14 +89,12 @@ color: #000000;
       font-weight: 400;
       color: #000000;
       ">
-            Design & Developed By <a class="quicklinksstyle2" href="https://searchmarketingservice.com/">Search
-                Marketing
-                Services</a></p>
+            {{ __('footer.design_developed_by') }} <a class="quicklinksstyle2" href="https://searchmarketingservice.com/">Search Marketing Services</a></p>
     </div>
     <div class="social-icons">
 
         <ul>
-            <li class="liststylesn"><a class="quicklinksstyle" href="/privacy-policy">Privacy Policy</a></li>
+            <li class="liststylesn"><a class="quicklinksstyle" href="/privacy-policy">{{ __('footer.privacy_policy') }}</a></li>
         </ul>
     </div>
 
