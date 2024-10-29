@@ -14,6 +14,66 @@
         margin-top: 20px;
         border-radius: 15px;
     }
+    .export-hover-ul {
+    position: absolute;
+    display: none !important;
+    transition: .3s;
+    background: #E0E0E0;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    top: 50px;
+    border-radius: 20px;
+}
+
+.export-hover:hover .export-hover-ul{
+    display: block !important;
+}
+
+    .export-hover-ul li {
+    width: 100%;
+    background: transparent;
+}
+
+.export-hover-ul li button {
+    background: transparent;
+    width: 100%;
+    margin:5px 0;
+    text-align: left;
+    padding: 4px 8px;
+    border: 1px solid #A9967D;
+    border-radius: 10px;
+    font-size: 14.5px;
+    transition:.3s;
+}
+
+.export-hover-ul li button:hover {
+    margin: 0 !important;
+        color:white;
+    background:#A9967D;
+    transition:.3s;
+    margin:5px 0;
+}
+
+    .export-hover-links{
+        position: relative;
+    }
+
+    .export-hover-links:hover .export-hover-ul{
+        display: block;
+        transition: .3s;
+    }
+
+    .box-styling.event-photos-gallery .two-things-align .two-btn-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+
 
     .accordion-content {
         background-color: #D9D9D9;
@@ -384,8 +444,30 @@
                             </p>
                         </div>
                         <div class="two-btn-align">
-                            <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                                data-target="#exampleModalCenter04">Export </button>
+                            {{-- <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
+                                data-target="#exampleModalCenter04">Export </button> --}}
+
+                                <div class="export-hover-links">
+                                    <ul>
+                                        <li class="export-hover"><button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
+                                            data-target="#exampleModalCenter04">Export </button>
+                                            <ul class="export-hover-ul">
+                                                <li>
+                                                    <button>All Guests</button>
+                                                </li>
+                                                <li>
+                                                    <button>Confirmed Guests</button>
+                                                </li>
+                                                <li>
+                                                    <button>Declined Guests</button>
+                                                </li>
+                                                <li>
+                                                    <button>Checked In Guests</button>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                                 data-target="#exampleModalCenter05">Export Invitation QR
                                 Code </button>

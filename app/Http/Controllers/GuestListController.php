@@ -864,7 +864,8 @@ class GuestListController extends Controller
                 $options = $request->formData;
                 $guests = isset($request->guestid) ? [$request->guestid] : $request->guestIds;
                 if ($guests) {
-                foreach ($guests as $guest) {
+                    foreach ($guests as $guest) {
+
                     $guest = Guest::where('id_guest', $guest)->first();
                     $event = Event::where('id_event', $request->idevent)->first();
                     $cardId = Card::select("*")->where([['id_event', "=", $event->id_event]])->orderBy('id_card', 'desc')->first();
@@ -1046,7 +1047,7 @@ class GuestListController extends Controller
 
 
                     //---------- WHATSAPP ----------------------
-                    if ($request->has('whatsapp') && $request->whatsapp != 0 && $guest['parent_id_guest'] == 0) {
+                    if ($guest['whatsapp'] && $guest['whatsapp'] != 0 && $guest['parent_id_guest'] == 0) {
                         $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
 
                         $curl = curl_init();
