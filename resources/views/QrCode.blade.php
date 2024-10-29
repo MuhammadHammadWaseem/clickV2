@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <?php
-            require_once 'C:\xampp 7.4.1\htdocs\Clickinvitation\app\Http\Controllers/phpqrcode/qrlib.php';
+            require_once 'C:\xampp8.1\htdocs\clickV2\app\Http\Controllers/phpqrcode/qrlib.php';
             // require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
 
             $path = 'images/';
