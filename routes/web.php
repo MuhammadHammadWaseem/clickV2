@@ -17,6 +17,7 @@ use App\Http\Controllers\GuestListController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TableSeatingController;
 use App\Http\Controllers\PayController;
+use App\Http\Controllers\OperationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -186,4 +187,26 @@ Route::get('get-template/{id}', [InvitationController::class, 'getTemplateWithId
 Route::post('toggle-two-sided', [InvitationController::class, 'toggleTwoSided'])->name('toggleTwoSided');
 Route::post('animation-save', [InvitationController::class, 'saveAnimation'])->name('saveAnimation');
 Route::post('upload-stamp', [InvitationController::class, 'uploadStamp'])->name('uploadStamp');
-Route::get('/print-table/{idevent}', [TableSeatingController::class, 'print'])->name('print')->middleware('payCheck');
+Route::get('/print-table/{idevent}', [TableSeatingController::class, 'print'])->name('print');
+Route::get('/cardInvitations/{id}/{guestCode}/{name}/{lang}', [TableSeatingController::class, 'cardInviteLangNameNew']);
+Route::get('/attending/{cardId}/{guestcode}/{lang}', [OperationController::class, 'attending']);
+Route::post('/opened-answered', [OperationController::class, 'openedanswered']);
+Route::post('/show-event', [OperationController::class, 'showevent']);
+Route::post('/my-members', [OperationController::class, 'mymembers']);
+Route::post('/my-group', [OperationController::class, 'mygroup']);
+Route::post('/show-meals', [OperationController::class, 'showmeals']);
+Route::post('/get-table', [OperationController::class, 'getTables']);
+Route::post('/edit-opguest', [OperationController::class, 'editopguest']);
+Route::get('/get-guest', [OperationController::class, 'getGuest']);
+Route::post('/GuestEdit/{id}', [OperationController::class, 'guestedit']);
+Route::post('/guest-decline', [OperationController::class, 'GuestDecline']);
+Route::post('/confirm-guest', [OperationController::class, 'confirmGuest']);
+Route::post('/del-member-attending', [OperationController::class, 'delmemberattending']);
+Route::get('/gift-suggestion/{cardId}/{guestcode}/{lang}', [OperationController::class, 'giftsuggestion']);
+Route::post('/show-opgifts', [OperationController::class, 'showopgifts']);
+Route::post('/pick-gift', [OperationController::class, 'pickgift']);
+Route::get('/check-in/{cardId}/{guestcode}/{lang}', [OperationController::class, 'checkin']);
+Route::post('/show-opguests', [OperationController::class, 'showopguests']);
+Route::post('/change-check', [OperationController::class, 'changecheck']);
+Route::get('/add-photos/{cardId}/{guestcode}/{lang}', [OperationController::class, 'addphotos']);
+

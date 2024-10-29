@@ -10,6 +10,11 @@ use App\Helpers\GeneralHelper;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Meal;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
+use App\Models\GuestOption;
+use App\Models\Card;
 
 class TableSeatingController extends Controller
 {
@@ -333,6 +338,87 @@ class TableSeatingController extends Controller
             //return view('pdf')->with('tables',$tables)->with('event',$event);
         } else
             return redirect('/');
+    }
+
+    public function cardInviteLangNameNew(Request $req)
+    {
+        // Fetch card data
+        $cardData = Card::where('id_card', $req->route("id"))->get();
+        if ($cardData->isEmpty()) {
+            // Handle the case when no card data is found
+            abort(404, 'Card data not found');
+        }
+        $card = $cardData->first(); // Get the first item from the collection
+
+        // Fetch event data
+        $eventData = Event::where('id_event', $card->id_event)->get();
+        if ($eventData->isEmpty()) {
+            // Handle the case when no event data is found
+            abort(404, 'Event data not found');
+        }
+        $event = $eventData->first(); // Get the first item from the collection
+
+        // Fetch event type data
+        $eventType = DB::table('event_type')->where('id_eventtype', $event->type_id)->get();
+        if ($eventType->isEmpty()) {
+            // Handle the case when no event type data is found
+            abort(404, 'Event type data not found');
+        }
+        $eventType = $eventType->first(); // Get the first item from the collection
+
+        $lang = $req->route("lang");
+        $name = $req->route("name");
+        $name = str_replace("+", " ", $name);
+        if (array_key_exists($lang, Config::get('languages'))) {
+            Session::put('applocale', $lang);
+        }
+        App::setLocale($lang);
+
+        $guest = Guest::where('code', $req->route("guestCode"))->first();
+        if ($guest) {
+            if ($guest->opened != 2) {
+                $guest->opened = 1;
+                $guest->save();
+            }
+        }
+
+        // Fetch animation data
+        $animation = DB::table('events')->where('id_event', $card->id_event)->first();
+        if (!$animation) {
+            // Handle the case when no animation data is found
+            abort(404, 'Animation data not found');
+        }
+
+        $animationDetails = DB::table('animation')->where('id_animation', $animation->id_animation)->first();
+        if (!$animationDetails) {
+            // Handle the case when no animation details are found
+            abort(404, 'Animation details not found');
+        }
+
+        $guestOptions = GuestOption::where('guest_id', $guest->id_guest)->where('event_id', $card->id_event)->first();
+        if (!$guestOptions) {
+            $guestOptions = new GuestOption();
+            $guestOptions->gift = 0;
+            $guestOptions->checkin = 0;
+            $guestOptions->photos = 0;
+            $guestOptions->website = 0;
+            $guestOptions->rsp = 0;
+            $guestOptions->event_id = $card->id_event;
+            $guestOptions->guest_id = $guest->id_guest;
+            $guestOptions->save();
+        }
+        // dd($animationDetails);
+        // Return the view with the necessary data
+        return view($animationDetails->file_animation, [
+            "card" => $cardData,
+            "guestCode" => $req->route("guestCode"),
+            "lang" => $lang,
+            'guestName' => ($guest) ? $guest->name : null, // Handle the case when guest is not found
+            "isCouple" => $eventType->couple_event,
+            "eventType" => $eventType,
+            "eventData" => $eventData,
+            "guestOptions" => $guestOptions
+        ]);
     }
 
 }
