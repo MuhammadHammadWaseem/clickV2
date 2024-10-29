@@ -150,6 +150,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table')->middleware('payCheck');
             Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');
             Route::post('{id}/delete-table', [TableSeatingController::class, 'deleteTable'])->name('delete.table')->middleware('payCheck');
+            Route::post('set-tables', [TableSeatingController::class, 'setTable'])->name('set.table')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');

@@ -271,7 +271,7 @@
 
     <div class="modal fade modal-01 modal-02 upload-form-another-event" id="exampleModalCenter02" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
@@ -289,52 +289,22 @@
                             <ul>
                                 <li>Name </li>
                                 <li># Of Guests</li>
+                                <li>Table</li>
                                 <li>Actions</li>
                             </ul>
                         </div>
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
-                                            alt=""></a></li>
-                            </ul>
+
+                        <div id="sub-main-content">
                         </div>
 
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
-                                            alt=""></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
-                                            alt=""></a></li>
-                            </ul>
-                        </div>
-
-                        <div class="sub-main-content">
-                            <ul>
-                                <li>Test Event </li>
-                                <li>250 Guests</li>
-                                <li><a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}"
-                                            alt=""></a></li>
-                            </ul>
-                        </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter">Upload Guest</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                    <button type="button" class="btn btn-secondary" id="closeSetTableModal" data-dismiss="modal">No, I
+                        Don’t</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="saveGuestTableChanges"
+                        data-toggle="modal" data-target="#exampleModalCenter">Set Table</button>
                 </div>
             </div>
         </div>
@@ -343,20 +313,116 @@
 @section('scripts')
     <script>
         let tableToDelete = null;
-        let tableName = null;
-        let tableGuests = null;
-        let tableGuestLength = null;
+        let tableId;
+        let tableIsFull = false;
+        let tableGuests;
+        let tableGuestLength;
 
         $(document).on('click', '#openGuestModal', function() {
-            tableName = $(this).data('tablename');
+            const tableName = $(this).data('tablename');
             tableGuests = $(this).data('tableguests');
             tableGuestLength = $(this).data('tableguestlength');
+            tableId = $(this).data('id');
+
+            if (tableGuestLength > tableGuests) {
+                tableIsFull = true;
+                $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
+            } else {
+                tableIsFull = false;
+                $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+            }
+
             $("#dynamicTableName").empty();
             $("#dynamicTableName").append(`${tableName} (${tableGuestLength}/${tableGuests} Guests)`);
+            $("#sub-main-content").empty();
+
+            $.ajax({
+                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                type: 'GET',
+                success: function(response) {
+                    appendGuests(response.guests, tableId);
+                },
+                error: function(xhr) {
+                    toastr.error('Failed to add gift. Please try again.');
+                }
+            });
 
             var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
             deleteModal.show();
         });
+
+        function appendGuests(data) {
+            data.forEach(guest => {
+                const isChecked = guest.id_table === tableId ? 'checked' : '';
+
+                $("#sub-main-content").append(`
+                <div class="sub-main-content">
+                    <ul>
+                        <li>${guest.titleGuest ?? ""} ${guest.name}</li>
+                        <li>${guest.mealName ?? "-"}</li>
+                        ${(guest.id_table != 0) ? 
+                            `<li class="text-success">${guest.tablename}</li>`
+                            :
+                            `<li class="text-danger">Not Seated</li>`
+                        }
+                        <li>
+                            <a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}" alt=""></a>
+                            <input type="checkbox" class="guest-checkbox" data-guest-id="${guest.id_guest}" ${isChecked}/>
+                        </li>
+                    </ul>
+                </div>
+            `);
+            });
+            // Update initial guest count based on checkboxes
+            updateGuestCount();
+        }
+
+        // Event listener for checkboxes
+        $(document).on('change', '.guest-checkbox', function() {
+            updateGuestCount();
+        });
+
+
+        // Function to update guest count and check if table is full
+        function updateGuestCount() {
+            // Count the selected checkboxes
+            const selectedCount = $('.guest-checkbox:checked').length;
+
+            if (selectedCount > tableGuests) {
+                $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
+            } else {
+                $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+            }
+        }
+
+
+
+        // Save checked guests to the table
+        $(document).on('click', '#saveGuestTableChanges', function() {
+            const selectedGuests = [];
+            $('.guest-checkbox:checked').each(function() {
+                selectedGuests.push($(this).data('guest-id'));
+            });
+
+            $.ajax({
+                url: '{{ route('panel.event.set.table') }}',
+                type: 'POST',
+                data: {
+                    table_id: tableId,
+                    guests: selectedGuests,
+                    _token: "{{ csrf_token() }}" // Laravel CSRF token for security
+                },
+                success: function(response) {
+                    toastr.success('Guests assigned to table successfully.');
+                    $('#closeSetTableModal').click();
+                    getTable();
+                },
+                error: function() {
+                    toastr.error('Failed to assign guests to the table.');
+                }
+            });
+        });
+
 
         $(document).on('click', '.delete-table-btn', function() {
             tableToDelete = $(this).data('id'); // Get the table ID from the data-id attribute
@@ -389,19 +455,6 @@
             }
         });
 
-        function getGuests() {
-            $.ajax({
-                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
-                type: 'GET',
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr) {
-                    toastr.error('Failed to add gift. Please try again.');
-                }
-            });
-        }
-
 
         function getTable() {
             $.ajax({
@@ -421,10 +474,10 @@
                                     </div>
                                     <div class="box">
                                         ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                            ` : `
-                                                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                            `}
+                                                                                                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                            ` : `
+                                                                                                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                            `}
                                     </div>
 
                                     <div class="box">
@@ -433,7 +486,7 @@
                                                     alt=""></button>
                                             <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
                                                     alt=""></button>
-                                            <button id="openGuestModal" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
+                                            <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
                                                     alt=""></button>
                                         </div>
                                     </div>
@@ -442,14 +495,14 @@
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                                                    <p>${guest.name}</p>
-                                                                                                `).join('')}
+                                                                                                                                                    <p>${guest.name}</p>
+                                                                                                                                                `).join('')}
                                     </div>
                                     <div class="box">
                                         ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
                                         ${table.guests.map(guest => `
-                                                                                                    <p>${guest.meal_name}</p>
-                                                                                                `).join('')}
+                                                                                                                                                    <p>${guest.meal_name}</p>
+                                                                                                                                                `).join('')}
                                     </div>
                                 </div>
 
@@ -519,7 +572,6 @@
 
         $(document).ready(function() {
             getTable();
-            getGuests();
 
             $('#addTableButton').click(function() {
                 // Collect form data

@@ -15,7 +15,10 @@ class TableSeatingController extends Controller
 {
     public function index()
     {
-        return view("Panel.dashboard.guest-list.index");
+        $eventId = GeneralHelper::getEventId();
+        $event = Event::where('id_event',$eventId)->first();
+        $isCorporate = $event->type == "CORPORATE" ? 1 : 0;
+        return view("Panel.dashboard.guest-list.index", compact('isCorporate'));
     }
 
     public function showTables()
@@ -53,6 +56,7 @@ class TableSeatingController extends Controller
                 ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
                 (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
             )
+            ORDER BY id_table ASC
         ');
 
         foreach ($guests as $guest) {
@@ -101,7 +105,7 @@ class TableSeatingController extends Controller
 
         if ($isCorp->corporate_event) {
             for ($i = 0; $i < $request->max_guest; $i++) {
-                DB::insert('insert into seats (id_table, seat_name) values (?, ?)', [$insertedId, 'Seat ' . ($i + 1)]);
+                DB::insert('insert into seats (id_table, seat_name, id_guest) values (?, ?, ?)', [$insertedId, 'Seat ' . ($i + 1),0]);
             }
         }
         return response()->json([
@@ -175,6 +179,27 @@ class TableSeatingController extends Controller
         } else {
             return 0;
         }
+    }
+
+    public function setTable(Request $request)
+    {
+        $guests = Guest::where('id_table', $request->table_id)->get();
+        foreach ($guests as $g) {
+            $g->id_table = 0;
+            $g->save();
+        }
+
+        foreach ($request->guests as $g) {
+            $newGuest = Guest::where('id_guest', $g)->first();
+            if ($newGuest) {
+                $newGuest->id_table = $request->table_id;
+                $newGuest->save();
+            }
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Table Set Successfully!',
+        ]);
     }
 
 }
