@@ -1,8 +1,7 @@
 @php
     use App\Helpers\GeneralHelper;
-    $eventId = GeneralHelper::getEventId();
+    $eventId = GeneralHelper::getEventId() ?? 1;
 @endphp
-
 <header class="custom_mobile_toggle_header">
     <div class="container-fluid">
         <div class="row">
@@ -66,7 +65,7 @@
                         <a href="{{ route('panel.index') }}"><img
                                 src="{{ asset('assets/images/dashboard-logo.png') }}" alt=""></a>
                     </div>
-                    <di class="two_boxex_align">
+                    <div class="two_boxex_align">
                         <div class="langauge-person">
                             <div class="language-box">
                                 <div class="nav-box">

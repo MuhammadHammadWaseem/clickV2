@@ -1,7 +1,9 @@
 <?php
 
 return [
+    'Panel'  => 'Panel',
     'Home'  => 'Home',
+    'Logout'  => 'Logout',
     'Events'  => 'Events',
     'Blogs'  => 'Blogs',
     'Features'  => 'Features',

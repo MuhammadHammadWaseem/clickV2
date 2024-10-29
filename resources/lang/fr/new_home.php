@@ -2,6 +2,8 @@
 
 return [
     'Home'  => 'Maison',
+    'Panel'  => 'Panel',
+    'Logout'  => 'Logout',
     'Events'  => 'événement',
     'Blogs'  => 'Blogues',
     'Register'  => 'Registre',

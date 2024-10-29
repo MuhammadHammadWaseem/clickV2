@@ -140,41 +140,36 @@ ul.drop-menu li a {
 
                     @guest
                         <span class="header-buttons">
-
-                            <div class="langauge-person">
-                                <div class="language-box">
-                                    <div class="language-box">
-                                        <div class="nav-box">
-                                            <ul>
-                                                <li class="drop-down-link"><a href="#"><img
-                                                            src="{{ asset('assets/Panel/images/translate-icon.png') }}"
-                                                            alt=""><i class="fa fa-angle-down"
-                                                            aria-hidden="true">
-                                                            {{ Config::get('languages')[App::getLocale()] }}</i></a>
-                                                    <ul class="drop-menu">
-                                                        @foreach (Config::get('languages') as $lang => $language)
-                                                            @if ($lang != App::getLocale())
-                                                                <li><a
-                                                                        href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
-                                                                </li>
-                                                            @endif
-                                                        @endforeach
-                                                        {{-- <li><a href="#">Events</a></li>
-                                                        <li><a href="#">Guest List</a></li>
-                                                        <li><a href="#">Contact Info</a></li>
-                                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li> --}}
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <button class="login"> <a href="/login" style="text-decoration: none; color:black;">
                                     {{ __('new_home.Login') }}</a> </button>
                             <a class="register" href="/register"
                                 style="text-decoration: none; color:black;">{{ __('new_home.Register') }}</a>
+
+                                <div class="langauge-person">
+                                    <div class="language-box">
+                                        <div class="language-box">
+                                            <div class="nav-box">
+                                                <ul>
+                                                    <li class="drop-down-link"><a href="#"><img
+                                                                src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                                                alt=""><i class="fa fa-angle-down"
+                                                                aria-hidden="true">
+                                                                {{ Config::get('languages')[App::getLocale()] }}</i></a>
+                                                        <ul class="drop-menu">
+                                                            @foreach (Config::get('languages') as $lang => $language)
+                                                                @if ($lang != App::getLocale())
+                                                                    <li><a
+                                                                            href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </span>
                     @endguest
                     @auth
@@ -182,6 +177,31 @@ ul.drop-menu li a {
                             <a class="register" href="{{ route('panel.index') }}" style="text-decoration: none; color:black;">{{ __('new_home.Panel') }}</a>
                             <button class="login"> <a href="{{ route('web.logout') }}" style="text-decoration: none; color:black;">{{ __('new_home.Logout') }}</a> </button>
                         </span>
+                        <div class="langauge-person">
+                            <div class="language-box">
+                                <div class="language-box">
+                                    <div class="nav-box">
+                                        <ul>
+                                            <li class="drop-down-link"><a href="#"><img
+                                                        src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                                        alt=""><i class="fa fa-angle-down"
+                                                        aria-hidden="true">
+                                                        {{ Config::get('languages')[App::getLocale()] }}</i></a>
+                                                <ul class="drop-menu">
+                                                    @foreach (Config::get('languages') as $lang => $language)
+                                                        @if ($lang != App::getLocale())
+                                                            <li><a
+                                                                    href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endauth
 
                     <button class="nav-toggler">
