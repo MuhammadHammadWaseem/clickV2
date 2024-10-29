@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Jobs\RecoverEmailJob;
 use App\Jobs\RegisterEmailJob;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
@@ -24,9 +25,21 @@ class WebController extends Controller
 {
     public function lang($lang)
     {
-        if (array_key_exists($lang, Config::get('languages'))) {
-            Session::put('applocale', $lang);
+        //    Validate the requested language
+           if (!in_array($lang, ['en', 'fr'])) {
+            abort(400); // Bad request if language is not supported
         }
+
+        // Set the application locale
+        App::setLocale($lang);
+
+        // Store the language in session for future requests
+        Session::put('locale', $lang);
+
+        // Redirect back to the previous page
+        // if (array_key_exists($lang, Config::get('languages'))) {
+        //     Session::put('applocale', $lang);
+        // }
         return Redirect::back();
     }
     public function index()

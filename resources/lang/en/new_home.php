@@ -9,7 +9,6 @@ return [
     'About'  => 'About',
     'Contact'  => 'Contact',
     'Login'  => 'Login',
-    'Logout'  => 'Logout',
     'Register'  => 'Register',
     'Privacy Policy'  => 'Privacy Policy',
     'Terms of Use'  => 'Terms of Use',
@@ -60,8 +59,7 @@ return [
     'Start planning'  => 'Start planning',
     'Enough? start planning!'  => 'Enough? start planning!',
     'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY'  => 'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY',
-    'GET STARTED NOW'  => 'GET STARTED NOW',
-    'Panel' => 'Panel'
+    'GET STARTED NOW'  => 'GET STARTED NOW'
   
     
 ];

@@ -38,19 +38,16 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>Your Web Page</h2>
-                        <p>This page is to review your page before you send the invitation out, so here you can
-                            see the layout and make all the changes necessary and upload new pictures. Upload
-                            pictures for picture gallery. Link your Facebook and Instagram account.</p>
+                        <h2>{{ __('webpage.title') }}</h2>
+                        <p>{{ __('webpage.description') }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="box-styling website-preview ">
                     <div class="text">
-                        <h2>Website Preview </h2>
-                        <p>This page is to review your page before you send the invitation out, so here you can
-                            see the layout.</p>
+                        <h2>{{ __('webpage.webpriview') }} </h2>
+                        <p>{{ __('webpage.webpriviewdesc') }}</p>
                     </div>
                     <div class="iframe-box">
                         {{-- <img src="{{ asset('assets/Panel/images/website-preview-iframe.png') }}" alt=""> --}}
@@ -59,10 +56,10 @@
                     <div class="two-btn-align">
                         <button class="t-btn t-btn-gray"><a
                                 href="{{ route('panel.event.generalInfos', ['id' => $event->id_event]) }}"
-                                style="color:#ffffff;">Website Information</a></button>
-                        <button class="t-btn t-btn-gray" id="changeMainPhotoBtn">Change Main Photo</button>
+                                style="color:#ffffff;">{{ __('webpage.Website Information') }}</a></button>
+                        <button class="t-btn t-btn-gray" id="changeMainPhotoBtn">{{ __('webpage.Change Main Photo') }}</button>
                         <button class="t-btn"><a href="{{ route('website', ['id' => $event->id_event]) }}"
-                                style="color:#ffffff;">Visit Website</a></button>
+                                style="color:#ffffff;">{{ __('webpage.Visit Website') }}</a></button>
                     </div>
                 </div>
             </div>
@@ -70,12 +67,10 @@
                 <div class="box-styling event-photos-gallery">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Event Photos Gallery</h2>
-                            <p>This page is to review your page before you send the invitation out, so here you
-                                can see the layout.</p>
+                            <h2>{{ __('webpage.Eventphoto') }}</h2>
+                            <p>{{ __('webpage.Eventphotodesc') }}</p>
                         </div>
-                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">Add
-                            New</button>
+                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">{{ __('webpage.Add New') }}</button>
                     </div>
                     <div class="main-event-gallery-box">
                         @forelse ($photogallery as $photo)
@@ -116,10 +111,9 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="box-styling ceremony-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
-                        <h2>Ceremony</h2>
-                        <p>This page is to review your page before you send the invitation out, so here you can
-                            see the layout.</p>
-                        <button class="t-btn" id="addCerImageBtn">Add New </button>
+                        <h2>{{ __('webpage.Ceremony') }}</h2>
+                        <p>{{ __('webpage.Cermonydesc') }}</p>
+                        <button class="t-btn" id="addCerImageBtn">{{ __('webpage.Add New') }} </button>
                         @if (file_exists(public_path('event-images/' . $event->id_event . '/cerimg.jpg')))
                             <img src="{{ asset('event-images/' . $event->id_event . '/cerimg.jpg') }}" alt="">
                         @endif
@@ -129,10 +123,9 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="box-styling reception-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
-                        <h2>Recption</h2>
-                        <p>This page is to review your page before you send the invitation out, so here you can
-                            see the layout.</p>
-                        <button class="t-btn" id="addRecImageBtn">Add New </button>
+                        <h2>{{ __('webpage.Recption') }}</h2>
+                        <p>{{ __('webpage.Recptiondesc') }}</p>
+                        <button class="t-btn" id="addRecImageBtn">{{ __('webpage.Add New') }} </button>
                         @if (file_exists(public_path('event-images/' . $event->id_event . '/recimg.jpg')))
                             <img src="{{ asset('event-images/' . $event->id_event . '/recimg.jpg') }}" alt="">
                         @endif
@@ -142,10 +135,9 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="box-styling party-new-box ceremony-box web-page-three-boxes">
                     <div class="text">
-                        <h2>Custome</h2>
-                        <p>This page is to review your page before you send the invitation out, so here you can
-                            see the layout.</p>
-                        <button class="t-btn" id="addParImageBtn">Add New </button>
+                        <h2>{{ __('webpage.Custome') }}</h2>
+                        <p>{{ __('webpage.Customedesc') }}</p>
+                        <button class="t-btn" id="addParImageBtn">{{ __('webpage.Add New') }}</button>
                         @if (file_exists(public_path('event-images/' . $event->id_event . '/parimg.jpg')))
                             <img src="{{ asset('event-images/' . $event->id_event . '/parimg.jpg') }}" alt="">
                         @endif
@@ -176,9 +168,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeCerModalBtn" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -205,9 +197,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeBtn" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -340,8 +332,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -367,8 +359,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -395,9 +387,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeMainIamgeModalBtn" class="btn"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>

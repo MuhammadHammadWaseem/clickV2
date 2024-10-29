@@ -37,61 +37,49 @@
             color: #ccc;
             cursor: not-allowed;
         }
+
+        #exampleModalCenter03 .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
     </style>
 </head>
 
 <body>
 
+
+
+    @include('Panel.Layout.header')
+
+
     <section class="events-lists-sec-01">
-        <div class="main-logo">
+        {{-- <div class="main-logo">
             <a href="{{ route('web.index') }}"><img src="assets/images/main-logo.png" alt=""></a>
-        </div>
+        </div> --}}
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="text text-center">
-                        <h2>Your Previous Events</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing<br> and typesetting industry.</p>
+                        <h2>{{ __('panel.priviousevint') }}</h2>
+                        <p>{{ __('panel.heading') }}</p>
                         <!-- <a href="#" class="t-btn"> Create a New Event</a> -->
                         <button type="button" class="btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter"> Create a New Event </button>
+                            data-target="#exampleModalCenter"> {{ __('panel.creatnew') }} </button>
 
                     </div>
                     <div class="table-box">
                         <table id="events-table">
                             <thead>
                                 <tr>
-                                    <th>Created</th>
-                                    <th>Timings</th>
-                                    <th>Event Title</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('panel.Created') }}</th>
+                                    <th>{{ __('panel.Timings') }}</th>
+                                    <th>{{ __('panel.Event Title') }}</th>
+                                    <th>{{ __('panel.Actions') }}</th>
                                 </tr>
                             </thead>
 
                             <tbody id="tbody">
-                                {{-- @forelse($events as $event)
-                                    <tr>
-                                        <td>{{ $event->created_at->toDateString() }}</td>
 
-                                        <td>{{ $event->date }}</td>
-
-                                        <td>{{ $event->name }} {{ $event->type }}</td>
-                                        <td>
-                                            <div class="edit-delet">
-                                                <ul>
-                                                    <li><a href="#"><img src="assets/images/edit.png"
-                                                                alt=""></a>
-                                                    </li>
-                                                    <li><a href="#"><img src="assets/images/delet.png"
-                                                                alt=""></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <p>No items found.</p>
-                                @endforelse --}}
                             </tbody>
                         </table>
 
@@ -121,8 +109,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">Create a New Event</h2>
-                        <p class="text-center">You have 5 days full functional free trial</p>
+                        <h2 class="text-center">{{ __('panel.creatnew') }}</h2>
+                        <p class="text-center">{{ __('panel.trial') }}</p>
                     </div>
                     <div class="main-form-box">
                         <form id="eventTitle">
@@ -130,7 +118,7 @@
                             <input type="text" name="title" placeholder="Title ( Max 25 Characters )" required>
                             <input type="datetime-local" name="date" placeholder="Date" required>
                             <select name="type" required>
-                                <option selected disabled>Select Type</option>
+                                <option selected disabled>{{ __('panel.selecttype') }}</option>
                                 @foreach ($eventList as $data)
                                     <option value="{{ $data->id_eventtype }}">{{ $data->title }}</option>
                                 @endforeach
@@ -138,8 +126,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">Close</button>
-                    <button type="button" id="submitForm" class="submit-btn">Save changes</button>
+                    <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">{{ __('panel.Close') }}</button>
+                    <button type="button" id="submitForm" class="submit-btn">{{ __('panel.Save changes') }}</button>
                     </form>
                 </div>
             </div>
@@ -158,30 +146,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>What Do You Want To Do First?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('panel.do first') }}</h2>
+                        {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
+                        <br>
                     </div>
                     <div class="modal-listing-box">
                         <ul>
                             <li>
                                 <a href="#" onclick="hidemodel();">
-                                    Make Cards <img src="assets/images/modal-list-right-arow.png" alt="">
+                                    {{ __('panel.Make Cards') }} <img src="assets/images/modal-list-right-arow.png" alt="">
                                 </a>
                             </li>
-                            <li><a href="#" onclick="hidemodel();" >Send Invitations <img src="assets/images/modal-list-right-arow.png"
+                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Send Invitations') }} <img src="assets/images/modal-list-right-arow.png"
                                         alt=""></a></li>
-                            <li><a href="#" onclick="hidemodel();" >Make New Events <img src="assets/images/modal-list-right-arow.png"
+                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Make New Events') }} <img src="assets/images/modal-list-right-arow.png"
                                         alt=""></a></li>
-                            <li><a href="#" onclick="hidemodel();" >Manage Guest List <img src="assets/images/modal-list-right-arow.png"
+                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Manage Guest List') }} <img src="assets/images/modal-list-right-arow.png"
                                         alt=""></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMainModal">Go to
-                        Dashboard</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMainModal">{{ __('panel.Go to Dashboard') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter" data-dismiss="modal">Create New Event</button>
+                        data-target="#exampleModalCenter" data-dismiss="modal">{{ __('panel.creatnew') }}</button>
                 </div>
             </div>
         </div>
@@ -203,12 +191,9 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="assets/images/circle-check.png" alt="">
-                        <h2>Event Created Successfully</h2>
-                        <p>Your event has been successfully updated.</p>
+                        <h2>{{ __('panel.creatnewSU') }}</h2>
+                        <p>{{ __('panel.creatnewM') }}</p>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

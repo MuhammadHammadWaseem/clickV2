@@ -16,4 +16,9 @@ return[
     'Sign In' => 'Sign In',
     'Email or password incorrect' => 'Email or password incorrect',
     'Check your inbox to activate your account' => 'Check your inbox to activate your account',
+    'login account' => 'Login to your account',
+    'Create a new account!' => 'Create a new account!',
+    'Register' => 'Register',
+    'Login' => 'Login',
+
 ];

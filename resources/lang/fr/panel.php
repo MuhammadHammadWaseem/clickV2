@@ -24,6 +24,9 @@ return[
 'Delete Event' => 'Supprimer l\'événement',
 'Are you sure to delete this event?' => 'Voulez-vous vraiment supprimer cet événement ?',
 'By deleting this event you will lose all data and photos' => 'En supprimant cet événement, vous perdrez toutes les données et photos',
-
+'heading' => 'Organisez votre événement ou journée spéciale et immortalisez vos souvenirs',
+'priviousevint' => 'Vos événements précédents',
+'creatnew' => 'Créer un nouvel événement',
+'Created' => 'Créé',
 
 ];

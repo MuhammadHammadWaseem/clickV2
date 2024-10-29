@@ -397,7 +397,7 @@ header .langauge-person {
 
 header .langauge-person .language-box .nav-box ul li a {
   display: flex;
-  column-gap: 15px;
+  column-gap: 3px;
   width: 70px;
   height: 40px;
   border: 1px solid #7A7A7A;

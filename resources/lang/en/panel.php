@@ -24,6 +24,27 @@ return[
 'Delete Event' => 'Delete Event',
 'Are you sure to delete this event?' => 'Are you sure to delete this event?',
 'By deleting this event you will lose all data and photos' => 'By deleting this event you will lose all data and photos',
+'heading' => 'Organize Your Event or Special Day& Immortalize Your Memories',
+'priviousevint' => 'Your Previous Events',
+'creatnew' => 'Create a New Event',
+'Created' => 'Created',
+'Timings' => 'Timings',
+'Event Title' => 'Event Title',
+'Actions' => 'Actions',
+'trial' => 'You have 5 days full functional free trial',
+'selecttype' => 'Select Type',
+'Save changes' => 'Save changes',
+'do first' => 'What Do You Want To Do First?',
+'Make Cards' => 'Make Cards',
+'Send Invitations' => 'Send Invitations',
+'Make New Events' => 'Make New Events',
+'Manage Guest List' => 'Manage Guest List',
+'Go to Dashboard' => 'Go to Dashboard',
+'creatnewSU' => 'Event Created Successfully',
+'creatnewM' => 'Your event has been successfully updated.',
+
+
+
 
 
 ];

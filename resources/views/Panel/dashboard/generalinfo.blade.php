@@ -50,26 +50,23 @@
             <div class="col-lg-6 col-md-12">
                 <div class="box-styling general-event-information">
                     <div class="text">
-                        <h2>General Event Information</h2>
-                        <p>This page is to setup your web page information. All the info you enter here will be shown on
-                            your web page for your guests to see, you can add your pictures or your YouTube link for a story
-                            video and more.</p>
-                        <p class="note"> <b>Note:</b> Fill only what you think necessary and what you want to inform your
-                            guests about.</p>
+                        <h2>{{ __('genralInfo.General Info') }}</h2>
+                        <p>{{ __('genralInfo.description') }}</p>
+                        <p class="note"> <b> {{ __('genralInfo.Note') }}</b>{{ __('genralInfo.text') }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="box-styling edit-event">
                     <div class="text">
-                        <h2>Edit Event</h2>
+                        <h2>{{ __('genralInfo.Edit Event') }}</h2>
                         <form method="POST" enctype="multipart/form-data" id="editEventForm"
                             action="{{ route('panel.event.updateEvent', $event->id_event) }}">
                             <input type="hidden" value="{{ $event->id_event }}" name="event_id">
                             @csrf
 
-                            <input type="text" placeholder="Event Name" value="{{ $event->name }}" name="event">
-                            <input type="datetime-local" id="eventDate" name="event_date" placeholder="Event Date"
+                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" value="{{ $event->name }}" name="event">
+                            <input type="datetime-local" id="eventDate" name="event_date" placeholder="{{ __('genralInfo.Event Date') }}"
                                 value="{{ $event->date }}">
                     </div>
                 </div>
@@ -78,7 +75,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="box-styling person-details">
                         <div class="text">
-                            <h2>Groom Details</h2>
+                            <h2>{{ __('genralInfo.Groom Details') }}</h2>
                             <div class="person-box">
                                 <div class="avatar-upload">
                                     <div class="avatar-edit">
@@ -96,11 +93,11 @@
                                     </div>
 
                                 </div>
-                                <input type="text" placeholder="First Name" name="groomfname"
+                                <input type="text" placeholder="{{ __('genralInfo.First Name') }}" name="groomfname"
                                     value="{{ $event->groomfname }}">
-                                <input type="text" placeholder="Last Namee" name="groomlname"
+                                <input type="text" placeholder="{{ __('genralInfo.Last Name') }}" name="groomlname"
                                     value="{{ $event->groomlname }}">
-                                <textarea placeholder="Message Here" name="groomsummary">{{ $event->groomsummary }}</textarea>
+                                <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="groomsummary">{{ $event->groomsummary }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -108,7 +105,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="box-styling person-details">
                         <div class="text">
-                            <h2>Bride Details</h2>
+                            <h2>{{ __('genralInfo.Bride Details') }}</h2>
                             <div class="person-box">
 
                                 <div class="avatar-upload">
@@ -125,11 +122,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" placeholder="First Name" name="bridefname"
+                                <input type="text" placeholder="{{ __('genralInfo.First Name') }}" name="bridefname"
                                     value="{{ $event->groomlname }}">
-                                <input type="text" placeholder="Last Namee" name="bridelname"
+                                <input type="text" placeholder="{{ __('genralInfo.Last Name') }}" name="bridelname"
                                     value="{{ $event->bridelname }}">
-                                <textarea placeholder="Message Here" name="bridesummary">{{ $event->bridesummary }}</textarea>
+                                <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
 
                             </div>
 
@@ -141,8 +138,8 @@
             <div class="col-lg-12 col-md-12">
                 <div class="box-styling relationship-story">
                     <div class="text">
-                        <h2>@if ($event->eventType->couple_event == '1')Relationship Story @elseif ($event->eventType->couple_event == '0') EVENT SUMMARY @endif</h2>
-                        <textarea placeholder="Type Here" name="story">{{ $event->summary }}</textarea>
+                        <h2>@if ($event->eventType->couple_event == '1'){{ __('genralInfo.Relationship Story') }} @elseif ($event->eventType->couple_event == '0') {{ __('genralInfo.EVENT SUMMARY') }} @endif</h2>
+                        <textarea placeholder="{{ __('genralInfo.Type Here') }}" name="story">{{ $event->summary }}</textarea>
                     </div>
                 </div>
             </div>
@@ -150,11 +147,11 @@
                 <div class="box-styling ceremony-box">
                     <div class="text">
                         <div class="align-text-box">
-                            <h2>Ceremony</h2>
+                            <h2>{{ __('genralInfo.Ceremony') }}</h2>
                         </div>
 
                         <div class="person-box">
-                            <input type="text" placeholder="location" id="ceraddress" name="ceraddress"
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress" name="ceraddress"
                                 value="{{ $event->ceraddress }}">
                             <input type="time" placeholder="Event Time" name="certime" value="{{ $event->certime }}">
                             <input type="hidden" id="cerAddressLink">
@@ -163,7 +160,7 @@
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="mapView" style="width: 100%; height: 400px;"></div>
-                            <textarea placeholder="Event Description" name="cerdesc">{{ $event->cerdesc }}</textarea>
+                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -172,11 +169,11 @@
                 <div class="box-styling ceremony-box">
                     <div class="text">
                         <div class="align-text-box">
-                            <h2>Recption</h2>
+                            <h2>{{ __('genralInfo.Recption') }}</h2>
                         </div>
 
                         <div class="person-box">
-                            <input type="text" placeholder="location" id="recaddress" name="recaddress"
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress" name="recaddress"
                                 value="{{ $event->recaddress }}">
                             <input type="hidden" id="recAddressLink">
                             <input type="time" placeholder="Event Time" name="rectime"
@@ -186,7 +183,7 @@
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="RecmapView" style="width: 100%; height: 400px;"></div>
-                            <textarea placeholder="Event Description" name="recdesc">{{ $event->recdesc }}</textarea>
+                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
                         </div>
 
                     </div>
@@ -196,13 +193,13 @@
                 <div class="box-styling ceremony-box">
                     <div class="text">
                         <div class="align-text-box">
-                            <h2>Custom Event</h2>
+                            <h2>{{ __('genralInfo.Custom Event') }}</h2>
                         </div>
                         <div class="person-box">
-                            <input type="text" placeholder="Event Name" name="parname"
+                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
                                 value="{{ $event->parname }}">
                             <input type="hidden" id="parAddressLink">
-                            <input type="text" placeholder="location" id="paraddress" name="paraddress"
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress" name="paraddress"
                                 value="{{ $event->paraddress }}">
                             <input type="time" placeholder="Event Time" name="partime"
                                 value="{{ $event->partime }}">
@@ -211,12 +208,12 @@
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="ParmapView" style="width: 100%; height: 400px;"></div>
-                            <textarea placeholder="Event Description" name="pardesc">{{ $event->pardesc }}</textarea>
+                            <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="w-100 save t-btn" type="button" id="submitEditEvent">Save</button>
+            <button class="w-100 save t-btn" type="button" id="submitEditEvent">{{ __('genralInfo.Save') }}</button>
             </form>
         </div>
     </div>

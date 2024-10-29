@@ -32,6 +32,11 @@ $(".event-slider-single").slick({
 });
 
 
+
+
+
+
+
 // $(".blogslid").slick({
 //     dots: true,
 //     arrows: true,
@@ -114,7 +119,7 @@ if (document.getElementById("toggleBtn")) {
     function toggleButtons() {
         var checkBox = document.getElementById("two_sided");
         var buttons = document.querySelector(".two-btn-align");
-        
+
         // Toggle display based on checkbox status
         if (checkBox.checked) {
             buttons.style.display = "block";

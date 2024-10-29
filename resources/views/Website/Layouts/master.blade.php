@@ -31,6 +31,92 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <style>
+        .langauge-person {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+  justify-content: flex-end;
+}
+
+
+.langauge-person .language-box .nav-box ul li a {
+  display: flex;
+  column-gap: 3px;
+  width: 70px;
+  height: 40px;
+  border: 1px solid #7A7A7A;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+}
+
+.langauge-person .language-box .nav-box ul li a img {
+  width: 20px;
+  height: 20px;
+}
+
+.langauge-person .language-box .nav-box ul li a i {
+  color: #7A7A7A;
+}
+
+.langauge-person .language-box .nav-box ul li a:hover {
+  background-color: white;
+}
+
+.langauge-person .language-box .nav-box ul li {
+  position: relative;
+}
+
+ul.drop-menu {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px 15px;
+  position: absolute;
+  z-index: 9999;
+  top: 45px;
+  width: 130px;
+}
+
+ul.drop-menu li a {
+  border: none !important;
+  padding: 0;
+  display: block !important;
+  color: black !important;
+  font-size: 12px;
+}
+
+.langauge-person  .nav-box ul li.drop-down-link ul li a {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.langauge-person  .nav-box ul li.drop-down-link ul li {
+  border-bottom: 1px solid #00000052;
+  padding-bottom: 5px;
+}
+
+.langauge-person  .nav-box ul li.drop-down-link ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  display: none;
+  top: 40px;
+  transition: .3s;
+  left: -30px;
+}
+.langauge-person  .nav-box ul li.drop-down-link:hover ul {
+  display: flex !important;
+}
+
+.header-buttons {
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 20px;
+}
+    </style>
 </head>
 
 <body>
@@ -51,17 +137,40 @@
                         <li><a href="/register">signup</a></li>
                     </ul>
                     <a href="/" class="site-logo"><img src="/assets/images/logo.svg" alt="click-invitation"></a>
-                    <div class="dropdown-menu">
-                        @foreach (Config::get('languages') as $lang => $language)
-                            @if ($lang != App::getLocale())
-                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
-                                    {{ $language }}</a>
-                            @endif
-                        @endforeach
-                    </div>
-                    </li>
+
                     @guest
                         <span class="header-buttons">
+
+                            <div class="langauge-person">
+                                <div class="language-box">
+                                    <div class="language-box">
+                                        <div class="nav-box">
+                                            <ul>
+                                                <li class="drop-down-link"><a href="#"><img
+                                                            src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                                            alt=""><i class="fa fa-angle-down"
+                                                            aria-hidden="true">
+                                                            {{ Config::get('languages')[App::getLocale()] }}</i></a>
+                                                    <ul class="drop-menu">
+                                                        @foreach (Config::get('languages') as $lang => $language)
+                                                            @if ($lang != App::getLocale())
+                                                                <li><a
+                                                                        href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                        {{-- <li><a href="#">Events</a></li>
+                                                        <li><a href="#">Guest List</a></li>
+                                                        <li><a href="#">Contact Info</a></li>
+                                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li> --}}
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button class="login"> <a href="/login" style="text-decoration: none; color:black;">
                                     {{ __('new_home.Login') }}</a> </button>
                             <a class="register" href="/register"

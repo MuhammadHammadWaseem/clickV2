@@ -9,10 +9,14 @@
         content="Register now for Click Invitation and gain access to a world of exciting events and valuable connections. Join today and take your next event to new heights.">
     <link rel="stylesheet" href="assets/newcss/style.css">
     <link rel="canonical" href="https://clickinvitation.com/register">
-    <link rel="icon" type="image/x-icon" href="assets/newimages/Fav-Icon.png">
+    {{-- <link rel="icon" type="image/x-icon" href="assets/newimages/Fav-Icon.png"> --}}
     <link href="https://fonts.cdnfonts.com/css/night" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="favicon.png" sizes="32x32">
+    <link rel="stylesheet" href="{{ asset('assets/css/lib.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">
 
     {{-- SEO --}}
     <meta property="og:title" content="Click Invitation" />
@@ -66,39 +70,40 @@
                 ]
             }
         }
+
     </script>
 
 
-
+@include('Panel.Layout.header')
     <div class="container">
-        <div class="site-logo-img">
+        {{-- <div class="site-logo-img">
             <a href="/" class="site-logo"><img src="/assets/newimages/Group 1.png" alt="click-invitation"></a>
-        </div>
+        </div> --}}
         <div class="register-form-container">
-            <h1>let’s Get started</h1>
+            <h1>{{ __('register.title') }}</h1>
+
             <form action="/register" method="post" class="Register-form" onsubmit="return false;" id="register-form">
                 <div style="display: flex;">
-                    <input type="text" id="firstnamereg" name="first_name" placeholder="First Name" required>
-                    <input type="text" id="surnamereg" name="last_name" placeholder="Last Name" required>
+                    <input type="text" id="firstnamereg" name="first_name" placeholder="{{ __('register.First Name') }}" required>
+                    <input type="text" id="surnamereg" name="last_name" placeholder="{{ __('register.Last Name') }}" required>
                 </div>
                 <br><br>
-                <input type="email" id="emailreg" class="email" name="email" placeholder="Email Address"
+                <input type="email" id="emailreg" class="email" name="email" placeholder="{{ __('register.Your Email') }}"
                     required><br><br>
                 <span id="email"
                     style="display:none;color: #ff3535;font-size: 16px;margin-left: 32px;">{{ __('register.This email is already in use') }}</span>
                 <input type="text" id="phonereg" class="email" name="phonereg" oninput="formatPhone(this)"
-                    placeholder="Enter Your Phone" required><br><br>
+                    placeholder="{{ __('register.Your Phone') }}" required><br><br>
 
                 <div class="password-input">
-                    <input type="password" id="passwordreg" name="password" placeholder="Password" required>
+                    <input type="password" id="passwordreg" name="password" placeholder="{{ __('register.Your Password') }}" required>
                     <span id="showPassword" style="cursor: pointer;"><i class="fas fa-eye"></i></span>
                 </div><br><br>
                 <input type="checkbox" id="terms" name="terms" class="checkbox" required>
-                <span style="color: gray;">I accept Click Invitation’s <a href="/privacy-policy">Term of
-                        Services</a></span><br><br>
+                <span style="color: gray;">{{ __('register.term') }} <a href="/privacy-policy">{{ __('register.codition') }}</a></span><br><br>
                 <input type="submit" value="Register" class="register-button" id="register" onclick="return false;">
             </form>
-            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>{{ __('register.Already have an account?') }} <a href="/login">{{ __('register.Login') }}</a></p>
         </div>
     </div>
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
@@ -117,6 +122,7 @@
     <script src="/assets/js/main.js"></script>
 
     <script>
+        const tryItNowText = @json(__('register.Try It Now'));
         $(document).ready(function() {
             $("#register").click(function() {
                 if ($("#register-form")[0].checkValidity()) {
@@ -148,9 +154,7 @@
                             if (msg == 1) window.location = "/success";
                             else {
                                 $('#register').attr("disabled", false);
-                                $('#register').html(
-                                    'Try It Now'
-                                );
+                                $('#register').html(tryItNowText);
                                 $("#email").css("display", "block");
                             }
                         },

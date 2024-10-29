@@ -66,7 +66,7 @@
                         <a href="{{ route('panel.index') }}"><img
                                 src="{{ asset('assets/images/dashboard-logo.png') }}" alt=""></a>
                     </div>
-                    <div class="two_boxex_align">
+                    <di class="two_boxex_align">
                         <div class="langauge-person">
                             <div class="language-box">
                                 <div class="nav-box">
@@ -76,10 +76,17 @@
                                                     alt=""><i class="fa fa-angle-down"
                                                     aria-hidden="true"></i></a>
                                             <ul class="drop-menu">
-                                                <li><a href="#">Events</a></li>
+                                                @foreach (Config::get('languages') as $lang => $language)
+                                                    @if ($lang != App::getLocale())
+                                                        <li><a
+                                                                href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                                {{-- <li><a href="#">Events</a></li>
                                                 <li><a href="#">Guest List</a></li>
                                                 <li><a href="#">Contact Info</a></li>
-                                                <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
+                                                <li><a href="{{ route('web.logout') }}">Sign Out</a></li> --}}
                                             </ul>
                                         </li>
                                     </ul>
@@ -102,10 +109,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </header>
 
@@ -123,14 +130,21 @@
                     <div class="language-box">
                         <div class="nav-box">
                             <ul>
-                                <li class="drop-down-link"><a href="#"><img
-                                            src="{{ asset('assets/Panel/images/translate-icon.png') }}"
-                                            alt=""><i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <li class="drop-down-link">
+                                    <a href="#">
+                                        <img src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                            alt="">
+                                        {{ Config::get('languages')[App::getLocale()] }}<i class="fa fa-angle-down"
+                                            aria-hidden="true"></i>
+                                    </a>
                                     <ul class="drop-menu">
-                                        <li><a href="#">Events</a></li>
-                                        <li><a href="#">Guest List</a></li>
-                                        <li><a href="#">Contact Info</a></li>
-                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
+                                        @foreach (Config::get('languages') as $lang => $language)
+                                            @if ($lang != App::getLocale())
+                                                <li><a
+                                                        href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>

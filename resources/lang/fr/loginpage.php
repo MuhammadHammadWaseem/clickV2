@@ -16,5 +16,9 @@ return[
     'Sign In' => 'S\'identifier',
     'Email or password incorrect' => 'Email ou mot de passe incorrect',
     'Check your inbox to activate your account' => 'Vérifiez votre boîte de réception pour activer votre compte',
+    'login account' => 'Connectez-vous à votre compte',
+    'Create a new account!' => 'Créez un nouveau compte !',
+    'Register' => 'Registre',
+    'Login' => 'Se connecter',
 
 ];

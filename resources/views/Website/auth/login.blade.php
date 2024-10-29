@@ -72,18 +72,18 @@
             <a href="/" class="site-logo"><img src="/assets/newimages/Group 1.png" alt="click-invitation"></a>
         </div>
         <div class="register-form-container">
-            <h1>Login to your account</h1>
+            <h1>{{ __('loginpage.login account') }}</h1>
             <form action="" method="post" class="Register-form" id="signin-form">
-                <input type="email" id="emailreg" class="email" name="email" placeholder="Email Address"
+                <input type="email" id="emailreg" class="email" name="email" placeholder="{{ __('loginpage.Enter Your Email') }}"
                     required><br><br>
                 <div class="password-input">
-                    <input type="password" id="passwordreg" name="password" placeholder="Password" required>
+                    <input type="password" id="passwordreg" name="password" placeholder="{{ __('loginpage.Enter Your Password') }}" required>
                     <span id="showPassword" style="cursor: pointer;"><i class="fas fa-eye"></i></span>
                 </div><br><br>
-                <a href="/reset" class="forget-password">Forgotten Password?</a>
-                <input type="submit" value="Login" class="register-button" id="signin">
+                <a href="/reset" class="forget-password">{{ __('loginpage.Forgot your password?') }}'</a>
+                <input type="submit" value="{{ __('loginpage.Login') }}" class="register-button" id="signin">
             </form>
-            <p>Create a new account!<a href="/register"> Register</a></p>
+            <p>{{ __('loginpage.Create a new account!') }}<a href="/register"> {{ __('loginpage.Register') }}</a></p>
             <br>
             <p id="mex"></p>
         </div>
