@@ -1,5 +1,30 @@
 @extends('Panel.Layout.master')
 <style>
+
+.main-dashboard-sec .left-menu-dash ul li.management-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.management-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.management-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.management-active {
+  background-color: #c09d2a29;
+}
+
+
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
         /* border-bottom: 1px solid #00000038; */
         margin-bottom: 10px;

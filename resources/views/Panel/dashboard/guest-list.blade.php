@@ -1,5 +1,32 @@
 @extends('Panel.Layout.master')
 <style>
+
+
+.main-dashboard-sec .left-menu-dash ul li.gest-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.gest-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.gest-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.gest-active {
+  background-color: #c09d2a29;
+}
+
+
+
     .accordion {
         width: 100%;
         background-color: #D9D9D9;

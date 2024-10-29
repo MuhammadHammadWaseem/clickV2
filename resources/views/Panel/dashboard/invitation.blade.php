@@ -1,5 +1,32 @@
 @extends('Panel.Layout.master')
 <style>
+
+
+
+.main-dashboard-sec .left-menu-dash ul li.invitatin-active::after {
+  width: 5px;
+  height: 100%;
+  background-color: #C09D2A;
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: "";
+  top: 0;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.invitatin-active a {
+  color: #C09D2A;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.invitatin-active img {
+  filter: none;
+}
+
+.main-dashboard-sec .left-menu-dash ul li.invitatin-active {
+  background-color: #c09d2a29;
+}
+
+
     #txtTool h5 {
         color: #7A7A7A !important;
         font-size: 15px !important;
