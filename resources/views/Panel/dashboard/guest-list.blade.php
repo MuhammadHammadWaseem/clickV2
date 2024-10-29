@@ -2210,8 +2210,26 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
-                    alert('An error occurred while sending invitations');
+                    alert('An error');
                 }
+            });
+        }
+
+        function accordionFunctionality() {
+            const accordionBtns = document.querySelectorAll(".accordion");
+
+            accordionBtns.forEach((accordion) => {
+                accordion.onclick = function() {
+                    this.classList.toggle("is-open");
+                    let content = this.nextElementSibling;
+
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null; // If accordion is open, close it
+                    } else {
+                        content.style.maxHeight = content.scrollHeight +
+                            "px"; // If accordion is closed, open it
+                    }
+                };
             });
         }
     </script>

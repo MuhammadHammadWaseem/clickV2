@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitaion\EventsEnglish;
 use App\Mail\Invitaion\CorporateFrench;
 use App\Mail\Invitaion\CorporateEnglish;
-use Barryvdh\DomPDF\Facade as PDF;
+use PDF;
 class GuestListController extends Controller
 {
     public function index() {
@@ -150,38 +150,6 @@ class GuestListController extends Controller
         return response()->json(['success' => true, 'message' => 'Guest added successfully!']);
     }
 
-        // public function show(Request $request) {
-        //     $eventId = GeneralHelper::getEventId();
-
-        //     // Set the current page from the request or default to 1
-        //     $currentPage = $request->input('page', 1);
-        //     $perPage = 10; // Number of items per page
-
-        //     $guests = Guest::where('id_event', $eventId)
-        //         ->where(function ($query) {
-        //             $query->where('mainguest', 1)
-        //                 ->orWhere('mainguest', null);
-        //         })
-        //         ->paginate($perPage, ['*'], 'page', $currentPage);
-
-        //     foreach ($guests as $g) {
-        //         $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->get();
-        //         foreach ($g->members as $gm) {
-        //             if ($gm->id_meal != 0)
-        //                 $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
-        //         }
-        //         foreach ($g->members as $gm) {
-        //             if ($gm->id_table != 0)
-        //                 $gm->table = Table::where('id_table', $gm->id_table)->first();
-        //         }
-        //     }
-
-        //     return response()->json([
-        //         'guests' => $guests->items(),
-        //         'totalPages' => $guests->lastPage(), // total number of pages
-        //         'currentPage' => $guests->currentPage() // current page number
-        //     ]);
-        // }
 
 
         public function show(Request $request)
@@ -789,45 +757,61 @@ class GuestListController extends Controller
             }
         }
     }
-    public function getGuestqr(Request $request)
-    {
-        $id = $request->idevent;
-        $date = $request->reservationDate;
-        $guests = Guest::where('id_event', $id)->where('mainguest', 1)->get();
-        $date = Carbon::parse($date);
-        $eventDate = $date->format('F j, Y');
-        require_once 'C:\xampp8.2\htdocs\clickV2\app/Http/Controllers/phpqrcode/qrlib.php';
 
-        if ($guests->isNotEmpty()) {
-            $guestData = [];
-            $card = Card::where('id_event', $id)->first();
-            $lang = session('applocale', 'en'); // Default to 'en' if session is not set
+            public function getGuestqr(Request $request)
+        {
+            $id = $request->idevent;
+            $date = $request->reservationDate;
+            $guests = Guest::where('id_event', $id)->where('mainguest', 1)->get();
+            $date = Carbon::parse($date);
+            $eventDate = $date->format('F j, Y');
 
-            if ($card && $card->id_card) {
-                foreach ($guests as $g) {
-                    $guest_code = $g->code;
-                    $guest_name = $g->name;
-                    $guest_name_without_spaces = str_replace(' ', '', $guest_name);
-                    $url = url('/cardInvitations/' . $card->id_card . '/' . $guest_code . '/' . $guest_name_without_spaces . '/' . $lang);
-                    $qrcode = 'images/' . $g->id_guest . $guest_code . '.png';
+            require_once 'C:\xampp8.2\htdocs\clickV2\app\Http\Controllers\phpqrcode/qrlib.php';
+            // require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
 
-                    if (!file_exists($qrcode)) {
-                        \QRcode::png($url, $qrcode, 'H', 4, 4);
-                    }
-                    $guestData[] = [
-                        'name' => $guest_name,
-                        'qr_code_path' => $qrcode,
-                        'eventDate' => $eventDate,
-                    ];
+            if ($guests->isNotEmpty()) {
+                $guestData = [];
+                $card = Card::where('id_event', $id)->first();
+                $lang = session('applocale', 'en');
+                \Log::info('No guests found for event ID: ' . $id);
+                \Log::info('No guests found for Card: ' . $card);
+
+                set_time_limit(600);
+                $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
+
+                // Check if the PDF generation was successful
+                if ($pdf) {
+                    return $pdf->download('tables.pdf');
+                } else {
+
                 }
+
+                if ($card && $card->id_card) {
+                    foreach ($guests as $g) {
+                        $guest_code = $g->code;
+                        $guest_name = $g->name;
+                        $guest_name_without_spaces = str_replace(' ', '', $guest_name);
+                        $url = url('/cardInvitations/' . $card->id_card . '/' . $guest_code . '/' . $guest_name_without_spaces . '/' . $lang);
+                        $qrcode = 'images/' . $g->id_guest . $guest_code . '.png';
+
+                        if (!file_exists($qrcode)) {
+                            \QRcode::png($url, $qrcode, 'H', 4, 4);
+                        }
+                        $guestData[] = [
+                            'name' => $guest_name,
+                            'qr_code_path' => $qrcode,
+                            'eventDate' => $eventDate,
+                        ];
+                    }
+                }
+
+                set_time_limit(600);
+                $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
+                return $pdf->download('tables.pdf');
+            } else {
+                return response()->json(['message' => 'No guests found.']);
             }
-            set_time_limit(600);
-            $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
-            return $pdf->download('tables.pdf');
-        } else {
-            return response()->json(['message' => 'No guests found.']);
         }
-    }
 
 
         // Save buttons when send invitaiton
@@ -1126,6 +1110,4 @@ class GuestListController extends Controller
                 }
             }
         }
-
-
     }
