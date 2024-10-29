@@ -1,9 +1,9 @@
 @extends('Website.Layouts.master')
 @section('title')
-{{ __('home.title') }}
+    {{ __('home.title') }}
 @endsection
 @section('description')
-{{ __('home.description') }}
+    {{ __('home.description') }}
 @endsection
 
 @section('tags')
@@ -188,7 +188,8 @@
 
         <div class="head-area">
             <h2 class="heading-center">
-                {{ __('home.Some of the') }} <span class="bold-text">{{ __('home.features') }} </span>{{ __('home.that are going') }}
+                {{ __('home.Some of the') }} <span class="bold-text">{{ __('home.features') }}
+                </span>{{ __('home.that are going') }}
             </h2>
         </div>
 
@@ -318,7 +319,8 @@
 
             <div class="head-area">
                 <h2 class="heading-center second">
-                    {{ __('home.Top Invitations Heading') }} <span class="bold-text">{{ __('home.Recommended') }} </span> {{ __('home.by our users') }}
+                    {{ __('home.Top Invitations Heading') }} <span class="bold-text">{{ __('home.Recommended') }} </span>
+                    {{ __('home.by our users') }}
                 </h2>
                 <p>
                     {{ __('home.Event Design Reminder') }}
@@ -371,7 +373,9 @@
 
         <div class="content-box">
             <h2 class="heading-center third">
-                {{ __('home.customer_feedback_part_1') }} <span class="bold-text">{{ __('home.customer_feedback_part_2') }} </span> {{ __('home.customer_feedback_part_3') }}
+                {{ __('home.customer_feedback_part_1') }} <span
+                    class="bold-text">{{ __('home.customer_feedback_part_2') }} </span>
+                {{ __('home.customer_feedback_part_3') }}
             </h2>
 
         </div>
@@ -489,14 +493,15 @@
         </div>
 
         <!--
-                                            <div class="testomonials">
-                                              <h1>hello</h1>
-                                            </div> -->
+                                                <div class="testomonials">
+                                                  <h1>hello</h1>
+                                                </div> -->
 
 
         <div class="content-section">
             <h3 class="heading-center fourth">
-                Using QR Codes for <span class="bold-text"> Seamless Event Check-In</span> and Organizer Tracking
+                {{ __('home.qr_codes_part_1') }} <span class="bold-text"> {{ __('home.titqr_codes_part_2le') }}</span>
+                {{ __('home.qr_codes_part_3') }}
 
             </h3>
             <div class="container">
@@ -512,33 +517,23 @@
     line-height: 2;
 ">
 
-                    <h4 style="padding-bottom:10px;">QR codes have transformed event check-in and made tracking a breeze.
-                        Here's how to use them:</h4>
-                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>Arrival and QR Code:</b> When you arrive at the
-                        event, have your
-                        digital or printed invitation ready. The QR code is typically found on the invitation.
+                    <h4 style="padding-bottom:10px;">{{ __('home.qr_codes_transformation') }}</h4>
+                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>{{ __('home.arrival_qr_code_heading') }}</b>
+                        {{ __('home.arrival_qr_code_description') }}
                     </li>
 
-                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>Scan the QR Code:</b> Use your smartphone or a
-                        QR code scanner app to
-                        scan the code. This will take you to the event's check-in page.</li>
+                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>{{ __('home.qr_code_scan_title') }}</b>
+                        {{ __('home.qr_code_scan_instruction') }}</li>
 
-                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>Check-In Process:</b> On the check-in page,
-                        follow the instructions.
-                        You may need to confirm your attendance and provide contact information. </li>
+                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>{{ __('home.check_in_process_title') }}</b>
+                        {{ __('home.check_in_process_instruction') }} </li>
 
-                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>QR Code Check-In:</b> After successfully
-                        checking in, the page may
-                        display your table number or name. The QR code is designed for organizers to track guest arrivals
-                        and check them in.</li>
+                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>{{ __('home.qr_code_check_in_title') }}</b>
+                        {{ __('home.qr_code_check_in_instruction') }}</li>
 
-                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>Event Enjoyment:</b> With the check-in process
-                        complete, you're all
-                        set to enjoy the event. There's no need to search for your table or wait in line at the reception
-                        door.</li>
-                    <h4 style="padding-top:10px;">QR codes simplify event check-in and provide organizers with real-time
-                        tracking data. They enhance
-                        the guest experience and make events run more smoothly.</h4>
+                    <li style="padding-left: 1em; padding-bottom: 8px;"><b>{{ __('home.event_enjoyment_title') }}</b>
+                        {{ __('home.event_enjoyment_instruction') }}</li>
+                    <h4 style="padding-top:10px;">{{ __('home.qr_code_benefits') }}</h4>
                     <ul>
             </div>
         </div>
@@ -549,151 +544,138 @@
 
 
         <h2 class="heading-center fifth">
-            FREQUENTLY <span class="bold-text">ASK </span>QUESTIONS
+            {{ __('home.FREQUENTLY') }} <span class="bold-text">{{ __('home.ASK') }} </span>{{ __('home.FREQUENTLY') }}
         </h2>
 
         <div class="accordion">
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    What is ClickInvitation?
+                    {{ __('home.What_is_ClickInvitation') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        ClickInvitation is an online platform that simplifies event planning by providing digital
-                        invitations for all types of events. We offer a wide range of customizable invitation templates and
-                        tools to help you manage RSVPs and event details.
+                        {{ __('home.defination') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    How does ClickInvitation work?
+                    {{ __('home.HOW_DOES_CLICKINVITATION_WORK') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        It's easy! Choose a template, personalize it with your event details, and then send it to your
-                        guests electronically. They can RSVP online, and you can track responses in real-time, making event
-                        planning a breeze.
+                        {{ __('home.WORK_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    What types of events can I use ClickInvitation for?
+                    {{ __('home.WHAT_TYPES_OF_EVENTS_CAN_I_USE_CLICKINVITATION_FOR') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        ClickInvitation can be used for any event, from birthday parties and weddings to corporate events
-                        and fundraisers. We have templates to suit a wide variety of occasions.
+                        {{ __('home.EVENTS_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Are the digital invitations customizable?
+                    {{ __('home.ARE_THE_DIGITAL_INVITATIONS_CUSTOMIZABLE') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, absolutely! You can customize the text, colors, fonts, and even add your own images or logos to
-                        make the invitations uniquely yours.
+                        {{ __('home.CUSTOMIZABLE_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Is ClickInvitation eco-friendly?
+                    {{ __('home.IS_CLICKINVITATION_ECO_FRIENDLY') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, we're committed to reducing paper waste. By using digital invitations, you're helping the
-                        environment by eliminating the need for physical paper invitations.
+                        {{ __('home.ECO_FRIENDLY_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    How do guests RSVP to an invitation?
+                    {{ __('home.HOW_DO_GUESTS_RSVP_TO_AN_INVITATION') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Guests can easily RSVP by clicking the RSVP button on the digital invitation. They can indicate
-                        whether they will attend, and you'll receive their responses instantly.
+                        {{ __('home.RSVP_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Can I track RSVPs and manage my guest list?
+                    {{ __('home.CAN_I_TRACK_RSVPS_AND_MANAGE_MY_GUEST_LIST') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Absolutely! ClickInvitation provides a guest list management feature that allows you to keep track
-                        of RSVPs, send reminders, and update event details as needed.
+                        {{ __('home.GUEST_LIST_MANAGEMENT_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Is ClickInvitation secure for sharing event details?
+                    {{ __('home.IS_CLICKINVITATION_SECURE_FOR_SHARING_EVENT_DETAILS') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, we prioritize security and privacy. All event details and RSVPs are kept confidential and
-                        accessible only to you and your invited guests.
+                        {{ __('home.SECURITY_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    How much does ClickInvitation cost?
+                    {{ __('home.HOW_MUCH_DOES_CLICKINVITATION_COST') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        We offer 5 days complete website trial no strings attached. And then 99$ to subscribe for 2
-                        years per event.
+                        {{ __('home.COST_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Do we have a count for the guests and dishes?
+                    {{ __('home.DO_WE_HAVE_A_COUNT_FOR_THE_GUESTS_AND_DISHES') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, on the tables page, an auto count is implemented so you can print and hand to your reception
-                        hall or restaurant .
+                        {{ __('home.GUEST_COUNT_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Can we steer our guests to their tables?
+                    {{ __('home.CAN_WE_STEER_OUR_GUESTS_TO_THEIR_TABLES') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, we made it very easy to create tables and assign the guests to their seats.
+                        {{ __('home.TABLE_ASSIGNMENT_DEFINITION') }}
                     </div>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-item-header">
-                    Does it include a photo gallery?
+                    {{ __('home.DOES_IT_INCLUDE_A_PHOTO_GALLERY') }}
                 </div>
                 <div class="accordion-item-body">
                     <div class="accordion-item-body-content">
-                        Yes, we offer a photo gallery for all photos uploaded by the organizers and their guests to the
-                        private webpage of the event.
+                        {{ __('home.PHOTO_GALLERY_DEFINITION') }}
                     </div>
                 </div>
             </div>
@@ -701,25 +683,22 @@
 
         <div class="inner-heading">
             <h2 class="heading-center sixth">
-                <span class="bold-text">About</span> Clickinvitation.com
+                <span class="bold-text"> {{ __('home.About') }}</span>  {{ __('home.Clickinvitation') }}
             </h2>
         </div>
 
 
         <div class="background-picture-box">
 
-            <h2 style="">Effortless Event Planning</h2>
+            <h2 style=""> {{ __('home.EFFORTLESS_EVENT_PLANNING_TITLE') }}</h2>
 
 
             <p>
-                ClickInvitation streamlines every aspect of event planning, offering auto guest count,
-                customizable invitations, and intuitive table and seating arrangement tools for seamless,
-                stress-free celebrations. Personalize your event with our easy-to-use customization options
-                or upload your own designs for unique, memorable invitations.
+                {{ __('home.EFFORTLESS_EVENT_PLANNING_DESCRIPTION') }}
 
             </p>
             <a href="/about" class="view-more-events third">
-                Discover More Info <img src="assets/newimages/Group 12 (3).png" alt="">
+                {{ __('home.DISCOVER_MORE_INFO_TEXT') }} <img src="assets/newimages/Group 12 (3).png" alt="">
             </a>
 
         </div>

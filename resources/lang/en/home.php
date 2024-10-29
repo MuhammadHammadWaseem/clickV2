@@ -100,20 +100,87 @@ return [
     'customer_feedback_part_3' => 'SAYS ABOUT US',
 
     'testimonial_1_name' => 'Sarah',
-'testimonial_1_feedback' => 'The baby shower invitations created on ClickInvitation were adorable and exactly what I envisioned. It added a special touch to our celebration.',
+    'testimonial_1_feedback' => 'The baby shower invitations created on ClickInvitation were adorable and exactly what I envisioned. It added a special touch to our celebration.',
 
-'testimonial_2_name' => 'Emily',
-'testimonial_2_feedback' => 'We used ClickInvitation for our engagement party, and it was a hit with our friends and family. The customization options allowed us to match the theme perfectly.',
+    'testimonial_2_name' => 'Emily',
+    'testimonial_2_feedback' => 'We used ClickInvitation for our engagement party, and it was a hit with our friends and family. The customization options allowed us to match the theme perfectly.',
 
-'testimonial_3_name' => 'Jennifer',
-'testimonial_3_feedback' => 'The holiday party invitations from ClickInvitation helped us spread the festive cheer. It was effortless to create and share with our loved ones.',
+    'testimonial_3_name' => 'Jennifer',
+    'testimonial_3_feedback' => 'The holiday party invitations from ClickInvitation helped us spread the festive cheer. It was effortless to create and share with our loved ones.',
 
-'testimonial_4_name' => 'David',
-'testimonial_4_feedback' => 'Planning our company\'s annual gala was a breeze with ClickInvitation. The corporate event templates were professional, and the RSVP feature helped us manage attendance seamlessly.',
+    'testimonial_4_name' => 'David',
+    'testimonial_4_feedback' => 'Planning our company\'s annual gala was a breeze with ClickInvitation. The corporate event templates were professional, and the RSVP feature helped us manage attendance seamlessly.',
 
-'testimonial_5_name' => 'Michael',
-'testimonial_5_feedback' => 'I organized a charity fundraiser and relied on ClickInvitation for all our digital invites. The platform\'s simplicity and affordability were a lifesaver.',
+    'testimonial_5_name' => 'Michael',
+    'testimonial_5_feedback' => 'I organized a charity fundraiser and relied on ClickInvitation for all our digital invites. The platform\'s simplicity and affordability were a lifesaver.',
+
+    'qr_codes_part_1' => 'Using QR Codes for',
+    'qr_codes_part_2' => 'Seamless Event Check-In',
+    'qr_codes_part_3' => 'and Organizer Tracking',
 
 
+    'qr_codes_transformation' => 'QR codes have transformed event check-in and made tracking a breeze. Here\'s how to use them:',
+    'arrival_qr_code_heading' => 'Arrival and QR Code:',
+    'arrival_qr_code_description' => 'When you arrive at the event, have your digital or printed invitation ready. The QR code is typically found on the invitation.',
+
+    'qr_code_scan_title' => 'Scan the QR Code:',
+    'qr_code_scan_instruction' => 'Use your smartphone or a QR code scanner app to scan the code. This will take you to the event\'s check-in page.',
+
+    'check_in_process_title' => 'Check-In Process:',
+    'check_in_process_instruction' => 'On the check-in page, follow the instructions. You may need to confirm your attendance and provide contact information.',
+
+    'qr_code_check_in_title' => 'QR Code Check-In:',
+    'qr_code_check_in_instruction' => 'After successfully checking in, the page may display your table number or name. The QR code is designed for organizers to track guest arrivals and check them in.',
+
+    'event_enjoyment_title' => 'Event Enjoyment:',
+    'event_enjoyment_instruction' => 'With the check-in process complete, you\'re all set to enjoy the event. There\'s no need to search for your table or wait in line at the reception door.',
+    'qr_code_benefits' => 'QR codes simplify event check-in and provide organizers with real-time tracking data. They enhance the guest experience and make events run more smoothly.',
+
+    'FREQUENTLY' => 'FREQUENTLY',
+    'ASK' => 'ASK',
+    'QUESTIONS' => 'QUESTIONS',
+
+    'What_is_ClickInvitation' => 'What is ClickInvitation?',
+    'defination' => 'ClickInvitation is an online platform that simplifies event planning by providing digital
+    invitations for all types of events. We offer a wide range of customizable invitation templates and
+    tools to help you manage RSVPs and event details.',
+
+    'HOW_DOES_CLICKINVITATION_WORK' => 'How does ClickInvitation work?',
+    'WORK_DEFINITION' => "It's easy! Choose a template, personalize it with your event details, and then send it to your guests electronically. They can RSVP online, and you can track responses in real-time, making event planning a breeze.",
+
+    'WHAT_TYPES_OF_EVENTS_CAN_I_USE_CLICKINVITATION_FOR' => 'What types of events can I use ClickInvitation for?',
+    'EVENTS_DEFINITION' => 'ClickInvitation can be used for any event, from birthday parties and weddings to corporate events and fundraisers. We have templates to suit a wide variety of occasions.',
+
+    'ARE_THE_DIGITAL_INVITATIONS_CUSTOMIZABLE' => 'Are the digital invitations customizable?',
+    'CUSTOMIZABLE_DEFINITION' => 'Yes, absolutely! You can customize the text, colors, fonts, and even add your own images or logos to make the invitations uniquely yours.',
+
+    'IS_CLICKINVITATION_ECO_FRIENDLY' => 'Is ClickInvitation eco-friendly?',
+    'ECO_FRIENDLY_DEFINITION' => "Yes, we're committed to reducing paper waste. By using digital invitations, you're helping the environment by eliminating the need for physical paper invitations.",
+
+    'HOW_DO_GUESTS_RSVP_TO_AN_INVITATION' => 'How do guests RSVP to an invitation?',
+    'RSVP_DEFINITION' => 'Guests can easily RSVP by clicking the RSVP button on the digital invitation. They can indicate whether they will attend, and you\'ll receive their responses instantly.',
+
+    'CAN_I_TRACK_RSVPS_AND_MANAGE_MY_GUEST_LIST' => 'Can I track RSVPs and manage my guest list?',
+    'GUEST_LIST_MANAGEMENT_DEFINITION' => 'Absolutely! ClickInvitation provides a guest list management feature that allows you to keep track of RSVPs, send reminders, and update event details as needed.',
+
+    'IS_CLICKINVITATION_SECURE_FOR_SHARING_EVENT_DETAILS' => 'Is ClickInvitation secure for sharing event details?',
+    'SECURITY_DEFINITION' => 'Yes, we prioritize security and privacy. All event details and RSVPs are kept confidential and accessible only to you and your invited guests.',
+
+    'HOW_MUCH_DOES_CLICKINVITATION_COST' => 'How much does ClickInvitation cost?',
+    'COST_DEFINITION' => 'We offer 5 days complete website trial no strings attached. And then 99$ to subscribe for 2 years per event.',
+
+    'DO_WE_HAVE_A_COUNT_FOR_THE_GUESTS_AND_DISHES' => 'Do we have a count for the guests and dishes?',
+    'GUEST_COUNT_DEFINITION' => 'Yes, on the tables page, an auto count is implemented so you can print and hand to your reception hall or restaurant.',
+
+    'CAN_WE_STEER_OUR_GUESTS_TO_THEIR_TABLES' => 'Can we steer our guests to their tables?',
+    'TABLE_ASSIGNMENT_DEFINITION' => 'Yes, we made it very easy to create tables and assign the guests to their seats.',
+
+    'DOES_IT_INCLUDE_A_PHOTO_GALLERY' => 'Does it include a photo gallery?',
+    'PHOTO_GALLERY_DEFINITION' => 'Yes, we offer a photo gallery for all photos uploaded by the organizers and their guests to the private webpage of the event.',
+
+    'Clickinvitation' => 'Clickinvitation.com',
+    'EFFORTLESS_EVENT_PLANNING_TITLE' => 'Effortless Event Planning',
+    'EFFORTLESS_EVENT_PLANNING_DESCRIPTION' => "ClickInvitation streamlines every aspect of event planning, offering auto guest count, customizable invitations, and intuitive table and seating arrangement tools for seamless, stress-free celebrations. Personalize your event with our easy-to-use customization options or upload your own designs for unique, memorable invitations.",
+    'DISCOVER_MORE_INFO_TEXT' => 'Discover More Info',
 
 ];
