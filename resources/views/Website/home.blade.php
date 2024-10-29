@@ -1,4 +1,38 @@
 @extends('Website.Layouts.master')
+
+<style>
+   .accordion-item:first-of-type {
+    border-top-left-radius: 50px !important;
+    border-top-right-radius: 50px !important;
+
+    border-bottom-right-radius: .25rem !important;
+    border-bottom-left-radius: .25rem !important;
+}
+
+.accordion-item:last-of-type {
+    border-top-left-radius: .25rem !important;
+    border-top-right-radius: .25rem !important;
+
+    border-bottom-right-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
+}
+
+.langauge-person .nav-box ul li.drop-down-link ul li {
+    border-bottom: none !important;
+}
+
+a.site-logo {
+    width: 31% !important;
+
+}
+.header-buttons {
+    width: 25% !important;
+}
+
+.site-navbar ul li a {
+    padding: 7px !important;
+    }
+</style>
 @section('title')
     {{ __('home.title') }}
 @endsection
@@ -45,7 +79,7 @@
         <div class="text-center">
 
             <h2>
-                {{ __(' home.Some of Most') }} <span class="bold-text">{{ __('home.Popular') }}</span>
+                {{ __('home.Some_OF') }} <span class="bold-text">{{ __('home.Popular') }}</span>
                 {{ __('home.Popular Events Subheading') }}
             </h2>
 
@@ -500,7 +534,7 @@
 
         <div class="content-section">
             <h3 class="heading-center fourth">
-                {{ __('home.qr_codes_part_1') }} <span class="bold-text"> {{ __('home.titqr_codes_part_2le') }}</span>
+                {{ __('home.qr_codes_part_1') }} <span class="bold-text"> {{ __('home.event_checkin') }}</span>
                 {{ __('home.qr_codes_part_3') }}
 
             </h3>
