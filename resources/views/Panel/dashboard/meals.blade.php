@@ -42,6 +42,11 @@
 }
 
 
+.box-styling.event-photos-gallery.meal-details .meal-box .three-align-things .tw0-boxex-align-in h6 {
+    width:70%;
+}
+
+
 
 </style>
 <!-- Include Toastr CSS and JS -->
@@ -54,7 +59,7 @@
     <div class="col-lg-10 col-md-10" id="content">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> {{ session('success') }}
+                <strong>{{ __('meal.error') }}</strong> {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -63,7 +68,7 @@
 
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ session('error') }}
+                <strong>{{ __('meal.success') }}</strong> {{ session('error') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,12 +79,9 @@
             <div class="col-lg-12">
                 <div class="box-styling your-event-meals">
                     <div class="text">
-                        <h2>Your Event Meals</h2>
-                        <p>After you decide what your guest’s choices with the reception hall, here you can give the choice
-                            to your guests to make that choice ahead of time for better organization with the hall
-                            kitchen.<br>
-                            Your guests can indicate their choice of meals provided by you, they can indicate if they are
-                            allergic or vegetarian or even vegan.</p>
+                        <h2>{{ __('meal.your_event_meals_title') }}</h2>
+                        <p>{{ __('meal.your_event_meals_description') }}<br>
+                            {{ __('meal.your_event_meals_description2') }}</p>
                     </div>
                 </div>
             </div>
@@ -87,12 +89,11 @@
                 <div class="box-styling event-photos-gallery meal-details">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Meal Details</h2>
-                            <p>After you decide what your guest’s choices with the reception hall, here you can give the
-                                choice.</p>
+                            <h2>{{ __('meal.meal_details_title') }}</h2>
+                            <p>{{ __('meal.meal_details_description') }}</p>
                         </div>
                         <button class="t-btn" type="button" class="btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter">Add New </button>
+                            data-target="#exampleModalCenter">{{ __('meal.Add New') }} </button>
                     </div>
                     <div class="meal-name-boxes">
                         @foreach ($meals as $meal)
@@ -139,20 +140,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Add New Meal</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('meal.add_new_meal_title') }}</h2>
+                        <p>{{ __('meal.add_new_meal_description') }}</p>
                     </div>
                     <div class="main-form-box">
                         <form action="{{ route('panel.event.meals.store') }}" method="POST">
                             @csrf
-                            <input type="text" placeholder="Meal Name ( Max 25 Characters )" name="namemeal" required>
-                            <textarea placeholder="Description" name="descriptionmeal"></textarea>
+                            <input type="text" placeholder="{{ __('meal.meal_name_label') }}" name="namemeal" required>
+                            <textarea placeholder="{{ __('meal.description_label') }}" name="descriptionmeal"></textarea>
                             <input type="hidden" name="idevent" value="{{ $eventId }}">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal">Close</button>
-                    <button type="submit" class="submit-btn">Save changes</button>
+                    <button type="button" data-dismiss="modal">{{ __('meal.close_button') }}</button>
+                    <button type="submit" class="submit-btn">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
             </div>
@@ -187,8 +188,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="submit-btn" id="mealUpdate">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.close_button') }}</button>
+                    <button type="button" class="submit-btn" id="mealUpdate">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
             </div>
@@ -208,13 +209,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Are you sure you want to delete this meal?</h2>
-                        <p>This action cannot be undone.</p>
+                        <h2>{{ __('meal.delete_confirmation_title') }}</h2>
+                        <p>{{ __('meal.delete_confirmation_message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Yes, Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.cancel_button') }}</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">{{ __('meal.delete_button') }}</button>
                 </div>
             </div>
         </div>
@@ -232,12 +233,12 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="assets/images/circle-check.png" alt="">
-                        <h2>Meal Added Successfully</h2>
-                        <p>Your meal has been successfully added.</p>
+                        <h2>{{ __('meal.title') }}</h2>
+                        <p>{{ __('meal.message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.close_button') }}</button>
                 </div>
             </div>
         </div>
