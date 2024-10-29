@@ -1,5 +1,47 @@
 @extends('Panel.Layout.master')
 <style>
+
+.modal-03 .modal-body .text {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 15px;
+    align-items: stretch !important;
+}
+
+#ExportQrModal .modal-body .text .form-group input#reservationDate {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: 1px solid grey;
+}
+
+.modal-03 .modal-body .text .form-group {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0 !important;
+    column-gap:10px;
+    flex-direction: row-reverse;
+}
+
+#ExportQrModal .modal-body .text .form-group {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 0 !important;
+    column-gap: 10px;
+    flex-direction: column;
+}
+
+.modal-03 .modal-body .text .form-group label {
+    margin-bottom: 0 !important;
+}
+
     #exampleModalCenter02 .modal-dialog.modal-dialog-centered form#GuestImportForm {
         height: 50vh;
         overflow: scroll;
@@ -859,7 +901,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">New Guest</h2>
+                        <h2 class="text-center">Add Memeber</h2>
                     </div>
                     <!-- Form start -->
                     <form id="AddMemberForm">
@@ -1048,7 +1090,7 @@
                     <form id="DisplaySaveOptionForm">
                         <div class="text">
                             <img src="assets/images/circle-check.png" alt="">
-                            <h2>Select Options to Display</h2>
+                            <h2>Select Options to Send Invitation</h2>
                             <div class="form-group">
                                 <label for="gift-suggestion">Gift Suggestions</label>
                                 <input type="checkbox" name="gift-suggestion" id="gift-suggestion">
