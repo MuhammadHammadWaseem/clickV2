@@ -1323,7 +1323,7 @@
                                             ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                             <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                             </span>
                                         </td>
                                         <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
