@@ -439,11 +439,11 @@ class GuestListController extends Controller
             }
 
             if($request->filter == "z-to-a"){
-                $guests = Guest::where('id_event', $request->idevent)->where('mainguest', 1)
+                $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)
                 ->orderBy('name', 'desc')->get();
-                    $CheckedIn = 0;
-                    foreach ($guests as $g) {
-                    $g->members = Guest::where('id_event', $request->idevent)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)
+                $CheckedIn = 0;
+                foreach ($guests as $g) {
+                    $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)
                     ->orderBy('name', 'desc')->get();
 
                     $CheckedIn = $g->checkin;
@@ -469,8 +469,9 @@ class GuestListController extends Controller
                     if ($g->id_table != 0)
                         $g->table = Table::where('id_table', $g->id_table)->first();
                 }
-                return $guests;
-
+                return response()->json([
+                    'guests' => $guests,
+                ]);
             }
 
     }
