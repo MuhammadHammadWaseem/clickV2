@@ -28,6 +28,7 @@ return[
     'Close' => 'Close',
     'Update Success Heading' => 'Changes Updated Successfully',
     'Update Success Message' => 'Your event has been successfully updated.',
-
-
+    'Would You Like' => 'Would You Like To Create A Website For Your Event?',
+    'No, it Don\'t' => 'No, it Don\'t',
+    'Yes, it Does' => 'Yes, it Does',
 ];

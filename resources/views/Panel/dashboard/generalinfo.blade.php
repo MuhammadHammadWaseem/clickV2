@@ -155,10 +155,6 @@
                                 value="{{ $event->ceraddress }}">
                             <input type="time" placeholder="Event Time" name="certime" value="{{ $event->certime }}">
                             <input type="hidden" id="cerAddressLink">
-                            {{-- <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7112.801846878584!2d-1.5164632188270797!3d50.92824510422275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48738a3dd7ad5e33%3A0x10f95f7cedac0482!2sCalmore%2C%20Southampton%2C%20UK!5e0!3m2!1sen!2s!4v1720646307913!5m2!1sen!2s"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="mapView" style="width: 100%; height: 400px;"></div>
                             <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
                         </div>
@@ -178,10 +174,6 @@
                             <input type="hidden" id="recAddressLink">
                             <input type="time" placeholder="Event Time" name="rectime"
                                 value="{{ $event->rectime }}">
-                            {{-- <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7112.801846878584!2d-1.5164632188270797!3d50.92824510422275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48738a3dd7ad5e33%3A0x10f95f7cedac0482!2sCalmore%2C%20Southampton%2C%20UK!5e0!3m2!1sen!2s!4v1720646307913!5m2!1sen!2s"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="RecmapView" style="width: 100%; height: 400px;"></div>
                             <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
                         </div>
@@ -203,10 +195,6 @@
                                 value="{{ $event->paraddress }}">
                             <input type="time" placeholder="Event Time" name="partime"
                                 value="{{ $event->partime }}">
-                            {{-- <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7112.801846878584!2d-1.5164632188270797!3d50.92824510422275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48738a3dd7ad5e33%3A0x10f95f7cedac0482!2sCalmore%2C%20Southampton%2C%20UK!5e0!3m2!1sen!2s!4v1720646307913!5m2!1sen!2s"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
                             <div id="ParmapView" style="width: 100%; height: 400px;"></div>
                             <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
                         </div>
@@ -223,20 +211,42 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <img src="assets/images/circle-check.png" alt="">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                         <h2>{{ __('genralInfo.Update Success Heading') }}</h2>
                         <p>{{ __('genralInfo.Update Success Message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.Close') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeUpdatedBtn">{{ __('genralInfo.Close') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter06" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
+                        <h3>{{ __('genralInfo.Would You Like') }}</h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.No, it Don\'t') }}</button>
+                    <button type="button" class="btn t-btn"><a class="text-light" href="{{ route('panel.event.webpage',['id'=>$event->id_event]) }}">{{ __('genralInfo.Yes, it Does') }}</a></button>
                 </div>
             </div>
         </div>
@@ -344,6 +354,11 @@
             initMap();
         };
 
+        $("#closeUpdatedBtn").on('click',function(){
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter06'));
+            successModal.show();
+        });
+
         $(document).ready(function() {
             $('#submitEditEvent').click(function() {
                 // Get the form data
@@ -362,10 +377,8 @@
                     success: function(response) {
                         // Show success notification
                         toastr.success('Event updated successfully!');
-                        // var successModal = new bootstrap.Modal(document.getElementById(
-                        //     'exampleModalCenter05'));
-                        // successModal.show();
-                        location.reload();
+                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+                        successModal.show();
                     },
                     error: function(xhr) {
                         // Handle error response
