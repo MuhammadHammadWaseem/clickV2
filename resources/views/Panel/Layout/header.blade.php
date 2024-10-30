@@ -98,9 +98,7 @@
                                                     src="{{ asset('assets/Panel/images/person-icon.png') }}"
                                                     alt=""></a>
                                             <ul class="drop-menu">
-                                                <li><a href="#">Events</a></li>
-                                                <li><a href="#">Guest List</a></li>
-                                                <li><a href="#">Contact Info</a></li>
+                                                <li><a href="{{ url('/panel') }}">Events</a></li>
                                                 <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                             </ul>
                                         </li>
@@ -156,9 +154,7 @@
                                             src="{{ asset('assets/Panel/images/person-icon.png') }}"
                                             alt=""></a>
                                     <ul class="drop-menu">
-                                        <li><a href="#">Events</a></li>
-                                        <li><a href="#">Guest List</a></li>
-                                        <li><a href="#">Contact Info</a></li>
+                                        <li><a href="{{ url('/panel') }}">Events</a></li>
                                         <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
                                     </ul>
                                 </li>
