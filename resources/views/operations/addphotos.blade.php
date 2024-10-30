@@ -98,7 +98,7 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item" ng-class='{active:$first}'
                                         ng-repeat="photo in galleries">
-                                        <img ng-src="{{ env('APP_URL') }}event-images/@{{ photo.id_event }}/photogallery/@{{ photo.id_photogallery }}.jpg"
+                                        <img ng-src="{{ env('APP_URL') }}/event-images/@{{ photo.id_event }}/photogallery/@{{ photo.id_photogallery }}.jpg"
                                             height="700px" class="d-block w-100">
                                     </div>
                                 </div>
