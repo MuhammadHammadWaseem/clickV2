@@ -58,8 +58,7 @@ class PanelController extends Controller
     public function index(Request $request)
     {
         $eventList = EventType::get();
-        $events = Event::where('id_user', Auth::id())->paginate(10);
-
+        $events = Event::where('id_user', Auth::id())->orderBy('id_event', 'desc')->paginate(10);
         if ($request->ajax()) {
             // Pass the current page number to the view to highlight it
             $pagination = $this->customPagination($events);
