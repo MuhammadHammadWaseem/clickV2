@@ -773,18 +773,6 @@ class GuestListController extends Controller
                 $guestData = [];
                 $card = Card::where('id_event', $id)->first();
                 $lang = session('applocale', 'en');
-                \Log::info('No guests found for event ID: ' . $id);
-                \Log::info('No guests found for Card: ' . $card);
-
-                set_time_limit(600);
-                $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
-
-                // Check if the PDF generation was successful
-                if ($pdf) {
-                    return $pdf->download('tables.pdf');
-                } else {
-
-                }
 
                 if ($card && $card->id_card) {
                     foreach ($guests as $g) {

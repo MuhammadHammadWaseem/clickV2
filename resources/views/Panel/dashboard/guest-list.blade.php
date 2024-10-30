@@ -1,59 +1,60 @@
 @extends('Panel.Layout.master')
 <style>
-#exampleModalCenter03 .modal-footer {
-    display: flex;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 20px 5px !important;
-}
-.modal-03 .modal-body .text {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    row-gap: 15px;
-    align-items: stretch !important;
-}
+    #exampleModalCenter03 .modal-footer {
+        display: flex;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 20px 5px !important;
+    }
 
-.box-styling.event-photos-gallery .two-things-align .two-btn-align select.form-select {
-    height: 40px;
-    padding: 10px;
-    border: 1px solid grey;
-    border-radius: 15px;
-    background: #ffffffb8;
-}
+    .modal-03 .modal-body .text {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        row-gap: 15px;
+        align-items: stretch !important;
+    }
 
-#ExportQrModal .modal-body .text .form-group input#reservationDate {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 25px;
-    border: 1px solid grey;
-}
+    .box-styling.event-photos-gallery .two-things-align .two-btn-align select.form-select {
+        height: 40px;
+        padding: 10px;
+        border: 1px solid grey;
+        border-radius: 15px;
+        background: #ffffffb8;
+    }
 
-.modal-03 .modal-body .text .form-group {
+    #ExportQrModal .modal-body .text .form-group input#reservationDate {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 25px;
+        border: 1px solid grey;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 0 !important;
-    column-gap:10px;
-    flex-direction: row-reverse;
-}
+    .modal-03 .modal-body .text .form-group {
 
-#ExportQrModal .modal-body .text .form-group {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-bottom: 0 !important;
-    column-gap: 10px;
-    flex-direction: column;
-}
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 0 !important;
+        column-gap: 10px;
+        flex-direction: row-reverse;
+    }
 
-.modal-03 .modal-body .text .form-group label {
-    margin-bottom: 0 !important;
-}
+    #ExportQrModal .modal-body .text .form-group {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: 0 !important;
+        column-gap: 10px;
+        flex-direction: column;
+    }
+
+    .modal-03 .modal-body .text .form-group label {
+        margin-bottom: 0 !important;
+    }
 
     #exampleModalCenter02 .modal-dialog.modal-dialog-centered form#GuestImportForm {
         height: 50vh;
@@ -336,17 +337,17 @@
 
 
     .upload-form-csv .modal-body form label {
-    width: 100%;
-    height: 200px;
-    border: 5px dashed #A9967D;
-    border-radius: 10px;
-    display: flex;
-    padding: 50px 60px;
-}
+        width: 100%;
+        height: 200px;
+        border: 5px dashed #A9967D;
+        border-radius: 10px;
+        display: flex;
+        padding: 50px 60px;
+    }
 
-.upload-form-csv .modal-body form input {
-    display: none !important;
-}
+    .upload-form-csv .modal-body form input {
+        display: none !important;
+    }
 
 
     @media only screen and (max-width: 1500px) {
@@ -575,7 +576,7 @@
                                             </li>
                                             <li>
                                                 <button id="exportCheckedGuest"
-                                                    onclick="exportcheckedin    ('checked-in')">Checked In
+                                                    onclick="exportcheckedin('checked-in')">Checked In
                                                     Guests</button>
                                             </li>
                                         </ul>
@@ -1001,7 +1002,8 @@
 
                                     <input type="file" id="fileInput" name="csv_file" onchange="showFileName()"
                                         accept=".csv" required>
-                                        <label for="csv_file"><img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" /></label>
+                                    <label for="csv_file"><img src="{{ asset('assets/images/upload_svg_image.png') }}"
+                                            alt="Upload Icon" /></label>
                                 </div>
                                 <div id="fileName" class="file-name"></div>
                             </form>
@@ -1192,6 +1194,9 @@
             </div>
         </div>
     </div>
+
+    {{-- for abse url --}}
+    <input type="text" value="{{ url('/') }}" id="baseUrl">
 @endsection
 <!-- Include jQuery first -->
 <!-- #region datatables files -->
@@ -1357,15 +1362,15 @@
                                             </ul>
                                         </td>
                                         ${(member.opened === 2) ? `
-                                                                                                                                                                                                        <td class="accordian_img_acces">
-                                                                                                                                                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                                            <td class="accordian_img_acces">
+                                                                                                                                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                                                                                                            </td>
+                                                                                                                                                                                                        ` : ''}
                                         ${(member.declined === 1) ? `
-                                                                                                                                                                                                        <td class="accordian_img_acces">
-                                                                                                                                                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                                            <td class="accordian_img_acces">
+                                                                                                                                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                                                                                                            </td>
+                                                                                                                                                                                                        ` : ''}
                                     </tr>`;
                             });
 
@@ -2264,10 +2269,12 @@
             // Get values directly from form inputs
             const mealId = $('#idevent').val();
             const date = $('#reservationDate').val();
-
+            const baseUrl = $('#baseUrl').val();
             // Define the URL with query parameters
-            const url = `/event/${mealId}/get-guests-qr/${date}?idevent=${mealId}&reservationDate=${date}`;
+            const url = `${baseUrl}/event/${mealId}/get-guests-qr/${date}?idevent=${mealId}&reservationDate=${date}`;
 
+            // Open the URL directly in a new tab to download the PDF
+            window.open(url, '_blank');
             // Send data with GET request using $.ajax
             $.ajax({
                 url: url,
