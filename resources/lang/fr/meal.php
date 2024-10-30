@@ -1,33 +1,23 @@
 <?php
-return[
-    'error' => 'Error!',
-    'success' => 'Success!',
-    'your_event_meals_title' => 'Your Event Meals',
-    'your_event_meals_description' => 'After you decide what your guest’s choices with the reception hall, here you can give the choice
-    to your guests to make that choice ahead of time for better organization with the hall
-    kitchen.',
-    'your_event_meals_description2' => ' Your guests can indicate their choice of meals provided by you, they can indicate if they are
-    allergic or vegetarian or even vegan.',
-    'meal_details_title' => 'Meal Details',
-    'meal_details_description' => 'After you decide on your guests\' choices with the reception hall, you can provide them with options to select their meal preferences.',
-    'Add New' => 'Add New',
-    'add_new_meal_title' => 'Add New Meal',
-    'add_new_meal_description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    'meal_name_label' => 'Meal Name ( Max 25 Characters )',
+return [
+    'error' => 'Erreur !',
+    'success' => 'Succès !',
+    'your_event_meals_title' => 'Vos Repas d\'Événement',
+    'your_event_meals_description' => 'Après avoir décidé des choix de vos invités avec la salle de réception, vous pouvez leur donner la possibilité de faire ce choix à l\'avance pour une meilleure organisation avec la cuisine de la salle.',
+    'your_event_meals_description2' => 'Vos invités peuvent indiquer leur choix de repas fournis par vous, ils peuvent signaler s\'ils sont allergiques, végétariens ou même véganes.',
+    'meal_details_title' => 'Détails du Repas',
+    'meal_details_description' => 'Après avoir décidé des choix de vos invités avec la salle de réception, vous pouvez leur fournir des options pour sélectionner leurs préférences de repas.',
+    'Add New' => 'Ajouter Nouveau',
+    'add_new_meal_title' => 'Ajouter un Nouveau Repas',
+    'add_new_meal_description' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'meal_name_label' => 'Nom du Repas (Max 25 Caractères)',
     'description_label' => 'Description',
-    'close_button' => 'Close',
-    'save_changes_button' => 'Save changes',
-    'delete_confirmation_title' => 'Are you sure you want to delete this meal?',
-    'delete_confirmation_message' => 'This action cannot be undone.',
-    'cancel_button' => 'Cancel',
-    'delete_button' => 'Yes, Delete',
-    'title' => 'Meal Added Successfully',
-    'message' => 'Your meal has been successfully added.',
-
-
-
-
-
-
-
+    'close_button' => 'Fermer',
+    'save_changes_button' => 'Enregistrer les modifications',
+    'delete_confirmation_title' => 'Êtes-vous sûr de vouloir supprimer ce repas ?',
+    'delete_confirmation_message' => 'Cette action ne peut pas être annulée.',
+    'cancel_button' => 'Annuler',
+    'delete_button' => 'Oui, Supprimer',
+    'title' => 'Repas Ajouté avec Succès',
+    'message' => 'Votre repas a été ajouté avec succès.',
 ];

@@ -1,17 +1,16 @@
 <?php
-return[
+return [
 
-    'General Info' => 'General Info',
-    'Web Page' => 'Web Page',
-    'Meals' => 'Meals',
-    'Gift Suggestions' => 'Gift Suggestions',
+    'General Info' => 'Informations Générales',
+    'Web Page' => 'Page Web',
+    'Meals' => 'Repas',
+    'Gift Suggestions' => 'Suggestions de Cadeaux',
     'Invitations' => 'Invitations',
-    'Guest List' => 'Guest List',
-    'Tables  Management' => 'Tables  Management',
-    'Event Photos' => 'Event Photos',
-    'Reminders' => 'Reminders',
-    'Custom Messages' => 'Custom Messages',
-    'Tutorials' => 'Tutorials',
-
+    'Guest List' => 'Liste des Invités',
+    'Tables Management' => 'Gestion des Tables',
+    'Event Photos' => 'Photos de l’Événement',
+    'Reminders' => 'Rappels',
+    'Custom Messages' => 'Messages Personnalisés',
+    'Tutorials' => 'Tutoriels',
 
 ];

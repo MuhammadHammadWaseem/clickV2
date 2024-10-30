@@ -1,44 +1,35 @@
 <?php
-return[
+return [
 
-    'title' => 'Your Web Page',
-    'description' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout and make all the changes necessary and upload new pictures. Upload
-    pictures for picture gallery. Link your Facebook and Instagram account.',
-    'webpriview' => 'Website Preview',
-    'webpriviewdesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
-    'Website Information' => 'Website Information',
-    'Change Main Photo' => 'Change Main Photo',
-    'Visit Website' => 'Visit Website',
-    'Eventphoto' => 'Event Photos Gallery',
-    'Eventphotodesc' => 'This page is to review your page before you send the invitation out, so here you
-    can see the layout.',
-    'Add New' => 'Add New',
-    'Ceremony' => 'Ceremony',
-    'Cermonydesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
-    'Recption' => 'Recption',
-    'Recptiondesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
-    'Custome' => 'Custome',
-    'Customedesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
-    'Submit' => 'Submit',
-    'Close' => 'Close',
-    'Image Add Success Heading' => 'Images Added Successfully',
-    'Image Add Success Message' => 'Your images have been successfully added.',
-    'Delete Image' => 'You Want to Delete this image?',
-    'No' => 'No',
-    'Yes' => 'Yes',
-    'Serve Meal Button Text' => 'Want To Serve Your Guests a Meal?',
-    'Serve Meal Modal Heading' => 'Want To Serve Your Guests a Meal?',
-    'Serve Meal Modal Body Text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    'Serve Meal Modal No Button' => 'No, I Don\'t',
-    'Serve Meal Modal Yes Button' => 'Yes, Add Meals',
-    'Image Delete Success Heading' => 'Image Deleted Successfully',
-    'Image Delete Success Message' => 'The image has been successfully deleted.',
-
-
+    'title' => 'Votre Page Web',
+    'description' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page et apporter toutes les modifications nécessaires ainsi qu\'uploader de nouvelles photos. Téléchargez des photos pour la galerie d\'images. Liez votre compte Facebook et Instagram.',
+    'webpriview' => 'Aperçu du Site Web',
+    'webpriviewdesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Website Information' => 'Informations sur le Site Web',
+    'Change Main Photo' => 'Changer la Photo Principale',
+    'Visit Website' => 'Visiter le Site Web',
+    'Eventphoto' => 'Galerie de Photos de l\'Événement',
+    'Eventphotodesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Add New' => 'Ajouter Nouveau',
+    'Ceremony' => 'Cérémonie',
+    'Cermonydesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Recption' => 'Réception',
+    'Recptiondesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Custome' => 'Personnalisé',
+    'Customedesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Submit' => 'Soumettre',
+    'Close' => 'Fermer',
+    'Image Add Success Heading' => 'Images Ajoutées avec Succès',
+    'Image Add Success Message' => 'Vos images ont été ajoutées avec succès.',
+    'Delete Image' => 'Voulez-vous supprimer cette image ?',
+    'No' => 'Non',
+    'Yes' => 'Oui',
+    'Serve Meal Button Text' => 'Voulez-vous servir un repas à vos invités ?',
+    'Serve Meal Modal Heading' => 'Voulez-vous servir un repas à vos invités ?',
+    'Serve Meal Modal Body Text' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'Serve Meal Modal No Button' => 'Non, je ne veux pas',
+    'Serve Meal Modal Yes Button' => 'Oui, ajouter des repas',
+    'Image Delete Success Heading' => 'Image Supprimée avec Succès',
+    'Image Delete Success Message' => 'L\'image a été supprimée avec succès.',
 
 ];
