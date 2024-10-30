@@ -114,14 +114,14 @@
     .export-hover-ul {
         position: absolute;
         display: none !important;
-        transition: .3s;
+        transition: 1.3s;
         background: #E0E0E0;
         width: 180px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 10px;
-        top: 50px;
+        top: 43px;
         border-radius: 20px;
     }
 
@@ -477,8 +477,9 @@
         <div class="button-group d-flex flex-column" style="gap:0.5rem;" id="modifierButton">
             <button class="edit-btn btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#EditGuest"
                 style="display:none;">EDIT</button>
+            <!-- Delete Button -->
             <button class="btn btn-sm btn-danger delete-btn-single" data-bs-toggle="modal" data-bs-target="#delguestModal"
-                style="display:none;" onclick="deleteGuest()">DELETE</button>
+                style="display:none;" onclick="showDeleteModal(idArray[0])">DELETE</button>
             <button class="btn btn-sm btn-danger delete-btn-all" data-bs-toggle="modal" data-bs-target="#delAllGuestsModal"
                 style="display:none;">DELETE ALL</button>
             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#SelectOptionstoDisplay">SEND
@@ -1068,6 +1069,67 @@
     </div>
 
 
+
+
+
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="delguestModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h5 class="modal-title text-center">Delete</h5>
+                        <p>Are you sure you want to delete this guest?</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delguestModalClose">No, I Don’t</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="deleteGuest()">Delete</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- Delete All Confirmation Modal -->
+{{-- <div class="modal fade modal-01 modal-02 upload-form-another-event" id="delguestAllModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="text">
+                <h5 class="modal-title text-center">Delete</h5>
+                <p>Are you sure you want to delete this guest?</p>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delguestModalClose">No, I Don’t</button>
+            <button type="button" class="submit-btn btn btn-primary t-btn" >Delete</button>
+        </div>
+        </form>
+    </div>
+</div>
+</div> --}}
+
+
+
     <div class="modal fade modal-01 modal-02 modal-03" id="ExportQrModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -1081,7 +1143,7 @@
                 <div class="modal-body">
                     <form id="ExportQrForm">
                         <div class="text">
-                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                            {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
                             <h2>Select Date</h2>
                             <span>Select Reserve By date to show your Guests the latest date to respond using the Qr
                                 Code.</span>
@@ -1307,7 +1369,6 @@
                     $('#GuestList').empty();
 
                     if (filter == 1) {
-                        console.log("All", guests);
                         guests.forEach(function(guest) {
                             // ALL GUESTS
                             var accordion = `
@@ -1358,13 +1419,13 @@
                                         </ul>
                                     </td>
                                     ${(member.opened === 2) ? `
-                                                                <td class="accordian_img_acces">
-                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                </td>` : ''}
+                                                                        <td class="accordian_img_acces">
+                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                        </td>` : ''}
                                     ${(member.declined === 1) ? `
-                                                                <td class="accordian_img_acces">
-                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                </td>` : ''}
+                                                                        <td class="accordian_img_acces">
+                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                        </td>` : ''}
                                 </tr>`;
                             });
 
@@ -1379,7 +1440,7 @@
                     }
 
                     if (filter == "attending") {
-                        console.log("Confirm", guests);
+
                         var guests = response.guests;
                         guests.forEach(function(guest) {
                             if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
@@ -1392,7 +1453,7 @@
                                                     <td>
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    
+
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
                                                             <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
                                                         </span>
@@ -1436,13 +1497,13 @@
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1459,7 +1520,6 @@
                     }
 
                     if (filter == "opened") {
-                        console.log("Open", guests);
                         guests.forEach(function(guest) {
                             if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
                                 // Show guest and their members if the guest is checked in
@@ -1471,7 +1531,7 @@
                                                     <td>
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    
+
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
                                                             <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
                                                         </span>
@@ -1515,13 +1575,13 @@
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1538,7 +1598,7 @@
                     }
 
                     if (filter == "declined") {
-                        console.log("Decline", guests);
+
                         guests.forEach(function(guest) {
                             if (guest.declined == 1 || guest.members.some(member => member.declined ==
                                     1)) {
@@ -1552,7 +1612,7 @@
                                                     <td>
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    
+
                                                         <span class="${guest.declined == 0 ? 'd-none' : ''}">
                                                             <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
                                                         </span>
@@ -1596,13 +1656,13 @@
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1618,10 +1678,10 @@
                     }
 
                     if (filter == "checked-in") {
-                        console.log("Checkin", guests);
+
                         guests.forEach(function(guest) {
                             if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
-                                1)) {
+                                    1)) {
                                 // Show guest and their members if the guest is checked in
 
                                 var accordion = `
@@ -1632,7 +1692,7 @@
                                                     <td>
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    
+
                                                         <span class="${guest.checkin == 0 ? 'd-none' : ''}">
                                                             <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
                                                         </span>
@@ -1676,13 +1736,13 @@
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>` : ''}
+                                                                                                    <td class="accordian_img_acces">
+                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1704,7 +1764,6 @@
                         guests.forEach(function(guest) {
                             if ((guest.opened == 0 || guest.opened == null) || guest.members.some(
                                     member => member.opened == 0 || member.opened == null)) {
-                                console.log("1", guest);
                                 // Show guest and their members if the guest is checked in
                                 var accordion = `
                                     <div class="accordion">
@@ -1760,13 +1819,13 @@
                                                         </ul>
                                                     </td>
                                                     ${(member.opened === 2) ? `
-                                                                        <td class="accordian_img_acces">
-                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                        </td>` : ''}
+                                                                                <td class="accordian_img_acces">
+                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                </td>` : ''}
                                                     ${(member.declined === 1) ? `
-                                                                        <td class="accordian_img_acces">
-                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                        </td>` : ''}
+                                                                                <td class="accordian_img_acces">
+                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                </td>` : ''}
                                                 </tr>`;
                                         }
                                     });
@@ -1856,13 +1915,13 @@
                                                 </ul>
                                             </td>
                                             ${(member.opened === 2) ? `
-                                                        <td class="accordian_img_acces">
-                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                        </td>` : ''}
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
                                             ${(member.declined === 1) ? `
-                                                        <td class="accordian_img_acces">
-                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                        </td>` : ''}
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
                                         </tr>`;
                                     });
 
@@ -1906,7 +1965,7 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(response) {
-                        console.log("Response received:", response);
+
                         if (!response.guests) {
                             console.error("No 'guests' data found in response.");
                             return;
@@ -2400,8 +2459,7 @@
                     },
                     error: function(xhr, status, error) {
                         // Handle error response
-                        // console.log(xhr.responseText);
-                        alert("Error uploading the file.");
+                        //                         alert("Error uploading the file.");
                     }
                 });
             });
@@ -2544,33 +2602,40 @@
             }
         });
 
+
         // Single delete button for one guest
+        let guestId; // Variable to hold the ID of the guest to be deleted
+        function showDeleteModal(id) {
+            guestId = id; // Store the guest ID
+            var myModal = new bootstrap.Modal(
+                document.getElementById(
+                    'delguestModal'));
+            myModal.show(); // Show the modal
+        }
+
         function deleteGuest() {
-            if (idArray.length === 1) {
+            if (guestId) {
                 $.ajax({
                     url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
                     type: "POST",
                     data: {
-                        guestid: idArray[0], // Send a single guest ID
+                        guestid: guestId, // Send the stored guest ID
                         idevent: "{{ $eventId }}", // Include event ID
                         _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
                     success: function(response) {
                         showGuest("1"); // Reload the guest list
                         toastr.success('Guest deleted successfully');
-                        $('#modifier').css('display',
-                            'none'); // Hide modifier section
-                        idArray = []; // Reset the selected guests array
+                        $('#delguestModalClose').click(); // Hide modal after successful deletion
+                        guestId = null; // Reset the guest ID
                         $('.delete-btn').hide(); // Hide delete button
                     },
                     error: function(xhr) {
-                        alert('Something went wrong: ' + xhr
-                            .responseText);
+                        alert('Something went wrong: ' + xhr.responseText);
                     }
                 });
             }
         }
-
         // Delete all button for multiple guests
         $(document).on('click', '.delete-btn-all', function() {
             if (idArray.length > 1) {
