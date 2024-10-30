@@ -1306,53 +1306,128 @@
                 },
                 success: function(response) {
                     var guests = response.guests;
-                    // Clear the existing accordions
-                    $('#GuestList').empty();
+                    $('#GuestList').empty(); // Clear existing accordions
 
                     if (filter == 1) {
-                        $('#GuestList').empty();
                         guests.forEach(function(guest) {
                             // ALL GUESTS
                             var accordion = `
-                        <div class="accordion">
-                            <div class="table-box">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
-                                            <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                            </span>
-                                        </td>
-                                        <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                        <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                        <td>${guest.notes || 'No Notes'}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                            data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                    <div class="accordion">
+                        <div class="table-box">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                        <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                        </span>
+                                    </td>
+                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                    <td>${guest.notes || 'No Notes'}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="accordion-content">
-                            <div class="table-box">
-                                <table>
-                                    <p class="after-line-effect">Members</p>
-                                    <tr>
-                                        <td><strong>Member Details</strong></td>
-                                        <td><strong>Note</strong></td>
-                                        <td><strong>Other Details</strong></td>
-                                        <td><strong>Attending Event</strong></td>
-                                    </tr>`;
+                    </div>
+                    <div class="accordion-content">
+                        <div class="table-box">
+                            <table>
+                                <p class="after-line-effect">Members</p>
+                                <tr>
+                                    <td><strong>Member Details</strong></td>
+                                    <td><strong>Note</strong></td>
+                                    <td><strong>Other Details</strong></td>
+                                    <td><strong>Attending Event</strong></td>
+                                </tr>`;
 
                             guest.members.forEach(function(member) {
                                 accordion += `
+                        <tr class="divider-line"></tr>
+                        <tr>
+                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                            <td>${member.notes || 'No Notes'}</td>
+                            <td>
+                                <ul>
+                                    <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                    <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                </ul>
+                            </td>
+                            ${(member.opened === 2) ? `
+                                    <td class="accordian_img_acces">
+                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                    </td>` : ''}
+                            ${(member.declined === 1) ? `
+                                    <td class="accordian_img_acces">
+                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                    </td>` : ''}
+                        </tr>`;
+                            });
+
+                            accordion += `
+                            <tr class="divider-line"></tr>
+                            </table>
+                        </div>
+                    </div>`;
+
+                            $('#GuestList').append(accordion); // Append each accordion to the list
+                        });
+                    }
+
+                    if (filter == "attending") {
+                        var guests = response.guests;
+                        guests.forEach(function(guest) {
+                            if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
+                                // Show guest and their members if the guest is checked in
+
+                                var accordion = `
+                            <div class="accordion">
+                                <div class="table-box">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                </span>
+                                            </td>
+                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                            <td>${guest.notes || 'No Notes'}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="table-box">
+                                    <table>
+                                        <p class="after-line-effect">Members</p>
+                                        <tr>
+                                            <td><strong>Member Details</strong></td>
+                                            <td><strong>Note</strong></td>
+                                            <td><strong>Other Details</strong></td>
+                                            <td><strong>Attending Event</strong></td>
+                                        </tr>`;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 2) {
+                                        accordion += `
                                     <tr class="divider-line"></tr>
                                     <tr>
-                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                         <td>${member.notes || 'No Notes'}</td>
                                         <td>
                                             <ul>
@@ -1362,37 +1437,360 @@
                                             </ul>
                                         </td>
                                         ${(member.opened === 2) ? `
-                                                                                                                                                                                                            <td class="accordian_img_acces">
-                                                                                                                                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                        ` : ''}
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
                                         ${(member.declined === 1) ? `
-                                                                                                                                                                                                            <td class="accordian_img_acces">
-                                                                                                                                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                        ` : ''}
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
                                     </tr>`;
-                            });
+                                    }
+                                });
 
-                            accordion += `
+                                accordion += `
                                 <tr class="divider-line"></tr>
-                            </table>
+                                </table>
                             </div>
                         </div>`;
 
-                            // ALL GUESTS
-                            $('#GuestList').append(accordion); // Append each accordion to the list
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
                         });
                     }
-                    // Re-apply the accordion toggle functionality after adding new elements
+
+                    if (filter == "opened") {
+                        guests.forEach(function(guest) {
+                            if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
+                                // Show guest and their members if the guest is checked in
+                                var accordion = `
+                            <div class="accordion">
+                                <div class="table-box">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                </span>
+                                            </td>
+                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                            <td>${guest.notes || 'No Notes'}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="table-box">
+                                    <table>
+                                        <p class="after-line-effect">Members</p>
+                                        <tr>
+                                            <td><strong>Member Details</strong></td>
+                                            <td><strong>Note</strong></td>
+                                            <td><strong>Other Details</strong></td>
+                                            <td><strong>Attending Event</strong></td>
+                                        </tr>`;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 1) {
+                                        accordion += `
+                                    <tr class="divider-line"></tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                        <td>${member.notes || 'No Notes'}</td>
+                                        <td>
+                                            <ul>
+                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                            </ul>
+                                        </td>
+                                        ${(member.opened === 2) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
+                                        ${(member.declined === 1) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
+                                    </tr>`;
+                                    }
+                                });
+
+                                accordion += `
+                                <tr class="divider-line"></tr>
+                                </table>
+                            </div>
+                        </div>`;
+
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
+                        });
+                    }
+
+                    if (filter == "declined") {
+                        guests.forEach(function(guest) {
+                            if (guest.declined == 1 || guest.members.some(member => member.declined ==
+                                    1)) {
+                                // Show guest and their members if the guest is checked in
+
+                                var accordion = `
+                            <div class="accordion">
+                                <div class="table-box">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                <span class="${guest.declined == 0 ? 'd-none' : ''}">
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                </span>
+                                            </td>
+                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                            <td>${guest.notes || 'No Notes'}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="table-box">
+                                    <table>
+                                        <p class="after-line-effect">Members</p>
+                                        <tr>
+                                            <td><strong>Member Details</strong></td>
+                                            <td><strong>Note</strong></td>
+                                            <td><strong>Other Details</strong></td>
+                                            <td><strong>Attending Event</strong></td>
+                                        </tr>`;
+
+                                // Loop through each member of the guest and add them only if declined == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.declined == 1) {
+                                        accordion += `
+                                    <tr class="divider-line"></tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                        <td>${member.notes || 'No Notes'}</td>
+                                        <td>
+                                            <ul>
+                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                            </ul>
+                                        </td>
+                                        ${(member.opened === 2) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
+                                        ${(member.declined === 1) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
+                                    </tr>`;
+                                    }
+                                });
+                                accordion += `
+                                <tr class="divider-line"></tr>
+                                </table>
+                            </div>
+                        </div>`;
+
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
+                        });
+                    }
+
+                    if (filter == "checked-in") {
+                        guests.forEach(function(guest) {
+                            if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
+                                    1)) {
+                                // Show guest and their members if the guest is checked in
+
+                                var accordion = `
+                            <div class="accordion">
+                                <div class="table-box">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                </span>
+                                            </td>
+                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                            <td>${guest.notes || 'No Notes'}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="table-box">
+                                    <table>
+                                        <p class="after-line-effect">Members</p>
+                                        <tr>
+                                            <td><strong>Member Details</strong></td>
+                                            <td><strong>Note</strong></td>
+                                            <td><strong>Other Details</strong></td>
+                                            <td><strong>Attending Event</strong></td>
+                                        </tr>`;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.checkin == 1) {
+                                        accordion += `
+                                    <tr class="divider-line"></tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                        <td>${member.notes || 'No Notes'}</td>
+                                        <td>
+                                            <ul>
+                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                            </ul>
+                                        </td>
+                                        ${(member.opened === 2) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
+                                        ${(member.declined === 1) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
+                                    </tr>`;
+                                    }
+                                });
+
+                                accordion += `
+                                    <tr class="divider-line"></tr>
+                                </table>
+                                </div>
+                            </div>`;
+
+                                // Append the accordion to the GuestList
+                                $('#GuestList').append(accordion);
+                            }
+                        });
+                    }
+
+
+                    if (filter == "not-open") {
+    guests.forEach(function(guest) {
+        if ((guest.opened == 0 || guest.opened == null) || guest.members.some(
+                member => member.opened == 0 || member.opened == null)) {
+
+            // Show guest and their members if the guest is checked in
+            var accordion = `
+            <div class="accordion">
+                <div class="table-box">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                </span>
+                            </td>
+                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                            <td>${guest.notes || 'No Notes'}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="table-box">
+                    <table>
+                        <p class="after-line-effect">Members</p>
+                        <tr>
+                            <td><strong>Member Details</strong></td>
+                            <td><strong>Note</strong></td>
+                            <td><strong>Other Details</strong></td>
+                            <td><strong>Attending Event</strong></td>
+                        </tr>`;
+
+            // Loop through each member of the guest and add them only if checkin == 1
+            if (guest.members && guest.members.length > 0) {
+                csvContent += "MEMBER, , , , , \n";
+                guest.members.forEach(function(member) {
+                    if ((member.opened == 0 || member.opened == null)) {
+                        accordion += `
+                        <tr class="divider-line"></tr>
+                        <tr>
+                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                            ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                            <td>${member.notes || 'No Notes'}</td>
+                            <td>
+                                <ul>
+                                    <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                    <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                </ul>
+                            </td>
+                            ${(member.opened === 2) ? `
+                            <td class="accordian_img_acces">
+                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                            </td>` : ''}
+                            ${(member.declined === 1) ? `
+                            <td class="accordian_img_acces">
+                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                            </td>` : ''}
+                        </tr>`;
+                    }
+                });
+
+                accordion += `
+                    <tr class="divider-line"></tr>
+                    </table>
+                </div>
+            </div>`;
+
+                // Append the accordion to the GuestList
+                $('#GuestList').append(accordion);
+            }
+        }
+    });
+}
+
+
+
                     accordionFunctionality();
                 },
                 error: function(xhr, status, error) {
                     console.error("An error occurred while fetching guests:", error);
                 }
-
             });
         }
+
 
         function exportall(filter) {
             if (filter == 1) {
