@@ -54,9 +54,8 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page reminders">
                     <div class="text">
-                        <h2>Messages</h2>
-                        <p>You can send a thank you card/picture and tell everyone how grateful you were for their presence
-                            and more...Change the photo write your text and send.</p>
+                        <h2>{{ __('message.Messages') }}</h2>
+                        <p>{{ __('message.thank_you_card_text') }}</p>
                     </div>
                 </div>
             </div>
@@ -64,31 +63,31 @@
                 <div class="box-styling preview actions ">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Actions</h2>
+                            <h2>{{ __('message.actions') }}</h2>
                         </div>
                         <button type="button" class="btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter03">Send Mail </button>
+                            data-target="#exampleModalCenter03">{{ __('message.send_mail') }} </button>
                     </div>
                     <div class="action-iframe">
                         <iframe src="{{ url('/mail-message/') }}/fake/{{ $eventId }}" frameborder="0"></iframe>
                     </div>
                     <div class="three-inputs">
                         <div class="box">
-                            <label>Title</label>
-                            <textarea placeholder="Title" id="title">{{ $message[0]->mtitle }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('message.title') }}</label>
+                            <textarea placeholder="{{ __('message.title_placeholder') }}" id="title">{{ $message[0]->mtitle }}</textarea> <!-- Use a textarea -->
                         </div>
                         <div class="box">
-                            <label>Subtitle</label>
-                            <textarea placeholder="Subtitle" id="subtitle">{{ $message[0]->msubtitle }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('message.subtitle') }}</label>
+                            <textarea placeholder="{{ __('message.subtitle_placeholder') }}" id="subtitle">{{ $message[0]->msubtitle }}</textarea> <!-- Use a textarea -->
                         </div>
                         <div class="box">
-                            <label>Text</label>
-                            <textarea placeholder="Text" id="text">{{ $message[0]->mtext }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('message.text') }}</label>
+                            <textarea placeholder="Text" id="{{ __('message.text_placeholder') }}">{{ $message[0]->mtext }}</textarea> <!-- Use a textarea -->
 
                         </div>
                     </div>
                     <div class="text-right mt-3"> <!-- Aligns the button to the right -->
-                        <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">Save</button>
+                        <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">{{ __('message.save') }}</button>
                     </div>
                 </div>
             </div>
@@ -105,7 +104,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Send To Who?</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ __('send_to_who') }}</h5>
                     <button type="button" class="close close_icon" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -115,15 +114,15 @@
                         <div class="table-box">
                             <table>
                                 <tr>
-                                    <th>Names</th>
+                                    <th>{{ __('message.names') }}</th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-phone"> Contact #
+                                        <input type="checkbox" class="check_box_style" id="select-all-phone"> {{ __('message.contact_number') }}
                                     </th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-email"> Email Address
+                                        <input type="checkbox" class="check_box_style" id="select-all-email">{{ __('message.email_address') }}
                                     </th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-whatsapp"> WhatsApp
+                                        <input type="checkbox" class="check_box_style" id="select-all-whatsapp"> {{ __('message.whatsapp') }}
                                     </th>
                                 </tr>
 
@@ -159,10 +158,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-sms-btn">Send SMS</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-email-btn">Send Email</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-whatsapp-btn">Send Whatsapp</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('message.close') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-sms-btn">{{ __('message.send_sms') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-email-btn">{{ __('message.send_email') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-whatsapp-btn">{{ __('message.send_whatsapp') }}</button>
                 </div>
             </div>
         </div>
@@ -183,12 +182,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="assets/images/circle-check.png" alt="">
-                        <h2>Message Sent</h2>
-                        <p>Your message has been successfully sent.</p>
+                        <h2>{{ __('message_sent') }}</h2>
+                        <p>{{ __('message_sent_success') }}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('message.close') }}</button>
                 </div>
             </div>
         </div>
@@ -206,12 +206,12 @@
             <div class="modal-body">
                 <div class="text">
                     <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>Message update Successfully</h2>
-                    <p>Your Message suggestion has been successfully updated.</p>
+                    <h2>{{ __('message_update_success') }}</h2>
+                    <p>{{ __('message_update_success_message') }}</p>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">{{ __('message.close') }}</button>
             </div>
         </div>
     </div>
