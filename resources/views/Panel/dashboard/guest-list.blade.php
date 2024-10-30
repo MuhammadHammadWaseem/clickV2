@@ -1,6 +1,11 @@
 @extends('Panel.Layout.master')
 <style>
-
+#exampleModalCenter03 .modal-footer {
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px 5px !important;
+}
 .modal-03 .modal-body .text {
     text-align: center;
     display: flex;
@@ -328,6 +333,20 @@
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list {
         height: max-content !important;
     }
+
+
+    .upload-form-csv .modal-body form label {
+    width: 100%;
+    height: 200px;
+    border: 5px dashed #A9967D;
+    border-radius: 10px;
+    display: flex;
+    padding: 50px 60px;
+}
+
+.upload-form-csv .modal-body form input {
+    display: none !important;
+}
 
 
     @media only screen and (max-width: 1500px) {
@@ -979,9 +998,10 @@
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
                                 <div class="upload-container" onclick="document.getElementById('fileInput').click();">
-                                    <img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" />
+
                                     <input type="file" id="fileInput" name="csv_file" onchange="showFileName()"
                                         accept=".csv" required>
+                                        <label for="csv_file"><img src="{{ asset('assets/images/upload_svg_image.png') }}" alt="Upload Icon" /></label>
                                 </div>
                                 <div id="fileName" class="file-name"></div>
                             </form>

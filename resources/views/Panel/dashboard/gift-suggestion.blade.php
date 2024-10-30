@@ -1,5 +1,14 @@
 @extends('Panel.Layout.master')
 <style>
+
+#exampleModalCenter03 .modal-dialog {
+    max-width: 600px !important;
+    margin: 1.75rem auto;
+}
+
+#exampleModalCenter03 .modal-footer {
+    justify-content: center !important;
+}
     .payment-transfer-box .three-things-align .payment-select-option select {
         width: 200px;
         padding: 10px 10px;
@@ -53,14 +62,9 @@
             <div class="col-lg-12">
                 <div class="box-styling gift-suggestions">
                     <div class="text">
-                        <h2>Gift Suggestions</h2>
-                        <p>As we know guest can’t really know your needs unless you tell them, this page is to link a
-                            webpage for a certain gift you would like to get, your guest will get a link to that page the
-                            same time as the invitation, they can pick a gift you choose, and it will be eliminated from the
-                            list, so others can’t pick the same.</p>
-                        <p>And you get to know the picker on the return guest list. And you can include a link to your email
-                            account for e-transfer, <b>so guests won't have to carry and envelope with money all day and
-                                nothing can be lost.</b> </p>
+                        <h2>{{ __('giftsuggestion.title') }}</h2>
+                        <p>{{ __('giftsuggestion.description') }}</p>
+                        <p>{{ __('giftsuggestion.message') }} </p>
                     </div>
                 </div>
             </div>
@@ -68,12 +72,11 @@
                 <div class="box-styling event-photos-gallery meal-details gift-suggestions-details">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Gift Suggestions Details</h2>
-                            <p>After you decide what your guest’s choices with the reception hall, here you can give the
-                                choice</p>
+                            <h2>{{ __('giftsuggestion.title_suggest') }}</h2>
+                            <p>{{ __('giftsuggestion.description_suggest') }}</p>
                         </div>
                         <button class="t-btn btn btn-primary" type="button" data-toggle="modal"
-                            data-target="#exampleModalCenter">Add New</button>
+                            data-target="#exampleModalCenter">{{ __('giftsuggestion.Add New') }}</button>
 
 
                     </div>
@@ -108,20 +111,20 @@
                 <div class="payment-transfer-box box-styling">
 
                     <div class="text">
-                        <h2>TRANSFER DATA</h2>
+                        <h2>{{ __('giftsuggestion.TRANSFER DATA') }}</h2>
                     </div>
 
                     <div class="three-things-align">
                         <div class="payment-select-option">
                             <select id="transferType" required  name="type">
-                                <option value="TRANSFER TYPE"  {{ $event->transfer_type == "TRANSFER TYPE" ? "selected" : "" }}>TRANSFER TYPE</option>
-                                <option value="PAYPAL" {{ $event->transfer_type == "PAYPAL" ? "selected" : "" }}>PAYPAL</option>
-                                <option value="STRYPE" {{ $event->transfer_type == "STRYPE" ? "selected" : "" }}>STRYPE</option>
-                                <option value="INTERAC TRANSFER" {{ $event->transfer_type == "INTERAC TRANSFER" ? "selected" : "" }}>INTERAC TRANSFER</option>
+                                <option value="TRANSFER TYPE"  {{ $event->transfer_type == "TRANSFER TYPE" ? "selected" : "" }}>{{ __('giftsuggestion.message') }}</option>
+                                <option value="PAYPAL" {{ $event->transfer_type == "PAYPAL" ? "selected" : "" }}>{{ __('giftsuggestion.paypal') }}</option>
+                                <option value="STRYPE" {{ $event->transfer_type == "STRYPE" ? "selected" : "" }}>{{ __('giftsuggestion.stripe') }}</option>
+                                <option value="INTERAC TRANSFER" {{ $event->transfer_type == "INTERAC TRANSFER" ? "selected" : "" }}>{{ __('giftsuggestion.interac_transfer') }}</option>
                             </select>
                         </div>
                         <input type="text" id="transferLink" placeholder="Enter link" required value="{{ $event->transfer_link }}" >
-                        <button class="t-btn btn btn-primary" id="saveTransferBtn" type="button">Save</button>
+                        <button class="t-btn btn btn-primary" id="saveTransferBtn" type="button">{{ __('giftsuggestion.SAVE') }}</button>
                     </div>
                 </div>
             </div>
@@ -143,13 +146,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Suggestion Added Successfully</h2>
-                        <p>Your gift suggestion has been successfully added.</p>
+                        <h2>{{ __('giftsuggestion.title_add') }}</h2>
+                        <p>{{ __('giftsuggestion.message_add') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="successmodalCloseBtn"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('giftsuggestion.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -168,13 +171,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Suggestion Deleted Successfully</h2>
-                        <p>Your gift suggestion has been successfully deleted.</p>
+                        <h2>{{ __('giftsuggestion.title_delete') }}</h2>
+                        <p>{{ __('giftsuggestion.message_delete') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="successmodalCloseBtn"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('giftsuggestion.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -193,13 +196,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Suggestion Edit Successfully</h2>
-                        <p>Your gift suggestion has been successfully edited.</p>
+                        <h2>{{ __('giftsuggestion.title_edit') }}</h2>
+                        <p>{{ __('giftsuggestion.Clomessage_editse') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeMainModal"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('giftsuggestion.Close') }}</button>
                 </div>
             </div>
         </div>
