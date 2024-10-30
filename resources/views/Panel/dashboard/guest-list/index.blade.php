@@ -161,19 +161,11 @@
             <div class="col-lg-12">
                 <div class="box-styling table-management">
                     <div class="text">
-                        <h2>Table Management</h2>
-                        <p>Now that you know how many guests your expecting, you can add the tables needed to seat them.You
-                            can number the tables and you can give the tables names such as cities, countries, teams, or
-                            crew for DJ, band, videographer...</p>
-                        <p>Make sure you enter the right number of tables needed so everyone can have a seat.You can always
-                            come back and add a tableThis is the page where you indicate the seats for your guests, make
-                            sure not to exceed the number of guests per table indicated by the size given to you by the
-                            reception hall.</p>
-                        <p>After all the guests are seated you can print and give the seating chart to the reception hall so
-                            they can know the number of plates per meal choice and prepare it for each table. And they can
-                            call your guest by name for allergy or vegan cases.</p>
-                        <p class="bold-text-color-change">Declined and non confirmed guests will not be seen on this page. to
-                            have them appear they must confirm or choose a meal. and you can always do it for them.</p>
+                        <h2>{{ __('table.table_management') }}</h2>
+                        <p>{{ __('table.guest_seating_info') }}</p>
+                        <p>{{ __('table.correct_table_number') }}</p>
+                        <p>{{ __('table.correct_table_number') }}</p>
+                        <p class="bold-text-color-change">{{ __('table.declined_non_confirmed_guests') }}</p>
                     </div>
                 </div>
             </div>
@@ -181,14 +173,14 @@
                 <div class="box-styling management-plan">
                     <div class="two-plan-details-align">
                         <div class="text">
-                            <h2>Management Plan</h2>
+                            <h2>{{ __('table.management_plan') }}</h2>
                         </div>
                     </div>
                     <div class="management-plan-box">
                         <div class="box">
                             <img src="{{ asset('assets/images/dinner-table.png') }}" alt="">
-                            <h6>Table#01</h6>
-                            <p>Friends</p>
+                            <h6>{{ __('table.table_01') }}</h6>
+                            <p>{{ __('table.friends') }}</p>
                         </div>
                     </div>
                 </div>
@@ -197,19 +189,19 @@
                 <div class="box-styling event-photos-gallery events-lists-sec-01 guest-list details">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Details</h2>
+                            <h2>{{ __('table.details') }}</h2>
                             @if ($isCorporate == 1)
-                                <p>Total Tables: <span id="totalTables"></span> </p>
-                                <p>Total Guests: <span id="totalGuests"></span> </p>
+                                <p>{{ __('table.total_tables') }} <span id="totalTables"></span> </p>
+                                <p>{{ __('table.total_guests') }} <span id="totalGuests"></span> </p>
                             @endif
                         </div>
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                                data-target="#exampleModalCenter04">Add Table</button>
-                            <a href="/print-table/{{ $eventId }}" class="t-btn">Print Plan</a>
+                                data-target="#exampleModalCenter04">{{ __('table.add_table') }}</button>
+                            <a href="/print-table/{{ $eventId }}" class="t-btn">{{ __('table.print_plan') }}</a>
                             @if ($isCorporate == 0)
                                 <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                                    data-target="#reminderModal">Reminder</button>
+                                    data-target="#reminderModal">{{ __('table.reminder') }}</button>
                             @endif
                         </div>
                     </div>
@@ -217,16 +209,16 @@
                     <div class="table-align-boxes">
                         <div class="th-boxes">
                             <div class="box">
-                                <h6> Table Name</h6>
+                                <h6> {{ __('table.table_name') }}</h6>
                             </div>
                             <div class="box">
-                                <h6> Table #</h6>
+                                <h6> {{ __('table.table_number') }}</h6>
                             </div>
                             <div class="box">
-                                <h6> Guest Allowed</h6>
+                                <h6> {{ __('table.guest_allowed') }}</h6>
                             </div>
                             <div class="box">
-                                <h6> Actions</h6>
+                                <h6> {{ __('table.actions') }}</h6>
                             </div>
                         </div>
 
@@ -252,20 +244,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>New Table</h2>
+                        <h2>{{ __('table.new_table') }}</h2>
                     </div>
                     <div class="main-form-box mt-3">
                         <form id="createTableForm">
-                            <input type="number" id="tableNumber" name="table_number" placeholder="Table Number" required>
-                            <input type="text" id="tableName" name="table_name" placeholder="Table Name" required>
-                            <input type="number" id="maxGuest" name="max_guest" placeholder="Max Guest" required>
+                            <input type="number" id="tableNumber" name="table_number" placeholder="{{ __('table.table_number_placeholder') }}" required>
+                            <input type="text" id="tableName" name="table_name" placeholder="{{ __('table.table_name_placeholder') }}" required>
+                            <input type="number" id="maxGuest" name="max_guest" placeholder="{{ __('table.max_guest_placeholder') }}" required>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeAddModalBtn"
-                        data-dismiss="modal">Close</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" id="addTableButton">Add Table</button>
+                        data-dismiss="modal">{{ __('table.close') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="addTableButton">{{ __('table.add_table') }}</button>
                 </div>
             </div>
         </div>
@@ -282,25 +274,24 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Edit Table</h2>
+                        <h2>{{ __('table.edit_table') }}</h2>
                     </div>
                     <div class="main-form-box mt-3">
                         <form id="editTableForm">
                             <input type="hidden" id="editTableId">
-                            <label for="editTableName">Table Name</label>
+                            <label for="editTableName">{{ __('table.table_name_placeholder') }}</label>
                             <input type="text" id="editTableName" name="table_name" required>
-                            <label for="editTableNumber">Table Number</label>
+                            <label for="editTableNumber">{{ __('table.table_number_placeholder') }}</label>
                             <input type="number" id="editTableNumber" name="table_number" required>
-                            <label for="editMaxGuest">Max Guest</label>
+                            <label for="editMaxGuest">{{ __('table.max_guest_placeholder') }}</label>
                             <input type="number" id="editMaxGuest" name="max_guest" required>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeEditModal"
-                        data-dismiss="modal">Close</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" id="saveEditTable">Save
-                        Changes</button>
+                        data-dismiss="modal">{{ __('table.close') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="saveEditTable">{{ __('table.save_changes') }}</button>
                 </div>
             </div>
         </div>
@@ -317,15 +308,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Confirm Deletion</h2>
-                        <p>Are you sure you want to delete this table?</p>
+                        <h2>{{ __('table.confirm_deletion') }}</h2>
+                        <p>{{ __('table.delete_table_confirmation') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeDeleteModal"
-                        data-dismiss="modal">Cancel</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteTable">Yes,
-                        Delete</button>
+                        data-dismiss="modal">{{ __('table.cancel') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteTable">{{ __('table.yes_delete') }}</button>
                 </div>
             </div>
         </div>
@@ -344,16 +334,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Guest Table</h2>
-                        <p>Guests of table <span id="dynamicTableName"></span></p>
+                        <h2>{{ __('table.guest_table') }}</h2>
+                        <p>{{ __('table.guests_of_table') }}<span id="dynamicTableName"></span></p>
                     </div>
                     <div class="modal-table-type-content">
                         <div class="main-heading">
                             <ul>
-                                <li>Name </li>
-                                <li># Of Guests</li>
-                                <li>Table</li>
-                                <li>Actions</li>
+                                <li>{{ __('table.name') }}</li>
+                                <li>{{ __('table.number_of_guests') }}</li>
+                                <li>{{ __('table.table') }}</li>
+                                <li>{{ __('table.actions') }}</li>
                             </ul>
                         </div>
 
@@ -364,10 +354,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeSetTableModal" data-dismiss="modal">No, I
-                        Don’t</button>
+                    <button type="button" class="btn btn-secondary" id="closeSetTableModal" data-dismiss="modal">{{ __('table.no_i_dont') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="saveGuestTableChanges"
-                        data-toggle="modal" data-target="#exampleModalCenter">Set Table</button>
+                        data-toggle="modal" data-target="#exampleModalCenter">{{ __('table.set_table') }}</button>
                 </div>
             </div>
         </div>
@@ -384,28 +373,27 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Guest Table</h2>
-                        <p>Guests of table <span id="dynamicTableName"></span></p>
+                        <h2>{{ __('table.guest_table') }}</h2>
+                        <p>{{ __('table.guests_of_table') }}<span id="dynamicTableName"></span></p>
                     </div>
                     <div class="modal-table-type-content">
                         <div class="main-heading">
                             <ul>
-                                <li>Name </li>
-                                <li># Of Guests</li>
-                                <li>Table</li>
-                                <li>Actions</li>
+                                <li>{{ __('table.name') }}</li>
+                                <li>{{ __('table.number_of_guests') }}</li>
+                                <li>{{ __('table.table') }}</li>
+                                <li>{{ __('table.actions') }}</li>
                             </ul>
                         </div>
 
-                        <div id="sub-main-content2">
+                        <div id="sub-main-content">
                         </div>
 
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeSetTableModal2" data-dismiss="modal">No, I
-                        Don’t</button>
+                    <button type="button" class="btn btn-secondary" id="closeSetTableModal2" data-dismiss="modal">{{ __('table.set_table') }}</button>
                 </div>
             </div>
         </div>
@@ -423,12 +411,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>New Table</h2>
+                        <h2>{{ __('table.new_table') }}</h2>
                     </div>
                     <div class="modal-table-type-content">
                         <div class="main-heading">
                             <ul>
-                                <li style="width:100% !important;">Guests</li>
+                                <li style="width:100% !important;">{{ __('table.guests') }}</li>
                             </ul>
                         </div>
 
@@ -439,9 +427,8 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="closeAddModalBtn"
-                            data-dismiss="modal">Close</button>
-                        <button type="button" class="submit-btn btn btn-primary t-btn" id="sendReminderBtn">Send
-                            Reminder</button>
+                            data-dismiss="modal">{{ __('table.close') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" id="sendReminderBtn">{{ __('table.send_reminder') }}</button>
                     </div>
                 </div>
             </div>
@@ -894,7 +881,7 @@
                                                                                                                                                                                                                     <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
                                                                                                                                                                                                                 `}
                                             </div>
-                                        
+
                                             <div class="box">
                                                 <div class="three-action-align">
                                                     <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
@@ -920,7 +907,7 @@
                                                                                                                                                                                                                                     `).join('')}
                                             </div>
                                         </div>
-                                    
+
                                     </div>
                                     <hr>
                                 `);
