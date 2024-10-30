@@ -502,29 +502,29 @@
                     </div>
                     <div class="guest-listings">
                         <ul>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>Here you can enter your guest and limit the number of people you want
                                     them to bring with them, for example if you invite a guest that have a
                                     wife and 5 children, and you only want him to come with the wife you can
                                     limit to 2 the number of members so you can directly indicate that no
                                     kids allowed in this event.</p>
                             </li>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>You can also know who confirmed and who didn’t</p>
                             </li>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>ou can see how many members added and calculate the number of guest so
                                     far</p>
                             </li>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>You can resend invitation to the guest who did not answer or send it to
                                     one guest you just added</p>
                             </li>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>Once your guest is highlighted in Blue it means that he has checked inn
                                     to the reception</p>
                             </li>
-                            <li><img src="assets/images/sent-right.png" alt="">
+                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
                                 <p>If the guest is highlighted in red it means he or she declined</p>
                             </li>
                         </ul>
@@ -991,7 +991,8 @@
                                 <h2>Upload CSV</h2>
                                 <p>Upload a CSV file with the columns: name, email, phone, whatsapp, nummembers, notes.
                                     Separated by Semicolon ( ; ).</p>
-                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download CSV
+                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download
+                                    CSV
                                     Example</a>
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
@@ -1080,7 +1081,7 @@
                 <div class="modal-body">
                     <form id="ExportQrForm">
                         <div class="text">
-                            <img src="assets/images/circle-check.png" alt="">
+                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                             <h2>Select Date</h2>
                             <span>Select Reserve By date to show your Guests the latest date to respond using the Qr
                                 Code.</span>
@@ -1116,7 +1117,7 @@
                 <div class="modal-body">
                     <form id="DisplaySaveOptionForm">
                         <div class="text">
-                            <img src="assets/images/circle-check.png" alt="">
+                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                             <h2>Select Options to Display </h2>
                             <div class="form-group">
                                 <label for="gift-suggestion">Gift Suggestions</label>
@@ -1165,7 +1166,7 @@
                 <div class="modal-body">
                     <form id="SendInvitationForm">
                         <div class="text">
-                            <img src="assets/images/circle-check.png" alt="">
+                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                             <h2>Select Options to Send Invitation</h2>
                             <div class="form-group">
                                 <label for="emailCheck">Email</label>
@@ -1294,95 +1295,22 @@
         function showGuest(filter) {
             var mealId = $('#idevent').val();
             $.ajax({
-                    url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "&filter=" + filter,
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        filter: filter,
-                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
-                    },
-                    success: function(response) {
-                        var guests = response.guests || [];
-                        $('#GuestList').empty(); // Clear existing accordions
+                url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId + "&filter=" + filter,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    filter: filter,
+                    _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                },
+                success: function(response) {
+                    var guests = response.guests || [];
+                    $('#GuestList').empty();
 
-                        if (filter == 1) {
-                            guests.forEach(function(guest) {
-                                // ALL GUESTS
-                                var accordion = `
-                    <div class="accordion">
-                        <div class="table-box">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                        <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                        </span>
-                                    </td>
-                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                    <td>${guest.notes || 'No Notes'}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="table-box">
-                            <table>
-                                <p class="after-line-effect">Members</p>
-                                <tr>
-                                    <td><strong>Member Details</strong></td>
-                                    <td><strong>Note</strong></td>
-                                    <td><strong>Other Details</strong></td>
-                                    <td><strong>Attending Event</strong></td>
-                                </tr>`;
-
-                                guest.members.forEach(function(member) {
-                                    accordion += `
-                        <tr class="divider-line"></tr>
-                        <tr>
-                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                            <td>${member.notes || 'No Notes'}</td>
-                            <td>
-                                <ul>
-                                    <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                    <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                </ul>
-                            </td>
-                            ${(member.opened === 2) ? `
-                                                <td class="accordian_img_acces">
-                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                </td>` : ''}
-                            ${(member.declined === 1) ? `
-                                                <td class="accordian_img_acces">
-                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                </td>` : ''}
-                        </tr>`;
-                                });
-
-                                accordion += `
-                            <tr class="divider-line"></tr>
-                            </table>
-                        </div>
-                    </div>`;
-
-                                $('#GuestList').append(accordion); // Append each accordion to the list
-                            });
-                        }
-
-                        if (filter == "attending") {
-                            var guests = response.guests;
-                            guests.forEach(function(guest) {
-                                if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
-                                    // Show guest and their members if the guest is checked in
-
-                                    var accordion = `
+                    if (filter == 1) {
+                        console.log("All", guests);
+                        guests.forEach(function(guest) {
+                            // ALL GUESTS
+                            var accordion = `
                             <div class="accordion">
                                 <div class="table-box">
                                     <table>
@@ -1390,246 +1318,8 @@
                                             <td>
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                 ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
-                                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
-                                                </span>
-                                            </td>
-                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                            <td>${guest.notes || 'No Notes'}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="table-box">
-                                    <table>
-                                        <p class="after-line-effect">Members</p>
-                                        <tr>
-                                            <td><strong>Member Details</strong></td>
-                                            <td><strong>Note</strong></td>
-                                            <td><strong>Other Details</strong></td>
-                                            <td><strong>Attending Event</strong></td>
-                                        </tr>`;
-
-                                    // Loop through each member of the guest and add them only if checkin == 1
-                                    guest.members.forEach(function(member) {
-                                        if (member.opened == 2) {
-                                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                                        <td>${member.notes || 'No Notes'}</td>
-                                        <td>
-                                            <ul>
-                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                            </ul>
-                                        </td>
-                                        ${(member.opened === 2) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                            </td>` : ''}
-                                        ${(member.declined === 1) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                            </td>` : ''}
-                                    </tr>`;
-                                        }
-                                    });
-
-                                    accordion += `
-                                <tr class="divider-line"></tr>
-                                </table>
-                            </div>
-                        </div>`;
-
-                                    $('#GuestList').append(accordion); // Append each accordion to the list
-                                }
-                            });
-                        }
-
-                        if (filter == "opened") {
-                            guests.forEach(function(guest) {
-                                if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
-                                    // Show guest and their members if the guest is checked in
-                                    var accordion = `
-                            <div class="accordion">
-                                <div class="table-box">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
-                                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
-                                                </span>
-                                            </td>
-                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                            <td>${guest.notes || 'No Notes'}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="table-box">
-                                    <table>
-                                        <p class="after-line-effect">Members</p>
-                                        <tr>
-                                            <td><strong>Member Details</strong></td>
-                                            <td><strong>Note</strong></td>
-                                            <td><strong>Other Details</strong></td>
-                                            <td><strong>Attending Event</strong></td>
-                                        </tr>`;
-
-                                    // Loop through each member of the guest and add them only if checkin == 1
-                                    guest.members.forEach(function(member) {
-                                        if (member.opened == 1) {
-                                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                                        <td>${member.notes || 'No Notes'}</td>
-                                        <td>
-                                            <ul>
-                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                            </ul>
-                                        </td>
-                                        ${(member.opened === 2) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                            </td>` : ''}
-                                        ${(member.declined === 1) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                            </td>` : ''}
-                                    </tr>`;
-                                        }
-                                    });
-
-                                    accordion += `
-                                <tr class="divider-line"></tr>
-                                </table>
-                            </div>
-                        </div>`;
-
-                                    $('#GuestList').append(accordion); // Append each accordion to the list
-                                }
-                            });
-                        }
-
-                        if (filter == "declined") {
-                            guests.forEach(function(guest) {
-                                if (guest.declined == 1 || guest.members.some(member => member.declined ==
-                                        1)) {
-                                    // Show guest and their members if the guest is checked in
-
-                                    var accordion = `
-                            <div class="accordion">
-                                <div class="table-box">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
-                                                <span class="${guest.declined == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
-                                                </span>
-                                            </td>
-                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                            <td>${guest.notes || 'No Notes'}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="table-box">
-                                    <table>
-                                        <p class="after-line-effect">Members</p>
-                                        <tr>
-                                            <td><strong>Member Details</strong></td>
-                                            <td><strong>Note</strong></td>
-                                            <td><strong>Other Details</strong></td>
-                                            <td><strong>Attending Event</strong></td>
-                                        </tr>`;
-
-                                    // Loop through each member of the guest and add them only if declined == 1
-                                    guest.members.forEach(function(member) {
-                                        if (member.declined == 1) {
-                                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                                        <td>${member.notes || 'No Notes'}</td>
-                                        <td>
-                                            <ul>
-                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                            </ul>
-                                        </td>
-                                        ${(member.opened === 2) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                            </td>` : ''}
-                                        ${(member.declined === 1) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                            </td>` : ''}
-                                    </tr>`;
-                                        }
-                                    });
-                                    accordion += `
-                                <tr class="divider-line"></tr>
-                                </table>
-                            </div>
-                        </div>`;
-
-                                    $('#GuestList').append(accordion); // Append each accordion to the list
-                                }
-                            });
-                        }
-
-                        if (filter == "checked-in") {
-                            guests.forEach(function(guest) {
-                                if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
-                                        1)) {
-                                    // Show guest and their members if the guest is checked in
-
-                                    var accordion = `
-                            <div class="accordion">
-                                <div class="table-box">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
                                                 <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                 </span>
                                             </td>
                                             <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1654,97 +1344,509 @@
                                             <td><strong>Attending Event</strong></td>
                                         </tr>`;
 
-                                    // Loop through each member of the guest and add them only if checkin == 1
-                                    guest.members.forEach(function(member) {
-                                        if (member.checkin == 1) {
-                                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                                        <td>${member.notes || 'No Notes'}</td>
-                                        <td>
-                                            <ul>
-                                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                            </ul>
-                                        </td>
-                                        ${(member.opened === 2) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                            </td>` : ''}
-                                        ${(member.declined === 1) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                            </td>` : ''}
-                                    </tr>`;
-                                        }
-                                    });
+                            guest.members.forEach(function(member) {
+                                accordion += `
+                                <tr class="divider-line"></tr>
+                                <tr>
+                                    <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                    <td>${member.notes || 'No Notes'}</td>
+                                    <td>
+                                        <ul>
+                                            <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                            <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                        </ul>
+                                    </td>
+                                    ${(member.opened === 2) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                </td>` : ''}
+                                    ${(member.declined === 1) ? `
+                                                                <td class="accordian_img_acces">
+                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                </td>` : ''}
+                                </tr>`;
+                            });
 
-                                    accordion += `
+                            accordion += `
                                     <tr class="divider-line"></tr>
-                                </table>
+                                    </table>
                                 </div>
                             </div>`;
 
-                                    // Append the accordion to the GuestList
-                                    $('#GuestList').append(accordion);
-                                }
-                            });
-                        }
+                            $('#GuestList').append(accordion); // Append each accordion to the list
+                        });
+                    }
 
+                    if (filter == "attending") {
+                        console.log("Confirm", guests);
+                        var guests = response.guests;
+                        guests.forEach(function(guest) {
+                            if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
+                                // Show guest and their members if the guest is checked in
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    
+                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                        </span>
+                                                    </td>
+                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>`;
 
-                        if (filter == "not-open") {
-                            guests.forEach(function(guest) {
-                                if ((guest.opened == 0 || guest.opened == null) || guest.members.some(
-                                        member => member.opened == 0 || member.opened == null)) {
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 2) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened === 2) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                            </td>` : ''}
+                                                ${(member.declined === 1) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                            </td>` : ''}
+                                            </tr>`;
+                                    }
+                                });
 
-                                    // Show guest and their members if the guest is checked in
-                                    var accordion = `
-                            <div class="accordion">
-                                <div class="table-box">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
-                                                </span>
-                                            </td>
-                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                            <td>${guest.notes || 'No Notes'}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                                            </td>
-                                        </tr>
+                                accordion += `
+                                        <tr class="divider-line"></tr>
+                                        </table>
+                                    </div>
+                                </div>`;
+
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
+                        });
+                    }
+
+                    if (filter == "opened") {
+                        console.log("Open", guests);
+                        guests.forEach(function(guest) {
+                            if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
+                                // Show guest and their members if the guest is checked in
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    
+                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                        </span>
+                                                    </td>
+                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>`;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 1) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened === 2) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                            </td>` : ''}
+                                                ${(member.declined === 1) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                            </td>` : ''}
+                                            </tr>`;
+                                    }
+                                });
+
+                                accordion += `
+                                        <tr class="divider-line"></tr>
+                                        </table>
+                                    </div>
+                                </div>`;
+
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
+                        });
+                    }
+
+                    if (filter == "declined") {
+                        console.log("Decline", guests);
+                        guests.forEach(function(guest) {
+                            if (guest.declined == 1 || guest.members.some(member => member.declined ==
+                                    1)) {
+                                // Show guest and their members if the guest is checked in
+
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    
+                                                        <span class="${guest.declined == 0 ? 'd-none' : ''}">
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                        </span>
+                                                    </td>
+                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>`;
+
+                                // Loop through each member of the guest and add them only if declined == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.declined == 1) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened === 2) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                            </td>` : ''}
+                                                ${(member.declined === 1) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                            </td>` : ''}
+                                            </tr>`;
+                                    }
+                                });
+                                accordion += `
+                                        <tr class="divider-line"></tr>
+                                        </table>
+                                    </div>
+                                </div>`;
+
+                                $('#GuestList').append(accordion); // Append each accordion to the list
+                            }
+                        });
+                    }
+
+                    if (filter == "checked-in") {
+                        console.log("Checkin", guests);
+                        guests.forEach(function(guest) {
+                            if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
+                                1)) {
+                                // Show guest and their members if the guest is checked in
+
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    
+                                                        <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                        </span>
+                                                    </td>
+                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>`;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.checkin == 1) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened === 2) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                            </td>` : ''}
+                                                ${(member.declined === 1) ? `
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                            </td>` : ''}
+                                            </tr>`;
+                                    }
+                                });
+
+                                accordion += `
+                                        <tr class="divider-line"></tr>
                                     </table>
-                                </div>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="table-box">
-                                    <table>
-                                        <p class="after-line-effect">Members</p>
-                                        <tr>
-                                            <td><strong>Member Details</strong></td>
-                                            <td><strong>Note</strong></td>
-                                            <td><strong>Other Details</strong></td>
-                                            <td><strong>Attending Event</strong></td>
-                                        </tr>`;
+                                    </div>
+                                </div>`;
 
-                                    // Loop through each member of the guest and add them only if checkin == 1
-                                    if (guest.members && guest.members.length > 0) {
-                                        csvContent += "MEMBER, , , , , \n";
-                                        guest.members.forEach(function(member) {
-                                            if ((member.opened == 0 || member.opened == null)) {
-                                                accordion += `
+                                // Append the accordion to the GuestList
+                                $('#GuestList').append(accordion);
+                            }
+                        });
+                    }
+
+
+                    if (filter == "not-open") {
+                        guests.forEach(function(guest) {
+                            if ((guest.opened == 0 || guest.opened == null) || guest.members.some(
+                                    member => member.opened == 0 || member.opened == null)) {
+                                console.log("1", guest);
+                                // Show guest and their members if the guest is checked in
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null) ? guest.table.name : 'N/A'}
+                                                        </span>
+                                                    </td>
+                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    `;
+
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                if (guest.members && guest.members.length > 0) {
+                                    csvContent += "MEMBER, , , , , \n";
+                                    guest.members.forEach(function(member) {
+                                        if ((member.opened == 0 || member.opened == null)) {
+                                            accordion += `
+                                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>
+                                                <tr class="divider-line"></tr>
+                                                <tr>
+                                                    <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                    ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                    <td>${member.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <ul>
+                                                            <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                            <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        </ul>
+                                                    </td>
+                                                    ${(member.opened === 2) ? `
+                                                                        <td class="accordian_img_acces">
+                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                        </td>` : ''}
+                                                    ${(member.declined === 1) ? `
+                                                                        <td class="accordian_img_acces">
+                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                        </td>` : ''}
+                                                </tr>`;
+                                        }
+                                    });
+
+                                    accordion += `
+                                            <tr class="divider-line"></tr>
+                                            </table>
+                                        </div>
+                                    </div>`;
+
+                                }
+                                // Append the accordion to the GuestList
+                                $('#GuestList').append(accordion);
+                            }
+                        });
+                    }
+
+
+                    if (filter === "a-to-z" || filter === "z-to-a") {
+                        if (Array.isArray(guests) && guests.length > 0) {
+                            // Sort guests array based on the filter
+                            if (filter === "a-to-z" || filter === "z-to-a") {
+                                guests.sort((a, b) => {
+                                    return filter === "a-to-z" ? a.name.localeCompare(b.name) : b.name
+                                        .localeCompare(a.name);
+                                });
+                            }
+
+                            // Clear the existing guest list before appending sorted results
+                            $('#GuestList').empty();
+
+                            guests.forEach(function(guest) {
+                                let accordion = `
+                                <div class="accordion">
+                                    <div class="table-box">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                        <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email}
+                                                        <br>${guest.members_number} Members Left
+                                                        <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                    </span>
+                                                </td>
+                                                <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                <td>${guest.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>`;
+
+                                // If the guest has members, iterate over each member to create their row
+                                if (Array.isArray(guest.members) && guest.members.length > 0) {
+                                    accordion += `
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>Member Details</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Other Details</strong></td>
+                                                    <td><strong>Attending Event</strong></td>
+                                                </tr>`;
+
+                                    guest.members.forEach(function(member) {
+                                        accordion += `
                                         <tr class="divider-line"></tr>
                                         <tr>
-                                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                            ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}
+                                            </td>
                                             <td>${member.notes || 'No Notes'}</td>
                                             <td>
                                                 <ul>
@@ -1762,453 +1864,193 @@
                                                             <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                         </td>` : ''}
                                         </tr>`;
-                                            }
-                                        });
+                                    });
 
-                                        accordion += `
-                                    <tr class="divider-line"></tr>
+                                    accordion += `
+                                        <tr class="divider-line"></tr>
                                     </table>
-                                </div>
-                            </div>`;
-
-                                        // Append the accordion to the GuestList
-                                        $('#GuestList').append(accordion);
-                                    }
+                                    </div>
+                                </div>`;
                                 }
+
+                                // Append each accordion to the list
+                                $('#GuestList').append(accordion);
                             });
                         }
-
-
-
-                        if (Array.isArray(guests) && guests.length > 0) {
-                    // Sort guests array based on the filter
-                    if (filter === "a-to-z" || filter === "z-to-a") {
-                        guests.sort((a, b) => {
-                            return filter === "a-to-z" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-                        });
                     }
 
-    // Clear the existing guest list before appending sorted results
-    $('#GuestList').empty();
-
-    guests.forEach(function(guest) {
-        let accordion = `
-            <div class="accordion">
-                <div class="table-box">
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email}
-                                    <br>${guest.members_number} Members Left
-                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                </span>
-                            </td>
-                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                            <td>${guest.notes || 'No Notes'}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>`;
-
-        // If the guest has members, iterate over each member to create their row
-        if (Array.isArray(guest.members) && guest.members.length > 0) {
-            accordion += `
-                <div class="accordion-content">
-                    <div class="table-box">
-                        <table>
-                            <p class="after-line-effect">Members</p>
-                            <tr>
-                                <td><strong>Member Details</strong></td>
-                                <td><strong>Note</strong></td>
-                                <td><strong>Other Details</strong></td>
-                                <td><strong>Attending Event</strong></td>
-                            </tr>`;
-
-            guest.members.forEach(function(member) {
-                accordion += `
-                    <tr class="divider-line"></tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                            ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}
-                        </td>
-                        <td>${member.notes || 'No Notes'}</td>
-                        <td>
-                            <ul>
-                                <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
-                                <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                            </ul>
-                        </td>
-                        ${(member.opened === 2) ? `
-                            <td class="accordian_img_acces">
-                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                            </td>` : ''}
-                        ${(member.declined === 1) ? `
-                            <td class="accordian_img_acces">
-                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                            </td>` : ''}
-                    </tr>`;
+                    accordionFunctionality();
+                },
+                error: function(xhr, status, error) {
+                    console.error("An error occurred while fetching guests:", error);
+                }
             });
-
-            accordion += `
-                    <tr class="divider-line"></tr>
-                </table>
-            </div>
-        </div>`;
         }
 
-        // Append each accordion to the list
-        $('#GuestList').append(accordion);
-    });
-}
 
-                            accordionFunctionality();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("An error occurred while fetching guests:", error);
+        function exportall(filter) {
+            if (filter == 1) {
+                var currentDate = new Date();
+                var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+                var filename = `all_guest_list_${formattedDate}.csv`;
+
+                var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
+                var mealId = $('#idevent').val();
+
+                $.ajax({
+                    url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        filter: filter,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log("Response received:", response);
+                        if (!response.guests) {
+                            console.error("No 'guests' data found in response.");
+                            return;
                         }
-                    });
-            }
 
+                        var guests = response.guests;
+                        guests.forEach(function(guest) {
+                            var status;
+                            var mealName;
+                            var title;
+                            var table;
+                            var nameParts = guest.name ? guest.name.split(" ") : [];
+                            var familyName = nameParts.length > 1 ? nameParts.pop() : "-";
+                            var name = nameParts.join(" ") || "-";
 
-            function exportall(filter) {
-                if (filter == 1) {
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
-                    var filename = `all_guest_list_${formattedDate}.csv`;
+                            if (guest.opened == 2) status = "Confirmed";
+                            else if (guest.declined == 1) status = "Declined";
+                            else if (guest.checkin == 1) status = "Checked-in";
+                            else status = "-";
+                            table = guest.table ? guest.table.number : "-";
+                            mealName = guest.meal ? guest.meal.name : "-";
+                            title = guest.titleGuest ? guest.titleGuest : "-";
 
-                    var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
-                    var mealId = $('#idevent').val();
+                            csvContent +=
+                                `${guest.id_guest},${title ?? "-"},${name ?? "-"},${familyName},${guest.email ?? "-"},${guest.phone ?? "-"},${guest.whatsapp ?? "-"},${mealName},${table},${status}\n`;
 
-                    $.ajax({
-                        url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            filter: filter,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            console.log("Response received:", response);
-                            if (!response.guests) {
-                                console.error("No 'guests' data found in response.");
-                                return;
+                            if (guest.members && guest.members.length > 0) {
+                                csvContent += "MEMBER, , , , , \n";
+                                guest.members.forEach(function(member) {
+                                    var status;
+                                    var mealName;
+                                    var table;
+                                    var nameParts = member.name ? member.name.split(" ") : [];
+                                    var familyName = nameParts.length > 1 ? nameParts
+                                        .pop() :
+                                        "-";
+                                    var name = nameParts.join(" ") || "-";
+
+                                    if (member.opened == 2) status = "Confirmed";
+                                    else if (member.declined == 1) status = "Declined";
+                                    else if (member.checkin == 1) status = "Checked-in";
+                                    else status = "-";
+                                    table = member.table ? member.table.number : "-";
+                                    mealName = member.meal ? member.meal.name : "-";
+                                    csvContent +=
+                                        `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email ?? "-"},${member.phone ?? "-"},${member.whatsapp ?? "-"},${mealName},${table},${status}\n`;
+                                });
                             }
+                            csvContent += "GUEST, , , , , \n";
+                        });
 
-                            var guests = response.guests;
+                        var blob = new Blob([csvContent], {
+                            type: 'text/csv;charset=utf-8;'
+                        });
+                        var url = URL.createObjectURL(blob);
+                        var link = document.createElement("a");
+                        link.setAttribute("href", url);
+                        link.setAttribute("download", filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX request failed:");
+                    }
+                });
+            }
+        }
+
+        function exportconfirmed(filter) {
+            if (filter == "attending") {
+                showGuest(filter);
+                var currentDate = new Date();
+                var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+                var filename = `confirmed_guest_list_${formattedDate}.csv`;
+                var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
+                var mealId = $('#idevent').val();
+
+                $.ajax({
+                    url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        filter: filter,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        var guests = response.guests;
+
+                        setTimeout(function() { // Wrap entire CSV generation in setTimeout
                             guests.forEach(function(guest) {
-                                var status;
-                                var mealName;
-                                var title;
-                                var table;
-                                var nameParts = guest.name ? guest.name.split(" ") : [];
-                                var familyName = nameParts.length > 1 ? nameParts.pop() : "-";
-                                var name = nameParts.join(" ") || "-";
+                                if ((guest.checkin == 1 && guest.declined == null && (guest
+                                        .id_meal != null || guest.opened == 2)) ||
+                                    ((guest.opened == 2 || guest.id_meal != null) && guest
+                                        .declined == null)) {
 
-                                if (guest.opened == 2) status = "Confirmed";
-                                else if (guest.declined == 1) status = "Declined";
-                                else if (guest.checkin == 1) status = "Checked-in";
-                                else status = "-";
-                                table = guest.table ? guest.table.number : "-";
-                                mealName = guest.meal ? guest.meal.name : "-";
-                                title = guest.titleGuest ? guest.titleGuest : "-";
-
-                                csvContent +=
-                                    `${guest.id_guest},${title ?? "-"},${name ?? "-"},${familyName},${guest.email ?? "-"},${guest.phone ?? "-"},${guest.whatsapp ?? "-"},${mealName},${table},${status}\n`;
-
-                                if (guest.members && guest.members.length > 0) {
-                                    csvContent += "MEMBER, , , , , \n";
-                                    guest.members.forEach(function(member) {
-                                        var status;
-                                        var mealName;
-                                        var table;
-                                        var nameParts = member.name ? member.name.split(" ") :
-                                        [];
-                                        var familyName = nameParts.length > 1 ? nameParts
-                                        .pop() :
-                                            "-";
-                                        var name = nameParts.join(" ") || "-";
-
-                                        if (member.opened == 2) status = "Confirmed";
-                                        else if (member.declined == 1) status = "Declined";
-                                        else if (member.checkin == 1) status = "Checked-in";
-                                        else status = "-";
-                                        table = member.table ? member.table.number : "-";
-                                        mealName = member.meal ? member.meal.name : "-";
-                                        csvContent +=
-                                            `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email ?? "-"},${member.phone ?? "-"},${member.whatsapp ?? "-"},${mealName},${table},${status}\n`;
-                                    });
-                                }
-                                csvContent += "GUEST, , , , , \n";
-                            });
-
-                            var blob = new Blob([csvContent], {
-                                type: 'text/csv;charset=utf-8;'
-                            });
-                            var url = URL.createObjectURL(blob);
-                            var link = document.createElement("a");
-                            link.setAttribute("href", url);
-                            link.setAttribute("download", filename);
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                            URL.revokeObjectURL(url);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("AJAX request failed:");
-                        }
-                    });
-                }
-            }
-
-            function exportconfirmed(filter) {
-                if (filter == "attending") {
-                    showGuest(filter);
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
-                    var filename = `confirmed_guest_list_${formattedDate}.csv`;
-                    var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
-                    var mealId = $('#idevent').val();
-
-                    $.ajax({
-                        url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            filter: filter,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            var guests = response.guests;
-
-                            setTimeout(function() { // Wrap entire CSV generation in setTimeout
-                                guests.forEach(function(guest) {
-                                    if ((guest.checkin == 1 && guest.declined == null && (guest
-                                            .id_meal != null || guest.opened == 2)) ||
-                                        ((guest.opened == 2 || guest.id_meal != null) && guest
-                                            .declined == null)) {
-
-                                        var status = "Confirmed";
-                                        var mealName = guest.meal ? guest.meal.name : "-";
-                                        var title = guest.titleGuest ? guest.titleGuest : "-";
-                                        var table = guest.table ? guest.table.number : "-";
-                                        var nameParts = guest.name ? guest.name.split(" ") : [];
-                                        var familyName = nameParts.length > 1 ? nameParts
-                                        .pop() :
-                                            "-";
-                                        var name = nameParts.join(" ") || "-";
-
-                                        csvContent +=
-                                            `${guest.id_guest},${title ?? "-"},${name ?? "-"},${familyName ?? "-"},${guest.email ? guest.email : "-"},${guest.phone ? guest.phone : "-"},${guest.whatsapp ? guest.whatsapp : "-"},${mealName},${table},${status}\n`;
-                                    }
-
-                                    if (guest.members && guest.members.length > 0) {
-                                        csvContent += "MEMBER, , , , , \n";
-                                        guest.members.forEach(function(member) {
-                                            if ((member.checkin == 1 && member
-                                                    .declined ==
-                                                    null && (member.id_meal != null ||
-                                                        member.opened == 2)) ||
-                                                ((member.opened == 2 || member
-                                                        .id_meal !=
-                                                        null) && member.declined ==
-                                                    null)) {
-
-                                                var status = "Confirmed";
-                                                var mealName = member.meal ? member.meal
-                                                    .name : "-";
-                                                var table = member.table ? member.table
-                                                    .number : "-";
-                                                var nameParts = member.name ? member
-                                                    .name
-                                                    .split(" ") : [];
-                                                var familyName = nameParts.length > 1 ?
-                                                    nameParts.pop() : "-";
-                                                var name = nameParts.join(" ") || "-";
-
-                                                csvContent +=
-                                                    `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email ? member.email : "-"},${member.phone ? member.phone : "-"},${member.whatsapp ? member.whatsapp : "-"},${mealName},${table},${status}\n`;
-                                            }
-                                        });
-                                    }
-                                    csvContent += "GUEST, , , , , \n";
-                                });
-
-                                // Create and download the CSV file
-                                var blob = new Blob([csvContent], {
-                                    type: 'text/csv;charset=utf-8;'
-                                });
-                                var url = URL.createObjectURL(blob);
-                                var link = document.createElement("a");
-                                link.setAttribute("href", url);
-                                link.setAttribute("download", filename);
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                                URL.revokeObjectURL(url);
-
-                            }, 1000); // end of setTimeout
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("AJAX request failed:", error);
-                        }
-                    });
-                }
-            }
-
-            function exportdeclined(filter) {
-                if (filter === "declined") {
-                    showGuest(filter);
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
-                    var filename = `declined_guest_list_${formattedDate}.csv`;
-                    var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
-                    var mealId = $('#idevent').val();
-
-                    $.ajax({
-                        url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            filter: filter,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            var guests = response.guests;
-
-                            setTimeout(function() {
-                                guests.forEach(function(guest) {
+                                    var status = "Confirmed";
                                     var mealName = guest.meal ? guest.meal.name : "-";
                                     var title = guest.titleGuest ? guest.titleGuest : "-";
                                     var table = guest.table ? guest.table.number : "-";
                                     var nameParts = guest.name ? guest.name.split(" ") : [];
-                                    var familyName = nameParts.length > 1 ? nameParts.pop() :
+                                    var familyName = nameParts.length > 1 ? nameParts
+                                        .pop() :
                                         "-";
                                     var name = nameParts.join(" ") || "-";
 
-                                    if (guest.declined === 1) {
-                                        var status = "Declined";
-                                        csvContent +=
-                                            `${guest.id_guest},${title},${name},${familyName},${guest.email || "-"},${guest.phone || "-"},${guest.whatsapp || "-"},${mealName},${table},${status}\n`;
-                                    }
-
-                                    guest.members.forEach(function(member) {
-                                        if (member.declined === 1) {
-                                            var memberMealName = member.meal ? member
-                                                .meal
-                                                .name : "-";
-                                            var memberTable = member.table ? member
-                                                .table
-                                                .number : "-";
-                                            var memberNameParts = member.name ? member
-                                                .name
-                                                .split(" ") : [];
-                                            var memberFamilyName = memberNameParts
-                                                .length >
-                                                1 ? memberNameParts.pop() : "-";
-                                            var memberName = memberNameParts.join(
-                                                " ") ||
-                                                "-";
-                                            var memberStatus = "-";
-
-                                            if (member.opened === 2) memberStatus =
-                                                "Confirmed";
-                                            else if (member.declined === 1)
-                                                memberStatus =
-                                                "Declined";
-                                            else if (member.checkin === 1)
-                                                memberStatus =
-                                                "Checked-in";
-
-                                            csvContent +=
-                                                `${member.id_guest},- ,${memberName},${memberFamilyName},${member.email || "-"},${member.phone || "-"},${member.whatsapp || "-"},${memberMealName},${memberTable},${memberStatus}\n`;
-                                        }
-                                    });
-                                });
-
-                                var blob = new Blob([csvContent], {
-                                    type: 'text/csv;charset=utf-8;'
-                                });
-                                var url = URL.createObjectURL(blob);
-                                var link = document.createElement("a");
-                                link.setAttribute("href", url);
-                                link.setAttribute("download", filename);
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                                URL.revokeObjectURL(url);
-                            }, 1000);
-
-
-                        }
-                    });
-                }
-            }
-
-            function exportcheckedin(filter) {
-                if (filter === "checked-in") {
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
-                    var filename = `checkedin_guest_list_${formattedDate}.csv`;
-                    var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
-                    var mealId = $('#idevent').val();
-
-                    $.ajax({
-                        url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            filter: filter,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            var guests = response.guests;
-
-                            // Process the guests
-                            guests.forEach(function(guest) {
-                                var mealName = guest.meal ? guest.meal.name : "-";
-                                var title = guest.titleGuest ? guest.titleGuest : "-";
-                                var table = guest.table ? guest.table.number : "-";
-                                var nameParts = guest.name ? guest.name.split(" ") : [];
-                                var familyName = nameParts.length > 1 ? nameParts.pop() : "-";
-                                var name = nameParts.join(" ") || "-";
-
-                                if (guest.checkin == 1) {
-                                    var status = 'Checked-in';
                                     csvContent +=
                                         `${guest.id_guest},${title ?? "-"},${name ?? "-"},${familyName ?? "-"},${guest.email ? guest.email : "-"},${guest.phone ? guest.phone : "-"},${guest.whatsapp ? guest.whatsapp : "-"},${mealName},${table},${status}\n`;
                                 }
 
                                 if (guest.members && guest.members.length > 0) {
+                                    csvContent += "MEMBER, , , , , \n";
                                     guest.members.forEach(function(member) {
-                                        var mealName = member.meal ? member.meal.name : "-";
-                                        var table = member.table ? member.table.number : "-";
-                                        var nameParts = member.name ? member.name.split(" ") :
-                                        [];
-                                        var familyName = nameParts.length > 1 ? nameParts
-                                        .pop() :
-                                            "-";
-                                        var name = nameParts.join(" ") || "-";
+                                        if ((member.checkin == 1 && member
+                                                .declined ==
+                                                null && (member.id_meal != null ||
+                                                    member.opened == 2)) ||
+                                            ((member.opened == 2 || member
+                                                    .id_meal !=
+                                                    null) && member.declined ==
+                                                null)) {
 
-                                        if (member.checkin === 1) {
-                                            var status = 'Checked-in';
+                                            var status = "Confirmed";
+                                            var mealName = member.meal ? member.meal
+                                                .name : "-";
+                                            var table = member.table ? member.table
+                                                .number : "-";
+                                            var nameParts = member.name ? member
+                                                .name
+                                                .split(" ") : [];
+                                            var familyName = nameParts.length > 1 ?
+                                                nameParts.pop() : "-";
+                                            var name = nameParts.join(" ") || "-";
+
                                             csvContent +=
-                                                `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email},${member.phone},${member.whatsapp},${mealName},${table},${status}\n`;
+                                                `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email ? member.email : "-"},${member.phone ? member.phone : "-"},${member.whatsapp ? member.whatsapp : "-"},${mealName},${table},${status}\n`;
                                         }
                                     });
                                 }
+                                csvContent += "GUEST, , , , , \n";
                             });
 
-                            // Create the CSV file and trigger download
+                            // Create and download the CSV file
                             var blob = new Blob([csvContent], {
                                 type: 'text/csv;charset=utf-8;'
                             });
@@ -2221,598 +2063,762 @@
                             document.body.removeChild(link);
                             URL.revokeObjectURL(url);
 
-                            // Refresh the guest list if needed
-                            $scope.guestlist();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("Error fetching guests:", error);
-                            // Handle error if needed
-                        }
-                    });
-                }
-            }
-
-
-            $('#submitEditGuestForm').click(function(e) {
-                e.preventDefault();
-                var guestId = $(this).data('id');
-                var formData = $('#EditguestForm')
-                    .serialize(); // Serialize form data
-
-                $.ajax({
-                    url: "{{ route('panel.event.guests.update', ':id') }}"
-                        .replace(':id', guestId),
-                    type: "POST",
-                    data: formData,
-                    success: function(response) {
-                        // Optionally reload guest list
-                        showGuest("1");
-                        toastr.success(
-                            'Guest updated successfully');
-                        $('#EditGuestClose').click();
-                        $('#modifier').css('display', 'none');
-                        $('#modifierButton').css('display', 'none');
-
-                        // Uncheck the checkbox
-                        if (clickedCheckbox) {
-                            clickedCheckbox.checked =
-                                false; // Uncheck the checkbox
-                        }
+                        }, 1000); // end of setTimeout
                     },
-                    error: function(xhr) {
-                        alert('Something went wrong: ' + xhr
-                            .responseText);
+                    error: function(xhr, status, error) {
+                        console.error("AJAX request failed:", error);
                     }
                 });
-            });
+            }
+        }
+
+        function exportdeclined(filter) {
+            if (filter === "declined") {
+                showGuest(filter);
+                var currentDate = new Date();
+                var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+                var filename = `declined_guest_list_${formattedDate}.csv`;
+                var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
+                var mealId = $('#idevent').val();
+
+                $.ajax({
+                    url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        filter: filter,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        var guests = response.guests;
+
+                        setTimeout(function() {
+                            guests.forEach(function(guest) {
+                                var mealName = guest.meal ? guest.meal.name : "-";
+                                var title = guest.titleGuest ? guest.titleGuest : "-";
+                                var table = guest.table ? guest.table.number : "-";
+                                var nameParts = guest.name ? guest.name.split(" ") : [];
+                                var familyName = nameParts.length > 1 ? nameParts.pop() :
+                                    "-";
+                                var name = nameParts.join(" ") || "-";
+
+                                if (guest.declined === 1) {
+                                    var status = "Declined";
+                                    csvContent +=
+                                        `${guest.id_guest},${title},${name},${familyName},${guest.email || "-"},${guest.phone || "-"},${guest.whatsapp || "-"},${mealName},${table},${status}\n`;
+                                }
+
+                                guest.members.forEach(function(member) {
+                                    if (member.declined === 1) {
+                                        var memberMealName = member.meal ? member
+                                            .meal
+                                            .name : "-";
+                                        var memberTable = member.table ? member
+                                            .table
+                                            .number : "-";
+                                        var memberNameParts = member.name ? member
+                                            .name
+                                            .split(" ") : [];
+                                        var memberFamilyName = memberNameParts
+                                            .length >
+                                            1 ? memberNameParts.pop() : "-";
+                                        var memberName = memberNameParts.join(
+                                                " ") ||
+                                            "-";
+                                        var memberStatus = "-";
+
+                                        if (member.opened === 2) memberStatus =
+                                            "Confirmed";
+                                        else if (member.declined === 1)
+                                            memberStatus =
+                                            "Declined";
+                                        else if (member.checkin === 1)
+                                            memberStatus =
+                                            "Checked-in";
+
+                                        csvContent +=
+                                            `${member.id_guest},- ,${memberName},${memberFamilyName},${member.email || "-"},${member.phone || "-"},${member.whatsapp || "-"},${memberMealName},${memberTable},${memberStatus}\n`;
+                                    }
+                                });
+                            });
+
+                            var blob = new Blob([csvContent], {
+                                type: 'text/csv;charset=utf-8;'
+                            });
+                            var url = URL.createObjectURL(blob);
+                            var link = document.createElement("a");
+                            link.setAttribute("href", url);
+                            link.setAttribute("download", filename);
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            URL.revokeObjectURL(url);
+                        }, 1000);
 
 
+                    }
+                });
+            }
+        }
 
-            // Show Import Guest Using Modal
+        function exportcheckedin(filter) {
+            if (filter === "checked-in") {
+                var currentDate = new Date();
+                var formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+                var filename = `checkedin_guest_list_${formattedDate}.csv`;
+                var csvContent = "ID,TITLE,NAME,FAMILY NAME,EMAIL,PHONE,WHATSAPP,MEAL,TABLE,STATUS\n";
+                var mealId = $('#idevent').val();
 
-            var mealId = $('#idevent').val();
-            $.ajax({
-                url: `/event/${mealId}/guests/show-event`,
-                method: 'GET',
-                dataType: "json",
-                success: function(response) {
-                    var guests = response.guests; // Main array of guests
+                $.ajax({
+                    url: "{{ route('panel.event.guests-list.show', '') }}/" + mealId,
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        filter: filter,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        var guests = response.guests;
 
-                    // Clear previous content
-                    $('#guestListItems').empty();
-
-                    // Check if 'guests' is an array
-                    if (Array.isArray(guests) && guests.length > 0) {
-                        // Loop through each guest
+                        // Process the guests
                         guests.forEach(function(guest) {
-                            // Append main guest information
-                            var guestSection = `
+                            var mealName = guest.meal ? guest.meal.name : "-";
+                            var title = guest.titleGuest ? guest.titleGuest : "-";
+                            var table = guest.table ? guest.table.number : "-";
+                            var nameParts = guest.name ? guest.name.split(" ") : [];
+                            var familyName = nameParts.length > 1 ? nameParts.pop() : "-";
+                            var name = nameParts.join(" ") || "-";
+
+                            if (guest.checkin == 1) {
+                                var status = 'Checked-in';
+                                csvContent +=
+                                    `${guest.id_guest},${title ?? "-"},${name ?? "-"},${familyName ?? "-"},${guest.email ? guest.email : "-"},${guest.phone ? guest.phone : "-"},${guest.whatsapp ? guest.whatsapp : "-"},${mealName},${table},${status}\n`;
+                            }
+
+                            if (guest.members && guest.members.length > 0) {
+                                guest.members.forEach(function(member) {
+                                    var mealName = member.meal ? member.meal.name : "-";
+                                    var table = member.table ? member.table.number : "-";
+                                    var nameParts = member.name ? member.name.split(" ") : [];
+                                    var familyName = nameParts.length > 1 ? nameParts
+                                        .pop() :
+                                        "-";
+                                    var name = nameParts.join(" ") || "-";
+
+                                    if (member.checkin === 1) {
+                                        var status = 'Checked-in';
+                                        csvContent +=
+                                            `${member.id_guest},${"-"},${name ?? "-"},${familyName ?? "-"},${member.email},${member.phone},${member.whatsapp},${mealName},${table},${status}\n`;
+                                    }
+                                });
+                            }
+                        });
+
+                        // Create the CSV file and trigger download
+                        var blob = new Blob([csvContent], {
+                            type: 'text/csv;charset=utf-8;'
+                        });
+                        var url = URL.createObjectURL(blob);
+                        var link = document.createElement("a");
+                        link.setAttribute("href", url);
+                        link.setAttribute("download", filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+
+                        // Refresh the guest list if needed
+                        $scope.guestlist();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching guests:", error);
+                        // Handle error if needed
+                    }
+                });
+            }
+        }
+
+
+        $('#submitEditGuestForm').click(function(e) {
+            e.preventDefault();
+            var guestId = $(this).data('id');
+            var formData = $('#EditguestForm')
+                .serialize(); // Serialize form data
+
+            $.ajax({
+                url: "{{ route('panel.event.guests.update', ':id') }}"
+                    .replace(':id', guestId),
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    // Optionally reload guest list
+                    showGuest("1");
+                    toastr.success(
+                        'Guest updated successfully');
+                    $('#EditGuestClose').click();
+                    $('#modifier').css('display', 'none');
+                    $('#modifierButton').css('display', 'none');
+
+                    // Uncheck the checkbox
+                    if (clickedCheckbox) {
+                        clickedCheckbox.checked =
+                            false; // Uncheck the checkbox
+                    }
+                },
+                error: function(xhr) {
+                    alert('Something went wrong: ' + xhr
+                        .responseText);
+                }
+            });
+        });
+
+
+
+        // Show Import Guest Using Modal
+
+        var mealId = $('#idevent').val();
+        $.ajax({
+            url: `/event/${mealId}/guests/show-event`,
+            method: 'GET',
+            dataType: "json",
+            success: function(response) {
+                var guests = response.guests; // Main array of guests
+
+                // Clear previous content
+                $('#guestListItems').empty();
+
+                // Check if 'guests' is an array
+                if (Array.isArray(guests) && guests.length > 0) {
+                    // Loop through each guest
+                    guests.forEach(function(guest) {
+                        // Append main guest information
+                        var guestSection = `
                     <div class="sub-main-content">
                         <h3>Event: ${guest.name}</h3> <!-- Main guest name -->
                         <div class="nested-guests">
                             <h4>Guest List:</h4>
                     `;
 
-                            // Check if nested guests array exists and is not empty
-                            if (Array.isArray(guest.guests) && guest
-                                .guests.length >
-                                0) {
-                                guest.guests.forEach(function(
-                                    nestedGuest, index) {
-                                    // Append nested guest names with checkboxes
-                                    guestSection += `
+                        // Check if nested guests array exists and is not empty
+                        if (Array.isArray(guest.guests) && guest
+                            .guests.length >
+                            0) {
+                            guest.guests.forEach(function(
+                                nestedGuest, index) {
+                                // Append nested guest names with checkboxes
+                                guestSection += `
                             <div class="w-100 mt-1">
                                 <input type="hidden" value="${JSON.stringify(nestedGuest)}" name="allguests" id="">
                                 <input type="checkbox" class="guest-checkbox" data-guest='${JSON.stringify(nestedGuest)}' id="guest_${index}">
                                 <label for="guest_${index}"><strong>Name:</strong> ${nestedGuest.name}</label>
                             </div>
                             `;
-                                });
-                            } else {
-                                guestSection +=
-                                    '<p>No additional guests found.</p>';
-                            }
+                            });
+                        } else {
+                            guestSection +=
+                                '<p>No additional guests found.</p>';
+                        }
 
-                            guestSection += '</div></div>';
-                            $('#guestListItems').append(
-                                guestSection);
-                        });
-                    } else {
+                        guestSection += '</div></div>';
                         $('#guestListItems').append(
-                            '<p>No guests found for this event.</p>');
+                            guestSection);
+                    });
+                } else {
+                    $('#guestListItems').append(
+                        '<p>No guests found for this event.</p>');
+                }
+            },
+            error: function(err) {
+                console.error('Error fetching guest data:', err);
+            }
+        });
+
+        // Upload Guest from other event
+        // Handle the "Upload Guest" button click
+        $(".submit-btn").on("click", function() {
+            var selectedGuests = [];
+
+            // Get all checked guests
+            $(".guest-checkbox:checked").each(function() {
+                var guestData = $(this).data('guest');
+                guestData.selected =
+                    1; // Mark the guest as selected
+                selectedGuests.push(guestData);
+            });
+
+            var mealId = $('#idevent').val();
+            if (selectedGuests.length > 0) {
+                // Send selected guests to the backend
+                $.ajax({
+                    url: `/event/${mealId}/guests/import`,
+                    method: 'POST',
+                    dataType: "json",
+                    data: {
+                        allguests: selectedGuests,
+                        idevent: mealId, // Assuming this is the target event id
+                    },
+                    success: function(response) {
+                        showGuest("1");
+                        $('#GuestImportForm')[0].reset();
+                        $('#exampleModalCenter02').click();
+                        toastr.success(
+                            "Guests imported successfully");
+                    },
+                    error: function(err) {
+                        console.error('Error importing guests:',
+                            err);
                     }
-                },
-                error: function(err) {
-                    console.error('Error fetching guest data:', err);
-                }
-            });
-
-            // Upload Guest from other event
-            // Handle the "Upload Guest" button click
-            $(".submit-btn").on("click", function() {
-                var selectedGuests = [];
-
-                // Get all checked guests
-                $(".guest-checkbox:checked").each(function() {
-                    var guestData = $(this).data('guest');
-                    guestData.selected =
-                        1; // Mark the guest as selected
-                    selectedGuests.push(guestData);
                 });
-
-                var mealId = $('#idevent').val();
-                if (selectedGuests.length > 0) {
-                    // Send selected guests to the backend
-                    $.ajax({
-                        url: `/event/${mealId}/guests/import`,
-                        method: 'POST',
-                        dataType: "json",
-                        data: {
-                            allguests: selectedGuests,
-                            idevent: mealId, // Assuming this is the target event id
-                        },
-                        success: function(response) {
-                            showGuest("1");
-                            $('#GuestImportForm')[0].reset();
-                            $('#exampleModalCenter02').click();
-                            toastr.success(
-                                "Guests imported successfully");
-                        },
-                        error: function(err) {
-                            console.error('Error importing guests:',
-                                err);
-                        }
-                    });
-                } else {
-                    // alert('Please select at least one guest to import.');
-                }
-            });
-
-
-            function showFileName() {
-                const fileInput = document.getElementById('fileInput');
-                const fileNameDiv = document.getElementById('fileName');
-                const fileName = fileInput.files[0].name;
-                fileNameDiv.textContent = fileName;
+            } else {
+                // alert('Please select at least one guest to import.');
             }
-            document.getElementById('uploadCsvBtn').addEventListener('click',
-                function() {
-                    const formData = new FormData(document.getElementById(
-                        'csvUploadForm'));
-
-                    $.ajax({
-                        url: "{{ route('panel.event.importFromCsvGuest', ['id' => $eventId]) }}",
-                        type: "POST",
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function(response) {
-                            showGuest("1");
-                            toastr.success(
-                                "Guests imported successfully!");
-                            idArray = [];
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle error response
-                            // console.log(xhr.responseText);
-                            alert("Error uploading the file.");
-                        }
-                    });
-                });
+        });
 
 
-            let idArray = []; // Store selected guest IDs
-            var clickedCheckbox = '';
-
-
-            function showButton(event) {
-                var clickedCheckbox = event.target;
-                let selectedID = clickedCheckbox.getAttribute('data-guest-id');
-                const modifierDiv = document.querySelector(".modifier");
-
-                // Add or remove the guest ID from the array based on the checkbox state
-                if (clickedCheckbox.checked && selectedID) {
-                    if (!idArray.includes(selectedID)) {
-                        idArray.push(selectedID); // Add selected guest ID to array
-                    }
-                } else {
-                    idArray = idArray.filter(id => id !==
-                        selectedID); // Remove unchecked guest ID from array
-                }
-
-                // Show or hide modifier buttons based on selections
-                if (idArray.length > 0) {
-                    modifierDiv.style.display = "block"; // Show the buttons
-                } else {
-                    modifierDiv.style.display = "none"; // Hide the buttons
-                }
-
-                // Show or hide buttons based on the number of selected guests
-                const editButton = document.querySelector('.edit-btn');
-                const deleteButtonSingle = document.querySelector('.delete-btn-single');
-                const deleteButtonAll = document.querySelector('.delete-btn-all');
-                const declineButton = document.querySelector('.decline-btn');
-                const declineAllButton = document.querySelector('.decline-all-btn');
-
-                if (idArray.length === 1) {
-                    editButton.style.display = "block";
-                    deleteButtonSingle.style.display = "block";
-                    deleteButtonAll.style.display =
-                        "none"; // Hide Delete All when only one guest is selected
-                    declineButton.style.display =
-                        "block"; // Show Decline button for one guest
-                    declineAllButton.style.display = "none"; // Hide Decline All
-                } else if (idArray.length > 1) {
-                    editButton.style.display =
-                        "none"; // Hide Edit button for multiple selections
-                    deleteButtonSingle.style.display =
-                        "none"; // Hide single Delete button
-                    deleteButtonAll.style.display = "block"; // Show Delete All button
-                    declineButton.style.display = "none"; // Hide Decline button
-                    declineAllButton.style.display = "block"; // Show Decline All button
-                }
-
-                // Update the selected count display
-                const countDisplay = modifierDiv.querySelector('p');
-                countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
-            }
-
-            // Decline all selected guests
-            function declineAllGuests() {
-                if (idArray.length > 1) {
-                    $.ajax({
-                        url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Your route for declining all
-                        type: "POST",
-                        data: {
-                            guestIds: idArray,
-                            idevent: "{{ $eventId }}",
-                            _token: "{{ csrf_token() }}" // Ensure CSRF token is included
-                        },
-                        success: function(response) {
-                            showGuest("1"); // Reload the guest list
-                            toastr.success(
-                                'Selected guests declined successfully');
-                            $('#modifier').css('display',
-                                'none'); // Hide modifier section
-                            idArray = []; // Reset the selected guests array
-                            $('.decline-all-btn')
-                                .hide(); // Hide Decline All button
-                        },
-                        error: function(xhr) {
-                            alert('Something went wrong: ' + xhr
-                                .responseText);
-                        }
-                    });
-                }
-            }
-
-            // Decline all selected guests
-            function declineGuest() {
-                if (idArray.length === 1) {
-                    $.ajax({
-                        url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Use the same route for multiple declines
-                        type: "POST",
-                        data: {
-                            guestid: idArray[0], // Send a single guest ID
-                            idevent: "{{ $eventId }}", // Include event ID
-                            _token: "{{ csrf_token() }}" // Ensure CSRF token is included
-                        },
-                        success: function(response) {
-                            showGuest("1"); // Reload the guest list
-                            toastr.success('Guests declined successfully');
-                            $('#modifier').css('display',
-                                'none'); // Hide modifier section
-                            idArray = []; // Reset the selected guests array
-                            $('.delete-btn-all')
-                                .hide(); // Hide delete all button
-                        },
-                        error: function(xhr) {
-                            alert('Something went wrong: ' + xhr
-                                .responseText);
-                        }
-                    });
-                }
-            }
-
-            $(document).on('change', '.guest-checkbox', function() {
-                const guestId = $(this).val();
-
-                // Add or remove guest ID from the array based on checkbox state
-                if ($(this).is(':checked')) {
-                    idArray.push(guestId);
-                } else {
-                    idArray = idArray.filter(id => id !== guestId);
-                }
-
-                // Show "delete all" button if multiple guests are selected
-                if (idArray.length > 1) {
-                    $('.delete-btn').hide(); // Hide single delete button
-                    $('.delete-btn-all').show(); // Show delete all button
-                } else if (idArray.length === 1) {
-                    $('.delete-btn').show(); // Show single delete button
-                    $('.delete-btn-all').hide(); // Hide delete all button
-                } else {
-                    $('.delete-btn')
-                        .hide(); // Hide both buttons if nothing is selected
-                    $('.delete-btn-all').hide();
-                }
-            });
-
-            // Single delete button for one guest
-            function deleteGuest() {
-                if (idArray.length === 1) {
-                    $.ajax({
-                        url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
-                        type: "POST",
-                        data: {
-                            guestid: idArray[0], // Send a single guest ID
-                            idevent: "{{ $eventId }}", // Include event ID
-                            _token: "{{ csrf_token() }}" // Ensure CSRF token is included
-                        },
-                        success: function(response) {
-                            showGuest("1"); // Reload the guest list
-                            toastr.success('Guest deleted successfully');
-                            $('#modifier').css('display',
-                                'none'); // Hide modifier section
-                            idArray = []; // Reset the selected guests array
-                            $('.delete-btn').hide(); // Hide delete button
-                        },
-                        error: function(xhr) {
-                            alert('Something went wrong: ' + xhr
-                                .responseText);
-                        }
-                    });
-                }
-            }
-
-            // Delete all button for multiple guests
-            $(document).on('click', '.delete-btn-all', function() {
-                if (idArray.length > 1) {
-                    $.ajax({
-                        url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
-                        type: "POST",
-                        data: {
-                            guestIds: idArray, // Send array of guest IDs
-                            idevent: "{{ $eventId }}", // Include event ID
-                            _token: "{{ csrf_token() }}" // Ensure CSRF token is included
-                        },
-                        success: function(response) {
-                            showGuest("1"); // Reload the guest list
-                            toastr.success(
-                                'Guests deleted successfully');
-                            $('#modifier').css('display',
-                                'none'); // Hide modifier section
-                            idArray
-                                = []; // Reset the selected guests array
-                            $('.delete-btn-all')
-                                .hide(); // Hide delete all button
-                        },
-                        error: function(xhr) {
-                            alert('Something went wrong: ' + xhr
-                                .responseText);
-                        }
-                    });
-                }
-            });
-
-            // Edit button event: Open modal with selected guest data (if one guest is selected)
-            $(document).on('click', '.edit-btn', function() {
-                if (idArray.length === 1) {
-                    const guestId = idArray[
-                        0]; // Only the single selected ID is used for editing
-
-                    // Fetch and populate modal with guest data
-                    $.ajax({
-                        url: "{{ route('panel.event.guests.edit', ':id') }}"
-                            .replace(':id',
-                                guestId),
-                        type: "GET",
-                        success: function(response) {
-                            $('#edit_title').val(response
-                                .titleGuest);
-                            $('#edit_name').val(response.name);
-                            $('#edit_email').val(response.email);
-                            $('#edit_phone').val(response.phone);
-                            $('#edit_whatsapp').val(response
-                                .whatsapp);
-
-                            // Set allergies (radio button)
-                            if (response.allergies == 1) {
-                                $('#edit_allergiesYes').prop(
-                                    'checked', true);
-                            } else {
-                                $('#edit_allergiesNo').prop(
-                                    'checked', true);
-                            }
-
-                            // Set meal
-                            $('#edit_meal').val(response.id_meal);
-                            if (response.allergies == 0) {
-                                $('#edit_members').hide();
-                                $('#members_label').hide();
-                            } else {
-                                $('#edit_members').val(response
-                                    .members_number);
-                            }
-                            $('#edit_notes').val(response.notes);
-
-                            // Set confirm (radio button)
-                            if (response.opened == 1) {
-                                $('#edit_confirmYes').prop(
-                                    'checked', true);
-                            } else {
-                                $('#edit_confirmNo').prop('checked',
-                                    true);
-                            }
-
-                            // Store the guest ID in a hidden field (for submission)
-                            $('#EditguestForm').find(
-                                    'input[name="idguest"]')
-                                .remove();
-                            $('#EditguestForm').append(
-                                '<input type="hidden" name="idguest" value="' +
-                                response.id_guest + '">');
-
-                            // Open the modal
-                            var myModal = new bootstrap.Modal(
-                                document.getElementById(
-                                    'EditGuest'));
-                            myModal.show();
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("AJAX Error: " + status +
-                                error);
-                        }
-                    });
-                }
-            });
-
-
-            function DisplayOptionSave() {
-                var
-                    formData = {}; // Initialize an empty object to collect checked options
-
-                // Collect checked options only
-                $('#DisplaySaveOptionForm input[type="checkbox"]:checked').each(
-                    function() {
-                        formData[$(this).attr('name')] =
-                            1; // Set the value to 1 if checked
-                    });
-
-                var dataToSend = {
-                    idevent: "{{ $eventId }}", // Include event ID
-                    _token: "{{ csrf_token() }}", // Ensure CSRF token is included
-                    formData: formData,
-                    email: formData['emailCheck'] ||
-                        false, // Set to false if not checked
-                    sms: formData['smsCheck'] ||
-                        false, // Set to false if not checked
-                    whatsapp: formData['whatsappcheck'] || false
-                    // Send the checked form options
-                };
-
-                if (idArray.length === 1) {
-                    dataToSend.guestid = idArray[0]; // Send a single guest ID
-                } else {
-                    dataToSend.guestIds = idArray; // Send multiple guest IDs
-                }
+        function showFileName() {
+            const fileInput = document.getElementById('fileInput');
+            const fileNameDiv = document.getElementById('fileName');
+            const fileName = fileInput.files[0].name;
+            fileNameDiv.textContent = fileName;
+        }
+        document.getElementById('uploadCsvBtn').addEventListener('click',
+            function() {
+                const formData = new FormData(document.getElementById(
+                    'csvUploadForm'));
 
                 $.ajax({
-                    url: "{{ route('panel.event.saveOptions', ['id' => $eventId]) }}", // Use the route for saving options
+                    url: "{{ route('panel.event.importFromCsvGuest', ['id' => $eventId]) }}",
                     type: "POST",
-                    data: dataToSend,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        showGuest("1");
+                        toastr.success(
+                            "Guests imported successfully!");
+                        idArray = [];
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        // console.log(xhr.responseText);
+                        alert("Error uploading the file.");
+                    }
+                });
+            });
+
+
+        let idArray = []; // Store selected guest IDs
+        var clickedCheckbox = '';
+
+
+        function showButton(event) {
+            var clickedCheckbox = event.target;
+            let selectedID = clickedCheckbox.getAttribute('data-guest-id');
+            const modifierDiv = document.querySelector(".modifier");
+
+            // Add or remove the guest ID from the array based on the checkbox state
+            if (clickedCheckbox.checked && selectedID) {
+                if (!idArray.includes(selectedID)) {
+                    idArray.push(selectedID); // Add selected guest ID to array
+                }
+            } else {
+                idArray = idArray.filter(id => id !==
+                    selectedID); // Remove unchecked guest ID from array
+            }
+
+            // Show or hide modifier buttons based on selections
+            if (idArray.length > 0) {
+                modifierDiv.style.display = "block"; // Show the buttons
+            } else {
+                modifierDiv.style.display = "none"; // Hide the buttons
+            }
+
+            // Show or hide buttons based on the number of selected guests
+            const editButton = document.querySelector('.edit-btn');
+            const deleteButtonSingle = document.querySelector('.delete-btn-single');
+            const deleteButtonAll = document.querySelector('.delete-btn-all');
+            const declineButton = document.querySelector('.decline-btn');
+            const declineAllButton = document.querySelector('.decline-all-btn');
+
+            if (idArray.length === 1) {
+                editButton.style.display = "block";
+                deleteButtonSingle.style.display = "block";
+                deleteButtonAll.style.display =
+                    "none"; // Hide Delete All when only one guest is selected
+                declineButton.style.display =
+                    "block"; // Show Decline button for one guest
+                declineAllButton.style.display = "none"; // Hide Decline All
+            } else if (idArray.length > 1) {
+                editButton.style.display =
+                    "none"; // Hide Edit button for multiple selections
+                deleteButtonSingle.style.display =
+                    "none"; // Hide single Delete button
+                deleteButtonAll.style.display = "block"; // Show Delete All button
+                declineButton.style.display = "none"; // Hide Decline button
+                declineAllButton.style.display = "block"; // Show Decline All button
+            }
+
+            // Update the selected count display
+            const countDisplay = modifierDiv.querySelector('p');
+            countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
+        }
+
+        // Decline all selected guests
+        function declineAllGuests() {
+            if (idArray.length > 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Your route for declining all
+                    type: "POST",
+                    data: {
+                        guestIds: idArray,
+                        idevent: "{{ $eventId }}",
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
                     success: function(response) {
                         showGuest("1"); // Reload the guest list
-                        toastr.success('Display Options Saved');
-                        $('#DisplaySaveOptionForm')[0].reset();
+                        toastr.success(
+                            'Selected guests declined successfully');
                         $('#modifier').css('display',
                             'none'); // Hide modifier section
-                        $('.delete-btn-all')
-                            .hide(); // Hide delete all button
-                        $("#closeDispalyModal").click();
+                        idArray = []; // Reset the selected guests array
+                        $('.decline-all-btn')
+                            .hide(); // Hide Decline All button
                     },
                     error: function(xhr) {
-                        alert('Something went wrong: ' + xhr.responseText);
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
                     }
                 });
             }
+        }
 
-            // save invitaion
-            function SendInvitation() {
-                $("#send-invitaion").prop("disabled",true);
-                $("#send-invitaion").text("Sending...");
-                var formData = {}; // Initialize an empty object to collect checked options
-                // Collect checked options only
-                $('#SendInvitationForm input[type="checkbox"]:checked').each(
-                    function() {
-                        formData[$(this).attr('name')] = 1; // Set the value to 1 if checked
-                    });
-
-
-                // Preparing data to send to the backend
-                var dataToSend = {
-                    idevent: "{{ $eventId }}", // Include the event ID
-                    _token: "{{ csrf_token() }}", // Ensure CSRF token is included
-                    formData: formData // Send the checked form options
-                };
-
-                // Conditionally send single or multiple guest IDs
-                if (idArray.length === 1) {
-                    dataToSend.guestid = idArray[0]; // Send a single guest ID
-                } else {
-                    dataToSend.guestIds = idArray; // Send multiple guest IDs
-                }
-
-                // Send data using AJAX
+        // Decline all selected guests
+        function declineGuest() {
+            if (idArray.length === 1) {
                 $.ajax({
-                    url: "{{ route('panel.event.sendinvitations', ['id' => $eventId]) }}", // Replace with your route URL
-                    method: 'POST',
-                    data: dataToSend,
-                    success: function(response) {
-                        showGuest(
-                            "1"); // This function reloads the guest list or does a follow-up action
-                        toastr.success('Invitations sent successfully');
-                        $('#SendInvitationForm')[0].reset(); // Reset the form after success
-                        $("#closeSendInvitationForm").click();
-                        idArray = []; // Close the modal (assuming this button closes it)
-                        $("#send-invitaion").prop("disabled",false);
-                        $("#send-invitaion").text("Send Invitation");
-
+                    url: "{{ route('panel.event.declineguest', ['id' => $eventId]) }}", // Use the same route for multiple declines
+                    type: "POST",
+                    data: {
+                        guestid: idArray[0], // Send a single guest ID
+                        idevent: "{{ $eventId }}", // Include event ID
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                        alert('An error occurred while sending invitations');
-                            $("#send-invitaion").prop("disabled",false);
-                            $("#send-invitaion").text("Send Invitation");
+                    success: function(response) {
+                        showGuest("1"); // Reload the guest list
+                        toastr.success('Guests declined successfully');
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.delete-btn-all')
+                            .hide(); // Hide delete all button
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
                     }
                 });
             }
+        }
 
+        $(document).on('change', '.guest-checkbox', function() {
+            const guestId = $(this).val();
 
+            // Add or remove guest ID from the array based on checkbox state
+            if ($(this).is(':checked')) {
+                idArray.push(guestId);
+            } else {
+                idArray = idArray.filter(id => id !== guestId);
+            }
 
-            function ExportGuestQr() {
-                // Get values directly from form inputs
-                const mealId = $('#idevent').val();
-                const date = $('#reservationDate').val();
-                const baseUrl = $('#baseUrl').val();
-                // Define the URL with query parameters
-                const url = `${baseUrl}/event/${mealId}/get-guests-qr/${date}?idevent=${mealId}&reservationDate=${date}`;
+            // Show "delete all" button if multiple guests are selected
+            if (idArray.length > 1) {
+                $('.delete-btn').hide(); // Hide single delete button
+                $('.delete-btn-all').show(); // Show delete all button
+            } else if (idArray.length === 1) {
+                $('.delete-btn').show(); // Show single delete button
+                $('.delete-btn-all').hide(); // Hide delete all button
+            } else {
+                $('.delete-btn')
+                    .hide(); // Hide both buttons if nothing is selected
+                $('.delete-btn-all').hide();
+            }
+        });
 
-                // Open the URL directly in a new tab to download the PDF
-                window.open(url, '_blank');
-                // Send data with GET request using $.ajax
+        // Single delete button for one guest
+        function deleteGuest() {
+            if (idArray.length === 1) {
                 $.ajax({
-                    url: url,
-                    method: 'GET',
-                    dataType: "json",
-                    success: function(response) {
-                        toastr.success('Export QR Successful');
-                        $('#ExportQrForm')[0].reset(); // Reset the form after success
-                        $("#closeExportQrFormModal").click();
+                    url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
+                    type: "POST",
+                    data: {
+                        guestid: idArray[0], // Send a single guest ID
+                        idevent: "{{ $eventId }}", // Include event ID
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
                     },
-                    error: function(xhr, status, error) {
-                        // console.error(error);
-                        // alert('An error');
+                    success: function(response) {
+                        showGuest("1"); // Reload the guest list
+                        toastr.success('Guest deleted successfully');
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.delete-btn').hide(); // Hide delete button
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
                     }
                 });
             }
+        }
 
-            function accordionFunctionality() {
-                const accordionBtns = document.querySelectorAll(".accordion");
+        // Delete all button for multiple guests
+        $(document).on('click', '.delete-btn-all', function() {
+            if (idArray.length > 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.deleteGuest', ['id' => $eventId]) }}", // Your route for deletion
+                    type: "POST",
+                    data: {
+                        guestIds: idArray, // Send array of guest IDs
+                        idevent: "{{ $eventId }}", // Include event ID
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
+                    success: function(response) {
+                        showGuest("1"); // Reload the guest list
+                        toastr.success(
+                            'Guests deleted successfully');
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray
+                            = []; // Reset the selected guests array
+                        $('.delete-btn-all')
+                            .hide(); // Hide delete all button
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
+                    }
+                });
+            }
+        });
 
-                accordionBtns.forEach((accordion) => {
-                    accordion.onclick = function() {
-                        this.classList.toggle("is-open");
-                        let content = this.nextElementSibling;
+        // Edit button event: Open modal with selected guest data (if one guest is selected)
+        $(document).on('click', '.edit-btn', function() {
+            if (idArray.length === 1) {
+                const guestId = idArray[
+                    0]; // Only the single selected ID is used for editing
 
-                        if (content.style.maxHeight) {
-                            content.style.maxHeight = null; // If accordion is open, close it
+                // Fetch and populate modal with guest data
+                $.ajax({
+                    url: "{{ route('panel.event.guests.edit', ':id') }}"
+                        .replace(':id',
+                            guestId),
+                    type: "GET",
+                    success: function(response) {
+                        $('#edit_title').val(response
+                            .titleGuest);
+                        $('#edit_name').val(response.name);
+                        $('#edit_email').val(response.email);
+                        $('#edit_phone').val(response.phone);
+                        $('#edit_whatsapp').val(response
+                            .whatsapp);
+
+                        // Set allergies (radio button)
+                        if (response.allergies == 1) {
+                            $('#edit_allergiesYes').prop(
+                                'checked', true);
                         } else {
-                            content.style.maxHeight = content.scrollHeight +
-                                "px"; // If accordion is closed, open it
+                            $('#edit_allergiesNo').prop(
+                                'checked', true);
                         }
-                    };
+
+                        // Set meal
+                        $('#edit_meal').val(response.id_meal);
+                        if (response.allergies == 0) {
+                            $('#edit_members').hide();
+                            $('#members_label').hide();
+                        } else {
+                            $('#edit_members').val(response
+                                .members_number);
+                        }
+                        $('#edit_notes').val(response.notes);
+
+                        // Set confirm (radio button)
+                        if (response.opened == 1) {
+                            $('#edit_confirmYes').prop(
+                                'checked', true);
+                        } else {
+                            $('#edit_confirmNo').prop('checked',
+                                true);
+                        }
+
+                        // Store the guest ID in a hidden field (for submission)
+                        $('#EditguestForm').find(
+                                'input[name="idguest"]')
+                            .remove();
+                        $('#EditguestForm').append(
+                            '<input type="hidden" name="idguest" value="' +
+                            response.id_guest + '">');
+
+                        // Open the modal
+                        var myModal = new bootstrap.Modal(
+                            document.getElementById(
+                                'EditGuest'));
+                        myModal.show();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: " + status +
+                            error);
+                    }
                 });
             }
+        });
+
+
+        function DisplayOptionSave() {
+            var
+                formData = {}; // Initialize an empty object to collect checked options
+
+            // Collect checked options only
+            $('#DisplaySaveOptionForm input[type="checkbox"]:checked').each(
+                function() {
+                    formData[$(this).attr('name')] =
+                        1; // Set the value to 1 if checked
+                });
+
+            var dataToSend = {
+                idevent: "{{ $eventId }}", // Include event ID
+                _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+                formData: formData,
+                email: formData['emailCheck'] ||
+                    false, // Set to false if not checked
+                sms: formData['smsCheck'] ||
+                    false, // Set to false if not checked
+                whatsapp: formData['whatsappcheck'] || false
+                // Send the checked form options
+            };
+
+            if (idArray.length === 1) {
+                dataToSend.guestid = idArray[0]; // Send a single guest ID
+            } else {
+                dataToSend.guestIds = idArray; // Send multiple guest IDs
+            }
+
+            $.ajax({
+                url: "{{ route('panel.event.saveOptions', ['id' => $eventId]) }}", // Use the route for saving options
+                type: "POST",
+                data: dataToSend,
+                success: function(response) {
+                    showGuest("1"); // Reload the guest list
+                    toastr.success('Display Options Saved');
+                    $('#DisplaySaveOptionForm')[0].reset();
+                    $('#modifier').css('display',
+                        'none'); // Hide modifier section
+                    $('.delete-btn-all')
+                        .hide(); // Hide delete all button
+                    $("#closeDispalyModal").click();
+                },
+                error: function(xhr) {
+                    alert('Something went wrong: ' + xhr.responseText);
+                }
+            });
+        }
+
+        // save invitaion
+        function SendInvitation() {
+            $("#send-invitaion").prop("disabled", true);
+            $("#send-invitaion").text("Sending...");
+            var formData = {}; // Initialize an empty object to collect checked options
+            // Collect checked options only
+            $('#SendInvitationForm input[type="checkbox"]:checked').each(
+                function() {
+                    formData[$(this).attr('name')] = 1; // Set the value to 1 if checked
+                });
+
+
+            // Preparing data to send to the backend
+            var dataToSend = {
+                idevent: "{{ $eventId }}", // Include the event ID
+                _token: "{{ csrf_token() }}", // Ensure CSRF token is included
+                formData: formData // Send the checked form options
+            };
+
+            // Conditionally send single or multiple guest IDs
+            if (idArray.length === 1) {
+                dataToSend.guestid = idArray[0]; // Send a single guest ID
+            } else {
+                dataToSend.guestIds = idArray; // Send multiple guest IDs
+            }
+
+            // Send data using AJAX
+            $.ajax({
+                url: "{{ route('panel.event.sendinvitations', ['id' => $eventId]) }}", // Replace with your route URL
+                method: 'POST',
+                data: dataToSend,
+                success: function(response) {
+                    showGuest(
+                        "1"); // This function reloads the guest list or does a follow-up action
+                    toastr.success('Invitations sent successfully');
+                    $('#SendInvitationForm')[0].reset(); // Reset the form after success
+                    $("#closeSendInvitationForm").click();
+                    idArray = []; // Close the modal (assuming this button closes it)
+                    $("#send-invitaion").prop("disabled", false);
+                    $("#send-invitaion").text("Send Invitation");
+
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while sending invitations');
+                    $("#send-invitaion").prop("disabled", false);
+                    $("#send-invitaion").text("Send Invitation");
+                }
+            });
+        }
+
+
+
+        function ExportGuestQr() {
+            // Get values directly from form inputs
+            const mealId = $('#idevent').val();
+            const date = $('#reservationDate').val();
+            const baseUrl = $('#baseUrl').val();
+            // Define the URL with query parameters
+            const url = `${baseUrl}/event/${mealId}/get-guests-qr/${date}?idevent=${mealId}&reservationDate=${date}`;
+
+            // Open the URL directly in a new tab to download the PDF
+            window.open(url, '_blank');
+            // Send data with GET request using $.ajax
+            $.ajax({
+                url: url,
+                method: 'GET',
+                dataType: "json",
+                success: function(response) {
+                    toastr.success('Export QR Successful');
+                    $('#ExportQrForm')[0].reset(); // Reset the form after success
+                    $("#closeExportQrFormModal").click();
+                },
+                error: function(xhr, status, error) {
+                    // console.error(error);
+                    // alert('An error');
+                }
+            });
+        }
+
+        function accordionFunctionality() {
+            const accordionBtns = document.querySelectorAll(".accordion");
+
+            accordionBtns.forEach((accordion) => {
+                accordion.onclick = function() {
+                    this.classList.toggle("is-open");
+                    let content = this.nextElementSibling;
+
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null; // If accordion is open, close it
+                    } else {
+                        content.style.maxHeight = content.scrollHeight +
+                            "px"; // If accordion is closed, open it
+                    }
+                };
+            });
+        }
     </script>
 @endsection
