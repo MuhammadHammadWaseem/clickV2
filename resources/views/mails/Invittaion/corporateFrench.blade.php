@@ -43,7 +43,7 @@
                                                     <p style="font-size:14px;">{{ $data['formattedDate'] }}</p>
                                                     <p style="margin-top:20px;"></p>
                                                     <p style="text-align:center">
-                                                        <a href="{{ env('APP_URL') }}cardInvitations/{{ $data['cardId']['id_card'] }}/{{ $data['guest']['code'] }}/{{ $data['guest']['name'] }}/{{ $data['lang'] }}"
+                                                        <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
                                                             style="text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap;"
                                                             target="_blank"
                                                             onmouseover="this.style.backgroundColor='#333333'; this.style.boxShadow='0 0 5px rgba(0, 0, 0, 0.5)';"
@@ -51,14 +51,14 @@
                                                             Invitation</a>
                                                     </p>
                                                     <p style="text-align:center">
-                                                        <a href="{{ env('APP_URL') }}/CheckInQr/{{ $data['cardId']['id_card'] }}/{{ $data['guest']['code'] }}/{{ $data['lang'] }}"
+                                                        <a href="{{ env('APP_URL') .'/'. 'CheckInQr/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data->lang }}"
                                                             style="text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap;"
                                                             target="_blank"
                                                             onmouseover="this.style.backgroundColor='#333333'; this.style.boxShadow='0 0 5px rgba(0, 0, 0, 0.5)';"
                                                             onmouseout="this.style.backgroundColor='#242424'; this.style.boxShadow='none';">Enregistrement</a>
                                                     </p>
                                                     <p style="text-align:center">
-                                                        <a href="{{ env('APP_URL') }}cardInvitations/{{ $data['cardId']['id_card'] }}/{{ $data['guest']['code'] }}/{{ $data['guest']['name'] }}/{{ $data['lang'] }}"
+                                                        <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
                                                             target="_blank">
                                                             <img src="{{ asset('card-images/' . $data['event']['id_event'].'.png') }}"
                                                                 style="margin-bottom:20px;max-width:100%;">

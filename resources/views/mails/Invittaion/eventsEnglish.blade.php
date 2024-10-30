@@ -83,13 +83,13 @@
             <p style="font-size: 14px;">{{ $data['formattedDate'] }}</p>
 
             <p>
-                <a href="{{ env('APP_URL') . 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" class="button" target="_blank">Open Invitation</a>
+                <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" class="button" target="_blank">Open Invitation</a>
             </p>
             <p>
-                <a href="{{ env('APP_URL') . '/CheckInQr/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data->lang }}" class="button" target="_blank">Check In</a>
+                <a href="{{ env('APP_URL') .'/'. 'CheckInQr/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data->lang }}" class="button" target="_blank">Check In</a>
             </p>
             <p>
-                <a href="{{ env('APP_URL') . 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" target="_blank">
+                <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" target="_blank">
                     <img src="{{ asset('card-images/' . $data['event']['id_event'] . '.png') }}" alt="Invitation Image" style="max-width: 100%; margin-bottom: 20px;">
                 </a>
             </p>
