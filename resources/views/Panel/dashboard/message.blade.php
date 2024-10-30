@@ -104,7 +104,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">{{ __('send_to_who') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ __('message.send_to_who') }}</h5>
                     <button type="button" class="close close_icon" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
