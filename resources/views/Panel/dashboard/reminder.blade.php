@@ -52,10 +52,10 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page reminders">
                     <div class="text">
-                        <h2>Reminders</h2>
-                        <p class="bold-text-color-change">This is what your guest will get in the message you send.</p>
-                        <p>You can share a picture and send it to all at once with the link to upload their pictures so all
-                            memories of your event are shared in one private gallery on your web page.</p>
+                        <h2>{{ __('reminder.reminders') }}</h2>
+                        <p class="bold-text-color-change">{{ __('reminder.guest_message') }}</p>
+                        <p>{{ __('reminder.share_picture') }}</p>
+
                     </div>
                 </div>
             </div>
@@ -63,10 +63,11 @@
                 <div class="box-styling preview actions ">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Actions</h2>
+                            <h2>{{ __('reminder.reminders') }}</h2>
+
                         </div>
                         <button type="button" class="btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter03">Send Mail </button>
+                            data-target="#exampleModalCenter03">{{ __('reminder.send_mail') }} </button>
                     </div>
                     <div class="action-iframe">
                         {{-- <img src="assets/images/action-img-iframe.png" alt=""> --}}
@@ -74,20 +75,20 @@
                     </div>
                     <div class="three-inputs">
                         <div class="box" id="TitleEditor">
-                            <label>Title</label>
-                            <textarea placeholder="Title" id="title">{{ $reminder[0]->atitle }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('reminder.title') }}</label>
+                            <textarea placeholder="{{ __('reminder.title_placeholder') }}" id="title">{{ $reminder[0]->atitle }}</textarea> <!-- Use a textarea -->
                         </div>
                         <div class="box" id="SubtitleEditor">
-                            <label>Subtitle</label>
-                            <textarea placeholder="Subtitle" id="subtitle">{{ $reminder[0]->asubtitle }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('reminder.subtitle') }}</label>
+                            <textarea placeholder="{{ __('reminder.subtitle_placeholder') }}" id="subtitle">{{ $reminder[0]->asubtitle }}</textarea> <!-- Use a textarea -->
                         </div>
                         <div class="box" id="TextEditor">
-                            <label>Text</label>
-                            <textarea placeholder="Text" id="text">{{ $reminder[0]->atext }}</textarea> <!-- Use a textarea -->
+                            <label>{{ __('reminder.text') }}</label>
+                            <textarea placeholder="{{ __('reminder.text_placeholder') }}" id="text">{{ $reminder[0]->atext }}</textarea> <!-- Use a textarea -->
                         </div>
                     </div>
                     <div class="text-right mt-3"> <!-- Aligns the button to the right -->
-                        <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">Save</button>
+                        <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">{{ __('reminder.save') }}</button>
                     </div>
                 </div>
             </div>
@@ -107,12 +108,12 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Reminder update Successfully</h2>
-                        <p>Your Reminder suggestion has been successfully updated.</p>
+                        <h2>{{ __('reminder.update_success') }}</h2>
+                        <p>{{ __('reminder.update_success_message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="successmodalCloseBtn" data-dismiss="modal">{{ __('reminder.close') }}</button>
                 </div>
             </div>
         </div>
@@ -125,7 +126,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Send To Who?</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ __('reminder.send_to_who') }}</h5>
                     <button type="button" class="close close_icon" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -135,15 +136,15 @@
                         <div class="table-box">
                             <table>
                                 <tr>
-                                    <th>Names</th>
+                                    <th>{{ __('reminder.names') }}</th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-phone"> Contact #
+                                        <input type="checkbox" class="check_box_style" id="select-all-phone"> {{ __('reminder.contact_number') }}
                                     </th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-email"> Email Address
+                                        <input type="checkbox" class="check_box_style" id="select-all-email"> {{ __('reminder.email_address') }}
                                     </th>
                                     <th>
-                                        <input type="checkbox" class="check_box_style" id="select-all-whatsapp"> WhatsApp
+                                        <input type="checkbox" class="check_box_style" id="select-all-whatsapp"> {{ __('reminder.whatsapp') }}
                                     </th>
                                 </tr>
 
@@ -179,10 +180,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-sms-btn">Send SMS</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-email-btn">Send Email</button>
-                    <button type="button" class="btn btn-secondary t-btn" id="send-whatsapp-btn">Send Whatsapp</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('reminder.close') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-sms-btn">{{ __('reminder.send_sms') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-email-btn">{{ __('reminder.send_email') }}</button>
+                    <button type="button" class="btn btn-secondary t-btn" id="send-whatsapp-btn">{{ __('reminder.send_whatsapp') }}</button>
                 </div>
             </div>
         </div>
