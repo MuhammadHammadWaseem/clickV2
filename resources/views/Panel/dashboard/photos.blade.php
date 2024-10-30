@@ -23,6 +23,21 @@
         content: "";
         top: 0;
     }
+
+    .modal form label {
+        width: 100%;
+        height: 200px;
+        border: 5px dashed #A9967D;
+        border-radius: 10px;
+        display: flex;
+        padding: 50px 60px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #exampleModalCenter03 .modal-dialog.modal-dialog-centered {
+        max-width: 600px;
+    }
 </style>
 @section('content')
     @php
@@ -177,8 +192,16 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="gall" name="gall[]" multiple accept="image/*" />
+                            <input type="file" id="gall" name="gall[]" multiple accept="image/*"
+                                style="display: none;" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+
+                            <!-- Button to trigger file input -->
+                            <label id="uploadButton">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="imagePreviewContainer">No File Selected</div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -364,8 +387,16 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="vid" name="vid" accept="video/*" />
+                            <input type="file" id="vid" name="vid" accept="video/*"
+                                style="display: none;" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+
+                            <!-- Button to trigger the file input -->
+                            <label id="uploadVideoButton">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="videoPreviewContainer" style="margin-top: 10px;">No File Selected</div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -417,7 +448,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="successmodalCloseBtn">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="successmodalCloseBtn">Close</button>
                 </div>
             </div>
         </div>
@@ -452,6 +484,48 @@
 
 @section('scripts')
     <script>
+        // Trigger file input when the custom button is clicked
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            document.getElementById('gall').click();
+        });
+
+        // Display file names when files are selected
+        document.getElementById('gall').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            previewContainer.innerHTML = ''; // Clear previous names
+
+            if (files.length === 0) {
+                previewContainer.textContent = 'No File';
+            } else {
+                Array.from(files).forEach((file) => {
+                    const label = document.createElement('p');
+                    label.textContent = file.name;
+                    label.style.fontSize = '12px';
+                    label.style.margin = '5px 0';
+                    previewContainer.appendChild(label);
+                });
+            }
+        });
+
+
+        // Trigger file input when the custom button is clicked
+        document.getElementById('uploadVideoButton').addEventListener('click', function() {
+            document.getElementById('vid').click();
+        });
+
+        // Display video file name when a file is selected
+        document.getElementById('vid').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('videoPreviewContainer');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+            } else {
+                previewContainer.textContent = file.name; // Show the selected video file name
+            }
+        });
+
         function hidemodel() {
             $("#successmodalCloseBtn1").click();
             var successModal = new bootstrap.Modal(document.getElementById(
