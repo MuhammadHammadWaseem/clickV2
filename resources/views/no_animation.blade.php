@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://searchmarketingservices.online/fonts/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">
         <style>
             body{
                 background-image: url({{ url('animations-images/texture-bg-01.jpg') }});
@@ -17,6 +17,12 @@
                 height: 100%;
                 background-repeat: no-repeat;
                 background-size: cover;            
+        }
+
+        #offcanvasExample .offcanvas-body {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
         }
         </style>
 </head>
@@ -50,7 +56,7 @@
 
         @if ($card[0]->rsvp != '0,0,0,0,0,0')
             <!-- Button to submit RSVP -->
-            <a class="btn btn-primary extra-card" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+            <a class="btn t-btn extra-card" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                 aria-controls="offcanvasExample"
                 style="
             z-index: 7;
@@ -61,8 +67,8 @@
      width: 70%;">
                 {{ __('cardinvit.SUBMIT YOUR RSVP') }}
             </a>
-            <a class="btn btn-success extra-card"
-                href="{{ env('APP_URL') }}CheckInQr/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+            <a class="btn t-btn extra-card"
+                href="{{ env('APP_URL') }}/CheckInQr/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
                 target="_blank"
                 style="
            
@@ -89,22 +95,22 @@
 
                 @if ($card[0]->rsvp[0] == '1')
                     <a href="{{ env('APP_URL') }}/attending/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                        class="btn btn-outline-success modify ">{{ __('cardinvit.Attending') }}</a><br>
+                        class="btn btn-outline-success modify ">{{ __('cardinvit.Attending') }}</a>
                 @endif
 
                 @if ($card[0]->rsvp[2] == '1' && $guestOptions->gift == 1)
                     <a href="{{ env('APP_URL') }}/gift-suggestion/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                        class="btn btn-outline-primary modify ">{{ __('cardinvit.Gift Suggestions') }}</a><br>
+                        class="btn btn-outline-primary modify ">{{ __('cardinvit.Gift Suggestions') }}</a>
                 @endif
 
                 @if ($card[0]->rsvp[4] == '1' && $guestOptions->checkin == 1)
                     <a href="{{ env('APP_URL') }}/check-in/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                        class="btn btn-outline-primary modify ">{{ __('cardinvit.At the reception Check-In') }}</a><br>
+                        class="btn btn-outline-primary modify ">{{ __('cardinvit.At the reception Check-In') }}</a>
                 @endif
 
                 @if ($card[0]->rsvp[6] == '1' && $guestOptions->photos == 1)
                     <a href="{{ env('APP_URL') }}/add-photos/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                        class="btn btn-outline-primary modify ">{{ __('cardinvit.Upload your Photos') }}</a><br>
+                        class="btn btn-outline-primary modify ">{{ __('cardinvit.Upload your Photos') }}</a>
                 @endif
 
                 @if ($card[0]->rsvp[8] == '1')
