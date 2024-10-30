@@ -49,17 +49,17 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>Table Management</h2>
-                        <p>Here is the photo gallery you want to show your guests before and after the event.</p>
-                        <p class="bold-text-color-change">You can send a thank you e-mail to all your guest and remind them
-                            to come back here to see and download their pictures.</p>
+                        <h2>{{ __('photos.table_management') }}</h2>
+                        <p>{{ __('photos.photo_gallery_intro') }}</p>
+                        <p class="bold-text-color-change"> {{ __('photos.thank_you_email_reminder') }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="box-styling preview ">
                     <div class="text">
-                        <h2>Website Preview </h2>
+                        <h2>{{ __('photos.website_preview') }}</h2>
+
                     </div>
                     <div class="mainevent-gallery-slider event-slider-single">
                         @forelse ($photogallery as $photo)
@@ -70,7 +70,7 @@
                                         style="object-fit: contain;" width="100px" height="600px" alt=""></a>
                             </div>
                         @empty
-                            <p>No Images!</p>
+                        <p>{{ __('photos.no_images') }}</p>
                         @endforelse
                     </div>
                 </div>
@@ -80,12 +80,10 @@
                 <div class="box-styling event-photos-gallery">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Event Photos Gallery</h2>
-                            <p>This page is to review your page before you send the invitation out, so here you can see the
-                                layout.</p>
+                            <h2>{{ __('photos.event_photos_gallery') }}</h2>
+                            <p>{{ __('photos.review_page_layout') }}</p>
                         </div>
-                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">Add
-                            New</button>
+                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">   {{ __('photos.add_new') }}</button>
                     </div>
                     <div class="main-event-gallery-box" id="PhotoBox">
                         @forelse ($photogallery as $photo)
@@ -108,7 +106,7 @@
                                 </button>
                             </div>
                         @empty
-                            <p id="noImages">No Images!</p>
+                        <p id="noImages">{{ __('photos.no_images') }}</p>
                         @endforelse
                     </div>
                     {{-- <div class="table-content-pagination">
@@ -129,12 +127,10 @@
                 <div class="box-styling event-photos-gallery">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Event Videos</h2>
-                            <p>This page is to review your page before you send the invitation out, so here you can see the
-                                layout.</p>
+                            <h2>{{ __('photos.event_videos') }}</h2>
+                            <p>{{ __('photos.review_page_layout') }}</p>
                         </div>
-                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter07">Add
-                            New</button>
+                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter07">   {{ __('photos.add_new') }}</button>
                     </div>
                     <div class="main-event-gallery-box" id="main-video-gallery-box">
                         @forelse ($videogallery as $video)
@@ -143,7 +139,7 @@
                                     <source
                                         src="{{ asset('event-images/' . $video->id_event . '/videos/' . $video->video) }}"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
+                                        <p>{{ __('photos.video_support') }}</p>
                                 </video>
                                 <button type="button" class="delete-video-btn" data-id="{{ $video->id }}"
                                     data-eventId="{{ $video->id_event }}"><svg width="28" height="29"
@@ -158,7 +154,8 @@
                                 </button>
                             </div>
                         @empty
-                            <p>No Videos!</p>
+                        <p>{{ __('photos.no_videos') }}</p>
+
                         @endforelse
                     </div>
                     {{-- <div class="table-content-pagination">
@@ -200,14 +197,14 @@
                             <label id="uploadButton">
                                 <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
                             </label>
-                            <div id="imagePreviewContainer">No File Selected</div>
+                            <div id="imagePreviewContainer">{{ __('photos.no_file_selected') }}</div>
 
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
                         <button type="button" id="closeBtn" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -227,13 +224,14 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Images Added Successfully</h2>
-                        <p>Your images has been successfully added.</p>
+                        <h2>{{ __('photos.images_added_successfully') }}</h2>
+                        <p>{{ __('photos.images_added_message') }}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="successmodalCloseBtn1" class="btn btn-secondary"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('photos.close') }}</button>
                 </div>
             </div>
         </div>
@@ -252,14 +250,15 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
-                        <h2>You Want to Delete this image ?</h2>
+                        <h2>{{ __('photos.confirm_delete_image') }}</h2>
+
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="saveImagesModal" class="btn btn-secondary"
-                        data-dismiss="modal">No</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn">Yes</button>
+                        data-dismiss="modal">{{ __('photos.no') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn">{{ __('photos.yes') }}</button>
                 </div>
             </div>
         </div>
@@ -278,12 +277,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Image Deleted Successfully</h2>
-                        <p>The image has been successfully deleted.</p>
+                        <h2>{{ __('photos.image_deleted_successfully') }}</h2>
+                        <p>{{ __('photos.image_deleted_message') }}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('photos.close') }}</button>
                 </div>
             </div>
         </div>
@@ -308,8 +308,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
+                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -335,8 +335,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
-                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
+                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -363,9 +363,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
                         <button type="button" id="closeMainIamgeModalBtn" class="btn"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -395,14 +395,14 @@
                             <label id="uploadVideoButton">
                                 <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
                             </label>
-                            <div id="videoPreviewContainer" style="margin-top: 10px;">No File Selected</div>
+                            <div id="videoPreviewContainer" style="margin-top: 10px;">{{ __('photos.no_file_selected') }}</div>
 
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">Submit</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
                         <button type="button" id="addVideoModalCloseBtn" class="btn btn-secondary"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -421,12 +421,13 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
-                        <h2>Do you want to delete this video?</h2>
+                        <h2>{{ __('photos.confirm_delete_video') }}</h2>
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('photos.no') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn">{{ __('photos.yes') }}</button>
                 </div>
             </div>
         </div>
@@ -443,13 +444,14 @@
                 <div class="modal-body">
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                        <h2>Video Deleted Successfully</h2>
-                        <p>The Video has been successfully deleted.</p>
+                        <h2>{{ __('photos.video_deleted_successfully') }}</h2>
+                        <p>{{ __('photos.video_deleted_message') }}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="successmodalCloseBtn">Close</button>
+                        id="successmodalCloseBtn">{{ __('photos.close') }}</button>
                 </div>
             </div>
         </div>
@@ -467,14 +469,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Want To serve Your Guests a Meail ?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('meal.confirm_serve_meal') }}</h2>
+                        <p>{{ __('meal.lorem_ipsum') }}</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('email.no_dont_add_email') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter1">Yes, Add Email</button>
+                        data-target="#exampleModalCenter1">{{ __('email.yes_add_email') }}</button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
