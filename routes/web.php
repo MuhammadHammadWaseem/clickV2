@@ -188,6 +188,7 @@ Route::post('animation-save', [InvitationController::class, 'saveAnimation'])->n
 Route::post('upload-stamp', [InvitationController::class, 'uploadStamp'])->name('uploadStamp');
 Route::get('/print-table/{idevent}', [TableSeatingController::class, 'print'])->name('print');
 Route::get('/cardInvitations/{id}/{guestCode}/{name}/{lang}', [TableSeatingController::class, 'cardInviteLangNameNew']);
+Route::get('/cardinvitations/{id}/{guestCode}/{name}/{lang}', [TableSeatingController::class, 'cardInviteLangNameNew']);
 Route::get('/attending/{cardId}/{guestcode}/{lang}', [OperationController::class, 'attending']);
 Route::post('/opened-answered', [OperationController::class, 'openedanswered']);
 Route::post('/show-event', [OperationController::class, 'showevent']);

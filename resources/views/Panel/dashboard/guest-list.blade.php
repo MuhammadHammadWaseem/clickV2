@@ -1117,7 +1117,7 @@
                 <div class="modal-body">
                     <form id="DisplaySaveOptionForm">
                         <div class="text">
-                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                            {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
                             <h2>Select Options to Display </h2>
                             <div class="form-group">
                                 <label for="gift-suggestion">Gift Suggestions</label>
@@ -1166,7 +1166,7 @@
                 <div class="modal-body">
                     <form id="SendInvitationForm">
                         <div class="text">
-                            <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                            {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
                             <h2>Select Options to Send Invitation</h2>
                             <div class="form-group">
                                 <label for="emailCheck">Email</label>
