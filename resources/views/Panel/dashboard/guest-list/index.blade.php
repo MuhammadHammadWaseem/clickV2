@@ -1,28 +1,58 @@
 @extends('Panel.Layout.master')
+@if ($isCorporate == 1)
+    <style>
+        /* corporate */
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box h4 {
+            padding: 10px 0;
+            border-bottom: 1px solid #80808047;
+        }
+
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box p {
+            padding: 10px 0;
+            border-bottom: 1px solid #80808047;
+        }
+
+        .remove-btn-css {
+            background-color: #A9967D !important;
+            color: white !important;
+            font-size: 14px;
+            padding: 5px 20px;
+            border-radius: 15px;
+            transition: .3s;
+            border: navajowhite;
+        }
+
+        .remove-btn-css:hover {
+            background-color: #A9964B !important;
+            color: white !important;
+        }
+
+        /* corporate */
+    </style>
+@endif
 <style>
+    .main-dashboard-sec .left-menu-dash ul li.management-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.management-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
+    .main-dashboard-sec .left-menu-dash ul li.management-active a {
+        color: #C09D2A;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.management-active a {
-  color: #C09D2A;
-}
+    .main-dashboard-sec .left-menu-dash ul li.management-active img {
+        filter: none;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.management-active img {
-  filter: none;
-}
-
-.main-dashboard-sec .left-menu-dash ul li.management-active {
-  background-color: #c09d2a29;
-}
+    .main-dashboard-sec .left-menu-dash ul li.management-active {
+        background-color: #c09d2a29;
+    }
 
 
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
@@ -168,11 +198,19 @@
                     <div class="two-things-align">
                         <div class="text">
                             <h2>Details</h2>
+                            @if ($isCorporate == 1)
+                                <p>Total Tables: <span id="totalTables"></span> </p>
+                                <p>Total Guests: <span id="totalGuests"></span> </p>
+                            @endif
                         </div>
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                                 data-target="#exampleModalCenter04">Add Table</button>
-                            <a href="/print-table/{{$eventId}}" class="t-btn">Print Plan</a>
+                            <a href="/print-table/{{ $eventId }}" class="t-btn">Print Plan</a>
+                            @if ($isCorporate == 0)
+                                <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
+                                    data-target="#reminderModal">Reminder</button>
+                            @endif
                         </div>
                     </div>
 
@@ -372,60 +410,203 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        let tableToDelete = null;
-        let tableId;
-        let tableIsFull = false;
-        let tableGuests;
-        let tableGuestLength;
 
-        $(document).on('click', '#openGuestModal', function() {
-            const tableName = $(this).data('tablename');
-            tableGuests = $(this).data('tableguests');
-            tableGuestLength = $(this).data('tableguestlength');
-            tableId = $(this).data('id');
 
-            if (tableGuestLength > tableGuests) {
-                tableIsFull = true;
-                $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
-            } else {
-                tableIsFull = false;
-                $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="reminderModal" tabindex="-1" role="dialog"
+        aria-labelledby="reminderModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>New Table</h2>
+                    </div>
+                    <div class="modal-table-type-content">
+                        <div class="main-heading">
+                            <ul>
+                                <li style="width:100% !important;">Guests</li>
+                            </ul>
+                        </div>
+
+                        <div class="sub-main-content" id="reminderGuests">
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeAddModalBtn"
+                            data-dismiss="modal">Close</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" id="sendReminderBtn">Send
+                            Reminder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
+    @section('scripts')
+        <script>
+            let tableToDelete = null;
+            let tableId;
+            let tableIsFull = false;
+            let tableGuests;
+            let tableGuestLength;
+            let totalTables = 0;
+            let totalGuests = 0;
+            let totalSeatedGuests = 0;
+
+            countData();
+
+            function countData() {
+                totalTables = 0;
+                totalGuests = 0;
+                totalSeatedGuests = 0;
+                $.ajax({
+                    url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        response.guests.forEach(guest => {
+                            totalGuests++;
+                            if (guest.tablename != undefined) {
+                                totalSeatedGuests++;
+                            }
+                        });
+                        $("#totalGuests").text(`${totalGuests} (${totalSeatedGuests} SEATED) `);
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
+
+                $.ajax({
+                    url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        let isCorporate = {{ $isCorporate }};
+
+                        if (isCorporate == 1) {
+                            response.table.forEach(table => {
+                                totalTables++;
+                            });
+                            $("#totalTables").text(totalTables);
+                        }
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
             }
 
-            $("#dynamicTableName").empty();
-            $("#dynamicTableName").append(`${tableName} (${tableGuestLength}/${tableGuests} Guests)`);
-            $("#sub-main-content").empty();
 
-            $.ajax({
-                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
-                type: 'GET',
-                success: function(response) {
-                    appendGuests(response.guests, tableId);
-                },
-                error: function(xhr) {
-                    toastr.error('Failed to add gift. Please try again.');
-                }
+            appendReminderGuests();
+
+            function appendReminderGuests() {
+                $.ajax({
+                    url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        response.guests.forEach(guest => {
+                            if (guest.mealName == undefined) {
+                                $("#reminderGuests").append(`
+                                <hr>
+                                    <ul>
+                                        <li style="width:100% !important;">${guest.name}</li>
+                                    </ul>
+                                <hr>
+                                `);
+                            }
+                        });
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
+            }
+            $(document).on('click', '#sendReminderBtn', function() {
+                const uniqueIds = [];
+                $.ajax({
+                    url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        response.guests.forEach(guest => {
+                            if (guest.mealName == undefined) {
+                                uniqueIds.push(guest.id_guest);
+                            }
+                        });
+                        console.log("ss", uniqueIds);
+
+                        $.ajax({
+                            url: '{{ route('sendMealInvite') }}',
+                            type: 'POST',
+                            data: {
+                                uniqueIds: uniqueIds,
+                                _token: "{{ csrf_token() }}" // Laravel CSRF token for security
+                            },
+                            success: function(response) {
+                                toastr.success('Meal Reminder Send Successfully!.');
+                                getTable();
+                                countData();
+                            },
+                            error: function() {
+                                toastr.error('Failed to assign guests to the table.');
+                            }
+                        });
+
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
             });
 
-            var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
-            deleteModal.show();
-        });
+            $(document).on('click', '#openGuestModal', function() {
+                const tableName = $(this).data('tablename');
+                tableGuests = $(this).data('tableguests');
+                tableGuestLength = $(this).data('tableguestlength');
+                tableId = $(this).data('id');
 
-        $(document).on('click', '#openGuestModal2', function() {
-            const tableId = $(this).data('tableid');
-            const seatId = $(this).data('id');
-            $.ajax({
-                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
-                type: 'GET',
-                success: function(response) {
-                    console.log(response.guests);
-                    $("#sub-main-content2").empty();
-                    $("#closeSetTableModal2").click();
-                    response.guests.forEach(guest => {
-                        $("#sub-main-content2").append(`
+                if (tableGuestLength > tableGuests) {
+                    tableIsFull = true;
+                    $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
+                } else {
+                    tableIsFull = false;
+                    $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+                }
+
+                $("#dynamicTableName").empty();
+                $("#dynamicTableName").append(`${tableName} (${tableGuestLength}/${tableGuests} Guests)`);
+                $("#sub-main-content").empty();
+
+                $.ajax({
+                    url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        appendGuests(response.guests, tableId);
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
+
+                var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+                deleteModal.show();
+            });
+
+            $(document).on('click', '#openGuestModal2', function() {
+                const tableId = $(this).data('tableid');
+                const seatId = $(this).data('id');
+                $.ajax({
+                    url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response.guests);
+                        $("#sub-main-content2").empty();
+                        $("#closeSetTableModal2").click();
+                        response.guests.forEach(guest => {
+                            $("#sub-main-content2").append(`
                             <div class="sub-main-content">
                                 <ul>
                                     <li>${guest.titleGuest ?? ""} ${guest.name}</li>
@@ -442,22 +623,22 @@
                                 </ul>
                             </div>
                         `);
-                    });
-                },
-                error: function(xhr) {
-                    toastr.error('Failed to add gift. Please try again.');
-                }
+                        });
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
+                    }
+                });
+
+                var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter022'));
+                deleteModal.show();
             });
 
-            var deleteModal = new bootstrap.Modal(document.getElementById('exampleModalCenter022'));
-            deleteModal.show();
-        });
+            function appendGuests(data) {
+                data.forEach(guest => {
+                    const isChecked = guest.id_table === tableId ? 'checked' : '';
 
-        function appendGuests(data) {
-            data.forEach(guest => {
-                const isChecked = guest.id_table === tableId ? 'checked' : '';
-
-                $("#sub-main-content").append(`
+                    $("#sub-main-content").append(`
                 <div class="sub-main-content">
                     <ul>
                         <li>${guest.titleGuest ?? ""} ${guest.name}</li>
@@ -468,157 +649,161 @@
                             `<li class="text-danger">Not Seated</li>`
                         }
                         <li>
-                            <a href="#"><img src="{{ asset('assets/Panel/images/user-plus.png') }}" alt=""></a>
                             <input type="checkbox" class="guest-checkbox" data-guest-id="${guest.id_guest}" ${isChecked}/>
                         </li>
                     </ul>
                 </div>
             `);
-            });
-            // Update initial guest count based on checkboxes
-            updateGuestCount();
-        }
-
-        // Event listener for checkboxes
-        $(document).on('change', '.guest-checkbox', function() {
-            updateGuestCount();
-        });
-
-        $(document).on('change', '.guest-checkbox2', function() {
-            var seatId = $(this).data('seatid');
-            var tableId = $(this).data('tableid');
-            var guestId = $(this).data('guest-id');
-
-            console.log(seatId, tableId, guestId);
-
-            $.ajax({
-                url: '{{ route('panel.event.settablesseat') }}',
-                type: 'POST',
-                data: {
-                    seatId: seatId,
-                    tableId: tableId,
-                    guestId: guestId,
-                    _token: "{{ csrf_token() }}" // Laravel CSRF token for security
-                },
-                success: function(response) {
-                    toastr.success('Guests assigned to table successfully.');
-                    getTable();
-                    $("#closeSetTableModal2").click();
-                },
-                error: function() {
-                    toastr.error('Failed to assign guests to the table.');
-                }
-            });
-        });
-
-
-        // Function to update guest count and check if table is full
-        function updateGuestCount() {
-            // Count the selected checkboxes
-            const selectedCount = $('.guest-checkbox:checked').length;
-
-            if (selectedCount > tableGuests) {
-                $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
-            } else {
-                $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+                });
+                // Update initial guest count based on checkboxes
+                updateGuestCount();
             }
-        }
 
-
-
-        // Save checked guests to the table
-        $(document).on('click', '#saveGuestTableChanges', function() {
-            const selectedGuests = [];
-            $('.guest-checkbox:checked').each(function() {
-                selectedGuests.push($(this).data('guest-id'));
+            // Event listener for checkboxes
+            $(document).on('change', '.guest-checkbox', function() {
+                updateGuestCount();
             });
 
-            $.ajax({
-                url: '{{ route('panel.event.set.table') }}',
-                type: 'POST',
-                data: {
-                    table_id: tableId,
-                    guests: selectedGuests,
-                    _token: "{{ csrf_token() }}" // Laravel CSRF token for security
-                },
-                success: function(response) {
-                    toastr.success('Guests assigned to table successfully.');
-                    $('#closeSetTableModal').click();
-                    getTable();
-                },
-                error: function() {
-                    toastr.error('Failed to assign guests to the table.');
+            $(document).on('change', '.guest-checkbox2', function() {
+                var seatId = $(this).data('seatid');
+                var tableId = $(this).data('tableid');
+                var guestId = $(this).data('guest-id');
+
+                console.log(seatId, tableId, guestId);
+
+                $.ajax({
+                    url: '{{ route('panel.event.settablesseat') }}',
+                    type: 'POST',
+                    data: {
+                        seatId: seatId,
+                        tableId: tableId,
+                        guestId: guestId,
+                        _token: "{{ csrf_token() }}" // Laravel CSRF token for security
+                    },
+                    success: function(response) {
+                        toastr.success('Guests assigned to table successfully.');
+                        getTable();
+                        countData();
+                        $("#closeSetTableModal2").click();
+                    },
+                    error: function() {
+                        toastr.error('Failed to assign guests to the table.');
+                    }
+                });
+            });
+
+
+            // Function to update guest count and check if table is full
+            function updateGuestCount() {
+                // Count the selected checkboxes
+                const selectedCount = $('.guest-checkbox:checked').length;
+
+                if (selectedCount > tableGuests) {
+                    $("#saveGuestTableChanges").attr('disabled', true).text('Table is full');
+                } else {
+                    $("#saveGuestTableChanges").attr('disabled', false).text('Set Table');
+                }
+            }
+
+
+
+            // Save checked guests to the table
+            $(document).on('click', '#saveGuestTableChanges', function() {
+                const selectedGuests = [];
+                $('.guest-checkbox:checked').each(function() {
+                    selectedGuests.push($(this).data('guest-id'));
+                });
+
+                $.ajax({
+                    url: '{{ route('panel.event.set.table') }}',
+                    type: 'POST',
+                    data: {
+                        table_id: tableId,
+                        guests: selectedGuests,
+                        _token: "{{ csrf_token() }}" // Laravel CSRF token for security
+                    },
+                    success: function(response) {
+                        toastr.success('Guests assigned to table successfully.');
+                        $('#closeSetTableModal').click();
+                        getTable();
+                        countData();
+                    },
+                    error: function() {
+                        toastr.error('Failed to assign guests to the table.');
+                    }
+                });
+            });
+
+
+            $(document).on('click', '.delete-table-btn', function() {
+                tableToDelete = $(this).data('id'); // Get the table ID from the data-id attribute
+                var deleteModal = new bootstrap.Modal(document.getElementById('deleteTableModal'));
+                deleteModal.show();
+            });
+
+            $('#confirmDeleteTable').click(function() {
+                if (tableToDelete) {
+                    var url = `{{ route('panel.event.delete.table', ':id') }}`.replace(':id', tableToDelete);
+                    const tableData = {
+                        idevent: {{ $eventId }}
+                    };
+                    $.ajax({
+                        url: url, // Update with your route for deleting a table
+                        type: 'POST',
+                        data: tableData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            $('#closeDeleteModal').click();
+                            getTable(); // Refresh the table list
+                            countData();
+                            toastr.success('Table deleted successfully.');
+                        },
+                        error: function() {
+                            toastr.error('Failed to delete the table. Please try again.');
+                        }
+                    });
                 }
             });
-        });
 
-
-        $(document).on('click', '.delete-table-btn', function() {
-            tableToDelete = $(this).data('id'); // Get the table ID from the data-id attribute
-            var deleteModal = new bootstrap.Modal(document.getElementById('deleteTableModal'));
-            deleteModal.show();
-        });
-
-        $('#confirmDeleteTable').click(function() {
-            if (tableToDelete) {
-                var url = `{{ route('panel.event.delete.table', ':id') }}`.replace(':id', tableToDelete);
+            $(document).on('click', '#removeGuest', function() {
                 const tableData = {
-                    idevent: {{ $eventId }}
+                    idevent: {{ $eventId }},
+                    tableId: $(this).data('tableid'),
+                    guestId: $(this).data('idguest'),
                 };
                 $.ajax({
-                    url: url, // Update with your route for deleting a table
+                    url: "{{ route('panel.event.removeGuest') }}",
                     type: 'POST',
                     data: tableData,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        $('#closeDeleteModal').click();
                         getTable(); // Refresh the table list
+                        countData();
                         toastr.success('Table deleted successfully.');
                     },
                     error: function() {
                         toastr.error('Failed to delete the table. Please try again.');
                     }
                 });
-            }
-        });
-
-        $(document).on('click', '#removeGuest', function() {
-            const tableData = {
-                idevent: {{ $eventId }},
-                tableId: $(this).data('tableid'),
-                guestId: $(this).data('idguest'),
-            };
-            $.ajax({
-                url: "{{ route('panel.event.removeGuest') }}",
-                type: 'POST',
-                data: tableData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    getTable(); // Refresh the table list
-                    toastr.success('Table deleted successfully.');
-                },
-                error: function() {
-                    toastr.error('Failed to delete the table. Please try again.');
-                }
             });
-        });
 
 
-        function getTable() {
-            $.ajax({
-                url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
-                type: 'GET',
-                success: function(response) {
-                    let isCorporate = {{ $isCorporate }};
+            function getTable() {
+                $.ajax({
+                    url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
+                    type: 'GET',
+                    success: function(response) {
+                        let isCorporate = {{ $isCorporate }};
 
-                    if (isCorporate == 1) {
-                        $("#tableAppend").empty();
-                        response.table.forEach(table => {
-                            $("#tableAppend").append(`
+                        if (isCorporate == 1) {
+
+                            $("#tableAppend").empty();
+                            response.table.forEach(table => {
+                                $("#tableAppend").append(`
                                 <div class="td-boxes-down-align">
                                     <div class="top-box">
                                         <div class="box">
@@ -629,10 +814,10 @@
                                         </div>
                                         <div class="box">
                                             ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                ` : `
-                                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                `}
+                                                                                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                            ` : `
+                                                                                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                            `}
                                         </div>
                                         <div class="box">
                                             <div class="three-action-align">
@@ -643,10 +828,10 @@
                                                     <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
                                                 </button>
                                                 ${(isCorporate == 1) ? '' : `
-                                                                <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
-                                                                    <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
-                                                                </button>
-                                                            `}
+                                                                                                            <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
+                                                                                                                <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
+                                                                                                            </button>
+                                                                                                        `}
                                             </div>
                                         </div>
                                     </div>
@@ -655,192 +840,185 @@
                                         <div class="box">
                                             <h4>Seat Name</h4>
                                             ${table.seats.map(seat => `
-                                                            <p>${seat.seat_name}</p>
-                                                            <hr>
-                                                            `).join('')}
+                                                                                <p>${seat.seat_name}</p>
+                                                                            `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Guest Name</h4>
                                             ${table.seats.map(seat => `
-                                                            ${(seat.guest) ? `<p>${seat.guest.name}</p>
-                                                <hr>
+                                                                                ${(seat.guest) ? `<p>${seat.guest.name}</p>
                                                 ` : `
                                                 <p>No Guest Assigned</p>
-                                                <hr>
                                                 `}
-                                                    `).join('')}
+                                                                                `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Email</h4>
                                             ${table.seats.map(seat => `
-                                                            ${(seat.guest) ? `<p>${seat.guest.email}</p>
-                                                <hr>
-                                                ` : `
-                                                <p>No Guest Assigned</p>
-                                                <hr>
-                                                `}
-                                                    `).join('')}
+                                                        ${(seat.guest && seat.guest.email) ? `<p>${seat.guest.email}</p>` : `<p>No Email Provided</p>`}
+                                                             `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Action</h4>
                                             ${table.seats.map(seat => `
-                                                        ${(!seat.guest) ? `
-                                                <p><a href="#" id="openGuestModal2" data-tableid="${seat.id_table}" data-id="${seat.id}">Select Guest</a></p>
-                                                <hr>
+                                                                                ${(!seat.guest) ? `
+                                                <p><a href="#" class="remove-btn-css" id="openGuestModal2" data-tableid="${seat.id_table}" data-id="${seat.id}">Select Guest</a></p>
                                                 ` : `
-                                                <p><a href="#" id="removeGuest" data-tableid="${seat.id_table}" data-id="${seat.id}" data-idguest="${seat.id_guest}">Remove Guest</a></p>
-                                                <hr>
+                                                <p><a href="#" class="remove-btn-css" id="removeGuest" data-tableid="${seat.id_table}" data-id="${seat.id}" data-idguest="${seat.id_guest}">Remove Guest</a></p>
                                                 `}
-                                                    `).join('')}
+                                                                                `).join('')}
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
+
                             `);
-                        });
-                    } else {
-                        $("#tableAppend").empty();
-                        response.table.forEach(table => {
-                            $("#tableAppend").append(`
-                            <div class="td-boxes-down-align">
-                                <div class="top-box">
-                                    <div class="box">
-                                        <h5>${table.name}</h5>
-                                    </div>
-                                    <div class="box">
-                                        <h5>${table.number}</h5>
-                                    </div>
-                                    <div class="box">
-                                        ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                            ` : `
-                                                                                                                                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                            `}
-                                    </div>
-
-                                    <div class="box">
-                                        <div class="three-action-align">
-                                            <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
-                                                    alt=""></button>
-                                            <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
-                                                    alt=""></button>
-                                            <button class="{{ $isCorporate == 1 ? 'd-none' : '' }}" id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
-                                                    alt=""></button>
+                            });
+                        } else {
+                            totalTables = 0;
+                            $("#tableAppend").empty();
+                            response.table.forEach(table => {
+                                totalTables++;
+                                $("#tableAppend").append(`
+                                    <div class="td-boxes-down-align">
+                                        <div class="top-box">
+                                            <div class="box">
+                                                <h5>${table.name}</h5>
+                                            </div>
+                                            <div class="box">
+                                                <h5>${table.number}</h5>
+                                            </div>
+                                            <div class="box">
+                                                ${(table.guest_number - table.guests.length <= 0) ? `
+                                                                                                                                                                                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                ` : `
+                                                                                                                                                                                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                `}
+                                            </div>
+                                        
+                                            <div class="box">
+                                                <div class="three-action-align">
+                                                    <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
+                                                            alt=""></button>
+                                                    <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
+                                                            alt=""></button>
+                                                    <button class="{{ $isCorporate == 1 ? 'd-none' : '' }}" id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
+                                                            alt=""></button>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="bottom-box">
+                                            <div class="box">
+                                                ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
+                                                ${table.guests.map(guest => `
+                                                                                                                                                                                                                                        <p>${guest.name}</p>
+                                                                                                                                                                                                                                    `).join('')}
+                                            </div>
+                                            <div class="box">
+                                                ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
+                                                ${table.guests.map(guest => `
+                                                                                                                                                                                                                                        <p>${guest.meal_name}</p>
+                                                                                                                                                                                                                                    `).join('')}
+                                            </div>
+                                        </div>
+                                    
                                     </div>
-                                </div>
-                                <div class="bottom-box">
-                                    <div class="box">
-                                        ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
-                                        ${table.guests.map(guest => `
-                                                                                                                                                                                    <p>${guest.name}</p>
-                                                                                                                                                                                `).join('')}
-                                    </div>
-                                    <div class="box">
-                                        ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
-                                        ${table.guests.map(guest => `
-                                                                                                                                                                                    <p>${guest.meal_name}</p>
-                                                                                                                                                                                `).join('')}
-                                    </div>
-                                </div>
-
-                            </div>
-                            <hr>
-                        `);
-                        });
+                                    <hr>
+                                `);
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        toastr.error('Failed to add gift. Please try again.');
                     }
-                },
-                error: function(xhr) {
-                    toastr.error('Failed to add gift. Please try again.');
-                }
-            });
-        }
+                });
+            }
 
-        $(document).on('click', '.edit-table-btn', function() {
-            const tableId = $(this).data('id'); // Assuming the button has a data-id attribute
-            var url = `{{ route('panel.event.get.table.data', ':id') }}`.replace(':id', tableId);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function(response) {
-                    // Populate the form with the current table data
-                    $('#editTableId').val(response.table.id_table);
-                    $('#editTableName').val(response.table.name);
-                    $('#editTableNumber').val(response.table.number);
-                    $('#editMaxGuest').val(response.table.guest_number);
-                    // Show the edit modal
-                    var successModal = new bootstrap.Modal(document.getElementById('editTableModal'));
-                    successModal.show();
-                },
-                error: function() {
-                    toastr.error('Failed to load table data.');
-                }
-            });
-        });
-
-        $('#saveEditTable').click(function() {
-            const tableId = $('#editTableId').val();
-            const tableData = {
-                table_name: $('#editTableName').val(),
-                table_number: $('#editTableNumber').val(),
-                max_guest: $('#editMaxGuest').val(),
-                idevent: {{ $eventId }}
-            };
-            var url = `{{ route('panel.event.edit.table', ':id') }}`.replace(':id', tableId);
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: tableData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    // Hide the modal and reload the tables list
-                    $('#closeEditModal').click();
-                    getTable(); // Call your function to refresh the table list
-                    toastr.success('Table updated successfully.');
-                },
-                error: function() {
-                    toastr.error('Failed to update the table. Please try again.');
-                }
-            });
-        });
-
-
-
-        $(document).ready(function() {
-            getTable();
-
-            $('#addTableButton').click(function() {
-                // Collect form data
-                const tableData = {
-                    id_event: {{ $eventId }},
-                    table_number: $('#tableNumber').val(),
-                    table_name: $('#tableName').val(),
-                    max_guest: $('#maxGuest').val()
-                };
-
-                // AJAX request to submit form data
+            $(document).on('click', '.edit-table-btn', function() {
+                const tableId = $(this).data('id'); // Assuming the button has a data-id attribute
+                var url = `{{ route('panel.event.get.table.data', ':id') }}`.replace(':id', tableId);
                 $.ajax({
-                    url: "{{ route('panel.event.store.table', ['id' => $eventId]) }}", // Change this to your route
+                    url: url,
+                    type: 'GET',
+                    success: function(response) {
+                        // Populate the form with the current table data
+                        $('#editTableId').val(response.table.id_table);
+                        $('#editTableName').val(response.table.name);
+                        $('#editTableNumber').val(response.table.number);
+                        $('#editMaxGuest').val(response.table.guest_number);
+                        // Show the edit modal
+                        var successModal = new bootstrap.Modal(document.getElementById('editTableModal'));
+                        successModal.show();
+                    },
+                    error: function() {
+                        toastr.error('Failed to load table data.');
+                    }
+                });
+            });
+
+            $('#saveEditTable').click(function() {
+                const tableId = $('#editTableId').val();
+                const tableData = {
+                    table_name: $('#editTableName').val(),
+                    table_number: $('#editTableNumber').val(),
+                    max_guest: $('#editMaxGuest').val(),
+                    idevent: {{ $eventId }}
+                };
+                var url = `{{ route('panel.event.edit.table', ':id') }}`.replace(':id', tableId);
+
+                $.ajax({
+                    url: url,
                     type: 'POST',
                     data: tableData,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        toastr.success("Table created Successfully!")
-                        $("#closeAddModalBtn").click();
-                        $('#createTableForm')[0].reset(); // Clear the form
-                        getTable();
+                        // Hide the modal and reload the tables list
+                        $('#closeEditModal').click();
+                        getTable(); // Call your function to refresh the table list
+                        toastr.success('Table updated successfully.');
                     },
-                    error: function(xhr, status, error) {
-                        // Handle error response
-                        alert('An error occurred while adding the table');
+                    error: function() {
+                        toastr.error('Failed to update the table. Please try again.');
                     }
                 });
             });
-        });
-    </script>
-@endsection
+
+
+
+            $(document).ready(function() {
+                getTable();
+
+                $('#addTableButton').click(function() {
+                    // Collect form data
+                    const tableData = {
+                        id_event: {{ $eventId }},
+                        table_number: $('#tableNumber').val(),
+                        table_name: $('#tableName').val(),
+                        max_guest: $('#maxGuest').val()
+                    };
+
+                    // AJAX request to submit form data
+                    $.ajax({
+                        url: "{{ route('panel.event.store.table', ['id' => $eventId]) }}", // Change this to your route
+                        type: 'POST',
+                        data: tableData,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            toastr.success("Table created Successfully!")
+                            $("#closeAddModalBtn").click();
+                            $('#createTableForm')[0].reset(); // Clear the form
+                            getTable();
+                            countData();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error response
+                            alert('An error occurred while adding the table');
+                        }
+                    });
+                });
+            });
+        </script>
+    @endsection

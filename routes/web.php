@@ -216,3 +216,4 @@ Route::post('/save-images', [OperationController::class, 'saveimages']);
 Route::get('/sorry-cant/{cardId}/{guestcode}/{lang}', [OperationController::class, 'sorrycant']);
 Route::post('/decline', [OperationController::class, 'decline']);
 Route::get('/CheckInQr/{cId}/{gCode}/{lang}', [OperationController::class, 'CheckInQr']);
+Route::post('/send-meal-invitations', [OperationController::class, 'sendMealInvitations'])->name('sendMealInvite');
