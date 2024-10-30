@@ -59,7 +59,7 @@
     <div class="col-lg-10 col-md-10" id="content">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{ __('meal.error') }}</strong> {{ session('success') }}
+                <strong>{{ __('meal.success') }}</strong> {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,7 +68,7 @@
 
         @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{ __('meal.success') }}</strong> {{ session('error') }}
+                <strong>{{ __('meal.error') }}</strong> {{ session('error') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
