@@ -82,7 +82,7 @@
                         </div>
                         <div class="box">
                             <label>{{ __('message.text') }}</label>
-                            <textarea placeholder="Text" id="{{ __('message.text_placeholder') }}">{{ $message[0]->mtext }}</textarea> <!-- Use a textarea -->
+                            <textarea placeholder="{{ __('message.text_placeholder') }}" id="text">{{ $message[0]->mtext }}</textarea> <!-- Use a textarea -->
 
                         </div>
                     </div>
@@ -206,8 +206,8 @@
             <div class="modal-body">
                 <div class="text">
                     <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>{{ __('message_update_success') }}</h2>
-                    <p>{{ __('message_update_success_message') }}</p>
+                    <h2>{{ __('message.message_update_success') }}</h2>
+                    <p>{{ __('message.message_update_success_message') }}</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -219,7 +219,7 @@
 @endsection
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 @section('scripts')
-    <script type="text/javascript">
+    <script>
         var titleEditor, subtitleEditor, textEditor;
         $(document).ready(function() {
 
