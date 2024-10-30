@@ -77,7 +77,6 @@
 </head>
 
 <body>
-
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tbody>
             <tr>
@@ -89,48 +88,55 @@
                                 <td valign="top">
                                     <div class="header">
                                         <img src="https://clickinvitation.com/assets/images/logo/logoNewWhite.png"
-                                            alt="Click Invitation" style="width: 125px;">
+                                             alt="Click Invitation" style="width: 125px;">
                                     </div>
 
                                     <div style="padding: 15px; font-family: Arial, sans-serif; text-align:center;">
-                                        <p style="font-size:16px; color:#333333;">{{ $data['cardId']['msgTitle']  }}</p>
-                                        <p style="font-size:16px; color:#333333;">{{ $data['event']['bridefname'] . ' ' .  $data['event']['bridelname']}}</p>
-                                        <p style="font-size:14px; color:#777;">{{ $data['formattedDate'] ?? '' }}</p>
-                                        <p>
-                                            <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
-                                                class="button" target="_blank">Open Invitation</a>
+                                        <p style="font-size:16px; color:#333333;">
+                                            {{ $data['cardId']['msgTitle'] ?? 'No Title Available' }}
+                                        </p>
+                                        <p style="font-size:16px; color:#333333;">
+                                            {{ ($data['event']['bridefname'] ?? '') . ' ' . ($data['event']['bridelname'] ?? '') }}
+                                        </p>
+                                        <p style="font-size:14px; color:#777;">
+                                            {{ $data['formattedDate'] ?? 'Date not available' }}
                                         </p>
                                         <p>
-                                            <a href="{{ env('APP_URL') .'/'. 'CheckInQr/' . ($data['cardId']['id_card'] ?? '') . '/' . $data['guest']['code'] . '/' . $data['lang'] }}"
-                                                class="button" target="_blank">Check In</a>
+                                            <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                               class="button" target="_blank">Open Invitation</a>
                                         </p>
                                         <p>
-                                            <a href="{{ env('APP_URL') . '/'.'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
-                                                target="_blank">
-                                                <img src="{{ asset('card-images/' . $data['event']['id_event'] . '.png') }}"
-                                                    style="margin-bottom:20px; max-width:100%;">
+                                            <a href="{{ env('APP_URL') .'/'. 'CheckInQr/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                               class="button" target="_blank">Check In</a>
+                                        </p>
+                                        <p>
+                                            <a href="{{ env('APP_URL') . '/' . 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                               target="_blank">
+                                                <img src="{{ asset('card-images/' . ($data['event']['id_event'] ?? 'default') . '.png') }}"
+                                                     style="margin-bottom:20px; max-width:100%;">
                                             </a>
                                         </p>
 
-                                        @if ($data['event']->type == 'CORPORATE' && $guestTable !== null)
-                                        <p class="event-details">Table: {{ $guestTable->name }} - Seat: {{ $guestTable->guest_number }}</p>
+                                        @if (($data['event']['type'] ?? '') == 'CORPORATE' && isset($guestTable))
+                                            <p class="event-details">Table: {{ $guestTable->name ?? 'N/A' }} - Seat: {{ $guestTable->guest_number ?? 'N/A' }}</p>
                                         @endif
 
                                         <p class="event-details">This email is personalized for you. Please do not forward.</p>
 
                                         <table width="100%" cellpadding="0" cellspacing="0"
-                                            style="margin:0 auto; text-align:center; border-top:1px solid #ebe9e9; background:#383838; font-size:14px; color:white;">
+                                               style="margin:0 auto; text-align:center; border-top:1px solid #ebe9e9; background:#383838; font-size:14px; color:white;">
                                             <tbody>
                                                 <tr>
                                                     <td>
                                                         <p class="reception-info">Reception</p>
                                                         <p>
-                                                            {{ $data['event']['recaddress'] }}, {{ $data['event']['reccity'] }},
-                                                            {{ $data['event']['reccountry'] }},
-                                                            {{ $data['event']['recprovince'] }}, {{ $data['event']['recpc'] }}
-                                                            <a href="{{ $data['event']['recAddressLink'] }}"
-                                                                style="margin-left:5px; color:#2bb573; text-decoration:none;"
-                                                                target="_blank">(View Map)</a>
+                                                            {{ $data['event']['recaddress'] ?? 'Address not available' }},
+                                                            {{ $data['event']['reccity'] ?? '' }},
+                                                            {{ $data['event']['reccountry'] ?? '' }},
+                                                            {{ $data['event']['recprovince'] ?? '' }},
+                                                            {{ $data['event']['recpc'] ?? '' }}
+                                                            <a href="{{ $data['event']['recAddressLink'] ?? '#' }}"
+                                                               style="margin-left:5px; color:#2bb573; text-decoration:none;" target="_blank">(View Map)</a>
                                                         </p>
                                                     </td>
                                                 </tr>
@@ -151,6 +157,7 @@
             </tr>
         </tbody>
     </table>
+
 
     <div class="footer">
         <p>Copyright © 2024 ClickInvitation. All rights reserved.<br>

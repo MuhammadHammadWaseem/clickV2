@@ -766,8 +766,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="AddGuestClose">Cancel</button>
-                    <button type="submit" class="btn btn-primary submit-btn" id="submitGuestForm">Yes, Manage
-                        Now</button>
+                    <button type="submit" class="btn btn-primary submit-btn" id="submitGuestForm">Save</button>
                 </div>
             </div>
         </div>
@@ -910,8 +909,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="EditGuestClose">Cancel</button>
-                    <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">Yes, Manage
-                        Now</button>
+                    <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">Update</button>
                 </div>
             </div>
         </div>
@@ -970,8 +968,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="AddMemberClose">Cancel</button>
-                    <button type="button" class="btn btn-primary submit-btn" id="submitMemberForm">Yes, Manage
-                        Now</button>
+                    <button type="button" class="btn btn-primary submit-btn" id="submitMemberForm">Save</button>
                 </div>
             </div>
         </div>
@@ -1120,7 +1117,7 @@
                     <form id="DisplaySaveOptionForm">
                         <div class="text">
                             <img src="assets/images/circle-check.png" alt="">
-                            <h2>Select Options to Send Invitation</h2>
+                            <h2>Select Options to Display </h2>
                             <div class="form-group">
                                 <label for="gift-suggestion">Gift Suggestions</label>
                                 <input type="checkbox" name="gift-suggestion" id="gift-suggestion">
@@ -1169,7 +1166,7 @@
                     <form id="SendInvitationForm">
                         <div class="text">
                             <img src="assets/images/circle-check.png" alt="">
-                            <h2>Select Options to Display</h2>
+                            <h2>Select Options to Send Invitation</h2>
                             <div class="form-group">
                                 <label for="emailCheck">Email</label>
                                 <input type="checkbox" name="emailCheck" id="emailCheck">
@@ -1187,8 +1184,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="closeSendInvitationForm">Close</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" id="save-option"
-                        onclick="SendInvitation()">Save Changes</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="send-invitaion"
+                        onclick="SendInvitation()">Send Invitation</button>
                     </form>
                 </div>
             </div>
@@ -2722,13 +2719,13 @@
 
             // save invitaion
             function SendInvitation() {
-                var
-                    formData = {}; // Initialize an empty object to collect checked options
+                $("#send-invitaion").prop("disabled",true);
+                $("#send-invitaion").text("Sending...");
+                var formData = {}; // Initialize an empty object to collect checked options
                 // Collect checked options only
                 $('#SendInvitationForm input[type="checkbox"]:checked').each(
                     function() {
-                        formData[$(this).attr('name')] =
-                            1; // Set the value to 1 if checked
+                        formData[$(this).attr('name')] = 1; // Set the value to 1 if checked
                     });
 
 
@@ -2755,16 +2752,18 @@
                         showGuest(
                             "1"); // This function reloads the guest list or does a follow-up action
                         toastr.success('Invitations sent successfully');
-                        $('#SendInvitationForm')[0]
-                            .reset(); // Reset the form after success
+                        $('#SendInvitationForm')[0].reset(); // Reset the form after success
                         $("#closeSendInvitationForm").click();
-                        idArray
-                            = []; // Close the modal (assuming this button closes it)
+                        idArray = []; // Close the modal (assuming this button closes it)
+                        $("#send-invitaion").prop("disabled",false);
+                        $("#send-invitaion").text("Send Invitation");
+
                     },
                     error: function(xhr, status, error) {
                         console.error(error);
-                        alert(
-                            'An error occurred while sending invitations');
+                        alert('An error occurred while sending invitations');
+                            $("#send-invitaion").prop("disabled",false);
+                            $("#send-invitaion").text("Send Invitation");
                     }
                 });
             }

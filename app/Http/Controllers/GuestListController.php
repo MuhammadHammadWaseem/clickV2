@@ -852,7 +852,9 @@ class GuestListController extends Controller
 
                 $guestTable = DB::table('tables')->where('id_table', $guest['id_table'])->first();
                 $lang = App::getLocale();
-                if ($guest['email']) {
+
+                if($request->formData && isset($request->formData['emailCheck'])){
+                    if ($guest['email']) {
 
                     // if (!file_exists('/images/' . $guest['id_guest'] . $guest['code'] . '.png')) {
                     //     //Generate QR Code if not exists
@@ -954,15 +956,12 @@ class GuestListController extends Controller
                     } catch (\Exception $e) {
                         Log::error('Mail sending failed: ' . $e->getMessage());
                     }
+                    }
                 }
 
-
-
-
-
-
                 //---------- SMS ----------------------
-                if ($request->has('sms') && $request->sms != 0 && $guest['phone'] && $guest['parent_id_guest'] == 0) {
+                if ($request->formData && isset($request->formData['smsCheck'])) {
+                    if ($guest['phone'] && $guest['phone'] != null && $guest['parent_id_guest'] == 0) {
                     if ($event->type == "CORPORATE") {
                         if ($lang == 'en') {
                             $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
@@ -1019,11 +1018,13 @@ class GuestListController extends Controller
                     );
 
                     print_r($client->getResponse());*/
+                    }
                 }
 
 
                 //---------- WHATSAPP ----------------------
-                if ($guest['whatsapp'] && $guest['whatsapp'] != 0 && $guest['parent_id_guest'] == 0) {
+                if($request->formData && isset($request->formData['whatsappCheck'])){
+                    if ($guest['whatsapp'] && $guest['whatsapp'] != 0 && $guest['parent_id_guest'] == 0) {
                     $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
 
                     $curl = curl_init();
@@ -1097,6 +1098,7 @@ class GuestListController extends Controller
                     curl_close($curl);
 
                     echo $resp;
+                    }
                 }
             }
         }
