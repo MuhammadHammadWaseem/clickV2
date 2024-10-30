@@ -2,46 +2,43 @@
 
 
 <style>
+    .main-dashboard-sec .left-menu-dash ul li.general-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
+    .main-dashboard-sec .left-menu-dash ul li.general-active a {
+        color: #C09D2A;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active a {
-  color: #C09D2A;
-}
+    .main-dashboard-sec .left-menu-dash ul li.general-active img {
+        filter: none;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active img {
-  filter: none;
-}
+    .main-dashboard-sec .left-menu-dash ul li.general-active {
+        background-color: #c09d2a29;
+    }
 
-.main-dashboard-sec .left-menu-dash ul li.general-active {
-  background-color: #c09d2a29;
-}
+    .main-dashboard-sec .text {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 
-.main-dashboard-sec .text {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+    .box-styling .person-box {
+        height: -webkit-fill-available;
+        justify-content: space-between;
+    }
 
-.box-styling .person-box {
-    height: -webkit-fill-available;
-    justify-content: space-between;
-}
-
-.box-styling.ceremony-box {
-    height: 98% !important;
-}
-
-
+    .box-styling.ceremony-box {
+        height: 98% !important;
+    }
 </style>
 
 @section('content')
@@ -65,9 +62,10 @@
                             <input type="hidden" value="{{ $event->id_event }}" name="event_id">
                             @csrf
 
-                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" value="{{ $event->name }}" name="event">
-                            <input type="datetime-local" id="eventDate" name="event_date" placeholder="{{ __('genralInfo.Event Date') }}"
-                                value="{{ $event->date }}">
+                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}"
+                                value="{{ $event->name }}" name="event">
+                            <input type="datetime-local" id="eventDate" name="event_date"
+                                placeholder="{{ __('genralInfo.Event Date') }}" value="{{ $event->date }}">
                     </div>
                 </div>
             </div>
@@ -138,7 +136,13 @@
             <div class="col-lg-12 col-md-12">
                 <div class="box-styling relationship-story">
                     <div class="text">
-                        <h2>@if ($event->eventType->couple_event == '1'){{ __('genralInfo.Relationship Story') }} @elseif ($event->eventType->couple_event == '0') {{ __('genralInfo.EVENT SUMMARY') }} @endif</h2>
+                        <h2>
+                            @if ($event->eventType->couple_event == '1')
+                                {{ __('genralInfo.Relationship Story') }}
+                            @elseif ($event->eventType->couple_event == '0')
+                                {{ __('genralInfo.EVENT SUMMARY') }}
+                            @endif
+                        </h2>
                         <textarea placeholder="{{ __('genralInfo.Type Here') }}" name="story">{{ $event->summary }}</textarea>
                     </div>
                 </div>
@@ -151,8 +155,8 @@
                         </div>
 
                         <div class="person-box">
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress" name="ceraddress"
-                                value="{{ $event->ceraddress }}">
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
+                                name="ceraddress" value="{{ $event->ceraddress }}">
                             <input type="time" placeholder="Event Time" name="certime" value="{{ $event->certime }}">
                             <input type="hidden" id="cerAddressLink">
                             <div id="mapView" style="width: 100%; height: 400px;"></div>
@@ -169,8 +173,8 @@
                         </div>
 
                         <div class="person-box">
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress" name="recaddress"
-                                value="{{ $event->recaddress }}">
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
+                                name="recaddress" value="{{ $event->recaddress }}">
                             <input type="hidden" id="recAddressLink">
                             <input type="time" placeholder="Event Time" name="rectime"
                                 value="{{ $event->rectime }}">
@@ -191,8 +195,8 @@
                             <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
                                 value="{{ $event->parname }}">
                             <input type="hidden" id="parAddressLink">
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress" name="paraddress"
-                                value="{{ $event->paraddress }}">
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress"
+                                name="paraddress" value="{{ $event->paraddress }}">
                             <input type="time" placeholder="Event Time" name="partime"
                                 value="{{ $event->partime }}">
                             <div id="ParmapView" style="width: 100%; height: 400px;"></div>
@@ -223,7 +227,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeUpdatedBtn">{{ __('genralInfo.Close') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="closeUpdatedBtn">{{ __('genralInfo.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -245,17 +250,22 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.No, it Don\'t') }}</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn"><a class="text-light" href="{{ route('panel.event.webpage',['id'=>$event->id_event]) }}">{{ __('genralInfo.Yes, it Does') }}</a></button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('genralInfo.No, it Don\'t') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn"><a class="text-light"
+                            href="{{ route('panel.event.webpage', ['id' => $event->id_event]) }}">{{ __('genralInfo.Yes, it Does') }}</a></button>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
     <script>
+        $(document).ready(function() {
+            initMap();
+        });
+
         (g => {
             var h, a, k, p = "The Google Maps JavaScript API",
                 c = "google",
@@ -354,7 +364,7 @@
             initMap();
         };
 
-        $("#closeUpdatedBtn").on('click',function(){
+        $("#closeUpdatedBtn").on('click', function() {
             var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter06'));
             successModal.show();
         });
@@ -377,7 +387,8 @@
                     success: function(response) {
                         // Show success notification
                         toastr.success('Event updated successfully!');
-                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter05'));
                         successModal.show();
                     },
                     error: function(xhr) {

@@ -18,10 +18,10 @@ return[
     'Ceremony' => 'Ceremony',
     'Cermonydesc' => 'This page is to review your page before you send the invitation out, so here you can
     see the layout.',
-    'Recption' => 'Recption',
+    'Recption' => 'Reception',
     'Recptiondesc' => 'This page is to review your page before you send the invitation out, so here you can
     see the layout.',
-    'Custome' => 'Custome',
+    'Custome' => 'Custom',
     'Customedesc' => 'This page is to review your page before you send the invitation out, so here you can
     see the layout.',
     'Submit' => 'Submit',

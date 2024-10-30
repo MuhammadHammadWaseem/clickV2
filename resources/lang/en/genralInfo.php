@@ -14,7 +14,7 @@ return[
     'Relationship Story' => 'Relationship Story',
     'EVENT SUMMARY' => 'EVENT SUMMARY',
     'Ceremony' => 'Ceremony',
-    'Recption' => 'Recption',
+    'Recption' => 'Reception',
     'Custom Event' => 'Custom Event',
     'Event Description' => 'Event Description',
     'Save' => 'Save',
