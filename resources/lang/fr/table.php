@@ -1,42 +1,35 @@
 <?php
 
 return[
-    'table_management' => 'Table Management',
-    'guest_seating_info' => 'Now that you know how many guests you’re expecting, you can add the tables needed to seat them. You can number the tables and give them names such as cities, countries, teams, or crew for DJ, band, videographer...',
-    'correct_table_number' => 'Make sure you enter the right number of tables needed so everyone can have a seat. You can always come back and add a table. This is the page where you indicate the seats for your guests; make sure not to exceed the number of guests per table indicated by the size given to you by the reception hall.',
-    'seating_chart_info' => 'After all the guests are seated, you can print and give the seating chart to the reception hall so they can know the number of plates per meal choice and prepare it for each table. They can call your guests by name for allergy or vegan cases.',
-    'declined_non_confirmed_guests' => 'Declined and non-confirmed guests will not be seen on this page. To have them appear, they must confirm or choose a meal, and you can always do it for them.',
-
-    'management_plan' => 'Management Plan',
+'table_management' => 'Table Management',
+'guest_seating_info' => 'Now that you know how many guests you’re expecting, you can add the tables needed to seat them. You can number the tables and give them names such as cities, countries, teams, or crew for DJ, band, videographer...',
+'correct_table_number' => 'Make sure you enter the right number of tables needed so everyone can have a seat. You can always come back and add a table. This is the page where you indicate the seats for your guests; make sure not to exceed the number of guests per table indicated by the size given to you by the reception hall.',
+'seating_chart_info' => 'After all the guests are seated, you can print and give the seating chart to the reception hall so they can know the number of plates per meal choice and prepare it for each table. They can call your guests by name for allergy or vegan cases.',
+'declined_non_confirmed_guests' => 'Declined and non-confirmed guests will not be seen on this page. To have them appear, they must confirm or choose a meal, and you can always do it for them.',
+'management_plan' => 'Management Plan',
 'table_01' => 'Table#01',
 'friends' => 'Friends',
-
 'details' => 'Details',
 'total_tables' => 'Total Tables: ',
 'total_guests' => 'Total Guests: ',
 'add_table' => 'Add Table',
 'print_plan' => 'Print Plan',
 'reminder' => 'Reminder',
-
 'table_name' => 'Table Name',
 'table_number' => 'Table #',
 'guest_allowed' => 'Guest Allowed',
 'actions' => 'Actions',
-
 'new_table' => 'New Table',
 'table_number_placeholder' => 'Table Number',
 'table_name_placeholder' => 'Table Name',
 'max_guest_placeholder' => 'Max Guest',
 'close' => 'Close',
-
 'edit_table' => 'Edit Table',
 'save_changes' => 'Save Changes',
-
 'confirm_deletion' => 'Confirm Deletion',
 'delete_table_confirmation' => 'Are you sure you want to delete this table?',
 'cancel' => 'Cancel',
 'yes_delete' => 'Yes, Delete',
-
 'guest_table' => 'Guest Table',
 'guests_of_table' => 'Guests of table ',
 'name' => 'Name',
@@ -44,18 +37,7 @@ return[
 'table' => 'Table',
 'no_i_dont' => 'No, I Don’t',
 'set_table' => 'Set Table',
-
 'guests' => 'Guests',
-'send_reminder' => 'Send Reminder'
-
-
-
-
-
-
-
-
-
-
+'send_reminder' => 'Send Reminder',
 
 ];

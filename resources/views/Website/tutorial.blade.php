@@ -10,41 +10,39 @@
 
 @section('tags')
     <link rel="canonical" href="https://clickinvitation.com/tutorial">
-
 @endsection
 @section('content')
-<script>
-    .main-dashboard-sec .left-menu-dash ul li.tutoriar-active a {
-  color: #C09D2A;
-}
+    <style>
+        .main-dashboard-sec .left-menu-dash ul li.tutoriar-active a {
+            color: #C09D2A;
+        }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active img {
-  filter: none;
-}
+        .main-dashboard-sec .left-menu-dash ul li.tutoriar-active img {
+            filter: none;
+        }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active {
-  background-color: #c09d2a29;
-}
+        .main-dashboard-sec .left-menu-dash ul li.tutoriar-active {
+            background-color: #c09d2a29;
+        }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
-
-</script>
+        .main-dashboard-sec .left-menu-dash ul li.tutoriar-active::after {
+            width: 5px;
+            height: 100%;
+            background-color: #C09D2A;
+            position: absolute;
+            left: 0;
+            right: 0;
+            content: "";
+            top: 0;
+        }
+    </style>
     <div class="container">
         <div class="heading-text text-border tuts-heading">
             <h1>
-                <span class="bold-text">Tutorials </span>
+                <span class="bold-text">{{ __('tutorial.tutorials') }} </span>
             </h1>
             <p>
-                Organize Your Event or Special Day & Immortalize Your Memories
+                {{ __('tutorial.organize_your_event') }}
             </p>
         </div>
 
@@ -123,7 +121,8 @@
         </div>
         <div class="heading-text heading-emphasis">
             <h2>
-                Some Of most <span class="bold-text"> Popular </span>features
+                {{ __('tutorial.popular_features') }} <span class="bold-text"> {{ __('tutorial.popular') }}
+                </span>{{ __('tutorial.features') }}
             </h2>
         </div>
         <div class="container">
@@ -133,21 +132,14 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 16.png" alt=""></div>
                             <div>
-                                <h3>Effortless Event Planning</h3>
+                                <h3>{{ __('features.effortless_event_planning') }}</h3>
                             </div>
                         </div>
                         <p class="text1">
-                            ClickInvitation streamlines every aspect of event planning, offering auto guest count,
-                            customizable invitations, and intuitive table and seating arrangement tools for seamless,
-                            stress-free celebrations.
+                            {{ __('features.event_planning_description') }}
 
-                            <!-- <span class="dots"></span>
-                  <span class="moreText1">
-                    <br>
-                    Anticoagulant Specialist from USI, USA, C.H.Q.P. She has completed her Pharm.D, C.R.C.P, & Dip.
-                  </span> -->
+
                         </p>
-                        <!-- <button class="read-more-btn1">Read More...</button> -->
                     </div>
                 </div>
                 <div class="sub-text2">
@@ -155,18 +147,17 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 17.png" alt=""></div>
                             <div>
-                                <h3>Customizable Invitations</h3>
+                                <h3>{{ __('tutorial.customizable_invitations') }}</h3>
                             </div>
                         </div>
                         <p class="text4">
-                            Personalize your event with our easy-to-use customization options or upload your own designs for
-                            unique, memorable invitations.
+                            {{ __('tutorial.customizable_invitations_description') }}
 
                             <!-- <span class="dots"></span>
-                  <span class="moreText4">
-                    <br>
-                    Anticoagulant Specialist from USI, USA, C.H.Q.P. She has completed her Pharm.D, C.R.C.P, & Dip.
-                  </span> -->
+                      <span class="moreText4">
+                        <br>
+                        Anticoagulant Specialist from USI, USA, C.H.Q.P. She has completed her Pharm.D, C.R.C.P, & Dip.
+                      </span> -->
                         </p>
                         <!-- <button class="read-more-btn4">Read More...</button> -->
                     </div>
@@ -176,18 +167,17 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 18.png" alt=""></div>
                             <div>
-                                <h3>Private and Exclusive</h3>
+                                <h3>{{ __('tutorial.private_and_exclusive') }}</h3>
                             </div>
                         </div>
                         <p class="text7">
-                            ClickInvitation respects your privacy, ensuring your events remain exclusive, free from
-                            third-party intrusions. Your celebrations, your way.
+                            {{ __('tutorial.private_and_exclusive_description') }}
 
                             <!-- <span class="dots"></span>
-                  <span class="moreText7">
-                    <br>
-                    Anticoagulant Specialist from USI, USA, C.H.Q.P. She has completed her Pharm.D, C.R.C.P, & Dip.
-                  </span> -->
+                      <span class="moreText7">
+                        <br>
+                        Anticoagulant Specialist from USI, USA, C.H.Q.P. She has completed her Pharm.D, C.R.C.P, & Dip.
+                      </span> -->
                         </p>
                         <!-- <button class="read-more-btn7">Read More...</button> -->
                     </div>
@@ -199,11 +189,11 @@
 
         <div class="heading-text">
             <h2>
-                Let’s Get Started With <span class="bold-text"> US </span>Today
+                {{ __('tutorial.get_started') }} <span class="bold-text"> {{ __('tutorial.with_us') }}
+                </span>{{ __('tutorial.today') }}
             </h2>
             <p>
-                Start Planning your event here. <br> In only few seconds you’ll be on your way to easily control and manage
-                your event.
+                {{ __('tutorial.start_planning') }} <br> {{ __('tutorial.easy_control') }}
 
 
             </p>
@@ -211,7 +201,7 @@
 
         <div class="form-container new-form form-153">
             <input type="email" placeholder="Enter your email address">
-            <button class="btn-new" type="submit" id="register">Get Started</button>
+            <button class="btn-new" type="submit" id="register">{{ __('tutorial.get_started_1') }}</button>
         </div>
     </div>
     <div class="container">
