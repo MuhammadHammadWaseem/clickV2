@@ -246,7 +246,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.No, it Don\'t') }}</button>
-                    <button type="button" class="btn t-btn"><a class="text-light" href="{{ route('panel.event.webpage',['id'=>$event->id_event]) }}">{{ __('genralInfo.Yes, it Does') }}</a></button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn"><a class="text-light" href="{{ route('panel.event.webpage',['id'=>$event->id_event]) }}">{{ __('genralInfo.Yes, it Does') }}</a></button>
                 </div>
             </div>
         </div>
