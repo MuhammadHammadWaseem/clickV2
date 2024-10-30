@@ -496,32 +496,32 @@
                         justify-content: center;
                         align-items: center;"
                             id="canv">
-                            <canvas id="canvas">Your browser doesn't support canvas</canvas>
+                            <canvas id="canvas">{{ __('invitation.browser_no_canvas_support') }}</canvas>
                         </div>
                     </div>
                     <div class="main-card-detaling-box">
                         <div class="editing-options-box">
 
                             <div class="two-thing-align">
-                                <h3 id="dynamicHeading">Editing Options</h3>
+                                <h3 id="dynamicHeading">{{ __('invitation.editing_options') }}</h3>
                                 <div class="hide-and-show-box">
                                     <div class="input-check-box">
                                         <input type="checkbox" id="two_sided" class="check_box_style" name="two_sided"
                                             value="Two Sided Card" onclick="toggleButtons(); toggleTwoSided(this);">
-                                        <label for="two_sided"> Two Sided Card</label>
+                                        <label for="two_sided"> {{ __('invitation.two_sided_card') }}</label>
                                     </div>
                                     <div class="two-btn-align" id="frontBackBox" style="display: none;">
 
                                         <div class="radio-box-related">
                                             <input type="radio" id="front" name="edit" value="front"
                                                 onchange="toggleSide(this)">
-                                            <label for="front">Front</label>
+                                            <label for="front">{{ __('invitation.front') }}</label>
                                         </div>
 
                                         <div class="radio-box-related">
                                             <input type="radio" id="back" name="edit" value="back"
                                                 onchange="toggleSide(this)">
-                                            <label for="back">Back</label>
+                                            <label for="back">{{ __('invitation.back') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -974,9 +974,9 @@
                                 <div id="sidebarbackgroundaddimg1" style="display: none;">
                                     <div class="two-things-align">
                                         <div class="two-btn-align">
-                                            <button onclick="moveForward()" class="moveForward btn btn-primary t-btn">Move Forward</button>
+                                            <button onclick="moveForward()" class="moveForward btn btn-primary t-btn">{{ __('invitation.move_forward') }}</button>
                                             <button onclick="moveBackword()"
-                                                class="moveBackword btn btn-primary t-btn">Move Backward</button>
+                                                class="moveBackword btn btn-primary t-btn">{{ __('invitation.move_backward') }}</button>
                                         </div>
 
                                         <div id="txtTool" class="row  pt-3 pb-3">
@@ -999,7 +999,7 @@
                                 <div class="sidebaraddimg" style="display: none;z-index: 2;">
                                     <div id="txtTool" class="row  pt-3 pb-3">
                                         <div class="col-12">
-                                            <h5>Image Size&nbsp;</h5>
+                                            <h5>{{ __('invitation.image_size') }}&nbsp;</h5>
                                         </div>
                                         <div class="col-12  btn-toolbar mb-3" role="toolbar"
                                             aria-label="Toolbar with button groups">
@@ -1011,7 +1011,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <h5>Image Edit &nbsp; &nbsp;</h5>
+                                            <h5>{{ __('invitation.image_edit') }} &nbsp; &nbsp;</h5>
                                         </div>
                                         <div class="col-12">
                                             <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
@@ -1034,7 +1034,7 @@
                                                     oninput="changeOpacity(this)">
                                             </div> --}}
                                             <div class="other-editing mb-3">
-                                                <h4>Opacity</h4>
+                                                <h4>{{ __('invitation.opacity') }}</h4>
                                                 <div class="slider-container">
                                                     <div class="range-slider">
                                                         <input type="range" id="opacityRange2" min="0"
@@ -1043,10 +1043,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button onclick="moveForward()" class="moveForward other-editing-btn">Move
-                                                Forward</button>
-                                            <button onclick="moveBackword()" class="moveBackword other-editing-btn">Move
-                                                Backward</button>
+                                            <button onclick="moveForward()" class="moveForward other-editing-btn">{{ __('invitation.move_forward') }}</button>
+                                            <button onclick="moveBackword()" class="moveBackword other-editing-btn">{{ __('invitation.move_backward') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1072,7 +1070,7 @@
 
                                 <button type="button" class="btn btn-primary t-btn SaveBtn" id="save1"
                                     onclick="saveAll()" data-toggle="modal" data-target="#exampleModalCenter03">
-                                    Save Invitation Card
+                                    {{ __('invitation.save_invitation_card') }}
                                 </button>
 
                             </div>
@@ -1120,17 +1118,17 @@
                 </div>
                 <div class="modal-body text-center">
                     <div class="text">
-                        <h2>Set Animations</h2>
+                        <h2>{{ __('invitation.set_animations') }}</h2>
                     </div>
                     <div class="row d-flex justify-content-center align-items-center" id="animationModalBody">
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeAnimationModal"  data-dismiss="modal" aria-label="Close">Close</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"  data-dismiss="modal" aria-label="Close">Save Animation</button>
+                    <button type="button" class="btn btn-secondary" id="closeAnimationModal"  data-dismiss="modal" aria-label="Close">{{ __('invitation.close') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"  data-dismiss="modal" aria-label="Close">{{ __('invitation.save_animations') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveNoneOfThese()"
-                    data-dismiss="modal" aria-label="Close">Non Animations</button>
+                    data-dismiss="modal" aria-label="Close">{{ __('invitation.set_animations') }}</button>
                 </div>
             </div>
         </div>
@@ -1181,11 +1179,11 @@
                 <div class="modal-body">
                     <iframe id="iframe" height="100%" width="100%" src="" frameborder="0"></iframe>
                     <div class="text">
-                        <p class="text-center">You need to save the setting first</p>
+                        <p class="text-center">{{ __('invitation.need_to_save_setting') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('invitation.close') }}</button>
                     </form>
                 </div>
             </div>
@@ -1264,13 +1262,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Settings</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('invitation.settings') }}</h2>
+                        <p>{{ __('invitation.lorem_ipsum_description') }}</p>
                     </div>
                     <form>
                         <div class="two-inline-inputes">
                             <div class="box">
-                                <label>Invitation Message Title</label>
+                                <label>{{ __('invitation.invitation_message_title') }}</label>
                                 <input type="text" value="{{ $cardData->msgTitle ?? '' }}" id="msgTitle"
                                     placeholder="We Are Going To Marriage.">
                             </div>
@@ -1328,60 +1326,60 @@
                         </div>
                         <div class="three-inputes-align">
                             <div class="box">
-                                <label for="colorPickersetting">Guest Name’s Font Color</label>
+                                <label for="colorPickersetting">{{ __('invitation.guest_name_font_color') }}</label>
                                 <input type="color" id="colorPickersetting" name="colorPickersetting"
                                     value="{{ $cardData->envTitleColor ?? '#000000' }}">
                             </div>
                             <div class="box">
-                                <label for="colorPickerenvelope_innersetting">Envelope Inner Color</label>
+                                <label for="colorPickerenvelope_innersetting">{{ __('invitation.envelope_inner_color') }}</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
                                     name="colorPickerenvelope_innersetting"
                                     value="{{ $cardData->cardColorIn ?? '#000000' }}">
                             </div>
                             <div class="box">
-                                <label for="colorPickerenvelope_outsetting">Envelope Outer Color</label>
+                                <label for="colorPickerenvelope_outsetting">{{ __('invitation.envelope_outer_color') }}</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
                                     name="colorPickerenvelope_outsetting"
                                     value="{{ $cardData->cardColorOut ?? '#000000' }}">
                             </div>
                         </div>
                         <div class="multipal-check-boxes">
-                            <h4>Guest Can</h4>
+                            <h4>{{ __('invitation.guest_can') }}</h4>
                             <div class="align-check-boxes">
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked1" name="flexCheckChecked1"
                                         value="">
-                                    <label for="flexCheckChecked1"> Attendance Confirmation</label>
+                                    <label for="flexCheckChecked1"> {{ __('invitation.attendance_confirmation') }}</label>
                                 </div>
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked2" name="flexCheckChecked2"
                                         value="">
-                                    <label for="flexCheckChecked2"> Select Gift Suggestions</label>
+                                    <label for="flexCheckChecked2"> {{ __('invitation.select_gift_suggestions') }}</label>
                                 </div>
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked3" name="flexCheckChecked3"
                                         value="">
-                                    <label for="flexCheckChecked3"> Reception Check-In</label>
+                                    <label for="flexCheckChecked3"> {{ __('invitation.reception_check_in') }}</label>
                                 </div>
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked4" name="flexCheckChecked4"
                                         value="">
-                                    <label for="flexCheckChecked4"> Upload Event Photos</label>
+                                    <label for="flexCheckChecked4"> {{ __('invitation.upload_event_photos') }}</label>
                                 </div>
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked5" name="flexCheckChecked5"
                                         value="">
-                                    <label for="flexCheckChecked5"> Go to Website</label>
+                                    <label for="flexCheckChecked5"> {{ __('invitation.go_to_website') }}</label>
                                 </div>
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked6" name="flexCheckChecked6"
                                         value="">
-                                    <label for="flexCheckChecked6"> Apologies For Not Attending</label>
+                                    <label for="flexCheckChecked6"> {{ __('invitation.apologies_for_not_attending') }}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="background-select">
-                            <h3>Background</h3>
+                            <h3>{{ __('invitation.background') }}</h3>
                             <div class="many-radio-boxes">
                                 @if (isset($cardData))
                                     @forelse ($cardData->bgImgs as $card)
@@ -1394,7 +1392,7 @@
                                                     alt=""></label>
                                         </div>
                                     @empty
-                                        <p>No Cards!</p>
+                                        <p>{{ __('invitation.no_cards') }}</p>
                                     @endforelse
                                 @endif
                             </div>
@@ -1402,9 +1400,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('invitation.discard_changes') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveSetting()"
-                        data-dismiss="modal">Save Changes</button>
+                        data-dismiss="modal">{{ __('invitation.save_changes') }}</button>
                 </div>
             </div>
         </div>
