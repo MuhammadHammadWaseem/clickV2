@@ -43,6 +43,26 @@
 
 
 
+        .display_flex_start {
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+        }
+
+        .display_flex_end {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .operations .groupdesc .memberrow {
+            border-bottom: 1px solid #80808030;
+        }
+
         .dropbtn {
             background-color: #4CAF50;
             color: white;
@@ -328,9 +348,10 @@
             <div class="row justify-content-md-center">
 
                 <div class="col-12">
-                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px; color: #212529" class="back" id="backBtn">
+                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px; color: #212529" class="back"
+                        id="backBtn">
                         <i class="fas fa-chevron-left"></i>
-                    {{ __('attending.BACK TO INVITATION') }}</button>
+                        {{ __('attending.BACK TO INVITATION') }}</button>
                     {{-- <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px; color: #212529" class="back"
                         onclick="window.location.href = document.referrer;"><i class="fas fa-chevron-left"></i>
                     {{ __('attending.BACK TO INVITATION') }}</button> --}}
@@ -353,7 +374,7 @@
                                     <p ng-show="mygroup.email"><i class="fal fa-envelope"></i> @{{ mygroup.email }}
                                     </p>
                                 </div>
-                                <div class="col-md-4 col-12 endinfo text-end">
+                                <div class="col-md-4 col-12 endinfo display_flex_start text-end">
                                     <p>{{ __('attending.You are already Counted') }}</p>
                                     <p ng-show="mygroup.table"><strong>
                                             {{ __('attending.TABLE:') }}</strong>
@@ -366,23 +387,22 @@
                                         <strong>{{ __('attending.ALLERGIES') }}</strong>
                                     </p>
                                 </div>
-                                <div class="col-md-2 col-12 text-end">
-                                    <button style="width: 100%" class="btn t-btn"
-                                        data-bs-toggle="modal" ng-click="editdatag();" data-bs-target="#editguestModal">
+                                <div class="col-md-2 col-12 text-end display_flex_end">
+                                    <button style="width: 100%" class="btn t-btn" data-bs-toggle="modal"
+                                        ng-click="editdatag();" data-bs-target="#editguestModal">
                                         <i class="iconstyle  fa-edit"></i>
                                         <p>{{ __('attending.EDIT') }}</p>
                                     </button>
 
-                                    <button class="btn t-btn btn-md w-100 addm mb-1 mt-1"
-                                        data-bs-toggle="modal" ng-click="getguest(mygroup.id_guest)"
-                                        data-bs-target="#editMemberModal"> <i class="iconstyle  fa-edit"></i>
+                                    <button class="btn t-btn btn-md w-100 addm mb-1 mt-1" data-bs-toggle="modal"
+                                        ng-click="getguest(mygroup.id_guest)" data-bs-target="#editMemberModal"> <i
+                                            class="iconstyle  fa-edit"></i>
                                         <p>{{ __('attending.EDIT MEMBER') }}</p>
 
                                     </button>
 
                                     @if ($guest->declined == 1)
-                                        <button style="width: 100%" id="confirm"
-                                            class="btn t-btn mb-1 mt-1"
+                                        <button style="width: 100%" id="confirm" class="btn t-btn mb-1 mt-1"
                                             ng-click="confirmGuest({{ $guest->id_guest }},{{ $guest->members_number }})"
                                             name="guest_id" value="{{ $guest->id_guest }}"><i
                                                 class="iconstyle  fa-check"></i>
@@ -418,9 +438,10 @@
                                     data-bs-target="#tableLayout">{{ __('attending.Table Layout') }}</button>
                             @endif
                         </div>
-                    </div>  
+                    </div>
 
-                    <div class="card mb-4 box-styling" style="overflow-y: unset!important; overflow: unset!important;">
+                    <div class="card mb-4 box-styling"
+                        style="overflow-y: unset!important; overflow: unset!important;">
                         <div class="card-body groupdesc">
                             <div ng-class="member.declined?'row align-items-center memberrow declined':'row align-items-center memberrow'"
                                 ng-repeat="member in members">
@@ -433,7 +454,7 @@
                                     <p ng-show="member.email"><i class="fal fa-envelope"></i> @{{ member.email }}
                                     </p>
                                 </div>
-                                <div class="col-md-2 col-12 text-end endinfo">
+                                <div class="col-md-2 col-12 text-end display_flex_start endinfo">
                                     <p ng-show="member.table"><strong>{{ __('attending.TABLE:') }}</strong>
                                         @{{ member.table.name }}</p>
                                     <p ng-show="member.seat"><strong>{{ __('attending.SEAT:') }}</strong>
@@ -991,7 +1012,7 @@
             var guestCode = urlParts[5];
             var languageCode = urlParts[6];
             var guestName = "{{ $guest->name }}";
-            var url  = '/cardInvitations/' + guestId + '/' + guestCode + '/' + guestName + '/' + languageCode;
+            var url = '/cardInvitations/' + guestId + '/' + guestCode + '/' + guestName + '/' + languageCode;
 
             var backBtn = document.getElementById('backBtn');
             backBtn.addEventListener('click', function() {
