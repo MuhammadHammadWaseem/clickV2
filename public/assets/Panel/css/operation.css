@@ -18,6 +18,14 @@
     height: 50px;
 }
 
+.text-end {
+    text-align: right !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .saver p{
 transform: translateX(0) !important;
 }
