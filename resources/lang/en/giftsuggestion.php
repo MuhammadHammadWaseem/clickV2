@@ -4,9 +4,10 @@ return[
 'BACK TO INVITATION' => 'BACK TO INVITATION',
 'OUR GIFT SELECTION' => 'OUR GIFT SELECTION',
 'LINK' => 'LINK',
+'Cancel' => 'Cancel',
 'SELECT GIFT' => 'SELECT GIFT',
 'Already selected' => 'Already selected',
-'TRANSFER TYPE:' => 'TRANSFER TYPE:',
+'TRANSFER TYPE' => 'TRANSFER TYPE',
 'TRANSFER LINK:' => 'TRANSFER LINK:',
 'SAVE' => 'SAVE',
 'Gift Selection' => 'Gift Selection',
@@ -31,11 +32,19 @@ return[
 'title_edit' => 'Suggestion Edited Successfully',
 'message_edit' => 'Your gift suggestion has been successfully edited.',
 
+'want_to_send_invitations_to_guests' => 'Want To Send Invitations To Guests?',
+'description_text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'yes_add_gift_suggestions' => 'Yes, Add Gift Suggestions',
 
+'add_new_gift_suggestions' => 'Add New Gift Suggestions',
+'description_text2' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'Add Suggestion' => 'Add Suggestion',
+'Delete Gift' => 'Delete Gift',
 
-
-
-
-
+'confirm_delete_gift' => 'Are you sure you want to delete this gift?',
+'Edit Gift' => 'Edit Gift',
+'edit_desc' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'Update Gift' => 'Update Gift',
+'edit_success' => 'Suggestion Edited Successfully',
 
 ];

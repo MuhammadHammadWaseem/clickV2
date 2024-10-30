@@ -117,7 +117,7 @@
                     <div class="three-things-align">
                         <div class="payment-select-option">
                             <select id="transferType" required  name="type">
-                                <option value="TRANSFER TYPE"  {{ $event->transfer_type == "TRANSFER TYPE" ? "selected" : "" }}>{{ __('giftsuggestion.message') }}</option>
+                                <option value="TRANSFER TYPE"  {{ $event->transfer_type == "TRANSFER TYPE" ? "selected" : "" }}>{{ __('giftsuggestion.TRANSFER TYPE') }}</option>
                                 <option value="PAYPAL" {{ $event->transfer_type == "PAYPAL" ? "selected" : "" }}>{{ __('giftsuggestion.paypal') }}</option>
                                 <option value="STRYPE" {{ $event->transfer_type == "STRYPE" ? "selected" : "" }}>{{ __('giftsuggestion.stripe') }}</option>
                                 <option value="INTERAC TRANSFER" {{ $event->transfer_type == "INTERAC TRANSFER" ? "selected" : "" }}>{{ __('giftsuggestion.interac_transfer') }}</option>
@@ -197,7 +197,7 @@
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                         <h2>{{ __('giftsuggestion.title_edit') }}</h2>
-                        <p>{{ __('giftsuggestion.Clomessage_editse') }}</p>
+                        <p>{{ __('giftsuggestion.edit_success') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -222,14 +222,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Want To Send Invitations To Guests?</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('giftsuggestion.yes_add_gift_suggestions') }}</h2>
+                        <p>{{ __('giftsuggestion.description_text') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter1">Yes, Add Gift Suggestions</button>
+                        data-target="#exampleModalCenter1">{{ __('giftsuggestion.yes_add_gift_suggestions') }}</button>
                     <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                 </div>
             </div>
@@ -249,8 +249,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Add New Gift Suggestions</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('giftsuggestion.add_new_gift_suggestions') }}</h2>
+                        <p>{{ __('giftsuggestion.description_text2') }}</p>
                     </div>
                     <div class="main-form-box">
                         <form id="addGiftForm">
@@ -263,8 +263,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeAddModal"
-                        data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="submit-btn btn btn-primary" form="addGiftForm">Add Suggestion</button>
+                        data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
+                    <button type="submit" class="submit-btn btn btn-primary" form="addGiftForm">{{ __('giftsuggestion.Add Suggestion') }}</button>
                     </form>
                 </div>
             </div>
@@ -284,16 +284,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteGiftModalLabel">Delete Gift</h5>
+                    <h5 class="modal-title" id="deleteGiftModalLabel">{{ __('giftsuggestion.Delete Gift') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this gift?</p>
+                    <p>{{ __('giftsuggestion.confirm_delete_gift') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="t-btn t-btn-gray" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="t-btn t-btn-gray" data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="confirmDeleteBtn">Delete</button>
                 </div>
             </div>
@@ -312,8 +312,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Edit Gift</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('giftsuggestion.Edit Gift') }}</h2>
+                        <p>{{ __('giftsuggestion.edit_desc') }}</p>
                     </div>
                     <div class="main-form-box">
                         <!-- Edit Gift Form -->
@@ -330,8 +330,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="editModalCancelBtn"
-                        data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="submit-btn btn btn-primary" form="editGiftForm">Update Gift</button>
+                        data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
+                    <button type="submit" class="submit-btn btn btn-primary" form="editGiftForm">{{ __('giftsuggestion.Update Gift') }}</button>
                 </div>
             </div>
         </div>

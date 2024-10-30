@@ -35,4 +35,24 @@ return [
     'Tools' => 'Tools',
     'Save' => 'Save',
     'Add Card' => 'Add Card',
+
+    'edit_invitation_card' => 'Edit Invitation Card',
+'description_text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+
+'settings' => 'Settings',
+'preview' => 'Preview',
+'undo' => 'Undo',
+'redo' => 'Redo',
+'add_card' => 'Add Card',
+'template' => 'Template',
+'add_text' => 'Add Text',
+'add_sticker' => 'Add Sticker',
+'add_image' => 'Add Image',
+'duplicate' => 'Duplicate',
+'clear_card' => 'Clear Card',
+'animations' => 'Animations',
+'download_pdf' => 'Download PDF',
+'upload_stamp' => 'Upload Stamp'
+
+
 ];
