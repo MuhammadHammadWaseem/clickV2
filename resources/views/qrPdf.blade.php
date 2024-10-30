@@ -60,7 +60,7 @@
                         <p class="kindly">Kindly Rsvp</p>
                         <p class="name-text" style="letter-spacing: 3px; text-transform: uppercase; font-size: 33px !important;">BY {{ $guest['eventDate'] }}</p>
                         <p class="name-text" style="font-weight: 400; margin-top: 2!important; margin-bottom: 2!important;">Please scan this QR code to RSVP</p>
-                        <img class="qr-code" src="{{ asset($guest['qr_code_path']) }}" width="170px" alt="QR Code">
+                        <img class="qr-code" src="{{ $guest['qr_code_path'] }}" width="170px" alt="QR Code">
                         <p class="name-text" style="font-size: 26px !important; margin-top: 0!important">{{ $guest['name'] }}</p>
                     </div>
                 </div>

@@ -46,5 +46,7 @@ return[
 'edit_desc' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
 'Update Gift' => 'Update Gift',
 'edit_success' => 'Suggestion Edited Successfully',
+'No, I Don’t' => 'No, I Don’t',
+'Yes, Create Invitation' => 'Yes, Create Invitation',
 
 ];

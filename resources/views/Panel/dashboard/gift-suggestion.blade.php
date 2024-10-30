@@ -222,15 +222,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>{{ __('giftsuggestion.yes_add_gift_suggestions') }}</h2>
+                        <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
                         <p>{{ __('giftsuggestion.description_text') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('giftsuggestion.No, I Don’t') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#exampleModalCenter1">{{ __('giftsuggestion.yes_add_gift_suggestions') }}</button>
-                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                        data-target="#exampleModalCenter1"><a class="text-light" href="{{ route('panel.event.invitation' ,['id'=>$eventId]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
                 </div>
             </div>
         </div>
@@ -264,7 +263,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeAddModal"
                         data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
-                    <button type="submit" class="submit-btn btn btn-primary" form="addGiftForm">{{ __('giftsuggestion.Add Suggestion') }}</button>
+                    <button type="submit" class="submit-btn btn" form="addGiftForm">{{ __('giftsuggestion.Add Suggestion') }}</button>
                     </form>
                 </div>
             </div>

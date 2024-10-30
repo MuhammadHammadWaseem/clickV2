@@ -2792,8 +2792,8 @@
                         $("#closeExportQrFormModal").click();
                     },
                     error: function(xhr, status, error) {
-                        console.error(error);
-                        alert('An error');
+                        // console.error(error);
+                        // alert('An error');
                     }
                 });
             }
