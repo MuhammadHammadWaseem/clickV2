@@ -65,7 +65,7 @@ return [
     'save_invitation_card' => 'Save Invitation Card',
     'set_animations' => 'Set Animations',
     'close' => 'Close',
-    'non_animations' => 'Non Animations',
+    'non_animations' => 'No Animation',
     'save_animations' => 'Save Animation',
     'need_to_save_setting' => 'You need to save the setting first.',
     'lorem_ipsum_description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',

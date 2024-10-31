@@ -1128,7 +1128,7 @@
                     <button type="button" class="btn btn-secondary" id="closeAnimationModal"  data-dismiss="modal" aria-label="Close">{{ __('invitation.close') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"  data-dismiss="modal" aria-label="Close">{{ __('invitation.save_animations') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveNoneOfThese()"
-                    data-dismiss="modal" aria-label="Close">{{ __('invitation.set_animations') }}</button>
+                    data-dismiss="modal" aria-label="Close">{{ __('invitation.non_animations') }}</button>
                 </div>
             </div>
         </div>
