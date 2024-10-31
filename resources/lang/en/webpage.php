@@ -16,14 +16,11 @@ return[
     can see the layout.',
     'Add New' => 'Add New',
     'Ceremony' => 'Ceremony',
-    'Cermonydesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
+    'Cermonydesc' => 'Upload a photo of the Ceremony address',
     'Recption' => 'Reception',
-    'Recptiondesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
+    'Recptiondesc' => 'Upload a photo of the Reception address',
     'Custome' => 'Custom',
-    'Customedesc' => 'This page is to review your page before you send the invitation out, so here you can
-    see the layout.',
+    'Customedesc' => 'Upload a photo of the Special address',
     'Submit' => 'Submit',
     'Close' => 'Close',
     'Image Add Success Heading' => 'Images Added Successfully',
@@ -38,6 +35,7 @@ return[
     'Serve Meal Modal Yes Button' => 'Yes, Add Meals',
     'Image Delete Success Heading' => 'Image Deleted Successfully',
     'Image Delete Success Message' => 'The image has been successfully deleted.',
+
 
 
 

@@ -42,8 +42,8 @@
 @section('content')
     <div class="container">
         <div class="form-container new-form">
-            <input type="email" placeholder="Search Blogs" name="search" id="search">
-            <button class="btn-new" type="button" id="clear">Clear</button>
+            <input type="email" placeholder="{{ __('blog.search_blogs') }}" name="search" id="search">
+            <button class="btn-new" type="button" id="clear">{{ __('blog.clear') }}</button>
         </div>
         <div class="" id="ResultsBox"
             style="display: flex; justify-content: center; align-items: center; min-width: 280px; padding: 10px; margin: 0 auto; display: none; width: 74%; background-color: rgb(244, 244, 244);">
@@ -56,7 +56,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12 ">
                 <div>
                     <h1 class="category mt-3">
-                        Todays trending
+                        {{ __('blog.todays_trending') }}
                     </h1>
                     @foreach ($trending_blogs as $blog)
                         @if ($blog->is_trending == 1)
@@ -77,8 +77,7 @@
                                 </p>
                                 {{-- <button class="read-more-btn"
                                     onclick="window.location.href='/blog/{{ $blog->slug }}';">Read this article</button> --}}
-                                <a href="/blog/{{ $blog->slug }}" style="margin-top: 10px !important;">Read this
-                                    article</a>
+                                <a href="/blog/{{ $blog->slug }}" style="margin-top: 10px !important;">{{ __('blog.read_this_article') }}</a>
                             </div>
                         @endif
                     @endforeach
@@ -89,7 +88,7 @@
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div>
                     <h1 class="category mt-3 text-start">
-                        Popular blogs
+                        {{ __('blog.popular_blogs') }}
                     </h1>
                     @foreach ($popular_blogs as $blog)
                         @if ($blog->is_popular == 1)
@@ -108,7 +107,7 @@
                                 </p>
                                 {{-- <button class="read-more-btn"
                                     onclick="window.location.href='/blog/{{ $blog->slug }}';">Read this article</button> --}}
-                                <a href="/blog/{{ $blog->slug }}">Read this article</a>
+                                <a href="/blog/{{ $blog->slug }}">{{ __('blog.read_this_article') }}</a>
                             </div>
                         @endif
                     @endforeach
@@ -119,7 +118,8 @@
 
         </div>
         <div class="headind-latest-blogs mt-5">
-            <h1>Latest blogs</h1>
+            <h1>{{ __('blog.latest_blogs') }}</h1>
+
         </div>
 
 
@@ -146,7 +146,7 @@
                                 </p>
                                 {{-- <button onclick="window.location.href='/blog/{{ $blog->slug }}';">Read this
                                     article</button> --}}
-                                <a href="/blog/{{ $blog->slug }}">Read this article</a>
+                                <a href="/blog/{{ $blog->slug }}">{{ __('blog.read_this_article') }}</a>
                             </div>
                         </div>
                     @endif
@@ -162,17 +162,17 @@
 
         <div class="heading-text hs-border">
             <h1>
-                ORGANIZE YOUR EVENT OR SPECIAL DAY & <span class="bold-text"> IMMORTALIZE </span>YOUR MEMORIES
+                {{ __('blog.organize_event') }} <span class="bold-text"> {{ __('blog.immortalize') }} </span>{{ __('blog.your_memories') }}
             </h1>
             <p>
-                Digitize Your Invites, Control your guest List.
+                {{ __('blog.digitize_invites') }}
 
             </p>
         </div>
 
         <div class="form-container new-form form-153">
-            <input type="email" placeholder="Enter your email address">
-            <button class="btn-new" type="submit" id="register">Get Started</button>
+            <input type="email" placeholder="{{ __('blog.email_placeholder') }}">
+            <button class="btn-new" type="submit" id="register">{{ __('blog.get_started') }}</button>
         </div>
 
     </div>

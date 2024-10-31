@@ -12,11 +12,11 @@ return [
     'Eventphotodesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
     'Add New' => 'Ajouter Nouveau',
     'Ceremony' => 'Cérémonie',
-    'Cermonydesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Cermonydesc' => 'Téléchargez une photo de l\'adresse de la cérémonie',
     'Recption' => 'Réception',
-    'Recptiondesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Recptiondesc' => 'Téléchargez une photo de l\'adresse de la réception',
     'Custome' => 'Personnalisé',
-    'Customedesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
+    'Customedesc' => 'Téléchargez une photo de l\'adresse spéciale',
     'Submit' => 'Soumettre',
     'Close' => 'Fermer',
     'Image Add Success Heading' => 'Images Ajoutées avec Succès',
@@ -31,5 +31,7 @@ return [
     'Serve Meal Modal Yes Button' => 'Oui, ajouter des repas',
     'Image Delete Success Heading' => 'Image Supprimée avec Succès',
     'Image Delete Success Message' => 'L\'image a été supprimée avec succès.',
+
+
 
 ];
