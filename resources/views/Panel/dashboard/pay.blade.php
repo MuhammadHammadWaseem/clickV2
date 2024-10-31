@@ -93,7 +93,7 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" placeholder="{{ __('pay.postal_code') }}*" required>
+                                    <input type="text" placeholder="{{ __('pay.city') }}*" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="number" placeholder="{{ __('pay.postal_code') }}*" required>
