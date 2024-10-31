@@ -943,7 +943,7 @@
                                                         onclick="neonText()">Text Neon Effect</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="applyTextMirror()">Text Mirror</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                {{-- <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="applyTextIce()">Text Ice Effect</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="applyTextFire()">Text Fire Effect</a></li>
@@ -960,7 +960,7 @@
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="applyTextComic()">Text Comic</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextShimmer()">Text Shimmer</a></li>
+                                                        onclick="applyTextShimmer()">Text Shimmer</a></li> --}}
                                             </ul>
                                         </div>
                                     </form>

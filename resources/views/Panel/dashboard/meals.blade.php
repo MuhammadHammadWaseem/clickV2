@@ -90,7 +90,7 @@
                     <div class="two-things-align">
                         <div class="text">
                             <h2>{{ __('meal.meal_details_title') }}</h2>
-                            <p>{{ __('meal.meal_details_description') }}</p>
+                            {{-- <p>{{ __('meal.meal_details_description') }}</p> --}}
                         </div>
                         <button class="t-btn" type="button" class="btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter">{{ __('meal.Add New') }} </button>
@@ -177,7 +177,7 @@
                 <div class="modal-body">
                     <div class="text">
                         <h2>Edit Meal</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                     </div>
                     <div class="main-form-box">
                         <form id="editMealForm" action="{{ route('panel.event.meals.update', '') }}" method="POST">
