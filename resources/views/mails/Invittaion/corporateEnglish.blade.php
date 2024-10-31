@@ -112,7 +112,7 @@
                                         <p>
                                             <a href="{{  config('app.url') . '/' . 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
                                                target="_blank">
-                                                <img src="{{ asset('card-images/' . ($data['event']['id_event'] ?? 'default') . '.png') }}"
+                                                <img src="{{ asset(config('app.url') . '/card-images/'  . ($data['event']['id_event'] ?? 'default') . '.png') }}"
                                                      style="margin-bottom:20px; max-width:100%;">
                                             </a>
                                         </p>
