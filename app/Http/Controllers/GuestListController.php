@@ -769,7 +769,7 @@ class GuestListController extends Controller
         $eventDate = $date->format('F j, Y');
 
         // require_once 'C:\xampp8.2\htdocs\clickV2\app\Http\Controllers\phpqrcode/qrlib.php';
-        require_once base_path('app\Http\Controllers\phpqrcode/qrlib.php');
+        require_once base_path('app/Http/Controllers/phpqrcode/qrlib.php');
         // require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
 
         if ($guests->isNotEmpty()) {
