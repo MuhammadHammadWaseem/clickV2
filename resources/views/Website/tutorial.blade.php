@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <p class="text1">
-                            {{ __('tutorial.event_planning_description') }}
+                            {{ __('tutorial.clickinvitation_description') }}
 
 
                         </p>
@@ -200,7 +200,7 @@
         </div>
 
         <div class="form-container new-form form-153">
-            <input type="email" placeholder="Enter your email address">
+            <input type="email" placeholder="{{ __('tutorial.email') }}">
             <button class="btn-new" type="submit" id="register">{{ __('tutorial.get_started_1') }}</button>
         </div>
     </div>
