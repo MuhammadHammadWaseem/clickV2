@@ -788,9 +788,11 @@ class GuestListController extends Controller
                     if (!file_exists($qrcode)) {
                         \QRcode::png($url, $qrcode, 'H', 4, 4);
                     }
+
+                    $base64QrCode = base64_encode(file_get_contents($qrcode));
                     $guestData[] = [
                         'name' => $guest_name,
-                        'qr_code_path' => url($qrcode),
+                        'qr_code_base64' => $base64QrCode,
                         'eventDate' => $eventDate,
                     ];
                 }
@@ -799,12 +801,12 @@ class GuestListController extends Controller
             set_time_limit(600);
             $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate]);
             // $pdf = PDF::loadView('qrPdf', ['guests' => $guestData, 'eventDate' => $eventDate])->setOptions(['isRemoteEnabled' => true]);
-
             return $pdf->download('tables.pdf');
         } else {
             return response()->json(['message' => 'No guests found.']);
         }
     }
+
 
 
     // Save buttons when send invitaiton
