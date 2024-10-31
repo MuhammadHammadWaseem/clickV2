@@ -27,13 +27,13 @@ const stickers = [];
 var clonedText;
 let canv;
 let moveHistory = [];
-let currentIndex = -1;
 var canvasHistory = [];
 
 
-var undoStack = [];
-var redoStack = [];
-var maxUndoStackSize = 10000000;
+let undoStack = [];
+let redoStack = [];
+let currentIndex = -1;
+const maxUndoStackSize = 50;
 
 
 canv = new fabric.Canvas("canvas", {
@@ -1174,14 +1174,20 @@ function moveBackword() {
 // Undo
 var maxHistoryLength = 10;
 
-document.getElementById("undoBtn").addEventListener("click", function () {
-  undo();
-});
+// document.getElementById("undoBtn").addEventListener("click", function () {
+//   undo();
+// });
 
-function loadCanvasState() {
-  canv.loadFromJSON(moveHistory[currentIndex], function () {
-    canv.renderAll();
-  });
+function loadCanvasState(state) {
+  canv.off('object:added', saveState);
+    canv.off('object:modified', saveState);
+    canv.off('object:removed', saveState);
+    canv.loadFromJSON(state, function () {
+      canv.renderAll();
+      canv.on('object:added', saveState);
+      canv.on('object:modified', saveState);
+      canv.on('object:removed', saveState);
+    });
 }
 
 function saveCanvasState() {
@@ -1195,9 +1201,9 @@ function saveCanvasState() {
 }
 
 // Redo
-document.getElementById("redoBtn").addEventListener("click", function () {
-  redo();
-})
+// document.getElementById("redoBtn").addEventListener("click", function () {
+//   redo();
+// })
 function giveRecordOfCard() {
   let record = [];
   for (let i = 0; i < canv._objects.length; i++) {
@@ -1324,13 +1330,13 @@ function addText() {
     selectionColor: 'rgba(0, 0, 0, 0.3)',
   });
   canv.add(textbox);
-  saveState();
-  saveAll();
-
   canv.setActiveObject(textbox);
   canv.requestRenderAll();
   textbox.enterEditing();
   textbox.hiddenTextarea.focus();
+
+  saveState();
+  // saveAll();
 }
 
 // document
@@ -1364,10 +1370,16 @@ function addText() {
 // Undo
 
 
-function loadCanvasState() {
-  canv.loadFromJSON(moveHistory[currentIndex], function () {
-    canv.renderAll();
-  });
+function loadCanvasState(state) {
+  canv.off('object:added', saveState);
+    canv.off('object:modified', saveState);
+    canv.off('object:removed', saveState);
+    canv.loadFromJSON(state, function () {
+      canv.renderAll();
+      canv.on('object:added', saveState);
+      canv.on('object:modified', saveState);
+      canv.on('object:removed', saveState);
+    });
 }
 
 function saveCanvasState() {
@@ -1382,9 +1394,9 @@ function saveCanvasState() {
 
 
 // Redo
-document.getElementById("redoBtn").addEventListener("click", function () {
-  redo();
-});
+// document.getElementById("redoBtn").addEventListener("click", function () {
+//   redo();
+// });
 
 // document.querySelector(".deleteBtn").addEventListener("click", function () {
 //   const obj = canv.getActiveObject();
@@ -2693,15 +2705,15 @@ function renderBgImages(imgData, selectedBackground) {
 function updateCanvasHistory() {
   canvasHistory.push(canv.toJSON());
 }
-function addToHistory() {
-  const jsonData = JSON.stringify(canv.toJSON());
-  moveHistory = moveHistory.slice(0, currentIndex + 1); // Remove future history
-  moveHistory.push(jsonData);
-  if (moveHistory.length > 10) {
-    moveHistory.shift();
-  }
-  currentIndex = moveHistory.length - 1;
-}
+// function addToHistory() {
+//   const jsonData = JSON.stringify(canv.toJSON());
+//   moveHistory = moveHistory.slice(0, currentIndex + 1); // Remove future history
+//   moveHistory.push(jsonData);
+//   if (moveHistory.length > 10) {
+//     moveHistory.shift();
+//   }
+//   currentIndex = moveHistory.length - 1;
+// }
 
 function switchToOld() {
   window.location =
@@ -2932,9 +2944,9 @@ function AddCity() {
 //UNDO
 
 function saveState() {
-  var currentState = JSON.stringify(canv.toJSON(['selectable', 'evented'])); // Save canvas state
+  var currentState = JSON.stringify(canv.toJSON()); // Save canvas state
   if (currentIndex < undoStack.length - 1) {
-    undoStack.splice(currentIndex + 1, undoStack.length - currentIndex - 1); // Clear redo states
+    undoStack.splice(currentIndex + 1); // Clear redo states
   }
   undoStack.push(currentState);
   if (undoStack.length > maxUndoStackSize) {
@@ -2947,22 +2959,27 @@ function saveState() {
 function undo() {
   if (currentIndex > 0) {
     currentIndex--;
-    loadCanvasState();
+    loadCanvasState(undoStack[currentIndex]);
   }
 }
 
 function redo() {
   if (currentIndex < undoStack.length - 1) {
     currentIndex++;
-    loadCanvasState();
+    loadCanvasState(undoStack[currentIndex]);
   }
 }
 
-function loadCanvasState() {
-  var state = JSON.parse(undoStack[currentIndex]);
-  canv.loadFromJSON(state, function () {
-    canv.renderAll();
-  });
+function loadCanvasState(state) {
+  canv.off('object:added', saveState);
+    canv.off('object:modified', saveState);
+    canv.off('object:removed', saveState);
+    canv.loadFromJSON(state, function () {
+      canv.renderAll();
+      canv.on('object:added', saveState);
+      canv.on('object:modified', saveState);
+      canv.on('object:removed', saveState);
+    });
 }
 
 function toggleTwoSided(element) {
