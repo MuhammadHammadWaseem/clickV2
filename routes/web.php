@@ -40,6 +40,7 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/contact', [WebController::class, 'contact'])->name('contact');
     Route::get('/blog', [WebController::class, 'blog'])->name('blog');
     Route::get('/tutorial', [WebController::class, 'tutorial'])->name('tutorial');
+    Route::get('/packages', [WebController::class, 'packages'])->name('packages');
 
     Route::middleware('guest')->group(function () {
         Route::get('/register', [WebController::class, 'register']);

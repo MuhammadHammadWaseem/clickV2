@@ -262,5 +262,11 @@ class WebController extends Controller
         } else
             return 0;
     }
+
+    public function packages(){
+
+       return view("Website.package");
+    }
+
 }
 

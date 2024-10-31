@@ -14,7 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.cdnfonts.com/css/night" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="stylesheet" href="/assets/css/webStyle.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/webStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <meta property="og:title" content="Click Invitation" />
     <meta property="og:description" content="the best Guest management tools. digital invitation" />
@@ -128,6 +129,7 @@ ul.drop-menu li a {
 
                     <ul>
                         <li><a href="/events">{{ __('new_home.Events') }}</a></li>
+                        <li><a href="/packages">Packages</a></li>
                         <li><a href="/features">{{ __('new_home.Features') }}</a></li>
                         <li><a href="/about">{{ __('new_home.About') }} </a></li>
                         <li><a href="/contact">{{ __('new_home.Contact') }}</a></li>
