@@ -1101,4 +1101,14 @@ class OperationController extends Controller
         }
         return response()->json(['message' => 'Invitations sent successfully.']);
     }
+
+
+    public function guestCanSelectSeats(Request $request)
+    {
+        $event = Event::where('id_event', $request->idevent)->first();
+        $event->update([
+            'guestCanSelectSeats' => $request->guestCanSelectSeats
+        ]);
+        return $event;
+    }
 }

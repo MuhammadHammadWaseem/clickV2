@@ -39,5 +39,10 @@ return[
 'set_table' => 'Set Table',
 'guests' => 'Guests',
 'send_reminder' => 'Send Reminder',
+'Changes Updated Successfully' => 'Changes Updated Successfully',
+'Guest can select seats successfully' => 'Guest can select seats successfully',
+'Guest can not select seats' => 'Guest can not select seats',
+'I will select seats' => 'I will select seats',
+'Guest will select seats' => 'Guest will select seats',
 
 ];

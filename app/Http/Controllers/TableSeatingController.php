@@ -24,7 +24,7 @@ class TableSeatingController extends Controller
         $eventId = GeneralHelper::getEventId();
         $event = Event::where('id_event', $eventId)->first();
         $isCorporate = $event->type == "CORPORATE" ? 1 : 0;
-        return view("Panel.dashboard.guest-list.index", compact('isCorporate'));
+        return view("Panel.dashboard.guest-list.index", compact('isCorporate','event'));
     }
 
     public function showTables()

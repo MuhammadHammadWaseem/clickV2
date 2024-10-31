@@ -39,4 +39,9 @@ return [
     'set_table' => 'Définir la Table',
     'guests' => 'Invités',
     'send_reminder' => 'Envoyer un Rappel',
+    'Changes Updated Successfully' => 'Modifications mises à jour avec succès',
+    'Guest can select seats successfully' => 'Les invités peuvent sélectionner des sièges avec succès',
+    'Guest can not select seats' => 'Les invités ne peuvent pas sélectionner de sièges',
+    'I will select seats' => 'Je sélectionnerai les sièges',
+    'Guest will select seats' => 'Les invités sélectionneront leurs sièges',
 ];
