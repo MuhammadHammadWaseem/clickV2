@@ -405,7 +405,9 @@
                     @if ($event->boolcerimony)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
+                                @if ($event->cerimg)
                                 <img src="{{ $event->cerimg }}" class="card-img-top">
+                                @endif
                                 <div class="card-body">
                                     <h4 class="card-title">EVENT CEREMONY</h4>
                                     <p class="card-text">{{ $event->cerdesc }}</p>
@@ -415,7 +417,7 @@
                                     </p>
                                     @if ($event->certime)
                                         <p class="card-text text-center"><small class="text-muted"
-                                                id='eventCer'>{{ \Carbon\Carbon::parse($event->certime)->setTimezone('-7')->format('g:i a') }}</small>
+                                                id='eventCer'>{{ \Carbon\Carbon::parse($event->certime)->format('g:i a') }}</small>
                                         </p>
                                     @endif
                                 </div>
@@ -426,7 +428,9 @@
                     @if ($event->boolreception)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
+                                @if ($event->recimg)
                                 <img src="{{ $event->recimg }}" class="card-img-top">
+                                @endif
                                 <div class="card-body">
                                     <h4 class="card-title">EVENT RECEPTION</h4>
                                     <p class="card-text">{{ $event->recdesc }}</p>
@@ -436,7 +440,7 @@
                                     </p>
                                     @if ($event->rectime)
                                         <p class="card-text text-center"><small class="text-muted"
-                                                id='recTime'>{{ \Carbon\Carbon::parse($event->rectime)->setTimezone('-7')->format('g:i a') }}</small>
+                                                id='recTime'>{{ \Carbon\Carbon::parse($event->rectime)->format('g:i A') }}</small>
                                         </p>
                                     @endif
                                 </div>
@@ -447,7 +451,9 @@
                     @if ($event->boolparty)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
-                                <img src="{{ $event->parimg }}" class="card-img-top">
+                                @if ($event->parimg)
+                                    <img src="{{ $event->parimg }}" class="card-img-top">
+                                @endif
                                 <div class="card-body">
                                     <h4 class="card-title">{{ strtoupper($event->parname) }}</h4>
                                     <p class="card-text">{{ $event->pardesc }}</p>
@@ -457,7 +463,7 @@
                                     </p>
                                     @if ($event->partime)
                                         <p class="card-text text-center"><small class="text-muted"
-                                                id='parTime'>{{ \Carbon\Carbon::parse($event->partime)->setTimezone('-7')->format('g:i a') }}</small>
+                                                id='parTime'>{{ \Carbon\Carbon::parse($event->partime)->format('g:i a') }}</small>
                                         </p>
                                     @endif
                                 </div>
@@ -521,88 +527,88 @@
             newEDate.getHours() + ":" + min;
     }
 
-    if (("{{ $event->certime }}").length > 0) {
-        console.log("{{ $event->certime }}");
-        console.log(new Date("{{ $event->certime }}"));
-        let eDate = document.getElementById('eventCer');
-        let newEDate = new Date("{{ $event->certime }}");
-        let hr = newEDate.getHours();
-        let min = newEDate.getMinutes();
-        let ft = 'AM';
-        if (parseInt(hr) > 11) {
-            ft = "PM";
-            if (parseInt(hr) > 12) {
-                hr = parseInt(hr) - 12;
-            }
-        }
-        if (parseInt(hr) == 0) {
-            hr = "12";
-        }
-        if (min == "0") {
-            min = "00";
-        } else if (parseInt(min) < 10) {
-            min = "0" + min;
-        }
-        eDate.innerHTML = hr + ":" + min + " " + ft;
-    }
+    // if (("{{ $event->certime }}").length > 0) {
+    //     console.log("{{ $event->certime }}");
+    //     console.log(new Date("{{ $event->certime }}"));
+    //     let eDate = document.getElementById('eventCer');
+    //     let newEDate = new Date("{{ $event->certime }}");
+    //     let hr = newEDate.getHours();
+    //     let min = newEDate.getMinutes();
+    //     let ft = 'AM';
+    //     if (parseInt(hr) > 11) {
+    //         ft = "PM";
+    //         if (parseInt(hr) > 12) {
+    //             hr = parseInt(hr) - 12;
+    //         }
+    //     }
+    //     if (parseInt(hr) == 0) {
+    //         hr = "12";
+    //     }
+    //     if (min == "0") {
+    //         min = "00";
+    //     } else if (parseInt(min) < 10) {
+    //         min = "0" + min;
+    //     }
+    //     eDate.innerHTML = hr + ":" + min + " " + ft;
+    // }
 
-    if (("{{ $event->partime }}").length > 0) {
-        console.log("{{ $event->partime }}");
-        console.log(new Date("{{ $event->partime }}"));
-        let eDate = document.getElementById('parTime');
-        let newEDate = new Date("{{ $event->partime }}");
-        let hr = newEDate.getHours();
-        let min = newEDate.getMinutes();
-        let ft = 'AM';
-        if (parseInt(hr) > 11) {
-            ft = "PM";
-            if (parseInt(hr) > 12) {
-                hr = parseInt(hr) - 12;
-            }
-        }
-        if (parseInt(hr) == 0) {
-            hr = "12";
-        }
-        if (min == "0") {
-            min = "00";
-        } else if (parseInt(min) < 10) {
-            min = "0" + min;
-        }
-        eDate.innerHTML = hr + ":" + min + " " + ft;
-    }
+    // if (("{{ $event->partime }}").length > 0) {
+    //     console.log("{{ $event->partime }}");
+    //     console.log(new Date("{{ $event->partime }}"));
+    //     let eDate = document.getElementById('parTime');
+    //     let newEDate = new Date("{{ $event->partime }}");
+    //     let hr = newEDate.getHours();
+    //     let min = newEDate.getMinutes();
+    //     let ft = 'AM';
+    //     if (parseInt(hr) > 11) {
+    //         ft = "PM";
+    //         if (parseInt(hr) > 12) {
+    //             hr = parseInt(hr) - 12;
+    //         }
+    //     }
+    //     if (parseInt(hr) == 0) {
+    //         hr = "12";
+    //     }
+    //     if (min == "0") {
+    //         min = "00";
+    //     } else if (parseInt(min) < 10) {
+    //         min = "0" + min;
+    //     }
+    //     eDate.innerHTML = hr + ":" + min + " " + ft;
+    // }
 
-    if (("{{ $event->rectime }}").length > 0) {
-        console.log("{{ $event->rectime }}");
-        console.log(new Date("{{ $event->rectime }}"));
-        let eDate = document.getElementById('recTime');
-        let newEDate = new Date("{{ $event->rectime }}");
-        let hr = newEDate.getHours();
-        let min = newEDate.getMinutes();
-        let ft = 'AM';
-        if (parseInt(hr) > 11) {
-            ft = "PM";
-            if (parseInt(hr) > 12) {
-                hr = parseInt(hr) - 12;
-            }
-        }
-        if (parseInt(hr) == 0) {
-            hr = "12";
-        }
-        if (min == "0") {
-            min = "00";
-        } else if (parseInt(min) < 10) {
-            min = "0" + min;
-        }
-        eDate.innerHTML = hr + ":" + min + " " + ft;
+    // if (("{{ $event->rectime }}").length > 0) {
+    //     console.log("{{ $event->rectime }}");
+    //     console.log(new Date("{{ $event->rectime }}"));
+    //     let eDate = document.getElementById('recTime');
+    //     let newEDate = new Date("{{ $event->rectime }}");
+    //     let hr = newEDate.getHours();
+    //     let min = newEDate.getMinutes();
+    //     let ft = 'AM';
+    //     if (parseInt(hr) > 11) {
+    //         ft = "PM";
+    //         if (parseInt(hr) > 12) {
+    //             hr = parseInt(hr) - 12;
+    //         }
+    //     }
+    //     if (parseInt(hr) == 0) {
+    //         hr = "12";
+    //     }
+    //     if (min == "0") {
+    //         min = "00";
+    //     } else if (parseInt(min) < 10) {
+    //         min = "0" + min;
+    //     }
+    //     eDate.innerHTML = hr + ":" + min + " " + ft;
 
-        @if (Session::has('success'))
-            toastr.success("{{ Session::get('success') }}");
-        @endif
+    //     @if (Session::has('success'))
+    //         toastr.success("{{ Session::get('success') }}");
+    //     @endif
 
-        @if ($errors->any())
-            toastr.error("{{ $errors->first() }}");
-        @endif
-    }
+    //     @if ($errors->any())
+    //         toastr.error("{{ $errors->first() }}");
+    //     @endif
+    // }
 
 
     window.onload = function() {
