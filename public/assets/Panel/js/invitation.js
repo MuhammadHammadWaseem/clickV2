@@ -1174,9 +1174,9 @@ function moveBackword() {
 // Undo
 var maxHistoryLength = 10;
 
-// document.getElementById("undoBtn").addEventListener("click", function () {
-//   undo();
-// });
+document.getElementById("undoBtn").addEventListener("click", function () {
+  undo();
+});
 
 function loadCanvasState() {
   canv.loadFromJSON(moveHistory[currentIndex], function () {
@@ -1195,9 +1195,9 @@ function saveCanvasState() {
 }
 
 // Redo
-// document.getElementById("redoBtn").addEventListener("click", function () {
-//   redo();
-// })
+document.getElementById("redoBtn").addEventListener("click", function () {
+  redo();
+})
 function giveRecordOfCard() {
   let record = [];
   for (let i = 0; i < canv._objects.length; i++) {
@@ -1382,9 +1382,9 @@ function saveCanvasState() {
 
 
 // Redo
-// document.getElementById("redoBtn").addEventListener("click", function () {
-//   redo();
-// });
+document.getElementById("redoBtn").addEventListener("click", function () {
+  redo();
+});
 
 // document.querySelector(".deleteBtn").addEventListener("click", function () {
 //   const obj = canv.getActiveObject();
