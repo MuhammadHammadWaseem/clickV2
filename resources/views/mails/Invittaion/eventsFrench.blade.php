@@ -70,7 +70,7 @@
                                                     <p style="text-align:center"><a
                                                             href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
                                                             target="_blank">
-                                                            <img src="{{ asset('card-images/' . $data['event']['id_event'] . '.png') }}"
+                                                            <img src="{{ asset(config('app.url') . '/card-images/'  . ($data['event']['id_event'] ?? 'default') . '.png') }}"
                                                                 border="0" style="margin-bottom:20px;max-width:100%"
                                                                 class="CToWUd" data-bit="iit"></a>
                                                     </p>

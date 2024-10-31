@@ -60,8 +60,8 @@
                                                     <p style="text-align:center">
                                                         <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}"
                                                             target="_blank">
-                                                            <img src="{{ asset('card-images/' . $data['event']['id_event'].'.png') }}"
-                                                                style="margin-bottom:20px;max-width:100%;">
+                                                            <img src="{{ asset(config('app.url') . '/card-images/'  . ($data['event']['id_event'] ?? 'default') . '.png') }}"
+                                                            style="margin-bottom:20px; max-width:100%;">
                                                         </a>
                                                     </p>
                                                     @if ($data['event']->type == 'CORPORATE')

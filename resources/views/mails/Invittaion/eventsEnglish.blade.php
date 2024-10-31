@@ -90,7 +90,7 @@
             </p>
             <p>
                 <a href="{{ url('/') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" target="_blank">
-                    <img src="{{ asset('card-images/' . $data['event']['id_event'] . '.png') }}" alt="Invitation Image" style="max-width: 100%; margin-bottom: 20px;">
+                    <img src="{{ asset(config('app.url') . '/card-images/'  . ($data['event']['id_event'] ?? 'default') . '.png') }}" alt="Invitation Image" style="max-width: 100%; margin-bottom: 20px;">
                 </a>
             </p>
 
