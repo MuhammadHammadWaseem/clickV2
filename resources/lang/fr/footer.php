@@ -1,23 +1,19 @@
 <?php
 return[
-    'definition' => 'ClickInvitation is an online platform that simplifies event planning by providing digital invitations for all types of events.',
-    'Quick Links' => 'Quick Links',
-    'events' => 'Events',
-    'features' => 'Features',
-    'about' => 'About',
+    'definition' => "ClickInvitation est une plateforme en ligne qui simplifie la planification d'événements en fournissant des invitations numériques pour tous les types d'événements.",
+    'Quick Links' => 'Liens Rapides',
+    'events' => 'Événements',
+    'features' => 'Fonctionnalités',
+    'about' => 'À Propos',
     'contact' => 'Contact',
     'blogs' => 'Blogs',
-
-    'tutorial' => 'Tutorial',
-    'contact_us' => 'Contact Us',
-    'contact_message' => 'Feel free to get in touch with us!',
+    'tutorial' => 'Tutoriel',
+    'contact_us' => 'Contactez-Nous',
+    'contact_message' => 'N’hésitez pas à nous contacter !',
     'contact_email' => 'Info@clickinvitation.com',
-    'Copyright' => 'Copyright',
-    'all_rights_reserved' => 'All rights reserved.',
-    'privacy_policy' => 'Privacy Policy',
-    'design_developed_by' => 'Design & Developed By',
-
-
-
+    'Copyright' => 'Droits d\'Auteur',
+    'all_rights_reserved' => 'Tous droits réservés.',
+    'privacy_policy' => 'Politique de Confidentialité',
+    'design_developed_by' => 'Design & Développé Par',
 
 ];

@@ -37,27 +37,27 @@
         <div class="col-lg-12">
             <div class="box-styling your-web-page reminders tutorials">
                 <div class="text">
-                    <h2>Tutorials</h2>
+                    <h2>{{ __('tutorial.tutorials') }}</h2>
                 </div>
                     <div class="main-tabs">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Introduction</a>
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">{{ __('tutorial.introduction') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Web Page</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">{{ __('tutorial.web_page') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">General Info</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">{{ __('tutorial.general_info') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Invitations</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">{{ __('tutorial.invitations') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">Guest List</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">{{ __('tutorial.guest_list') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Table Management</a>
+                                <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">{{ __('tutorial.table_management') }}</a>
                             </li>
                         </ul><!-- Tab panes -->
                         <div class="tab-content">

@@ -132,11 +132,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 16.png" alt=""></div>
                             <div>
-                                <h3>{{ __('features.effortless_event_planning') }}</h3>
+                                <h3>{{ __('tutorial.effortless_event_planning') }}</h3>
                             </div>
                         </div>
                         <p class="text1">
-                            {{ __('features.event_planning_description') }}
+                            {{ __('tutorial.event_planning_description') }}
 
 
                         </p>

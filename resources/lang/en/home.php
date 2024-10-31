@@ -55,7 +55,6 @@ return [
     'Enough? start planning!'  => 'Enough? start planning!',
     'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY'  => 'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY',
     'GET STARTED NOW'  => 'GET STARTED NOW',
-
     'title' => 'Click Invitation: Organize Your Events or Special Day',
     'description' => 'Click Invitation is the ultimate event organization tool that helps you effortlessly plan and manage your events or special day. Let\'s organize your next event.',
     'Get Started Button Text' => 'Get Started',
@@ -98,10 +97,8 @@ return [
     'customer_feedback_part_1' => 'TAKE A LOOK AT WHAT OUT',
     'customer_feedback_part_2' => 'CUSTOMERS',
     'customer_feedback_part_3' => 'SAYS ABOUT US',
-
     'testimonial_1_name' => 'Sarah',
     'testimonial_1_feedback' => 'The baby shower invitations created on ClickInvitation were adorable and exactly what I envisioned. It added a special touch to our celebration.',
-
     'testimonial_2_name' => 'Emily',
     'testimonial_2_feedback' => 'We used ClickInvitation for our engagement party, and it was a hit with our friends and family. The customization options allowed us to match the theme perfectly.',
 
@@ -174,10 +171,8 @@ return [
 
     'CAN_WE_STEER_OUR_GUESTS_TO_THEIR_TABLES' => 'Can we steer our guests to their tables?',
     'TABLE_ASSIGNMENT_DEFINITION' => 'Yes, we made it very easy to create tables and assign the guests to their seats.',
-
     'DOES_IT_INCLUDE_A_PHOTO_GALLERY' => 'Does it include a photo gallery?',
     'PHOTO_GALLERY_DEFINITION' => 'Yes, we offer a photo gallery for all photos uploaded by the organizers and their guests to the private webpage of the event.',
-
     'Clickinvitation' => 'Clickinvitation.com',
     'EFFORTLESS_EVENT_PLANNING_TITLE' => 'Effortless Event Planning',
     'EFFORTLESS_EVENT_PLANNING_DESCRIPTION' => "ClickInvitation streamlines every aspect of event planning, offering auto guest count, customizable invitations, and intuitive table and seating arrangement tools for seamless, stress-free celebrations. Personalize your event with our easy-to-use customization options or upload your own designs for unique, memorable invitations.",

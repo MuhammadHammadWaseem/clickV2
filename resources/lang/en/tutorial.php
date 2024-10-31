@@ -19,7 +19,12 @@ return[
 'easy_control' => 'In only few seconds you’ll be on your way to easily control and manage your event.',
 'get_started_1' => 'Get Started',
 
-
+'introduction' => 'Introduction',
+'web_page' => 'Web Page',
+'general_info' => 'General Info',
+'invitations' => 'Invitations',
+'guest_list' => 'Guest List',
+'table_management' => 'Table Management',
 
 
 ];
