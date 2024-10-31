@@ -32,12 +32,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
 
     {{-- <script src="/assets/jspanel/jquery.min.js"></script> --}}
     <script src="{{ asset('/assets/jspanel/jquery.min.js') }}"></script>
 
     <style>
+
         .lb-next{
             display: block !important;
             opacity: 1 !important;
@@ -50,7 +52,99 @@
     </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#sp">
+<body data-bs-spy="scroll" data-bs-target="#sp" class="extra_side_page">
+
+
+
+    <header class="custom_mobile_toggle_header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header_content">
+                        <div class="custom_menu_toggle">
+                            <input id="dropdown-button" type="checkbox" class="dropdown-toggle">
+                            <label class="dropdown-label" for="dropdown-button"></label>
+                            <div class="menu-slide-from-left" id="menu">
+                                <div class="inner-menu-slide-from-left">
+                                    <div class="left-menu-dash">
+                                        <div class="two-things-inline">
+                                            <h2>Menu</h2>
+                                        </div>
+                                        <div class="nav-top-menu" id="sp">
+                                            <ul>
+                                                <li><a href="#start">START</a></li>
+                    
+                                                <li><a href="#thecouple">
+                                                    @if ($eventType)
+                                                        @if ($eventType->couple_event)
+                                                            THE COUPLE
+                                                        @else
+                                                            Description
+                                                        @endif
+                                                    @endif
+                                                </a></li>
+                    
+                                                <li> @if (!$photogallery->isEmpty())
+                                                        <a href="#gallery">GALLERY</a>
+                                                @endif</li>
+                    
+                                                <li>@if ($event->boolcerimony || $event->boolreception || $event->boolparty)
+                                                        <a href="#eventsc">EVENT SCHEDULE</a>
+                                                @endif</li>
+                    
+                                            </ul>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main_mobile_logo">
+                            <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png" alt=""></a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <header class="custom_dextop_mode_header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="main-logo">
+                        <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="nav-top-menu" id="sp">
+                        <ul>
+                            <li><a href="#start">START</a></li>
+
+                            <li><a href="#thecouple">
+                                @if ($eventType)
+                                    @if ($eventType->couple_event)
+                                        THE COUPLE
+                                    @else
+                                        Description
+                                    @endif
+                                @endif
+                            </a></li>
+
+                            <li> @if (!$photogallery->isEmpty())
+                                    <a href="#gallery">GALLERY</a>
+                            @endif</li>
+
+                            <li>@if ($event->boolcerimony || $event->boolreception || $event->boolparty)
+                                    <a href="#eventsc">EVENT SCHEDULE</a>
+                            @endif</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <section id="start" class="main"
         style="background-image: url('{{ $event->mainimage }}?id=<?php echo mt_rand(1, 100000); ?>'); background-position: center;background-size: cover">
@@ -90,40 +184,8 @@
         <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
     </section>
 
-    <section class="container-fluid menu">
-        <div class="row justify-content-md-center" id="sp">
-            <div class="col-md-2 offset-md-2">
-                <a href="#start">START</a>
-                <hr class="d-block d-md-none">
-            </div>
-            <div class="col-md-2">
-                <a href="#thecouple">
-                    @if ($eventType)
-                        @if ($eventType->couple_event)
-                            THE COUPLE
-                        @else
-                            Description
-                        @endif
-                    @endif
-                </a>
-                <hr class="d-block d-md-none">
-            </div>
-            @if (!$photogallery->isEmpty())
-                <div class="col-md-2">
-                    <a href="#gallery">GALLERY</a>
-                    <hr class="d-block d-md-none">
-                </div>
-            @endif
-            @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
-                <div class="col-md-2">
-                    <a href="#eventsc">EVENT SCHEDULE</a>
-                    <hr class="d-block d-md-none">
-                </div>
-            @endif
-        </div>
-    </section>
-
-    <section id="thecouple" class="container thecouple">
+    <section id="thecouple" class="container">
+       <div class="box-styling">
         <div class="row tit">
             <div class="col text-center">
                 <h1>
@@ -154,8 +216,8 @@
             @if ($eventType->couple_event)
                 <div class="row mt-4">
                     <div class="col">
-                        <div class="card mb-3">
-                            <div class="row g-0">
+                        <div class="mb-3">
+                            <div class="row card g-0">
                                 <div class="col-md-4">
                                     <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
                                     @if ($event->imggroom)
@@ -173,8 +235,8 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-3">
-                            <div class="row g-0">
+                        <div class="mb-3">
+                            <div class="row card g-0">
                                 <div class="col-md-4">
                                     @if ($event->imgbride)
                                         <img src="{{ url('/') }}{{ $event->imgbride }}" class="img-fluid rounded-start">
@@ -193,6 +255,7 @@
                 </div>
             @endif
         @endif
+       </div>
     </section>
 
     <div id="photogalleryModal" tabindex="-1" class="modal" tabindex="-1">
@@ -210,7 +273,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn modal-t-btn">Submit</button>
                     </div>
                 </form>
             </div>
@@ -220,190 +283,194 @@
 
     @if (!$photogallery->isEmpty() || !$videogallery->isEmpty())
         <section id="gallery" class="container gallery">
-            <div class="row tit">
-                <div class="col text-center">
-                    <h1>GALLERY</h1>
-                    <h4 class="mt-4 mb-4">Check out the Candid Moments</h4>
-                    <button data-bs-toggle="modal" data-bs-target="#photogalleryModal" class="btn btn-success">ADD
-                        PHOTOS</button>
-                    <hr>
-                </div>
-            </div>
-
-            {{-- <div class="row">
-                <div class="col">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach ($photogallery as $photo)
-                                <div class="carousel-item @if ($loop->first) active @endif">
-                                    <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
-								   data-lightbox="gallery" 
-								   data-title="Image {{ $loop->iteration }}" class="img-thumbnail">
-                                    <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                        class="d-block w-100" height="600px">
-                                </div>
-                            @endforeach
-                            <!--<div class="carousel-item">
-       <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-       <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
-      </div>-->
-                        </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+            <div class="box-styling">
+                <div class="row tit">
+                    <div class="col text-center">
+                        <h1>GALLERY</h1>
+                        <h4 class="mt-4 mb-4">Check out the Candid Moments</h4>
+                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal" class="btn t-btn">ADD
+                            PHOTOS</button>
+                        <hr>
                     </div>
                 </div>
-            </div> --}}
-
-            <div class="row">
-                <div class="col">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @php
-                                // Ensure the collection is sorted in descending order based on a specific field.
-                                $sortedPhotogallery = $photogallery->sortByDesc('id_photogallery');
-                            @endphp
-            
-                            @foreach ($sortedPhotogallery as $photo)
-                                <div class="carousel-item @if ($loop->first) active @endif">
-                                    <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
+    
+                {{-- <div class="row">
+                    <div class="col">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($photogallery as $photo)
+                                    <div class="carousel-item @if ($loop->first) active @endif">
+                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
                                        data-lightbox="gallery" 
-                                       data-title="Image {{ $loop->iteration }}" 
-                                       class="img-thumbnail">
+                                       data-title="Image {{ $loop->iteration }}" class="img-thumbnail">
                                         <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                             class="d-block w-100" height="600px">
-                                    </a>
-                                </div>
+                                            class="d-block w-100" height="600px">
+                                    </div>
+                                @endforeach
+                                <!--<div class="carousel-item">
+           <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+           <img src="https://picsum.photos/1298/649?grayscale" class="d-block w-100">
+          </div>-->
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div> --}}
+    
+                <div class="row">
+                    <div class="col">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @php
+                                    // Ensure the collection is sorted in descending order based on a specific field.
+                                    $sortedPhotogallery = $photogallery->sortByDesc('id_photogallery');
+                                @endphp
+                
+                                @foreach ($sortedPhotogallery as $photo)
+                                    <div class="carousel-item @if ($loop->first) active @endif">
+                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
+                                           data-lightbox="gallery" 
+                                           data-title="Image {{ $loop->iteration }}" 
+                                           class="img-thumbnail">
+                                            <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                                 class="d-block w-100" height="600px">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+    
+                {{-- VIDEO --}}
+                <div class="row">
+                    <div class="col">
+                        <h1 class="text-center mt-3 mb-3">VIDEO</h1>
+                        <div class="video-style">
+                            @foreach ($videogallery as $video)
+                            <video width="300" height="200" controls>
+                                <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                             @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                        <center>
+                            <button class="btn t-btn mt-3" id="viewall"><a
+                                    class="text-white text-decoration-none" target="_blank"
+                                    href="{{ url("/events/$event->id_event/show-gallery") }}">View All</a></button>
+                        </center>
                     </div>
                 </div>
+                {{-- VIDEO --}}
             </div>
-            
-
-            {{-- VIDEO --}}
-            <div class="row">
-                <div class="col">
-                    <h1 class="text-center mt-3 mb-3">VIDEO</h1>
-                    <div>
-                        @foreach ($videogallery as $video)
-                        <video width="300" height="200" controls>
-                            <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
-                                type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        @endforeach
-                    </div>
-                    <center>
-                        <button class="btn btn-primary mt-3" id="viewall"><a
-                                class="text-white text-decoration-none" target="_blank"
-                                href="{{ url("/events/$event->id_event/show-gallery") }}">View All</a></button>
-                    </center>
-                </div>
-            </div>
-            {{-- VIDEO --}}
 
         </section>
     @endif
 
     @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
         <section id="eventsc" class="container event-schedule">
-            <div class="row tit">
-                <div class="col text-center">
-                    <h1>EVENT SCHEDULE</h1>
-                    <h4 class="mt-4 mb-4">List of all the Scheduled Event for your Information</h4>
-                    <hr>
+            <div class="box-styling">
+                <div class="row tit">
+                    <div class="col text-center">
+                        <h1>EVENT SCHEDULE</h1>
+                        <h4 class="mt-4 mb-4">List of all the Scheduled Event for your Information</h4>
+                        <hr>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row justify-content-md-center mt-4">
-                @if ($event->boolcerimony)
-                    <div class="col-12 col-lg-4">
-                        <div class="card me-4 ms-4 mb-4">
-                            <img src="{{ $event->cerimg }}" class="card-img-top">
-                            <div class="card-body">
-                                <h4 class="card-title">EVENT CEREMONY</h4>
-                                <p class="card-text">{{ $event->cerdesc }}</p>
-                                <p class="card-text"><small class="text-muted">{{ $event->ceraddress }}
-                                        <br>{{ $event->cercity }}
-                                        {{ $event->cerprovince }}<br>{{ $event->cerpc }}<br>{{ $event->cercountry }}</small>
-                                </p>
-                                @if ($event->certime)
-                                    <p class="card-text text-center"><small class="text-muted"
-                                            id='eventCer'>{{ \Carbon\Carbon::parse($event->certime)->setTimezone('-7')->format('g:i a') }}</small>
+    
+                <div class="row justify-content-md-center mt-4">
+                    @if ($event->boolcerimony)
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <div class="card me-4 ms-4 mb-4">
+                                <img src="{{ $event->cerimg }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title">EVENT CEREMONY</h4>
+                                    <p class="card-text">{{ $event->cerdesc }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ $event->ceraddress }}
+                                            <br>{{ $event->cercity }}
+                                            {{ $event->cerprovince }}<br>{{ $event->cerpc }}<br>{{ $event->cercountry }}</small>
                                     </p>
-                                @endif
+                                    @if ($event->certime)
+                                        <p class="card-text text-center"><small class="text-muted"
+                                                id='eventCer'>{{ \Carbon\Carbon::parse($event->certime)->setTimezone('-7')->format('g:i a') }}</small>
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
-
-                @if ($event->boolreception)
-                    <div class="col-12 col-lg-4">
-                        <div class="card me-4 ms-4 mb-4">
-                            <img src="{{ $event->recimg }}" class="card-img-top">
-                            <div class="card-body">
-                                <h4 class="card-title">EVENT RECEPTION</h4>
-                                <p class="card-text">{{ $event->recdesc }}</p>
-                                <p class="card-text"><small class="text-muted">{{ $event->recaddress }}
-                                        <br>{{ $event->reccity }}
-                                        {{ $event->recprovince }}<br>{{ $event->recpc }}<br>{{ $event->reccountry }}</small>
-                                </p>
-                                @if ($event->rectime)
-                                    <p class="card-text text-center"><small class="text-muted"
-                                            id='recTime'>{{ \Carbon\Carbon::parse($event->rectime)->setTimezone('-7')->format('g:i a') }}</small>
+                    @endif
+    
+                    @if ($event->boolreception)
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <div class="card me-4 ms-4 mb-4">
+                                <img src="{{ $event->recimg }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title">EVENT RECEPTION</h4>
+                                    <p class="card-text">{{ $event->recdesc }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ $event->recaddress }}
+                                            <br>{{ $event->reccity }}
+                                            {{ $event->recprovince }}<br>{{ $event->recpc }}<br>{{ $event->reccountry }}</small>
                                     </p>
-                                @endif
+                                    @if ($event->rectime)
+                                        <p class="card-text text-center"><small class="text-muted"
+                                                id='recTime'>{{ \Carbon\Carbon::parse($event->rectime)->setTimezone('-7')->format('g:i a') }}</small>
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
-
-                @if ($event->boolparty)
-                    <div class="col-12 col-lg-4">
-                        <div class="card me-4 ms-4 mb-4">
-                            <img src="{{ $event->parimg }}" class="card-img-top">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ strtoupper($event->parname) }}</h4>
-                                <p class="card-text">{{ $event->pardesc }}</p>
-                                <p class="card-text"><small class="text-muted">{{ $event->paraddress }}
-                                        <br>{{ $event->parcity }}
-                                        {{ $event->parprovince }}<br>{{ $event->parpc }}<br>{{ $event->parcountry }}</small>
-                                </p>
-                                @if ($event->partime)
-                                    <p class="card-text text-center"><small class="text-muted"
-                                            id='parTime'>{{ \Carbon\Carbon::parse($event->partime)->setTimezone('-7')->format('g:i a') }}</small>
+                    @endif
+    
+                    @if ($event->boolparty)
+                        <div class="col-12 col-lg-4 col-md-12">
+                            <div class="card me-4 ms-4 mb-4">
+                                <img src="{{ $event->parimg }}" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ strtoupper($event->parname) }}</h4>
+                                    <p class="card-text">{{ $event->pardesc }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ $event->paraddress }}
+                                            <br>{{ $event->parcity }}
+                                            {{ $event->parprovince }}<br>{{ $event->parpc }}<br>{{ $event->parcountry }}</small>
                                     </p>
-                                @endif
+                                    @if ($event->partime)
+                                        <p class="card-text text-center"><small class="text-muted"
+                                                id='parTime'>{{ \Carbon\Carbon::parse($event->partime)->setTimezone('-7')->format('g:i a') }}</small>
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
             </div>
 
         </section>
     @endif
 
-    <footer class="container-fluid">
+    <footer class="container-fluid footer_styling">
         <div class="row">
             <div class="col text-center">
                 <p>Copyrights © 2022 All Rights Reserved by ClickInvitation</p>
@@ -536,4 +603,16 @@
             toastr.error("{{ $errors->first() }}");
         @endif
     }
+
+
+    window.onload = function() {
+            init();
+        };
+
+
+
+    function init() {
+            var menu = document.getElementById("menu");
+            menu.classList.add("transition-after-pageload");
+        }
 </script>
