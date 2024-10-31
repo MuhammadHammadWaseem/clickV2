@@ -129,14 +129,14 @@ ul.drop-menu li a {
 
                     <ul>
                         <li><a href="/events">{{ __('new_home.Events') }}</a></li>
-                        <li><a href="/packages">Packages</a></li>
+                        <li><a href="/packages">{{ __('new_home.packages') }}</a></li>
                         <li><a href="/features">{{ __('new_home.Features') }}</a></li>
                         <li><a href="/about">{{ __('new_home.About') }} </a></li>
                         <li><a href="/contact">{{ __('new_home.Contact') }}</a></li>
                         <li><a href="/blog">{{ __('new_home.Blogs') }}</a></li>
                         <li><a href="/tutorial">{{ __('new_home.Tutorial') }}</a></li>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">signup</a></li>
+                        <li><a href="/login">{{ __('new_home.login') }}</a></li>
+                        <li><a href="/register">{{ __('new_home.signup') }}</a></li>
                     </ul>
                     <a href="/" class="site-logo"><img src="/assets/images/logo.svg" alt="click-invitation"></a>
 

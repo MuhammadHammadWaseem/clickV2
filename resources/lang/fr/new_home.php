@@ -62,5 +62,8 @@ return [
     'Now that you have read all the advantages, let\'s have FUN on YOUR WEDDING DAY'  => 'Maintenant que vous avez lu tous les avantages, amusons-nous le jour de VOTRE MARIAGE',
     'GET STARTED NOW'  => 'COMMENCEZ MAINTENANT',
 
-    'test' => 'abcd'
+    'test' => 'abcd',
+    'signup' => 'Inscription',
+    'login' => 'Connexion',
+    'packages' => 'Forfaits',
 ];

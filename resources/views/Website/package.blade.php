@@ -113,9 +113,10 @@ margin-top: 40px;
         <div class="row">
             <div class="col-md-12">
                 <div class="text text-center">
-                    <h2>Select A Pakage</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing<br> and typesetting industry.</p>
+                    <h2>{{ __('packages.select_a_package') }}</h2>
+                    <p>{{ __('packages.description') }}</p>
                 </div>
+
             </div>
         </div>
     </div>
@@ -126,55 +127,56 @@ margin-top: 40px;
             <div class="select-packages-boxes">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">Basic Package</div>
+                        <div class="box-subtitle">{{ __('packages.basic_package') }}</div>
                         <div class="box-unit-price">$23</div>
                         <ul>
-                            <li>General Info</li>
-                            <li>Invitation</li>
-                            <li>Guest List</li>
-                            <li>Messaging</li>
-                            <li>Gift Suggestions</li>
+                            <li>{{ __('packages.general_info') }}</li>
+                            <li>{{ __('packages.invitation') }}</li>
+                            <li>{{ __('packages.guest_list') }}</li>
+                            <li>{{ __('packages.messaging') }}</li>
+                            <li>{{ __('packages.gift_suggestions') }}</li>
                         </ul>
-                        <p>Purpose: For simple events where basic event management and gift suggestions are sufficient.</p>
-                        <a href="#" class="btn t-btn">Buy Now</a>
+                        <p>{{ __('packages.purpose_basic') }}</p>
+                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                     </div>
+
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">Standard Package</div>
+                        <div class="box-subtitle">{{ __('packages.standard_package') }}</div>
                         <div class="box-unit-price">$49</div>
                         <ul>
-                            <li>Everything in the Basic Package</li>
-                            <li>Webpage</li>
-                            <li>Meals</li>
-                            <li>Photos</li>
+                            <li>{{ __('packages.basic_package_contents') }}</li>
+                            <li>{{ __('packages.webpage') }}</li>
+                            <li>{{ __('packages.meals') }}</li>
+                            <li>{{ __('packages.photos') }}</li>
                         </ul>
-                        <p>Purpose: Ideal for events requiring a webpage, meal options, and photo management.</p>
-                        <a href="#" class="btn t-btn">Buy Now</a>
+                        <p>{{ __('packages.purpose_standard') }}</p>
+                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">Premium Package</div>
+                        <div class="box-subtitle">{{ __('packages.premium_package') }}</div>
                         <div class="box-unit-price">$69</div>
                         <ul>
-                            <li>Everything in the Standard Package</li>
-                            <li>Table Seating Arrangements</li>
+                            <li>{{ __('packages.standard_package_contents') }}</li>
+                            <li>{{ __('packages.table_seating_arrangements') }}</li>
                         </ul>
-                        <p>Purpose: Designed for events needing additional features like seating arrangements.</p>
-                        <a href="#" class="btn t-btn">Buy Now</a>
+                        <p>{{ __('packages.purpose_premium') }}</p>
+                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">Comprehensive Package</div>
+                        <div class="box-subtitle">{{ __('packages.comprehensive_package') }}</div>
                         <div class="box-unit-price">$99</div>
                         <ul>
-                            <li>Everything in the Premium Package</li>
-                            <li>Acknowledgments</li>
+                            <li>{{ __('packages.premium_package_contents') }}</li>
+                            <li>{{ __('packages.acknowledgments') }}</li>
                         </ul>
-                        <p>Full access to all features.</p>
-                        <a href="#" class="btn t-btn">Buy Now</a>
+                        <p>{{ __('packages.purpose_comprehensive') }}</p>
+                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                     </div>
                 </div>
             </div>
