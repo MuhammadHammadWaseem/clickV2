@@ -18,6 +18,7 @@ return[
 'start_planning' => 'Start Planning your event here.',
 'easy_control' => 'In only few seconds you’ll be on your way to easily control and manage your event.',
 'get_started_1' => 'Get Started',
+'email' => 'Enter your email address',
 
 'introduction' => 'Introduction',
 'web_page' => 'Web Page',

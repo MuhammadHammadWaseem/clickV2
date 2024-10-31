@@ -18,7 +18,7 @@ return [
     'start_planning' => 'Commencez à planifier votre événement ici.',
     'easy_control' => 'En seulement quelques secondes, vous serez en route pour contrôler et gérer facilement votre événement.',
     'get_started_1' => 'Commencer',
-
+    'email' => 'Entrez votre adresse e-mail',
     'introduction' => 'Introduction',
     'web_page' => 'Page Web',
     'general_info' => 'Informations Générales',
