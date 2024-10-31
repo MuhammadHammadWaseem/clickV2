@@ -102,15 +102,15 @@
                                             {{ $data['formattedDate'] ?? 'Date not available' }}
                                         </p>
                                         <p>
-                                            <a href="{{ env('APP_URL') .'/'. 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                            <a href="{{  config('app.url') .'/'. 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
                                                class="button" target="_blank">Open Invitation</a>
                                         </p>
                                         <p>
-                                            <a href="{{ env('APP_URL') .'/'. 'CheckInQr/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                            <a href="{{  config('app.url') .'/'. 'CheckInQr/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['lang'] ?? '') }}"
                                                class="button" target="_blank">Check In</a>
                                         </p>
                                         <p>
-                                            <a href="{{ env('APP_URL') . '/' . 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
+                                            <a href="{{  config('app.url') . '/' . 'cardInvitations/' . ($data['cardId']['id_card'] ?? '') . '/' . ($data['guest']['code'] ?? '') . '/' . ($data['guest']['name'] ?? '') . '/' . ($data['lang'] ?? '') }}"
                                                target="_blank">
                                                 <img src="{{ asset('card-images/' . ($data['event']['id_event'] ?? 'default') . '.png') }}"
                                                      style="margin-bottom:20px; max-width:100%;">
