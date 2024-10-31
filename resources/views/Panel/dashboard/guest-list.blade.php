@@ -1414,7 +1414,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <td>
                                         <ul>
                                             <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                             <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                         </ul>
                                     </td>
@@ -1492,7 +1492,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>
                                                     <ul>
                                                         <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                         <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
@@ -1570,7 +1570,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>
                                                     <ul>
                                                         <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                         <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
@@ -1651,7 +1651,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>
                                                     <ul>
                                                         <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                         <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
@@ -1731,7 +1731,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>
                                                     <ul>
                                                         <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                         <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
@@ -1814,7 +1814,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>
                                                         <ul>
                                                             <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                             <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                         </ul>
                                                     </td>
@@ -1910,7 +1910,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td>
                                                 <ul>
                                                     <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null) ? member.table.name : 'N/A'}</li>
+                                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                                     <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
