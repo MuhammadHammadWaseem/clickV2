@@ -473,23 +473,23 @@
     @endphp
     <div class="modifier" id="modifier"
         style="position: fixed !important; bottom: 90px !important; right: 10px !important; border: 2px solid #f90; border-radius: 10px; text-align: center; padding: 5px 10px; background: #fff; z-index: 3000 !important; display:none;">
-        <p class="ng-binding mb-3">0 GUEST(S) SELECTED</p>
+        <p class="ng-binding mb-3">{{ __('guestlistpage.0_guests_selected') }}</p>
         <div class="button-group d-flex flex-column" style="gap:0.5rem;" id="modifierButton">
             <button class="edit-btn btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#EditGuest"
-                style="display:none;">EDIT</button>
+                style="display:none;">{{ __('guestlistpage.EDIT') }}</button>
             <!-- Delete Button -->
             <button class="btn btn-sm btn-danger delete-btn-single" data-bs-toggle="modal" data-bs-target="#delguestModal"
-                style="display:none;" onclick="showDeleteModal(idArray[0])">DELETE</button>
+                style="display:none;" onclick="showDeleteModal(idArray[0])">{{ __('guestlistpage.DELETE') }}</button>
             <button class="btn btn-sm btn-danger delete-btn-all" data-bs-toggle="modal" data-bs-target="#delAllGuestsModal"
-                style="display:none;">DELETE ALL</button>
-            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#SelectOptionstoDisplay">SEND
-                INVITATION</button>
+                style="display:none;">{{ __('guestlistpage.DELETE ALL') }}</button>
+            <button class="btn btn-sm btn-primary" data-toggle="modal"
+                data-target="#SelectOptionstoDisplay">{{ __('guestlistpage.send_invitation') }}</button>
             <button class="btn btn-sm btn-danger decline-btn" data-bs-toggle="modal" data-bs-target="#declineguestModal"
-                onclick="declineGuest()" style="display:none;">DECLINE</button>
-            <button class="btn btn-sm btn-danger decline-all-btn" style="display:none;" onclick="declineAllGuests()">DECLINE
-                ALL</button>
+                onclick="declineGuest()" style="display:none;">{{ __('guestlistpage.DECLINE') }}</button>
+            <button class="btn btn-sm btn-danger decline-all-btn" style="display:none;"
+                onclick="declineAllGuests()">{{ __('guestlistpage.DECLINE_ALL') }}</button>
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#undeclineguestModal"
-                style="display: none;">UNDECLINE</button>
+                style="display: none;">{{ __('guestlistpage.UNDECLINE') }}</button>
         </div>
     </div>
 
@@ -499,51 +499,52 @@
             <div class="col-lg-12">
                 <div class="box-styling guest-list">
                     <div class="text">
-                        <h2>Guest List</h2>
+                        <h2>{{ __('guestlistpage.guest_list') }}</h2>
+
                     </div>
                     <div class="guest-listings">
                         <ul>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>Here you can enter your guest and limit the number of people you want
-                                    them to bring with them, for example if you invite a guest that have a
-                                    wife and 5 children, and you only want him to come with the wife you can
-                                    limit to 2 the number of members so you can directly indicate that no
-                                    kids allowed in this event.</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.limit_guests_description') }}</p>
                             </li>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>You can also know who confirmed and who didn’t</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.confirmed_guests') }}</p>
                             </li>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>ou can see how many members added and calculate the number of guest so
-                                    far</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.total_members_added') }}</p>
                             </li>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>You can resend invitation to the guest who did not answer or send it to
-                                    one guest you just added</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.resend_invitation') }}</p>
                             </li>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>Once your guest is highlighted in Blue it means that he has checked inn
-                                    to the reception</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.guest_checked_in') }}</p>
                             </li>
-                            <li><img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
-                                <p>If the guest is highlighted in red it means he or she declined</p>
+                            <li>
+                                <img src="{{ asset('assets/Panel/images/sent-right.png') }}" alt="">
+                                <p>{{ __('guestlistpage.guest_declined') }}</p>
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="box-styling quick-actions">
                     <div class="text">
-                        <h2>Quick Actions</h2>
+                        <h2>{{ __('guestlistpage.quick_actions') }}</h2>
                     </div>
                     <div class="three-btns-align">
                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                            data-target="#AddGuest">Add Guest </button>
+                            data-target="#AddGuest"> {{ __('guestlistpage.add_guest') }} </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                            data-target="#exampleModalCenter02">Add From Other Events </button>
+                            data-target="#exampleModalCenter02">{{ __('guestlistpage.add_from_other_events') }} </button>
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                            data-target="#exampleModalCenter03">Upload .CSV File </button>
+                            data-target="#exampleModalCenter03">{{ __('guestlistpage.upload_csv_file') }} </button>
                     </div>
                 </div>
             </div>
@@ -551,34 +552,32 @@
                 <div class="box-styling event-photos-gallery events-lists-sec-01 guest-list">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>Guest List</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            </p>
+                            <h2>{{ __('guestlistpage.guest_list') }}</h2>
+                            <p>{{ __('guestlistpage.guest_list_description') }}</p>
+
                         </div>
                         <div class="two-btn-align">
                             <div class="export-hover-links">
                                 <ul>
                                     <li class="export-hover">
                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
-                                            data-target="#exampleModalCenter04">Export</button>
+                                            data-target="#exampleModalCenter04">{{ __('guestlistpage.export') }}</button>
                                         <ul class="export-hover-ul">
                                             <li>
-                                                <button id="exportAllGuest" onclick="exportall(1)">All Guests</button>
+                                                <button id="exportAllGuest"
+                                                    onclick="exportall(1)">{{ __('guestlistpage.export_all_guests') }}</button>
                                             </li>
                                             <li>
                                                 <button id="exportConfirmedGuest"
-                                                    onclick="exportconfirmed('attending')">Confirmed
-                                                    Guests</button>
+                                                    onclick="exportconfirmed('attending')">{{ __('guestlistpage.export_confirmed_guests') }}</button>
                                             </li>
                                             <li>
                                                 <button id="exportDeclinedGuest"
-                                                    onclick="exportdeclined('declined')">Declined
-                                                    Guests</button>
+                                                    onclick="exportdeclined('declined')">{{ __('guestlistpage.export_declined_guests') }}</button>
                                             </li>
                                             <li>
                                                 <button id="exportCheckedGuest"
-                                                    onclick="exportcheckedin('checked-in')">Checked In
-                                                    Guests</button>
+                                                    onclick="exportcheckedin('checked-in')">{{ __('guestlistpage.export_checked_in_guests') }}</button>
                                             </li>
                                         </ul>
                                     </li>
@@ -586,18 +585,18 @@
                             </div>
 
                             <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                                data-target="#ExportQrModal">Export Invitation QR
-                                Code </button>
+                                data-target="#ExportQrModal">{{ __('guestlistpage.export_invitation_qr_code') }} </button>
                             <select onchange="showGuest(this.value)" class="form-select">
-                                <option selected value="1">ALL</option>
-                                <option value="checked-in">CHECKED-IN</option>
-                                <option value="declined">DECLINED</option>
-                                <option value="attending">CONFIRMED</option>
-                                <option value="not-open">NOT OPEN</option>
-                                <option value="opened">OPENED</option>
-                                <option value="a-to-z">A to Z</option>
-                                <option value="z-to-a">Z to A</option>
+                                <option selected value="1">{{ __('guestlistpage.all') }}</option>
+                                <option value="checked-in">{{ __('guestlistpage.checked_in') }}</option>
+                                <option value="declined">{{ __('guestlistpage.declined') }}</option>
+                                <option value="attending">{{ __('guestlistpage.confirmed') }}</option>
+                                <option value="not-open">{{ __('guestlistpage.not_open') }}</option>
+                                <option value="opened">{{ __('guestlistpage.opened') }}</option>
+                                <option value="a-to-z">{{ __('guestlistpage.a_to_z') }}</option>
+                                <option value="z-to-a">{{ __('guestlistpage.z_to_a') }}</option>
                             </select>
+
 
                         </div>
                     </div>
@@ -645,88 +644,94 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">New Guest</h2>
+                        <h2 class="text-center">{{ __('guestlistpage.new_guest') }}</h2>
+
                     </div>
                     <!-- Form start -->
                     <form id="guestForm">
                         <!-- Title Select Box -->
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="title">{{ __('guestlistpage.title') }}</label>
                             <select class="form-control" id="title" name="title">
-                                <option selected disabled>Select Title</option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Mrs.">Mrs.</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Ms.">Ms.</option>
-                                <option value="Dr.">Dr.</option>
-                                <option value="Prof.">Prof.</option>
-                                <option value="Rev.">Rev.</option>
-                                <option value="Hon.">Hon.</option>
-                                <option value="Sir">Sir</option>
-                                <option value="Dame">Dame</option>
-                                <option value="Mr. & Mrs.">Mr. & Mrs.</option>
-                                <option value="Mr. & Family">Mr. & Family</option>
-                                <option value="Ms. & Family">Ms. & Family</option>
-                                <option value="Dr. & Mrs.">Dr. & Mrs.</option>
-                                <option value="Capt.">Capt.</option>
-                                <option value="Maj.">Maj.</option>
-                                <option value="Col.">Col.</option>
-                                <option value="Gen.">Gen.</option>
-                                <option value="Lt.">Lt.</option>
-                                <option value="Sgt.">Sgt.</option>
-                                <option value="Lord">Lord</option>
-                                <option value="Lady">Lady</option>
-                                <option value="Duke">Duke</option>
-                                <option value="Duchess">Duchess</option>
+                                <option selected disabled>{{ __('guestlistpage.select_title') }}</option>
+                                <option value="Mr.">{{ __('guestlistpage.mr') }}</option>
+                                <option value="Mrs.">{{ __('guestlistpage.mrs') }}</option>
+                                <option value="Miss">{{ __('guestlistpage.miss') }}</option>
+                                <option value="Ms.">{{ __('guestlistpage.ms') }}</option>
+                                <option value="Dr.">{{ __('guestlistpage.dr') }}</option>
+                                <option value="Prof.">{{ __('guestlistpage.prof') }}</option>
+                                <option value="Rev.">{{ __('guestlistpage.rev') }}</option>
+                                <option value="Hon.">{{ __('guestlistpage.hon') }}</option>
+                                <option value="Sir">{{ __('guestlistpage.sir') }}</option>
+                                <option value="Dame">{{ __('guestlistpage.dame') }}</option>
+                                <option value="Mr. & Mrs.">{{ __('guestlistpage.mr_and_mrs') }}</option>
+                                <option value="Mr. & Family">{{ __('guestlistpage.mr_and_family') }}</option>
+                                <option value="Ms. & Family">{{ __('guestlistpage.ms_and_family') }}</option>
+                                <option value="Dr. & Mrs.">{{ __('guestlistpage.dr_and_mrs') }}</option>
+                                <option value="Capt.">{{ __('guestlistpage.capt') }}</option>
+                                <option value="Maj.">{{ __('guestlistpage.maj') }}</option>
+                                <option value="Col.">{{ __('guestlistpage.col') }}</option>
+                                <option value="Gen.">{{ __('guestlistpage.gen') }}</option>
+                                <option value="Lt.">{{ __('guestlistpage.lt') }}</option>
+                                <option value="Sgt.">{{ __('guestlistpage.sgt') }}</option>
+                                <option value="Lord">{{ __('guestlistpage.lord') }}</option>
+                                <option value="Lady">{{ __('guestlistpage.lady') }}</option>
+                                <option value="Duke">{{ __('guestlistpage.duke') }}</option>
+                                <option value="Duchess">{{ __('guestlistpage.duchess') }}</option>
                             </select>
+
                         </div>
                         <input type="hidden" value="{{ $eventId }}" name="idevent" id="idevent">
                         <!-- Name Input -->
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">{{ __('guestlistpage.name') }}</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Enter name">
+                                placeholder="{{ __('guestlistpage.enter_name') }}">
                         </div>
 
                         <!-- Email Input -->
+                        <!-- E-mail Input -->
                         <div class="form-group">
-                            <label for="email">E-mail</label>
+                            <label for="email">{{ __('guestlistpage.email') }}</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Enter e-mail">
+                                placeholder="{{ __('guestlistpage.enter_email') }}">
                         </div>
 
                         <!-- Phone Input -->
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">{{ __('guestlistpage.phone') }}</label>
                             <input type="tel" class="form-control" id="phone" name="phone"
-                                placeholder="COUNTRY CODE THEN NUMBER">
+                                placeholder="{{ __('guestlistpage.phone_placeholder') }}">
                         </div>
 
                         <!-- WhatsApp Input -->
                         <div class="form-group">
-                            <label for="whatsapp">WhatsApp</label>
+                            <label for="whatsapp">{{ __('guestlistpage.whatsapp') }}</label>
                             <input type="tel" class="form-control" id="whatsapp" name="whatsapp"
-                                placeholder="COUNTRY CODE THEN NUMBER">
+                                placeholder="{{ __('guestlistpage.whatsapp_placeholder') }}">
                         </div>
 
                         <!-- Allergies Radio Button -->
                         <div class="form-group">
-                            <label>Allergies</label><br>
+                            <label>{{ __('guestlistpage.allergies') }}</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="allergiesYes"
                                     value="1">
-                                <label class="form-check-label" for="allergiesYes">Yes</label>
+                                <label class="form-check-label"
+                                    for="allergiesYes">{{ __('guestlistpage.allergies_yes') }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="allergiesNo"
                                     value="0">
-                                <label class="form-check-label" for="allergiesNo">No</label>
+                                <label class="form-check-label"
+                                    for="allergiesNo">{{ __('guestlistpage.allergies_no') }}</label>
                             </div>
                         </div>
 
+
                         <!-- Select Meal -->
                         <div class="form-group">
-                            <label for="meal">Select Meal</label>
+                            <label for="meal">{{ __('guestlistpage.select_meal') }}</label>
                             <select class="form-control" id="meal" name="meal">
                                 @foreach ($meals as $meal)
                                     <option value="{{ $meal->id_meal }}">{{ $meal->name }}</option>
@@ -736,38 +741,40 @@
 
                         <!-- Number of Members to Invite -->
                         <div class="form-group">
-                            <label for="members">Number of members can invite</label>
+                            <label for="members">{{ __('guestlistpage.number_of_members') }}</label>
                             <input type="number" class="form-control" id="members" name="members"
-                                placeholder="Enter number">
+                                placeholder="{{ __('guestlistpage.enter_number') }}">
                         </div>
 
                         <!-- Notes Input -->
                         <div class="form-group">
-                            <label for="notes">Notes</label>
-                            <textarea class="form-control" id="notes" name="notes" placeholder="Enter notes"></textarea>
+                            <label for="notes">{{ __('guestlistpage.notes') }}</label>
+                            <textarea class="form-control" id="notes" name="notes" placeholder="{{ __('guestlistpage.enter_notes') }}"></textarea>
                         </div>
 
                         <!-- Confirm Radio Button -->
                         <div class="form-group">
-                            <label>Confirm</label><br>
+                            <label>{{ __('guestlistpage.confirm') }}</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="confirm" id="confirmYes"
                                     value="1">
-                                <label class="form-check-label" for="confirmYes">Yes</label>
+                                <label class="form-check-label" for="confirmYes">{{ __('guestlistpage.yes') }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="confirm" id="confirmNo"
                                     value="0">
-                                <label class="form-check-label" for="confirmNo">No</label>
+                                <label class="form-check-label" for="confirmNo">{{ __('guestlistpage.no') }}</label>
                             </div>
                         </div>
+
                     </form>
                     <!-- Form end -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="AddGuestClose">Cancel</button>
-                    <button type="submit" class="btn btn-primary submit-btn" id="submitGuestForm">Save</button>
+                        id="AddGuestClose">{{ __('guestlistpage.Cancel') }}</button>
+                    <button type="submit" class="btn btn-primary submit-btn"
+                        id="submitGuestForm">{{ __('guestlistpage.Save') }}</button>
                 </div>
             </div>
         </div>
@@ -787,88 +794,91 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">Edit Guest</h2>
+                        <h2 class="text-center">{{ __('guestlistpage.Edit_Guest') }}</h2>
                     </div>
                     <!-- Form start -->
                     <form id="EditguestForm">
                         <!-- Title Select Box -->
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="edit_title">{{ __('guestlistpage.title') }}</label>
                             <select class="form-control" id="edit_title" name="title">
-                                <option selected disabled>Select Title</option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Mrs.">Mrs.</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Ms.">Ms.</option>
-                                <option value="Dr.">Dr.</option>
-                                <option value="Prof.">Prof.</option>
-                                <option value="Rev.">Rev.</option>
-                                <option value="Hon.">Hon.</option>
-                                <option value="Sir">Sir</option>
-                                <option value="Dame">Dame</option>
-                                <option value="Mr. & Mrs.">Mr. & Mrs.</option>
-                                <option value="Mr. & Family">Mr. & Family</option>
-                                <option value="Ms. & Family">Ms. & Family</option>
-                                <option value="Dr. & Mrs.">Dr. & Mrs.</option>
-                                <option value="Capt.">Capt.</option>
-                                <option value="Maj.">Maj.</option>
-                                <option value="Col.">Col.</option>
-                                <option value="Gen.">Gen.</option>
-                                <option value="Lt.">Lt.</option>
-                                <option value="Sgt.">Sgt.</option>
-                                <option value="Lord">Lord</option>
-                                <option value="Lady">Lady</option>
-                                <option value="Duke">Duke</option>
-                                <option value="Duchess">Duchess</option>
+                                <option selected disabled>{{ __('guestlistpage.select_title_option') }}</option>
+                                <option value="Mr.">{{ __('guestlistpage.title_mr') }}</option>
+                                <option value="Mrs.">{{ __('guestlistpage.title_mrs') }}</option>
+                                <option value="Miss">{{ __('guestlistpage.title_miss') }}</option>
+                                <option value="Ms.">{{ __('guestlistpage.title_ms') }}</option>
+                                <option value="Dr.">{{ __('guestlistpage.title_dr') }}</option>
+                                <option value="Prof.">{{ __('guestlistpage.title_prof') }}</option>
+                                <option value="Rev.">{{ __('guestlistpage.title_rev') }}</option>
+                                <option value="Hon.">{{ __('guestlistpage.title_hon') }}</option>
+                                <option value="Sir">{{ __('guestlistpage.title_sir') }}</option>
+                                <option value="Dame">{{ __('guestlistpage.title_dame') }}</option>
+                                <option value="Mr. & Mrs.">{{ __('guestlistpage.title_mr_mrs') }}</option>
+                                <option value="Mr. & Family">{{ __('guestlistpage.title_mr_family') }}</option>
+                                <option value="Ms. & Family">{{ __('guestlistpage.title_ms_family') }}</option>
+                                <option value="Dr. & Mrs.">{{ __('guestlistpage.title_dr_mrs') }}</option>
+                                <option value="Capt.">{{ __('guestlistpage.title_capt') }}</option>
+                                <option value="Maj.">{{ __('guestlistpage.title_maj') }}</option>
+                                <option value="Col.">{{ __('guestlistpage.title_col') }}</option>
+                                <option value="Gen.">{{ __('guestlistpage.title_gen') }}</option>
+                                <option value="Lt.">{{ __('guestlistpage.title_lt') }}</option>
+                                <option value="Sgt.">{{ __('guestlistpage.title_sgt') }}</option>
+                                <option value="Lord">{{ __('guestlistpage.title_lord') }}</option>
+                                <option value="Lady">{{ __('guestlistpage.title_lady') }}</option>
+                                <option value="Duke">{{ __('guestlistpage.title_duke') }}</option>
+                                <option value="Duchess">{{ __('guestlistpage.title_duchess') }}</option>
                             </select>
+
                         </div>
                         <input type="hidden" value="{{ $eventId }}" name="idevent" id="idevent">
                         <!-- Name Input -->
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="edit_name">{{ __('guestlistpage.name') }}</label>
                             <input type="text" class="form-control" id="edit_name" name="name"
-                                placeholder="Enter name">
+                                placeholder="{{ __('guestlistpage.enter_name') }}">
                         </div>
+
 
                         <!-- Email Input -->
                         <div class="form-group">
-                            <label for="email">E-mail</label>
+                            <label for="edit_email">{{ __('guestlistpage.email') }}</label>
                             <input type="email" class="form-control" id="edit_email" name="email"
-                                placeholder="Enter e-mail">
+                                placeholder="{{ __('guestlistpage.enter_email') }}">
                         </div>
 
                         <!-- Phone Input -->
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="edit_phone">{{ __('guestlistpage.phone') }}</label>
                             <input type="tel" class="form-control" id="edit_phone" name="phone"
-                                placeholder="COUNTRY CODE THEN NUMBER">
+                                placeholder="{{ __('guestlistpage.enter_phone') }}">
                         </div>
 
                         <!-- WhatsApp Input -->
                         <div class="form-group">
-                            <label for="whatsapp">WhatsApp</label>
+                            <label for="edit_whatsapp">{{ __('guestlistpage.whatsapp') }}</label>
                             <input type="tel" class="form-control" id="edit_whatsapp" name="whatsapp"
-                                placeholder="COUNTRY CODE THEN NUMBER">
+                                placeholder="{{ __('guestlistpage.enter_whatsapp') }}">
                         </div>
+
 
                         <!-- Allergies Radio Button -->
                         <div class="form-group">
-                            <label>Allergies</label><br>
+                            <label>{{ __('guestlistpage.allergies') }}</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesYes"
                                     value="1">
-                                <label class="form-check-label" for="allergiesYes">Yes</label>
+                                <label class="form-check-label" for="allergiesYes">{{ __('guestlistpage.yes') }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesNo"
                                     value="0">
-                                <label class="form-check-label" for="allergiesNo">No</label>
+                                <label class="form-check-label" for="allergiesNo">{{ __('guestlistpage.no') }}</label>
                             </div>
                         </div>
 
                         <!-- Select Meal -->
                         <div class="form-group">
-                            <label for="meal">Select Meal</label>
+                            <label for="meal">{{ __('guestlistpage.select_meal') }}</label>
                             <select class="form-control" id="edit_meal" name="meal">
                                 @foreach ($meals as $meal)
                                     <option value="{{ $meal->id_meal }}">{{ $meal->name }}</option>
@@ -878,30 +888,30 @@
 
                         <!-- Number of Members to Invite -->
                         <div class="form-group">
-                            <label for="members" id="members_label">Number of members can invite</label>
-                            <input type="number" class="form-control" id="edit_members" name="members"
-                                placeholder="Enter members
-                                ">
+                            <label for="members" id="members_label">{{ __('guestlistpage.number_of_members') }}</label>
+                            <input type="number" class="form-control" id="edit_members" name="members" placeholder="{{ __('guestlistpage.enter_number') }}">
                         </div>
+
 
                         <!-- Notes Input -->
                         <div class="form-group">
-                            <label for="notes">Notes</label>
-                            <textarea class="form-control" id="edit_notes" name="notes" placeholder="Enter notes"></textarea>
+                            <label for="notes">{{ __('guestlistpage.notes') }}</label>
+                            <textarea class="form-control" id="edit_notes" name="notes" placeholder="{{ __('guestlistpage.enter_notes') }}"></textarea>
                         </div>
+
 
                         <!-- Confirm Radio Button -->
                         <div class="form-group">
-                            <label>Confirm</label><br>
+                            <label>{{ __('guestlistpage.confirm') }}</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="confirm" id="edit_confirmYes"
                                     value="1">
-                                <label class="form-check-label" for="confirmYes">Yes</label>
+                                <label class="form-check-label" for="confirmYes">{{ __('guestlistpage.yes') }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="confirm" id="edit_confirmNo"
                                     value="0">
-                                <label class="form-check-label" for="confirmNo">No</label>
+                                <label class="form-check-label" for="confirmNo">{{ __('guestlistpage.no') }}</label>
                             </div>
                         </div>
                     </form>
@@ -909,8 +919,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="EditGuestClose">Cancel</button>
-                    <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">Update</button>
+                        id="EditGuestClose">{{ __('guestlistpage.Cancel') }}</button>
+                    <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">{{ __('guestlistpage.update') }}</button>
                 </div>
             </div>
         </div>
@@ -928,35 +938,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2 class="text-center">Add Memeber</h2>
+                        <h2 class="text-center">{{ __('guestlistpage.add_member') }}</h2>
                     </div>
                     <!-- Form start -->
                     <form id="AddMemberForm">
                         <!-- Name Input -->
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">{{ __('guestlistpage.name') }}</label>
                             <input type="text" class="form-control" id="member_name" name="name"
-                                placeholder="Enter name">
+                                placeholder="Enter name{{ __('guestlistpage.enter_name') }}">
                         </div>
                         <input type="hidden" value="{{ $eventId }}" name="idevent" id="idevent">
                         <input type="hidden" value="" name="parentidguest" id="parentidguest">
                         <!-- Allergies Radio Button -->
                         <div class="form-group">
-                            <label>Allergies</label><br>
+                            <label>{{ __('guestlistpage.allergies') }}</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesYes"
                                     value="1">
-                                <label class="form-check-label" for="allergiesYes">Yes</label>
+                                <label class="form-check-label" for="allergiesYes">{{ __('guestlistpage.yes') }}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="allergies" id="edit_allergiesNo"
                                     value="0">
-                                <label class="form-check-label" for="allergiesNo">No</label>
+                                <label class="form-check-label" for="allergiesNo">{{ __('guestlistpage.no') }}</label>
                             </div>
                         </div>
                         <!-- Select Meal -->
                         <div class="form-group">
-                            <label for="meal">Select Meal</label>
+                            <label for="meal">{{ __('guestlistpage.select_meal') }}</label>
                             <select class="form-control" id="edit_meal" name="meal">
                                 @foreach ($meals as $meal)
                                     <option value="{{ $meal->id_meal }}">{{ $meal->name }}</option>
@@ -968,8 +978,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="AddMemberClose">Cancel</button>
-                    <button type="button" class="btn btn-primary submit-btn" id="submitMemberForm">Save</button>
+                        id="AddMemberClose">{{ __('guestlistpage.Cancel') }}</button>
+                    <button type="button" class="btn btn-primary submit-btn"
+                        id="submitMemberForm">{{ __('guestlistpage.Save') }}</button>
                 </div>
             </div>
         </div>
@@ -989,12 +1000,9 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="text">
-                                <h2>Upload CSV</h2>
-                                <p>Upload a CSV file with the columns: name, email, phone, whatsapp, nummembers, notes.
-                                    Separated by Semicolon ( ; ).</p>
-                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>Download
-                                    CSV
-                                    Example</a>
+                                <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
+                                <p>{{ __('guestlistpage.upload_csv_description') }}</p>
+                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>{{ __('guestlistpage.download_csv_example') }}</a>
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
                                 <div class="upload-container" onclick="document.getElementById('fileInput').click();">
@@ -1008,8 +1016,9 @@
                             </form>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="submit-btn" id="uploadCsvBtn">Upload Guest List</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
+                                <button type="button" class="submit-btn" id="uploadCsvBtn">{{ __('guestlistpage.upload_guest_list') }}</button>
                             </div>
                         </div>
 
@@ -1048,8 +1057,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Upload Guests From Another Event</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2>{{ __('guestlistpage.upload_guests_from_another_event') }}</h2>
+
+                        <p>{{ __('guestlistpage.guest_list_description') }}</p>
                     </div>
                     <form id="GuestImportForm">
                         <div class="modal-table-type-content" id="guestListItems">
@@ -1059,9 +1069,9 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('guestlistpage.no_dont') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                        data-target="#">Upload Guest</button>
+                        data-target="#">{{ __('guestlistpage.upload_guest') }}</button>
                 </div>
                 </form>
             </div>
@@ -1085,14 +1095,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h5 class="modal-title text-center">Delete</h5>
-                        <p>Are you sure you want to delete this guest?</p>
+                        <h5 class="modal-title text-center">{{ __('guestlistpage.delete') }}</h5>
+                        <p>{{ __('guestlistpage.delete_confirmation') }}</p>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delguestModalClose">No, I Don’t</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="deleteGuest()">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delguestModalClose">{{ __('guestlistpage.no_dont') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn"
+                        onclick="deleteGuest()">{{ __('guestlistpage.delete') }}</button>
                 </div>
                 </form>
             </div>
@@ -1102,8 +1113,8 @@
 
 
 
-<!-- Delete All Confirmation Modal -->
-{{-- <div class="modal fade modal-01 modal-02 upload-form-another-event" id="delguestAllModal" tabindex="-1" role="dialog"
+    <!-- Delete All Confirmation Modal -->
+    {{-- <div class="modal fade modal-01 modal-02 upload-form-another-event" id="delguestAllModal" tabindex="-1" role="dialog"
 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -1144,20 +1155,18 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <form id="ExportQrForm">
                         <div class="text">
                             {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
-                            <h2>Select Date</h2>
-                            <span>Select Reserve By date to show your Guests the latest date to respond using the Qr
-                                Code.</span>
+                            <h2>{{ __('guestlistpage.select_date') }}</h2>
+                            <span>{{ __('guestlistpage.select_date_description') }}</span>
                             <div class="form-group">
-                                <label for="reservationDate">Select Date</label>
+                                <label for="reservationDate">{{ __('guestlistpage.select_date_label') }}</label>
                                 <input type="date" name="reservationDate" id="reservationDate">
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeExportQrFormModal"
-                        data-dismiss="modal">Close</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="ExportGuestQr()">Save
-                        Changes</button>
+                        data-dismiss="modal">{{ __('guestlistpage.close') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="ExportGuestQr()">{{ __('guestlistpage.save_changes') }}</button>
                     </form>
                 </div>
             </div>
@@ -1180,35 +1189,34 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <form id="DisplaySaveOptionForm">
                         <div class="text">
                             {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
-                            <h2>Select Options to Display </h2>
+                            <h2>{{ __('guestlistpage.select_options_display') }}</h2>
                             <div class="form-group">
-                                <label for="gift-suggestion">Gift Suggestions</label>
+                                <label for="gift-suggestion">{{ __('guestlistpage.gift_suggestions') }}</label>
                                 <input type="checkbox" name="gift-suggestion" id="gift-suggestion">
                             </div>
                             <div class="form-group">
-                                <label for="at-reception-check-in">At the Reception Check-In</label>
+                                <label for="at-reception-check-in">{{ __('guestlistpage.at_reception_check_in') }}</label>
                                 <input type="checkbox" name="at-reception-check-in" id="at-reception-check-in">
                             </div>
                             <div class="form-group">
-                                <label for="upload-your-photo">Upload your Photos</label>
+                                <label for="upload-your-photo">{{ __('guestlistpage.upload_your_photos') }}</label>
                                 <input type="checkbox" name="upload-your-photo" id="upload-your-photo">
                             </div>
                             <div class="form-group">
-                                <label for="go-to-the-website">Go to the website</label>
+                                <label for="go-to-the-website">{{ __('guestlistpage.go_to_the_website') }}</label>
                                 <input type="checkbox" name="go-to-the-website" id="go-to-the-website">
                             </div>
                             <div class="form-group">
-                                <label for="learn-how-RSVP-works">Learn How RSVP Works</label>
+                                <label for="learn-how-RSVP-works">{{ __('guestlistpage.learn_how_rsvp_works') }}</label>
                                 <input type="checkbox" name="learn-how-RSVP-works" id="learn-how-RSVP-works">
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeDispalyModal"
-                        data-dismiss="modal">Close</button>
+                        data-dismiss="modal">{{ __('guestlistpage.close') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="save-option"
-                        onclick="DisplayOptionSave()" data-toggle="modal" data-target="#SendInvitation">Save
-                        Changes</button>
+                        onclick="DisplayOptionSave()" data-toggle="modal" data-target="#SendInvitation">{{ __('guestlistpage.save_changes') }}</button>
                     </form>
                 </div>
             </div>
@@ -1229,26 +1237,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <form id="SendInvitationForm">
                         <div class="text">
                             {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
-                            <h2>Select Options to Send Invitation</h2>
+                            <h2>{{ __('guestlistpage.select_options_send_invitation') }}</h2>
                             <div class="form-group">
-                                <label for="emailCheck">Email</label>
+                                <label for="emailCheck">{{ __('guestlistpage.email') }}</label>
                                 <input type="checkbox" name="emailCheck" id="emailCheck">
                             </div>
                             <div class="form-group">
-                                <label for="smsCheck">SMS</label>
+                                <label for="smsCheck">{{ __('guestlistpage.sms') }}</label>
                                 <input type="checkbox" name="smsCheck" id="smsCheck">
                             </div>
                             <div class="form-group">
-                                <label for="whatsappCheck">Whatsapp</label>
+                                <label for="whatsappCheck">{{ __('guestlistpage.whatsapp') }}</label>
                                 <input type="checkbox" name="whatsappCheck" id="whatsappCheck">
                             </div>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="closeSendInvitationForm">Close</button>
+                        id="closeSendInvitationForm">{{ __('guestlistpage.close') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="send-invitaion"
-                        onclick="SendInvitation()">Send Invitation</button>
+                        onclick="SendInvitation()">  {{ __('guestlistpage.send_invitation') }}</button>
                     </form>
                 </div>
             </div>
@@ -1419,13 +1427,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         </ul>
                                     </td>
                                     ${(member.opened === 2) ? `
-                                                                        <td class="accordian_img_acces">
-                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                        </td>` : ''}
+                                                                                    <td class="accordian_img_acces">
+                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                    </td>` : ''}
                                     ${(member.declined === 1) ? `
-                                                                        <td class="accordian_img_acces">
-                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                        </td>` : ''}
+                                                                                    <td class="accordian_img_acces">
+                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                    </td>` : ''}
                                 </tr>`;
                             });
 
@@ -1497,13 +1505,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1575,13 +1583,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1656,13 +1664,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1736,13 +1744,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                    <td class="accordian_img_acces">
-                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                    </td>` : ''}
+                                                                                                                <td class="accordian_img_acces">
+                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1819,13 +1827,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </ul>
                                                     </td>
                                                     ${(member.opened === 2) ? `
-                                                                                <td class="accordian_img_acces">
-                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                </td>` : ''}
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                            </td>` : ''}
                                                     ${(member.declined === 1) ? `
-                                                                                <td class="accordian_img_acces">
-                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                </td>` : ''}
+                                                                                            <td class="accordian_img_acces">
+                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                            </td>` : ''}
                                                 </tr>`;
                                         }
                                     });
@@ -1915,13 +1923,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 </ul>
                                             </td>
                                             ${(member.opened === 2) ? `
-                                                                <td class="accordian_img_acces">
-                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                </td>` : ''}
+                                                                            <td class="accordian_img_acces">
+                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                            </td>` : ''}
                                             ${(member.declined === 1) ? `
-                                                                <td class="accordian_img_acces">
-                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                </td>` : ''}
+                                                                            <td class="accordian_img_acces">
+                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                            </td>` : ''}
                                         </tr>`;
                                     });
 
