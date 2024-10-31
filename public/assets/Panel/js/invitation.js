@@ -28,8 +28,6 @@ var clonedText;
 let canv;
 let moveHistory = [];
 var canvasHistory = [];
-
-
 let undoStack = [];
 let redoStack = [];
 let currentIndex = -1;
@@ -69,7 +67,7 @@ function getTemplates() {
         // Convert object to array of templates
         const templatesArray = Object.values(data);
 
-        if(data.data.length == 0){
+        if (data.data.length == 0) {
           $("#viewTemplates").append(`
             <h3 class="text-center">No Templates Found!</h3>
           `);
@@ -112,7 +110,7 @@ function getTemplatewithId(templateId) {
         const jsonData = JSON.parse(templateData.json);
         canv.clear();
         canv.loadFromJSON(jsonData, canv.renderAll.bind(canv));
-        updateCanvasHistory();
+        // updateCanvasHistory();
       } else {
         console.error('No template data found.');
       }
@@ -155,7 +153,7 @@ function getTemplatewithId(templateId) {
         const templateData = response.data[0];
         const jsonData = JSON.parse(templateData.json);
         canv.loadFromJSON(jsonData, canv.renderAll.bind(canv));
-        updateCanvasHistory()
+        // updateCanvasHistory()
         // Remove loading message
         canv.remove(loadingText);
       } else {
@@ -178,11 +176,11 @@ function selectedObject(event) {
   if (event.target != null) {
     var selectBox = document.getElementById("font-selector2");
     var colorPicker = document.getElementById("colorPicker");
-    
+
     // Get the selected option value
     var optionValue = event.target.fontFamily;
     selectBox.value = optionValue;
-    
+
     // Get the selected color value
     var colorValue = event.target.fill;
     colorPicker.value = colorValue;
@@ -1133,8 +1131,8 @@ document
 document.getElementById("deleteBtn").addEventListener("click", function () {
   const obj = canv.getActiveObject();
   if (obj) {
-    canv.remove(obj);
     saveState();
+    canv.remove(obj);
   }
 });
 
@@ -1151,8 +1149,8 @@ function moveForward() {
 
   const obj = canv.getActiveObject();
   if (obj) {
-    canv.bringForward(obj);
     saveState();
+    canv.bringForward(obj);
     canv.renderAll();
   }
 }
@@ -1166,44 +1164,14 @@ function moveBackword() {
       canv._currentTransform.target.setCoords();
     }
 
-    canv.sendBackwards(obj);
     saveState();
+    canv.sendBackwards(obj);
     canv.renderAll();
   }
 }
 // Undo
 var maxHistoryLength = 10;
 
-// document.getElementById("undoBtn").addEventListener("click", function () {
-//   undo();
-// });
-
-function loadCanvasState(state) {
-  canv.off('object:added', saveState);
-    canv.off('object:modified', saveState);
-    canv.off('object:removed', saveState);
-    canv.loadFromJSON(state, function () {
-      canv.renderAll();
-      canv.on('object:added', saveState);
-      canv.on('object:modified', saveState);
-      canv.on('object:removed', saveState);
-    });
-}
-
-function saveCanvasState() {
-  moveHistory[currentIndex] = JSON.stringify(canv.toJSON());
-  currentIndex++;
-
-  if (currentIndex > maxHistoryLength) {
-    moveHistory.shift();
-    currentIndex = maxHistoryLength;
-  }
-}
-
-// Redo
-// document.getElementById("redoBtn").addEventListener("click", function () {
-//   redo();
-// })
 function giveRecordOfCard() {
   let record = [];
   for (let i = 0; i < canv._objects.length; i++) {
@@ -1311,9 +1279,9 @@ function textEffectsAnimationsBtn() {
 function changeOpacity(value) {
   const obj = canv.getActiveObject();
   if (obj) {
+    saveState();
     obj.set({ opacity: parseFloat(value.value) / 100 });
     canv.renderAll();
-    saveState();
     saveAll();
   }
 }
@@ -1368,35 +1336,6 @@ function addText() {
 //   });
 
 // Undo
-
-
-function loadCanvasState(state) {
-  canv.off('object:added', saveState);
-    canv.off('object:modified', saveState);
-    canv.off('object:removed', saveState);
-    canv.loadFromJSON(state, function () {
-      canv.renderAll();
-      canv.on('object:added', saveState);
-      canv.on('object:modified', saveState);
-      canv.on('object:removed', saveState);
-    });
-}
-
-function saveCanvasState() {
-  moveHistory[currentIndex] = JSON.stringify(canv.toJSON());
-  currentIndex++;
-
-  if (currentIndex > maxHistoryLength) {
-    moveHistory.shift();
-    currentIndex = maxHistoryLength;
-  }
-}
-
-
-// Redo
-// document.getElementById("redoBtn").addEventListener("click", function () {
-//   redo();
-// });
 
 // document.querySelector(".deleteBtn").addEventListener("click", function () {
 //   const obj = canv.getActiveObject();
@@ -2009,7 +1948,7 @@ function undoCanvas() {
 }
 function canvaClear() {
   // Clear the current canvas instance
-  updateCanvasHistory();
+  // updateCanvasHistory();
   canv.clear();
 
   // Create a new Fabric.js canvas instance
@@ -2030,7 +1969,7 @@ function canvaClear() {
 
 function dublicateObject() {
   var object = canv.getActiveObject();
-  if(object){ 
+  if (object) {
     object.clone(function (e) {
       canv.add(
         e.set({
@@ -2146,9 +2085,9 @@ function stickerLoad(data) {
 }
 function show() {
   document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
-  
+
   sideshow.style.display = "inline-block";
-  
+
   document.querySelector("#viewTemplates").style.display = "none";
   document.querySelector(".sidebaraddimg").style.display = "none";
   document.querySelector(".sidebaraddtext").style.display = "none";
@@ -2406,12 +2345,12 @@ function saveAll() {
 
 const stickers1 = [];
 function loadCardImagesFromDB(data) {
-  
+
   var imgDiv = document.getElementById("imgDiv");
   for (let i = 0; i < data.length; i++) {
     const colDiv = document.createElement("div");
     colDiv.className = "col-6 mb-3";
-    
+
     const img = document.createElement("img");
     img.crossOrigin = "Anonymous";
     img.src =
@@ -2577,7 +2516,7 @@ async function loadOldData2() {
       const obj = canv.getActiveObject();
       if (obj) {
         canv.remove(obj);
-        saveState();
+        // saveState();
       }
     });
 
@@ -2702,9 +2641,9 @@ function renderBgImages(imgData, selectedBackground) {
   }
 }
 
-function updateCanvasHistory() {
-  canvasHistory.push(canv.toJSON());
-}
+// function updateCanvasHistory() {
+//   canvasHistory.push(canv.toJSON());
+// }
 // function addToHistory() {
 //   const jsonData = JSON.stringify(canv.toJSON());
 //   moveHistory = moveHistory.slice(0, currentIndex + 1); // Remove future history
@@ -2970,18 +2909,6 @@ function redo() {
   }
 }
 
-function loadCanvasState(state) {
-  canv.off('object:added', saveState);
-    canv.off('object:modified', saveState);
-    canv.off('object:removed', saveState);
-    canv.loadFromJSON(state, function () {
-      canv.renderAll();
-      canv.on('object:added', saveState);
-      canv.on('object:modified', saveState);
-      canv.on('object:removed', saveState);
-    });
-}
-
 function toggleTwoSided(element) {
   if (element.checked === true) {
     document.getElementById("frontBackBox").style.display = "block";
@@ -3019,3 +2946,24 @@ function toggleSide(element) {
     handleJSONImport();
   }
 }
+
+
+function loadCanvasState(state) {
+  canv.off('object:added', saveState);
+  canv.off('object:modified', saveState);
+  canv.off('object:removed', saveState);
+  canv.loadFromJSON(state, function () {
+    canv.renderAll();
+    canv.on('object:added', saveState);
+    canv.on('object:modified', saveState);
+    canv.on('object:removed', saveState);
+  });
+}
+
+// document.getElementById("undoBtn").addEventListener("click", function () {
+//   undo();
+// });
+
+// document.getElementById("redoBtn").addEventListener("click", function () {
+//   redo();
+// })
