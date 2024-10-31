@@ -212,8 +212,8 @@
     <div class="account-section bg_img" data-background="">
         <div class="container">
             <div class="account-title text-center mb-120">
-                <a href="/login" class="back-home"><i class="fas fa-angle-left"></i><span>Back <span
-                            class="d-none d-sm-inline-block">To Sign in</span></span></a>
+                <a href="/login" class="back-home"><i class="fas fa-angle-left"></i><span>{{ __('reset.back') }} <span
+                            class="d-none d-sm-inline-block">{{ __('reset.to_sign_in') }}</span></span></a>
                 <a href="/" class="logo">
                     <img src="/assets/newimages/Group 1.png" alt="click-invitation">
                 </a>
@@ -227,24 +227,22 @@
                         margin-top: -14px;
                         font-family: 'night';
                         color: #000 !important; ">
-                            Reset Your Passsword</h1>
-                        <p class="sub-title-p">Please enter your email address below. We'll send you instructions to
-                            reset your password</p>
+                          {{ __('reset.reset') }}</h1>
+                        <p class="sub-title-p">{{ __('reset.instructions') }}</p>
                     </div>
                     <form class="account-form" id="signin-form">
                         <div class="form-group">
-                            <label for="sign-up" class="sub-title-p">Your Email </label>
-                            <input type="text" placeholder="Enter Your Email " id="sign-up" required>
+                            <label for="sign-up" class="sub-title-p">{{ __('reset.your_email') }}</label>
+                            <input type="text" placeholder="{{ __('reset.enter_your_email') }} " id="sign-up" required>
                             <div class="text-center mt-4" id="mex"></div>
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="mt-1 mb-30 w-100 register-button" id="signin"
-                                onclick="return false;">Send
-                                instructions </button>
+                                onclick="return false;">{{ __('reset.send_instructions') }} </button>
                         </div>
                     </form>
-                    <span class="d-block mt-15 sub-title-p ">Remember your password? <a href="/login" class="login">
-                            Log In</a></span>
+                    <span class="d-block mt-15 sub-title-p ">{{ __('reset.remember_your_password') }} <a href="/login" class="login">
+                        {{ __('reset.log_in') }}</a></span>
                 </div>
             </div>
         </div>

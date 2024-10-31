@@ -14,33 +14,34 @@
     <div class="container">
         <div class="heading-text">
             <h1>
-                Discover Our Comprehensive Features for<span class="bold-text"> Unforgettable </span>Events.
+                {{ __('feature.features_heading') }}<span class="bold-text"> {{ __('feature.features_highlight') }}</span> {{ __('feature.features_tagline') }}
             </h1>
+
         </div>
         <div class="main-img">
             <img src="assets/newimages/Component 33 (5).png" alt="paperless-post-birthday-invitations">
         </div>
         <div class="tab text-border">
             <input id="tab1" type="radio" name="tabs" checked>
-            <label for="tab1">Event Webpage</label>
+            <label for="tab1">{{ __('feature.event_webpage') }}</label>
             <input id="tab2" type="radio" name="tabs">
-            <label for="tab2" onclick="scrollToContent2()">Photo Gallery</label>
+            <label for="tab2" onclick="scrollToContent2()">{{ __('feature.photo_gallery') }}</label>
             <input id="tab3" type="radio" name="tabs">
-            <label for="tab3" onclick="scrollToContent3()">Gifts and Payment Gateway</label>
+            <label for="tab3" onclick="scrollToContent3()">{{ __('feature.gifts_payment_gateway') }}</label>
             <input id="tab4" type="radio" name="tabs">
-            <label for="tab4" onclick="scrollToContent4()">Main Meal Choices and Allergies</label>
+            <label for="tab4" onclick="scrollToContent4()">{{ __('feature.main_meal_choices') }}</label>
             <input id="tab5" type="radio" name="tabs">
-            <label for="tab5" onclick="scrollToContent5()">Pre-Made Invitations or Custom Designs</label>
+            <label for="tab5" onclick="scrollToContent5()">{{ __('feature.pre_made_invitations') }}</label>
             <input id="tab6" type="radio" name="tabs">
-            <label for="tab6" onclick="scrollToContent6()">Tables and Seating Arrangements</label>
+            <label for="tab6" onclick="scrollToContent6()">{{ __('feature.tables_seating') }}</label>
             <input id="tab7" type="radio" name="tabs">
-            <label for="tab7" onclick="scrollToContent7()">Messaging System</label>
+            <label for="tab7" onclick="scrollToContent7()">{{ __('feature.messaging_system') }}</label>
             <input id="tab8" type="radio" name="tabs">
-            <label for="tab8" onclick="scrollToContent8()">QR Code Check-In with Acknowledgment</label>
+            <label for="tab8" onclick="scrollToContent8()">{{ __('feature.qr_code_check_in') }}</label>
             <input id="tab9" type="radio" name="tabs">
-            <label for="tab9" onclick="scrollToContent9()">Guest Table Numbers at Check-In</label>
+            <label for="tab9" onclick="scrollToContent9()">{{ __('feature.guest_table_numbers') }}</label>
             <input id="tab10" type="radio" name="tabs">
-            <label for="tab10" onclick="scrollToContent10()">Adding Family Members and Sharing Invitations</label>
+            <label for="tab10" onclick="scrollToContent10()">{{ __('feature.adding_family_members') }}</label>
 
 
             <div id="content1" class="tab-wrap">
@@ -48,62 +49,47 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Group 16.png" alt="">
                     <h2>
-                        Event Webpage
+                        {{ __('feature.event_webpage_title') }}
                     </h2>
-                </div>
-                <p>
-                    Create a dedicated webpage for your event, showcasing all the important details in one place.<span
-                        class="bold-text font-default"> From event description and schedule to location and FAQs,
-                    </span>your guests will have easy access to everything they need to know.
-                </p>
+                    <p>
+                        {{ __('feature.event_webpage_description') }}<span class="bold-text font-default"> {{ __('feature.event_webpage_highlight') }}</span>
+                    </p>
 
             </div>
             <div id="content2" class="tab-wrap">
                 <div class="tab-content">
                     <img src="assets/newimages/Group 17.png" alt="">
                     <h3>
-                        Photo Gallery
+                        {{ __('feature.photo_gallery_title') }}
                     </h3>
+                    <p>
+                        <span class="bold-text font-default">{{ __('feature.photo_gallery_highlight') }}</span>
+                        {{ __('feature.photo_gallery_description') }}
+                    </p>
 
-                </div>
-                <p>
-                    <span class="bold-text font-default">Capture the memories of your event through photos. </span>
-                    Both organizers and guests can upload images to the event's photo gallery, ensuring that every
-                    special moment is preserved.
-                </p>
             </div>
 
             <div id="content3" class="tab-wrap">
                 <div class="tab-content">
                     <img src="assets/newimages/Group 18.png" alt="">
                     <h3>
-                        Gifts and Payment Gateway
+                        {{ __('feature.gifts_payment_gateway_title') }}
                     </h3>
-
-                </div>
-
-                <p>
-                    Streamline gift-giving with our integrated payment gateway. Guests can contribute to gifts or send
-                    monetary presents directly through the platform, <span class="bold-text font-default">making the
-                        experience convenient and hassle-free.</span>
-
-                </p>
+                    <p>
+                        {{ __('feature.gifts_payment_gateway_description') }}<span class="bold-text font-default">{{ __('feature.gifts_payment_gateway_highlight') }}</span>
+                    </p>
 
             </div>
             <div id="content4" class="tab-wrap">
                 <div class="tab-content">
                     <img src="assets/newimages/icons.png" alt="">
                     <h3>
-                        Main Meal Choices and Allergies
+                        {{ __('feature.main_meal_choices_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.main_meal_choices_description') }}<span class="bold-text font-default">{{ __('feature.main_meal_choices_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Cater to your guests' dietary preferences and allergies by offering them meal choices. <span
-                        class="bold-text font-default"> Collect their selections during the RSVP process</span>
-                    and ensure that everyone enjoys a delicious dining experience.
-                </p>
 
             </div>
             <!-- end of div 4 -->
@@ -111,16 +97,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Vector (6).png" alt="">
                     <h3>
-                        Pre-Made Invitations or Custom Designs
+                        {{ __('feature.pre_made_invitations_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.pre_made_invitations_description') }}<span class="bold-text font-default">{{ __('feature.pre_made_invitations_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Choose from<span class="bold-text font-default"> a range of pre-made invitation cards or unleash
-                        your</span> creativity by uploading your custom designs and logos. Make your event invitations
-                    truly unique and reflective of your style.
-                </p>
 
             </div>
             <!-- end of div 5 -->
@@ -128,16 +110,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Group 19.png" alt="">
                     <h3>
-                        Tables and Seating Arrangements
+                        {{ __('feature.tables_and_seating_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.tables_and_seating_description') }}<span class="bold-text font-default">{{ __('feature.tables_and_seating_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Effortlessly organize seating arrangements with our intuitive tools. Designate tables and seats for
-                    your guests, <span class="bold-text font-default">ensuring a smooth and enjoyable event</span>
-                    experience.
-                </p>
 
             </div>
             <!-- end of div 6 -->
@@ -145,16 +123,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Vector (5).png" alt="">
                     <h3>
-                        Messaging System
+                        {{ __('feature.messaging_system_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.messaging_system_description') }}<span class="bold-text font-default">{{ __('feature.messaging_system_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Communicate seamlessly with your guests through our built-in messaging system. Send event updates,
-                    <span class="bold-text font-default">reminders, and important information to keep everyone in the
-                        loop.</span>
-                </p>
 
             </div>
             <!-- end of div 7 -->
@@ -162,16 +136,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Language_translator.png" alt="">
                     <h3>
-                        QR Code Check-In with Acknowledgment
+                        {{ __('feature.qr_code_checkin_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.qr_code_checkin_description') }}<span class="bold-text font-default">{{ __('feature.qr_code_checkin_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Streamline event check-in with QR codes. Guests can simply scan their codes at the reception,
-                    receiving an acknowledgment <span class="bold-text font-default">of their attendance. Make the entry
-                        process swift </span> and efficient.
-                </p>
 
             </div>
             <!-- end of div 8 -->
@@ -179,16 +149,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Vector (7).png" alt="">
                     <h3>
-                        Guest Table Numbers at Check-In
+                        {{ __('feature.guest_table_numbers_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.guest_table_numbers_description') }}<span class="bold-text font-default">{{ __('feature.guest_table_numbers_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Enhance guest<span class="bold-text font-default"> experience by providing them with their table
-                    </span> numbers upon check-in. Avoid confusion and ensure everyone finds their designated seats
-                    effortlessly.
-                </p>
 
             </div>
             <!-- end of div 9 -->
@@ -196,17 +162,12 @@
                 <div class="tab-content">
                     <img src="assets/newimages/Vector (7).png" alt="">
                     <h3>
-                        Adding Family Members and Sharing Invitations
+                        {{ __('feature.adding_family_members_title') }}
                     </h3>
+                    <p>
+                        {{ __('feature.adding_family_members_description') }}<span class="bold-text font-default">{{ __('feature.adding_family_members_highlight') }}</span>
+                    </p>
 
-                </div>
-
-                <p>
-                    Allow guests to include their family members when responding to invitations. <span
-                        class="bold-text font-default">Share the event details with the added members, ensuring all
-                        attendees are well-informed.
-                    </span>
-                </p>
 
             </div>
             <!-- end of div 10 -->
@@ -214,8 +175,9 @@
 
         <div class="heading-text">
             <h2>
-                Why Chooses<span class="bold-text"> ClickInvitation</span> ?
+                {{ __('feature.title') }}<span class="bold-text">{{ __('feature.highlight') }}</span>?
             </h2>
+
         </div>
 
         <div class="container">
@@ -225,12 +187,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 16.png" alt=""></div>
                             <div>
-                                <h3>All-in-One Solution</h3>
+                                <h3>{{ __('feature.all_in_one_solution_title') }}</h3>
                             </div>
                         </div>
                         <p class="text1">
-                            We provide a comprehensive suite of features that cover every aspect of event planning and
-                            management, ensuring a seamless and enjoyable experience for both organizers and guests.
+                            {{ __('feature.all_in_one_solution_description') }}
                         </p>
 
                     </div>
@@ -240,12 +201,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 17.png" alt=""></div>
                             <div>
-                                <h3>Ease of Use</h3>
+                                <h3>{{ __('feature.ease_of_use_title') }}</h3>
                             </div>
                         </div>
                         <p class="text4">
-                            Our platform is designed with simplicity in mind. Whether you're a tech enthusiast or a novice,
-                            you'll find our tools intuitive and user-friendly.
+                            {{ __('feature.ease_of_use_description') }}
 
                         </p>
                     </div>
@@ -255,12 +215,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 18.png" alt=""></div>
                             <div>
-                                <h3>Customization</h3>
+                                <h3>{{ __('feature.customization_title') }}</h3>
                             </div>
                         </div>
                         <p class="text7">
-                            Tailor every element to match your event's theme and style. From invitations to seating
-                            arrangements, you have full control over how your event is presented.
+                            {{ __('feature.customization_description') }}
                         </p>
                     </div>
                 </div>
@@ -275,12 +234,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 16.png" alt=""></div>
                             <div>
-                                <h3>Efficiency</h3>
+                                <h3>{{ __('feature.efficiency_title') }}</h3>
                             </div>
                         </div>
                         <p class="text1">
-                            Save time and reduce stress with our streamlined features. Manage guest lists, communication,
-                            and event logistics effortlessly.
+                            {{ __('feature.efficiency_description') }}
                         </p>
 
                     </div>
@@ -290,12 +248,11 @@
                         <div class="sub-area">
                             <div> <img src="assets/newimages/Group 17.png" alt=""></div>
                             <div>
-                                <h3>Memories That Last</h3>
+                                <h3>{{ __('feature.memories_that_last_title') }}</h3>
                             </div>
                         </div>
                         <p class="text4">
-                            Capture and cherish every moment with our photo gallery and memory-sharing features. Your
-                            event's essence will be preserved for years to come.
+                            {{ __('feature.memories_that_last_description') }}
 
                         </p>
                     </div>
