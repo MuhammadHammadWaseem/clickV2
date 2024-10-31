@@ -508,13 +508,7 @@
         'December'
     ]
 
-    console.log("sdfasdf");
-
     if (("{{ $event->date }}").length > 0) {
-        console.log({{ strtotime(now()) * 1000 }});
-        console.log({{ strtotime($event->date) * 1000 }});
-        console.log("aa {{ $event->date }}");
-        console.log(new Date("{{ $event->date }}"));
         let eDate = document.getElementById('eventDate');
         let newEDate = new Date("{{ $event->date }}");
         let min = newEDate.getMinutes();
@@ -528,8 +522,6 @@
     }
 
     // if (("{{ $event->certime }}").length > 0) {
-    //     console.log("{{ $event->certime }}");
-    //     console.log(new Date("{{ $event->certime }}"));
     //     let eDate = document.getElementById('eventCer');
     //     let newEDate = new Date("{{ $event->certime }}");
     //     let hr = newEDate.getHours();

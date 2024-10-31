@@ -2,31 +2,40 @@
 
 
 <style>
-
     .main-dashboard-sec .left-menu-dash ul li.webpage-active a {
-      color: #C09D2A;
+        color: #C09D2A;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active img {
-      filter: none;
+        filter: none;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active {
-      background-color: #c09d2a29;
+        background-color: #c09d2a29;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 
-    </style>
+    .modal form label {
+        width: 100%;
+        height: 200px;
+        border: 5px dashed #A9967D;
+        border-radius: 10px;
+        display: flex;
+        padding: 50px 60px;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
 
 @section('content')
     @php
@@ -57,7 +66,8 @@
                         <button class="t-btn t-btn-gray"><a
                                 href="{{ route('panel.event.generalInfos', ['id' => $event->id_event]) }}"
                                 style="color:#ffffff;">{{ __('webpage.Website Information') }}</a></button>
-                        <button class="t-btn t-btn-gray" id="changeMainPhotoBtn">{{ __('webpage.Change Main Photo') }}</button>
+                        <button class="t-btn t-btn-gray"
+                            id="changeMainPhotoBtn">{{ __('webpage.Change Main Photo') }}</button>
                         <button class="t-btn"><a href="{{ route('website', ['id' => $event->id_event]) }}"
                                 style="color:#ffffff;">{{ __('webpage.Visit Website') }}</a></button>
                     </div>
@@ -70,7 +80,8 @@
                             <h2>{{ __('webpage.Eventphoto') }}</h2>
                             <p>{{ __('webpage.Eventphotodesc') }}</p>
                         </div>
-                        <button type="button" class="t-btn" data-toggle="modal" data-target="#exampleModalCenter04">{{ __('webpage.Add New') }}</button>
+                        <button type="button" class="t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter04">{{ __('webpage.Add New') }}</button>
                     </div>
                     <div class="main-event-gallery-box">
                         @forelse ($photogallery as $photo)
@@ -163,12 +174,17 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="cerimage" name="cerimage" multiple accept="image/*" />
+                            <input type="file" id="cerimage" name="cerimage" class="d-none" accept="image/*" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                            <label id="uploadButton">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="printCerName">No File Selected</div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="submit"
+                            class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeCerModalBtn" class="btn btn-secondary"
                             data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
@@ -197,7 +213,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="submit"
+                            class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeBtn" class="btn btn-secondary"
                             data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
@@ -258,7 +275,8 @@
     </div>
 
 
-    <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02"> {{ __('webpage.Serve Meal Button Text') }} </button>
+    <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02">
+        {{ __('webpage.Serve Meal Button Text') }} </button>
     <!-- Modal -->
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -277,7 +295,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('webpage.Serve Meal Modal No Button') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter"><a class="text-light"
                             href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">{{ __('webpage.Serve Meal Modal Yes Button') }}</a></button>
@@ -305,7 +324,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('webpage.Close') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('webpage.Close') }}</button>
                 </div>
             </div>
         </div>
@@ -325,13 +345,19 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="recimage" name="recimage" accept="image/*" />
+                            <input type="file" id="recimage" name="recimage" class="d-none" accept="image/*" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                            <label id="uploadButton2">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="printRecName" class="text-center">No File Selected</div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
-                        <button type="button" id="closeRecModalBtn" class="btn" data-dismiss="modal">{{ __('webpage.Close') }}</button>
+                        <button type="submit"
+                            class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="button" id="closeRecModalBtn" class="btn"
+                            data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -352,13 +378,19 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="parimage" name="parimage" accept="image/*" />
+                            <input type="file" id="parimage" name="parimage" class="d-none" accept="image/*" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                            <label id="uploadButton3">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="printCusName" class="text-center">No File Selected</div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
-                        <button type="button" id="closeParModalBtn" class="btn" data-dismiss="modal">{{ __('webpage.Close') }}</button>
+                        <button type="submit"
+                            class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="button" id="closeParModalBtn" class="btn"
+                            data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
                 </form>
             </div>
@@ -385,7 +417,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
+                        <button type="submit"
+                            class="submit-btn btn btn-primary t-btn">{{ __('webpage.Submit') }}</button>
                         <button type="button" id="closeMainIamgeModalBtn" class="btn"
                             data-dismiss="modal">{{ __('webpage.Close') }}</button>
                     </div>
@@ -397,6 +430,52 @@
 
 @section('scripts')
     <script>
+        document.getElementById('uploadButton').addEventListener('click', function() {
+            document.getElementById('cerimage').click();
+        });
+        
+        // Display video file name when a file is selected
+        document.getElementById('cerimage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('printCerName');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+            } else {
+                previewContainer.textContent = file.name; // Show the selected video file name
+            }
+        });
+
+        document.getElementById('uploadButton2').addEventListener('click', function() {
+            document.getElementById('recimage').click();
+        });
+
+        document.getElementById('recimage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('printRecName');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+            } else {
+                previewContainer.textContent = file.name; // Show the selected video file name
+            }
+        });
+
+        document.getElementById('uploadButton3').addEventListener('click', function() {
+            document.getElementById('parimage').click();
+        });
+
+        document.getElementById('parimage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('printCusName');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+            } else {
+                previewContainer.textContent = file.name; // Show the selected video file name
+            }
+        });
+
         $(document).ready(function() {
             $("#saveImagesModal").on("click", function() {
                 var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
@@ -496,9 +575,8 @@
                     contentType: false, // Do not set content-type header
                     processData: false, // Do not process the data
                     success: function(response) {
-                        // Handle success (e.g., display a success message or update the UI)
-                        console.log(response.img);
                         $("#cerimage").val(''); // Clear the file input field after success
+                        $("#printCerName").text('No File Selected'); // Clear the file input field after success
                         toastr.success('Ceremony image uploaded successfully!');
                         $('#closeCerModalBtn').click(); // Close the modal
 
@@ -540,6 +618,7 @@
                     success: function(response) {
                         // Clear input field
                         $("#recimage").val('');
+                        $("#printRecName").text('No File Selected');
                         toastr.success('Reception image uploaded successfully!');
                         $('#closeRecModalBtn').click();
 
@@ -577,6 +656,7 @@
                     success: function(response) {
                         // Clear input field
                         $("#parimage").val('');
+                        $("#printCusName").text('No File Selected');
                         toastr.success('Custom image uploaded successfully!');
                         $('#closeParModalBtn').click();
 
