@@ -66,8 +66,8 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>PAYMENT WITH PAYPAL</h2>
-                        <p>You must make payment to access to this area.</p>
+                        <h2>{{ __('pay.payment_with_paypal') }}</h2>
+                        <p>{{ __('pay.payment_access_area') }}</p>
                     </div>
                 </div>
             </div>
@@ -78,34 +78,34 @@
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Name*" required>
+                                    <input type="text" placeholder="{{ __('pay.name') }}*" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" placeholder="Phone*" required>
+                                    <input type="tel" placeholder="{{ __('pay.phone') }}*" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group" style="width: 100%">
-                                    <input type="text" placeholder="Address*" required>
+                                    <input type="text" placeholder="{{ __('pay.address') }}*" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <input type="text" placeholder="City*" required>
+                                    <input type="text" placeholder="{{ __('pay.postal_code') }}*" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" placeholder="Postal Code*" required>
+                                    <input type="number" placeholder="{{ __('pay.postal_code') }}*" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <select name="" id="country">
-                                        <option selected disabled>Select Country</option>
-                                        <option value="canada">CANADA</option>
-                                        <option value="us">UNITED STATES</option>
+                                        <option selected disabled>{{ __('pay.select_country') }}</option>
+                                        <option value="canada">{{ __('pay.canada') }}</option>
+                                        <option value="us">{{ __('pay.united_states') }}</option>
                                     </select>
                                 </div>
 
@@ -116,8 +116,8 @@
                             <span class="divider-seperater"></span>
                             <div class="form-row">
                                 <div class="form-group discont-cd">
-                                    <input type="text" id="code" placeholder="Discount Code">
-                                    <button type="button" onclick="verify()">VERIFY</button>
+                                    <input type="text" id="code" placeholder="Discount {{ __('pay.discount_code') }}">
+                                    <button type="button" onclick="verify()">{{ __('pay.verify') }}</button>
                                 </div>
                                 <div class="form-group table-reveal-data">
                                     <table id="canadaTable" class="d-none">
@@ -127,9 +127,9 @@
                                 </div>
                             </div>
                             <div class="two-btn-form-align">
-                                <button>CANCEL</button>
-                                <button id="canBtn" class="d-none"><a id="can" class="text-white" href="">PAY NOW</a></button>
-                                <button id="usaBtn" class="d-none"><a id="usa" class="text-white" href="">PAY NOW</a></button>
+                                <button>{{ __('pay.cancel') }}</button>
+                                <button id="canBtn" class="d-none"><a id="can" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>
+                                <button id="usaBtn" class="d-none"><a id="usa" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>
                             </div>
 
                         </form>
