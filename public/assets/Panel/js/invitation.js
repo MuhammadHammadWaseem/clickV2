@@ -48,9 +48,23 @@ getapi();
 handleJSONImport();
 loadOldData2();
 
-canv.on('object:modified', saveState);
-canv.on('object:added', saveState);
-canv.on('object:removed', saveState);
+// canv.on('object:modified', saveState);
+// canv.on('object:added', saveState);
+// canv.on('object:removed', saveState);
+
+canv.on('object:modified', function() {
+  saveState();
+  saveAll();
+});
+canv.on('object:added', function() {
+  saveState();
+  saveAll();
+});
+canv.on('object:removed', function() {
+  saveState();
+  saveAll();
+});
+
 
 
 //get templates 
@@ -185,7 +199,7 @@ function selectedObject(event) {
     var colorValue = event.target.fill;
     colorPicker.value = colorValue;
     saveState();
-    saveAll();
+    // saveAll();
   }
 
 
@@ -1304,7 +1318,7 @@ function addText() {
   textbox.hiddenTextarea.focus();
 
   saveState();
-  // saveAll();
+  saveAll();
 }
 
 // document
@@ -2219,7 +2233,6 @@ function saveData() {
 
 
 function saveAll() {
-
   const backElement = document.getElementById('back');
   if (backElement.checked) {
     var saveBtns = document.getElementsByClassName("SaveBtn");
