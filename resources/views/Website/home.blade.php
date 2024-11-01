@@ -32,6 +32,12 @@ a.site-logo {
 .site-navbar ul li a {
     padding: 7px !important;
     }
+
+
+
+    .site-navbar ul li a {
+    font-size: 12px !important;
+}
 </style>
 @section('title')
     {{ __('home.title') }}
