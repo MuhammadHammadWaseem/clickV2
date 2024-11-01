@@ -46,5 +46,15 @@ return[
 'Guest will select seats' => 'Guest will select seats',
 'Here you can upload your tables plan' => 'Here you can upload your tables plan',
 'No File Selected' => 'No File Selected',
+'Not_Seated' => 'Not Seated',
+'seat_name' => 'Seat Name',
+'guest_name' => 'Guest Name',
+'no_guest_assigned' => 'No Guest Assigned',
+'email' => 'Email',
+'action' => 'Action',
+'select_guest' => 'Select Guest',
+'remove_guest' => 'Remove Guest',
+'no_email_provided' => 'No Email Provided',
+'open' => 'OPEN ',
 
 ];

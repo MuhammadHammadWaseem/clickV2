@@ -24,7 +24,7 @@ class TableSeatingController extends Controller
         $eventId = GeneralHelper::getEventId();
         $event = Event::where('id_event', $eventId)->first();
         $isCorporate = $event->type == "CORPORATE" ? 1 : 0;
-        return view("Panel.dashboard.guest-list.index", compact('isCorporate','event'));
+        return view("Panel.dashboard.guest-list.index", compact('isCorporate', 'event'));
     }
 
     public function showTables()
@@ -421,5 +421,55 @@ class TableSeatingController extends Controller
             "guestOptions" => $guestOptions
         ]);
     }
+
+    public function editplan(Request $request)
+    {
+        $request->validate([
+            'idevent' => 'required|exists:events,id_event',
+            'tablePhoto' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        try {
+            $event = Event::where('id_event', $request->idevent)->first();
+
+            if ($event && $request->file('tablePhoto')) {
+                // Define directory path
+                $directory = public_path('event-images/' . $event->id_event);
+
+                // Check and create the directory
+                if (!file_exists($directory)) {
+                    if (!mkdir($directory, 0777, true)) {
+                        return response()->json(['success' => false, 'message' => 'Failed to create directory'], 500);
+                    }
+                }
+
+                // Set filename
+                $filename = 'plan.jpg';
+
+                // Delete old image if it exists
+                $oldImagePath = $directory . '/' . $filename;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+
+                // Move the new file to the directory
+                $file = $request->file('tablePhoto');
+                $file->move($directory, $filename);
+
+                // Update image path in the database
+                $event->imgplan = 'event-images/' . $event->id_event . '/' . $filename;
+                $event->save();
+
+                return response()->json(['success' => true, 'message' => 'Table plan updated successfully', 'srs' => asset($event->imgplan)]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Event or image not found'], 404);
+            }
+        } catch (\Exception $e) {
+            \Log::error('File upload error: ' . $e->getMessage()); // Log any exception
+            return response()->json(['success' => false, 'message' => 'An error occurred while updating the plan', 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
 
 }

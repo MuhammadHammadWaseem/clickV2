@@ -46,4 +46,15 @@ return [
     'Guest will select seats' => 'Les invités sélectionneront leurs sièges',
     'Here you can upload your tables plan' => 'Ici vous pouvez télécharger votre plan de tables',
     'No File Selected' => 'Aucun fichier sélectionné',
+
+    'Not_Seated' => 'Not Seated',
+    'seat_name' => 'Seat Name',
+    'guest_name' => 'Guest Name',
+    'no_guest_assigned' => 'No Guest Assigned',
+    'email' => 'Email',
+    'action' => 'Action',
+    'select_guest' => 'Select Guest',
+    'remove_guest' => 'Remove Guest',
+    'no_email_provided' => 'No Email Provided',
+    'open' => 'OPEN ',
 ];

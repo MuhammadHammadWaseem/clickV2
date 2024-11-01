@@ -154,6 +154,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('set-tables', [TableSeatingController::class, 'setTable'])->name('set.table')->middleware('payCheck');
             Route::post('set-guest-seat', [TableSeatingController::class, 'settablesseat'])->name('settablesseat')->middleware('payCheck');
             Route::post('remove-guest', [TableSeatingController::class, 'removeGuest'])->name('removeGuest')->middleware('payCheck');
+            Route::post('editplan', [TableSeatingController::class, 'editplan'])->name('editplan')->middleware('payCheck');
 
             //Invitation
             Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');

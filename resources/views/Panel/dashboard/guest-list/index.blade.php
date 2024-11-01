@@ -344,6 +344,11 @@
             font-size: 12px;
         }
 
+        .management-plan .management-plan-box .box h6 {
+            text-align: center;
+        }
+
+
     }
 </style>
 @section('content')
@@ -372,11 +377,24 @@
                         </div>
                     </div>
                     <div class="management-plan-box">
-                        <div class="box">
-                            <img src="{{ asset('assets/images/dinner-table.png') }}" alt="">
-                            <h6>{{ __('table.table_01') }}</h6>
-                            <p>{{ __('table.friends') }}</p>
-                        </div>
+                        @if (file_exists($event->imgplan))
+                            <input type="file" id="tablePhoto" name="tablePhoto" class="d-none" />
+                            <label id="uploadtablePhoto">
+                                <img id="tableImgPlan" src="{{ asset($event->imgplan) }}" width="600px" height="300px" alt="">
+                            </label>
+                            <p id="tablePhotoText" class="d-none" style="font-size: 11px !important; text-align:center !important;">                            
+                        @else
+                            <div class="box upload_boxex">
+                                <input type="file" id="tablePhoto" name="tablePhoto" class="d-none" />
+                                <label id="uploadtablePhoto">
+                                    {{-- <img src="{{ asset('assets/images/dinner-table.png') }}" alt="Upload Icon"> --}}
+                                    <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                                </label>
+                                <h6>{{ __('table.Here you can upload your tables plan') }}</h6>
+                                <p id="tablePhotoText" style="font-size: 11px !important; text-align:center !important;">
+                                    {{ __('table.No File Selected') }}</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -393,12 +411,16 @@
                         @if ($isCorporate == 1)
                             <div class="col radios" id="BtnsBox">
                                 <div class="div">
-                                    <input type="radio" name="seat-selection" id="can-select-seats" {{ $event->guestCanSelectSeats == 0 ? 'checked' : '' }}>
-                                    <label for="can-select-seats" onclick="guestCanSelectSeats(0)">{{ __('table.I will select seats') }}</label>
+                                    <input type="radio" name="seat-selection" id="can-select-seats"
+                                        {{ $event->guestCanSelectSeats == 0 ? 'checked' : '' }}>
+                                    <label for="can-select-seats"
+                                        onclick="guestCanSelectSeats(0)">{{ __('table.I will select seats') }}</label>
                                 </div>
                                 <div class="div">
-                                    <input type="radio" name="seat-selection" id="can-not-select-seats" {{ $event->guestCanSelectSeats == 1 ? 'checked' : '' }}>
-                                    <label for="can-not-select-seats" onclick="guestCanSelectSeats(1)">{{ __('table.Guest will select seats') }}</label>
+                                    <input type="radio" name="seat-selection" id="can-not-select-seats"
+                                        {{ $event->guestCanSelectSeats == 1 ? 'checked' : '' }}>
+                                    <label for="can-not-select-seats"
+                                        onclick="guestCanSelectSeats(1)">{{ __('table.Guest will select seats') }}</label>
                                 </div>
                             </div>
                         @endif
@@ -474,8 +496,8 @@
         </div>
     </div>
 
-    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="editTableModal" tabindex="-1" role="dialog"
-        aria-labelledby="editTableModalLabel" aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 upload-form-another-event" id="editTableModal" tabindex="-1"
+        role="dialog" aria-labelledby="editTableModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -700,6 +722,54 @@
 @endsection
 @section('scripts')
     <script>
+        // Trigger file input when the custom button is clicked
+        document.getElementById('uploadtablePhoto').addEventListener('click', function() {
+            document.getElementById('tablePhoto').click();
+        });
+
+        // Display file name and image preview when a file is selected
+        document.getElementById('tablePhoto').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('tablePhotoText');
+            const previewImage = document.getElementById('tablePhotoPreview');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+                previewImage.style.display = 'none';
+            } else {
+                previewContainer.textContent = file.name;
+            }
+            submitTableData();
+        });
+
+        function submitTableData() {
+            const file = document.getElementById('tablePhoto').files[0];
+            const tableData = new FormData();
+
+            // Append the file and any other data you want to send
+            tableData.append('tablePhoto', file);
+            tableData.append('idevent', "{{ $eventId }}");
+
+            $.ajax({
+                url: "{{ route('panel.event.editplan') }}",
+                type: 'POST',
+                data: tableData,
+                processData: false, // Required for FormData
+                contentType: false, // Required for FormData
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $("#tableImgPlan").attr('src', '/event-images/16/plan.jpg' + '?' + new Date().getTime());
+                    countData();
+                    toastr.success('Plan Image updated successfully.');
+                },
+                error: function() {
+                    toastr.error('Failed to update the table. Please try again.');
+                }
+            });
+        }
+
         let tableToDelete = null;
         let tableId;
         let tableIsFull = false;
@@ -1065,10 +1135,10 @@
                                         </div>
                                         <div class="box">
                                             ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                    <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                ` : `
-                                                                                                                                    <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                `}
+                                                                                                                                                                        <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                    ` : `
+                                                                                                                                                                        <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                    `}
                                         </div>
                                         <div class="box">
                                             <div class="three-action-align">
@@ -1079,10 +1149,10 @@
                                                     <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
                                                 </button>
                                                 ${(isCorporate == 1) ? '' : `
-                                                                                                                                <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
-                                                                                                                                    <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
-                                                                                                                                </button>
-                                                                                                                            `}
+                                                                                                                                                                    <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
+                                                                                                                                                                        <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
+                                                                                                                                                                    </button>
+                                                                                                                                                                `}
                                             </div>
                                         </div>
                                     </div>
@@ -1091,33 +1161,33 @@
                                         <div class="box">
                                             <h4>Seat Name</h4>
                                             ${table.seats.map(seat => `
-                                                                                                    <p>${seat.seat_name}</p>
-                                                                                                `).join('')}
+                                                                                                                                        <p>${seat.seat_name}</p>
+                                                                                                                                    `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Guest Name</h4>
                                             ${table.seats.map(seat => `
-                                                                                                    ${(seat.guest) ? `<p>${seat.guest.name}</p>
+                                                                                                                                        ${(seat.guest) ? `<p>${seat.guest.name}</p>
                                                 ` : `
                                                 <p>No Guest Assigned</p>
                                                 `}
-                                                                                                    `).join('')}
+                                                                                                                                        `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Email</h4>
                                             ${table.seats.map(seat => `
-                                                                            ${(seat.guest && seat.guest.email) ? `<p>${seat.guest.email}</p>` : `<p>No Email Provided</p>`}
-                                                                                 `).join('')}
+                                                                                                                ${(seat.guest && seat.guest.email) ? `<p>${seat.guest.email}</p>` : `<p>No Email Provided</p>`}
+                                                                                                                     `).join('')}
                                         </div>
                                         <div class="box">
                                             <h4>Action</h4>
                                             ${table.seats.map(seat => `
-                                                                                                    ${(!seat.guest) ? `
+                                                                                                                                        ${(!seat.guest) ? `
                                                 <p><a href="#" class="remove-btn-css" id="openGuestModal2" data-tableid="${seat.id_table}" data-id="${seat.id}">Select Guest</a></p>
                                                 ` : `
                                                 <p><a href="#" class="remove-btn-css" id="removeGuest" data-tableid="${seat.id_table}" data-id="${seat.id}" data-idguest="${seat.id_guest}">Remove Guest</a></p>
                                                 `}
-                                                                                                    `).join('')}
+                                                                                                                                        `).join('')}
                                         </div>
                                     </div>
                                 </div>
@@ -1140,10 +1210,10 @@
                                             </div>
                                             <div class="box">
                                                 ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                                                                                                                        <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                                                                                    ` : `
-                                                                                                                                                                                                                                        <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                                                                                    `}
+                                                                                                                                                                                                                                                                            <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                                                                        ` : `
+                                                                                                                                                                                                                                                                            <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                                                                        `}
                                             </div>
 
                                             <div class="box">
@@ -1161,14 +1231,14 @@
                                             <div class="box">
                                                 ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
                                                 ${table.guests.map(guest => `
-                                                                                                                                                                                                                                                            <p>${guest.name}</p>
-                                                                                                                                                                                                                                                        `).join('')}
+                                                                                                                                                                                                                                                                                                <p>${guest.name}</p>
+                                                                                                                                                                                                                                                                                            `).join('')}
                                             </div>
                                             <div class="box">
                                                 ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
                                                 ${table.guests.map(guest => `
-                                                                                                                                                                                                                                                            <p>${guest.meal_name}</p>
-                                                                                                                                                                                                                                                        `).join('')}
+                                                                                                                                                                                                                                                                                                <p>${guest.meal_name}</p>
+                                                                                                                                                                                                                                                                                            `).join('')}
                                             </div>
                                         </div>
 
@@ -1252,16 +1322,18 @@
                 success: function(data) {
                     console.log(data.guestCanSelectSeats);
                     if (data.guestCanSelectSeats == 1) {
-                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter100'));
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter100'));
                         successModal.show();
                         // Swal.fire({
-                            //     icon: "success",
-                            //     title: "Success",
-                            //     text: "Guest can select seats successfully",
-                            //     confirmButtonText: "OK",
-                            // });
-                        } else if (data.guestCanSelectSeats == 0) {
-                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter101'));
+                        //     icon: "success",
+                        //     title: "Success",
+                        //     text: "Guest can select seats successfully",
+                        //     confirmButtonText: "OK",
+                        // });
+                    } else if (data.guestCanSelectSeats == 0) {
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter101'));
                         successModal.show();
                         // Swal.fire({
                         //     icon: "success",
