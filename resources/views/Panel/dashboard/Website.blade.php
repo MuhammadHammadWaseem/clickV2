@@ -67,30 +67,30 @@
                                 <div class="inner-menu-slide-from-left">
                                     <div class="left-menu-dash">
                                         <div class="two-things-inline">
-                                            <h2>Menu</h2>
+                                            <h2>{{ __('website.Menu') }}</h2>
                                         </div>
                                         <div class="nav-top-menu" id="sp">
                                             <ul>
-                                                <li><a href="#start">START</a></li>
+                                                <li><a href="#start">{{ __('website.start') }}</a></li>
 
                                                 <li><a href="#thecouple">
                                                         @if ($eventType)
                                                             @if ($eventType->couple_event)
-                                                                THE COUPLE
+                                                            {{ __('website.the_couple') }}
                                                             @else
-                                                                Description
+                                                            {{ __('website.description') }}
                                                             @endif
                                                         @endif
                                                     </a></li>
 
                                                 <li>
                                                     @if (!$photogallery->isEmpty())
-                                                        <a href="#gallery">GALLERY</a>
+                                                        <a href="#gallery">{{ __('website.gallery') }}</a>
                                                     @endif
                                                 </li>
                                                 <li>
                                                     @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
-                                                        <a href="#eventsc">EVENT SCHEDULE</a>
+                                                        <a href="#eventsc">{{ __('website.event_schedule') }}</a>
                                                     @endif
                                                 </li>
                                             </ul>
@@ -122,26 +122,26 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="nav-top-menu" id="sp">
                         <ul>
-                            <li><a href="#start">START</a></li>
+                            <li><a href="#start">{{ __('website.start') }}</a></li>
 
                             <li><a href="#thecouple">
                                     @if ($eventType)
                                         @if ($eventType->couple_event)
-                                            THE COUPLE
+                                        {{ __('website.the_couple') }}
                                         @else
-                                            Description
+                                        {{ __('website.description') }}
                                         @endif
                                     @endif
                                 </a></li>
 
                             <li>
                                 @if (!$photogallery->isEmpty())
-                                    <a href="#gallery">GALLERY</a>
+                                    <a href="#gallery">{{ __('website.gallery') }}</a>
                                 @endif
                             </li>
                             <li>
                                 @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
-                                    <a href="#eventsc">EVENT SCHEDULE</a>
+                                    <a href="#eventsc">{{ __('website.event_schedule') }}</a>
                                 @endif
                             </li>
 
@@ -197,7 +197,7 @@
                     <h1>
                         @if ($eventType)
                             @if ($eventType->couple_event)
-                                THE COUPLE
+                            {{ __('website.the_couple') }}
                             @else
                                 {{ $eventType->title }}
                             @endif
@@ -208,7 +208,7 @@
 
                         @if ($eventType)
                             @if ($eventType->couple_event)
-                                Meet the Bride & the Groom
+                            {{ __('website.meet_the_bride_and_groom') }}
                             @else
                                 {{ $event->name }}
                             @endif
@@ -235,7 +235,7 @@
                                         <div class="card-body">
                                             <h4 class="card-title">{{ $event->groomfname }} {{ $event->groomlname }}
                                             </h4>
-                                            <i>Groom</i>
+                                            <i>{{ __('website.groom') }}</i>
                                             <p class="card-text">{{ $event->groomsummary }}</p>
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@
                                         <div class="card-body">
                                             <h4 class="card-title">{{ $event->bridefname }} {{ $event->bridelname }}
                                             </h4>
-                                            <i>Bride</i>
+                                            <i>{{ __('website.bride') }}</i>
                                             <p class="card-text">{{ $event->bridesummary }}</p>
                                         </div>
                                     </div>
@@ -272,7 +272,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Photos</h5>
+                    <h5 class="modal-title">{{ __('website.add_photos') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('store.users.images', ['id' => $event->id_event]) }}" method="post"
@@ -284,8 +284,8 @@
                         <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn modal-t-btn">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('website.close') }}</button>
+                        <button type="submit" class="btn modal-t-btn">{{ __('website.submit') }}</button>
                     </div>
                 </form>
             </div>
@@ -298,10 +298,9 @@
             <div class="box-styling">
                 <div class="row tit">
                     <div class="col text-center">
-                        <h1>GALLERY</h1>
-                        <h4 class="mt-4 mb-4">Check out the Candid Moments</h4>
-                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal" class="btn t-btn">ADD
-                            PHOTOS</button>
+                        <h1>{{ __('website.gallery_title') }}</h1>
+                        <h4 class="mt-4 mb-4">{{ __('website.gallery_subtitle') }}</h4>
+                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal" class="btn t-btn">{{ __('website.add_photos') }}</button>
                         <hr>
                     </div>
                 </div>
@@ -312,8 +311,8 @@
                             <div class="carousel-inner">
                                 @foreach ($photogallery as $photo)
                                     <div class="carousel-item @if ($loop->first) active @endif">
-                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
-                                       data-lightbox="gallery" 
+                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                       data-lightbox="gallery"
                                        data-title="Image {{ $loop->iteration }}" class="img-thumbnail">
                                         <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
                                             class="d-block w-100" height="600px">
@@ -363,12 +362,13 @@
                             <button class="carousel-control-prev" type="button"
                                 data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
+                                <span class="visually-hidden">{{ __('website.previous') }}</span>
                             </button>
                             <button class="carousel-control-next" type="button"
                                 data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
+                                <span class="visually-hidden">{{ __('website.next') }}</span>
+
                             </button>
                         </div>
                     </div>
@@ -378,20 +378,19 @@
                 {{-- VIDEO --}}
                 <div class="row">
                     <div class="col">
-                        <h1 class="text-center mt-3 mb-3">VIDEO</h1>
+                        <h1 class="text-center mt-3 mb-3">{{ __('website.video') }}</h1>
                         <div class="video-style">
                             @foreach ($videogallery as $video)
                                 <video width="300" height="200" controls>
                                     <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
                                         type="video/mp4">
-                                    Your browser does not support the video tag.
+                                        {{ __('website.video_support') }}
                                 </video>
                             @endforeach
                         </div>
                         <center>
                             <button class="btn t-btn mt-3" id="viewall"><a class="text-white text-decoration-none"
-                                    target="_blank" href="{{ url("/events/$event->id_event/show-gallery") }}">View
-                                    All</a></button>
+                                    target="_blank" href="{{ url("/events/$event->id_event/show-gallery") }}">{{ __('website.view') }}</a></button>
                         </center>
                     </div>
                 </div>
@@ -406,8 +405,8 @@
             <div class="box-styling">
                 <div class="row tit">
                     <div class="col text-center">
-                        <h1>EVENT SCHEDULE</h1>
-                        <h4 class="mt-4 mb-4">List of all the Scheduled Event for your Information</h4>
+                        <h1>{{ __('website.event_schedule') }}</h1>
+                        <h4 class="mt-4 mb-4">{{ __('website.scheduled_event_list') }}</h4>
                         <hr>
                     </div>
                 </div>
@@ -420,7 +419,7 @@
                                     <img src="{{ $event->cerimg }}" class="card-img-top">
                                 @endif
                                 <div class="card-body">
-                                    <h4 class="card-title">EVENT CEREMONY</h4>
+                                    <h4 class="card-title">{{ __('website.event_ceremony') }}</h4>
                                     <p class="card-text">{{ $event->cerdesc }}</p>
                                     <p class="card-text">
                                         <input type="hidden" placeholder="{{ __('genralInfo.location') }}"
@@ -454,7 +453,7 @@
                                     <img src="{{ $event->recimg }}" class="card-img-top">
                                 @endif
                                 <div class="card-body">
-                                    <h4 class="card-title">EVENT RECEPTION</h4>
+                                    <h4 class="card-title">{{ __('website.event_reception') }}</h4>
                                     <p class="card-text">{{ $event->recdesc }}</p>
                                     <p class="card-text">
                                         <input type="hidden" placeholder="{{ __('genralInfo.location') }}"
@@ -522,7 +521,7 @@
     <footer class="container-fluid footer_styling">
         <div class="row">
             <div class="col text-center">
-                <p>Copyrights © 2022 All Rights Reserved by ClickInvitation</p>
+                <p>{{ __('website.copyright') }}</p>
             </div>
         </div>
     </footer>
