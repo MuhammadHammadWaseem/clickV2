@@ -29,4 +29,10 @@ return [
     'No, it Don\'t' => 'Non, ça ne le fait pas',
     'Yes, it Does' => 'Oui, ça le fait',
     'I Do' => 'Je fais',
+    'steps_title' => 'Étapes',
+    'steps_description' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.',
+    'no_dont_button' => 'Non, je ne veux pas',
+    'educate_button' => 'Éduquez-moi',
+    'previous_button' => 'Précédent',
+    'next_button' => 'Suivant',
 ];

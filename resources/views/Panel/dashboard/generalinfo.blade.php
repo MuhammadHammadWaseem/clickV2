@@ -394,15 +394,15 @@
                     </div>
                     <div class="modal-body">
                         <div class="text">
-                            <h5 class="modal-title text-center">Steps</h5>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.</p>
+                            <h5 class="modal-title text-center">{{ __('genralInfo.steps_title') }}</h5>
+                            <p>{{ __('genralInfo.steps_description') }}</p>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I Don’t</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.no_dont_button') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" id="educate"
-                            data-toggle="modal" data-target="#StepForm" data-dismiss="modal">Educate me</button>
+                            data-toggle="modal" data-target="#StepForm" data-dismiss="modal">{{ __('genralInfo.educate_button') }}</button>
                     </div>
                     </form>
                 </div>
@@ -425,8 +425,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="text">
-                            <h5 class="modal-title text-center">Steps</h5>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.</p>
+                            <h5 class="modal-title text-center">{{ __('genralInfo.steps_title') }}</h5>
+                            <p>{{ __('genralInfo.steps_description') }}</p>
                             <form id="registrationForm" enctype="multipart/form-data">
                                 @csrf
                                 <!-- Step 1-->
@@ -526,9 +526,9 @@
                                 <div style="overflow:auto;">
                                     <div style="float:right;">
                                         <button type="button" class="custom-button custom-prev" id="prevButton"
-                                            onclick="nextPrev(-1)">Previous</button>
+                                            onclick="nextPrev(-1)">{{ __('genralInfo.previous_button') }}</button>
                                         <button type="button" class="custom-button" id="nextButton"
-                                            onclick="nextPrev(1)">Next</button>
+                                            onclick="nextPrev(1)">{{ __('genralInfo.next_button') }}</button>
                                     </div>
                                 </div>
                                 <div style="text-align:center;margin-top:40px;">
@@ -546,7 +546,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="registrationFormClose">No, I Don’t</button>
+                            id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
                         {{-- <button type="button" class="submit-btn btn btn-primary t-btn" id="updateStepForm" onclick="submitStep()">Update</button> --}}
                     </div>
                     </form>
