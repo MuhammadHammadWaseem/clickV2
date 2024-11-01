@@ -44,4 +44,6 @@ return [
     'Guest can not select seats' => 'Les invités ne peuvent pas sélectionner de sièges',
     'I will select seats' => 'Je sélectionnerai les sièges',
     'Guest will select seats' => 'Les invités sélectionneront leurs sièges',
+    'Here you can upload your tables plan' => 'Ici vous pouvez télécharger votre plan de tables',
+    'No File Selected' => 'Aucun fichier sélectionné',
 ];

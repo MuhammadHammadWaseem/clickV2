@@ -64,7 +64,7 @@
                     <div class="text">
                         <h2>{{ __('giftsuggestion.title') }}</h2>
                         <p>{{ __('giftsuggestion.description') }}</p>
-                        <p>{{ __('giftsuggestion.message') }} </p>
+                        <p>{{ __('giftsuggestion.message') }} <b>{{ __('giftsuggestion.message_2') }}</b> </p>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <div class="two-things-align">
                         <div class="text">
                             <h2>{{ __('giftsuggestion.title_suggest') }}</h2>
-                            <p>{{ __('giftsuggestion.description_suggest') }}</p>
+                            {{-- <p>{{ __('giftsuggestion.description_suggest') }}</p> --}}
                         </div>
                         <button class="t-btn btn btn-primary" type="button" data-toggle="modal"
                             data-target="#exampleModalCenter">{{ __('giftsuggestion.Add New') }}</button>

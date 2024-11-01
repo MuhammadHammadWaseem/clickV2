@@ -44,5 +44,7 @@ return[
 'Guest can not select seats' => 'Guest can not select seats',
 'I will select seats' => 'I will select seats',
 'Guest will select seats' => 'Guest will select seats',
+'Here you can upload your tables plan' => 'Here you can upload your tables plan',
+'No File Selected' => 'No File Selected',
 
 ];

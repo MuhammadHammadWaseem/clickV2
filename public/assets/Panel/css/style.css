@@ -1985,6 +1985,21 @@ transition:.5s;
 }
 
 
+.box-styling.management-plan .management-plan-box .box.upload_boxex {
+  width: 600px !important;
+  height: 300px !important;
+}
+
+label#uploadtablePhoto {
+  text-align: center;
+} 
+
+label#uploadtablePhoto img {
+  max-width: 100%;
+}
+
+
+
 @media only screen and (max-width: 1600px) {
 
   .main-dashboard-sec .col-md-10.col-lg-11{
