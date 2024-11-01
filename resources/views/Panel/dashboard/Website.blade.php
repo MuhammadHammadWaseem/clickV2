@@ -48,6 +48,76 @@
             display: block !important;
             opacity: 1 !important;
         }
+
+
+
+        .language-box .nav-box ul li a {
+  display: flex;
+  column-gap: 3px;
+  width: 70px;
+  height: 40px;
+  border: 1px solid #7A7A7A;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+}
+
+.language-box .nav-box ul li a img {
+  width: 20px;
+  height: 20px;
+}
+
+.language-box .nav-box ul li a i {
+  color: #7A7A7A;
+}
+
+.language-box .nav-box ul li a:hover {
+  background-color: white;
+}
+
+.language-box .nav-box ul li {
+  position: relative;
+}
+
+ul.drop-menu {
+  left: -50px !important;
+  top: 40px !important;
+}
+
+ul.drop-menu {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px 15px;
+  position: absolute;
+  z-index: 9999;
+  top: 45px;
+  width: 130px;
+}
+
+ul.drop-menu li a {
+  border: none !important;
+  padding: 0;
+  display: block !important;
+  color: black !important;
+  font-size: 12px;
+}
+
+.nav-box ul li.drop-down-link ul {
+  display: none ;
+}
+
+.nav-box ul li.drop-down-link:hover ul {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px !important;
+}
+
+
+.nav-box ul {
+    padding: 0 !important;
+}
+
     </style>
 </head>
 
@@ -94,7 +164,12 @@
                                                     @endif
                                                 </li>
                                             </ul>
+
+
+
                                         </div>
+
+
 
                                     </div>
                                 </div>
@@ -143,6 +218,31 @@
                                 @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
                                     <a href="#eventsc">{{ __('website.event_schedule') }}</a>
                                 @endif
+                            </li>
+                            <li>
+                                <div class="language-box">
+                                    <div class="nav-box">
+                                        <ul>
+                                            <li class="drop-down-link">
+                                                <a href="#">
+                                                    <img src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                                        alt="">
+                                                    {{ Config::get('languages')[App::getLocale()] }}<i class="fa fa-angle-down"
+                                                        aria-hidden="true"></i>
+                                                </a>
+                                                <ul class="drop-menu">
+                                                    @foreach (Config::get('languages') as $lang => $language)
+                                                        @if ($lang != App::getLocale())
+                                                            <li><a
+                                                                    href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
 
                         </ul>

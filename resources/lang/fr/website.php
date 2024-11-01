@@ -24,4 +24,4 @@ return [
     'event_ceremony' => 'CÉRÉMONIE DE L’ÉVÉNEMENT',
     'event_reception' => 'RÉCEPTION DE L’ÉVÉNEMENT',
     'copyright' => 'Droits d\'auteur © 2022 Tous droits réservés par ClickInvitation',
-];l
+];
