@@ -31,4 +31,5 @@ return[
     'Would You Like' => 'Would You Like To Create A Website For Your Event?',
     'No, it Don\'t' => 'No, it Don\'t',
     'Yes, it Does' => 'Yes, it Does',
+    'I Do' => 'I Do',
 ];

@@ -28,4 +28,5 @@ return [
     'Would You Like' => 'Souhaitez-vous créer un site web pour votre événement ?',
     'No, it Don\'t' => 'Non, ça ne le fait pas',
     'Yes, it Does' => 'Oui, ça le fait',
+    'I Do' => 'Je fais',
 ];

@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QD4QH7KNBF"></script>
     <script>
@@ -32,20 +32,19 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/Panel/css/operation.css') }}">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
 
     {{-- <script src="/assets/jspanel/jquery.min.js"></script> --}}
     <script src="{{ asset('/assets/jspanel/jquery.min.js') }}"></script>
 
     <style>
-
-        .lb-next{
+        .lb-next {
             display: block !important;
             opacity: 1 !important;
         }
 
-        .lb-prev{
+        .lb-prev {
             display: block !important;
             opacity: 1 !important;
         }
@@ -73,38 +72,41 @@
                                         <div class="nav-top-menu" id="sp">
                                             <ul>
                                                 <li><a href="#start">START</a></li>
-                    
+
                                                 <li><a href="#thecouple">
-                                                    @if ($eventType)
-                                                        @if ($eventType->couple_event)
-                                                            THE COUPLE
-                                                        @else
-                                                            Description
+                                                        @if ($eventType)
+                                                            @if ($eventType->couple_event)
+                                                                THE COUPLE
+                                                            @else
+                                                                Description
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </a></li>
-                    
-                                                <li> @if (!$photogallery->isEmpty())
+                                                    </a></li>
+
+                                                <li>
+                                                    @if (!$photogallery->isEmpty())
                                                         <a href="#gallery">GALLERY</a>
-                                                @endif</li>
-                    
-                                                <li>@if ($event->boolcerimony || $event->boolreception || $event->boolparty)
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
                                                         <a href="#eventsc">EVENT SCHEDULE</a>
-                                                @endif</li>
-                    
+                                                    @endif
+                                                </li>
                                             </ul>
                                         </div>
-    
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="main_mobile_logo">
-                            <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png" alt=""></a>
+                            <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png"
+                                    alt=""></a>
                         </div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </header>
 
@@ -113,7 +115,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="main-logo">
-                        <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png" alt=""></a>
+                        <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -122,22 +125,25 @@
                             <li><a href="#start">START</a></li>
 
                             <li><a href="#thecouple">
-                                @if ($eventType)
-                                    @if ($eventType->couple_event)
-                                        THE COUPLE
-                                    @else
-                                        Description
+                                    @if ($eventType)
+                                        @if ($eventType->couple_event)
+                                            THE COUPLE
+                                        @else
+                                            Description
+                                        @endif
                                     @endif
-                                @endif
-                            </a></li>
+                                </a></li>
 
-                            <li> @if (!$photogallery->isEmpty())
+                            <li>
+                                @if (!$photogallery->isEmpty())
                                     <a href="#gallery">GALLERY</a>
-                            @endif</li>
-
-                            <li>@if ($event->boolcerimony || $event->boolreception || $event->boolparty)
+                                @endif
+                            </li>
+                            <li>
+                                @if ($event->boolcerimony || $event->boolreception || $event->boolparty)
                                     <a href="#eventsc">EVENT SCHEDULE</a>
-                            @endif</li>
+                                @endif
+                            </li>
 
                         </ul>
                     </div>
@@ -185,77 +191,81 @@
     </section>
 
     <section id="thecouple" class="container">
-       <div class="box-styling">
-        <div class="row tit">
-            <div class="col text-center">
-                <h1>
-                    @if ($eventType)
-                        @if ($eventType->couple_event)
-                            THE COUPLE
-                        @else
-                            {{ $eventType->title }}
+        <div class="box-styling">
+            <div class="row tit">
+                <div class="col text-center">
+                    <h1>
+                        @if ($eventType)
+                            @if ($eventType->couple_event)
+                                THE COUPLE
+                            @else
+                                {{ $eventType->title }}
+                            @endif
                         @endif
-                    @endif
-                </h1>
-                <h4 class="mt-4 mb-4">
+                    </h1>
+                    <h4 class="mt-4 mb-4">
 
 
-                    @if ($eventType)
-                        @if ($eventType->couple_event)
-                            Meet the Bride & the Groom
-                        @else
-                            {{ $event->name }}
+                        @if ($eventType)
+                            @if ($eventType->couple_event)
+                                Meet the Bride & the Groom
+                            @else
+                                {{ $event->name }}
+                            @endif
                         @endif
-                    @endif
-                </h4>
-                <p>{{ $event->summary }}</p>
-                <hr>
-            </div>
-        </div>
-        @if ($eventType)
-            @if ($eventType->couple_event)
-                <div class="row mt-4">
-                    <div class="col">
-                        <div class="mb-3">
-                            <div class="row card g-0">
-                                <div class="col-md-4">
-                                    <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
-                                    @if ($event->imggroom)
-                                        <img src="{{ url('/') }}{{ $event->imggroom }}" class="img-fluid rounded-start">
-                                    @endif
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h4 class="card-title">{{ $event->groomfname }} {{ $event->groomlname }}</h4>
-                                        <i>Groom</i>
-                                        <p class="card-text">{{ $event->groomsummary }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <div class="row card g-0">
-                                <div class="col-md-4">
-                                    @if ($event->imgbride)
-                                        <img src="{{ url('/') }}{{ $event->imgbride }}" class="img-fluid rounded-start">
-                                    @endif
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h4 class="card-title">{{ $event->bridefname }} {{ $event->bridelname }}</h4>
-                                        <i>Bride</i>
-                                        <p class="card-text">{{ $event->bridesummary }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </h4>
+                    <p>{{ $event->summary }}</p>
+                    <hr>
                 </div>
+            </div>
+            @if ($eventType)
+                @if ($eventType->couple_event)
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="mb-3">
+                                <div class="row card g-0">
+                                    <div class="col-md-4">
+                                        <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
+                                        @if ($event->imggroom)
+                                            <img src="{{ url('/') }}{{ $event->imggroom }}"
+                                                class="img-fluid rounded-start">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{ $event->groomfname }} {{ $event->groomlname }}
+                                            </h4>
+                                            <i>Groom</i>
+                                            <p class="card-text">{{ $event->groomsummary }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <div class="row card g-0">
+                                    <div class="col-md-4">
+                                        @if ($event->imgbride)
+                                            <img src="{{ url('/') }}{{ $event->imgbride }}"
+                                                class="img-fluid rounded-start">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{ $event->bridefname }} {{ $event->bridelname }}
+                                            </h4>
+                                            <i>Bride</i>
+                                            <p class="card-text">{{ $event->bridesummary }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             @endif
-        @endif
-       </div>
+        </div>
     </section>
 
     <div id="photogalleryModal" tabindex="-1" class="modal" tabindex="-1">
@@ -265,10 +275,12 @@
                     <h5 class="modal-title">Add Photos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('store.users.images',['id' => $event->id_event]) }}" method="post" enctype="multipart/form-data" id="galleryform">
+                <form action="{{ route('store.users.images', ['id' => $event->id_event]) }}" method="post"
+                    enctype="multipart/form-data" id="galleryform">
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <input type="file" id="gall" style="display: block !important;" name="gall[]" multiple accept="image/*" />
+                        <input type="file" id="gall" style="display: block !important;" name="gall[]"
+                            multiple accept="image/*" />
                         <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
                     </div>
                     <div class="modal-footer">
@@ -293,7 +305,7 @@
                         <hr>
                     </div>
                 </div>
-    
+
                 {{-- <div class="row">
                     <div class="col">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -327,7 +339,7 @@
                         </div>
                     </div>
                 </div> --}}
-    
+
                 <div class="row">
                     <div class="col">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -336,15 +348,14 @@
                                     // Ensure the collection is sorted in descending order based on a specific field.
                                     $sortedPhotogallery = $photogallery->sortByDesc('id_photogallery');
                                 @endphp
-                
+
                                 @foreach ($sortedPhotogallery as $photo)
                                     <div class="carousel-item @if ($loop->first) active @endif">
-                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" 
-                                           data-lightbox="gallery" 
-                                           data-title="Image {{ $loop->iteration }}" 
-                                           class="img-thumbnail">
+                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                            data-lightbox="gallery" data-title="Image {{ $loop->iteration }}"
+                                            class="img-thumbnail">
                                             <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                                 class="d-block w-100" height="600px">
+                                                class="d-block w-100" height="600px">
                                         </a>
                                     </div>
                                 @endforeach
@@ -362,25 +373,25 @@
                         </div>
                     </div>
                 </div>
-                
-    
+
+
                 {{-- VIDEO --}}
                 <div class="row">
                     <div class="col">
                         <h1 class="text-center mt-3 mb-3">VIDEO</h1>
                         <div class="video-style">
                             @foreach ($videogallery as $video)
-                            <video width="300" height="200" controls>
-                                <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
-                                    type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                                <video width="300" height="200" controls>
+                                    <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
+                                        type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
                             @endforeach
                         </div>
                         <center>
-                            <button class="btn t-btn mt-3" id="viewall"><a
-                                    class="text-white text-decoration-none" target="_blank"
-                                    href="{{ url("/events/$event->id_event/show-gallery") }}">View All</a></button>
+                            <button class="btn t-btn mt-3" id="viewall"><a class="text-white text-decoration-none"
+                                    target="_blank" href="{{ url("/events/$event->id_event/show-gallery") }}">View
+                                    All</a></button>
                         </center>
                     </div>
                 </div>
@@ -400,20 +411,31 @@
                         <hr>
                     </div>
                 </div>
-    
+
                 <div class="row justify-content-md-center mt-4">
                     @if ($event->boolcerimony)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
                                 @if ($event->cerimg)
-                                <img src="{{ $event->cerimg }}" class="card-img-top">
+                                    <img src="{{ $event->cerimg }}" class="card-img-top">
                                 @endif
                                 <div class="card-body">
                                     <h4 class="card-title">EVENT CEREMONY</h4>
                                     <p class="card-text">{{ $event->cerdesc }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ $event->ceraddress }}
-                                            <br>{{ $event->cercity }}
-                                            {{ $event->cerprovince }}<br>{{ $event->cerpc }}<br>{{ $event->cercountry }}</small>
+                                    <p class="card-text">
+                                        <input type="hidden" placeholder="{{ __('genralInfo.location') }}"
+                                            id="ceraddress" name="ceraddress" value="{{ $event->ceraddress }}">
+                                        <input type="hidden" id="cerAddressLink">
+                                    <div id="mapView" style="width: 100%; height: 400px;"></div>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            {{ $event->ceraddress }}<br>
+                                            {{ $event->cercity }}
+                                            {{ $event->cerprovince }}<br>
+                                            {{ $event->cerpc }}<br>
+                                            {{ $event->cercountry }}
+                                        </small>
                                     </p>
                                     @if ($event->certime)
                                         <p class="card-text text-center"><small class="text-muted"
@@ -424,19 +446,30 @@
                             </div>
                         </div>
                     @endif
-    
+
                     @if ($event->boolreception)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
                                 @if ($event->recimg)
-                                <img src="{{ $event->recimg }}" class="card-img-top">
+                                    <img src="{{ $event->recimg }}" class="card-img-top">
                                 @endif
                                 <div class="card-body">
                                     <h4 class="card-title">EVENT RECEPTION</h4>
                                     <p class="card-text">{{ $event->recdesc }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ $event->recaddress }}
-                                            <br>{{ $event->reccity }}
-                                            {{ $event->recprovince }}<br>{{ $event->recpc }}<br>{{ $event->reccountry }}</small>
+                                    <p class="card-text">
+                                        <input type="hidden" placeholder="{{ __('genralInfo.location') }}"
+                                            id="recaddress" name="recaddress" value="{{ $event->recaddress }}">
+                                        <input type="hidden" id="recAddressLink">
+                                    <div id="RecmapView" style="width: 100%; height: 400px;"></div>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            {{ $event->recaddress }}<br>
+                                            {{ $event->reccity }}
+                                            {{ $event->recprovince }}<br>
+                                            {{ $event->recpc }}<br>
+                                            {{ $event->reccountry }}
+                                        </small>
                                     </p>
                                     @if ($event->rectime)
                                         <p class="card-text text-center"><small class="text-muted"
@@ -447,7 +480,7 @@
                             </div>
                         </div>
                     @endif
-    
+
                     @if ($event->boolparty)
                         <div class="col-12 col-lg-4 col-md-12">
                             <div class="card me-4 ms-4 mb-4">
@@ -457,9 +490,19 @@
                                 <div class="card-body">
                                     <h4 class="card-title">{{ strtoupper($event->parname) }}</h4>
                                     <p class="card-text">{{ $event->pardesc }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ $event->paraddress }}
-                                            <br>{{ $event->parcity }}
-                                            {{ $event->parprovince }}<br>{{ $event->parpc }}<br>{{ $event->parcountry }}</small>
+                                    <p class="card-text">
+                                        <input type="hidden" placeholder="{{ __('genralInfo.location') }}"
+                                            id="paraddress" name="paraddress" value="{{ $event->paraddress }}">
+                                        <input type="hidden" id="parAddressLink">
+                                    <div id="ParmapView" style="width: 100%; height: 400px;"></div>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ $event->paraddress }}<br>
+                                            {{ $event->parcity }}
+                                            {{ $event->parprovince }}<br>
+                                            {{ $event->parpc }}<br>
+                                            {{ $event->parcountry }}
+                                        </small>
                                     </p>
                                     @if ($event->partime)
                                         <p class="card-text text-center"><small class="text-muted"
@@ -486,13 +529,116 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
     <script src="/assets/jspanel/bootstrap.min.js"></script>
 </body>
 
 </html>
 <script>
+    $(document).ready(function() {
+        initMap();
+    });
+
+
+    (g => {
+        var h, a, k, p = "The Google Maps JavaScript API",
+            c = "google",
+            l = "importLibrary",
+            q = "__ib__",
+            m = document,
+            b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+            r = new Set,
+            e = new URLSearchParams,
+            u = () => h || (h = new Promise(async (f, n) => {
+                await (a = m.createElement("script"));
+                e.set("libraries", [...r] + "");
+                for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+                e.set("callback", c + ".maps." + q);
+                a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+                d[q] = f;
+                a.onerror = () => h = n(Error(p + " could not load."));
+                a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+                m.head.append(a)
+            }));
+        d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() =>
+            d[l](f, ...n))
+    })
+    ({
+        key: "AIzaSyBW3i6Ia5wC19YV9654N4jISic1Uzvft8M",
+        v: "weekly"
+    });
+
+    let map;
+
+    async function initMap() {
+        const {
+            Map
+        } = await google.maps.importLibrary("maps");
+        const {
+            Geocoder
+        } = await google.maps.importLibrary("geocoding");
+
+        const geocoder = new Geocoder();
+
+        // Fetch addresses from Blade variables (these should be passed from your controller)
+        const address = document.getElementById("ceraddress").value;
+        const recaddress = document.getElementById("recaddress").value;
+        const paraddress = document.getElementById("paraddress").value;
+
+        if (address) {
+            geocodeAddress(geocoder, address, "mapView", "cerAddressLink");
+        }
+
+        if (recaddress) {
+            geocodeAddress(geocoder, recaddress, "RecmapView", "recAddressLink");
+        }
+
+        if (paraddress) {
+            geocodeAddress(geocoder, paraddress, "ParmapView", "parAddressLink");
+        }
+    }
+
+    function geocodeAddress(geocoder, address, mapViewId, addressLinkId) {
+        geocoder.geocode({
+            address: address
+        }, (results, status) => {
+            if (status === "OK" && results[0]) {
+                const location = results[0].geometry.location;
+                map = new google.maps.Map(document.getElementById(mapViewId), {
+                    center: {
+                        lat: location.lat(),
+                        lng: location.lng()
+                    },
+                    zoom: 15,
+                });
+
+                new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: address,
+                });
+
+                const mapLink = `https://www.google.com/maps?q=${location.lat()},${location.lng()}`;
+                document.getElementById(addressLinkId).value = mapLink; // Update link
+            } else {
+                console.error("Geocode was not successful for the following reason: " + status);
+            }
+        });
+    }
+
+    // Add event listeners for input fields
+    document.getElementById("ceraddress").addEventListener("input", initMap);
+    document.getElementById("recaddress").addEventListener("input", initMap);
+    document.getElementById("paraddress").addEventListener("input", initMap);
+
+    // Initialize map on page load
+    window.onload = function() {
+        initMap();
+    };
+
     const months = [
         'January',
         'February',
@@ -604,13 +750,13 @@
 
 
     window.onload = function() {
-            init();
-        };
+        init();
+    };
 
 
 
     function init() {
-            var menu = document.getElementById("menu");
-            menu.classList.add("transition-after-pageload");
-        }
+        var menu = document.getElementById("menu");
+        menu.classList.add("transition-after-pageload");
+    }
 </script>
