@@ -98,8 +98,8 @@
                                                     src="{{ asset('assets/Panel/images/person-icon.png') }}"
                                                     alt=""></a>
                                             <ul class="drop-menu">
-                                                <li><a href="{{ url('/panel') }}">Events</a></li>
-                                                <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
+                                                <li><a href="{{ url('/panel') }}">{{ __('new_home.events') }}</a></li>
+                                                <li><a href="{{ route('web.logout') }}">{{ __('new_home.sign_out') }}</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -154,8 +154,8 @@
                                             src="{{ asset('assets/Panel/images/person-icon.png') }}"
                                             alt=""></a>
                                     <ul class="drop-menu">
-                                        <li><a href="{{ url('/panel') }}">Events</a></li>
-                                        <li><a href="{{ route('web.logout') }}">Sign Out</a></li>
+                                        <li><a href="{{ url('/panel') }}">{{ __('new_home.events') }}</a></li>
+                                        <li><a href="{{ route('web.logout') }}">{{ __('new_home.sign_out') }}</a></li>
                                     </ul>
                                 </li>
                             </ul>

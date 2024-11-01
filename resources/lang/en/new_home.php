@@ -66,6 +66,9 @@ return [
     'login' => 'Login',
     'packages' => 'Packages',
 
+    'events' => 'Events',
+    'sign_out' => 'Sign Out',
+
 
 
 ];

@@ -66,4 +66,6 @@ return [
     'signup' => 'Inscription',
     'login' => 'Connexion',
     'packages' => 'Forfaits',
+    'events' => 'Événements',
+    'sign_out' => 'Déconnexion',
 ];
