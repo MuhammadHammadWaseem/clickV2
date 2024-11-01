@@ -23,9 +23,7 @@ return[
     'delete_button' => 'Yes, Delete',
     'title' => 'Meal Added Successfully',
     'message' => 'Your meal has been successfully added.',
-
-
-
+    'edit_meal' => 'Edit Meal',
 
 
 

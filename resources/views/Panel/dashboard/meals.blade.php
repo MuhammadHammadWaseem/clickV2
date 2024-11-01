@@ -176,7 +176,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>Edit Meal</h2>
+                        <h2>{{ __('meal.edit_meal') }}</h2>
                         {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                     </div>
                     <div class="main-form-box">

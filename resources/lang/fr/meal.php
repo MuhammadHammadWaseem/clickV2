@@ -20,4 +20,5 @@ return [
     'delete_button' => 'Oui, Supprimer',
     'title' => 'Repas Ajouté avec Succès',
     'message' => 'Votre repas a été ajouté avec succès.',
+    'edit_meal' => 'Modifier le repas',
 ];
