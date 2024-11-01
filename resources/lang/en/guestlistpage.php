@@ -156,8 +156,11 @@ return[
     'learn_how_rsvp_works' => 'Learn How RSVP Works',
     'select_options_send_invitation' => 'Select Options to Send Invitation',
     'sms' => 'SMS',
-
-
-
-
+    'left_member' => 'Members Left',
+    'member_details' => 'Member Details',
+    'note' => 'Note',
+    'other_details' => 'Other Details',
+    'attending_event' => 'Attending Event',
+    'meal' => 'Meal',
+    'table' => 'Table',
 ];
