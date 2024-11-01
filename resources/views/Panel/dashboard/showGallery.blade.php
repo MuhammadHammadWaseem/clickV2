@@ -45,11 +45,11 @@
 <body>
     <div class="container mt-5">
         @if ($photogallery->count() > 0)
-            <h1 class="text-center mb-5">Images</h1>
+            <h1 class="text-center mb-5">{{ __('photos.images_title') }}</h1>
             <div class="row">
                 @foreach ($photogallery->reverse() as $photo)
                 <div class="col-md-2 mb-4">
-                    <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" data-lightbox="gallery" 
+                    <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" data-lightbox="gallery"
                         data-title="Image {{ $loop->index + 1 }}" class="gallery-image">
                     <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg" class="img-fluid" alt="Gallery Image">
                 </a>
@@ -60,14 +60,14 @@
         @endif
 
         @if ($videogallery->count() > 0)
-        <h1 class="text-center mt-3 mb-5">Videos</h1>
+        <h1 class="text-center mt-3 mb-5">{{ __('photos.videos_title') }}</h1>
         <div class="row">
             @foreach ($videogallery as $video)
             <div class="col-md-4 mb-4">
                 <video width="300" height="200" controls>
                     <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
                         type="video/mp4">
-                        Your browser does not support the video tag.
+                        {{ __('photos.videos_support') }}
                     </video>
             </div>
             @endforeach
@@ -75,7 +75,7 @@
         @endif
 
         @if ($photogallery->count() == 0 && $videogallery->count() == 0)
-        <h3 class="text-center mt-5">No images or videos found.</h3>
+        <h3 class="text-center mt-5">{{ __('photos.images_found') }}</h3>
         @endif
     </div>
 

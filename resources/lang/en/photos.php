@@ -29,5 +29,9 @@ return[
     'lorem_ipsum' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     'yes_add_email' => 'Yes, Add Email',
     'no_dont_add_email' => 'No, I Don’t',
+    'images_title' => 'Images',
+    'videos_title' => 'Videos',
+    'videos_support' => ' Your browser does not support the video tag.',
+    'images_found' => 'No images or videos found.',
 
 ];

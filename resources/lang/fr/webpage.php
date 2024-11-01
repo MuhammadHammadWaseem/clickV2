@@ -31,7 +31,6 @@ return [
     'Serve Meal Modal Yes Button' => 'Oui, ajouter des repas',
     'Image Delete Success Heading' => 'Image Supprimée avec Succès',
     'Image Delete Success Message' => 'L\'image a été supprimée avec succès.',
-
-
-
+    'no_items_found' => 'Aucun élément trouvé.',
+    'no_file_selected' => 'Aucun fichier sélectionné.',
 ];

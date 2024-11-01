@@ -35,8 +35,6 @@ return[
     'Serve Meal Modal Yes Button' => 'Yes, Add Meals',
     'Image Delete Success Heading' => 'Image Deleted Successfully',
     'Image Delete Success Message' => 'The image has been successfully deleted.',
-
-
-
-
+    'no_items_found' => 'No items found.',
+    'no_file_selected' => 'No File Selected',
 ];

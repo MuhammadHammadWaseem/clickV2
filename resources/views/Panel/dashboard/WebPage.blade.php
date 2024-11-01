@@ -104,7 +104,7 @@
                                 </button>
                             </div>
                         @empty
-                            <p id="NoItems">No items found.</p>
+                            <p id="NoItems">{{ __('webpage.no_items_found') }}</p>
                         @endforelse
                     </div>
                     {{-- <div class="table-content-pagination">
@@ -179,7 +179,7 @@
                             <label id="uploadButton">
                                 <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
                             </label>
-                            <div id="printCerName">No File Selected</div>
+                            <div id="printCerName">{{ __('webpage.no_file_selected') }}</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -383,7 +383,7 @@
                             <label id="uploadButton3">
                                 <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
                             </label>
-                            <div id="printCusName" class="text-center">No File Selected</div>
+                            <div id="printCusName" class="text-center">{{ __('webpage.no_file_selected') }}</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -433,7 +433,7 @@
         document.getElementById('uploadButton').addEventListener('click', function() {
             document.getElementById('cerimage').click();
         });
-        
+
         // Display video file name when a file is selected
         document.getElementById('cerimage').addEventListener('change', function(event) {
             const file = event.target.files[0];

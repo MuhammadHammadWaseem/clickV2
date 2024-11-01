@@ -29,4 +29,8 @@ return [
     'lorem_ipsum' => 'Lorem Ipsum est simplement du texte factice de l\'imprimerie et de la composition.',
     'yes_add_email' => 'Oui, Ajouter un E-mail',
     'no_dont_add_email' => 'Non, je ne veux pas ajouter d\'e-mail',
+    'images_title' => 'Images',
+    'videos_title' => 'Vidéos',
+    'videos_support' => 'Votre navigateur ne prend pas en charge la balise vidéo.',
+    'images_found' => 'Aucune image ou vidéo trouvée.',
 ];
