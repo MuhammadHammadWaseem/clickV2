@@ -38,6 +38,17 @@
         font-family: 'night' !important;
         font-weight: 400 !important;
     }
+    header {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+body {
+    padding-top: 120px;
+}
+
 </style>
 @section('content')
     <div class="container">

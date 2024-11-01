@@ -35,6 +35,17 @@
             content: "";
             top: 0;
         }
+        header {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+body {
+    padding-top: 120px;
+}
+
     </style>
     <div class="container">
         <div class="heading-text text-border tuts-heading">

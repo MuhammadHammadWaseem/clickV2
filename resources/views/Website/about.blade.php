@@ -1,4 +1,17 @@
 @extends('Website.Layouts.master')
+<style>
+    header {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+body {
+    padding-top: 120px;
+}
+
+</style>
 @section('title')
     About Us | Event Organization Tool | Click Invitation
 @endsection
