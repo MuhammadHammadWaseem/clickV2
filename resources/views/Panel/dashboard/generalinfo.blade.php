@@ -28,7 +28,7 @@
         #registrationForm .tab:nth-child(8) {
             overflow: scroll;
             overflow-x: hidden;
-            height: 500px;
+            /* height: 500px; */
         }
 
         #registrationForm::-webkit-scrollbar {
@@ -438,6 +438,7 @@
                                     <input type="datetime-local" id="eventDate" name="event_date"
                                         placeholder="{{ __('genralInfo.Event Date') }}" value="{{ $event->date }}">
                                 </div>
+                                @if ($event->eventType->couple_event == '1')
                                 <!-- Step 2 -->
                                 <div class="tab">
                                     <h2>{{ __('genralInfo.Groom Details') }}</h2>
@@ -474,6 +475,7 @@
                                     <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
                                     @endif
                                 </div>
+                                @endif
                                 <!-- Step 4 -->
                                 <div class="tab">
                                     <h2>
@@ -493,7 +495,7 @@
                                     <input type="time" placeholder="Event Time" name="certime"
                                         value="{{ $event->certime }}">
                                     <input type="hidden" id="cerAddressLink">
-                                    <div id="mapView" style="width: 100%; height: 400px;"></div>
+                                    {{-- <div id="mapView" style="width: 100%; height: 400px;"></div> --}}
                                     <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
                                 </div>
                                 <!-- Step 6 -->
@@ -504,7 +506,7 @@
                                     <input type="hidden" id="recAddressLink">
                                     <input type="time" placeholder="Event Time" name="rectime"
                                         value="{{ $event->rectime }}">
-                                    <div id="RecmapView" style="width: 100%; height: 400px;"></div>
+                                    {{-- <div id="RecmapView" style="width: 100%; height: 400px;"></div> --}}
                                     <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
 
                                 </div>
@@ -519,7 +521,7 @@
                                         name="paraddress" value="{{ $event->paraddress }}">
                                     <input type="time" placeholder="Event Time" name="partime"
                                         value="{{ $event->partime }}">
-                                    <div id="ParmapView" style="width: 100%; height: 400px;"></div>
+                                    {{-- <div id="ParmapView" style="width: 100%; height: 400px;"></div> --}}
                                     <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
 
                                 </div>
@@ -531,6 +533,15 @@
                                             onclick="nextPrev(1)">{{ __('genralInfo.next_button') }}</button>
                                     </div>
                                 </div>
+                                @if ($event->eventType->couple_event == '1')
+                                <div style="text-align:center;margin-top:40px;">
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                </div>
+                                @else
                                 <div style="text-align:center;margin-top:40px;">
                                     <span class="step"></span>
                                     <span class="step"></span>
@@ -540,6 +551,7 @@
                                     <span class="step"></span>
                                     <span class="step"></span>
                                 </div>
+                                @endif
                             </form>
                         </div>
 
