@@ -43,6 +43,7 @@
 
         #StepForm img {
             object-fit: contain;
+            margin-bottom: 10px;
         }
 
         #StepForm .tab {
@@ -197,15 +198,14 @@
                                 <div class="person-box">
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
-                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                                name="groom_img" />
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="groom_img" />
                                             <label for="imageUpload"></label>
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview"
-                                                @if (file_exists(public_path($event->imggroom))) style="background-image: url('{{ asset($event->imggroom) }}');"
+                                                @if (file_exists($event->imggroom)) style="background-image: url('{{ asset($event->imggroom) }}');"
                                             @else
-                                                style="background-image: url('{{ asset('assets/Panel/images/bride-img.png') }}');" @endif>
+                                                style="background-image: url('{{ asset('assets/Panel/images/groom-img.png') }}');" @endif>
                                             </div>
 
                                         </div>
@@ -228,15 +228,14 @@
 
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
-                                            <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg"
-                                                name="bride_img" />
+                                            <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" name="bride_img" />
                                             <label for="imageUpload2"></label>
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview2"
-                                                @if (file_exists(public_path($event->imgbride))) style="background-image: url('{{ asset($event->imgbride) }}');"
+                                                @if (file_exists($event->imgbride)) style="background-image: url('{{ asset($event->imgbride) }}');"
                                             @else
-                                                style="background-image: url('{{ asset('assets/Panel/images/groom-img.png') }}');" @endif>
+                                                style="background-image: url('{{ asset('assets/Panel/images/bride-img.png ') }}');" @endif>
                                             </div>
                                         </div>
                                     </div>
@@ -447,7 +446,7 @@
                                             name="groom_img" />
 
                                         <!-- Groom Image Display with Conditional Source -->
-                                        <img src="{{ file_exists(public_path($event->imggroom)) ? asset($event->imggroom) : asset('assets/Panel/images/bride-img.png') }}"
+                                        <img src="{{ file_exists($event->imggroom) ? asset($event->imggroom) : asset('assets/Panel/images/groom-img.png') }}"
                                             alt="Groom Image" class="groom-image" height="100px" width="100px">
 
                                         <!-- Groom Information -->
@@ -465,7 +464,7 @@
                                     <input type="file" id="imageUpload2" accept=".png, .jpg, .jpeg"
                                         name="bride_img" />
                                     <!-- bride Image Display with Conditional Source -->
-                                    <img src="{{ file_exists(public_path($event->imgbride)) ? asset($event->imgbride) : asset('assets/Panel/images/bride-img.png') }}"
+                                    <img src="{{ file_exists($event->imgbride) ? asset($event->imgbride) : asset('assets/Panel/images/bride-img.png') }}"
                                         alt="Groom Image" class="groom-image" height="100px" width="100px">
                                     <!-- Bride Information -->
                                     <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
