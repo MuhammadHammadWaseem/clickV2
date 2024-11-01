@@ -528,7 +528,7 @@
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="img-box">
-                        <img src="{{ asset('assets/Panel/images/env.jpg') }}" alt="">
+                        <img src="{{ asset('assets/Panel/images/sideCard.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
