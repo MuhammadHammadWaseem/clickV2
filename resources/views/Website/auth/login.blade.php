@@ -80,7 +80,7 @@
                     <input type="password" id="passwordreg" name="password" placeholder="{{ __('loginpage.Enter Your Password') }}" required>
                     <span id="showPassword" style="cursor: pointer;"><i class="fas fa-eye"></i></span>
                 </div><br><br>
-                <a href="/reset" class="forget-password">{{ __('loginpage.Forgot your password?') }}'</a>
+                <a href="/reset" class="forget-password">{{ __('loginpage.Forgot your password?') }}</a>
                 <input type="submit" value="{{ __('loginpage.Login') }}" class="register-button" id="signin">
             </form>
             <p>{{ __('loginpage.Create a new account!') }}<a href="/register"> {{ __('loginpage.Register') }}</a></p>
