@@ -39,9 +39,20 @@
         }
 
         #exampleModalCenter03 .modal-dialog {
-    max-width: 500px;
-    margin: 1.75rem auto;
-}
+            max-width: 500px;
+            margin: 1.75rem auto;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            z-index: 99999;
+            top: 0;
+        }
+
+        body {
+            padding-top: 120px;
+        }
     </style>
 </head>
 
@@ -126,7 +137,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeModal" data-dismiss="modal">{{ __('panel.Close') }}</button>
+                    <button type="button" class="btn btn-secondary" id="closeModal"
+                        data-dismiss="modal">{{ __('panel.Close') }}</button>
                     <button type="button" id="submitForm" class="submit-btn">{{ __('panel.Save changes') }}</button>
                     </form>
                 </div>
@@ -154,20 +166,22 @@
                         <ul>
                             <li>
                                 <a href="#" onclick="hidemodel();">
-                                    {{ __('panel.Make Cards') }} <img src="assets/images/modal-list-right-arow.png" alt="">
+                                    {{ __('panel.Make Cards') }} <img src="assets/images/modal-list-right-arow.png"
+                                        alt="">
                                 </a>
                             </li>
-                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Send Invitations') }} <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""></a></li>
-                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Make New Events') }} <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""></a></li>
-                            <li><a href="#" onclick="hidemodel();" >{{ __('panel.Manage Guest List') }} <img src="assets/images/modal-list-right-arow.png"
-                                        alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();">{{ __('panel.Send Invitations') }} <img
+                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();">{{ __('panel.Make New Events') }} <img
+                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();">{{ __('panel.Manage Guest List') }} <img
+                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMainModal">{{ __('panel.Go to Dashboard') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="closeMainModal">{{ __('panel.Go to Dashboard') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter" data-dismiss="modal">{{ __('panel.creatnew') }}</button>
                 </div>
@@ -339,8 +353,8 @@
                             toastr.success(response.message);
                             //here
                             var successModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter03'));
-                        successModal.show();
+                                'exampleModalCenter03'));
+                            successModal.show();
                             // Close modal
                             $("#closeModal").trigger("click");
 
@@ -349,7 +363,8 @@
 
                             // Get the event data from the response
                             var event = response.event;
-                            var openPanelUrl = '{{ route('panel.event.generalInfos', ':id') }}'.replace(':id', event.id_event);
+                            var openPanelUrl = '{{ route('panel.event.generalInfos', ':id') }}'
+                                .replace(':id', event.id_event);
 
                             // Create a new row for the event and append it to tbody
                             var newRow = `

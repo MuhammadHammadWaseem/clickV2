@@ -38,6 +38,22 @@ a.site-logo {
     .site-navbar ul li a {
     font-size: 12px !important;
 }
+
+
+
+
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}
+
+body {
+    padding-top: 120px;
+}
+
+
 </style>
 @section('title')
     {{ __('home.title') }}
