@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Template;
 use Carbon\Carbon;
 use App\Models\Blog;
 use App\Models\User;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Event;
+use App\Models\EventType;
 
 
 
@@ -53,6 +56,12 @@ class WebController extends Controller
     public function events()
     {
         return view('Website.events');
+    }
+    public function getEvents($id)
+    {
+        $type = EventType::where('id_eventtype',$id)->first();
+        $templates = DB::table('templates')->where('type_id', $id)->get();
+        return view('Website.showEvents',compact('templates','type'));
     }
     public function features()
     {

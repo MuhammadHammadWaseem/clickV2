@@ -35,6 +35,7 @@ Route::get('/lang/{lang}', [WebController::class, 'lang'])->name('lang.switch');
 Route::group(['as' => 'web.'], function () {
     Route::get('/', [WebController::class, 'index'])->name('index');
     Route::get('/events', [WebController::class, 'events'])->name('events');
+    Route::get('/events/{id}', [WebController::class, 'getEvents'])->name('get.events');
     Route::get('/features', [WebController::class, 'features'])->name('features');
     Route::get('/about', [WebController::class, 'about'])->name('about');
     Route::get('/contact', [WebController::class, 'contact'])->name('contact');

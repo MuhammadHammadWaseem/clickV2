@@ -1,59 +1,58 @@
 @extends('Website.Layouts.master')
 
 <style>
-   .accordion-item:first-of-type {
-    border-top-left-radius: 50px !important;
-    border-top-right-radius: 50px !important;
+    .accordion-item:first-of-type {
+        border-top-left-radius: 50px !important;
+        border-top-right-radius: 50px !important;
 
-    border-bottom-right-radius: .25rem !important;
-    border-bottom-left-radius: .25rem !important;
-}
+        border-bottom-right-radius: .25rem !important;
+        border-bottom-left-radius: .25rem !important;
+    }
 
-.accordion-item:last-of-type {
-    border-top-left-radius: .25rem !important;
-    border-top-right-radius: .25rem !important;
+    .accordion-item:last-of-type {
+        border-top-left-radius: .25rem !important;
+        border-top-right-radius: .25rem !important;
 
-    border-bottom-right-radius: 50px !important;
-    border-bottom-left-radius: 50px !important;
-}
+        border-bottom-right-radius: 50px !important;
+        border-bottom-left-radius: 50px !important;
+    }
 
-.langauge-person .nav-box ul li.drop-down-link ul li {
-    border-bottom: none !important;
-}
+    .langauge-person .nav-box ul li.drop-down-link ul li {
+        border-bottom: none !important;
+    }
 
-a.site-logo {
-    width: 31% !important;
+    a.site-logo {
+        width: 31% !important;
 
-}
-.header-buttons {
-    width: 25% !important;
-}
+    }
 
-.site-navbar ul li a {
-    padding: 7px !important;
+    .header-buttons {
+        width: 25% !important;
+    }
+
+    .site-navbar ul li a {
+        padding: 7px !important;
     }
 
 
 
     .site-navbar ul li a {
-    font-size: 12px !important;
-}
+        font-size: 12px !important;
+    }
 
 
 
 
-header {
-    position: fixed;
-    width: 100%;
-    z-index: 99999;
-    top: 0;
-}
+    header {
+        position: fixed;
+        width: 100%;
+        z-index: 99999;
+        top: 0;
+    }
 
-body {
-    padding-top: 120px;
-}
-
-
+    body {
+        padding-top: 120px;
+    }
 </style>
 @section('title')
     {{ __('home.title') }}
@@ -114,20 +113,14 @@ body {
 
             <div class="col-lg-6 col-md-12">
                 <div class="inner-sec">
-                    <a href="/login" class="Wedding-Events">
-
+                    <a href="{{ route('web.get.events',['id' => 1]) }}" class="Wedding-Events">
                         <div class="gradient-anim">
                             <img src="assets/newimages/Vector (1).png" alt="">
-
                         </div>
-
                         <h3>{{ __('home.Wedding Events') }}</h3>
-
                         <div>
                             <img src="assets/newimages/Group 12.png" alt="">
-
                         </div>
-
                     </a>
                 </div>
 
@@ -135,7 +128,7 @@ body {
                 <div class="Anniversary-Events">
                     <div class="inner-sec">
 
-                        <a href="/login" class="Wedding-Events">
+                        <a href="{{ route('web.get.events',['id' => 3]) }}" class="Wedding-Events">
                             <div class="gradient-anim">
                                 <img src="assets/newimages/Group 13.png" alt="">
 
@@ -155,7 +148,7 @@ body {
                 <div class="Baby-Shower-Events">
                     <div class="inner-sec">
 
-                        <a href="/login" class="Wedding-Events">
+                        <a href="{{ route('web.get.events',['id' => 2]) }}" class="Wedding-Events">
                             <div class="gradient-anim">
                                 <img src="assets/newimages/Group 13.png" alt="">
 
@@ -180,7 +173,7 @@ body {
                 <div class="Corporate-Events">
                     <div class="inner-sec">
 
-                        <a href="/login" class="Wedding-Events">
+                        <a href="{{ route('web.get.events',['id' => 6]) }}" class="Wedding-Events">
                             <div class="gradient-anim">
                                 <img src="assets/newimages/Group 14.png" alt="">
 
@@ -199,7 +192,7 @@ body {
                 <div class="Baptism-Events">
                     <div class="inner-sec">
 
-                        <a href="/login" class="Wedding-Events">
+                        <a href="{{ route('web.get.events',['id' => 4]) }}" class="Wedding-Events">
                             <div class="gradient-anim">
                                 <img src="assets/newimages/Vector (2).png" alt="">
 
@@ -218,7 +211,7 @@ body {
                 <div class="Birthday-Events">
                     <div class="inner-sec">
 
-                        <a href="/login" class="Wedding-Events">
+                        <a href="{{ route('web.get.events',['id' => 5]) }}" class="Wedding-Events">
                             <div class="gradient-anim">
                                 <img src="assets/newimages/Vector (4).png" alt="">
 
@@ -549,9 +542,9 @@ body {
         </div>
 
         <!--
-                                                <div class="testomonials">
-                                                  <h1>hello</h1>
-                                                </div> -->
+                                                    <div class="testomonials">
+                                                      <h1>hello</h1>
+                                                    </div> -->
 
 
         <div class="content-section">
@@ -739,7 +732,7 @@ body {
 
         <div class="inner-heading">
             <h2 class="heading-center sixth">
-                <span class="bold-text"> {{ __('home.About') }}</span>  {{ __('home.Clickinvitation') }}
+                <span class="bold-text"> {{ __('home.About') }}</span> {{ __('home.Clickinvitation') }}
             </h2>
         </div>
 
