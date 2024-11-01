@@ -15,6 +15,14 @@ return[
     'verify' => 'VERIFY',
     'cancel' => 'CANCEL',
     'pay_now' => 'PAY NOW',
+    'SUBTOTAL' => 'SUBTOTAL:',
+    'TPS' => 'TPS:',
+    'TVQ' => 'TPS:',
+    'TOTAL' => 'TOTAL:',
+    'canada_1' => 'canada 1',
+    'canada_2' => 'canada 2',
+    'us_1' => 'us 1',
+    'us_2' => 'us 2',
 
 
 ];

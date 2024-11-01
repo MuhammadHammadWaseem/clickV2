@@ -15,4 +15,12 @@ return [
     'verify' => 'VÉRIFIER',
     'cancel' => 'ANNULER',
     'pay_now' => 'PAYER MAINTENANT',
+    'SUBTOTAL' => 'SOUS-TOTAL:',
+    'TPS' => 'TPS:',
+    'TVQ' => 'TVQ:',
+    'TOTAL' => 'TOTAL:',
+    'canada_1' => 'canada 1',
+    'canada_2' => 'canada 2',
+    'us_1' => 'États-Unis 1',
+    'us_2' => 'États-Unis 2',
 ];

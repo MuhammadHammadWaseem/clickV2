@@ -225,21 +225,21 @@
                 $("#canadaTable").empty();
                 $("#canadaTable").append(`
                     <tr>
-                        <th>SUBTOTAL:</th>
+                        <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
                                                     <td id="subTotalCan">${res[0].subcano}</td>
                                                 ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
-                        <th>TPS:</th>
+                        <th>{{ __('pay.TPS') }}</th>
                         <td id="TPSCan">${res[0].tpscan}</td>
                     </tr>
                     <tr>
-                        <th>TVQ:</th>
+                        <th>{{ __('pay.TVQ') }}</th>
                         <td id="TVQCan">${res[0].tvqcan}</td>
                     </tr>
                     <tr>
-                        <th>TOTAL:</th>
+                        <th>{{ __('pay.TOTAL') }}</th>
                         <td id="TotalCan" style="font-weight: bold;">${res[0].totcan}</td>
                     </tr>
                 `);
@@ -247,21 +247,21 @@
                 $("#usaTable").empty();
                 $("#usaTable").append(`
                     <tr>
-                        <th>SUBTOTAL:</th>
+                        <th>{{ __('pay.SUBTOTAL') }}:</th>
                         ${res[0].discount !== "0%" ? `
                                             <td id="subTotalUSA">${res[0].subusao}</td>
                                             ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
-                        <th>TPS:</th>
+                        <th>{{ __('pay.TPS') }}</th>
                         <td id="TPSUSA">${res[0].tpsusa}</td>
                     </tr>
                     <tr>
-                        <th>TVQ:</th>
+                        <th>{{ __('pay.TVQ') }}</th>
                         <td id="TVQUSA">${res[0].tvqusa}</td>
                     </tr>
                     <tr>
-                        <th>TOTAL:</th>
+                        <th>{{ __('pay.TOTAL') }}</th>
                         <td id="TotalUSA" style="font-weight: bold;">${res[0].totusa}</td>
                     </tr>
                 `);
@@ -285,8 +285,8 @@
                 $("#province").append(`
                 <select name="" id="">
                     <option selected disabled>Province*</option>
-                    <option value="111">canada 1</option>
-                    <option value="222">canada 2</option>
+                    <option value="111">{{ __('pay.canada_1') }}</option>
+                    <option value="222">{{ __('pay.canada_2') }}</option>
                     </select>
                     `);
             }
@@ -301,8 +301,8 @@
                 $("#province").append(`
                     <select name="" id="">
                         <option selected disabled>Province*</option>
-                        <option value="11">us 1</option>
-                        <option value="22">us 2</option>
+                        <option value="11">{{ __('pay.us_1') }}</option>
+                        <option value="22">{{ __('pay.us_2') }}</option>
                     </select>
                 `);
             }

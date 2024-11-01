@@ -155,5 +155,12 @@ return[
     'learn_how_rsvp_works' => 'Découvrez comment fonctionne le RSVP',
     'select_options_send_invitation' => 'Sélectionner les Options pour Envoyer l\'Invitation',
     'sms' => 'SMS',
+    'left_member' => 'Membres restants',
+    'member_details' => 'Détails du membre',
+    'note' => 'Remarque',
+    'other_details' => 'Autres détails',
+    'attending_event' => 'Participation à l\'événement',
+    'meal' => 'Repas',
+    'table' => 'Table',
 
 ];

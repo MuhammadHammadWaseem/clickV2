@@ -1388,7 +1388,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                 ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                 <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                    <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number}  {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                 </span>
                                             </td>
                                             <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1396,7 +1396,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td>${guest.notes || 'No Notes'}</td>
                                             <td>
                                                 <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                             </td>
                                         </tr>
                                     </table>
@@ -1407,10 +1407,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <table>
                                         <p class="after-line-effect">Members</p>
                                         <tr>
-                                            <td><strong>Member Details</strong></td>
-                                            <td><strong>Note</strong></td>
-                                            <td><strong>Other Details</strong></td>
-                                            <td><strong>Attending Event</strong></td>
+                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                            <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+
                                         </tr>`;
 
                             guest.members.forEach(function(member) {
@@ -1421,9 +1422,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <td>${member.notes || 'No Notes'}</td>
                                     <td>
                                         <ul>
-                                            <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                         </ul>
                                     </td>
                                     ${(member.opened === 2) ? `
@@ -1463,7 +1464,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1471,7 +1472,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1482,10 +1483,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
@@ -1499,9 +1500,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>${member.notes || 'No Notes'}</td>
                                                 <td>
                                                     <ul>
-                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
@@ -1541,7 +1542,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1549,7 +1550,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1560,10 +1561,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
@@ -1577,9 +1578,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>${member.notes || 'No Notes'}</td>
                                                 <td>
                                                     <ul>
-                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
@@ -1622,7 +1623,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.declined == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1630,7 +1631,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1641,10 +1642,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if declined == 1
@@ -1658,9 +1659,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>${member.notes || 'No Notes'}</td>
                                                 <td>
                                                     <ul>
-                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
@@ -1702,7 +1703,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1710,7 +1711,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1721,10 +1722,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
@@ -1738,9 +1739,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>${member.notes || 'No Notes'}</td>
                                                 <td>
                                                     <ul>
-                                                        <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
@@ -1782,7 +1783,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} Members Left<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
@@ -1790,7 +1791,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1809,10 +1810,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>
                                                 <tr class="divider-line"></tr>
                                                 <tr>
@@ -1821,9 +1822,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>${member.notes || 'No Notes'}</td>
                                                     <td>
                                                         <ul>
-                                                            <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                            <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                            <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                         </ul>
                                                     </td>
                                                     ${(member.opened === 2) ? `
@@ -1876,7 +1877,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                     <span class="${guest.checkin == 0 ? 'd-none' : ''}">
                                                         <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email}
-                                                        <br>${guest.members_number} Members Left
+                                                        <br>${guest.members_number} {{ __('guestlistpage.left_member') }}
                                                         <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                     </span>
                                                 </td>
@@ -1885,7 +1886,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>${guest.notes || 'No Notes'}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">Add Members</button>
+                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1900,10 +1901,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <table>
                                                 <p class="after-line-effect">Members</p>
                                                 <tr>
-                                                    <td><strong>Member Details</strong></td>
-                                                    <td><strong>Note</strong></td>
-                                                    <td><strong>Other Details</strong></td>
-                                                    <td><strong>Attending Event</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>`;
 
                                     guest.members.forEach(function(member) {
@@ -1917,9 +1918,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td>${member.notes || 'No Notes'}</td>
                                             <td>
                                                 <ul>
-                                                    <li><strong>Meal: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                    <li><strong>Table: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                    <li><strong>Allergies: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
                                             ${(member.opened === 2) ? `
