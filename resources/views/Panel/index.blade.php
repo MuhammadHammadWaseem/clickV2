@@ -361,29 +361,8 @@
                             // Reset form
                             form[0].reset();
 
-                            // Get the event data from the response
-                            var event = response.event;
-                            var openPanelUrl = '{{ route('panel.event.generalInfos', ':id') }}'
-                                .replace(':id', event.id_event);
-
-                            // Create a new row for the event and append it to tbody
-                            var newRow = `
-                            <tr>
-                                <td>${event.created_at.split('T')[0]}</td> <!-- Format the created_at field -->
-                                <td>${event.date}</td>
-                                <td>${event.name} ${event.type}</td>
-                                <td>
-                                    <div class="edit-delet">
-                                        <ul>
-                                            <li><a href="${openPanelUrl}"><img src="assets/images/edit.png" alt=""></a></li>
-                                            <li><a href="#" onclick="deleteEvent(${event.id_event})"><img src="assets/images/delet.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>`;
-
-                            // Append the new row to the tbody
-                            $('#tbody').append(newRow);
+                            // Reload the first page of events to ensure correct pagination
+                            loadEvents(1); // Reload the first page of events
 
                         } else {
                             toastr.error("An error occurred while creating the event.");
