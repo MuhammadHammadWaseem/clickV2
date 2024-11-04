@@ -415,8 +415,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit"
-                            class="submit-btn btn btn-primary t-btn">{{ __('photos.submit') }}</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn" id="uploadPhotosBtn">{{ __('photos.submit') }}</button>
                         <button type="button" id="addVideoModalCloseBtn" class="btn btn-secondary"
                             data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
@@ -626,6 +625,9 @@
             $('#uploadVideosForm').on('submit', function(e) {
                 e.preventDefault(); // Prevent the form from submitting the traditional way
 
+                $("#uploadPhotosBtn").prop('disabled',true);
+                $("#uploadPhotosBtn").text('Uploading...');
+
                 var formData = new FormData(this); // Use FormData to handle the files
 
                 $.ajax({
@@ -636,7 +638,10 @@
                     processData: false, // Prevent jQuery from processing the form data
                     success: function(response) {
                         if (response.success) {
-                            console.log(response);
+
+                            $("#uploadPhotosBtn").prop('disabled',false);
+                            $("#uploadPhotosBtn").text('Submit');
+
                             toastr.success(response.success); // Show success notification
                             $('#vid').val(''); // Clear the file input
                             $('#addVideoModalCloseBtn').click(); // Close the modal
@@ -662,8 +667,12 @@
                                 `;
                             $('#main-video-gallery-box').append(newVideo);
                         }
+                        $("#uploadPhotosBtn").prop('disabled',false);
+                        $("#uploadPhotosBtn").text('Submit');
                     },
                     error: function(xhr) {
+                        $("#uploadPhotosBtn").prop('disabled',false);
+                        $("#uploadPhotosBtn").text('Submit');
                         toastr.error('Failed to upload the videos. Please try again.');
                         console.error(xhr.responseText); // Log the error for debugging
                     }
