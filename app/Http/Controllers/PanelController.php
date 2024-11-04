@@ -151,9 +151,7 @@ class PanelController extends Controller
 
     public function generalInfos($id)
     {
-        $event = Event::with('eventType')->where('id_event', $id)
-            ->where('id_user', Auth::id())
-            ->first();
+        $event = Event::with('eventType')->where('id_event', $id)->where('id_user', Auth::id())->first();
         if ($event) {
             // Store event ID in the session
             GeneralHelper::setEventId($id);

@@ -1843,10 +1843,10 @@ button.btn-new:hover {
   background: #ffc107;
 }
 
-.slick-slider img {
+/* .slick-slider img {
   width: 100%;
   height: 280px;
-}
+} */
 
 .slick-slide {
   padding: 40px 0;

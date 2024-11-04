@@ -1,6 +1,12 @@
 @extends('Website.Layouts.master')
 
 <style>
+    .slick-slider button {
+    top: 45% !important;
+    }
+</style>
+
+<style>
     .accordion-item:first-of-type {
         border-top-left-radius: 50px !important;
         border-top-right-radius: 50px !important;
@@ -383,12 +389,23 @@
 
 
             <div class="slider">
+                @foreach ($templates as $template)
                 <div class="mx-3">
                     <div class="card border-0 rounded-0">
-                        <img src="assets/newimages/Component 27 (1).png" alt="paperless-post-birthday-invitations">
+                        @guest
+                        <a href="/login">
+                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="paperless-post-birthday-invitations">
+                        </a>
+                        @endguest
+                        @auth
+                        <a href="/panel">
+                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="paperless-post-birthday-invitations">
+                        </a>
+                        @endauth
                     </div>
                 </div>
-                <div class="mx-3">
+                @endforeach
+                {{-- <div class="mx-3">
                     <div class="card border-0 rounded-0">
                         <img src="assets/newimages/Component 27 (2).png" alt="digital-invitations">
                     </div>
@@ -407,7 +424,7 @@
                     <div class="card border-0 rounded-0">
                         <img src="assets/newimages/Component 27 (1).png" alt="graduation-party-invitation-cards">
                     </div>
-                </div>
+                </div> --}}
             </div>
 
         </div>

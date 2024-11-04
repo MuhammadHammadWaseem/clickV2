@@ -52,72 +52,71 @@
 
 
         .language-box .nav-box ul li a {
-  display: flex;
-  column-gap: 3px;
-  width: 70px;
-  height: 40px;
-  border: 1px solid #7A7A7A;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-  transition: .3s;
-}
+            display: flex;
+            column-gap: 3px;
+            width: 70px;
+            height: 40px;
+            border: 1px solid #7A7A7A;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            transition: .3s;
+        }
 
-.language-box .nav-box ul li a img {
-  width: 20px;
-  height: 20px;
-}
+        .language-box .nav-box ul li a img {
+            width: 20px;
+            height: 20px;
+        }
 
-.language-box .nav-box ul li a i {
-  color: #7A7A7A;
-}
+        .language-box .nav-box ul li a i {
+            color: #7A7A7A;
+        }
 
-.language-box .nav-box ul li a:hover {
-  background-color: white;
-}
+        .language-box .nav-box ul li a:hover {
+            background-color: white;
+        }
 
-.language-box .nav-box ul li {
-  position: relative;
-}
+        .language-box .nav-box ul li {
+            position: relative;
+        }
 
-ul.drop-menu {
-  left: -50px !important;
-  top: 40px !important;
-}
+        ul.drop-menu {
+            left: -50px !important;
+            top: 40px !important;
+        }
 
-ul.drop-menu {
-  background-color: white;
-  border-radius: 10px;
-  padding: 15px 15px;
-  position: absolute;
-  z-index: 9999;
-  top: 45px;
-  width: 130px;
-}
+        ul.drop-menu {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 15px;
+            position: absolute;
+            z-index: 9999;
+            top: 45px;
+            width: 130px;
+        }
 
-ul.drop-menu li a {
-  border: none !important;
-  padding: 0;
-  display: block !important;
-  color: black !important;
-  font-size: 12px;
-}
+        ul.drop-menu li a {
+            border: none !important;
+            padding: 0;
+            display: block !important;
+            color: black !important;
+            font-size: 12px;
+        }
 
-.nav-box ul li.drop-down-link ul {
-  display: none ;
-}
+        .nav-box ul li.drop-down-link ul {
+            display: none;
+        }
 
-.nav-box ul li.drop-down-link:hover ul {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px !important;
-}
+        .nav-box ul li.drop-down-link:hover ul {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px !important;
+        }
 
 
-.nav-box ul {
-    padding: 0 !important;
-}
-
+        .nav-box ul {
+            padding: 0 !important;
+        }
     </style>
 </head>
 
@@ -146,9 +145,9 @@ ul.drop-menu li a {
                                                 <li><a href="#thecouple">
                                                         @if ($eventType)
                                                             @if ($eventType->couple_event)
-                                                            {{ __('website.the_couple') }}
+                                                                {{ __('website.the_couple') }}
                                                             @else
-                                                            {{ __('website.description') }}
+                                                                {{ __('website.description') }}
                                                             @endif
                                                         @endif
                                                     </a></li>
@@ -202,9 +201,9 @@ ul.drop-menu li a {
                             <li><a href="#thecouple">
                                     @if ($eventType)
                                         @if ($eventType->couple_event)
-                                        {{ __('website.the_couple') }}
+                                            {{ __('website.the_couple') }}
                                         @else
-                                        {{ __('website.description') }}
+                                            {{ __('website.description') }}
                                         @endif
                                     @endif
                                 </a></li>
@@ -227,8 +226,8 @@ ul.drop-menu li a {
                                                 <a href="#">
                                                     <img src="{{ asset('assets/Panel/images/translate-icon.png') }}"
                                                         alt="">
-                                                    {{ Config::get('languages')[App::getLocale()] }}<i class="fa fa-angle-down"
-                                                        aria-hidden="true"></i>
+                                                    {{ Config::get('languages')[App::getLocale()] }}<i
+                                                        class="fa fa-angle-down" aria-hidden="true"></i>
                                                 </a>
                                                 <ul class="drop-menu">
                                                     @foreach (Config::get('languages') as $lang => $language)
@@ -297,7 +296,7 @@ ul.drop-menu li a {
                     <h1>
                         @if ($eventType)
                             @if ($eventType->couple_event)
-                            {{ __('website.the_couple') }}
+                                {{ __('website.the_couple') }}
                             @else
                                 {{ $eventType->title }}
                             @endif
@@ -308,7 +307,7 @@ ul.drop-menu li a {
 
                         @if ($eventType)
                             @if ($eventType->couple_event)
-                            {{ __('website.meet_the_bride_and_groom') }}
+                                {{ __('website.meet_the_bride_and_groom') }}
                             @else
                                 {{ $event->name }}
                             @endif
@@ -384,7 +383,8 @@ ul.drop-menu li a {
                         <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('website.close') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('website.close') }}</button>
                         <button type="submit" class="btn modal-t-btn">{{ __('website.submit') }}</button>
                     </div>
                 </form>
@@ -400,7 +400,8 @@ ul.drop-menu li a {
                     <div class="col text-center">
                         <h1>{{ __('website.gallery_title') }}</h1>
                         <h4 class="mt-4 mb-4">{{ __('website.gallery_subtitle') }}</h4>
-                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal" class="btn t-btn">{{ __('website.add_photos') }}</button>
+                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal"
+                            class="btn t-btn">{{ __('website.add_photos') }}</button>
                         <hr>
                     </div>
                 </div>
@@ -442,23 +443,34 @@ ul.drop-menu li a {
                 <div class="row">
                     <div class="col">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                @php
-                                    // Ensure the collection is sorted in descending order based on a specific field.
-                                    $sortedPhotogallery = $photogallery->sortByDesc('id_photogallery');
-                                @endphp
+                            @php
+                                // Ensure the collection is sorted in descending order based on a specific field.
+                                $sortedPhotogallery = $photogallery->sortByDesc('id_photogallery');
+                                $photoExists = false;
+                            @endphp
 
-                                @foreach ($sortedPhotogallery as $photo)
-                                    <div class="carousel-item @if ($loop->first) active @endif">
-                                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                            data-lightbox="gallery" data-title="Image {{ $loop->iteration }}"
-                                            class="img-thumbnail">
-                                            <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                                class="d-block w-100" height="600px">
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
+                            @if (
+                                $sortedPhotogallery->contains(function ($photo) {
+                                    return file_exists(public_path('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg'));
+                                }))
+                                <div class="carousel-inner">
+                                    @foreach ($sortedPhotogallery as $photo)
+                                        @if (file_exists(public_path('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg')))
+                                            @php $photoExists = true; @endphp
+                                            <div
+                                                class="carousel-item @if ($loop->first) active @endif">
+                                                <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                                    data-lightbox="gallery" data-title="Image {{ $loop->iteration }}"
+                                                    class="img-thumbnail">
+                                                    <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                                        class="d-block w-100" height="600px">
+                                                </a>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
+
                             <button class="carousel-control-prev" type="button"
                                 data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -480,20 +492,36 @@ ul.drop-menu li a {
                     <div class="col">
                         <h1 class="text-center mt-3 mb-3">{{ __('website.video') }}</h1>
                         <div class="video-style">
+                            @php
+                                $videoExists = false;
+                            @endphp
                             @foreach ($videogallery as $video)
-                                <video width="300" height="200" controls>
-                                    <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
-                                        type="video/mp4">
+                                @if (file_exists(public_path('event-images/' . $video->id_event . '/videos/' . $video->video)))
+                                    @php
+                                        $videoExists = true;
+                                    @endphp
+                                    <video width="300" height="200" controls>
+                                        <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
+                                            type="video/mp4">
                                         {{ __('website.video_support') }}
-                                </video>
+                                    </video>
+                                @endif
                             @endforeach
                         </div>
-                        <center>
-                            <button class="btn t-btn mt-3" id="viewall"><a class="text-white text-decoration-none"
-                                    target="_blank" href="{{ url("/events/$event->id_event/show-gallery") }}">{{ __('website.view') }}</a></button>
-                        </center>
+
+                        @if ($videoExists)
+                            <center>
+                                <button class="btn t-btn mt-3" id="viewall">
+                                    <a class="text-white text-decoration-none" target="_blank"
+                                        href="{{ url("/events/$event->id_event/show-gallery") }}">
+                                        {{ __('website.view') }}
+                                    </a>
+                                </button>
+                            </center>
+                        @endif
                     </div>
                 </div>
+
                 {{-- VIDEO --}}
             </div>
 

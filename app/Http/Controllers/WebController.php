@@ -29,7 +29,7 @@ class WebController extends Controller
     public function lang($lang)
     {
         //    Validate the requested language
-           if (!in_array($lang, ['en', 'fr'])) {
+        if (!in_array($lang, ['en', 'fr'])) {
             abort(400); // Bad request if language is not supported
         }
 
@@ -47,8 +47,10 @@ class WebController extends Controller
     }
     public function index()
     {
-        return view('Website.home');
+        $templates = Template::inRandomOrder()->take(10)->get();
+        return view('Website.home', compact('templates'));
     }
+
     public function register()
     {
         return view('Website.auth.register');
@@ -59,9 +61,9 @@ class WebController extends Controller
     }
     public function getEvents($id)
     {
-        $type = EventType::where('id_eventtype',$id)->first();
+        $type = EventType::where('id_eventtype', $id)->first();
         $templates = DB::table('templates')->where('type_id', $id)->get();
-        return view('Website.showEvents',compact('templates','type'));
+        return view('Website.showEvents', compact('templates', 'type'));
     }
     public function features()
     {
@@ -272,9 +274,10 @@ class WebController extends Controller
             return 0;
     }
 
-    public function packages(){
+    public function packages()
+    {
 
-       return view("Website.package");
+        return view("Website.package");
     }
 
 }

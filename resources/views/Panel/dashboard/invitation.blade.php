@@ -231,8 +231,37 @@
 #editor .sidebaraddtext::-webkit-scrollbar{
     width: 5px;
 }
+@media only screen and (max-width: 991px){
+.edit-cards-boxes .card-styling-box {
+    width: 16.5% !important;
+}
+.edit-cards-boxes{
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (max-width: 767px){
+.edit-cards-boxes .card-styling-box {
+        width: 22% !important;
+    }
+    .edit-cards-boxes{
+        justify-content: center;
+    }
+
+}
+
 
     @media only screen and (max-width: 575px){
+
+        .edit-cards-boxes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-content: center;
+}
         .two-outside-boxes .main-card-box {
         width: 100%;
     }
@@ -243,7 +272,7 @@
     }
 
     .edit-cards-boxes .card-styling-box {
-        width: 23% !important;
+        width: 30% !important;
     }
 
     .edit-cards-boxes .card-styling-box a {
@@ -270,6 +299,17 @@
 .two-outside-boxes .main-card-box {
         width: 100% !important;
     }
+
+    #canvas {
+        position: absolute !important;
+        width: 280px !important;
+        height: 668px !important;
+        left: 0px !important;
+        top: 0px !important;
+        touch-action: none !important;
+        user-select: none !important;
+    }
+
     }
 </style>
 @section('content')

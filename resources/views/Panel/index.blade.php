@@ -159,12 +159,11 @@
                 <div class="modal-body">
                     <div class="text">
                         <h2>{{ __('panel.do first') }}</h2>
-                        {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> --}}
                         <br>
                     </div>
                     <div class="modal-listing-box">
                         <ul>
-                            <li>
+                            {{-- <li>
                                 <a href="#" onclick="hidemodel();">
                                     {{ __('panel.Make Cards') }} <img src="assets/images/modal-list-right-arow.png"
                                         alt="">
@@ -175,7 +174,8 @@
                             <li><a href="#" onclick="hidemodel();">{{ __('panel.Make New Events') }} <img
                                         src="assets/images/modal-list-right-arow.png" alt=""></a></li>
                             <li><a href="#" onclick="hidemodel();">{{ __('panel.Manage Guest List') }} <img
-                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li>
+                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li> --}}
+                            <li><a href="" onclick="hidemodel();">{{ __('panel.Go To Events') }} <img src="assets/images/modal-list-right-arow.png" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -244,10 +244,30 @@
                         var openPanelUrl = '{{ route('panel.event.generalInfos', ':id') }}'.replace(
                             ':id', event
                             .id_event);
+
+                        // Format date to 'YYYY-MM-DD HH:mm AM/PM'
+                        var createdAt = new Date(event.created_at).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        }).replace(',', ''); // Remove the comma after date
+
+                        var eventDate = new Date(event.date).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        }).replace(',', '');
+
                         var newRow = `
                         <tr>
-                        <td>${new Date(event.created_at).toLocaleDateString()}</td>
-                        <td>${event.date}</td>
+                         <td>${createdAt}</td>
+                         <td>${eventDate}</td>
                         <td>${event.name} ${event.type}</td>
                         <td>
                             <div class="edit-delet">

@@ -532,7 +532,7 @@
                                             onclick="nextPrev(1)">{{ __('genralInfo.next_button') }}</button>
                                     </div>
                                 </div>
-                                @if ($event->eventType->couple_event == '1')
+                                @if ($event->eventType->couple_event == "0")
                                 <div style="text-align:center;margin-top:40px;">
                                     <span class="step"></span>
                                     <span class="step"></span>
@@ -556,8 +556,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
+                        <button type="button" class="btn btn-secondary d-none" data-dismiss="modal" id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
                         {{-- <button type="button" class="submit-btn btn btn-primary t-btn" id="updateStepForm" onclick="submitStep()">Update</button> --}}
                     </div>
                     </form>
@@ -893,6 +892,7 @@
 
                         // Close the modal
                         $('#registrationFormClose').click();
+
                     },
                     error: function(xhr) {
                         alert('Something went wrong: ' + xhr.responseText);

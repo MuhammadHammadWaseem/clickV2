@@ -42,6 +42,7 @@ return[
 'Go to Dashboard' => 'Go to Dashboard',
 'creatnewSU' => 'Event Created Successfully',
 'creatnewM' => 'Your event has been successfully updated.',
+'Go To Events' => 'Go To Events',
 
 
 

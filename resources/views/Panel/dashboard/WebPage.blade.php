@@ -3,26 +3,26 @@
 
 <style>
     .main-dashboard-sec .left-menu-dash ul li.webpage-active a {
-        color: #C09D2A;
+        color: #C09D2A !important;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active img {
-        filter: none;
+        filter: none !important;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active {
-        background-color: #c09d2a29;
+        background-color: #c09d2a29 !important;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.webpage-active::after {
-        width: 5px;
-        height: 100%;
-        background-color: #C09D2A;
-        position: absolute;
-        left: 0;
-        right: 0;
-        content: "";
-        top: 0;
+        width: 5px !important;
+        height: 100% !important;
+        background-color: #C09D2A !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        content: "" ;
+        top: 0 !important;
     }
 
     .modal form label {
@@ -85,6 +85,7 @@
                     </div>
                     <div class="main-event-gallery-box">
                         @forelse ($photogallery as $photo)
+                        @if (file_exists('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg'))
                             <div class="box" id="photo-box-{{ $photo->id_photogallery }}">
                                 <a href="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                     data-fancybox="images" tabindex="0">
@@ -103,6 +104,7 @@
                                     </svg>
                                 </button>
                             </div>
+                        @endif
                         @empty
                             <p id="NoItems">{{ __('webpage.no_items_found') }}</p>
                         @endforelse
