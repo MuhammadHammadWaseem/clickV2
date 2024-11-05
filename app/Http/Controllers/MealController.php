@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
+use App\Models\Guest;
 
 class MealController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $eventId = GeneralHelper::getEventId();
         $meals = Meal::where('id_event', $eventId)->get();
-        return view('Panel.dashboard.meals',compact('meals'));
+        return view('Panel.dashboard.meals', compact('meals'));
+    }
+    public function showMeals()
+    {
+        $eventId = GeneralHelper::getEventId();
+        $meals = Meal::where('id_event', $eventId)->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Meals Get Successfully!',
+            'meals' => $meals,
+        ]);
     }
 
     public function store(Request $request)
@@ -24,14 +36,22 @@ class MealController extends Controller
             $meal->id_event = $request->idevent;
             // Save the meal to the database
             $meal->save();
-            return redirect()->back()->with('success', 'Meal created successfully!');
+            return response()->json([
+                'success' => true,
+                'message' => 'Meal created successfully!',
+            ]);
+            // return redirect()->back()->with('success', 'Meal created successfully!');
 
         } catch (\Exception $e) {
             // Flash error message if something goes wrong
-            return redirect()->back()->with('error', 'Failed to create meal. Please try again.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create meal. Please try again.',
+            ]);
+            // return redirect()->back()->with('error', 'Failed to create meal. Please try again.');
         }
     }
-   // In MealController.php
+    // In MealController.php
 
     public function edit($id)
     {
@@ -61,12 +81,20 @@ class MealController extends Controller
 
         return response()->json(['success' => 'Meal updated successfully!']);
     }
-        public function destroy($id){
-            $meal = Meal::findOrFail($id);
-            $meal->delete();
+    public function destroy($id)
+    {
+        $meal = Meal::findOrFail($id);
+        $guests = Guest::where('id_meal', $meal->id_meal)->get();
 
-            return response()->json(['success' => 'Meal deleted successfully']);
-
+        if ($guests) {
+            foreach ($guests as $guest) {
+                $guest->id_meal = 0;
+                $guest->save();
+            }
         }
+
+        $meal->delete();
+        return response()->json(['success' => 'Meal deleted successfully']);
+    }
 
 }

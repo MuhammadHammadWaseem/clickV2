@@ -19,35 +19,32 @@
 
 
     .main-dashboard-sec .left-menu-dash ul li.meals-active a {
-      color: #C09D2A;
+        color: #C09D2A;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.meals-active img {
-      filter: none;
+        filter: none;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.meals-active {
-      background-color: #c09d2a29;
+        background-color: #c09d2a29;
     }
 
     .main-dashboard-sec .left-menu-dash ul li.meals-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 
 
-.box-styling.event-photos-gallery.meal-details .meal-box .three-align-things .tw0-boxex-align-in h6 {
-    width:70%;
-}
-
-
-
+    .box-styling.event-photos-gallery.meal-details .meal-box .three-align-things .tw0-boxex-align-in h6 {
+        width: 70%;
+    }
 </style>
 <!-- Include Toastr CSS and JS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -95,8 +92,8 @@
                         <button class="t-btn" type="button" class="btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter">{{ __('meal.Add New') }} </button>
                     </div>
-                    <div class="meal-name-boxes">
-                        @foreach ($meals as $meal)
+                    <div class="meal-name-boxes" id="mealsBox">
+                        {{-- @foreach ($meals as $meal)
                             <div class="meal-box">
                                 <div class="three-align-things">
                                     <div class="tw0-boxex-align-in">
@@ -111,13 +108,12 @@
                                         </button>
 
                                     </div>
-                                    {{-- <h6>{{ $meal->name ?? '' }}</h6> --}}
                                     <p>{{ $meal->description ?? '' }}</p>
                                     <input type="hidden" id="event_id" value="{{ $meal->id_meal }}"
                                         data-id="{{ $meal->id_meal }}">
                                 </div>
                             </div>
-                        @endforeach
+                        @endforeach --}}
 
 
                     </div>
@@ -139,12 +135,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="text">
+                    <div class="text mb-4">
                         <h2>{{ __('meal.add_new_meal_title') }}</h2>
-                        <p>{{ __('meal.add_new_meal_description') }}</p>
+                        {{-- <p>{{ __('meal.add_new_meal_description') }}</p> --}}
                     </div>
                     <div class="main-form-box">
-                        <form action="{{ route('panel.event.meals.store') }}" method="POST">
+                        <form action="{{ route('panel.event.meals.store') }}" id="mealForm" method="POST">
                             @csrf
                             <input type="text" placeholder="{{ __('meal.meal_name_label') }}" name="namemeal" required>
                             <textarea placeholder="{{ __('meal.description_label') }}" name="descriptionmeal"></textarea>
@@ -152,7 +148,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal">{{ __('meal.close_button') }}</button>
+                    <button type="button" data-dismiss="modal"
+                        id="closeMealAddForm">{{ __('meal.close_button') }}</button>
                     <button type="submit" class="submit-btn">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
@@ -188,8 +185,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.close_button') }}</button>
-                    <button type="button" class="submit-btn" id="mealUpdate">{{ __('meal.save_changes_button') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="closeEditModal">{{ __('meal.close_button') }}</button>
+                    <button type="button" class="submit-btn"
+                        id="mealUpdate">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
             </div>
@@ -214,8 +213,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.cancel_button') }}</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">{{ __('meal.delete_button') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal" id="deleteModalBtn">{{ __('meal.cancel_button') }}</button>
+                    <button type="button" class="submit-btn" id="confirmDelete">{{ __('meal.delete_button') }}</button>
                 </div>
             </div>
         </div>
@@ -232,13 +232,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <img src="assets/images/circle-check.png" alt="">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
                         <h2>{{ __('meal.title') }}</h2>
                         <p>{{ __('meal.message') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('meal.close_button') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('meal.close_button') }}</button>
                 </div>
             </div>
         </div>
@@ -247,7 +248,72 @@
 
 @section('scripts')
     <script>
+        $('#mealForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('panel.event.meals.store') }}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    $("#closeMealAddForm").click();
+                    showMeals();
+                    toastr.success(response.message);
+                },
+                error: function(xhr) {
+                    toastr.error('Failed to upload the reception image. Please try again.');
+                }
+            });
+        });
+
+
+        function showMeals() {
+            $.ajax({
+                url: "{{ route('panel.event.meals.show') }}",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    $("#mealsBox").empty();
+                    response.meals.forEach(element => {
+                        $("#mealsBox").append(`
+                        <div class="meal-box">
+                            <div class="three-align-things">
+                                <div class="tw0-boxex-align-in">
+                                    <h6>${ element.name ?? '' }</h6>
+                                    <!-- Edit button (use data-id to store the meal id) -->
+                                    <button type="button" class="editMeal" data-toggle="modal" data-target="#editMeal"
+                                        data-id="${ element.id_meal }">
+                                        <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
+                                    </button>
+                                    <button class="deleteMeal" data-id="${ element.id_meal }" type="button">
+                                        <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
+                                    </button>
+                                </div>
+                                <p>${ element.description ?? '' }</p>
+                                <input type="hidden" id="event_id" value="${ element.id_meal }"
+                                    data-id="${ element.id_meal }">
+                            </div>
+                        </div>
+                    `);
+                    });
+                },
+                error: function(xhr) {
+                    alert('An error occurred while updating the meal');
+                }
+            });
+        }
         $(document).ready(function() {
+            var MealModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+            MealModal.show();
+            showMeals();
+
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -280,23 +346,16 @@
                 e.preventDefault();
                 var mealId = $('#event_id').val(); // Get the meal ID from the hidden input
                 var formData = $("#editMealForm").serialize(); // Serialize the form data
-
-                console.log(formData);
                 $.ajax({
                     url: "{{ route('panel.event.meals.update', '') }}/" + mealId,
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        // Close the modal
-                        var myModal = new bootstrap.Modal(document.getElementById(
-                            'editMeal'));
-                        myModal.show();
                         toastr.success('Meal update successfully!');
-                        location.reload(); // Refresh the page or update the DOM
-
+                        showMeals();
+                        $("#closeEditModal").click();
                     },
                     error: function(xhr) {
-                        // Handle error
                         alert('An error occurred while updating the meal');
                     }
                 });
@@ -321,7 +380,7 @@
             if (mealIdToDelete) {
                 var deleteUrl = "{{ route('panel.event.meals.destroy', ':id') }}"; // Use meal ID in the route
                 deleteUrl = deleteUrl.replace(':id',
-                mealIdToDelete); // Replace the placeholder with the actual meal ID
+                    mealIdToDelete); // Replace the placeholder with the actual meal ID
 
                 $.ajax({
                     url: deleteUrl, // URL to delete the meal
@@ -331,14 +390,11 @@
                     },
                     success: function(response) {
                         // Hide the confirmation modal after successful deletion
-                        var myModal = new bootstrap.Modal(document.getElementById(
-                            'deleteModal'));
+                        var myModal = new bootstrap.Modal(document.getElementById('deleteModal'));
                         myModal.hide(); // Hide the modal
                         toastr.success('Meal deleted successfully!');
-
-                        setTimeout(function() {
-                            location.reload(); // Reload the page after 2 seconds
-                        }, 2000); // Adjust the delay as needed
+                        showMeals();
+                        $("#deleteModalBtn").click();
                     },
                     error: function(xhr) {
                         toastr.error('Something went wrong, please try again later.');
@@ -356,5 +412,4 @@
         };
     </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 @endsection

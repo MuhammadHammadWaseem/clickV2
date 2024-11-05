@@ -93,8 +93,8 @@ Route::group(['as' => 'panel.'], function () {
 
             // Meals Route
             Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
+            Route::post('show/meals', [MealController::class, 'showMeals'])->name('meals.show');
             Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
-            // Edit meal route (fetch meal data)
             Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
             Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
             Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
