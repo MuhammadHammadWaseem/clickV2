@@ -21,7 +21,7 @@
         position: absolute !important;
         left: 0 !important;
         right: 0 !important;
-        content: "" ;
+        content: "";
         top: 0 !important;
     }
 
@@ -85,26 +85,26 @@
                     </div>
                     <div class="main-event-gallery-box">
                         @forelse ($photogallery as $photo)
-                        @if (file_exists('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg'))
-                            <div class="box" id="photo-box-{{ $photo->id_photogallery }}">
-                                <a href="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
-                                    data-fancybox="images" tabindex="0">
-                                    <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
-                                        alt="">
-                                </a>
-                                <button type="button" class="delete-image-btn" data-id="{{ $photo->id_photogallery }}"
-                                    data-eventId="{{ $photo->id_event }}"><svg width="28" height="29"
-                                        viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
-                                            fill="#F1F1F1" />
-                                        <path
-                                            d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
-                                            fill="#F1F1F1" />
-                                    </svg>
-                                </button>
-                            </div>
-                        @endif
+                            @if (file_exists('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg'))
+                                <div class="box" id="photo-box-{{ $photo->id_photogallery }}">
+                                    <a href="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
+                                        data-fancybox="images" tabindex="0">
+                                        <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
+                                            alt="">
+                                    </a>
+                                    <button type="button" class="delete-image-btn" data-id="{{ $photo->id_photogallery }}"
+                                        data-eventId="{{ $photo->id_event }}"><svg width="28" height="29"
+                                            viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+                                                fill="#F1F1F1" />
+                                            <path
+                                                d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endif
                         @empty
                             <p id="NoItems">{{ __('webpage.no_items_found') }}</p>
                         @endforelse
@@ -400,8 +400,8 @@
     </div>
 
     {{-- Change Main Photo --}}
-    <div class="modal fade" id="changeMainPhoto" tabindex="-1" role="dialog" aria-labelledby="changeMainPhotoTitle"
-        aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 modal-03" id="changeMainPhoto" tabindex="-1" role="dialog"
+        aria-labelledby="changeMainPhotoTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -409,13 +409,23 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('panel.event.changeMainPhoto', ['id' => $event->id_event]) }}"
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('webpage.Change Main Photo') }}</h2>
+                    </div>
+                </div>
+                <form method="POST" id="saveMainPhoto"
+                    action="{{ route('panel.event.changeMainPhoto', ['id' => $event->id_event]) }}"
                     enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="mainimage" name="mainimage" accept="image/*" />
+                            <input type="file" id="mainimage" name="mainimage" accept="image/*" class="d-none" />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
+                            <label id="uploadButton4">
+                                <img src="{{ asset('assets/Panel/images/uploadFile.png') }}" alt="Upload Icon">
+                            </label>
+                            <div id="printMainImgName">{{ __('webpage.no_file_selected') }}</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -432,11 +442,60 @@
 
 @section('scripts')
     <script>
+        var successModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
+        successModal.show();
+
+        $('#saveMainPhoto').on('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Create a FormData object to handle the file upload and other form data
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('panel.event.changeMainPhoto', ['id' => $event->id_event]) }}", // Your Laravel route for storing images
+                type: 'POST', // HTTP method
+                data: formData, // The form data
+                contentType: false, // Do not set content-type header
+                processData: false, // Do not process the data
+                success: function(response) {
+                    $("#mainimage").val(''); // Clear the file input field after success
+                    $("#printMainImgName").text(
+                    'No File Selected'); // Clear the file input field after success
+                    toastr.success('Ceremony image uploaded successfully!');
+                    $('#closeMainIamgeModalBtn').click(); // Close the modal
+
+                    var myModal2 = new bootstrap.Modal(document.getElementById('exampleModalCenter03'));
+                    myModal2.show();
+
+                },
+                error: function(xhr) {
+                    // Handle error (e.g., display error messages)
+                    toastr.error('Failed to upload the Main image. Please try again.');
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        document.getElementById('uploadButton4').addEventListener('click', function() {
+            document.getElementById('mainimage').click();
+        });
+
+        // Display video file name when a file is selected
+        document.getElementById('mainimage').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('printMainImgName');
+
+            if (!file) {
+                previewContainer.textContent = 'No File Selected';
+            } else {
+                previewContainer.textContent = file.name; // Show the selected video file name
+            }
+        });
+
         document.getElementById('uploadButton').addEventListener('click', function() {
             document.getElementById('cerimage').click();
         });
 
-        // Display video file name when a file is selected
         document.getElementById('cerimage').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const previewContainer = document.getElementById('printCerName');
@@ -578,7 +637,8 @@
                     processData: false, // Do not process the data
                     success: function(response) {
                         $("#cerimage").val(''); // Clear the file input field after success
-                        $("#printCerName").text('No File Selected'); // Clear the file input field after success
+                        $("#printCerName").text(
+                            'No File Selected'); // Clear the file input field after success
                         toastr.success('Ceremony image uploaded successfully!');
                         $('#closeCerModalBtn').click(); // Close the modal
 

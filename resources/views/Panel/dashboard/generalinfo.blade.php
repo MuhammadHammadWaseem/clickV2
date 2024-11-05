@@ -160,6 +160,27 @@
         .step.finish {
             background-color: #A9964B;
         }
+
+
+        @media only screen and (max-width: 575px) {
+
+            #StepForm .two-box-inline {
+                display: flex;
+                column-gap: 10px;
+                justify-content: space-between;
+                float: none !important;
+            }
+
+            #StepForm .custom-button {
+                background-color: #A9967D;
+                color: white !important;
+                font-size: 13px;
+                padding: 5px 30px;
+                border-radius: 15px;
+                transition: .3s;
+                border: navajowhite;
+            }
+        }
     </style>
 
     @section('content')
@@ -198,7 +219,8 @@
                                 <div class="person-box">
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
-                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="groom_img" />
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                                name="groom_img" />
                                             <label for="imageUpload"></label>
                                         </div>
                                         <div class="avatar-preview">
@@ -228,7 +250,8 @@
 
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
-                                            <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" name="bride_img" />
+                                            <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg"
+                                                name="bride_img" />
                                             <label for="imageUpload2"></label>
                                         </div>
                                         <div class="avatar-preview">
@@ -355,6 +378,7 @@
             </div>
         </div>
 
+
         <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter06" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -367,14 +391,206 @@
                     <div class="modal-body">
                         <div class="text">
                             <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
-                            <h3>{{ __('genralInfo.Would You Like') }}</h3>
+                            <h2>{{ __('genralInfo.Would You Like') }}</h2>
+                            <p>{{ __('genralInfo.Would You Like-desc') }}</p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">{{ __('genralInfo.No, it Don\'t') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noWebsite">{{ __('genralInfo.No, it Don\'t') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn"><a class="text-light"
                                 href="{{ route('panel.event.webpage', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('webpage.Serve Meal Modal Heading') }}</h2>
+                            <p>{{ __('webpage.Serve Meal Modal Body Text') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="mealNoBtn">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter"><a class="text-light"
+                                href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">{{ __('webpage.Serve Meal Modal Yes Button') }}</a></button>
+                        <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter022" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
+                            <p>{{ __('genralInfo.Design your invite') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noInvitation">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.invitation', ['id' => $event->id_event]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter023" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Add A Guest List For Your Event?') }}</h2>
+                            <p>{{ __('genralInfo.Add your guest list and send invitations') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noGuestList">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Manage A Table Sitting') }}</h2>
+                            <p>{{ __('genralInfo.Arrange your seating here') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noTable">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.guests.index', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                            <p>{{ __('genralInfo.Share the memories') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noPhotos">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                            <p>{{ __('genralInfo.Stay connected') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noR&A">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.reminder', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter04" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Add A Gift Suggestions For Your Event?') }}</h2>
+                            <p>{{ __('genralInfo.Gift Suggestions Desc') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noGift">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter"><a class="text-light"
+                                href="{{ route('panel.event.gift', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                        <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
                     </div>
                 </div>
             </div>
@@ -393,15 +609,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="text">
-                            <h5 class="modal-title text-center">{{ __('genralInfo.steps_title') }}</h5>
-                            <p>{{ __('genralInfo.steps_description') }}</p>
+                            <h5 class="modal-title text-center">{{ __('genralInfo.general-infos') }}</h5>
+                            <p>{{ __('genralInfo.general-infos-desc') }}</p>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('genralInfo.no_dont_button') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ __('genralInfo.no_dont_button') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" id="educate"
-                            data-toggle="modal" data-target="#StepForm" data-dismiss="modal">{{ __('genralInfo.educate_button') }}</button>
+                            data-toggle="modal" data-target="#StepForm"
+                            data-dismiss="modal">{{ __('genralInfo.educate_button') }}</button>
                     </div>
                     </form>
                 </div>
@@ -424,8 +642,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="text">
-                            <h5 class="modal-title text-center">{{ __('genralInfo.steps_title') }}</h5>
-                            <p>{{ __('genralInfo.steps_description') }}</p>
+                            <h5 class="modal-title text-center">{{ __('genralInfo.general-infos') }}</h5>
+                            <p>{{ __('genralInfo.general-infos-desc') }}</p>
                             <form id="registrationForm" enctype="multipart/form-data">
                                 @csrf
                                 <!-- Step 1-->
@@ -438,139 +656,195 @@
                                         placeholder="{{ __('genralInfo.Event Date') }}" value="{{ $event->date }}">
                                 </div>
                                 @if ($event->eventType->couple_event == '1')
-                                <!-- Step 2 -->
-                                <div class="tab">
-                                    <h2>{{ __('genralInfo.Groom Details') }}</h2>
-                                    @if ($event->eventType->couple_event == '1')
-                                        <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg"
-                                            name="groom_img" />
-
-                                        <!-- Groom Image Display with Conditional Source -->
-                                        <img src="{{ file_exists($event->imggroom) ? asset($event->imggroom) : asset('assets/Panel/images/groom-img.png') }}"
-                                            alt="Groom Image" class="groom-image" height="100px" width="100px">
-
-                                        <!-- Groom Information -->
-                                        <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
-                                            name="groomfname" value="{{ $event->groomfname }}">
-                                        <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
-                                            name="groomlname" value="{{ $event->groomlname }}">
-                                        <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="groomsummary">{{ $event->groomsummary }}</textarea>
-
-                                </div>
-                                <!-- Step 3 -->
-                                <div class="tab">
-                                    <h2>{{ __('genralInfo.Bride Details') }}</h2>
-                                    <!-- Bride Image Upload -->
-                                    <input type="file" id="imageUpload2" accept=".png, .jpg, .jpeg"
-                                        name="bride_img" />
-                                    <!-- bride Image Display with Conditional Source -->
-                                    <img src="{{ file_exists($event->imgbride) ? asset($event->imgbride) : asset('assets/Panel/images/bride-img.png') }}"
-                                        alt="Groom Image" class="groom-image" height="100px" width="100px">
-                                    <!-- Bride Information -->
-                                    <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
-                                        name="bridefname" value="{{ $event->bridefname }}">
-                                    <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
-                                        name="bridelname" value="{{ $event->bridelname }}">
-                                    <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
-                                    @endif
-                                </div>
-                                @endif
-                                <!-- Step 4 -->
-                                <div class="tab">
-                                    <h2>
+                                    <!-- Step 2 -->
+                                    <div class="tab">
+                                        <h2>{{ __('genralInfo.Groom Details') }}</h2>
                                         @if ($event->eventType->couple_event == '1')
-                                            {{ __('genralInfo.Relationship Story') }}
-                                        @elseif ($event->eventType->couple_event == '0')
-                                            {{ __('genralInfo.EVENT SUMMARY') }}
-                                        @endif
-                                    </h2>
-                                    <textarea placeholder="{{ __('genralInfo.Type Here') }}" name="story">{{ $event->summary }}</textarea>
-                                </div>
-                                <!-- Step 5 -->
-                                <div class="tab">
-                                    <h2>{{ __('genralInfo.Ceremony') }}</h2>
-                                    <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
-                                        name="ceraddress" value="{{ $event->ceraddress }}">
-                                    <input type="time" placeholder="Event Time" name="certime"
-                                        value="{{ $event->certime }}">
-                                    <input type="hidden" id="cerAddressLink">
-                                    {{-- <div id="mapView" style="width: 100%; height: 400px;"></div> --}}
-                                    <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
-                                </div>
-                                <!-- Step 6 -->
-                                <div class="tab">
-                                    <h2>{{ __('genralInfo.Recption') }}</h2>
-                                    <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
-                                        name="recaddress" value="{{ $event->recaddress }}">
-                                    <input type="hidden" id="recAddressLink">
-                                    <input type="time" placeholder="Event Time" name="rectime"
-                                        value="{{ $event->rectime }}">
-                                    {{-- <div id="RecmapView" style="width: 100%; height: 400px;"></div> --}}
-                                    <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
+                                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg"
+                                                name="groom_img" />
 
-                                </div>
-                                <!-- Step 7 -->
-                                <div class="tab">
-                                    <h2>{{ __('genralInfo.Custom Event') }}</h2>
+                                            <!-- Groom Image Display with Conditional Source -->
+                                            <img src="{{ file_exists($event->imggroom) ? asset($event->imggroom) : asset('assets/Panel/images/groom-img.png') }}"
+                                                alt="Groom Image" class="groom-image" height="100px" width="100px">
 
-                                    <input type="text" placeholder="{{ __('genralInfo.Event Name') }}"
-                                        name="parname" value="{{ $event->parname }}">
-                                    <input type="hidden" id="parAddressLink">
-                                    <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress"
-                                        name="paraddress" value="{{ $event->paraddress }}">
-                                    <input type="time" placeholder="Event Time" name="partime"
-                                        value="{{ $event->partime }}">
-                                    {{-- <div id="ParmapView" style="width: 100%; height: 400px;"></div> --}}
-                                    <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
+                                            <!-- Groom Information -->
+                                            <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
+                                                name="groomfname" value="{{ $event->groomfname }}">
+                                            <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
+                                                name="groomlname" value="{{ $event->groomlname }}">
+                                            <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="groomsummary">{{ $event->groomsummary }}</textarea>
 
-                                </div>
-                                <div style="overflow:auto;">
-                                    <div style="float:right;">
-                                        <button type="button" class="custom-button custom-prev" id="prevButton"
-                                            onclick="nextPrev(-1)">{{ __('genralInfo.previous_button') }}</button>
-                                        <button type="button" class="custom-button" id="nextButton"
-                                            onclick="nextPrev(1)">{{ __('genralInfo.next_button') }}</button>
                                     </div>
-                                </div>
-                                @if ($event->eventType->couple_event == "0")
-                                <div style="text-align:center;margin-top:40px;">
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                </div>
-                                @else
-                                <div style="text-align:center;margin-top:40px;">
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                    <span class="step"></span>
-                                </div>
+                                    <!-- Step 3 -->
+                                    <div class="tab">
+                                        <h2>{{ __('genralInfo.Bride Details') }}</h2>
+                                        <!-- Bride Image Upload -->
+                                        <input type="file" id="imageUpload2" accept=".png, .jpg, .jpeg"
+                                            name="bride_img" />
+                                        <!-- bride Image Display with Conditional Source -->
+                                        <img src="{{ file_exists($event->imgbride) ? asset($event->imgbride) : asset('assets/Panel/images/bride-img.png') }}"
+                                            alt="Groom Image" class="groom-image" height="100px" width="100px">
+                                        <!-- Bride Information -->
+                                        <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
+                                            name="bridefname" value="{{ $event->bridefname }}">
+                                        <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
+                                            name="bridelname" value="{{ $event->bridelname }}">
+                                        <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
                                 @endif
-                            </form>
                         </div>
+                        @endif
+                        <!-- Step 4 -->
+                        <div class="tab">
+                            <h2>
+                                @if ($event->eventType->couple_event == '1')
+                                    {{ __('genralInfo.Relationship Story') }}
+                                @elseif ($event->eventType->couple_event == '0')
+                                    {{ __('genralInfo.EVENT SUMMARY') }}
+                                @endif
+                            </h2>
+                            <textarea placeholder="{{ __('genralInfo.Type Here') }}" name="story">{{ $event->summary }}</textarea>
+                        </div>
+                        <!-- Step 5 -->
+                        <div class="tab">
+                            <h2>{{ __('genralInfo.Ceremony') }}</h2>
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
+                                name="ceraddress" value="{{ $event->ceraddress }}">
+                            <input type="time" placeholder="Event Time" name="certime"
+                                value="{{ $event->certime }}">
+                            <input type="hidden" id="cerAddressLink">
+                            {{-- <div id="mapView" style="width: 100%; height: 400px;"></div> --}}
+                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
+                        </div>
+                        <!-- Step 6 -->
+                        <div class="tab">
+                            <h2>{{ __('genralInfo.Recption') }}</h2>
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
+                                name="recaddress" value="{{ $event->recaddress }}">
+                            <input type="hidden" id="recAddressLink">
+                            <input type="time" placeholder="Event Time" name="rectime"
+                                value="{{ $event->rectime }}">
+                            {{-- <div id="RecmapView" style="width: 100%; height: 400px;"></div> --}}
+                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
 
+                        </div>
+                        <!-- Step 7 -->
+                        <div class="tab">
+                            <h2>{{ __('genralInfo.Custom Event') }}</h2>
+
+                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
+                                value="{{ $event->parname }}">
+                            <input type="hidden" id="parAddressLink">
+                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress"
+                                name="paraddress" value="{{ $event->paraddress }}">
+                            <input type="time" placeholder="Event Time" name="partime"
+                                value="{{ $event->partime }}">
+                            {{-- <div id="ParmapView" style="width: 100%; height: 400px;"></div> --}}
+                            <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
+
+                        </div>
+                        <div style="overflow:auto;">
+                            <div class="two-box-inline" style="float:right;">
+                                <button type="button" class="custom-button custom-prev" id="prevButton"
+                                    onclick="nextPrev(-1)">{{ __('genralInfo.previous_button') }}</button>
+                                <button type="button" class="custom-button" id="nextButton"
+                                    onclick="nextPrev(1)">{{ __('genralInfo.next_button') }}</button>
+                            </div>
+                        </div>
+                        @if ($event->eventType->couple_event == '0')
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                            </div>
+                        @else
+                            <div style="text-align:center;margin-top:40px;">
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                                <span class="step"></span>
+                            </div>
+                        @endif
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary d-none" data-dismiss="modal" id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
-                        {{-- <button type="button" class="submit-btn btn btn-primary t-btn" id="updateStepForm" onclick="submitStep()">Update</button> --}}
-                    </div>
-                    </form>
+
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
+                        id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
+                    {{-- <button type="button" class="submit-btn btn btn-primary t-btn" id="updateStepForm" onclick="submitStep()">Update</button> --}}
+                </div>
+                </form>
             </div>
+        </div>
         </div>
     @endsection
 
     @section('scripts')
         <script>
+            $("#noWebsite").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+                successModal.show();
+            });
+            $("#mealNoBtn").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter04'));
+                successModal.show();
+            });
+            $("#noGift").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter022'));
+                successModal.show();
+            });
+            $("#noInvitation").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter023'));
+                successModal.show();
+            });
+            $("#noGuestList").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+                successModal.show();
+            });
+            $("#noTable").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+                successModal.show();
+            });
+            $("#noPhotos").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+                successModal.show();
+            });
+
             $(document).ready(function() {
+                // Define the required fields and check if any are missing
+                var showModal =
+                    {{ json_encode(
+                        empty($event->name) ||
+                            empty($event->date) ||
+                            empty($event->groomfname) ||
+                            empty($event->groomlname) ||
+                            empty($event->groomsummary) ||
+                            empty($event->imggroom) ||
+                            empty($event->bridefname) ||
+                            empty($event->bridelname) ||
+                            empty($event->bridesummary) ||
+                            empty($event->imgbride) ||
+                            empty($event->summary) ||
+                            empty($event->certime) ||
+                            empty($event->ceraddress) ||
+                            empty($event->rectime) ||
+                            empty($event->recaddress),
+                        empty($event->parname),
+                        empty($event->paraddress),
+                    )
+                        ? 'true'
+                        : 'false' }};
                 initMap();
-                var myModal = new bootstrap.Modal(document.getElementById('popup'));
-                myModal.show();
+
+                if (showModal) {
+                    var myModal = new bootstrap.Modal(document.getElementById('popup'));
+                    myModal.show();
+                }
             });
 
             (g => {
@@ -893,9 +1167,31 @@
                         // Close the modal
                         $('#registrationFormClose').click();
 
+                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+                        successModal.show();
+
                     },
                     error: function(xhr) {
-                        alert('Something went wrong: ' + xhr.responseText);
+                        console.log(xhr);
+
+                        // Parse the JSON response
+                        let response = JSON.parse(xhr.responseText);
+
+                        // Check if there are errors in the response
+                        if (response.errors) {
+                            // Loop through each error field and message
+                            for (let key in response.errors) {
+                                if (response.errors.hasOwnProperty(key)) {
+                                    // Display each error message in a toaster
+                                    response.errors[key].forEach(errorMessage => {
+                                        toastr.error(errorMessage);
+                                    });
+                                }
+                            }
+                        } else {
+                            // If there’s no errors object, show a general error message
+                            toastr.error('Something went wrong');
+                        }
                     }
                 });
             }

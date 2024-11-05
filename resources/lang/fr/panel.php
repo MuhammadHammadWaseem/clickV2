@@ -42,6 +42,7 @@ return [
     'Go to Dashboard' => 'Aller au Tableau de Bord',
     'creatnewSU' => 'Événement Créé Avec Succès',
     'creatnewM' => 'Votre événement a été mis à jour avec succès.',
-    'Go To Events' => 'Aller aux événements'
+    'Go To Events' => 'Aller aux événements',
+    'Edit Event' => 'Modifier l\'événement',
 
 ];

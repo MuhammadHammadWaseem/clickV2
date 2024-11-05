@@ -149,7 +149,7 @@
 
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -158,12 +158,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="text">
-                        <h2>{{ __('panel.do first') }}</h2>
+                        <h2 class="text-center">{{ __('panel.do first') }}</h2>
                         <br>
                     </div>
                     <div class="modal-listing-box">
-                        <ul>
-                            {{-- <li>
+                        {{-- <ul>
+                            <li>
                                 <a href="#" onclick="hidemodel();">
                                     {{ __('panel.Make Cards') }} <img src="assets/images/modal-list-right-arow.png"
                                         alt="">
@@ -174,17 +174,23 @@
                             <li><a href="#" onclick="hidemodel();">{{ __('panel.Make New Events') }} <img
                                         src="assets/images/modal-list-right-arow.png" alt=""></a></li>
                             <li><a href="#" onclick="hidemodel();">{{ __('panel.Manage Guest List') }} <img
-                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li> --}}
-                            <li><a href="" onclick="hidemodel();">{{ __('panel.Go To Events') }} <img src="assets/images/modal-list-right-arow.png" alt=""></a></li>
-                        </ul>
+                                        src="assets/images/modal-list-right-arow.png" alt=""></a></li>
+                            <li><a href="#" onclick="hidemodel();">{{ __('panel.Edit Event') }} <img src="assets/images/modal-list-right-arow.png" alt=""></a></li>
+                        </ul> --}}
+                        <div class="modal-footer d-flex justify-content-center align-items-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                id="closeMainModal">{{ __('panel.Edit Event') }}</button>
+                            <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                                data-target="#exampleModalCenter" data-dismiss="modal">{{ __('panel.creatnew') }}</button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="closeMainModal">{{ __('panel.Go to Dashboard') }}</button>
+                        id="closeMainModal">{{ __('panel.panel.Edit Event') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter" data-dismiss="modal">{{ __('panel.creatnew') }}</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -53,15 +53,15 @@
             <h1 class="text-center mb-5">{{ __('photos.images_title') }}</h1>
             <div class="row">
                 @foreach ($photogallery->reverse() as $photo)
-                @if (file_exists(public_path('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg')))
-                    <div class="col-md-2 mb-4">
-                        <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                            data-lightbox="gallery" data-title="Image {{ $loop->index + 1 }}" class="gallery-image">
-                            <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                class="img-fluid" alt="Gallery Image">
-                        </a>
-                    </div>
-                @endif
+                    @if (file_exists(public_path('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg')))
+                        <div class="col-md-2 mb-4">
+                            <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                data-lightbox="gallery" data-title="Image {{ $loop->index + 1 }}" class="gallery-image">
+                                <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
+                                    class="img-fluid" alt="Gallery Image">
+                            </a>
+                        </div>
+                    @endif
                 @endforeach
                 <hr>
             </div>
@@ -71,13 +71,15 @@
             <h1 class="text-center mt-3 mb-5">{{ __('photos.videos_title') }}</h1>
             <div class="row">
                 @foreach ($videogallery as $video)
-                    <div class="col-md-4 mb-4">
-                        <video width="300" height="200" controls>
-                            <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
-                                type="video/mp4">
-                            {{ __('photos.videos_support') }}
-                        </video>
-                    </div>
+                    @if (file_exists(public_path('/event-images/' . $video->id_event . '/videos/' . $video->video)))
+                        <div class="col-md-4 mb-4">
+                            <video width="300" height="200" controls>
+                                <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
+                                    type="video/mp4">
+                                {{ __('photos.videos_support') }}
+                            </video>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         @endif

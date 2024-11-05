@@ -26,7 +26,7 @@ return [
     'Yes' => 'Oui',
     'Serve Meal Button Text' => 'Voulez-vous servir un repas à vos invités ?',
     'Serve Meal Modal Heading' => 'Voulez-vous servir un repas à vos invités ?',
-    'Serve Meal Modal Body Text' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'Serve Meal Modal Body Text' => 'Créez vos options de menu ici. Ajoutez des choix de repas pour garantir à chaque invité une expérience culinaire personnalisée.',
     'Serve Meal Modal No Button' => 'Non, je ne veux pas',
     'Serve Meal Modal Yes Button' => 'Oui, ajouter des repas',
     'Image Delete Success Heading' => 'Image Supprimée avec Succès',

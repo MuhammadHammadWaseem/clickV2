@@ -30,7 +30,7 @@ return[
     'Yes' => 'Yes',
     'Serve Meal Button Text' => 'Want To Serve Your Guests a Meal?',
     'Serve Meal Modal Heading' => 'Want To Serve Your Guests a Meal?',
-    'Serve Meal Modal Body Text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'Serve Meal Modal Body Text' => 'Create your menu options here. Add meal choices to ensure each guest has a personalized dining experience.',
     'Serve Meal Modal No Button' => 'No, I Don\'t',
     'Serve Meal Modal Yes Button' => 'Yes, Add Meals',
     'Image Delete Success Heading' => 'Image Deleted Successfully',

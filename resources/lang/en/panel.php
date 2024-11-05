@@ -43,6 +43,7 @@ return[
 'creatnewSU' => 'Event Created Successfully',
 'creatnewM' => 'Your event has been successfully updated.',
 'Go To Events' => 'Go To Events',
+'Edit Event' => 'Edit Event',
 
 
 
