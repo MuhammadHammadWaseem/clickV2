@@ -36,7 +36,7 @@ return[
     'steps_title' => 'Steps',
     'steps_description' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.',
     'no_dont_button' => 'No, I Don’t',
-    'educate_button' => 'Educate me',
+    'educate_button' => 'let\'s start',
     'previous_button' => 'Previous',
     'next_button' => 'Next',
     'general-infos' => 'General Infos',

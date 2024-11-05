@@ -37,4 +37,7 @@ return[
     'Image Delete Success Message' => 'The image has been successfully deleted.',
     'no_items_found' => 'No items found.',
     'no_file_selected' => 'No File Selected',
+    'Upload A Photo Of Your Ceremony.' => 'Upload A Photo Of Your Ceremony.',
+    'Upload A Photo Of Your Reception' => 'Upload A Photo Of Your Reception.',
+    'Upload A Photo Of Your Custom Event' => 'Upload A Photo Of Your Custom Event.',
 ];

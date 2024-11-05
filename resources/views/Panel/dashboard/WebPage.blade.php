@@ -172,6 +172,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('webpage.Upload A Photo Of Your Ceremony.') }}</h2>
+                    </div>
+                </div>
                 <form id="uploadCerImageForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="text">
@@ -264,7 +269,6 @@
                     <div class="text">
                         <img src="{{ asset('assets/Panel/images/bx-question-circle.svg.png') }}" alt="">
                         <h2>{{ __('webpage.Delete Image') }}</h2>
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -334,7 +338,7 @@
     </div>
 
     <!-- Reception Modal -->
-    <div class="modal fade" id="addRecImage" tabindex="-1" role="dialog" aria-labelledby="addRecImageTitle"
+    <div class="modal fade modal-01 modal-02 modal-03" id="addRecImage" tabindex="-1" role="dialog" aria-labelledby="addRecImageTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -342,6 +346,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('webpage.Upload A Photo Of Your Reception') }}</h2>
+                    </div>
                 </div>
                 <form id="uploadRecImageForm" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -367,7 +376,7 @@
     </div>
 
     <!-- Custom (Party) Modal -->
-    <div class="modal fade" id="addParImage" tabindex="-1" role="dialog" aria-labelledby="addParImageTitle"
+    <div class="modal fade modal-01 modal-02 modal-03" id="addParImage" tabindex="-1" role="dialog" aria-labelledby="addParImageTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -375,6 +384,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('webpage.Upload A Photo Of Your Custom Event') }}</h2>
+                    </div>
                 </div>
                 <form id="uploadParImageForm" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -414,9 +428,7 @@
                         <h2>{{ __('webpage.Change Main Photo') }}</h2>
                     </div>
                 </div>
-                <form method="POST" id="saveMainPhoto"
-                    action="{{ route('panel.event.changeMainPhoto', ['id' => $event->id_event]) }}"
-                    enctype="multipart/form-data">
+                <form method="POST" id="saveMainPhoto" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="text">
                             @csrf
@@ -461,11 +473,14 @@
                     $("#mainimage").val(''); // Clear the file input field after success
                     $("#printMainImgName").text(
                     'No File Selected'); // Clear the file input field after success
-                    toastr.success('Ceremony image uploaded successfully!');
+                    toastr.success('Main image uploaded successfully!');
                     $('#closeMainIamgeModalBtn').click(); // Close the modal
 
-                    var myModal2 = new bootstrap.Modal(document.getElementById('exampleModalCenter03'));
+                    var myModal2 = new bootstrap.Modal(document.getElementById('addCerImage'));
                     myModal2.show();
+
+                    const iframe = document.querySelector('iframe');
+                    iframe.src = iframe.src;
 
                 },
                 error: function(xhr) {
@@ -642,8 +657,7 @@
                         toastr.success('Ceremony image uploaded successfully!');
                         $('#closeCerModalBtn').click(); // Close the modal
 
-                        var myModal2 = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter03'));
+                        var myModal2 = new bootstrap.Modal(document.getElementById('addRecImage'));
                         myModal2.show();
 
                         if ($('.ceremony-new-box img').length > 0) {
@@ -684,8 +698,7 @@
                         toastr.success('Reception image uploaded successfully!');
                         $('#closeRecModalBtn').click();
 
-                        var myModal2 = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter03'));
+                        var myModal2 = new bootstrap.Modal(document.getElementById('addParImage'));
                         myModal2.show();
 
                         // Update the reception image dynamically

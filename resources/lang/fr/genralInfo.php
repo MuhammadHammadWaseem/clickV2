@@ -33,7 +33,7 @@ return [
     'steps_title' => 'Étapes',
     'steps_description' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.',
     'no_dont_button' => 'Non, je ne veux pas',
-    'educate_button' => 'Éduquez-moi',
+    'educate_button' => 'commençons',
     'previous_button' => 'Précédent',
     'next_button' => 'Suivant',
     'general-infos' => 'Informations générales',
