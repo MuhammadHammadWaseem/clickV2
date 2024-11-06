@@ -74,6 +74,89 @@
         object-fit: cover;
         height: 250px;
     }
+
+    .col-lg-4.col-md-6.col-sm-6 {
+    margin-top: 20px;
+}
+
+    @media only screen and (max-width: 991px){
+        .two-btn-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+.col-lg-4.col-md-6.col-sm-6 {
+    margin-top: 0px;
+}
+
+.two-btn-inline .t-btn {
+    font-size: 14px;
+}
+    }
+
+    @media only screen and (max-width: 767px){
+        form.custom-style {
+    flex-direction: column !important;
+    align-items: stretch !important;
+}
+
+form#settingForm .custom-box select {
+    width: 100%;
+}
+
+.box-styling .text p {
+        font-size: 13px;
+        text-align: center;
+    }
+
+
+.box-styling.event-photos-gallery .two-things-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+#content .box-styling {
+    height: max-content !important;
+    }
+
+    .col-sm-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    p#NoItems {
+    width: 100%;
+    text-align: center;
+}
+.box-styling.ceremony-box.web-page-three-boxes .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    row-gap: 20px;
+}
+
+.box-styling.event-photos-gallery .two-things-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch !important;
+}
+
+.box-styling.event-photos-gallery .main-event-gallery-box {
+    margin: 20px 0 0px;
+}
+
+.extra_side_page .box-styling {
+    padding: 0 !important;
+}
+
+    }
+
 </style>
 
 @section('content')
@@ -101,7 +184,7 @@
                         {{-- <img src="{{ asset('assets/Panel/images/website-preview-iframe.png') }}" alt=""> --}}
                         <iframe src="{{ route('website', ['id' => $event->id_event]) }}" frameborder="0"></iframe>
                     </div>
-                    <div class="two-btn-align">
+                    <div class="two-btn-inline">
                         <button class="t-btn t-btn-gray"><a
                                 href="{{ route('panel.event.generalInfos', ['id' => $event->id_event]) }}"
                                 style="color:#ffffff;">{{ __('webpage.Website Information') }}</a></button>
@@ -416,8 +499,8 @@
     </div>
 
 
-    <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02">
-        {{ __('webpage.Serve Meal Button Text') }} </button>
+    {{-- <button type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter02">
+        {{ __('webpage.Serve Meal Button Text') }} </button> --}}
     <!-- Modal -->
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter02" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

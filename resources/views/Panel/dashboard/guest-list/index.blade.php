@@ -68,7 +68,7 @@
     }
 
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .box {
-        width: 25%;
+        width: 100%;
     }
 
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align {
@@ -223,6 +223,16 @@
             flex-direction: column;
             align-items: stretch;
         }
+
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list .two-btn-align {
+        row-gap: 10px;
+        column-gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row ;
+        flex-wrap: nowrap;
+    }
     }
 
     @media only screen and (max-width: 1199px) {
@@ -243,6 +253,19 @@
         .t-btn {
             font-size: 13px !important;
         }
+
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes {
+    overflow: scroll;
+    overflow-y: hidden;
+}
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes::-webkit-scrollbar{
+    height: 5px;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes, .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes div#tableAppend {
+    width: 900px !important;
+}
+
     }
 
     @media only screen and (max-width: 1024px) {}
@@ -254,11 +277,6 @@
             align-items: stretch;
             justify-content: center;
             column-gap: 20px;
-        }
-
-        #tableAppend .bottom-box {
-            overflow: scroll;
-            overflow-y: hidden;
         }
 
         #tableAppend .bottom-box::-webkit-scrollbar {
@@ -308,6 +326,20 @@
             max-width: 80%;
         }
 
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes, .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes div#tableAppend {
+        width: 550px !important;
+    }
+
+    .box-styling.event-photos-gallery.events-lists-sec-01.guest-list .two-btn-align {
+        flex-wrap: wrap;
+        row-gap: 10px;
+        column-gap: 10px;
+        display: flex;
+        align-items: stretch !important;
+        flex-direction: column;
+        justify-content: center;
+    }
+
 
     }
 
@@ -315,7 +347,7 @@
 
         .box-styling.event-photos-gallery .two-things-align {
             flex-direction: column;
-            row-gap: 60px !important;
+            row-gap: 10px !important;
         }
 
         .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .td-boxes-down-align .top-box {
@@ -347,6 +379,10 @@
         .management-plan .management-plan-box .box h6 {
             text-align: center;
         }
+
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes .th-boxes, .box-styling.event-photos-gallery.events-lists-sec-01.guest-list.details .table-align-boxes div#tableAppend {
+        width: 100% !important;
+    }
 
 
     }
@@ -382,7 +418,7 @@
                             <label id="uploadtablePhoto">
                                 <img id="tableImgPlan" src="{{ asset($event->imgplan) }}" width="600px" height="300px" alt="">
                             </label>
-                            <p id="tablePhotoText" class="d-none" style="font-size: 11px !important; text-align:center !important;">                            
+                            <p id="tablePhotoText" class="d-none" style="font-size: 11px !important; text-align:center !important;">
                         @else
                             <div class="box upload_boxex">
                                 <input type="file" id="tablePhoto" name="tablePhoto" class="d-none" />

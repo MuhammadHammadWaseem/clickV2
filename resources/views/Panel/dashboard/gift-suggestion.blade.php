@@ -51,6 +51,65 @@
         content: "";
         top: 0;
     }
+
+    @media only screen and (max-width: 1024px) {
+    .box-styling.event-photos-gallery.meal-details .meal-name-boxes .meal-box {
+        width: 45% !important;
+    }
+}
+
+
+    @media only screen and (max-width: 767px){
+        .box-styling.event-photos-gallery.meal-details .meal-name-boxes .meal-box {
+        width: 100% !important;
+    }
+
+    .payment-transfer-box .three-things-align {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    column-gap: 30px;
+    row-gap: 20px;
+}
+
+.box-styling .text p {
+        text-align: center;
+    }
+
+.payment-transfer-box .three-things-align .payment-select-option select {
+    width: 100%;
+    padding: 10px 10px;
+    background: #ededed;
+    border-radius: 20px;
+    border: 2px solid #999999;
+}
+
+.box-styling.event-photos-gallery .two-things-align {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+    }
+
+
+    @media only screen and (max-width: 575px){
+    .box-styling.event-photos-gallery .two-things-align {
+    display: flex;
+    align-items: stretch !important;
+}
+
+.t-btn {
+    background-color: #A9967D !important;
+    color: white !important;
+    font-size: 14px;
+    padding: 8px 40px;
+    border-radius: 15px;
+    transition: .3s;
+    border: navajowhite;
+}
+
+    }
 </style>
 @section('content')
     @php
