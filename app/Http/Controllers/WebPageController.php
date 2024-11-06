@@ -7,6 +7,8 @@ use App\Models\Event;
 use App\Models\PhotoGallery;
 use App\Models\VideoGallery;
 use Illuminate\Support\Facades\Auth;
+use App\Models\WebsiteSetting;
+use App\Models\EventType;
 
 class WebPageController extends Controller
 {
@@ -18,8 +20,10 @@ class WebPageController extends Controller
 
         $photogallery = PhotoGallery::where('id_event', $event->id_event)->get();
         $videogallery = VideoGallery::where('id_event', $event->id_event)->get();
+        $WebsiteSetting = WebsiteSetting::where('id_event', $id)->first();
+        $eventType = EventType::where('id_eventtype', $event->type_id)->first();
 
-        return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery'));
+        return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery','WebsiteSetting','eventType'));
     }
 
     public function storeImages(Request $request)

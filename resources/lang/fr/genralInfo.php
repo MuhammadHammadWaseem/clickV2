@@ -49,5 +49,6 @@ return [
     'Would You Like To Add A Photos & Videos Of Your Event?' => 'Souhaitez-vous ajouter des photos et des vidéos de votre événement ?',
     'Reminder & Acknowledgment Page' => 'Page de rappel et de reconnaissance',
     'Stay connected' => 'Restez connecté ! Définissez des rappels et des accusés de réception pour tenir les invités informés et préparés pour votre événement.',
+    'Later' => 'Plus tard',
 
 ];

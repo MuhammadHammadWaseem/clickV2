@@ -40,4 +40,12 @@ return[
     'Upload A Photo Of Your Ceremony.' => 'Upload A Photo Of Your Ceremony.',
     'Upload A Photo Of Your Reception' => 'Upload A Photo Of Your Reception.',
     'Upload A Photo Of Your Custom Event' => 'Upload A Photo Of Your Custom Event.',
+
+    'Bride Name Color:' => 'Bride Name Color:',
+    'Groom Name Color:' => 'Groom Name Color:',
+    '"And" Symbol Color:' => '"And" Symbol Color:',
+    'Event Date Color:' => 'Event Date Color:',
+    'Font Style:' => 'Font Style:',
+    'Event Name Color:' => 'Event Name Color:',
+    'Save' => 'Save',
 ];

@@ -36,4 +36,12 @@ return [
     'Upload A Photo Of Your Ceremony.' => 'Téléchargez une photo de votre cérémonie.',
     'Upload A Photo Of Your Reception.' => 'Téléchargez une photo de votre réception.',
     'Upload A Photo Of Your Custom Event' => 'Téléchargez une photo de votre événement personnalisé.',
+    'Bride Name Color:' => 'Couleur du nom de la mariée:',
+    'Groom Name Color:' => 'Couleur du nom du marié:',
+    '"And" Symbol Color:' => 'Couleur du symbole "et":',
+    'Event Date Color:' => 'Couleur de la date de l\'événement:',
+    'Font Style:' => 'Style de police:',
+    'Event Name Color:' => 'Couleur du nom de l\'événement:',
+    'Save' => 'Enregistrer',
+
 ];

@@ -251,7 +251,7 @@
         </div>
     </header>
 
-    <section id="start" class="main"
+    {{-- <section id="start" class="main"
         style="background-image: url('{{ $event->mainimage }}?id=<?php echo mt_rand(1, 100000); ?>'); background-position: center;background-size: cover">
         <div class="names" style="margin-top: -136px !important">
             @if ($eventType)
@@ -277,13 +277,53 @@
                 @else
                     <div class="bridename">
                         <p class="firstname">{{ $event->name }}</p>
-                        {{-- <p class="secondname">{{ $eventType->title }}</p> --}}
                     </div>
                 @endif
             @endif
             <div class="date">
-                <!-- <p>{{ \Carbon\Carbon::parse($event->date)->setTimezone('+2')->format('j F, Y H:i') }}</p> -->
                 <p id='eventDate'></p>
+            </div>
+        </div>
+        <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
+    </section> --}}
+
+    <section id="start" class="main"
+        style="background-image: url('{{ $event->mainimage }}?id=<?php echo mt_rand(1, 100000); ?>'); background-position: center; background-size: cover">
+        <div class="names" style="margin-top: -136px !important">
+            @if ($eventType)
+                @if ($eventType->couple_event)
+                    <div class="bridename">
+                        <p class="firstname"
+                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">
+                            {{ $event->bridefname }}</p>
+                        <p class="secondname"
+                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">
+                            {{ $event->bridelname }}</p>
+                    </div>
+                    <div class="and">
+                        <p style="color: {{ $WebsiteSetting->and_symbol_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">&</p>
+                    </div>
+                    <div class="groomname">
+                        <p class="firstname"
+                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">
+                            {{ $event->groomfname }}</p>
+                        <p class="secondname"
+                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">
+                            {{ $event->groomlname }}</p>
+                    </div>
+                    <div class="h">
+                        <hr>
+                        <i class="far fa-heart"></i>
+                        <hr>
+                    </div>
+                @else
+                    <div class="bridename">
+                        <p class="firstname" style="color: {{ $WebsiteSetting->event_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">{{ $event->name }}</p>
+                    </div>
+                @endif
+            @endif
+            <div class="date">
+                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};"></p>
             </div>
         </div>
         <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
@@ -645,6 +685,7 @@
 
         </section>
     @endif
+    
 
     <footer class="container-fluid footer_styling">
         <div class="row">

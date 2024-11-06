@@ -52,4 +52,5 @@ return[
     'Would You Like To Add A Photos & Videos Of Your Event?' => 'Would You Like To Add A Photos & Videos Of Your Event?',
     'Reminder & Acknowledgment Page' => 'Reminder & Acknowledgment Page',
     'Stay connected' => 'Stay connected! Set reminders and acknowledgments to keep guests updated and prepared for your event.',
+    'Later' => 'Later',
 ];

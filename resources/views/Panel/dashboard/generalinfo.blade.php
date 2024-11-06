@@ -161,6 +161,29 @@
             background-color: #A9964B;
         }
 
+        #StepForm textarea {
+             overflow: auto;
+            height: 100px !important;
+        }
+
+        #StepForm textarea::-webkit-scrollbar{
+            width: 5px;
+        }
+
+        #StepForm .tab {
+    text-align: center;
+    height: 200px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+    padding-right: 5px;
+}
+
+#StepForm .tab::-webkit-scrollbar{
+    width: 5px;
+}
+
+
 
         @media only screen and (max-width: 575px) {
 
@@ -397,7 +420,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noWebsite">{{ __('genralInfo.No, it Don\'t') }}</button>
+                            id="noWebsite">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn"><a class="text-light"
                                 href="{{ route('panel.event.webpage', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
                     </div>
@@ -423,7 +446,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="mealNoBtn">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                            id="mealNoBtn">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter"><a class="text-light"
                                 href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">{{ __('webpage.Serve Meal Modal Yes Button') }}</a></button>
@@ -451,7 +474,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noInvitation">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                            id="noInvitation">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter1"><a class="text-light"
                                 href="{{ route('panel.event.invitation', ['id' => $event->id_event]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
@@ -478,7 +501,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noGuestList">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                            id="noGuestList">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter1"><a class="text-light"
                                 href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
@@ -505,7 +528,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noTable">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                            id="noTable">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter1"><a class="text-light"
                                 href="{{ route('panel.event.guests.index', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
@@ -532,7 +555,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noPhotos">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                            id="noPhotos">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter1"><a class="text-light"
                                 href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
@@ -559,7 +582,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noR&A">{{ __('giftsuggestion.No, I Don’t') }}</button>
+                            id="noR&A">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter1"><a class="text-light"
                                 href="{{ route('panel.event.reminder', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
@@ -586,7 +609,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noGift">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                            id="noGift">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                             data-target="#exampleModalCenter"><a class="text-light"
                                 href="{{ route('panel.event.gift', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
@@ -616,7 +639,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">{{ __('genralInfo.no_dont_button') }}</button>
+                            data-dismiss="modal">{{ __('genralInfo.Later') }}</button>
                         <button type="button" class="submit-btn btn btn-primary t-btn" id="educate"
                             data-toggle="modal" data-target="#StepForm"
                             data-dismiss="modal">{{ __('genralInfo.educate_button') }}</button>
@@ -775,7 +798,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
-                        id="registrationFormClose">{{ __('genralInfo.no_dont_button') }}</button>
+                        id="registrationFormClose">{{ __('genralInfo.Later') }}</button>
                     {{-- <button type="button" class="submit-btn btn btn-primary t-btn" id="updateStepForm" onclick="submitStep()">Update</button> --}}
                 </div>
                 </form>

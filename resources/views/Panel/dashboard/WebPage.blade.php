@@ -35,6 +35,45 @@
         align-items: center;
         justify-content: center;
     }
+
+    form.custom-style {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        /* align-items: center !important; */
+        column-gap: 20px !important;
+    }
+
+    .custom-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: -webkit-fill-available;
+    }
+
+    form.custom-style input {
+        background-color: transparent !important;
+        border: 2px solid transparent !important;
+        border-radius: 16px;
+        height: 50px;
+        padding: 0px !important;
+        width: 100%;
+    }
+
+    form.custom-style select {
+        background-color: #EDEDED;
+        border: 1px solid #999999;
+        border-radius: 30px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .box-styling.ceremony-box.web-page-three-boxes .text img {
+        width: 100%;
+        object-fit: cover;
+        height: 250px;
+    }
 </style>
 
 @section('content')
@@ -70,9 +109,104 @@
                             id="changeMainPhotoBtn">{{ __('webpage.Change Main Photo') }}</button>
                         <button class="t-btn"><a href="{{ route('website', ['id' => $event->id_event]) }}"
                                 style="color:#ffffff;">{{ __('webpage.Visit Website') }}</a></button>
+
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12">
+                <div class="box-styling">
+                    <form action="{{ route('website.update', $event->id_event) }}" method="POST" id="settingForm"
+                        class="custom-style">
+                        @csrf
+                        @if ($eventType->couple_event)
+                            <div class="custom-box">
+                                <label for="bride_name_color">{{ __('webpage.Bride Name Color:') }}</label>
+                                <input type="color" id="bride_name_color" name="bride_name_color"
+                                    value="{{ old('bride_name_color', $WebsiteSetting->bride_name_color ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="groom_name_color">{{ __('webpage.Groom Name Color:') }}</label>
+                                <input type="color" id="groom_name_color" name="groom_name_color"
+                                    value="{{ old('groom_name_color', $WebsiteSetting->groom_name_color ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="and_symbol_color">{{ __('webpage."And" Symbol Color:') }}</label>
+                                <input type="color" id="and_symbol_color" name="and_symbol_color"
+                                    value="{{ old('and_symbol_color', $WebsiteSetting->and_symbol_color ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
+                                <input type="color" id="event_date_color" name="event_date_color"
+                                    value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="font_style">{{ __('webpage.Font Style:') }}</label>
+
+                                <select id="font_style" name="font_style">
+                                    <option value="Arial"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
+                                        Arial
+                                    </option>
+                                    <option value="Times New Roman"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
+                                        Times New Roman</option>
+                                    <option value="Courier New"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
+                                        Courier New</option>
+                                    <option value="Georgia"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
+                                        Georgia</option>
+                                    <option value="Verdana"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
+                                        Verdana</option>
+                                    <!-- Add more font options as needed -->
+                                </select>
+                            </div>
+                        @else
+                            <div class="custom-box">
+                                <label for="event_name_color">{{ __('webpage.Event Name Color:') }}</label>
+                                <input type="color" id="event_name_color" name="event_name_color"
+                                    value="{{ old('event_name_color', $WebsiteSetting->event_name_color ?? '') }}">
+                            </div>
+                            <div class="custom-box">
+                                <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
+                                <input type="color" id="event_date_color" name="event_date_color"
+                                    value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
+                            </div>
+                            <div class="custom-box">
+                                <label for="font_style">{{ __('webpage.Font Style:') }}</label>
+
+                                <select id="font_style" name="font_style">
+                                    <option value="Arial"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
+                                        Arial
+                                    </option>
+                                    <option value="Times New Roman"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
+                                        Times New Roman</option>
+                                    <option value="Courier New"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
+                                        Courier New</option>
+                                    <option value="Georgia"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
+                                        Georgia</option>
+                                    <option value="Verdana"
+                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
+                                        Verdana</option>
+                                    <!-- Add more font options as needed -->
+                                </select>
+                            </div>
+                        @endif
+                        <button type="submit">{{ __('webpage.Save') }}</button>
+                    </form>
+                </div>
+            </div>
+
             <div class="col-lg-12">
                 <div class="box-styling event-photos-gallery">
                     <div class="two-things-align">
@@ -92,7 +226,8 @@
                                         <img src="{{ asset('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg') }}"
                                             alt="">
                                     </a>
-                                    <button type="button" class="delete-image-btn" data-id="{{ $photo->id_photogallery }}"
+                                    <button type="button" class="delete-image-btn"
+                                        data-id="{{ $photo->id_photogallery }}"
                                         data-eventId="{{ $photo->id_event }}"><svg width="28" height="29"
                                             viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -338,8 +473,8 @@
     </div>
 
     <!-- Reception Modal -->
-    <div class="modal fade modal-01 modal-02 modal-03" id="addRecImage" tabindex="-1" role="dialog" aria-labelledby="addRecImageTitle"
-        aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 modal-03" id="addRecImage" tabindex="-1" role="dialog"
+        aria-labelledby="addRecImageTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -376,8 +511,8 @@
     </div>
 
     <!-- Custom (Party) Modal -->
-    <div class="modal fade modal-01 modal-02 modal-03" id="addParImage" tabindex="-1" role="dialog" aria-labelledby="addParImageTitle"
-        aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 modal-03" id="addParImage" tabindex="-1" role="dialog"
+        aria-labelledby="addParImageTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -454,8 +589,25 @@
 
 @section('scripts')
     <script>
-        var successModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
-        successModal.show();
+        var mainImage = @json($event->mainimage);
+        var cerImage = @json($event->cerimg);
+        var recImage = @json($event->recimg);
+        var parImage = @json($event->parimg);
+        console.log(mainImage, cerImage, recImage, parImage);
+
+        if (mainImage == '' || mainImage == null) {
+            var successModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
+            successModal.show();
+        }else if (cerImage == '' || cerImage == null){
+            var successModal = new bootstrap.Modal(document.getElementById('addCerImage'));
+            successModal.show();
+        }else if (recImage == '' || recImage == null){
+            var successModal = new bootstrap.Modal(document.getElementById('addRecImage'));
+            successModal.show();
+        }else if (parImage == '' || parImage == null){
+            var successModal = new bootstrap.Modal(document.getElementById('addParImage'));
+            successModal.show();
+        }
 
         $('#saveMainPhoto').on('submit', function(e) {
             e.preventDefault(); // Prevent the form from submitting the traditional way
@@ -472,7 +624,7 @@
                 success: function(response) {
                     $("#mainimage").val(''); // Clear the file input field after success
                     $("#printMainImgName").text(
-                    'No File Selected'); // Clear the file input field after success
+                        'No File Selected'); // Clear the file input field after success
                     toastr.success('Main image uploaded successfully!');
                     $('#closeMainIamgeModalBtn').click(); // Close the modal
 
@@ -657,7 +809,8 @@
                         toastr.success('Ceremony image uploaded successfully!');
                         $('#closeCerModalBtn').click(); // Close the modal
 
-                        var myModal2 = new bootstrap.Modal(document.getElementById('addRecImage'));
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'addRecImage'));
                         myModal2.show();
 
                         if ($('.ceremony-new-box img').length > 0) {
@@ -676,6 +829,27 @@
                         toastr.error(
                             'Failed to upload the Ceremony image. Please try again.');
                         console.error(xhr.responseText);
+                    }
+                });
+            });
+            $('#settingForm').on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: "{{ route('website.update', $event->id_event) }}",
+                    type: 'POST', // HTTP method
+                    data: formData, // The form data
+                    contentType: false, // Do not set content-type header
+                    processData: false, // Do not process the data
+                    success: function(response) {
+                        toastr.success('Setting Updated Successfully!');
+                        const iframe = document.querySelector('iframe');
+                        iframe.src = iframe.src;
+                    },
+                    error: function(xhr) {
+                        // Handle error (e.g., display error messages)
+                        toastr.error('Failed to Update Setting. Please try again.');
                     }
                 });
             });
@@ -698,7 +872,8 @@
                         toastr.success('Reception image uploaded successfully!');
                         $('#closeRecModalBtn').click();
 
-                        var myModal2 = new bootstrap.Modal(document.getElementById('addParImage'));
+                        var myModal2 = new bootstrap.Modal(document.getElementById(
+                            'addParImage'));
                         myModal2.show();
 
                         // Update the reception image dynamically

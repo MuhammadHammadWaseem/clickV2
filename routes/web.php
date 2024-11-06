@@ -170,11 +170,11 @@ Route::group(['as' => 'panel.'], function () {
     });
 });
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
+Route::post('website/edit/{id}', [WebsiteController::class, 'update'])->name('website.update');
 Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');
 Route::post('store/images/{id}', [WebPageController::class, 'storeUsersImages'])->name('store.users.images');
 Route::get('/mail-acknowledgment/{idguest}/{idevent}', [reminderController::class, 'ackWebPage'])->name('ackWebPage');
 Route::get('/mail-message/{idguest}/{idevent}', [messageController::class, 'message'])->name('mail.message');
-
 
 
 Route::get('get-json', [InvitationController::class, 'getJson'])->name('get.jsone');
