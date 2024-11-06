@@ -6,6 +6,8 @@ use App\Models\Meal;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
 use App\Models\Guest;
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class MealController extends Controller
 {
@@ -13,7 +15,8 @@ class MealController extends Controller
     {
         $eventId = GeneralHelper::getEventId();
         $meals = Meal::where('id_event', $eventId)->get();
-        return view('Panel.dashboard.meals', compact('meals'));
+        $event = Event::with('eventType')->where('id_event', $eventId)->where('id_user', Auth::id())->first();
+        return view('Panel.dashboard.meals', compact('meals','event'));
     }
     public function showMeals()
     {

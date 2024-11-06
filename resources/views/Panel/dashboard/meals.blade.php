@@ -213,8 +213,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal" id="deleteModalBtn">{{ __('meal.cancel_button') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="deleteModalBtn">{{ __('meal.cancel_button') }}</button>
                     <button type="button" class="submit-btn" id="confirmDelete">{{ __('meal.delete_button') }}</button>
                 </div>
             </div>
@@ -244,6 +244,35 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter04" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Gift Suggestions For Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Gift Suggestions Desc') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGift">{{ __('genralInfo.Later') }}</button>
+                    <a class="text-light" href="{{ route('panel.event.gift', ['id' => $event->id_event]) }}">
+                        <button type="button" class="submit-btn btn btn-primary t-btn">
+                            {{ __('genralInfo.I Do') }}
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -263,6 +292,9 @@
                     $("#closeMealAddForm").click();
                     showMeals();
                     toastr.success(response.message);
+                    var successModal = new bootstrap.Modal(document.getElementById(
+                        'exampleModalCenter04'));
+                    successModal.show();
                 },
                 error: function(xhr) {
                     toastr.error('Failed to upload the reception image. Please try again.');
