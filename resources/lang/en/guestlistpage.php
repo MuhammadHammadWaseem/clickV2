@@ -163,4 +163,5 @@ return[
     'attending_event' => 'Attending Event',
     'meal' => 'Meal',
     'table' => 'Table',
+    'add_more_guest' => 'Would You Like To Add Another Guest For Your Event?',
 ];

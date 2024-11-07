@@ -214,6 +214,14 @@
                 transition: .3s;
                 border: navajowhite;
             }
+
+            #StepForm .two-box-inline #nextButton {
+    float: right !important;
+}
+
+#StepForm .two-box-inline #prevButton{
+float: left !important;
+}
         }
     </style>
 
@@ -777,7 +785,7 @@
 
                         </div>
                         <div style="overflow:auto;">
-                            <div class="two-box-inline" style="float:right;">
+                            <div class="two-box-inline" id="cutom-style-right" style="float:right;">
                                 <button type="button" class="custom-button custom-prev" id="prevButton"
                                     onclick="nextPrev(-1)">{{ __('genralInfo.previous_button') }}</button>
                                 <button type="button" class="custom-button" id="nextButton"
@@ -1032,8 +1040,10 @@
                 x[n].style.display = "block";
                 if (n == 0) {
                     document.getElementById("prevButton").style.display = "none";
+                    document.getElementById("cutom-style-right").style.justifyContent = "flex-end";
                 } else {
                     document.getElementById("prevButton").style.display = "inline";
+                    document.getElementById("cutom-style-right").style.justifyContent = "space-between";
                 }
                 if (n == (x.length - 1)) {
                     document.getElementById("nextButton").innerHTML = "Submit";

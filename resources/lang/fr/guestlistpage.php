@@ -162,5 +162,6 @@ return[
     'attending_event' => 'Participation à l\'événement',
     'meal' => 'Repas',
     'table' => 'Table',
+    'add_more_guest' => 'Souhaitez-vous ajouter un autre invité pour votre événement ?',
 
 ];

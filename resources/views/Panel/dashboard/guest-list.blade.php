@@ -366,6 +366,18 @@
 }
 
 
+form#guestForm {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right:5px;
+}
+
+form#guestForm::-webkit-scrollbar{
+    width: 5px;
+
+}
+
     @media only screen and (max-width: 1500px) {
         .accordian-table-content .table-box table tr td {
             font-size: 12px;
@@ -634,8 +646,10 @@ p#guestMemberTotal {
                     <div class="three-btns-align">
                         <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                             data-target="#AddGuest"> {{ __('guestlistpage.add_guest') }} </button>
+
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter02">{{ __('guestlistpage.add_from_other_events') }} </button>
+
                         <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
                             data-target="#exampleModalCenter03">{{ __('guestlistpage.upload_csv_file') }} </button>
                     </div>
@@ -869,6 +883,10 @@ p#guestMemberTotal {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="AddGuestClose">{{ __('guestlistpage.Cancel') }}</button>
+
+                        <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
+                        id="AddGuestClose1">{{ __('genralInfo.Later') }}</button>
+
                     <button type="submit" class="btn btn-primary submit-btn"
                         id="submitGuestForm">{{ __('guestlistpage.Save') }}</button>
                 </div>
@@ -1382,7 +1400,114 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             </div>
         </div>
     </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter09" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <h2>{{ __('guestlistpage.add_more_guest') }}</h2>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="noGift">{{ __('genralInfo.Later') }}</button>
 
+                <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
+                    id="noGift2">{{ __('genralInfo.Later') }}</button>
+
+                <button type="button" class="submit-btn btn btn-primary t-btn" id="add_meal">
+                    {{ __('genralInfo.I Do') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="text">
+                <h2>{{ __('genralInfo.Would You Like To Manage A Table Sitting') }}</h2>
+                <p>{{ __('genralInfo.Arrange your seating here') }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                id="noTable">{{ __('genralInfo.Later') }}</button>
+            <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                data-target="#exampleModalCenter1"><a class="text-light"
+                    href="{{ route('panel.event.guests.index', ['id' => $eventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="text">
+                <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                <p>{{ __('genralInfo.Share the memories') }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                id="noPhotos">{{ __('genralInfo.Later') }}</button>
+            <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                data-target="#exampleModalCenter1"><a class="text-light"
+                    href="{{ route('panel.event.photos', ['id' => $eventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                        <p>{{ __('genralInfo.Stay connected') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noR&A">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.reminder', ['id' => $eventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- for abse url --}}
     <input type="hidden" value="{{ url('/') }}" id="baseUrl">
 @endsection
@@ -1390,7 +1515,31 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <!-- #region datatables files -->
 @section('scripts')
     <script>
+        $("#add_meal").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('AddGuest'));
+            successModal.show();
+            $("#noGift2").click();
+        });
+        $("#AddGuestClose").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+            successModal.show();
+        });
+        $("#noGift").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+            successModal.show();
+        });
+        $("#noTable").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+            successModal.show();
+        });
+        $("#noPhotos").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
+
         $(document).ready(function() {
+            var myModal = new bootstrap.Modal(document.getElementById('AddGuest'));
+                myModal.show();
             showGuest("1");
             $.ajaxSetup({
                 headers: {
@@ -1415,8 +1564,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         if (response.success) {
                             toastr.success('Guest added successfully!');
                             $('#guestForm')[0].reset();
-                            $('#AddGuestClose').click();
+                            $('#AddGuestClose1').click();
                             showGuest("1");
+                            var successModal = new bootstrap.Modal(document.getElementById(
+                                    'exampleModalCenter09'));
+                                successModal.show();
                         } else {
                             alert(response.message || 'Failed to add guest.');
                         }
@@ -1462,6 +1614,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         success: function(response) {
                             if (response.success) {
                                 toastr.success('Member added successfully!');
+
                                 $('#AddMemberForm')[0].reset();
                                 $('#AddMemberClose')
                                     .click(); // Close the modal after success
