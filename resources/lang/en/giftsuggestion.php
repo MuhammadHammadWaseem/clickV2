@@ -34,20 +34,22 @@ return[
 'message_edit' => 'Your gift suggestion has been successfully edited.',
 
 'want_to_send_invitations_to_guests' => 'Want To Send Invitations To Guests?',
-'description_text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'description_text' => 'Make gifting easy! Add gift suggestions or a transfer address for those who wish to contribute.',
 'yes_add_gift_suggestions' => 'Yes, Add Gift Suggestions',
 
 'add_new_gift_suggestions' => 'Add New Gift Suggestions',
-'description_text2' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'description_text2' => 'Make gifting easy! Add gift suggestions or a transfer address for those who wish to contribute.',
 'Add Suggestion' => 'Add Suggestion',
 'Delete Gift' => 'Delete Gift',
 
 'confirm_delete_gift' => 'Are you sure you want to delete this gift?',
 'Edit Gift' => 'Edit Gift',
-'edit_desc' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+'edit_desc' => 'Make gifting easy! Add gift suggestions or a transfer address for those who wish to contribute.',
 'Update Gift' => 'Update Gift',
 'edit_success' => 'Suggestion Edited Successfully',
 'No, I Don’t' => 'No, I Don’t',
 'Yes, Create Invitation' => 'Yes, Create Invitation',
+'add_message' => 'Would You Like To Add Another Gift Suggestion For Your Event?',
+
 
 ];

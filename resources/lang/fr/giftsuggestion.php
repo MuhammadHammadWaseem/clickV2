@@ -34,20 +34,21 @@ return [
     'message_edit' => 'Votre suggestion de cadeau a été modifiée avec succès.',
 
     'want_to_send_invitations_to_guests' => 'Voulez-vous envoyer des invitations aux invités ?',
-    'description_text' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'description_text' => 'Facilitez les cadeaux ! Ajoutez des suggestions de cadeaux ou une adresse de transfert pour ceux qui souhaitent contribuer.',
     'yes_add_gift_suggestions' => 'Oui, Ajouter des Suggestions de Cadeaux',
 
     'add_new_gift_suggestions' => 'Ajouter de Nouvelles Suggestions de Cadeaux',
-    'description_text2' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'description_text2' => 'Facilitez les cadeaux ! Ajoutez des suggestions de cadeaux ou une adresse de transfert pour ceux qui souhaitent contribuer.',
     'Add Suggestion' => 'Ajouter une Suggestion',
     'Delete Gift' => 'Supprimer le Cadeau',
 
     'confirm_delete_gift' => 'Êtes-vous sûr de vouloir supprimer ce cadeau ?',
     'Edit Gift' => 'Modifier le Cadeau',
-    'edit_desc' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'edit_desc' => 'Facilitez les cadeaux ! Ajoutez des suggestions de cadeaux ou une adresse de transfert pour ceux qui souhaitent contribuer.',
     'Update Gift' => 'Mettre à Jour le Cadeau',
     'edit_success' => 'Suggestion Modifiée avec Succès',
     'No, I Don’t' => 'Non, je ne veux pas',
     'Yes, Create Invitation' => 'Oui, Créer l\'Invitation',
+    'add_message' => 'Souhaitez-vous ajouter une autre suggestion de cadeau pour votre événement ?',
 
 ];

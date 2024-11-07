@@ -93,28 +93,6 @@
                             data-target="#exampleModalCenter">{{ __('meal.Add New') }} </button>
                     </div>
                     <div class="meal-name-boxes" id="mealsBox">
-                        {{-- @foreach ($meals as $meal)
-                            <div class="meal-box">
-                                <div class="three-align-things">
-                                    <div class="tw0-boxex-align-in">
-                                        <h6>{{ $meal->name ?? '' }}</h6>
-                                        <!-- Edit button (use data-id to store the meal id) -->
-                                        <button type="button" class="editMeal" data-toggle="modal" data-target="#editMeal"
-                                            data-id="{{ $meal->id_meal }}">
-                                            <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
-                                        </button>
-                                        <button class="deleteMeal" data-id="{{ $meal->id_meal }}" type="button">
-                                            <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
-                                        </button>
-
-                                    </div>
-                                    <p>{{ $meal->description ?? '' }}</p>
-                                    <input type="hidden" id="event_id" value="{{ $meal->id_meal }}"
-                                        data-id="{{ $meal->id_meal }}">
-                                </div>
-                            </div>
-                        @endforeach --}}
-
 
                     </div>
 
@@ -150,6 +128,10 @@
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal"
                         id="closeMealAddForm">{{ __('meal.close_button') }}</button>
+
+                    <button type="button" data-dismiss="modal" class="d-none"
+                        id="closeMealAddForm2">{{ __('meal.close_button') }}</button>
+                        
                     <button type="submit" class="submit-btn">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
@@ -244,8 +226,37 @@
             </div>
         </div>
     </div>
-
+    {{-- //would you like --}}
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter04" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('meal.Add_more_meal') }}</h2>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGift">{{ __('genralInfo.Later') }}</button>
+
+                    <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
+                        id="noGift2">{{ __('genralInfo.Later') }}</button>
+
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="add_meal">
+                        {{ __('genralInfo.I Do') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter05" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -263,7 +274,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        id="noGift">{{ __('genralInfo.Later') }}</button>
+                        id="suggest">{{ __('genralInfo.Later') }}</button>
                     <a class="text-light" href="{{ route('panel.event.gift', ['id' => $event->id_event]) }}">
                         <button type="button" class="submit-btn btn btn-primary t-btn">
                             {{ __('genralInfo.I Do') }}
@@ -273,10 +284,177 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter022" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
+                        <p>{{ __('genralInfo.Design your invite') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noInvitation">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.invitation', ['id' => $event->id_event]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter023" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Guest List For Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Add your guest list and send invitations') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGuestList">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Manage A Table Sitting') }}</h2>
+                        <p>{{ __('genralInfo.Arrange your seating here') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noTable">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.guests.index', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Share the memories') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noPhotos">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                        <p>{{ __('genralInfo.Stay connected') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noR&A">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.reminder', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     <script>
+        $("#closeMealAddForm").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+            successModal.show();
+            // $("#noGift").click();
+        });
+        $("#add_meal").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+            successModal.show();
+            $("#noGift2").click();
+        });
+        $("#noGift").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter05'));
+            successModal.show();
+        });
+
+        $("#suggest").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter022'));
+            successModal.show();
+        });
+        $("#noInvitation").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter023'));
+            successModal.show();
+        });
+        $("#noGuestList").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+            successModal.show();
+        });
+        $("#noTable").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+            successModal.show();
+        });
+
+        $("#noPhotos").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
         $('#mealForm').on('submit', function(e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -289,9 +467,12 @@
                 processData: false,
                 success: function(response) {
                     console.log(response);
-                    $("#closeMealAddForm").click();
+                    // $("#closeMealAddForm").click();
+                    $("#closeMealAddForm2").click();
                     showMeals();
                     toastr.success(response.message);
+                    // Clear the form inputs
+                    $('#mealForm')[0].reset();
                     var successModal = new bootstrap.Modal(document.getElementById(
                         'exampleModalCenter04'));
                     successModal.show();

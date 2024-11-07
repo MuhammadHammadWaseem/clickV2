@@ -24,6 +24,8 @@ return[
     'title' => 'Meal Added Successfully',
     'message' => 'Your meal has been successfully added.',
     'edit_meal' => 'Edit Meal',
+    'Add_more_meal' => 'Would You Like To Add Another Meal For Your Event?',
+
 
 
 

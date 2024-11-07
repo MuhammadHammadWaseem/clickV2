@@ -21,4 +21,5 @@ return [
     'title' => 'Repas Ajouté avec Succès',
     'message' => 'Votre repas a été ajouté avec succès.',
     'edit_meal' => 'Modifier le repas',
+    'Add_more_meal' => 'Souhaitez-vous ajouter un autre repas pour votre événement ?',
 ];
