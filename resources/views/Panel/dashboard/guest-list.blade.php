@@ -1512,7 +1512,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                                 var br = '<br>';
                             // Update totals with a line break
-                    $('#guestMemberTotal').html(`TOTAL: ${totalGuests}${br}(guests ${totalGuests} - members ${totalMembers})`);
+                    $('#guestMemberTotal').html(`TOTAL: ${totalGuests + totalMembers} ${br}(guests ${totalGuests} - members ${totalMembers})`);
 
 
                     $('#totalCheckIn').html(`<i class="fa fa-check-square" aria-hidden="true"></i> CHECKED-IN ${checkedInCount}`);
@@ -1572,6 +1572,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                         </ul>
                                     </td>
+
                                     ${(member.opened === 2) ? `
                                                                                         <td class="accordian_img_acces">
                                                                                             <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
@@ -1580,7 +1581,12 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                                         <td class="accordian_img_acces">
                                                                                             <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                                                         </td>` : ''}
-                                </tr>`;
+                                                                                        <td>
+                                                                                            <li><strong>Email: ${member.email || 'No Email'}</strong>
+                                                                                            <li><strong>Phone : ${member.phone || 'No Phone'}</strong>
+                                                                                        </td>
+                                                                                        </tr>`;
+
                             });
 
                             accordion += `
