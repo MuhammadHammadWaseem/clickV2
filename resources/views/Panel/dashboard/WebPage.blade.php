@@ -76,87 +76,87 @@
     }
 
     .col-lg-4.col-md-6.col-sm-6 {
-    margin-top: 20px;
-}
+        margin-top: 20px;
+    }
 
-    @media only screen and (max-width: 991px){
+    @media only screen and (max-width: 991px) {
         .two-btn-inline {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    row-gap: 10px;
-}
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            row-gap: 10px;
+        }
 
-.col-lg-4.col-md-6.col-sm-6 {
-    margin-top: 0px;
-}
+        .col-lg-4.col-md-6.col-sm-6 {
+            margin-top: 0px;
+        }
 
-.two-btn-inline .t-btn {
-    font-size: 14px;
-}
+        .two-btn-inline .t-btn {
+            font-size: 14px;
+        }
     }
 
-    @media only screen and (max-width: 767px){
+    @media only screen and (max-width: 767px) {
         form.custom-style {
-    flex-direction: column !important;
-    align-items: stretch !important;
-}
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
 
-form#settingForm .custom-box select {
-    width: 100%;
-}
+        form#settingForm .custom-box select {
+            width: 100%;
+        }
 
-.box-styling .text p {
-        font-size: 13px;
-        text-align: center;
+        .box-styling .text p {
+            font-size: 13px;
+            text-align: center;
+        }
+
+
+        .box-styling.event-photos-gallery .two-things-align {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        #content .box-styling {
+            height: max-content !important;
+        }
+
+        .col-sm-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
+        p#NoItems {
+            width: 100%;
+            text-align: center;
+        }
+
+        .box-styling.ceremony-box.web-page-three-boxes .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center !important;
+            row-gap: 20px;
+        }
+
+        .box-styling.event-photos-gallery .two-things-align {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch !important;
+        }
+
+        .box-styling.event-photos-gallery .main-event-gallery-box {
+            margin: 20px 0 0px;
+        }
+
+        .extra_side_page .box-styling {
+            padding: 0 !important;
+        }
+
     }
-
-
-.box-styling.event-photos-gallery .two-things-align {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
-#content .box-styling {
-    height: max-content !important;
-    }
-
-    .col-sm-6 {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-    }
-
-    p#NoItems {
-    width: 100%;
-    text-align: center;
-}
-.box-styling.ceremony-box.web-page-three-boxes .text {
-    display: flex;
-    flex-direction: column;
-    align-items: center !important;
-    row-gap: 20px;
-}
-
-.box-styling.event-photos-gallery .two-things-align {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch !important;
-}
-
-.box-styling.event-photos-gallery .main-event-gallery-box {
-    margin: 20px 0 0px;
-}
-
-.extra_side_page .box-styling {
-    padding: 0 !important;
-}
-
-    }
-
 </style>
 
 @section('content')
@@ -519,8 +519,8 @@ form#settingForm .custom-box select {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">{{ __('webpage.Serve Meal Modal No Button') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="mealNoBtn">{{ __('webpage.Serve Meal Modal No Button') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#exampleModalCenter"><a class="text-light"
                             href="{{ route('panel.event.meals', ['id' => $event->id_event]) }}">{{ __('webpage.Serve Meal Modal Yes Button') }}</a></button>
@@ -668,10 +668,224 @@ form#settingForm .custom-box select {
             </div>
         </div>
     </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter022" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
+                        <p>{{ __('genralInfo.Design your invite') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noInvitation">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.invitation', ['id' => $event->id_event]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter010" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Gift Suggestions For Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Gift Suggestions Desc') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGift">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter"><a class="text-light"
+                            href="{{ route('panel.event.gift', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    <!-- <button  type="button" class="btn btn-primary t-btn" data-toggle="modal" data-target="#exampleModalCenter"> Create a New Event </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter022" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
+                        <p>{{ __('genralInfo.Design your invite') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noInvitation">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.invitation', ['id' => $event->id_event]) }}">{{ __('giftsuggestion.Yes, Create Invitation') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter023" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Add A Guest List For Your Event?') }}</h2>
+                            <p>{{ __('genralInfo.Add your guest list and send invitations') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noGuestList">{{ __('genralInfo.Later') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Manage A Table Sitting') }}</h2>
+                        <p>{{ __('genralInfo.Arrange your seating here') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noTable">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.guests.index', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text">
+                            <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                            <p>{{ __('genralInfo.Share the memories') }}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            id="noPhotos">{{ __('genralInfo.Later') }}</button>
+                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                            data-target="#exampleModalCenter1"><a class="text-light"
+                                href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                        <p>{{ __('genralInfo.Stay connected') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noR&A">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.reminder', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
     <script>
+        $("#mealNoBtn").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter010'));
+            successModal.show();
+        });
+        $("#noGift").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter022'));
+            successModal.show();
+        });
+        $("#noInvitation").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter023'));
+            successModal.show();
+        });
+
+        $("#noGuestList").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+                successModal.show();
+            });
+            $("#noTable").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+                successModal.show();
+            });
+
+            $("#noPhotos").on("click", function() {
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+                successModal.show();
+            });
         var mainImage = @json($event->mainimage);
         var cerImage = @json($event->cerimg);
         var recImage = @json($event->recimg);
@@ -681,13 +895,13 @@ form#settingForm .custom-box select {
         if (mainImage == '' || mainImage == null) {
             var successModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
             successModal.show();
-        }else if (cerImage == '' || cerImage == null){
+        } else if (cerImage == '' || cerImage == null) {
             var successModal = new bootstrap.Modal(document.getElementById('addCerImage'));
             successModal.show();
-        }else if (recImage == '' || recImage == null){
+        } else if (recImage == '' || recImage == null) {
             var successModal = new bootstrap.Modal(document.getElementById('addRecImage'));
             successModal.show();
-        }else if (parImage == '' || parImage == null){
+        } else if (parImage == '' || parImage == null) {
             var successModal = new bootstrap.Modal(document.getElementById('addParImage'));
             successModal.show();
         }
