@@ -31,7 +31,7 @@
     </style>
 @endif
 <style>
-    .main-dashboard-sec .left-menu-dash ul li.management-active::after {
+    .management-active::after {
         width: 5px;
         height: 100%;
         background-color: #C09D2A;
@@ -42,16 +42,16 @@
         top: 0;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.management-active a {
-        color: #C09D2A;
+    .management-active a {
+        color: #C09D2A !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.management-active img {
-        filter: none;
+    .management-active img {
+        filter: none !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.management-active {
-        background-color: #c09d2a29;
+    .management-active {
+        background-color: #c09d2a29 !important;
     }
 
 

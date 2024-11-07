@@ -2,19 +2,19 @@
 
 
 <style>
-    .main-dashboard-sec .left-menu-dash ul li.webpage-active a {
+    .webpage-active a {
         color: #C09D2A !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.webpage-active img {
+    .webpage-active img {
         filter: none !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.webpage-active {
+    .webpage-active {
         background-color: #c09d2a29 !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.webpage-active::after {
+    .webpage-active::after {
         width: 5px !important;
         height: 100% !important;
         background-color: #C09D2A !important;

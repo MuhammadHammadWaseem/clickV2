@@ -3,7 +3,7 @@
 
 
 
-.main-dashboard-sec .left-menu-dash ul li.invitatin-active::after {
+.invitatin-active::after {
   width: 5px;
   height: 100%;
   background-color: #C09D2A;
@@ -14,16 +14,16 @@
   top: 0;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.invitatin-active a {
-  color: #C09D2A;
+.invitatin-active a {
+  color: #C09D2A !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.invitatin-active img {
-  filter: none;
+.invitatin-active img {
+  filter: none !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.invitatin-active {
-  background-color: #c09d2a29;
+.invitatin-active {
+  background-color: #c09d2a29 !important;
 }
 
 

@@ -71,7 +71,7 @@
         margin-top: 10px !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gest-active::after {
+    .gest-active::after {
         width: 5px;
         height: 100%;
         background-color: #C09D2A;
@@ -82,16 +82,16 @@
         top: 0;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gest-active a {
-        color: #C09D2A;
+    .gest-active a {
+        color: #C09D2A !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gest-active img {
-        filter: none;
+    .gest-active img {
+        filter: none !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gest-active {
-        background-color: #c09d2a29;
+    .gest-active {
+        background-color: #c09d2a29 !important;
     }
 
 

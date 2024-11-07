@@ -18,19 +18,19 @@
   object-fit: contain;
   margin: 20px 0;
 }
-.main-dashboard-sec .left-menu-dash ul li.reminder-active a {
-  color: #C09D2A;
+.reminder-active a {
+  color: #C09D2A !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.reminder-active img {
-  filter: none;
+.reminder-active img {
+  filter: none !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.reminder-active {
-  background-color: #c09d2a29;
+.reminder-active {
+  background-color: #c09d2a29 !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.reminder-active::after {
+.reminder-active::after {
   width: 5px;
   height: 100%;
   background-color: #C09D2A;

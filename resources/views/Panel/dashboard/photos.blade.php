@@ -1,19 +1,19 @@
 @extends('Panel.Layout.master')
 
 <style>
-    .main-dashboard-sec .left-menu-dash ul li.poto-active a {
-        color: #C09D2A;
+    .poto-active a {
+        color: #C09D2A !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.poto-active img {
-        filter: none;
+    .poto-active img {
+        filter: none !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.poto-active {
-        background-color: #c09d2a29;
+    .poto-active {
+        background-color: #c09d2a29 !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.poto-active::after {
+    .poto-active::after {
         width: 5px;
         height: 100%;
         background-color: #C09D2A;

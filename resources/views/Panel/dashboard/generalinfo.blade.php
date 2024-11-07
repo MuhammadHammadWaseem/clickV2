@@ -74,16 +74,27 @@
         }
 
 
-        .main-dashboard-sec .left-menu-dash ul li.general-active a {
-            color: #C09D2A;
+        .general-active a {
+            color: #C09D2A !important;
         }
 
-        .main-dashboard-sec .left-menu-dash ul li.general-active img {
-            filter: none;
+        .general-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
+
+        .general-active img {
+            filter: none !important;
         }
 
-        .main-dashboard-sec .left-menu-dash ul li.general-active {
-            background-color: #c09d2a29;
+        .general-active {
+            background-color: #c09d2a29 !important;
         }
 
         .main-dashboard-sec .text {

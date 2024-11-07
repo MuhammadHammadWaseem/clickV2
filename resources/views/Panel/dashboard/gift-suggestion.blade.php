@@ -29,19 +29,19 @@
         margin-top: 20px !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gift-active a {
-        color: #C09D2A;
+    .gift-active a {
+        color: #C09D2A !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gift-active img {
-        filter: none;
+    .gift-active img {
+        filter: none !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gift-active {
-        background-color: #c09d2a29;
+    .gift-active {
+        background-color: #c09d2a29 !important;
     }
 
-    .main-dashboard-sec .left-menu-dash ul li.gift-active::after {
+    .gift-active::after {
         width: 5px;
         height: 100%;
         background-color: #C09D2A;

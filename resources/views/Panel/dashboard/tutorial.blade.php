@@ -3,19 +3,19 @@
 @section('content')
 <style>
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active a {
-  color: #C09D2A;
+.tutoriar-active a {
+  color: #C09D2A !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active img {
-  filter: none;
+.tutoriar-active img {
+  filter: none !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active {
-  background-color: #c09d2a29;
+.tutoriar-active {
+  background-color: #c09d2a29 !important;
 }
 
-.main-dashboard-sec .left-menu-dash ul li.tutoriar-active::after {
+.tutoriar-active::after {
   width: 5px;
   height: 100%;
   background-color: #C09D2A;
