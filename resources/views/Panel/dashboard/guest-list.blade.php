@@ -348,6 +348,22 @@
     .upload-form-csv .modal-body form input {
         display: none !important;
     }
+    p#guestMemberTotal {
+    text-align: end;
+    color: #A9967D;
+    font-weight: 600;
+}
+
+.box-styling.quick-actions .three-btns-align {
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.col-12.col-md-12.text-center.d-flex.align-items-center.justify-content-center.flex-wrap.flex-d-md-row p {
+    font-weight: 600;
+}
 
 
     @media only screen and (max-width: 1500px) {
@@ -371,6 +387,7 @@
 
         .accordian-table-content {
             overflow-x: scroll;
+            overflow-y: hidden;
         }
 
         .accordian-table-content::-webkit-scrollbar {
@@ -415,6 +432,22 @@
             margin: 10px 0;
             width: 95.7%;
         }
+
+        .box-styling.quick-actions .three-btns-align {
+    flex-direction: column;
+}
+
+.box-styling.event-photos-gallery .two-things-align {
+    row-gap: 10px;
+}
+
+p#guestMemberTotal {
+    text-align: center;
+    color: #A9967D;
+    font-weight: 600;
+}
+
+
     }
 
     @media only screen and (max-width: 767px) {
@@ -459,12 +492,52 @@
             background: #AAAAAA;
         }
 
+        .col-12.col-md-12.text-center.d-flex.align-items-center.justify-content-center.flex-wrap.flex-d-md-row p {
+    font-weight: 600;
+    width: 50%;
+    padding: 10px !important;
+}
+
+.col-12.col-md-12.text-center.d-flex.align-items-center.justify-content-center.flex-wrap.flex-d-md-row {
+    margin: 10px 0;
+}
+
+.box-styling.event-photos-gallery .two-things-align {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.box-styling.event-photos-gallery.events-lists-sec-01.guest-list .two-btn-align {
+        flex-wrap: wrap;
+        row-gap: 10px;
+        column-gap: 10px;
+        display: flex;
+        align-items: stretch !important;
+        justify-content: flex-start;
+        flex-direction: column !important;
+        width: 100%;
+    }
+
         /* .modifier {
 
         } */
     }
 
-    @media only screen and (max-width: 575px) {}
+    @media only screen and (max-width: 575px) {
+
+        .col-12.col-md-12.text-center.d-flex.align-items-center.justify-content-center.flex-wrap.flex-d-md-row p {
+        font-weight: 600;
+        width: 100%;
+    }
+    .t-btn{
+        font-size: 14px !important;
+    }
+
+    p {
+    font-size: 14px;
+}
+    }
 </style>
 @section('content')
     @php
@@ -534,7 +607,27 @@
                 </div>
             </div>
             <div class="col-lg-12">
+
                 <div class="box-styling quick-actions">
+                    <div class="row">
+                        <div class="col-12 text-end totals">
+                            <p id="guestMemberTotal">TOTAL: (guests - members)</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 text-center d-flex align-items-center justify-content-center flex-wrap flex-d-md-row">
+                        <p class="checkedincolor p-3" style="font-size:14px; color:rgb(37, 37, 37);" id="totalCheckIn">
+                            <i class="fa fa-check-square" aria-hidden="true" style="color: rgb(37, 37, 37);"></i> CHECKED-IN
+                        </p>
+                        <p class="declinedcolor p-3" style="font-size:14px; color:rgb(37, 37, 37);" id="totalDecline">
+                            <i class="fas fa-times" style="color: rgb(37, 37, 37);"></i> DECLINED
+                        </p>
+                        <p class="checkedincolor p-3" style="font-size:14px; color:rgb(37, 37, 37);" id="totalinvite">
+                            <i class="fas fa-user" style="color: rgb(37, 37, 37);"></i> INVITED GUEST
+                        </p>
+                        <p class="checkedincolor p-3" style="font-size:14px; color:rgb(37, 37, 37);" id="inviteMembers">
+                            <i class="fas fa-users" style="color: rgb(37, 37, 37);"></i> INVITED MEMBERS
+                        </p>
+                    </div>
                     <div class="text">
                         <h2>{{ __('guestlistpage.quick_actions') }}</h2>
                     </div>
@@ -560,7 +653,8 @@
                             <div class="export-hover-links">
                                 <ul>
                                     <li class="export-hover">
-                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
+                                        <button type="button" class="btn btn-primary t-btn t-btn-theme"
+                                            data-toggle="modal"
                                             data-target="#exampleModalCenter04">{{ __('guestlistpage.export') }}</button>
                                         <ul class="export-hover-ul">
                                             <li>
@@ -622,6 +716,8 @@
                     </div>
 
                 </div>
+                </div>
+
             </div>
         </div>
         {{-- <div class="col-md-12">
@@ -889,7 +985,8 @@
                         <!-- Number of Members to Invite -->
                         <div class="form-group">
                             <label for="members" id="members_label">{{ __('guestlistpage.number_of_members') }}</label>
-                            <input type="number" class="form-control" id="edit_members" name="members" placeholder="{{ __('guestlistpage.enter_number') }}">
+                            <input type="number" class="form-control" id="edit_members" name="members"
+                                placeholder="{{ __('guestlistpage.enter_number') }}">
                         </div>
 
 
@@ -920,7 +1017,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="EditGuestClose">{{ __('guestlistpage.Cancel') }}</button>
-                    <button type="button" class="btn btn-primary submit-btn" id="submitEditGuestForm">{{ __('guestlistpage.update') }}</button>
+                    <button type="button" class="btn btn-primary submit-btn"
+                        id="submitEditGuestForm">{{ __('guestlistpage.update') }}</button>
                 </div>
             </div>
         </div>
@@ -946,7 +1044,22 @@
                         <div class="form-group">
                             <label for="name">{{ __('guestlistpage.name') }}</label>
                             <input type="text" class="form-control" id="member_name" name="name"
-                                placeholder="Enter name{{ __('guestlistpage.enter_name') }}">
+                                placeholder="{{ __('guestlistpage.enter_name') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                placeholder="Enter Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone"
+                                placeholder="Enter Phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">Whatsapp</label>
+                            <input type="text" class="form-control" id="whatsapp" name="whatsapp"
+                                placeholder="Enter Whatsapp">
                         </div>
                         <input type="hidden" value="{{ $eventId }}" name="idevent" id="idevent">
                         <input type="hidden" value="" name="parentidguest" id="parentidguest">
@@ -1002,7 +1115,8 @@
                             <div class="text">
                                 <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
                                 <p>{{ __('guestlistpage.upload_csv_description') }}</p>
-                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn" download>{{ __('guestlistpage.download_csv_example') }}</a>
+                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn"
+                                    download>{{ __('guestlistpage.download_csv_example') }}</a>
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
                                 <div class="upload-container" onclick="document.getElementById('fileInput').click();">
@@ -1018,7 +1132,8 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
-                                <button type="button" class="submit-btn" id="uploadCsvBtn">{{ __('guestlistpage.upload_guest_list') }}</button>
+                                <button type="button" class="submit-btn"
+                                    id="uploadCsvBtn">{{ __('guestlistpage.upload_guest_list') }}</button>
                             </div>
                         </div>
 
@@ -1069,7 +1184,8 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('guestlistpage.no_dont') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('guestlistpage.no_dont') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
                         data-target="#">{{ __('guestlistpage.upload_guest') }}</button>
                 </div>
@@ -1101,7 +1217,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delguestModalClose">{{ __('guestlistpage.no_dont') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="delguestModalClose">{{ __('guestlistpage.no_dont') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn"
                         onclick="deleteGuest()">{{ __('guestlistpage.delete') }}</button>
                 </div>
@@ -1166,7 +1283,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeExportQrFormModal"
                         data-dismiss="modal">{{ __('guestlistpage.close') }}</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="ExportGuestQr()">{{ __('guestlistpage.save_changes') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn"
+                        onclick="ExportGuestQr()">{{ __('guestlistpage.save_changes') }}</button>
                     </form>
                 </div>
             </div>
@@ -1195,7 +1313,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <input type="checkbox" name="gift-suggestion" id="gift-suggestion">
                             </div>
                             <div class="form-group">
-                                <label for="at-reception-check-in">{{ __('guestlistpage.at_reception_check_in') }}</label>
+                                <label
+                                    for="at-reception-check-in">{{ __('guestlistpage.at_reception_check_in') }}</label>
                                 <input type="checkbox" name="at-reception-check-in" id="at-reception-check-in">
                             </div>
                             <div class="form-group">
@@ -1216,7 +1335,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <button type="button" class="btn btn-secondary" id="closeDispalyModal"
                         data-dismiss="modal">{{ __('guestlistpage.close') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="save-option"
-                        onclick="DisplayOptionSave()" data-toggle="modal" data-target="#SendInvitation">{{ __('guestlistpage.save_changes') }}</button>
+                        onclick="DisplayOptionSave()" data-toggle="modal"
+                        data-target="#SendInvitation">{{ __('guestlistpage.save_changes') }}</button>
                     </form>
                 </div>
             </div>
@@ -1256,7 +1376,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="closeSendInvitationForm">{{ __('guestlistpage.close') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" id="send-invitaion"
-                        onclick="SendInvitation()">  {{ __('guestlistpage.send_invitation') }}</button>
+                        onclick="SendInvitation()"> {{ __('guestlistpage.send_invitation') }}</button>
                     </form>
                 </div>
             </div>
@@ -1264,7 +1384,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     </div>
 
     {{-- for abse url --}}
-    <input type="text" value="{{ url('/') }}" id="baseUrl">
+    <input type="hidden" value="{{ url('/') }}" id="baseUrl">
 @endsection
 <!-- Include jQuery first -->
 <!-- #region datatables files -->
@@ -1376,6 +1496,31 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     var guests = response.guests || [];
                     $('#GuestList').empty();
 
+                    var totalGuests = guests.length;
+                    var totalMembers = guests.reduce(function(sum, guest) {
+                        return sum + (guest.members ? guest.members.length : 0);
+                    }, 0);
+                    var checkedInCount = guests.reduce(function(count, guest) {
+                        return count + (guest.checkin == 1 ? 1 : 0) +
+                            (guest.members ? guest.members.filter(member => member.checkin == 1).length : 0);
+                    }, 0);
+                    var declinedCount = guests.reduce(function(count, guest) {
+                        return count + (guest.declined == 1 ? 1 : 0) +
+                            (guest.members ? guest.members.filter(member => member.declined == 1).length : 0);
+                    }, 0);
+
+
+                                                var br = '<br>';
+                            // Update totals with a line break
+                    $('#guestMemberTotal').html(`TOTAL: ${totalGuests}${br}(guests ${totalGuests} - members ${totalMembers})`);
+
+
+                    $('#totalCheckIn').html(`<i class="fa fa-check-square" aria-hidden="true"></i> CHECKED-IN ${checkedInCount}`);
+                    $('#totalDecline').html(`<i class="fa fa-times" aria-hidden="true"></i> DECLINED ${declinedCount}`);
+                    $('#totalinvite').html(`<i class="fa fa-user" aria-hidden="true"></i> INVITED GUEST ${totalGuests}`);
+                    $('#inviteMembers').html(`<i class="fa fa-users" aria-hidden="true"></i> INVITED MEMBERS ${totalMembers}`);
+
+
                     if (filter == 1) {
                         guests.forEach(function(guest) {
                             // ALL GUESTS
@@ -1428,13 +1573,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         </ul>
                                     </td>
                                     ${(member.opened === 2) ? `
-                                                                                    <td class="accordian_img_acces">
-                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                    </td>` : ''}
+                                                                                        <td class="accordian_img_acces">
+                                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                        </td>` : ''}
                                     ${(member.declined === 1) ? `
-                                                                                    <td class="accordian_img_acces">
-                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                    </td>` : ''}
+                                                                                        <td class="accordian_img_acces">
+                                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                        </td>` : ''}
                                 </tr>`;
                             });
 
@@ -1449,49 +1594,61 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "attending") {
+                            var attendingGuestsCount = 0;
+                            var attendingMembersCount = 0;
 
-                        var guests = response.guests;
-                        guests.forEach(function(guest) {
-                            if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
-                                // Show guest and their members if the guest is checked in
-                                var accordion = `
-                                    <div class="accordion">
-                                        <div class="table-box">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                    guests.forEach(function(guest) {
+                                        // Check if guest or any member has opened == 2 (attending)
+                                        if (guest.opened == 2 || guest.members.some(member => member.opened == 2)) {
 
-                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                        </span>
-                                                    </td>
-                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                                    <td>${guest.notes || 'No Notes'}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <div class="table-box">
-                                            <table>
-                                                <p class="after-line-effect">Members</p>
-                                                <tr>
-                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
-                                                </tr>`;
+                                            if (guest.opened == 2) {
+                                                attendingGuestsCount++; // Count attending guest
+                                            }
+                                            var br = '<br>';
+                                            // Update the totals display with separate checked-in counts for guests and members
+                                            $('#guestMemberTotal').html(`TOTAL: ${attendingGuestsCount + attendingMembersCount} ${br} (guests ${attendingGuestsCount} - members ${attendingMembersCount})`);
+
+                                                // Show guest and their members if the guest is checked in
+                                                var accordion = `
+                                                    <div class="accordion">
+                                                        <div class="table-box">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                                    <td>${guest.notes || 'No Notes'}</td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        <div class="table-box">
+                                                            <table>
+                                                                <p class="after-line-effect">Members</p>
+                                                                <tr>
+                                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                                </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
                                 guest.members.forEach(function(member) {
                                     if (member.opened == 2) {
+                                        attendingMembersCount++; // Count attending member
+
                                         accordion += `
                                             <tr class="divider-line"></tr>
                                             <tr>
@@ -1506,31 +1663,41 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                </td>` : ''}
+                                                    <td class="accordian_img_acces">
+                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                </td>` : ''}
+                                                    <td class="accordian_img_acces">
+                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
 
                                 accordion += `
-                                        <tr class="divider-line"></tr>
-                                        </table>
-                                    </div>
-                                </div>`;
+                                    <tr class="divider-line"></tr>
+                                    </table>
+                                </div>
+                            </div>`;
 
                                 $('#GuestList').append(accordion); // Append each accordion to the list
                             }
                         });
                     }
 
+
                     if (filter == "opened") {
+                        var openedGuestsCount = 0;
+                        var openedMembersCount = 0;
+
                         guests.forEach(function(guest) {
+                            // Check if guest or any member has opened == 1 (opened)
                             if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
+                                if (guest.opened == 1) {
+                                    openedGuestsCount++; // Count opened guest
+                                }
+                                var br='<br>';
+                                $('#guestMemberTotal').html(`TOTAL: ${openedGuestsCount} ${br} (guests ${openedGuestsCount} - members ${openedMembersCount})`);
                                 // Show guest and their members if the guest is checked in
                                 var accordion = `
                                     <div class="accordion">
@@ -1584,13 +1751,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                </td>` : ''}
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                </td>` : ''}
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1607,11 +1774,23 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "declined") {
-
+                        var declinedGuestsCount = 0;
+                        var declinedMembersCount = 0;
                         guests.forEach(function(guest) {
                             if (guest.declined == 1 || guest.members.some(member => member.declined ==
                                     1)) {
                                 // Show guest and their members if the guest is checked in
+                                var declinedCount = guests.reduce(function(count, guest) {
+                                    return count + (guest.declined == 1 ? 1 : 0) +
+                                        (guest.members ? guest.members.filter(member => member.declined == 1).length : 0);
+                                }, 0);
+
+                                // Update totals
+                                if (guest.members && guest.members.some(member => member.declined == 1)) {
+                                    declinedMembersCount += guest.members.filter(member => member.declined == 1).length;
+                                }
+                                var br = '<br>';
+                                $('#guestMemberTotal').html(`TOTAL: ${declinedGuestsCount + declinedMembersCount} ${br} (guests ${declinedGuestsCount} - members ${declinedMembersCount})`);
 
                                 var accordion = `
                                     <div class="accordion">
@@ -1665,13 +1844,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </ul>
                                                 </td>
                                                 ${(member.opened === 2) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                </td>` : ''}
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                    </td>` : ''}
                                                 ${(member.declined === 1) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                </td>` : ''}
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                    </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1687,92 +1866,116 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "checked-in") {
+                    var checkedInGuestsCount = 0;
+                    var checkedInMembersCount = 0;
 
-                        guests.forEach(function(guest) {
-                            if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
-                                    1)) {
-                                // Show guest and their members if the guest is checked in
+                    guests.forEach(function(guest) {
+                        // Check if the main guest is checked in
+                        if (guest.checkin == 1 || guest.members.some(member => member.checkin == 1)) {
+                            checkedInGuestsCount++;
+                        }
 
-                                var accordion = `
-                                    <div class="accordion">
-                                        <div class="table-box">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-
-                                                        <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                            <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                        </span>
-                                                    </td>
-                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
-                                                    <td>${guest.notes || 'No Notes'}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-content">
-                                        <div class="table-box">
-                                            <table>
-                                                <p class="after-line-effect">Members</p>
-                                                <tr>
-                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
-                                                </tr>`;
-
-                                // Loop through each member of the guest and add them only if checkin == 1
-                                guest.members.forEach(function(member) {
-                                    if (member.checkin == 1) {
-                                        accordion += `
-                                            <tr class="divider-line"></tr>
+                        // Check if any of the guest's members are checked in
+                        if (guest.members && guest.members.some(member => member.checkin == 1)) {
+                            checkedInMembersCount += guest.members.filter(member => member.checkin == 1).length;
+                        }
+                    });
+                    var br = '<br>';
+                    // Update the totals display with separate checked-in counts for guests and members
+                    $('#guestMemberTotal').html(`TOTAL: ${checkedInGuestsCount + checkedInMembersCount} ${br} (guests ${checkedInGuestsCount} - members ${checkedInMembersCount})`);
+                    guests.forEach(function(guest) {
+                        // Only include guests who are checked-in
+                        if (guest.checkin == 1 || guest.members.some(member => member.checkin == 1)) {
+                            var accordion = `
+                                <div class="accordion">
+                                    <div class="table-box">
+                                        <table>
                                             <tr>
-                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
-                                                <td>${member.notes || 'No Notes'}</td>
                                                 <td>
-                                                    <ul>
-                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
-                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
-                                                    </ul>
+                                                    <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+
+                                                    <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                        <br>${guest.whatsapp} <br>${guest.phone}<br>${guest.email} <br>${guest.members_number} {{ __('guestlistpage.left_member') }}<br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
+                                                    </span>
                                                 </td>
-                                                ${(member.opened === 2) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                                                </td>` : ''}
-                                                ${(member.declined === 1) ? `
-                                                                                                                <td class="accordian_img_acces">
-                                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                                                </td>` : ''}
-                                            </tr>`;
-                                    }
-                                });
-
-                                accordion += `
-                                        <tr class="divider-line"></tr>
-                                    </table>
+                                                <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
+                                                <td>Allergies: ${guest.allergies || 'N/A'}</td>
+                                                <td>${guest.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal" data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">
+                                                        {{ __('guestlistpage.add_member') }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
-                                </div>`;
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="table-box">
+                                        <table>
+                                            <p class="after-line-effect">Members</p>
+                                            <tr>
+                                                <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                            </tr>`;
 
-                                // Append the accordion to the GuestList
-                                $('#GuestList').append(accordion);
-                            }
-                        });
-                    }
+                            // Loop through each member of the guest and add them only if checkin == 1
+                            guest.members.forEach(function(member) {
+                                if (member.checkin == 1) {
+                                    accordion += `
+                                        <tr class="divider-line"></tr>
+                                        <tr>
+                                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                            ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                            <td>${member.notes || 'No Notes'}</td>
+                                            <td>
+                                                <ul>
+                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                </ul>
+                                            </td>
+                                            ${(member.opened === 2) ? `
+                                                <td class="accordian_img_acces">
+                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                </td>` : ''}
+                                            ${(member.declined === 1) ? `
+                                                <td class="accordian_img_acces">
+                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                </td>` : ''}
+                                        </tr>`;
+                                }
+                            });
+
+                            accordion += `
+                                <tr class="divider-line"></tr>
+                                </table>
+                                </div>
+                            </div>`;
+
+                            // Append the accordion to the GuestList
+                            $('#GuestList').append(accordion);
+                        }
+                    });
+                }
+
 
 
                     if (filter == "not-open") {
+                        var notOpenedGuestsCount = 0;
+                        var notOpenedMembersCount = 0;
+
                         guests.forEach(function(guest) {
-                            if ((guest.opened == 0 || guest.opened == null) || guest.members.some(
-                                    member => member.opened == 0 || member.opened == null)) {
+                            // Check if guest or any member has opened == 0 or null (not open)
+                            if ((guest.opened == 0 || guest.opened == null) || guest.members.some(member => member.opened == 0 || member.opened == null)) {
+                                if (guest.opened == 0 || guest.opened == null) {
+                                    notOpenedGuestsCount++; // Count not-open guest
+                                }
+                                var br = '<br>';
+                                $('#guestMemberTotal').html(`TOTAL: ${notOpenedGuestsCount} ${br} (guests ${notOpenedGuestsCount} - members ${notOpenedMembersCount})`);
                                 // Show guest and their members if the guest is checked in
                                 var accordion = `
                                     <div class="accordion">
@@ -1828,13 +2031,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </ul>
                                                     </td>
                                                     ${(member.opened === 2) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                            </td>` : ''}
+                                                                                                <td class="accordian_img_acces">
+                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                </td>` : ''}
                                                     ${(member.declined === 1) ? `
-                                                                                            <td class="accordian_img_acces">
-                                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                            </td>` : ''}
+                                                                                                <td class="accordian_img_acces">
+                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                </td>` : ''}
                                                 </tr>`;
                                         }
                                     });
@@ -1924,13 +2127,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 </ul>
                                             </td>
                                             ${(member.opened === 2) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                            </td>` : ''}
+                                                                                <td class="accordian_img_acces">
+                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                </td>` : ''}
                                             ${(member.declined === 1) ? `
-                                                                            <td class="accordian_img_acces">
-                                                                                <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                            </td>` : ''}
+                                                                                <td class="accordian_img_acces">
+                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                </td>` : ''}
                                         </tr>`;
                                     });
 
