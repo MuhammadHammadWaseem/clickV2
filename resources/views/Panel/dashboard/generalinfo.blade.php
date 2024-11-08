@@ -390,8 +390,10 @@ float: left !important;
                         </div>
                     </div>
                 </div>
-                <button class="w-100 save t-btn" type="button"
+                <div class="col-lg-12 col-md-12">
+                    <button class="w-100 save t-btn" type="button"
                     id="submitEditEvent">{{ __('genralInfo.Save') }}</button>
+                </div>
                 </form>
             </div>
         </div>

@@ -79,6 +79,20 @@
         margin-top: 20px;
     }
 
+
+    #exampleModalCenter03 .modal-dialog {
+    max-width: 550px !important;
+}
+
+
+#settingForm label {
+    font-size: 14px;
+}
+
+#settingForm select#font_style {
+    margin: 0;
+}
+
     @media only screen and (max-width: 991px) {
         .two-btn-inline {
             display: flex;

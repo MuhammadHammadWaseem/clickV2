@@ -1571,13 +1571,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 successModal.show();
                         } else {
                             alert(response.message || 'Failed to add guest.');
+                            // toastr.success(response.message || 'Failed to add guest.');
                         }
                     },
                     error: function(xhr, status, error) {
                         // Handle validation or server errors
                         var errors = xhr.responseJSON.errors;
+                        console.log(errors);
                         $.each(errors, function(key, value) {
-                            alert(key + ": " + value);
+                            // alert(key + ": " + value);
+                            toastr.error(key + ": " + value);
                         });
                     }
                 });
@@ -1624,12 +1627,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             }
                         },
                         error: function(xhr, status, error) {
-                            // Handle validation or server errors
-                            var errors = xhr.responseJSON.errors;
-                            $.each(errors, function(key, value) {
-                                alert(key + ": " + value);
-                            });
-                        }
+                        // Handle validation or server errors
+                        var errors = xhr.responseJSON.errors;
+                        console.log(errors);
+                        $.each(errors, function(key, value) {
+                            // alert(key + ": " + value);
+                            toastr.error(key + ": " + value);
+                        });
+                    }
                     });
                 });
             });
@@ -2695,10 +2700,19 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             false; // Uncheck the checkbox
                     }
                 },
-                error: function(xhr) {
-                    alert('Something went wrong: ' + xhr
-                        .responseText);
-                }
+                // error: function(xhr) {
+                //     alert('Something went wrong: ' + xhr
+                //         .responseText);
+                // }
+                error: function(xhr, status, error) {
+                        // Handle validation or server errors
+                        var errors = xhr.responseJSON.errors;
+                        console.log(errors);
+                        $.each(errors, function(key, value) {
+                            // alert(key + ": " + value);
+                            toastr.error(key + ": " + value);
+                        });
+                    }
             });
         });
 
