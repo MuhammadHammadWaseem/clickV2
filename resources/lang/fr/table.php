@@ -57,4 +57,5 @@ return [
     'remove_guest' => 'Remove Guest',
     'no_email_provided' => 'No Email Provided',
     'open' => 'OPEN ',
+    'more_table' => 'Souhaitez-vous ajouter une autre table pour votre événement ? ',
 ];

@@ -26,12 +26,15 @@ return[
     'video_deleted_successfully' => 'Video Deleted Successfully',
     'video_deleted_message' => 'The Video has been successfully deleted.',
     'confirm_serve_meal' => 'Want To serve Your Guests a Meal?',
-    'lorem_ipsum' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'lorem_ipsum' => 'Create your menu options here. Add meal choices to ensure each guest has a personalized dining experience.',
     'yes_add_email' => 'Yes, Add Email',
     'no_dont_add_email' => 'No, I Don’t',
     'images_title' => 'Images',
     'videos_title' => 'Videos',
     'videos_support' => ' Your browser does not support the video tag.',
     'images_found' => 'No images or videos found.',
+
+    'video_added_successfully' => 'Video Added Successfully',
+    'video_added_message' => 'Your Video has been successfully added.',
 
 ];

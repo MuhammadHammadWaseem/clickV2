@@ -26,11 +26,14 @@ return [
     'video_deleted_successfully' => 'Vidéo Supprimée Avec Succès',
     'video_deleted_message' => 'La vidéo a été supprimée avec succès.',
     'confirm_serve_meal' => 'Voulez-vous servir un repas à vos invités ?',
-    'lorem_ipsum' => 'Lorem Ipsum est simplement du texte factice de l\'imprimerie et de la composition.',
+    'lorem_ipsum' => 'Créez vos options de menu ici. Ajoutez des choix de repas pour garantir à chaque invité une expérience culinaire personnalisée.',
     'yes_add_email' => 'Oui, Ajouter un E-mail',
     'no_dont_add_email' => 'Non, je ne veux pas ajouter d\'e-mail',
     'images_title' => 'Images',
     'videos_title' => 'Vidéos',
     'videos_support' => 'Votre navigateur ne prend pas en charge la balise vidéo.',
     'images_found' => 'Aucune image ou vidéo trouvée.',
+
+    'video_added_successfully' => 'Vidéo ajoutée avec succès',
+    'video_added_message' => 'Votre vidéo a été ajoutée avec succès.',
 ];

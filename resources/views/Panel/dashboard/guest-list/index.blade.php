@@ -463,6 +463,7 @@
                         <div class="two-btn-align">
                             <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
                                 data-target="#exampleModalCenter04">{{ __('table.add_table') }}</button>
+
                             <a href="/print-table/{{ $eventId }}" class="t-btn">{{ __('table.print_plan') }}</a>
                             @if ($isCorporate == 0)
                                 <button type="button" class="btn btn-primary t-btn t-btn-theme" data-toggle="modal"
@@ -525,6 +526,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeAddModalBtn"
                         data-dismiss="modal">{{ __('table.close') }}</button>
+
+                        <button type="button" data-dismiss="modal" class="d-none"
+                        id="closeAddModalBtn1">{{ __('meal.close_button') }}</button>
+
                     <button type="button" class="submit-btn btn btn-primary t-btn"
                         id="addTableButton">{{ __('table.add_table') }}</button>
                 </div>
@@ -755,9 +760,111 @@
             </div>
         </div>
     </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                    <p>{{ __('genralInfo.Share the memories') }}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="noPhotos">{{ __('genralInfo.Later') }}</button>
+                <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                    data-target="#exampleModalCenter1"><a class="text-light"
+                        href="{{ route('panel.event.photos', ['id' => $eventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                        <p>{{ __('genralInfo.Stay connected') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noR&A">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.reminder', ['id' => $eventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter09" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('table.more_table') }}</h2>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGift">{{ __('genralInfo.Later') }}</button>
+
+                    <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
+                        id="noGift2">{{ __('genralInfo.Later') }}</button>
+
+                    <button type="button" class="submit-btn btn btn-primary t-btn" id="add_meal">
+                        {{ __('genralInfo.I Do') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
+        $("#add_meal").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter04'));
+            successModal.show();
+            $("#noGift2").click();
+        });
+
+        $("#closeAddModalBtn").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+            successModal.show();
+        });
+
+        $("#noGift").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+            successModal.show();
+        });
+        $("#noPhotos").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
         // Trigger file input when the custom button is clicked
         document.getElementById('uploadtablePhoto').addEventListener('click', function() {
             document.getElementById('tablePhoto').click();
@@ -1389,6 +1496,9 @@
 
 
         $(document).ready(function() {
+            var firstModal = new bootstrap.Modal(document.getElementById('exampleModalCenter04'));
+            firstModal.show();
+
             getTable();
 
             $('#addTableButton').click(function() {
@@ -1410,8 +1520,13 @@
                     },
                     success: function(response) {
                         toastr.success("Table created Successfully!")
-                        $("#closeAddModalBtn").click();
-                        $('#createTableForm')[0].reset(); // Clear the form
+                        $('#createTableForm')[0].reset();
+                        $("#closeAddModalBtn1").click();
+                        $("#closeAddModal1").click();
+                        var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter09'));
+                        successModal.show();
+                        // $('#createTableForm')[0].reset(); // Clear the form
                         getTable();
                         countData();
                     },

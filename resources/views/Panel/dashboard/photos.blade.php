@@ -245,6 +245,32 @@
         </div>
     </div>
 
+    <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter022" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text">
+                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                    <h2>{{ __('photos.video_added_successfully') }}</h2>
+                    <p>{{ __('photos.video_added_message') }}</p>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="successVideoCloseBtn1" class="btn btn-secondary"
+                    data-dismiss="modal">{{ __('photos.close') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -499,6 +525,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Reminder & Acknowledgment Page') }}</h2>
+                        <p>{{ __('genralInfo.Stay connected') }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noR&A">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.reminder', ['id' => $currentEventId]) }}">{{ __('genralInfo.I Do') }}</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -545,6 +598,14 @@
             }
         });
 
+        $("#successmodalCloseBtn1").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
+        $("#successVideoCloseBtn1").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
         function hidemodel() {
             $("#successmodalCloseBtn1").click();
             var successModal = new bootstrap.Modal(document.getElementById(
@@ -645,6 +706,9 @@
                             toastr.success(response.success); // Show success notification
                             $('#vid').val(''); // Clear the file input
                             $('#addVideoModalCloseBtn').click(); // Close the modal
+                            var successModal = new bootstrap.Modal(document.getElementById(
+                            'exampleModalCenter022'));
+                        successModal.show();
                             // Append the video to your page
                             var newVideo = `
                                 <div class="box" id="video-box-${response.id}">
