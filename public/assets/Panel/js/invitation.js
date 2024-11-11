@@ -48,10 +48,6 @@ getapi();
 handleJSONImport();
 loadOldData2();
 
-// canv.on('object:modified', saveState);
-// canv.on('object:added', saveState);
-// canv.on('object:removed', saveState);
-
 canv.on('object:modified', function() {
   saveState();
   saveAll();
@@ -302,11 +298,6 @@ function uploadStamp(event) {
   });
 }
 
-// document.getElementById("yourFileInputId").onchange = uploadStamp;
-
-
-
-
 function applyBold() {
   const obj = canv.getActiveObject();
   if (obj && obj.type === "textbox") {
@@ -360,16 +351,6 @@ function applyShadow() {
     saveAll();
   }
 }
-// fontselector2.addEventListener("click", function fontselect2() {
-//   const obj = canv.getActiveObject();
-//   if (obj && obj.type === "textbox") {
-//     const font = this.value;
-//     obj.set({ fontFamily: font });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
 
 function changeFontStyle(selectElement) {
   const obj = canv.getActiveObject();
@@ -1150,14 +1131,6 @@ document.getElementById("deleteBtn").addEventListener("click", function () {
   }
 });
 
-// document.querySelector(".deleteBtn2").addEventListener("click", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//   }
-// });
-
 function moveForward() {
   canv.renderAll();
 
@@ -1269,27 +1242,6 @@ function textEffectsAnimationsBtn() {
   applyTextEffectsAnimations();
 }
 
-// ... (add more event listeners for other text effects)
-
-// document.getElementById("opacityRange").addEventListener("input", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     obj.set({ opacity: parseFloat(this.value) / 100 });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
-// document.getElementById("opacityRange2").addEventListener("input", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     obj.set({ opacity: parseFloat(this.value) / 100 });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
-
 function changeOpacity(value) {
   const obj = canv.getActiveObject();
   if (obj) {
@@ -1321,94 +1273,6 @@ function addText() {
   saveAll();
 }
 
-// document
-//   .getElementById("uploadSticker")
-//   .addEventListener("change", function (event) {
-//     const file = event.target.files[0];
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//       const imgObj = new Image();
-//       imgObj.src = e.target.result;
-//       imgObj.onload = function () {
-//         const sticker = new fabric.Image(imgObj);
-
-//         // Adjust sticker size to fit the canvas if it's larger
-//         if (sticker.width > canv.width || sticker.height > canv.height) {
-//           const scaleFactor = Math.min(
-//             canv.width / sticker.width,
-//             canv.height / sticker.height
-//           );
-//           sticker.scale(scaleFactor);
-//         }
-
-//         canv.add(sticker);
-//         saveState();
-//         saveAll();
-//       };
-//     };
-//     reader.readAsDataURL(file);
-//   });
-
-// Undo
-
-// document.querySelector(".deleteBtn").addEventListener("click", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//     saveAll();
-//   }
-// });
-
-// document.querySelector(".deleteBtn1").addEventListener("click", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//     saveAll();
-//   }
-// });
-// document.querySelector(".deleteBtn2").addEventListener("click", function () {
-
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//     saveAll();
-//   }
-// });
-// document.querySelector(".deleteBtn3").addEventListener("click", function () {
-
-//   const obj = canv.getActiveObject();
-//   if (obj) {
-//     canv.remove(obj);
-//     saveState();
-//     saveAll();
-//   }
-// });
-
-// document.addEventListener("keydown", function (event) {
-//   if (event.code === "Delete" || event.code === "Backspace") {
-//     const obj = canv.getActiveObject();
-//     if (obj) {
-//       canv.remove(obj);
-//       saveState();
-//       saveAll();
-//     }
-//   }
-// });
-
-
-// document.getElementById("canvasColor").addEventListener("input", function () {
-//   const color = document.getElementById("canvasColor").value;
-//   canv.setBackgroundColor(color, function () {
-
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   });
-// });
-
 function chnageBGColor() {
   const color = document.getElementById("canvasColor").value;
   canv.setBackgroundColor(color, function () {
@@ -1417,51 +1281,6 @@ function chnageBGColor() {
     saveAll();
   });
 }
-
-// document.getElementById("fontSelector").addEventListener("change", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj && obj.type === "textbox") {
-//     obj.set({ fontFamily: this.value });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
-
-// document.getElementById("textColor").addEventListener("input", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj && obj.type === "textbox") {
-//     obj.set({ fill: this.value });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
-
-// document.getElementById("fontSize").addEventListener("input", function () {
-//   const obj = canv.getActiveObject();
-//   if (obj && obj.type === "textbox") {
-//     obj.set({ fontSize: parseInt(this.value, 10) });
-//     canv.renderAll();
-//     saveState();
-//     saveAll();
-//   }
-// });
-
-// document.getElementById("saveBtn").addEventListener("click", function () {
-//   alert("Work has been saved!");
-// });
-
-// document.getElementById("downloadBtn").addEventListener("click", function () {
-//   const dataUrl = canv.toDataURL({
-//     format: "png",
-//     multiplier: 2, // Increase multiplier for higher resolution
-//   });
-//   const link = document.createElement("a");
-//   link.href = dataUrl;
-//   link.download = "canvas_image.png";
-//   link.click();
-// });
 
 canv.on("selection:created", function (options) {
   updateControls(options.target);
@@ -1531,10 +1350,7 @@ function sidebarbackaddimg() {
   document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
 }
 
-// trash.addEventListener("click", () => {
-//   canv.remove(selectedText);
-//   canv.renderAll();
-// });
+
 
 function deleteSelected() {
   const obj = canv.getActiveObject();
@@ -1542,10 +1358,6 @@ function deleteSelected() {
   canv.renderAll();
 }
 
-// trash2.addEventListener("click", () => {
-//   canv.remove(selectedText);
-//   canv.renderAll();
-// });
 
 function deleteImage() {
   canv.remove(selectedText);
@@ -1553,22 +1365,7 @@ function deleteImage() {
   canv.renderAll();
 }
 
-// textalign.addEventListener("click", () => {
-//   var center = "center";
-//   selectedText.set({ textAlign: center });
-//   canv.renderAll();
-// });
 
-// textalignleft.addEventListener("click", () => {
-//   var left = "left";
-//   selectedText.set({ textAlign: left });
-//   canv.renderAll();
-// });
-// textalignright.addEventListener("click", () => {
-//   var right = "right";
-//   selectedText.set({ textAlign: right });
-//   canv.renderAll();
-// });
 
 function showTxtTool() {
   document.querySelector("#dynamicHeading").innerText = "Editing Options";
@@ -1614,7 +1411,6 @@ function decreaseText() {
   var newFontSize = currentFontSize - 2;
   selectedText.set({ fontSize: newFontSize });
   canv.renderAll();
-  // font_number.innerText = newFontSize;
 }
 
 
@@ -1634,30 +1430,6 @@ function changeTextColor2() {
 
 const fontSelector = document.getElementById("font-selector");
 const font = document.getElementById("font");
-// fontSelector.addEventListener("click", function fontselect() {
-//   // const selectedFont = this.value;
-//   // font.style.fontFamily = selectedFont;
-//   // selectedText.set({ fontFamily: selectedFont });
-//   // canv.renderAll();
-// });
-
-// clone.addEventListener("click", function cloneTxt() {
-//   if (selectedText) {
-//     var clonedText = new fabric.IText(selectedText.text, {
-//       left: selectedText.left + 20,
-//       top: selectedText.top + 20,
-//       fontSize: selectedText.fontSize,
-//       fill: selectedText.fill,
-//       fontFamily: selectedText.fontFamily,
-//     });
-//     canv.add(clonedText);
-//     clonedText.set("zIndex", 100);
-//     canv.bringForward(clonedText);
-//     canv.moveTo(object, clonedText);
-//     canv.renderAll();
-//   }
-//   canv.renderAll();
-// });
 
 function downloadJSON() {
   const json = JSON.stringify(canv.toJSON());
@@ -1690,79 +1462,6 @@ function downloadSVG() {
   a.click();
   URL.revokeObjectURL(url);
 }
-
-// export1.addEventListener("click", async () => {
-//   try {
-//     saveData();
-//     const pdfDoc = await PDFLib.PDFDocument.create();
-//     const page = pdfDoc.addPage([450, 680]);
-
-//     const imgData = canv.toDataURL("image/png");
-
-//     const image = await pdfDoc.embedPng(imgData);
-//     const { width, height } = image.scale(1);
-//     page.drawImage(image, {
-//       x: 0,
-//       y: 0,
-//       width,
-//       height,
-//       opacity: 1,
-//     });
-
-//     const pdfBytes = await pdfDoc.save();
-//     const pdfBlob = new Blob([pdfBytes], {
-//       type: "application/pdf",
-//     });
-//     const downloadLink = document.createElement("a");
-//     if (typeof window.URL.createObjectURL === "undefined") {
-//       if (typeof webkitURL !== "undefined") {
-//         window.URL = webkitURL;
-//       } else {
-//         throw new Error("Your browser does not support downloading files.");
-//       }
-//     }
-//     downloadLink.href = window.URL.createObjectURL(pdfBlob);
-//     downloadLink.download = "output.pdf";
-//     downloadLink.click();
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// });
-
-// var imageInput = document.getElementById("imageInput");
-
-// imageInput.addEventListener("change", function (e) {
-//   var files = e.target.files;
-
-//   if (files) {
-//     for (var i = 0; i < files.length; i++) {
-//       var file = files[i];
-//       var reader = new FileReader();
-//       reader.onload = function (event) {
-//         var img = new Image();
-//         img.src = event.target.result;
-//         img.onload = function () {
-//           const desiredWidth = 200;
-//           const desiredHeight = 200;
-//           img.scaleX = desiredWidth / img.width;
-//           img.scaleY = desiredHeight / img.height;
-//           var fabricImage = new fabric.Image(img, {
-//             left: 100,
-//             top: 100,
-//             width: img.width,
-//             height: img.height,
-//             scaleX: img.scaleX,
-//             scaleY: img.scaleY,
-//             zIndex: 50,
-//           });
-//           addImageToCanvas(fabricImage);
-//           fabricImage.set("zIndex", 50), fabricImage.sendToBack();
-//         };
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   }
-// });
 
 function addImageToCanvas(fabricImage) {
   canv.add(fabricImage);
@@ -2017,64 +1716,9 @@ function handleSVGImport(event) {
   }
 }
 
-// addsticker.addEventListener("click", () => {
-//   sideshow.style.display == "none"
-//     ? (sideshow.style.display = "inline-block")
-//     : (sideshow.style.display = "none");
-// });
-// document.getElementById("imageInput1").addEventListener("change", function (e) {
-//   var fileInput = e.target;
-//   var file = fileInput.files[0];
-//   if (file) {
-//     var reader = new FileReader();
-
-//     reader.onload = function (e) {
-//       var imgURL = e.target.result;
-
-//       fabric.Image.fromURL(imgURL, function (img) {
-//         canv.setBackgroundImage(img, canv.renderAll.bind(canv), {
-//           scaleX: canv.width / img.width,
-//           scaleY: canv.height / img.height,
-//         });
-//       });
-//     };
-
-//     reader.readAsDataURL(file);
-//   }
-// });
 
 var API_KEY = "39819870-b0f877f9b101769c1f36d42d9";
 var resultsDiv = document.getElementById("stickerList");
-
-// document.getElementById("btnSearch").addEventListener("click", (ev) => {
-//   ev.preventDefault();
-//   var searchTerm = document.getElementById("searchInput").value;
-//   var URL = `https://pixabay.com/api/?key=39819870-b0f877f9b101769c1f36d42d9&q= ${encodeURIComponent(
-//     searchTerm
-//   )}&safeSearch=true`;
-//   var spinner = `<div class="spinner-border text-primary" role="status">
-//   <span class="visually-hidden">Loading...</span>
-//   </div>`;
-//   document.getElementById("btnSearch").innerHTML = spinner;
-//   fetch(URL)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       var html = "<br>";
-//       if (data.totalHits > 0) {
-//         data.hits.forEach(function (hit, i) {
-//           html += `<img src="${hit.previewURL}" alt="${hit.tags}" width="150px" height="150px"  style='z-index: -10'  >`;
-//           stickers.push({ src: hit.previewURL });
-//         });
-//         resultsDiv.innerHTML = html;
-//       } else {
-//         resultsDiv.innerHTML = "No hits";
-//       }
-//       document.getElementById("btnSearch").innerText = `Search`;
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//     });
-// });
 
 function stickerLoad(data) {
   var spinner = `<div class="spinner-border text-primary" role="status">
@@ -2107,22 +1751,6 @@ function show() {
   document.querySelector(".sidebaraddtext").style.display = "none";
   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
 }
-
-// resultsDiv.addEventListener("click", (event) => {
-//   if (event.target.tagName === "IMG") {
-//     const clickedImgSrc = event.target.src;
-
-//     const clickedSticker = stickers.find(
-//       (sticker) => sticker.src === clickedImgSrc
-//     );
-
-//     if (clickedSticker) {
-//       addStickerToCanvas(clickedSticker);
-//       sideshow.style.display = "none";
-//     }
-//   }
-// });
-
 
 function addStickerToCanvas(sticker) {
   fabric.Image.fromURL(
@@ -2332,30 +1960,6 @@ function saveAll() {
   }
 }
 
-// var imgDiv = document.getElementById('imgDiv');
-
-// for (let i = 0; i < stickers1.length; i++) {
-//   const colDiv = document.createElement('div');
-//   colDiv.className = 'col-6 mb-3';
-
-//   const img = document.createElement('img');
-//   img.src = stickers1[i];
-//   img.setAttribute('height', '200px');
-//   img.setAttribute('width', '200px');
-//   img.setAttribute('id', `img_${i}`);
-
-//   img.addEventListener('click', (event) => {
-//     const clickedImgSrc = event.target.src;
-//     const clickedSticker = stickers1.find((sticker) => sticker === clickedImgSrc);
-//     if (clickedSticker) {
-//       addStickerToCanvas1(clickedSticker);
-//     }
-//   });
-
-//   colDiv.appendChild(img);
-//   imgDiv.appendChild(colDiv);
-// }
-
 const stickers1 = [];
 function loadCardImagesFromDB(data) {
 
@@ -2412,15 +2016,6 @@ for (let i = 0; i < stickers1.length; i++) {
   colDiv.appendChild(img);
   imgDiv.appendChild(colDiv);
 }
-// function addStickerToCanvas(sticker) {
-//   fabric.Image.fromURL(sticker, (img) => {
-//     img.set({
-//       scaleX: canv.width / img.width,
-//       scaleY: canv.height / img.height,
-//     });
-//     canv.setBackgroundImage(img, canv.renderAll.bind(canv));
-//   }, { crossOrigin: 'Anonymous' });
-// }
 
 can.addEventListener("click", function () {
   sideshow.style.display = "none";
@@ -2533,20 +2128,6 @@ async function loadOldData2() {
       }
     });
 
-    // document
-    //   .getElementById("downloadBtn3")
-    //   .addEventListener("click", function () {
-    //     const dataUrl = canv.toDataURL({
-    //       format: "png",
-    //       multiplier: 2, // Increase multiplier for higher resolution
-    //     });
-    //     const link = document.createElement("a");
-    //     link.href = dataUrl;
-    //     link.download = "canvas_image.png";
-    //     link.click();
-    //   });
-
-
     canv.on("selection:created", function (options) {
       updateControls(options.target);
     });
@@ -2590,29 +2171,6 @@ function dwnPDF() {
   link.click();
 }
 
-// function loadBgImagesFromDB(imgData) {
-
-//   let doc = document.getElementById("bgImgData");
-//   if (imgData.length > 0) {
-//     let tags = "";
-//     for (let i = 0; i < imgData.length; i++) {
-//       tags +=
-//         "<label class='borderPc py-2' >" +
-//         "<input type='radio' onclick='backgroundSelecetor(this.value)' name='test' class='bgName' value='" +
-//         imgData[i].img +
-//         "' id='" +
-//         imgData[i].img +
-//         "' >" +
-//         "<img src='https://clickadmin.searchmarketingservices.online/eventcards/" +
-//         imgData[i].img +
-//         "' alt='Option 1'  style='z-index: -10'>" +
-//         "</label>";
-//     }
-//     doc.innerHTML = tags;
-//   } else {
-//     doc.innerHTML = "";
-//   }
-// }
 function loadBgImagesFromDB(imgData) {
   let selectedBackground;
   $.ajax({
@@ -2653,19 +2211,6 @@ function renderBgImages(imgData, selectedBackground) {
     doc.innerHTML = "";
   }
 }
-
-// function updateCanvasHistory() {
-//   canvasHistory.push(canv.toJSON());
-// }
-// function addToHistory() {
-//   const jsonData = JSON.stringify(canv.toJSON());
-//   moveHistory = moveHistory.slice(0, currentIndex + 1); // Remove future history
-//   moveHistory.push(jsonData);
-//   if (moveHistory.length > 10) {
-//     moveHistory.shift();
-//   }
-//   currentIndex = moveHistory.length - 1;
-// }
 
 function switchToOld() {
   window.location =
@@ -2892,9 +2437,6 @@ function AddCity() {
   canv.requestRenderAll();
 }
 
-
-//UNDO
-
 function saveState() {
   var currentState = JSON.stringify(canv.toJSON()); // Save canvas state
   if (currentIndex < undoStack.length - 1) {
@@ -2955,7 +2497,6 @@ function toggleSide(element) {
   if (element.id === 'front') {
     handleJSONImport();
   } else if (element.id === 'back') {
-    // Add logic for editing the back side
     handleJSONImport();
   }
 }
@@ -2972,11 +2513,3 @@ function loadCanvasState(state) {
     canv.on('object:removed', saveState);
   });
 }
-
-// document.getElementById("undoBtn").addEventListener("click", function () {
-//   undo();
-// });
-
-// document.getElementById("redoBtn").addEventListener("click", function () {
-//   redo();
-// })
