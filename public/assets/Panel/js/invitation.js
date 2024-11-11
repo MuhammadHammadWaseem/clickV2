@@ -361,31 +361,54 @@ function changeFontStyle(selectElement) {
   }
 }
 
-// Function to apply letter spacing text effect
-function applyLetterSpacing() {
+function increaseLetterSpacing() {
+  adjustLetterSpacing(5); // Increase spacing by 5
+}
+
+function decreaseLetterSpacing() {
+  adjustLetterSpacing(-5); // Decrease spacing by 5
+}
+
+function adjustLetterSpacing(amount) {
   const obj = canv.getActiveObject();
   if (obj && obj.type === "textbox") {
     const letterSpacing = obj.get("charSpacing") || 0;
-    const newLetterSpacing = letterSpacing === 5 ? 0 : letterSpacing + 5; // Increment letter spacing
-    obj.set({ charSpacing: newLetterSpacing });
-    canv.renderAll();
-    saveState();
-    saveAll();
+    const newLetterSpacing = letterSpacing + amount;
+
+    // Set a limit if desired, for example, prevent negative spacing
+    if (newLetterSpacing >= 0) {
+      obj.set({ charSpacing: newLetterSpacing });
+      canv.renderAll();
+      saveState();
+      saveAll();
+    }
   }
 }
 
-// Function to apply line height text effect
-function applyLineHeight() {
+function increaseLineHeight() {
+  adjustLineHeight(0.5); // Increase line height by 0.5
+}
+
+function decreaseLineHeight() {
+  adjustLineHeight(-0.5); // Decrease line height by 0.5
+}
+
+function adjustLineHeight(amount) {
   const obj = canv.getActiveObject();
   if (obj && obj.type === "textbox") {
     const lineHeight = obj.get("lineHeight") || 1;
-    const newLineHeight = lineHeight === 1.5 ? 1 : lineHeight + 0.5; // Increment line height
-    obj.set({ lineHeight: newLineHeight });
-    canv.renderAll();
-    saveState();
-    saveAll();
+    const newLineHeight = lineHeight + amount;
+
+    // Set a limit if desired, for example, prevent negative line height
+    if (newLineHeight >= 0.5) {  // Minimum line height of 0.5
+      obj.set({ lineHeight: newLineHeight });
+      canv.renderAll();
+      saveState();
+      saveAll();
+    }
   }
 }
+
 
 // Function to apply border text effect
 function applyBorder() {
@@ -1188,14 +1211,6 @@ function underlineBtn() {
 
 function shadowBtn() {
   applyShadow();
-}
-
-function letterSpacingBtn() {
-  applyLetterSpacing();
-}
-
-function lineHeightBtn() {
-  applyLineHeight();
 }
 
 function borderBtn() {

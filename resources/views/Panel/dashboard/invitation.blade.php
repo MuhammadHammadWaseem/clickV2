@@ -1000,6 +1000,44 @@
                                                     </a></li>
                                             </ul>
                                         </div>
+                                        <div class="font-size-styling">
+                                            <h4 class="disable-text-selection">Letter Spacing</h4>
+                                            <ul>
+                                                <li><a onclick="increaseLetterSpacing()"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M23.75 13.75H16.25V6.25H13.75V13.75H6.25V16.25H13.75V23.75H16.25V16.25H23.75V13.75Z"
+                                                                fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a onclick="decreaseLetterSpacing()"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="font-size-styling">
+                                            <h4 class="disable-text-selection">Line Height</h4>
+                                            <ul>
+                                                <li><a onclick="increaseLineHeight()"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M23.75 13.75H16.25V6.25H13.75V13.75H6.25V16.25H13.75V23.75H16.25V16.25H23.75V13.75Z"
+                                                                fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                                <li><a onclick="decreaseLineHeight()"><svg width="30" height="30"
+                                                            viewBox="0 0 30 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
+                                                        </svg>
+                                                    </a></li>
+                                            </ul>
+                                        </div>
                                         <div class="font-color-styling">
                                             <h4 class="disable-text-selection">Font Color</h4>
                                             <input type="color" id="colorPicker" oninput="changeTextColor2()"
@@ -1027,10 +1065,6 @@
                                                         onclick="textFlipBtn()">Flip Text</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="textTransformBtn()">Text Transform</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="letterSpacingBtn()">Letter Spacing</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="lineHeightBtn()">Line Height</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
                                                         onclick="shadowBtn()">Text Shadow</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;"
