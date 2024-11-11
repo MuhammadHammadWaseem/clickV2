@@ -384,7 +384,7 @@
                         </div>
                     </div>
                     <div class="card-styling-box">
-                        <a type="button" data-toggle="modal" data-target="#exampleModalCenter02">
+                        <a type="button" data-toggle="modal" title="Envelope and Background Settings" data-target="#exampleModalCenter02">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
