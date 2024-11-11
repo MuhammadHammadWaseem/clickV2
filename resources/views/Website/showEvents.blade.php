@@ -88,18 +88,18 @@
             position: absolute;
             bottom: 50px;
             z-index: 99;
-            right: -150px;
-            top: auto !important;
+            right: 150px;
+            top: 105% !important;
             width: auto !important;
             height: auto !important;
         }
 
         button.slide-arrow.next-arrow.slick-arrow {
-            right: -300px;
+            right: 0px;
         }
 
         .slider-invitation-box-main .text {
-            max-width: 70%;
+            max-width: 80%;
             justify-content: flex-start;
             padding-top: 20px;
         }
@@ -464,10 +464,38 @@
             <div class="page-design-hero-section">
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
-                        <div class="text">
-                            <h2>{{ $type->title }}</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
+                        {{-- {{ dd($type->title) }} --}}
+                        @if ($type->title == 'WEDDING')
+                            <div class="text">
+                                <h2>Wedding Templates</h2>
+                                <p>Celebrate Love with Beautiful Wedding Invitations.</p>
+                            </div>
+                        @elseif ($type->title == 'CORPORATE')
+                            <div class="text">
+                                <h2>Corporate Templates</h2>
+                                <p>Professional Corporate Invitations for Every Occasion.</p>
+                            </div>
+                        @elseif ($type->title == 'ANNIVERSARY')
+                            <div class="text">
+                                <h2>Anniversary Templates</h2>
+                                <p>Mark Every Milestone with Elegant Anniversary Invitations.</p>
+                            </div>
+                        @elseif ($type->title == 'BAPTISM')
+                            <div class="text">
+                                <h2>Baptism Templates</h2>
+                                <p>Cherish This Sacred Moment with Baptism Invitations.</p>
+                            </div>
+                        @elseif ($type->title == 'BABY-SHOWER')
+                            <div class="text">
+                                <h2>Baby Shower Templates</h2>
+                                <p>Welcome the Little One with Adorable Baby Shower Invitations.</p>
+                            </div>
+                        @elseif ($type->title == 'BIRTHDAY')
+                            <div class="text">
+                                <h2>Birthday Templates</h2>
+                                <p>Make Every Birthday Special with Personalized Invitations.</p>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-lg-8 col-md-12">
                         <div class="gif-box">
@@ -497,10 +525,50 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 bg_color">
-                    <div class="text">
-                        <h2>Get Professional’s Designed Cards</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    </div>
+                    @if ($type->title == 'WEDDING')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>Get ready to fall in love with our elegant wedding invitations wherein we blend
+                                creativity and professionalism to bring you and your invitees utmost happiness. From our
+                                wide collection of wedding templates, choose and customize that suits your distinct
+                                style.</p>
+                        </div>
+                    @elseif ($type->title == 'CORPORATE')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>In the business world, the first impression is the last. Click Invitation knowing the
+                                importance of professionalism, creates corporate invites that only radiate
+                                professionalism and timelessness. We promise to make you stand out in style!</p>
+                        </div>
+                    @elseif ($type->title == 'ANNIVERSARY')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>Whether it's your first anniversary or your twenty-fifth, Click Invitation has a variety
+                                of anniversary invites that are not only visually enticing but also memorable. Celebrate
+                                your year(s) of togetherness with our ultra-chic digital anniversary invitations..</p>
+                        </div>
+                    @elseif ($type->title == 'BAPTISM')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>Make a lasting impression with our professionally designed baptism invitations. Our
+                                elegant designs, personalized touches, and attention to detail will capture the hearts
+                                of your guests and create a memorable experience.</p>
+                        </div>
+                    @elseif ($type->title == 'BABY-SHOWER')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>The excitement of sharing good news about your little one is immeasurable! But you can
+                                share it with Click Invitation’s artistic digital invites that speak volumes, as we
+                                weave parents’ excitement into elegant designs.</p>
+                        </div>
+                    @elseif ($type->title == 'BIRTHDAY')
+                        <div class="text">
+                            <h2>Professionally Designed Cards That Capture Instant Attention</h2>
+                            <p>Grow wiser and older with Click Invitation! A birthday is another excuse to bring all
+                                your loved ones together. And our professionally designed birthday invitations are the
+                                perfect way to bring a broad smile to your guests' faces.</p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -509,22 +577,98 @@
         <div class="container-fluid effortless-section-main">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <div class="text">
-                        <h2>Effortless Inviting And RSVP</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing software like Aldus PageMaker including
-                            versions of Lorem Ipsum.</p>
-                        @guest
-                            <a href="/register" class="btn t-btn">Cutomize</a>
-                        @endguest
-                        @auth
-                            <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
-                        @endauth
-                    </div>
+                    @if ($type->title == 'WEDDING')
+                        <div class="text">
+                            <h2>Effortless Inviting and RSVP</h2>
+                            <p>Save yourself from the hassle of traditional RSVP and chaotic distribution of wedding
+                                invitations since Click Invitation makes the process of inviting and RSVP a smooth
+                                sailing. Track the responses of your guests with our online RSVP to check who has
+                                responded and make your wedding arrangements accordingly. </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @elseif ($type->title == 'CORPORATE')
+                        <div class="text">
+                            <h2>Effortless Inviting And RSVP</h2>
+                            <p>Creating, designing, and sending business invitations, along with RSVPs, is not a piece
+                                of cake. However, Click Invitation, with its artistry, makes the process of inviting and
+                                RSVPing a smooth sail. Elevate your corporate events with our intuitive online
+                                invitation and RSVP platform. Customize your invitations, send them with ease, and track
+                                responses in real-time. </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @elseif ($type->title == 'ANNIVERSARY')
+                        <div class="text">
+                            <h2>Effortless Inviting And RSVP</h2>
+                            <p>Your anniversary is evidence of genuine affection. Therefore, it should be filled with
+                                tranquility and moments of happiness. Say “no” to traditional RSVPs and paper
+                                invitations. Click Invitation is the perfect choice to make your anniversary filled with
+                                cherishable moments. With our online RSVP and anniversary invitations, you can create a
+                                lavish gathering with a peaceful inviting process.
+                            </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @elseif ($type->title == 'BAPTISM')
+                        <div class="text">
+                            <h2>Effortless Inviting And RSVP</h2>
+                            <p>Simplify your baptism planning with our seamless online invitation and RSVP platform.
+                                Create stunning digital invitations, effortlessly share them, and easily track RSVPs,
+                                all in one place. Make your special day stress-free and memorable.
+                            </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @elseif ($type->title == 'BABY-SHOWER')
+                        <div class="text">
+                            <h2>Effortless Inviting And RSVP</h2>
+                            <p>Baby shower bliss shouldn't be ruined by the hectic process of inviting guests and
+                                waiting for responses. Click Invitation is here to make your celebrations easier with
+                                effortless invitations and RSVPs. Now you can send digital invites with a single tap and
+                                quickly track responses from your guests.
+                            </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @elseif ($type->title == 'BIRTHDAY')
+                        <div class="text">
+                            <h2>Effortless Inviting And RSVP</h2>
+                            <p>Make your birthday free from chaos and unnecessary stress of guests responding late and
+                                distributing invitation cards door to door. Save your precious time with Click
+                                Invitation’s effortless digital invites and seamless online RSVP. Our user-friendly
+                                website guarantees a smooth experience from beginning to end. Our invitations will set
+                                the tone for a memorable event, whether you're organizing a little family get-together
+                                or a large celebration.
+                            </p>
+                            @guest
+                                <a href="/register" class="btn t-btn">Cutomize</a>
+                            @endguest
+                            @auth
+                                <a href="{{ route('panel.index') }}" class="btn t-btn">Cutomize</a>
+                            @endauth
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="img-box">
@@ -538,11 +682,43 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="all-template-box">
-                        <div class="text">
-                            <h2>Explore More Templates</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s</p>
-                        </div>
+                        @if ($type->title == 'WEDDING')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>Have a look at our stylish and timeless wedding digital invites that are as unique as
+                                    your love story. </p>
+                            </div>
+                        @elseif ($type->title == 'CORPORATE')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>Have a glance at our wide range of corporate digital invitation templates.</p>
+                            </div>
+                        @elseif ($type->title == 'ANNIVERSARY')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>Discover more and design more with our sophisticated anniversary invitations
+                                    collection.</p>
+                            </div>
+                        @elseif ($type->title == 'BAPTISM')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>Dive deeper into our wide range of baptism invitation templates and customize
+                                    according to your liking.</p>
+                            </div>
+                        @elseif ($type->title == 'BABY-SHOWER')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>With our wide range of baby shower invitation templates, explore and choose the one
+                                    that suits your distinctive personality.</p>
+                            </div>
+                        @elseif ($type->title == 'BIRTHDAY')
+                            <div class="text">
+                                <h2>Explore More Templates</h2>
+                                <p>With our wide range of birthday invitation templates, explore and choose the one that
+                                    suits your distinctive personality.
+                                </p>
+                            </div>
+                        @endif
 
                         <div class="all-customize-temp-boxes">
                             @foreach ($templates as $template)
