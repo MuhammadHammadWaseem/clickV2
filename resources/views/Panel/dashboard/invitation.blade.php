@@ -920,7 +920,7 @@
                                         </div>
                                         <div class="text-styling-things">
                                             <ul>
-                                                <li><a onclick="boldBtn()"><svg width="30" height="30"
+                                                <li><a onclick="boldBtn()" title="Bold"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -928,7 +928,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="italicBtn()"><svg width="30" height="30"
+                                                <li><a onclick="italicBtn()" title="Italic"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -936,7 +936,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="textRotationBtn()"><svg width="30" height="30"
+                                                <li><a onclick="textRotationBtn()" title="Text Rotation"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -944,7 +944,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="borderBtn()"><svg width="30" height="30"
+                                                <li><a onclick="borderBtn()" title="Border"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -952,7 +952,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="moveForward()"><svg width="30" height="30"
+                                                <li><a onclick="moveForward()" title="Move Forward"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -960,7 +960,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="moveBackword()"><svg width="30" height="30"
+                                                <li><a onclick="moveBackword()" title="Move Backward"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -968,7 +968,7 @@
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a id="deleteBtn"><svg width="30" height="30"
+                                                <li><a id="deleteBtn" title="Delete"><svg width="30" height="30"
                                                             viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
