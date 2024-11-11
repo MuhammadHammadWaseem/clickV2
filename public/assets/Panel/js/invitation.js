@@ -48,18 +48,18 @@ getapi();
 handleJSONImport();
 loadOldData2();
 
-canv.on('object:modified', function() {
-  saveState();
-  saveAll();
-});
-canv.on('object:added', function() {
-  saveState();
-  saveAll();
-});
-canv.on('object:removed', function() {
-  saveState();
-  saveAll();
-});
+// canv.on('object:modified', function() {
+//   saveState();
+//   // saveAll();
+// });
+// canv.on('object:added', function() {
+//   saveState();
+//   // saveAll();
+// });
+// canv.on('object:removed', function() {
+//   saveState();
+//   // saveAll();
+// });
 
 
 
@@ -2437,30 +2437,50 @@ function AddCity() {
   canv.requestRenderAll();
 }
 
+// function saveState() {
+//   var currentState = JSON.stringify(canv.toJSON()); // Save canvas state
+//   if (currentIndex < undoStack.length - 1) {
+//     undoStack.splice(currentIndex + 1); // Clear redo states
+//   }
+//   undoStack.push(currentState);
+//   if (undoStack.length > maxUndoStackSize) {
+//     undoStack.shift(); // Remove oldest state if stack size exceeds limit
+//   }
+//   currentIndex = undoStack.length - 1; // Update current index
+//   redoStack = []; // Clear redo stack
+// }
+
 function saveState() {
-  var currentState = JSON.stringify(canv.toJSON()); // Save canvas state
+  // Clear redoStack on a new action
+  redoStack = [];
+
+  // Save canvas state as JSON string
+  const currentState = JSON.stringify(canv.toJSON());
+
+  // Only push the state if it's a new change
   if (currentIndex < undoStack.length - 1) {
-    undoStack.splice(currentIndex + 1); // Clear redo states
+    undoStack = undoStack.slice(0, currentIndex + 1);
   }
+
+  // Push current state to undo stack
   undoStack.push(currentState);
-  if (undoStack.length > maxUndoStackSize) {
-    undoStack.shift(); // Remove oldest state if stack size exceeds limit
-  }
-  currentIndex = undoStack.length - 1; // Update current index
-  redoStack = []; // Clear redo stack
+  currentIndex = undoStack.length - 1;
 }
 
 function undo() {
   if (currentIndex > 0) {
+    redoStack.push(undoStack[currentIndex]);
     currentIndex--;
     loadCanvasState(undoStack[currentIndex]);
   }
 }
 
 function redo() {
-  if (currentIndex < undoStack.length - 1) {
+  if (redoStack.length > 0) {
+    const state = redoStack.pop();
+    undoStack.push(state);
     currentIndex++;
-    loadCanvasState(undoStack[currentIndex]);
+    loadCanvasState(state);
   }
 }
 
@@ -2503,13 +2523,14 @@ function toggleSide(element) {
 
 
 function loadCanvasState(state) {
-  canv.off('object:added', saveState);
-  canv.off('object:modified', saveState);
-  canv.off('object:removed', saveState);
-  canv.loadFromJSON(state, function () {
+  canv.off("object:modified", saveState);
+  canv.off("object:added", saveState);
+  canv.off("object:removed", saveState);
+
+  canv.loadFromJSON(state, () => {
     canv.renderAll();
-    canv.on('object:added', saveState);
-    canv.on('object:modified', saveState);
-    canv.on('object:removed', saveState);
+    canv.on("object:modified", saveState);
+    canv.on("object:added", saveState);
+    canv.on("object:removed", saveState);
   });
 }
