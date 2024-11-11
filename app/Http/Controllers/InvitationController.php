@@ -264,10 +264,8 @@ class InvitationController extends Controller
             $imagePath = public_path('card-images/' . $request->event_id . 'Back' . '.png');
             if (file_exists($imagePath)) {
                 unlink($imagePath);
-                \Log::info("Image deleted: " . $imagePath);
             }
             file_put_contents($imagePath, $decodedImage);
-            \Log::info("Image updated: " . $imagePath);
             $requestData = json_encode($request->all(), JSON_PRETTY_PRINT);
             $filename = $request->event_id . 'Back' . '.json';
             $filePath = public_path('Json/' . $filename);
