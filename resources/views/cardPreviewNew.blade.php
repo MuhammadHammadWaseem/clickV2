@@ -20,7 +20,7 @@
                 <div class="flip-card" id="flipCard">
                     <canvas id="canvas" style=" scale: 0.4 !important;">Your browser doesn't support canvas</canvas>
                     @if ($cardData[0]->two_sided == 1)
-                    <img src="{{ asset('/card-images/' . $eventData[0]->id_event . 'Back.png') }}" class="back" id="cardImage" alt="">
+                    <img src="{{ asset('/card-images/' . $eventData[0]->id_event . 'Back.png') }}?t={{ time() }}" class="back" id="cardImage" alt="">
                     @endif
                 </div>
             </div>
