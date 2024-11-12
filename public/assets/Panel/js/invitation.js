@@ -62,6 +62,60 @@ loadOldData2();
 // });
 
 
+// Initialize the canvas
+const canvasWidth = canv.width;
+const canvasHeight = canv.height;
+const tolerance = 5; // Set tolerance for center alignment
+
+// Define center line objects (they'll be added and removed dynamically)
+const centerLineVertical = new fabric.Line([canvasWidth / 2, 0, canvasWidth / 2, canvasHeight], {
+  stroke: 'red',
+  strokeWidth: 1,
+  selectable: false,
+  evented: false,
+});
+
+const centerLineHorizontal = new fabric.Line([0, canvasHeight / 2, canvasWidth, canvasHeight / 2], {
+  stroke: 'red',
+  strokeWidth: 1,
+  selectable: false,
+  evented: false,
+});
+
+// Function to add or remove center lines based on alignment
+function updateAlignmentLines(object) {
+  const objectCenterX = object.left + (object.width * object.scaleX) / 2;
+  const objectCenterY = object.top + (object.height * object.scaleY) / 2;
+
+  // Snap to center vertically
+  if (Math.abs(objectCenterX - canvasWidth / 2) < tolerance) {
+    if (!canv.contains(centerLineVertical)) canv.add(centerLineVertical);
+    object.left = (canvasWidth / 2) - (object.width * object.scaleX) / 2;
+  } else {
+    canv.remove(centerLineVertical);
+  }
+
+  // Snap to center horizontally
+  if (Math.abs(objectCenterY - canvasHeight / 2) < tolerance) {
+    if (!canv.contains(centerLineHorizontal)) canv.add(centerLineHorizontal);
+    object.top = (canvasHeight / 2) - (object.height * object.scaleY) / 2;
+  } else {
+    canv.remove(centerLineHorizontal);
+  }
+
+  canv.renderAll();
+}
+
+
+// Event listeners for alignment lines
+canv.on('object:moving', (e) => updateAlignmentLines(e.target));
+canv.on('mouse:up', () => {
+  // Remove lines when the object is no longer being moved
+  canv.remove(centerLineVertical);
+  canv.remove(centerLineHorizontal);
+  canv.renderAll();
+});
+
 
 //get templates 
 function getTemplates() {
