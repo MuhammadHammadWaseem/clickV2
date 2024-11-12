@@ -163,5 +163,8 @@ return[
     'meal' => 'Repas',
     'table' => 'Table',
     'add_more_guest' => 'Souhaitez-vous ajouter un autre invité pour votre événement ?',
-
+    'open' => 'OUVRIR',
+    'of' => 'DE',
+    'allowed' => 'PERMISE',
+    'all members allowed added' => 'Tous les membres autorisés ont ajouté.',
 ];

@@ -164,4 +164,8 @@ return[
     'meal' => 'Meal',
     'table' => 'Table',
     'add_more_guest' => 'Would You Like To Add Another Guest For Your Event?',
+    'open' => 'OPEN ',
+    'of' => 'OF ',
+    'allowed' => 'ALLOWED ',
+    'all members allowed added' => 'All members allowed added',
 ];
