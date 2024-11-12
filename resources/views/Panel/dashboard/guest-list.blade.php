@@ -1035,7 +1035,7 @@ p#guestMemberTotal {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"
                         id="EditGuestClose">{{ __('guestlistpage.Cancel') }}</button>
-                    <button type="button" class="btn btn-primary submit-btn"
+                    <button type="button" class="btn submit-btn"
                         id="submitEditGuestForm">{{ __('guestlistpage.update') }}</button>
                 </div>
             </div>
@@ -2722,8 +2722,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         $('#submitEditGuestForm').click(function(e) {
             e.preventDefault();
             var guestId = $(this).data('id');
-            var formData = $('#EditguestForm')
-                .serialize(); // Serialize form data
+            var formData = $('#EditguestForm').serialize();
 
             $.ajax({
                 url: "{{ route('panel.event.guests.update', ':id') }}"
@@ -2731,10 +2730,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 type: "POST",
                 data: formData,
                 success: function(response) {
-                    // Optionally reload guest list
-                    showGuest("1");
-                    toastr.success(
-                        'Guest updated successfully');
+                    if(response.error){
+                        toastr.error(response.error);
+                    }else{
+                        
+                        // Optionally reload guest list
+                        showGuest("1");
+                        toastr.success('Guest updated successfully');
                     $('#EditGuestClose').click();
                     $('#modifier').css('display', 'none');
                     $('#modifierButton').css('display', 'none');
@@ -2744,11 +2746,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         clickedCheckbox.checked =
                             false; // Uncheck the checkbox
                     }
+                }
                 },
-                // error: function(xhr) {
-                //     alert('Something went wrong: ' + xhr
-                //         .responseText);
-                // }
                 error: function(xhr, status, error) {
                         // Handle validation or server errors
                         var errors = xhr.responseJSON.errors;
@@ -3135,6 +3134,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         } else {
                             $('#edit_members').show();
                             $('#members_label').show();
+                            $('#edit_members').attr('min', response.members.length);
                             $('#edit_members').val(response.members_number);
                         }
                         $('#edit_notes').val(response.notes);

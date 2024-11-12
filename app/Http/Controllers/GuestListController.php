@@ -483,6 +483,7 @@ class GuestListController extends Controller
 
         if ($guest) {
             // Return a view or JSON response depending on your use case
+            $guest['members'] = Guest::where('parent_id_guest', $guest->id_guest)->get();
             return response()->json($guest);
         }
 
@@ -493,6 +494,15 @@ class GuestListController extends Controller
     public function update(Request $request)
     {
         $guest = Guest::where('id_guest', $request->idguest)->first();
+        $members = Guest::where('parent_id_guest', $request->idguest)->get();
+
+        if($request->members < $members->count()){
+            return response()->json(
+                ["error" => "Cannot set number of members below existing members."
+                ]
+            );
+        }
+
         if ($guest) {
             $guest->name = $request->name;
             $guest->titleGuest = $request->title;
