@@ -53,7 +53,7 @@
             <div id="container" class="letter">
                 <div class="flip-card" id="flipCard">
                     <canvas id="canvas" style=" scale: 0.4 !important;">Your browser doesn't support canvas</canvas>
-                    <img src="{{ asset('/card-images/' . $eventData[0]->id_event . 'Back.png') }}" class="back"
+                    <img src="{{ asset('/card-images/' . $eventData[0]->id_event . 'Back.png') }}?t={{ time() }}" class="back"
                         id="cardImage" alt="">
                 </div>
             </div>

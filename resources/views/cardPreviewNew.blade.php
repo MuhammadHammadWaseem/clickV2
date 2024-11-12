@@ -51,9 +51,9 @@
         .flip-card .front, .flip-card .back {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 98%;
             backface-visibility: hidden;
-            top: 0;
+            top: -2px;
             left: 0;
         }
 
