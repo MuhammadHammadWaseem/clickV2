@@ -1691,9 +1691,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                 ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                 <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                    <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                    <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -1794,9 +1794,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                                            <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                                             ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -1890,9 +1890,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                             ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -1989,9 +1989,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                         <span class="${guest.declined == 0 ? 'd-none' : ''}">
-                                                            <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                             ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -2089,9 +2089,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
                                                     <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                        <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                        <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                         ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -2185,9 +2185,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                         <span class="${guest.opened == 0 ? 'd-none' : ''}">
-                                                            <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                             ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -2284,9 +2284,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
                                                     <span class="${guest.checkin == 0 ? 'd-none' : ''}">
-                                                        <br>${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
-                                                        <br>${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
-                                                        <br>${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                        <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                         ${(guest.members_number == guest.members.length ) ? 
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
@@ -3128,12 +3128,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                         // Set meal
                         $('#edit_meal').val(response.id_meal);
-                        if (response.allergies == 0) {
+                        if (response.mainguest == 0) {
                             $('#edit_members').hide();
                             $('#members_label').hide();
+                            $('#edit_members').val('');
                         } else {
-                            $('#edit_members').val(response
-                                .members_number);
+                            $('#edit_members').show();
+                            $('#members_label').show();
+                            $('#edit_members').val(response.members_number);
                         }
                         $('#edit_notes').val(response.notes);
 
