@@ -1731,19 +1731,24 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         </ul>
                                     </td>
 
-                                    ${(member.opened === 2) ? `
-                                                                                        <td class="accordian_img_acces">
-                                                                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
-                                                                                        </td>` : ''}
-                                    ${(member.declined === 1) ? `
-                                                                                        <td class="accordian_img_acces">
-                                                                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
-                                                                                        </td>` : ''}
-                                                                                        <td>
-                                                                                            <li><strong>Email: ${member.email || 'No Email'}</strong>
-                                                                                            <li><strong>Phone : ${member.phone || 'No Phone'}</strong>
-                                                                                        </td>
-                                                                                        </tr>`;
+                                    ${(member.opened == 2) ? `
+                                        <td class="accordian_img_acces">
+                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                        </td>` : ''}
+                                    ${(member.declined == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                        </td>` : ''}
+
+                                        ${(member.opened != 2 && member.declined != 1) ? `
+                                            <td class="accordian_img_acces">
+                                        </td>` : ''}
+                                        
+                                        <td>
+                                            <li><strong>Email: ${member.email || 'No Email'}</strong>
+                                            <li><strong>Phone : ${member.phone || 'No Phone'}</strong>
+                                        </td>
+                                        </tr>`;
 
                             });
 
@@ -1826,11 +1831,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened === 2) ? `
+                                                ${(member.opened == 2) ? `
                                                     <td class="accordian_img_acces">
                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                     </td>` : ''}
-                                                ${(member.declined === 1) ? `
+                                                ${(member.declined == 1) ? `
                                                     <td class="accordian_img_acces">
                                                         <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                     </td>` : ''}
@@ -1914,11 +1919,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened === 2) ? `
+                                                ${(member.opened == 2) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                                     </td>` : ''}
-                                                ${(member.declined === 1) ? `
+                                                ${(member.declined == 1) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                                                                                     </td>` : ''}
@@ -2007,11 +2012,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened === 2) ? `
+                                                ${(member.opened == 2) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                                     </td>` : ''}
-                                                ${(member.declined === 1) ? `
+                                                ${(member.declined == 1) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                                                                                     </td>` : ''}
@@ -2102,11 +2107,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened === 2) ? `
+                                            ${(member.opened == 2) ? `
                                                 <td class="accordian_img_acces">
                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                 </td>` : ''}
-                                            ${(member.declined === 1) ? `
+                                            ${(member.declined == 1) ? `
                                                 <td class="accordian_img_acces">
                                                     <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                 </td>` : ''}
@@ -2194,11 +2199,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                         </ul>
                                                     </td>
-                                                    ${(member.opened === 2) ? `
+                                                    ${(member.opened == 2) ? `
                                                                                                 <td class="accordian_img_acces">
                                                                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                 </td>` : ''}
-                                                    ${(member.declined === 1) ? `
+                                                    ${(member.declined == 1) ? `
                                                                                                 <td class="accordian_img_acces">
                                                                                                     <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                                                                 </td>` : ''}
@@ -2290,11 +2295,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened === 2) ? `
+                                            ${(member.opened == 2) ? `
                                                                                 <td class="accordian_img_acces">
                                                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                 </td>` : ''}
-                                            ${(member.declined === 1) ? `
+                                            ${(member.declined == 1) ? `
                                                                                 <td class="accordian_img_acces">
                                                                                     <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
                                                                                 </td>` : ''}
@@ -2544,7 +2549,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 }
 
                                 guest.members.forEach(function(member) {
-                                    if (member.declined === 1) {
+                                    if (member.declined == 1) {
                                         var memberMealName = member.meal ? member
                                             .meal
                                             .name : "-";
@@ -2562,9 +2567,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             "-";
                                         var memberStatus = "-";
 
-                                        if (member.opened === 2) memberStatus =
+                                        if (member.opened == 2) memberStatus =
                                             "Confirmed";
-                                        else if (member.declined === 1)
+                                        else if (member.declined == 1)
                                             memberStatus =
                                             "Declined";
                                         else if (member.checkin === 1)
