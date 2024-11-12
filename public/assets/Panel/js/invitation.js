@@ -1328,15 +1328,14 @@ function addText() {
     left: 100,
     top: 100,
     width: 200,
-    fontFamily: 'arial',
+    fontFamily: font,
     editable: true,
     selectionColor: 'rgba(0, 0, 0, 0.3)',
   });
   canv.add(textbox);
   canv.setActiveObject(textbox);
+  canv.renderAll();
   canv.requestRenderAll();
-  textbox.enterEditing();
-  textbox.hiddenTextarea.focus();
 
   saveState();
   saveAll();
