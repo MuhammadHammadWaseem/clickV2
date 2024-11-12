@@ -660,7 +660,7 @@ p#guestMemberTotal {
                     <div class="two-things-align">
                         <div class="text">
                             <h2>{{ __('guestlistpage.guest_list') }}</h2>
-                            <p>{{ __('guestlistpage.guest_list_description') }}</p>
+                            {{-- <p>{{ __('guestlistpage.guest_list_description') }}</p> --}}
 
                         </div>
                         <div class="two-btn-align">
