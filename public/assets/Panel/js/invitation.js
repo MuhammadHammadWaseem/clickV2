@@ -107,6 +107,44 @@ function updateAlignmentLines(object) {
 }
 
 
+function alignObjectsVertically() {
+  const activeObjects = canv.getActiveObjects();
+  
+  if (activeObjects.length > 1) {
+    // Calculate the average X position for all selected objects
+    const avgX = activeObjects.reduce((sum, obj) => sum + obj.left + obj.width * obj.scaleX / 2, 0) / activeObjects.length;
+    
+    activeObjects.forEach(obj => {
+      obj.set({ left: avgX - (obj.width * obj.scaleX) / 2 }).setCoords();
+    });
+  } else if (activeObjects.length === 1) {
+    // Center single object vertically on canvas
+    activeObjects[0].set({ left: canv.width / 2 - (activeObjects[0].width * activeObjects[0].scaleX) / 2 }).setCoords();
+  }
+  canv.renderAll();
+  saveState();
+}
+
+function alignObjectsHorizontally() {
+  const activeObjects = canv.getActiveObjects();
+  
+  if (activeObjects.length > 1) {
+    // Calculate the average Y position for all selected objects
+    const avgY = activeObjects.reduce((sum, obj) => sum + obj.top + obj.height * obj.scaleY / 2, 0) / activeObjects.length;
+    
+    activeObjects.forEach(obj => {
+      obj.set({ top: avgY - (obj.height * obj.scaleY) / 2 }).setCoords();
+    });
+  } else if (activeObjects.length === 1) {
+    // Center single object horizontally on canvas
+    activeObjects[0].set({ top: canv.height / 2 - (activeObjects[0].height * activeObjects[0].scaleY) / 2 }).setCoords();
+  }
+  canv.renderAll();
+  saveState();
+}
+
+
+
 // Event listeners for alignment lines
 canv.on('object:moving', (e) => updateAlignmentLines(e.target));
 canv.on('mouse:up', () => {

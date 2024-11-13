@@ -1061,36 +1061,23 @@
                                         <div class="other-editing">
                                             <h4>Other Editing</h4>
                                             <ul>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="textFlipBtn()">Flip Text</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="textTransformBtn()">Text Transform</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="shadowBtn()">Text Shadow</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="textAlignmentBtn()">Text Alignment</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="neonText()">Text Neon Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextMirror()">Text Mirror</a></li>
-                                                {{-- <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextIce()">Text Ice Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextFire()">Text Fire Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextRainbow()">Text Rainbow Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextSparkle()">Text Sparkle Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyGradientStroke()">Text Gradient Stroke</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyShadowBlur()">Shadow Blur</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextHolographic()">Holographic Text</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextComic()">Text Comic</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;"
-                                                        onclick="applyTextShimmer()">Text Shimmer</a></li> --}}
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="alignObjectsVertically()">Align Vertically</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="alignObjectsHorizontally()">Align Horizontally</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textFlipBtn()">Flip Text</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textTransformBtn()">Text Transform</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="shadowBtn()">Text Shadow</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textAlignmentBtn()">Text Alignment</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="neonText()">Text Neon Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextMirror()">Text Mirror</a></li>
+                                                {{-- <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextIce()">Text Ice Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextFire()">Text Fire Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextRainbow()">Text Rainbow Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextSparkle()">Text Sparkle Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyGradientStroke()">Text Gradient Stroke</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyShadowBlur()">Shadow Blur</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextHolographic()">Holographic Text</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextComic()">Text Comic</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextShimmer()">Text Shimmer</a></li> --}}
                                             </ul>
                                         </div>
                                     </form>
