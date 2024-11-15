@@ -167,5 +167,5 @@ return[
     'open' => 'OPEN ',
     'of' => 'OF ',
     'allowed' => 'ALLOWED ',
-    'all members allowed added' => 'All members are allowed added',
+    'all members allowed added' => 'All members allowed are added',
 ];

@@ -166,5 +166,5 @@ return[
     'open' => 'OUVRIR',
     'of' => 'DE',
     'allowed' => 'PERMISE',
-    'all members allowed added' => 'Tous les membres sont autorisés à être ajoutés',
+    'all members allowed added' => 'Tous les membres autorisés sont ajoutés',
 ];
