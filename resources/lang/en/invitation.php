@@ -37,7 +37,7 @@ return [
     'Add Card' => 'Add Card',
 
     'edit_invitation_card' => 'Edit Invitation Card',
-    'description_text' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'description_text' => 'Design your invitation your way: upload a custom card, select from our templates, or start fresh with a blank canvas.',
     'settings' => 'Settings',
     'preview' => 'Preview',
     'undo' => 'Undo',

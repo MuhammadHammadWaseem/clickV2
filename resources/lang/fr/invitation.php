@@ -37,7 +37,7 @@ return [
     'Add Card' => 'Ajouter une Carte',
 
     'edit_invitation_card' => 'Modifier la Carte d\'Invitation',
-    'description_text' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la composition.',
+    'description_text' => "Concevez votre invitation à votre façon : téléchargez une carte personnalisée, sélectionnez l'un de nos modèles ou commencez à partir d'une toile vierge.",
     'settings' => 'Paramètres',
     'preview' => 'Aperçu',
     'undo' => 'Annuler',
