@@ -107,6 +107,29 @@ class TableSeatingController extends Controller
 
     public function storeTables(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'table_name' => 'required',
+            'table_number' => 'required',
+            'max_guest' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ]);
+        }
+        // Check if the table number or name already exists
+        $existingTable = Table::where('number', $request->table_number)
+            ->orWhere('name', $request->table_name)
+            ->first();
+
+        if ($existingTable) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Table number or name already exists. Please choose a unique number or name.'
+            ]);
+        }
         $table = new Table;
         $table->name = $request->table_name;
         $table->number = $request->table_number;

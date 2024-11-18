@@ -1512,13 +1512,14 @@
 
                 // AJAX request to submit form data
                 $.ajax({
-                    url: "{{ route('panel.event.store.table', ['id' => $eventId]) }}", // Change this to your route
+                    url: "{{ route('panel.event.store.table', ['id' => $eventId]) }}",
                     type: 'POST',
                     data: tableData,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
+                        if (response.success == true) {
                         toastr.success("Table created Successfully!")
                         $('#createTableForm')[0].reset();
                         $("#closeAddModalBtn1").click();
@@ -1529,6 +1530,18 @@
                         // $('#createTableForm')[0].reset(); // Clear the form
                         getTable();
                         countData();
+                        }else {
+                            // Handle validation or other error messages
+                            if (typeof response.message === 'string') {
+                                toastr.error(response.message); // Directly show the string error message
+                            } else if (response.message) {
+                                let errorMessages = '';
+                                $.each(response.message, function(key, value) {
+                                    errorMessages += value + '<br>';
+                                });
+                                toastr.error(errorMessages);
+                            }
+                        }
                     },
                     error: function(xhr, status, error) {
                         // Handle error response
