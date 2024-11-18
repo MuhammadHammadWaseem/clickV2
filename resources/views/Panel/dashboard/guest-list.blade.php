@@ -1148,7 +1148,7 @@ p#guestMemberTotal {
                             </form>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
+                                <button type="button" class="btn btn-secondary" id="uploadCsvClose"
                                     data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
                                 <button type="button" class="submit-btn"
                                     id="uploadCsvBtn">{{ __('guestlistpage.upload_guest_list') }}</button>
@@ -2882,9 +2882,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     processData: false,
                     success: function(response) {
                         showGuest("1");
-                        toastr.success(
-                            "Guests imported successfully!");
+                        toastr.success("Guests imported successfully!");
                         idArray = [];
+                        $("#uploadCsvClose").click();
                     },
                     error: function(xhr, status, error) {
                         // Handle error response

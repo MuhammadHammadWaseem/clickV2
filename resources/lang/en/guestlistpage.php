@@ -44,7 +44,7 @@ return[
     'add_guest' => 'Add Guest',
     'add_from_other_events' => 'Add From Other Events',
     'upload_csv_file' => 'Upload .CSV File',
-    'guest_list_description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'guest_list_description' => 'Select guests from previous events to easily add them here.',
     'export' => 'Export',
     'export_all_guests' => 'All Guests',
     'export_confirmed_guests' => 'Confirmed Guests',

@@ -43,7 +43,7 @@ return[
     'add_guest' => 'Ajouter un Invité',
     'add_from_other_events' => 'Ajouter d\'Autres Événements',
     'upload_csv_file' => 'Télécharger un fichier .CSV',
-    'guest_list_description' => 'Lorem Ipsum est simplement un texte factice de l\'industrie de l\'impression et de la typographie.',
+    'guest_list_description' => 'Sélectionnez les invités des événements précédents pour les ajouter facilement ici.',
     'export' => 'Exporter',
     'export_all_guests' => 'Tous les Invités',
     'export_confirmed_guests' => 'Invités Confirmés',
