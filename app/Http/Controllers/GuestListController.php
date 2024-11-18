@@ -28,11 +28,9 @@ class GuestListController extends Controller
     public function index()
     {
         $eventId = GeneralHelper::getEventId();
-
-        // Use paginate directly to get the paginated results
+        $card = Card::where('id_event', $eventId)->latest()->first();
         $meals = Meal::where('id_event', $eventId)->paginate(10, ['id_meal', 'name']);
-
-        return view('Panel.dashboard.guest-list', compact('meals'));
+        return view('Panel.dashboard.guest-list', compact('meals','card'));
     }
 
     public function newguest(Request $request)

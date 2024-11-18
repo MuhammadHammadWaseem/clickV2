@@ -1323,8 +1323,33 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 </div>
                 <div class="modal-body">
                     <form id="DisplaySaveOptionForm">
+                        @if ($card)
                         <div class="text">
-                            {{-- <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt=""> --}}
+                            <h2>{{ __('guestlistpage.select_options_display') }}</h2>
+                            <div class="form-group">
+                                <label for="gift-suggestion">{{ __('guestlistpage.gift_suggestions') }}</label>
+                                <input type="checkbox" name="gift-suggestion" id="gift-suggestion" {{ $card->rsvp[2] == 1 ? 'checked' : '' }}>
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    for="at-reception-check-in">{{ __('guestlistpage.at_reception_check_in') }}</label>
+                                <input type="checkbox" name="at-reception-check-in" id="at-reception-check-in" {{ $card->rsvp[4] == 1 ? 'checked' : '' }}>
+                            </div>
+                            <div class="form-group">
+                                <label for="upload-your-photo">{{ __('guestlistpage.upload_your_photos') }}</label>
+                                <input type="checkbox" name="upload-your-photo" id="upload-your-photo" {{ $card->rsvp[6] == 1 ? 'checked' : '' }}>
+                            </div>
+                            <div class="form-group">
+                                <label for="go-to-the-website">{{ __('guestlistpage.go_to_the_website') }}</label>
+                                <input type="checkbox" name="go-to-the-website" id="go-to-the-website" {{ $card->rsvp[8] == 1 ? 'checked' : '' }}>
+                            </div>
+                            <div class="form-group">
+                                <label for="learn-how-RSVP-works">{{ __('guestlistpage.learn_how_rsvp_works') }}</label>
+                                <input type="checkbox" name="learn-how-RSVP-works" id="learn-how-RSVP-works" {{ $card->rsvp[10] == 1 ? 'checked' : '' }}>
+                            </div>
+                        </div>
+                        @else
+                        <div class="text">
                             <h2>{{ __('guestlistpage.select_options_display') }}</h2>
                             <div class="form-group">
                                 <label for="gift-suggestion">{{ __('guestlistpage.gift_suggestions') }}</label>
@@ -1348,6 +1373,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <input type="checkbox" name="learn-how-RSVP-works" id="learn-how-RSVP-works">
                             </div>
                         </div>
+                        @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeDispalyModal"
