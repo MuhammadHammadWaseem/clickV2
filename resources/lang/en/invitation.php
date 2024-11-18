@@ -38,7 +38,7 @@ return [
 
     'edit_invitation_card' => 'Edit Invitation Card',
     'description_text' => 'Design your invitation your way: upload a custom card, select from our templates, or start fresh with a blank canvas.',
-    'settings' => 'Envelope and Background Settings',
+    'settings' => 'Envelope and Background',
     'preview' => 'Preview',
     'undo' => 'Undo',
     'redo' => 'Redo',
