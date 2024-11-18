@@ -37,18 +37,39 @@ class GuestListController extends Controller
 
     public function newguest(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|email|max:255',
-        //     'phone' => 'required',
-        //     'whatsapp' => 'required|',
-        //     'allergies' => 'required',
-        //     'meal' => 'required|exists:meals,id_meal',
-        //     'members' => 'required|integer|min:1',
-        //     'notes' => 'nullable|string',
-        //     'confirm' => 'required'
-        // ]);
+        $validator = \Validator::make($request->all(), [
+            'title' => 'string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required',
+            'whatsapp' => 'required',
+            'allergies' => 'required',
+            'meal' => 'required|exists:meals,id_meal',
+            'members' => 'integer|min:1',
+            'notes' => 'nullable|string'
+        ], [
+            'members.required' => 'Please specify the number of members invited.',
+            'members.integer' => 'The number of members must be a valid number.',
+            'members.min' => 'The number of members must be at least 1.'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        // Custom validation for duplicate name, email, and phone in the same event
+        $duplicateGuest = Guest::where('id_event', $request->idevent)
+            ->where(function ($query) use ($request) {
+                $query->where('name', $request->name)
+                    ->orWhere('email', $request->email)
+                    ->orWhere('phone', $request->phone);
+            })
+            ->exists();
+
+        if ($duplicateGuest) {
+            return response()->json(['success' => false, 'message' => 'Duplicate guest found. The name, email, or phone number already exists for this event.']);
+        }
+
         $count = Guest::where('parent_id_guest', $request->parentidguest)->count();
         $allowed = Guest::where('id_guest', $request->parentidguest)->first();
         if ($allowed) {
@@ -496,9 +517,10 @@ class GuestListController extends Controller
         $guest = Guest::where('id_guest', $request->idguest)->first();
         $members = Guest::where('parent_id_guest', $request->idguest)->get();
 
-        if($request->members < $members->count()){
+        if ($request->members < $members->count()) {
             return response()->json(
-                ["error" => "Cannot set number of members below existing members."
+                [
+                    "error" => "Cannot set number of members below existing members."
                 ]
             );
         }
@@ -865,251 +887,251 @@ class GuestListController extends Controller
                 $guestTable = DB::table('tables')->where('id_table', $guest['id_table'])->first();
                 $lang = App::getLocale();
 
-                if($request->formData && isset($request->formData['emailCheck'])){
+                if ($request->formData && isset($request->formData['emailCheck'])) {
                     if ($guest['email']) {
 
-                    // if (!file_exists('/images/' . $guest['id_guest'] . $guest['code'] . '.png')) {
-                    //     //Generate QR Code if not exists
-                    //     $lang = Session('applocale');
-                    //     if ($lang == "en") {
-                    //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'en');
-                    //     } else if ($lang == "fr") {
-                    //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'fr');
-                    //     } else {
-                    //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'en');
-                    //     }
-                    //     require_once 'C:\xampp 7.4.1\htdocs\Clickinvitation\app\Http\Controllers/phpqrcode/qrlib.php';
-                    //     // require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
+                        // if (!file_exists('/images/' . $guest['id_guest'] . $guest['code'] . '.png')) {
+                        //     //Generate QR Code if not exists
+                        //     $lang = Session('applocale');
+                        //     if ($lang == "en") {
+                        //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'en');
+                        //     } else if ($lang == "fr") {
+                        //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'fr');
+                        //     } else {
+                        //         $url = url('/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guest['name'] . '/' . 'en');
+                        //     }
+                        //     require_once 'C:\xampp 7.4.1\htdocs\Clickinvitation\app\Http\Controllers/phpqrcode/qrlib.php';
+                        //     // require_once '/var/www/html/clickinvitation/app/Http/Controllers/phpqrcode/qrlib.php';
 
-                    //     $path = 'images/';
-                    //     $qrcode = $path . $guest['id_guest'] . $guest['code'] . '.png';
-                    //     if (!file_exists($qrcode)) {
-                    //         \QRcode::png($url, $qrcode, 'H', 4, 4);
-                    //     };
-                    //     //Generate QR Code if not exists
-                    // }
+                        //     $path = 'images/';
+                        //     $qrcode = $path . $guest['id_guest'] . $guest['code'] . '.png';
+                        //     if (!file_exists($qrcode)) {
+                        //         \QRcode::png($url, $qrcode, 'H', 4, 4);
+                        //     };
+                        //     //Generate QR Code if not exists
+                        // }
 
-                    // $formattedDate = Carbon::parse($event->date)->format('m/d/Y, g:i A');
-                    // $formattedDate = Carbon::parse($event->date)->setTimezone('+2')->format('j F, Y H:i');
-                    $dataEvent = $event->date;
-                    $ConverteddataEvent = strtotime($dataEvent);
-                    $formattedDate = date('m/d/Y, g:i A', $ConverteddataEvent);
-                    // $formattedDate = $event->date;
+                        // $formattedDate = Carbon::parse($event->date)->format('m/d/Y, g:i A');
+                        // $formattedDate = Carbon::parse($event->date)->setTimezone('+2')->format('j F, Y H:i');
+                        $dataEvent = $event->date;
+                        $ConverteddataEvent = strtotime($dataEvent);
+                        $formattedDate = date('m/d/Y, g:i A', $ConverteddataEvent);
+                        // $formattedDate = $event->date;
 
-                    // $timestamp = strtotime($dateString);
-                    // $formattedDate = date('m/d/Y, g:i A', $timestamp);
-                    // $formattedDate = date('m/d/Y, g:i A', $timestamp);
+                        // $timestamp = strtotime($dateString);
+                        // $formattedDate = date('m/d/Y, g:i A', $timestamp);
+                        // $formattedDate = date('m/d/Y, g:i A', $timestamp);
 
-                    $cerTime = $event->certime;
-                    $ConvertedCerTime = strtotime($cerTime);
-                    $formattedCerTime = date('m/d/Y, g:i A', $ConvertedCerTime);
-                    // $formattedCerTime = date("g:i A l, F j, Y", $ConvertedCerTime);
+                        $cerTime = $event->certime;
+                        $ConvertedCerTime = strtotime($cerTime);
+                        $formattedCerTime = date('m/d/Y, g:i A', $ConvertedCerTime);
+                        // $formattedCerTime = date("g:i A l, F j, Y", $ConvertedCerTime);
 
 
-                    $recTime = $event->rectime;
-                    $date = Carbon::parse($recTime);
-                    $formattedRecTime = $date->format('m/d/Y, g:i A');
+                        $recTime = $event->rectime;
+                        $date = Carbon::parse($recTime);
+                        $formattedRecTime = $date->format('m/d/Y, g:i A');
 
-                    // $recTime = $event->rectime;
-                    // $ConvertedRecTime = strtotime($recTime);
-                    // $formattedRecTime = date("g:i A l, F j, Y", $ConvertedRecTime);
-                    $content = [
-                        'guest' => $guest,
-                        'event' => $event,
-                        'cardId' => $cardId ? $cardId->toArray() : null,
-                        'guestTable' => $guestTable,
-                        'formattedDate' => $formattedDate,
-                        'formattedCerTime' => $formattedCerTime,
-                        'formattedRecTime' => $formattedRecTime,
-                        'lang' => $lang,
-                    ];
-                    if ($lang == 'en') {
-                        if ($event->type == "CORPORATE") {
-                            $body = '';
+                        // $recTime = $event->rectime;
+                        // $ConvertedRecTime = strtotime($recTime);
+                        // $formattedRecTime = date("g:i A l, F j, Y", $ConvertedRecTime);
+                        $content = [
+                            'guest' => $guest,
+                            'event' => $event,
+                            'cardId' => $cardId ? $cardId->toArray() : null,
+                            'guestTable' => $guestTable,
+                            'formattedDate' => $formattedDate,
+                            'formattedCerTime' => $formattedCerTime,
+                            'formattedRecTime' => $formattedRecTime,
+                            'lang' => $lang,
+                        ];
+                        if ($lang == 'en') {
                             if ($event->type == "CORPORATE") {
-                                if ($guestTable !== null) {
+                                $body = '';
+                                if ($event->type == "CORPORATE") {
+                                    if ($guestTable !== null) {
 
-                                } else {
+                                    } else {
 
+                                    }
                                 }
+                                Mail::to('talharao997az@gmail.com')->send(new CorporateEnglish($content));
+                            } else {
+                                if ($event->type == "CORPORATE") {
+                                    if ($guestTable !== null) {
+
+                                    } else {
+                                        // Handle the case where $guestTable is null
+                                    }
+                                }
+                                Mail::to('talharao997az@gmail.com')->send(new EventsEnglish($content));
                             }
-                            Mail::to('talharao997az@gmail.com')->send(new CorporateEnglish($content));
-                        } else {
+                        } elseif ($lang == 'fr') {
+
                             if ($event->type == "CORPORATE") {
-                                if ($guestTable !== null) {
+                                $body = '';
 
-                                } else {
-                                    // Handle the case where $guestTable is null
-                                }
+                                Mail::to('talharao997az@gmail.com')->send(new CorporateFrench($content));
+                            } else {
+                                $body = '';
+                                Mail::to('talharao997az@gmail.com')->send(new EventsFrench($content));
                             }
-                            Mail::to('talharao997az@gmail.com')->send(new EventsEnglish($content));
                         }
-                    } elseif ($lang == 'fr') {
 
-                        if ($event->type == "CORPORATE") {
-                            $body = '';
-
-                            Mail::to('talharao997az@gmail.com')->send(new CorporateFrench($content));
-                        } else {
-                            $body = '';
-                            Mail::to('talharao997az@gmail.com')->send(new EventsFrench($content));
+                        // echo $body . " - " . $guest['email'] . " - " . $event->name . " - " . $cardId['msgTitle'];
+                        try {
+                            // Send Mail
+                            if ($lang === 'en') {
+                                $mailClass = $event->type === "CORPORATE" ? CorporateEnglish::class : EventsEnglish::class;
+                            } else {
+                                $mailClass = $event->type === "CORPORATE" ? CorporateFrench::class : EventsFrench::class;
+                            }
+                            Mail::to($guest['email'])->send(new $mailClass($content));
+                        } catch (\Exception $e) {
+                            Log::error('Mail sending failed: ' . $e->getMessage());
                         }
-                    }
-
-                    // echo $body . " - " . $guest['email'] . " - " . $event->name . " - " . $cardId['msgTitle'];
-                    try {
-                        // Send Mail
-                        if ($lang === 'en') {
-                            $mailClass = $event->type === "CORPORATE" ? CorporateEnglish::class : EventsEnglish::class;
-                        } else {
-                            $mailClass = $event->type === "CORPORATE" ? CorporateFrench::class : EventsFrench::class;
-                        }
-                        Mail::to($guest['email'])->send(new $mailClass($content));
-                    } catch (\Exception $e) {
-                        Log::error('Mail sending failed: ' . $e->getMessage());
-                    }
                     }
                 }
 
                 //---------- SMS ----------------------
                 if ($request->formData && isset($request->formData['smsCheck'])) {
                     if ($guest['phone'] && $guest['phone'] != null && $guest['parent_id_guest'] == 0) {
-                    if ($event->type == "CORPORATE") {
-                        if ($lang == 'en') {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
-                        } elseif ($lang == 'fr') {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                        if ($event->type == "CORPORATE") {
+                            if ($lang == 'en') {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            } elseif ($lang == 'fr') {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            } else {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            }
                         } else {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+
+                            if ($lang == 'en') {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            } elseif ($lang == 'fr') {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            } else {
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                            }
                         }
-                    } else {
+                        //$params=['MessagingServiceSid' => 'MG1638f5c41f52b36db3469924b8ff345a', 'To' => $guest['phone'], 'Body' => 'You Got Invitation For '.$event->name.' '.$event->type.' https://clickinvitation.com/cardInvitation/'.$cardId['id_card'].'/'.$guest['code'].'/'.$lang];
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://api.twilio.com/2010-04-01/Accounts/AC1875f6f40ede2df24999ef0db6d666da/Messages.json');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+                        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($ch, CURLOPT_USERPWD, 'AC1875f6f40ede2df24999ef0db6d666da:ea0f387de51d18742c5114d0232433c8');
+                        $data = curl_exec($ch);
+                        curl_close($ch);
 
-                        if ($lang == 'en') {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
-                        } elseif ($lang == 'fr') {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
-                        } else {
-                            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
-                        }
-                    }
-                    //$params=['MessagingServiceSid' => 'MG1638f5c41f52b36db3469924b8ff345a', 'To' => $guest['phone'], 'Body' => 'You Got Invitation For '.$event->name.' '.$event->type.' https://clickinvitation.com/cardInvitation/'.$cardId['id_card'].'/'.$guest['code'].'/'.$lang];
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'https://api.twilio.com/2010-04-01/Accounts/AC1875f6f40ede2df24999ef0db6d666da/Messages.json');
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($ch, CURLOPT_USERPWD, 'AC1875f6f40ede2df24999ef0db6d666da:ea0f387de51d18742c5114d0232433c8');
-                    $data = curl_exec($ch);
-                    curl_close($ch);
-
-                    //return $data;
+                        //return $data;
 
 
-                    //return 'ok';
+                        //return 'ok';
 
 
 
-                    /*$client = new \Goutte\Client(\Symfony\Component\HttpClient\HttpClient::create(['timeout' => 60]));
+                        /*$client = new \Goutte\Client(\Symfony\Component\HttpClient\HttpClient::create(['timeout' => 60]));
 
-                    $queryParams = [
-                        'foo=1',
-                        'bar=2',
-                        'bar=3',
-                        'baz=4',
-                    ];
+                        $queryParams = [
+                            'foo=1',
+                            'bar=2',
+                            'bar=3',
+                            'baz=4',
+                        ];
 
-                    $content = implode('&', $queryParams);
+                        $content = implode('&', $queryParams);
 
-                    $crawler = $client->request('POST', 'https://api.twilio.com/2010-04-01/Accounts/ACe58142d20bb65d447e449ce1169014fe/Messages.json',
-                        array(
-                            'MessagingServiceSid' => 'MG3285904c6c26862be5b4a38164177db8',
-                            'To' => '+393334850264',
-                            'Body' => 'hi thereeee'
-                        )
-                    );
+                        $crawler = $client->request('POST', 'https://api.twilio.com/2010-04-01/Accounts/ACe58142d20bb65d447e449ce1169014fe/Messages.json',
+                            array(
+                                'MessagingServiceSid' => 'MG3285904c6c26862be5b4a38164177db8',
+                                'To' => '+393334850264',
+                                'Body' => 'hi thereeee'
+                            )
+                        );
 
-                    print_r($client->getResponse());*/
+                        print_r($client->getResponse());*/
                     }
                 }
 
 
                 //---------- WHATSAPP ----------------------
-                if($request->formData && isset($request->formData['whatsappCheck'])){
+                if ($request->formData && isset($request->formData['whatsappCheck'])) {
                     if ($guest['whatsapp'] && $guest['whatsapp'] != 0 && $guest['parent_id_guest'] == 0) {
-                    $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
+                        $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
 
-                    $curl = curl_init();
-                    curl_setopt($curl, CURLOPT_URL, $url);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOyqSschCHIXhUyZBeJqurIW8ZBtjTZBYWOLCqnCrW8morXKZCK9aZBhTLc7XMKYxMTZBCKV85NoToguo5bNq5J88SFWyJEulKZCnX9jndDeN6p4ZB7Qr9HtVlG65pEZCBmqKXsxVNK5mv0HemfAOcg1MmCv9KRSAWZAiLwH4eWWW357MoZD', 'Content-Type: application/json'));
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    $data3 = [
+                        $curl = curl_init();
+                        curl_setopt($curl, CURLOPT_URL, $url);
+                        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOyqSschCHIXhUyZBeJqurIW8ZBtjTZBYWOLCqnCrW8morXKZCK9aZBhTLc7XMKYxMTZBCKV85NoToguo5bNq5J88SFWyJEulKZCnX9jndDeN6p4ZB7Qr9HtVlG65pEZCBmqKXsxVNK5mv0HemfAOcg1MmCv9KRSAWZAiLwH4eWWW357MoZD', 'Content-Type: application/json'));
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                        $data3 = [
 
-                        "type" => "body",
-                        "parameters" => [
+                            "type" => "body",
+                            "parameters" => [
                                 "type" => "$event->name . ' ' . $event->type",
                                 "text" => "Mr Jibran"
                             ]
-                    ];
+                        ];
 
-                    $data2 = [
-                        "name" => "sample_issue_resolution",
-                        "language" => ["code" => "en_US"],
-                        "components" => $data3
-                    ];
+                        $data2 = [
+                            "name" => "sample_issue_resolution",
+                            "language" => ["code" => "en_US"],
+                            "components" => $data3
+                        ];
 
-                    /*
-                    components:{
-                    type:body,
-                    parameters {
-                        type:text,
-                        text:Mr Jibran
-                    }}"
+                        /*
+                        components:{
+                        type:body,
+                        parameters {
+                            type:text,
+                            text:Mr Jibran
+                        }}"
 
-                    */
+                        */
 
-                    $data = array(
-                        "messaging_product" => "whatsapp",
-                        "to" => $guest['whatsapp'],
-                        "type" => "template",
-                        "preview_url" => true,
-                        "template" => array(
+                        $data = array(
+                            "messaging_product" => "whatsapp",
+                            "to" => $guest['whatsapp'],
+                            "type" => "template",
+                            "preview_url" => true,
+                            "template" => array(
                                 "name" => "clickinvitation_wedding_template_2",
                                 "language" => array("code" => $lang),
                                 "components" => array(
-                                        [
-                                            "type" => "body",
-                                            "parameters" => array(
-                                                    [
-                                                        "type" => "text",
-                                                        "text" => $event->name . ' ' . $event->type
-                                                    ],
-                                                    [
-                                                        "type" => "text",
-                                                        "text" => 'https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang
-                                                    ],
-                                                    [
-                                                        "type" => "text",
-                                                        "text" => $cardId['msgTitle'] . " "
-                                                    ]
-                                                )
-                                        ]
-                                    )
+                                    [
+                                        "type" => "body",
+                                        "parameters" => array(
+                                            [
+                                                "type" => "text",
+                                                "text" => $event->name . ' ' . $event->type
+                                            ],
+                                            [
+                                                "type" => "text",
+                                                "text" => 'https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang
+                                            ],
+                                            [
+                                                "type" => "text",
+                                                "text" => $cardId['msgTitle'] . " "
+                                            ]
+                                        )
+                                    ]
+                                )
                             )
-                    );
+                        );
 
 
 
-                    $fields_string = json_encode($data);
-                    //echo $fields_string;
-                    echo $fields_string;
-                    echo "<br/>";
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $fields_string);
+                        $fields_string = json_encode($data);
+                        //echo $fields_string;
+                        echo $fields_string;
+                        echo "<br/>";
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, $fields_string);
 
-                    $resp = curl_exec($curl);
-                    curl_close($curl);
+                        $resp = curl_exec($curl);
+                        curl_close($curl);
 
-                    echo $resp;
+                        echo $resp;
                     }
                 }
             }

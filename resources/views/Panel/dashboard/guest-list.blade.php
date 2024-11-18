@@ -1570,19 +1570,33 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     'exampleModalCenter09'));
                                 successModal.show();
                         } else {
-                            alert(response.message || 'Failed to add guest.');
-                            // toastr.success(response.message || 'Failed to add guest.');
+                            // If the server returns a custom error in a "message" field
+                            if (response.message) {
+                                toastr.error(response.message);
+                            } else if (response.errors) {
+                                // Handle validation errors sent as part of the response
+                                $.each(response.errors, function(key, messages) {
+                                    toastr.error(messages);
+                                });
+                            } else {
+                                toastr.error('An unexpected error occurred.');
+                            }
                         }
                     },
                     error: function(xhr, status, error) {
-                        // Handle validation or server errors
-                        var errors = xhr.responseJSON.errors;
-                        console.log(errors);
-                        $.each(errors, function(key, value) {
-                            // alert(key + ": " + value);
-                            toastr.error(key + ": " + value);
-                        });
+                        console.log(xhr.responseJSON); // Debugging
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, messages) {
+                                messages.forEach(function(message) {
+                                    toastr.error(message);
+                                });
+                            });
+                        } else {
+                            toastr.error('An unexpected error occurred.'); // Generic error
+                        }
                     }
+
                 });
             });
 
@@ -1623,8 +1637,18 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     .click(); // Close the modal after success
                                 showGuest("1"); // Refresh the guest list
                             } else {
-                                alert(response.message || 'Failed to add guest.');
+                            // If the server returns a custom error in a "message" field
+                            if (response.message) {
+                                toastr.error(response.message);
+                            } else if (response.errors) {
+                                // Handle validation errors sent as part of the response
+                                $.each(response.errors, function(key, messages) {
+                                    toastr.error(messages);
+                                });
+                            } else {
+                                toastr.error('An unexpected error occurred.');
                             }
+                        }
                         },
                         error: function(xhr, status, error) {
                         // Handle validation or server errors
