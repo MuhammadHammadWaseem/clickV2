@@ -9,7 +9,7 @@ return [
     'Guest List' => 'Liste des Invités',
     'Tables  Management' => 'Gestion des Tables',
     'Event Photos' => 'Photos de l’Événement',
-    'Reminders' => 'Rappels',
+    'Reminders' => 'Reconnaissance',
     'Custom Messages' => 'Messages Personnalisés',
     'Tutorials' => 'Tutoriels',
 

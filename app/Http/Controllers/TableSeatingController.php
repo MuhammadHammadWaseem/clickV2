@@ -54,14 +54,25 @@ class TableSeatingController extends Controller
     }
     public function showTableGuest($id)
     {
+        // $guests = DB::select('
+        // SELECT *
+        //     FROM guests
+        //     WHERE (id_event = ' . $id . ') AND 
+        //     (
+        //         ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+        //         (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
+        //     )
+        //     ORDER BY id_table ASC
+        // ');
+
         $guests = DB::select('
         SELECT *
             FROM guests
             WHERE (id_event = ' . $id . ') AND 
             (
-                ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
-                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
-            )
+                ((checkin = 1) AND declined IS NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined IS NULL))
+            ) AND opened != 0
             ORDER BY id_table ASC
         ');
 
@@ -260,6 +271,87 @@ class TableSeatingController extends Controller
         }
     }
 
+    // public function print(Request $request)
+    // {
+    //     $event = Event::where('id_event', $request->route('idevent'))->first();
+    //     if ($event && $event->id_user == Auth::id()) {
+    //         $tables = Table::where('id_event', $request->route('idevent'))->get();
+    //         foreach ($tables as $t) {
+    //             $numallergy = 0;
+    //             $t->guests = Guest::where('id_table', $t->id_table)->get();
+    //             foreach ($t->guests as $g) {
+    //                 if ($g->id_meal != 0)
+    //                     $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+    //                 if ($g->allergies)
+    //                     $numallergy++;
+    //             }
+    //             $t->guestscount = Guest::where('id_table', $t->id_table)->count();
+    //             $t->numallergy = $numallergy;
+    //             $allmeals = Meal::where('id_event', $request->route('idevent'))->get();
+    //             foreach ($allmeals as $meal) {
+    //                 $ng = Guest::where('id_meal', $meal->id_meal)->where('id_table', $t->id_table)->count();
+    //                 $meal->ng = $ng;
+    //             }
+    //             $t->mea = $allmeals;
+    //         }
+
+    //         $totm = Guest::where('id_event', $request->route('idevent'))
+    //             ->where(function ($query) {
+    //                 $query->where('checkin', 1)
+    //                     ->whereNull('declined')
+    //                     ->where(function ($subQuery) {
+    //                         $subQuery->whereNotNull('id_meal')
+    //                             ->orWhere('opened', 2);
+    //                     })
+    //                     ->orWhere(function ($subQuery) {
+    //                         $subQuery->where(function ($subSubQuery) {
+    //                             $subSubQuery->where('opened', 2)
+    //                                 ->orWhereNotNull('id_meal');
+    //                         })
+    //                             ->whereNull('declined');
+    //                     });
+    //             })
+    //             ->count();
+
+    //         $totg = Guest::where('id_event', $request->route('idevent'))
+    //             ->where(function ($query) {
+    //                 $query->where('checkin', 1)
+    //                     ->whereNull('declined')
+    //                     ->where(function ($subQuery) {
+    //                         $subQuery->whereNotNull('id_meal')
+    //                             ->orWhere('opened', 2);
+    //                     })
+    //                     ->orWhere(function ($subQuery) {
+    //                         $subQuery->where(function ($subSubQuery) {
+    //                             $subSubQuery->where('opened', 2)
+    //                                 ->orWhereNotNull('id_meal');
+    //                         })
+    //                             ->whereNull('declined');
+    //                     });
+    //             })
+    //             ->count();
+
+    //         $totguests = $totg;
+
+
+
+
+    //         $totguestseated = Guest::where('id_event', $request->route('idevent'))->where('id_table', '<>', 0)->count();
+    //         $totfrees = $totguests - $totguestseated;
+
+    //         $totallerseated = Guest::where('id_event', $request->route('idevent'))->where('allergies', 1)->where('id_table', '<>', 0)->count();
+
+    //         $allmeals = Meal::where('id_event', $request->route('idevent'))->get();
+    //         foreach ($allmeals as $meal) {
+    //             $ng = Guest::where('id_meal', $meal->id_meal)->where('id_table', '<>', 0)->count();
+    //             $meal->ng = $ng;
+    //         }
+    //         return PDF::loadView('pdf', ['tables' => $tables, 'event' => $event, 'totguestseated' => $totguestseated, 'totallerseated' => $totallerseated, 'allmeals' => $allmeals, 'totfrees' => $totfrees, 'totguests' => $totguests])->stream('tables.pdf'); //, compact('data')   ->save('/var/www/html/pmao/public/pdftest/pippo.pdf');
+    //         //return view('pdf')->with('tables',$tables)->with('event',$event);
+    //     } else
+    //         return redirect('/');
+    // }
+
     public function print(Request $request)
     {
         $event = Event::where('id_event', $request->route('idevent'))->first();
@@ -267,7 +359,7 @@ class TableSeatingController extends Controller
             $tables = Table::where('id_event', $request->route('idevent'))->get();
             foreach ($tables as $t) {
                 $numallergy = 0;
-                $t->guests = Guest::where('id_table', $t->id_table)->get();
+                $t->guests = Guest::where('id_table', $t->id_table)->where('declined', NULL)->get();
                 foreach ($t->guests as $g) {
                     if ($g->id_meal != 0)
                         $g->meal = Meal::where('id_meal', $g->id_meal)->first();
@@ -325,7 +417,7 @@ class TableSeatingController extends Controller
 
 
 
-            $totguestseated = Guest::where('id_event', $request->route('idevent'))->where('id_table', '<>', 0)->count();
+            $totguestseated = Guest::where('id_event', $request->route('idevent'))->where('id_table', '<>', 0)->where('declined', NULL)->count();
             $totfrees = $totguests - $totguestseated;
 
             $totallerseated = Guest::where('id_event', $request->route('idevent'))->where('allergies', 1)->where('id_table', '<>', 0)->count();

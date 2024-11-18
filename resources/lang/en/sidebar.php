@@ -9,7 +9,7 @@ return[
     'Guest List' => 'Guest List',
     'Tables  Management' => 'Tables  Management',
     'Event Photos' => 'Event Photos',
-    'Reminders' => 'Reminders',
+    'Reminders' => 'Acknowledgment',
     'Custom Messages' => 'Custom Messages',
     'Tutorials' => 'Tutorials',
 

@@ -1737,7 +1737,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         </ul>
                                     </td>
 
-                                    ${(member.opened == 2) ? `
+                                    ${(member.opened == 2 && member.declined != 1) ? `
                                         <td class="accordian_img_acces">
                                             <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                         </td>` : ''}
@@ -1843,7 +1843,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2) ? `
+                                                ${(member.opened == 2 && member.declined != 1) ? `
                                                     <td class="accordian_img_acces">
                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                     </td>` : ''}
@@ -1937,7 +1937,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2) ? `
+                                                ${(member.opened == 2 && member.declined != 1) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                                     </td>` : ''}
@@ -2036,7 +2036,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2) ? `
+                                                ${(member.opened == 2 && member.declined != 1) ? `
                                                                                                                     <td class="accordian_img_acces">
                                                                                                                         <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                                     </td>` : ''}
@@ -2137,7 +2137,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened == 2) ? `
+                                            ${(member.opened == 2 && member.declined != 1) ? `
                                                 <td class="accordian_img_acces">
                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                 </td>` : ''}
@@ -2235,7 +2235,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                         </ul>
                                                     </td>
-                                                    ${(member.opened == 2) ? `
+                                                    ${(member.opened == 2 && member.declined != 1) ? `
                                                                                                 <td class="accordian_img_acces">
                                                                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                                 </td>` : ''}
@@ -2335,7 +2335,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened == 2) ? `
+                                            ${(member.opened == 2 && member.declined != 1) ? `
                                                                                 <td class="accordian_img_acces">
                                                                                     <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
                                                                                 </td>` : ''}

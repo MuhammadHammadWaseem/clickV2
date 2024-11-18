@@ -401,7 +401,7 @@
                         <p>{{ __('table.guest_seating_info') }}</p>
                         <p>{{ __('table.correct_table_number') }}</p>
                         <p>{{ __('table.correct_table_number') }}</p>
-                        <p class="bold-text-color-change">{{ __('table.declined_non_confirmed_guests') }}</p>
+                        <p class="bold-text-color-change text-center">{{ __('table.declined_non_confirmed_guests') }}</p>
                     </div>
                 </div>
             </div>
