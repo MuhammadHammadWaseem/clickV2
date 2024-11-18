@@ -149,7 +149,7 @@ body {
                         </ul>
                         <p>{{ __('packages.purpose_basic') }}</p>
                         @guest
-                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endguest
                         @auth
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
@@ -169,7 +169,7 @@ body {
                         </ul>
                         <p>{{ __('packages.purpose_standard') }}</p>
                         @guest
-                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endguest
                         @auth
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
@@ -186,7 +186,7 @@ body {
                         </ul>
                         <p>{{ __('packages.purpose_premium') }}</p>
                         @guest
-                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endguest
                         @auth
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
@@ -203,7 +203,7 @@ body {
                         </ul>
                         <p>{{ __('packages.purpose_comprehensive') }}</p>
                         @guest
-                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endguest
                         @auth
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
@@ -221,7 +221,7 @@ body {
                             ]) }}
                         </p>
                         @guest
-                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endguest
                         @auth
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
