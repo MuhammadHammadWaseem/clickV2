@@ -233,6 +233,14 @@
 }
 
 
+.two-outside-boxes{
+    margin-top: 20px
+}
+
+.two-outside-boxes .main-card-box{
+    height: 100%;
+}
+
 @media only screen and (max-width: 1400px){
         .two-outside-boxes .main-card-box {
     padding: 50px 20px !important;

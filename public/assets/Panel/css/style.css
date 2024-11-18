@@ -984,6 +984,11 @@ header .langauge-person .person-box ul.drop-menu {
 }
 .box-styling.gift-suggestions .text p:nth-child(2) {
   margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.edit-cards-boxes .box-styling.gift-suggestions h2 {
+    font-size: 17px;
 }
 
 .box-styling.event-photos-gallery.meal-details .meal-box {
@@ -1028,8 +1033,9 @@ header .langauge-person .person-box ul.drop-menu {
 
 .edit-cards-boxes .box-styling.gift-suggestions {
   width: 42%;
-  height: 130px;
+  height: 100px;
   margin: 0;
+  padding: 20px;
 }
 .edit-cards-boxes .box-styling.gift-suggestions .text h2 {
   margin: 0;
@@ -1046,13 +1052,14 @@ header .langauge-person .person-box ul.drop-menu {
   background-color: #e0e0e0;
   border: 1px solid #CCCCCC;
   border-radius: 20px;
-  height: 130px;
-  row-gap: 10px;
+  height: 100px;
+  row-gap: 5px;
   transition: .3s;
   color: #7A7A7A;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  text-align: center;
 }
 
 .edit-cards-boxes .card-styling-box {
