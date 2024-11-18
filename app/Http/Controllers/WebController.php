@@ -275,8 +275,11 @@ class WebController extends Controller
 
     public function packages()
     {
-
         return view("Website.package");
+    }
+    public function privacyPolicy()
+    {
+        return view("Website.new_privacypolicy");
     }
 
 }

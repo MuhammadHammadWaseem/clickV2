@@ -42,6 +42,8 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/blog', [WebController::class, 'blog'])->name('blog');
     Route::get('/tutorial', [WebController::class, 'tutorial'])->name('tutorial');
     Route::get('/packages', [WebController::class, 'packages'])->name('packages');
+    Route::get('/privacy-policy', [WebController::class, 'privacyPolicy'])->name('privacy-policy');
+
 
     Route::middleware('guest')->group(function () {
         Route::get('/register', [WebController::class, 'register']);
