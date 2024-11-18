@@ -394,12 +394,12 @@
                     <div class="card border-0 rounded-0">
                         @guest
                         <a href="/login">
-                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="paperless-post-birthday-invitations">
+                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="{{ $template->image }} | {{ $template->id}}">
                         </a>
                         @endguest
                         @auth
                         <a href="/panel">
-                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="paperless-post-birthday-invitations">
+                            <img src="https://clickadmin.searchmarketingservices.online/storage/templates/{{ rawurlencode($template->image) }}" alt="{{ $template->image }} | {{ $template->id}}">
                         </a>
                         @endauth
                     </div>

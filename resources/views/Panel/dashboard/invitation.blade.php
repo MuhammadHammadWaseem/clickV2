@@ -241,6 +241,10 @@
     height: 100%;
 }
 
+.edit-cards-boxes .card-styling-box a{
+    font-size: 12px !important;
+}
+
 @media only screen and (max-width: 1400px){
         .two-outside-boxes .main-card-box {
     padding: 50px 20px !important;

@@ -240,6 +240,7 @@
     #main-bg {
         background: url("http://clickadmin.searchmarketingservices.online/eventcards/{{ $card[0]->bgName }}");
         background-size: cover;
+        background-position: center center;
     }
 
     .container-fluid {
