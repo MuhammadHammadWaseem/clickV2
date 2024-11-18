@@ -88,6 +88,7 @@ class TableSeatingController extends Controller
                 if ($meal)
                     $guest->mealName = $meal->name;
             }
+            $guest->mainGuest = Guest::where('id_guest', $guest->parent_id_guest)->select('name')->first();
         }
 
         return response()->json([

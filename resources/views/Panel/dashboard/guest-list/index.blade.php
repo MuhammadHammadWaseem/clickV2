@@ -619,6 +619,7 @@
                                 <li>{{ __('table.name') }}</li>
                                 <li>{{ __('table.number_of_guests') }}</li>
                                 <li>{{ __('table.table') }}</li>
+                                <li>{{ __('table.main_guest') }}</li>
                                 <li>{{ __('table.actions') }}</li>
                             </ul>
                         </div>
@@ -1100,18 +1101,19 @@
 
         function appendGuests(data) {
             data.forEach(guest => {
+                console.log(guest.mainguest);
                 const isChecked = guest.id_table === tableId ? 'checked' : '';
-
                 $("#sub-main-content").append(`
                 <div class="sub-main-content">
                     <ul>
                         <li>${guest.titleGuest ?? ""} ${guest.name}</li>
                         <li>${guest.mealName ?? "-"}</li>
-                        ${(guest.id_table != 0) ?
+                        ${(guest.id_table != 0 && guest.tablename != undefined) ?
                             `<li class="text-success">${guest.tablename}</li>`
                             :
                             `<li class="text-danger">Not Seated</li>`
                         }
+                        <li>${guest.mainGuest ? guest.mainGuest.name : ""}</li>
                         <li>
                             <input type="checkbox" class="guest-checkbox" data-guest-id="${guest.id_guest}" ${isChecked}/>
                         </li>
