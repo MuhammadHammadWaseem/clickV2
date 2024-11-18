@@ -998,20 +998,20 @@ class GuestListController extends Controller
                     if ($guest['phone'] && $guest['phone'] != null && $guest['parent_id_guest'] == 0) {
                         if ($event->type == "CORPORATE") {
                             if ($lang == 'en') {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             } elseif ($lang == 'fr') {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             } else {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             }
                         } else {
 
                             if ($lang == 'en') {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             } elseif ($lang == 'fr') {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'Vous avez une invitation pour' . $event->name . ' ' . $event->type . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             } else {
-                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
+                                $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
                             }
                         }
                         //$params=['MessagingServiceSid' => 'MG1638f5c41f52b36db3469924b8ff345a', 'To' => $guest['phone'], 'Body' => 'You Got Invitation For '.$event->name.' '.$event->type.' https://clickinvitation.com/cardInvitation/'.$cardId['id_card'].'/'.$guest['code'].'/'.$lang];
