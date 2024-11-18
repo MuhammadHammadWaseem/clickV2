@@ -123,8 +123,7 @@ class WebController extends Controller
 
     public function postcontact(Request $request)
     {
-
-        Mail::to("hw13604@gmail.com")->send(new ContactMail([
+        Mail::to("info@clickinvitation.com")->send(new ContactMail([
             'subject' => $request->subject,
             'message' => $request->message,
             'name' => $request->name,
