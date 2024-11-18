@@ -30,7 +30,7 @@ class GuestListController extends Controller
         $eventId = GeneralHelper::getEventId();
         $card = Card::where('id_event', $eventId)->latest()->first();
         $meals = Meal::where('id_event', $eventId)->paginate(10, ['id_meal', 'name']);
-        return view('Panel.dashboard.guest-list', compact('meals','card'));
+        return view('Panel.dashboard.guest-list', compact('meals', 'card'));
     }
 
     public function newguest(Request $request)
@@ -38,10 +38,10 @@ class GuestListController extends Controller
         $validator = \Validator::make($request->all(), [
             'title' => 'string|max:255',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required',
-            'whatsapp' => 'required',
-            'allergies' => 'required',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable',
+            'whatsapp' => 'nullable',
+            'allergies' => 'boolean',
             'meal' => 'required|exists:meals,id_meal',
             'members' => 'integer|min:1',
             'notes' => 'nullable|string'
@@ -51,6 +51,11 @@ class GuestListController extends Controller
             'members.min' => 'The number of members must be at least 1.'
         ]);
 
+        // Check if at least one of phone, email, or whatsapp is provided
+        if (empty($request->phone) && empty($request->email) && empty($request->whatsapp)) {
+            return response()->json(['success' => false, 'message' => 'At least one of phone, email, or WhatsApp must be provided.']);
+        }
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
@@ -58,9 +63,19 @@ class GuestListController extends Controller
         // Custom validation for duplicate name, email, and phone in the same event
         $duplicateGuest = Guest::where('id_event', $request->idevent)
             ->where(function ($query) use ($request) {
-                $query->where('name', $request->name)
-                    ->orWhere('email', $request->email)
-                    ->orWhere('phone', $request->phone);
+                // Check for duplicates only if the field is not empty or null
+                if ($request->name) {
+                    $query->where('name', $request->name);
+                }
+                if ($request->email) {
+                    $query->orWhere('email', $request->email);
+                }
+                if ($request->phone) {
+                    $query->orWhere('phone', $request->phone);
+                }
+                if ($request->whatsapp) {
+                    $query->orWhere('whatsapp', $request->whatsapp);
+                }
             })
             ->exists();
 
