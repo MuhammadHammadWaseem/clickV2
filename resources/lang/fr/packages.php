@@ -28,4 +28,12 @@ return [
     'premium_package_contents' => 'Tout dans le forfait premium',
     'acknowledgments' => 'Reconnaissances',
     'purpose_comprehensive' => 'Accès complet à toutes les fonctionnalités.',
+    'full_event_management' => 'Gestion complète de l\'événement',
+    'vendor_communication' => 'Communication avec les fournisseurs',
+    'on_day_coordination' => 'Coordination le jour de l\'événement',
+    'budget_management' => 'Gestion du budget',
+    'custom_design_and_invitations' => 'Conception personnalisée et invitations',
+    'post_event_services' => 'Services post-événement',
+    'details_comprehensive' => 'Dans ce forfait, nous nous occupons de tout du début à la fin. Cela comprend la planification et la coordination complètes de l'événement, la conception de cartes d'invitation personnalisées, les suggestions de cadeaux, la disposition des tables, la gestion des remerciements et la gestion de la liste des invités. Laissez-nous gérer tout le stress afin que vous puissiez profiter de votre journée spéciale sans tracas !',
+    'We_do_it_for_you' => 'Nous le faisons pour vous',
 ];

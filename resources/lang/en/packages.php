@@ -28,5 +28,14 @@ return [
         'premium_package_contents' => 'Everything in the Premium Package',
         'acknowledgments' => 'Acknowledgments',
         'purpose_comprehensive' => 'Full access to all features.',
+        'full_event_management' => 'Full Event Management',
+        'vendor_communication' => 'Vendor Communication',
+        'on_day_coordination' => 'On-the-Day Coordination',
+        'budget_management' => 'Budget Management',
+        'custom_design_and_invitations' => 'Custom Design and Invitations',
+        'post_event_services' => 'Post-Event Services',
+        'details_comprehensive' => 'In this package, we take care of everything from start to finish. This includes full event planning and coordination, custom invitation card design, gift suggestions, table seating arrangements, acknowledgment management, guest list management. Let us handle all the stress so you can enjoy your special day hassle-free!',
+        'We_do_it_for_you' => 'We do it for you',
+    
     ];
 

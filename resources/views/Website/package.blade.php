@@ -148,7 +148,12 @@ body {
                             <li>{{ __('packages.gift_suggestions') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_basic') }}</p>
-                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endauth
                     </div>
 
                 </div>
@@ -163,7 +168,12 @@ body {
                             <li>{{ __('packages.photos') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_standard') }}</p>
-                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endauth
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -175,7 +185,12 @@ body {
                             <li>{{ __('packages.table_seating_arrangements') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_premium') }}</p>
-                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endauth
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -187,7 +202,30 @@ body {
                             <li>{{ __('packages.acknowledgments') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_comprehensive') }}</p>
-                        <a href="#" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endauth
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="packages-single-card box-styling">
+                        <div class="box-subtitle">{{ __('packages.We_do_it_for_you') }}</div>
+                        <div class="box-unit-price">$349</div>
+                        <p>{{ __('packages.purpose_comprehensive') }}</p>
+                        <p>
+                            {{ __('packages.details_comprehensive', [
+                                'description' => "In this package, we take care of everything from start to finish. This includes venue selection, full event planning and coordination, managing vendors and suppliers, budget tracking, custom invitation design, guest list management, on-day support, and post-event services like sending thank-you notes and feedback collection. Let us handle all the stress so you can enjoy your special day hassle-free!"
+                            ]) }}
+                        </p>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
+                        @endauth
                     </div>
                 </div>
             </div>
