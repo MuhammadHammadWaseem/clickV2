@@ -1751,7 +1751,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 </span>
                                             </td>
                                             <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                            <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                             <td>${guest.notes || 'No Notes'}</td>
                                             <td>
                                                 <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -1854,7 +1854,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                         </span>
                                                                     </td>
                                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                                     <td>${guest.notes || 'No Notes'}</td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -1950,7 +1950,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -2049,7 +2049,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -2149,7 +2149,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </span>
                                                 </td>
                                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                <td>Allergies: ${guest.allergies || 'N/A'}</td>
+                                                <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                 <td>${guest.notes || 'No Notes'}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal" data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">
@@ -2245,7 +2245,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </span>
                                                     </td>
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -2344,7 +2344,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </span>
                                                 </td>
                                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                <td>Allergies: ${guest.allergies ? guest.allergies : 'N/A'}</td>
+                                                <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                 <td>${guest.notes || 'No Notes'}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"

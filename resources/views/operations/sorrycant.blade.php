@@ -38,22 +38,19 @@
     <script src="/assets/jspanel/ng-img-crop.js"></script>
 
     <style>
-
-
         @media only screen and (max-width: 767px) {
             .operations .groupdesc .memberrow div {
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: 0 0 100% !important;
-}
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
 
-.operations .groupdesc .memberrow .t-btn {
-    width: 100% !important;
-    flex: 0 0 100%;
-    margin: 10px 0;
-}
+            .operations .groupdesc .memberrow .t-btn {
+                width: 100% !important;
+                flex: 0 0 100%;
+                margin: 10px 0;
+            }
         }
-
     </style>
 </head>
 
@@ -79,27 +76,22 @@
                     <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i class="fal fa-clipboard-list-check"></i>
                             {{ __('sorrycant.DECLINE INVITE') }}</h4>
-                        <div class="card-body mt-5" style="{{ $guest->declined == 1 ? 'background-color:#ffdbdb' : '' }}">
-
-                            @if ($guest->declined == 0)
-                            <div class="form-check">
+                        <div class="card-body mt-5" style="{{ $guest->declined == 1 ? 'background: rgb(255, 219, 219);' : '' }}" id="declineForm">
+                            <div class="form-check" id="declineBtn" ng-show="!guestDeclined">
                                 <input ng-model="decliner" value="me" class="form-check-input" type="radio"
-                                name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                    name="flexRadioDefault" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     {{ __('sorrycant.Decline for me') }}
                                 </label>
                             </div>
-                            @endif
 
-                            @if ($guest->declined == 1)
-                                <div class="form-check">
-                                    <input ng-model="decliner" value="me_d" class="form-check-input" type="radio"
-                                        name="flexRadioDefault" id="flexRadioDefault3">
-                                    <label class="form-check-label" for="flexRadioDefault3">
-                                        Undecline for me
-                                    </label>
-                                </div>
-                            @endif
+                            <div class="form-check" id="undeclineBtn" ng-show="guestDeclined">
+                                <input ng-model="decliner" value="me_d" class="form-check-input" type="radio"
+                                    name="flexRadioDefault" id="flexRadioDefault3">
+                                <label class="form-check-label" for="flexRadioDefault3">
+                                    Undecline for me
+                                </label>
+                            </div>
 
 
                             @if ($guest->mainguest == 1)
@@ -108,6 +100,14 @@
                                         name="flexRadioDefault" id="flexRadioDefault2">
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         {{ __('sorrycant.Decline for all group') }}
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input ng-model="decliner" value="all_d" class="form-check-input" type="radio"
+                                        name="flexRadioDefault" id="flexRadioDefault4">
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        Undecline for all group
                                     </label>
                                 </div>
                             @endif
@@ -171,6 +171,8 @@
                 $scope.loading = 1;
                 $scope.saveyes = 0;
 
+                $scope.guestDeclined = {{ $guest->declined }};
+
                 $http({
                     method: 'POST',
                     url: '/opened-answered',
@@ -181,8 +183,11 @@
                 });
 
                 $scope.$watchGroup(["decliner"], function(newValue, oldValue) {
-                    if (newValue != oldValue)
-                        $scope.saveyes = 1;
+                    if (typeof newValue[0] === 'string') {
+                        if (newValue != oldValue) {
+                            $scope.saveyes = 1;
+                        }
+                    }
                 });
 
 
@@ -200,7 +205,25 @@
                             decliner: $scope.decliner,
                         },
                     }).then(function(response) {
-                        window.location.reload();
+                        if (response.data.data == "Guest Declined Successfully") {
+                            $("#declineForm").css("background", "#ffdbdb");
+                            $scope.guestDeclined = true;
+                            $scope.saveyes = 0;
+                            $scope.mymembers();
+                            start = $interval(function() {
+                                $scope.saveok = 1;
+                            }, 1300);
+                        }
+                        if (response.data.data == "Guest UnDeclined Successfully") {
+                            $("#declineForm").css("background", "#e0e0e0");
+                            $scope.guestDeclined = false;
+                            $scope.saveyes = 0;
+                            $scope.mymembers();
+                            start = $interval(function() {
+                                $scope.saveok = 1;
+                            }, 1300);
+                        }
+                        // window.location.reload();
                         $scope.saveyes = 0;
                         $scope.mymembers();
                         start = $interval(function() {

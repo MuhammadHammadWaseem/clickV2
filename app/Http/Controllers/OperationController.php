@@ -984,7 +984,6 @@ class OperationController extends Controller
 
     public function decline(Request $request)
     {
-
         $guest = Guest::where('code', $request->guestcode)->first();
         if ($guest) {
 
@@ -992,14 +991,22 @@ class OperationController extends Controller
                 $guest->declined = 1;
                 $guest->id_table = 0;
                 $guest->save();
+                return response()->json(['status' => 'success', 'data' => 'Guest Declined Successfully']);
             }elseif ($request->decliner == "me_d") {
                 $guest->declined = 0;
                 $guest->save();
+                return response()->json(['status' => 'success', 'data' => 'Guest UnDeclined Successfully']);
             } elseif ($request->decliner == "all") {
                 $guests = Guest::where("parent_id_guest", $guest->id_guest)->get();
                 foreach ($guests as $g) {
                     $g->declined = 1;
                     $guest->id_table = 0;
+                    $g->save();
+                }
+            }elseif ($request->decliner == "all_d") {
+                $guests = Guest::where("parent_id_guest", $guest->id_guest)->get();
+                foreach ($guests as $g) {
+                    $g->declined = 0;
                     $g->save();
                 }
             } else {
