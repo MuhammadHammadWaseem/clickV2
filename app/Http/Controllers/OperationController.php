@@ -992,6 +992,9 @@ class OperationController extends Controller
                 $guest->declined = 1;
                 $guest->id_table = 0;
                 $guest->save();
+            }elseif ($request->decliner == "me_d") {
+                $guest->declined = 0;
+                $guest->save();
             } elseif ($request->decliner == "all") {
                 $guests = Guest::where("parent_id_guest", $guest->id_guest)->get();
                 foreach ($guests as $g) {

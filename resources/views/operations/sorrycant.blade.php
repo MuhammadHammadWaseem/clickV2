@@ -1,4 +1,4 @@
-.<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -36,6 +36,25 @@
 
     <script src="/assets/jspanel/sortableang.js"></script>
     <script src="/assets/jspanel/ng-img-crop.js"></script>
+
+    <style>
+
+
+        @media only screen and (max-width: 767px) {
+            .operations .groupdesc .memberrow div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+}
+
+.operations .groupdesc .memberrow .t-btn {
+    width: 100% !important;
+    flex: 0 0 100%;
+    margin: 10px 0;
+}
+        }
+
+    </style>
 </head>
 
 
@@ -43,7 +62,8 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="/assets/images/logo/logoNewGolden.png" width="200px" class="d-inline-block align-top" alt="">
+                <img src="/assets/images/logo/logoNewGolden.png" width="200px" class="d-inline-block align-top"
+                    alt="">
             </a>
         </div>
     </nav>
@@ -53,19 +73,35 @@
             <div class="row justify-content-md-center">
 
                 <div class="col-12">
-                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()"><i
+                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back"
+                        onclick="history.back()"><i
                             class="fas fa-chevron-left"></i>{{ __('sorrycant.BACK TO INVITATION') }}</button>
                     <div class="card mb-4 box-styling">
                         <h4 class="card-header text-center"><i class="fal fa-clipboard-list-check"></i>
                             {{ __('sorrycant.DECLINE INVITE') }}</h4>
-                        <div class="card-body mt-5">
+                        <div class="card-body mt-5" style="{{ $guest->declined == 1 ? 'background-color:#ffdbdb' : '' }}">
+
+                            @if ($guest->declined == 0)
                             <div class="form-check">
                                 <input ng-model="decliner" value="me" class="form-check-input" type="radio"
-                                    name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                name="flexRadioDefault" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     {{ __('sorrycant.Decline for me') }}
                                 </label>
                             </div>
+                            @endif
+
+                            @if ($guest->declined == 1)
+                                <div class="form-check">
+                                    <input ng-model="decliner" value="me_d" class="form-check-input" type="radio"
+                                        name="flexRadioDefault" id="flexRadioDefault3">
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        Undecline for me
+                                    </label>
+                                </div>
+                            @endif
+
+
                             @if ($guest->mainguest == 1)
                                 <div class="form-check">
                                     <input ng-model="decliner" value="all" class="form-check-input" type="radio"
@@ -99,11 +135,9 @@
                                         <p ng-show="!member.declined">NOT DECLINED</p>
                                     </div>
                                     <div class="col-2 text-end">
-                                        <button style="width:auto" ng-show="!member.declined"
-                                            class="btn t-btn"
+                                        <button style="width:auto" ng-show="!member.declined" class="btn t-btn"
                                             ng-click="$parent.decliner=member.id_guest; decline();">DECLINE</button>
-                                        <button style="width:auto" ng-show="member.declined"
-                                            class="btn t-btn"
+                                        <button style="width:auto" ng-show="member.declined" class="btn t-btn"
                                             ng-click="$parent.decliner=member.id_guest; decline();">UNDECLINE</button>
 
                                         <!--<button class="btn btn-warning btn-sm" ng-click="editdata($index);" data-bs-toggle="modal" data-bs-target="#editguestModal">{{ __('attending.EDIT') }}</button>
@@ -166,6 +200,7 @@
                             decliner: $scope.decliner,
                         },
                     }).then(function(response) {
+                        window.location.reload();
                         $scope.saveyes = 0;
                         $scope.mymembers();
                         start = $interval(function() {
