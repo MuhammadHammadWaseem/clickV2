@@ -274,6 +274,14 @@ class WebPageController extends Controller
                 mkdir($eventFolder, 0777, true);
             }
 
+            // Delete the old image if it exists
+            if (!empty($event->mainimage)) {
+                $oldImagePath = public_path($event->mainimage);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // Remove the old image
+                }
+            }   
+            
             // Store the uploaded image
             $image = $request->file('mainimage');
             $filename = time() . '.' . $image->extension();
