@@ -206,6 +206,23 @@
     }
 
 
+    input#guestSearchInput {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 50px;
+        height: 50px;
+        border: 1px solid #999999;
+        padding-left: 20px;
+        font-size: 17px;
+        padding-right: 15px;
+        outline: none;
+        color: #4A4A4A;
+        box-shadow: none;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
 
     @media only screen and (max-width: 1600px) {}
 
@@ -614,6 +631,10 @@
                         <p>{{ __('table.guests_of_table') }}<span id="dynamicTableName"></span></p>
                     </div>
                     <div class="modal-table-type-content">
+                        <div class="search-box">
+                            <input type="text" id="guestSearchInput" placeholder="Search by Guest or Main Guest">
+                        </div>
+
                         <div class="main-heading">
                             <ul>
                                 <li>{{ __('table.name') }}</li>
@@ -847,6 +868,41 @@
 @endsection
 @section('scripts')
     <script>
+
+        $(document).ready(function () {
+            // Search function
+            $('#guestSearchInput').on('keyup', function () {
+                const searchText = $(this).val().toLowerCase();
+            
+                // Loop through each guest row
+                $('#sub-main-content .sub-main-content').filter(function () {
+                    // Get guest name and main guest name
+                    const guestName = $(this).find('li').eq(0).text().toLowerCase();
+                    const mainGuestName = $(this).find('li').eq(3).text().toLowerCase();
+                
+                    // Check if either name contains the search text
+                    const isMatch =
+                        guestName.includes(searchText) || mainGuestName.includes(searchText);
+                
+                    // Show or hide based on the match
+                    $(this).toggle(isMatch);
+                
+                    if (isMatch && mainGuestName) {
+                        // Show other rows with the same main guest
+                        const mainGuestRows = $(`#sub-main-content .sub-main-content`)
+                            .filter(function () {
+                                return (
+                                    $(this).find('li').eq(3).text().toLowerCase() ===
+                                    mainGuestName
+                                );
+                            })
+                            .show();
+                    }
+                });
+            });
+        });
+
+
         $("#add_meal").on("click", function() {
             var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter04'));
             successModal.show();
