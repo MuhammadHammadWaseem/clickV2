@@ -1015,7 +1015,7 @@ class OperationController extends Controller
                     $guest->id_table = 0;
                     $guest->declined = 1;
                 } else{
-                    $guest->declined = 0;
+                    $guest->declined = null;
                 }
                 $guest->save();
             }
