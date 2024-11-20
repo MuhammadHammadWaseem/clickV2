@@ -1734,13 +1734,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             // ALL GUESTS
                             var accordion = `
                             <div class="accordion">
-                                <div class="table-box">
+                                <div class="table-box" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                     <table>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                 ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                <span>
                                                     <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
@@ -1776,7 +1776,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             guest.members.forEach(function(member) {
                                 accordion += `
                                 <tr class="divider-line"></tr>
-                                <tr>
+                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                     <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                     <td>${member.notes || 'No Notes'}</td>
                                     <td>
@@ -1836,7 +1836,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 // Show guest and their members if the guest is checked in
                                                 var accordion = `
                                                     <div class="accordion">
-                                                        <div class="table-box">
+                                                        <div class="table-box" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                                             <table>
                                                                 <tr>
                                                                     <td>
@@ -1882,7 +1882,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                         accordion += `
                                             <tr class="divider-line"></tr>
-                                            <tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                                 <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                                 ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                                 <td>${member.notes || 'No Notes'}</td>
@@ -1932,7 +1932,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 // Show guest and their members if the guest is checked in
                                 var accordion = `
                                     <div class="accordion">
-                                        <div class="table-box">
+                                        <div class="table-box" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                             <table>
                                                 <tr>
                                                     <td>
@@ -1976,7 +1976,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     if (member.opened == 1) {
                                         accordion += `
                                             <tr class="divider-line"></tr>
-                                            <tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                                 <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                                 ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                                 <td>${member.notes || 'No Notes'}</td>
@@ -2031,7 +2031,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                 var accordion = `
                                     <div class="accordion">
-                                        <div class="table-box">
+                                        <div class="table-box" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                             <table>
                                                 <tr>
                                                     <td>
@@ -2075,7 +2075,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     if (member.declined == 1) {
                                         accordion += `
                                             <tr class="divider-line"></tr>
-                                            <tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                                 <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                                 ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                                 <td>${member.notes || 'No Notes'}</td>
@@ -2131,7 +2131,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         if (guest.checkin == 1 || guest.members.some(member => member.checkin == 1)) {
                             var accordion = `
                                 <div class="accordion">
-                                    <div class="table-box">
+                                    <div class="table-box" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                         <table>
                                             <tr>
                                                 <td>
@@ -2176,7 +2176,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 if (member.checkin == 1) {
                                     accordion += `
                                         <tr class="divider-line"></tr>
-                                        <tr>
+                                        <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                             <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                             ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                             <td>${member.notes || 'No Notes'}</td>
@@ -2227,7 +2227,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 $('#guestMemberTotal').html(`TOTAL: ${notOpenedGuestsCount} ${br} (guests ${notOpenedGuestsCount} - members ${notOpenedMembersCount})`);
                                 // Show guest and their members if the guest is checked in
                                 var accordion = `
-                                    <div class="accordion">
+                                    <div class="accordion" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                         <div class="table-box">
                                             <table>
                                                 <tr>
@@ -2274,7 +2274,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
                                                 </tr>
                                                 <tr class="divider-line"></tr>
-                                                <tr>
+                                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                                     <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                                     ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                                     <td>${member.notes || 'No Notes'}</td>
@@ -2326,14 +2326,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                             guests.forEach(function(guest) {
                                 let accordion = `
-                                <div class="accordion">
+                                <div class="accordion" ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                     <div class="table-box">
                                         <table>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    <span class="${guest.checkin == 0 ? 'd-none' : ''}">
+                                                    <span>
                                                         <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><i class="fa fa-phone"></i> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
@@ -2372,7 +2372,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     guest.members.forEach(function(member) {
                                         accordion += `
                                         <tr class="divider-line"></tr>
-                                        <tr>
+                                        <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
                                             <td>
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
                                                 ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}

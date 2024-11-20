@@ -171,7 +171,11 @@
                 $scope.loading = 1;
                 $scope.saveyes = 0;
 
-                $scope.guestDeclined = {{ $guest->declined }};
+                @if ($guest->declined == null || $guest->declined == 0)
+                $scope.guestDeclined = 0;
+                @elseif ($guest->declined == 1)
+                $scope.guestDeclined = 1;
+                @endif
 
                 $http({
                     method: 'POST',
