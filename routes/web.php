@@ -166,7 +166,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('{id}/get-csrfToken', [InvitationController::class, 'csrfToken'])->name('invitation.getCsrftoken');
 
             // Pay
-            Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index');
+            Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index')->middleware('PaidUserCheck');
             Route::post('{id}/pay-datas', [PayController::class, 'paydatas'])->name('pay.get');
         });
     });
