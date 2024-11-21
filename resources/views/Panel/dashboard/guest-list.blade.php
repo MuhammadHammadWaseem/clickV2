@@ -1783,7 +1783,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <ul>
                                             <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                             <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                         </ul>
                                     </td>
 
@@ -1890,7 +1890,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <ul>
                                                         <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                         <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened == 2 && member.declined != 1) ? `
@@ -1984,7 +1984,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <ul>
                                                         <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                         <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened == 2 && member.declined != 1) ? `
@@ -2083,7 +2083,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <ul>
                                                         <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                         <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
                                                 ${(member.opened == 2 && member.declined != 1) ? `
@@ -2184,7 +2184,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <ul>
                                                     <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                     <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                 </ul>
                                             </td>
                                             ${(member.opened == 2 && member.declined != 1) ? `
@@ -2282,7 +2282,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <ul>
                                                             <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                             <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                         </ul>
                                                     </td>
                                                     ${(member.opened == 2 && member.declined != 1) ? `
@@ -2382,7 +2382,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <ul>
                                                     <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
                                                     <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.allergies ? member.allergies : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                 </ul>
                                             </td>
                                             ${(member.opened == 2 && member.declined != 1) ? `
