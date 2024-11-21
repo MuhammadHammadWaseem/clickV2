@@ -333,6 +333,7 @@
 
     .box-styling.event-photos-gallery.events-lists-sec-01.guest-list {
         height: max-content !important;
+        margin-bottom: 50px;
     }
 
 
@@ -887,7 +888,7 @@ p#guestMemberTotal {
                         <button type="button" class="btn btn-secondary d-none" data-dismiss="modal"
                         id="AddGuestClose1">{{ __('genralInfo.Later') }}</button>
 
-                    <button type="submit" class="btn btn-primary submit-btn"
+                    <button type="submit" class="btn submit-btn"
                         id="submitGuestForm">{{ __('guestlistpage.Save') }}</button>
                 </div>
             </div>
@@ -1730,6 +1731,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                     if (filter == 1) {
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
+
                         guests.forEach(function(guest) {
                             // ALL GUESTS
                             var accordion = `
@@ -1819,6 +1825,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "attending") {
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
                             var attendingGuestsCount = 0;
                             var attendingMembersCount = 0;
 
@@ -1921,6 +1931,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         var openedGuestsCount = 0;
                         var openedMembersCount = 0;
 
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
+
                         guests.forEach(function(guest) {
                             // Check if guest or any member has opened == 1 (opened)
                             if (guest.opened == 1 || guest.members.some(member => member.opened == 1)) {
@@ -2011,6 +2026,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "declined") {
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
                         var declinedGuestsCount = 0;
                         var declinedMembersCount = 0;
                         guests.forEach(function(guest) {
@@ -2109,6 +2128,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     if (filter == "checked-in") {
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
                     var checkedInGuestsCount = 0;
                     var checkedInMembersCount = 0;
 
@@ -2214,6 +2237,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                     if (filter == "not-open") {
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
                         var notOpenedGuestsCount = 0;
                         var notOpenedMembersCount = 0;
 
@@ -2312,6 +2339,12 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                     if (filter === "a-to-z" || filter === "z-to-a") {
+
+                        if(guests.length == 0){
+                            $('#GuestList').empty();
+                            $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
+                        }
+                        
                         if (Array.isArray(guests) && guests.length > 0) {
                             // Sort guests array based on the filter
                             if (filter === "a-to-z" || filter === "z-to-a") {
