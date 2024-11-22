@@ -960,6 +960,9 @@
             </div>
         </div>
         </div>
+        <input type="hidden" name="showCeremonyBox" id="showCeremonyBox" value="{{ $event->boolcerimony }}">
+        <input type="hidden" name="showRecBox" id="showRecBox" value="{{ $event->boolreception }}">
+        <input type="hidden" name="showParBox" id="showParBox" value="{{ $event->boolparty }}">
     @endsection
 
     @section('scripts')
@@ -1018,11 +1021,16 @@
                         ? 'true'
                         : 'false' }};
 
-                        var showCeremonyBox = {{ json_encode($event->boolcerimony) == 1 ? 'true' : 'false' }};
-                        var showRecBox = {{ json_encode($event->boolreception) == 1 ? 'true' : 'false' }};
-                        var showParBox = {{ json_encode($event->boolparty) == 1 ? 'true' : 'false' }};
+                        // var showCeremonyBox = {{ json_encode($event->boolcerimony) == 1 ? 'true' : 'false' }};
+                        // var showRecBox = {{ json_encode($event->boolreception) == 1 ? 'true' : 'false' }};
+                        // var showParBox = {{ json_encode($event->boolparty) == 1 ? 'true' : 'false' }};
 
-                        console.log(showCeremonyBox);
+
+                        var showCeremonyBox = $("#showCeremonyBox").val() == 1 ? true : false;
+                        var showRecBox = $("#showRecBox").val() == 1 ? true : false;
+                        var showParBox = $("#showParBox").val() == 1 ? true : false;
+
+
                         if(showCeremonyBox == false){
                             $("#ceremonyBox").hide();
                         }else{
