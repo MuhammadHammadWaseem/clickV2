@@ -73,6 +73,7 @@ const centerLineVertical = new fabric.Line([canvasWidth / 2, 0, canvasWidth / 2,
   strokeWidth: 1,
   selectable: false,
   evented: false,
+  isHelper: true,
 });
 
 const centerLineHorizontal = new fabric.Line([0, canvasHeight / 2, canvasWidth, canvasHeight / 2], {
@@ -80,7 +81,15 @@ const centerLineHorizontal = new fabric.Line([0, canvasHeight / 2, canvasWidth, 
   strokeWidth: 1,
   selectable: false,
   evented: false,
+  isHelper: true,
 });
+
+canv.on('mouse:up', () => {
+  canv.remove(centerLineVertical);
+  canv.remove(centerLineHorizontal);
+  canv.renderAll();
+});
+
 
 // Function to add or remove center lines based on alignment
 function updateAlignmentLines(object) {
@@ -1565,6 +1574,9 @@ function downloadJSON() {
 }
 
 function downloadImage() {
+  canv.remove(centerLineVertical);
+  canv.remove(centerLineHorizontal);
+  
   const imgData = canv.toDataURL({ format: "png", quality: 1 });
   const link = document.createElement("a");
   link.href = imgData;
