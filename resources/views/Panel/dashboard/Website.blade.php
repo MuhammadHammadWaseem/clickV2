@@ -175,8 +175,8 @@
                             </div>
                         </div>
                         <div class="main_mobile_logo">
-                            <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png"
-                                    alt=""></a>
+                            <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -189,8 +189,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="main-logo">
-                        <a href="http://127.0.0.1:8000/panel"><img src="/assets/images/dashboard-logo.png"
-                                alt=""></a>
+                        <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
