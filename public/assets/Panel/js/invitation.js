@@ -258,6 +258,10 @@ function getTemplatewithId(templateId) {
         // updateCanvasHistory()
         // Remove loading message
         canv.remove(loadingText);
+
+        setTimeout(function(){
+          saveAll();
+        }, 1000);
       } else {
         console.error('No template data found.');
       }

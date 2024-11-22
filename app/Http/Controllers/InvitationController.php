@@ -15,6 +15,9 @@ class InvitationController extends Controller
     public function index(Request $request, $id)
     {
         $eventType = Event::where(['id_event' => $id])->get();
+        if (!$eventType) {
+            return redirect()->back()->with('error', 'Event not found!');
+        }
         $cardData = Card::select("*")->where([['id_event', '=', $id]])->orderBy('id_card', 'desc')->get();
 
         $cardImgs = DB::table('cards_upload')->where(['id_eventtype' => $eventType[0]->type_id, 'type' => 'card'])->get();
@@ -28,9 +31,10 @@ class InvitationController extends Controller
             $cardData[0]->bgImgs = $bgImgs;
             $cardData[0]->stickers = $stickers;
             $cardData = $cardData[0];
-            return view('Panel.dashboard.invitation', compact('cardData'));
+        }else{
+            $cardData = null;
         }
-        return view('Panel.dashboard.invitation');
+        return view('Panel.dashboard.invitation', compact('cardData'));
     }
 
     public function settingUpdate(Request $request)

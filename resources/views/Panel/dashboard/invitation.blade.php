@@ -1540,6 +1540,30 @@
 
 @section('scripts')
     <script>
+
+        var cardData = @json($cardData);
+        var settings = 0;
+
+        if (!cardData || cardData.result !== "1") {
+            settings = 0;
+            $("#two_sided").removeAttr("onclick");
+        } else {
+            settings = 1;
+        }
+
+        console.log(settings);
+
+        $("#two_sided").on("click", function (event) {
+            if (settings == 0) {
+                toastr.error('Please Save the Setting First!');
+
+                // Prevent further actions
+                event.preventDefault();  // Stop the default behavior
+                event.stopPropagation(); // Prevent `onclick` functions from triggering
+                return false;
+            }
+        });
+
         $("#previewModal").on("click", function() {
             var myModal = new bootstrap.Modal(document.getElementById('exampleModaliframe'));
             myModal.show();
@@ -1559,7 +1583,7 @@
                     rspvVal += "0,";
                 }
 
-                AllBgname = document.getElementsByClassName("bgName");
+                let AllBgname = document.getElementsByClassName("bgName");
                 var bgName;
                 for (let index = 0; index < AllBgname.length; index++) {
                     if (AllBgname[index].checked) {
@@ -1567,6 +1591,7 @@
                     }
                 }
             }
+
             let msg = document.getElementById("msgTitle").value;
 
             $.ajax({
@@ -1589,6 +1614,9 @@
                     console.log(msg);
                     if (msg.success == true) {
                         toastr.success(msg.message);
+                        settings = 1;
+                        // Reattach onclick attributes or functions
+                        $("#two_sided").attr("onclick", "toggleButtons(); toggleTwoSided(this);");
                     } else {
                         toastr.error('Something went wrong, please try again later.');
                     }
