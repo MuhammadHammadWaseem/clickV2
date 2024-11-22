@@ -828,9 +828,9 @@
                                 <div class="tab">
                                     <h2>{{ __('genralInfo.Edit Event') }}</h2>
                                     <input type="hidden" value="{{ $event->id_event }}" name="event_id">
-                                    <input type="text" placeholder="{{ __('genralInfo.Event Name') }}"
+                                    <input type="text" required placeholder="{{ __('genralInfo.Event Name') }}"
                                         value="{{ $event->name }}" name="event">
-                                    <input type="datetime-local" id="eventDate" name="event_date"
+                                    <input type="datetime-local" required id="eventDate" name="event_date"
                                         placeholder="{{ __('genralInfo.Event Date') }}" value="{{ $event->date }}">
                                 </div>
                                 @if ($event->eventType->couple_event == '1')
@@ -838,7 +838,7 @@
                                     <div class="tab">
                                         <h2>{{ __('genralInfo.Groom Details') }}</h2>
                                         @if ($event->eventType->couple_event == '1')
-                                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg"
+                                            <input type="file" required id="imageUpload" accept=".png, .jpg, .jpeg"
                                                 name="groom_img" />
 
                                             <!-- Groom Image Display with Conditional Source -->
@@ -846,9 +846,9 @@
                                                 alt="Groom Image" class="groom-image" height="100px" width="100px">
 
                                             <!-- Groom Information -->
-                                            <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
+                                            <input type="text" placeholder="{{ __('genralInfo.First Name') }}" required
                                                 name="groomfname" value="{{ $event->groomfname }}">
-                                            <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
+                                            <input type="text" placeholder="{{ __('genralInfo.Last Name') }}" required
                                                 name="groomlname" value="{{ $event->groomlname }}">
                                             <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="groomsummary">{{ $event->groomsummary }}</textarea>
 
