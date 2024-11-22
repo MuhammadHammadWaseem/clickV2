@@ -1022,6 +1022,7 @@
                         var showRecBox = {{ json_encode($event->boolreception) == 1 ? 'true' : 'false' }};
                         var showParBox = {{ json_encode($event->boolparty) == 1 ? 'true' : 'false' }};
 
+                        console.log(showCeremonyBox);
                         if(showCeremonyBox == false){
                             $("#ceremonyBox").hide();
                         }else{
