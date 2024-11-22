@@ -259,8 +259,12 @@ function getTemplatewithId(templateId) {
         // Remove loading message
         canv.remove(loadingText);
 
+        $("#front").prop("disabled",true);
+        $("#back").prop("disabled",true);
         setTimeout(function(){
           saveAll();
+          $("#front").prop("disabled",false);
+          $("#back").prop("disabled",false);
         }, 1000);
       } else {
         console.error('No template data found.');
@@ -324,6 +328,12 @@ function selectedObject(event) {
 
     if (activeObject) {
       const step = 3;
+
+      // Prevent default behavior for arrow keys
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+        event.preventDefault();
+      }
+      
       switch (event.key) {
         case 'ArrowUp':
           activeObject.top -= step;
