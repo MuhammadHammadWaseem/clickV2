@@ -215,7 +215,7 @@ class PanelController extends Controller
         $event->groomlname = $request->groomlname ?? $event->groomlname;
         $event->groomsummary = $request->groomsummary ?? $event->groomsummary;
         $event->summary = $request->story ?? $event->summary;
-        $event->boolcerimony = $request->boolcerimony ?? 1;
+        $event->boolcerimony = $request->boolcerimony ?? $event->boolcerimony;
         $event->ceraddress = $request->ceraddress ?? $event->ceraddress;
         $event->cercountry = $request->cercountry ?? $event->cercountry;
         $event->cerprovince = $request->cerprovince ?? $event->cerprovince;
@@ -223,7 +223,7 @@ class PanelController extends Controller
         $event->cerpc = $request->cerpc ?? $event->cerpc;
         $event->certime = $request->certime ?? $event->certime;
         $event->cerdesc = $request->cerdesc ?? $event->cerdesc;
-        $event->boolreception = $request->boolreception ?? 1;
+        $event->boolreception = $request->boolreception ?? $event->boolreception;
         $event->recaddress = $request->recaddress ?? $event->recaddress;
         $event->reccountry = $request->reccountry ?? $event->reccountry;
         $event->recprovince = $request->recprovince ?? $event->recprovince;
@@ -231,7 +231,7 @@ class PanelController extends Controller
         $event->recpc = $request->recpc ?? $event->recpc;
         $event->rectime = $request->rectime ?? $event->rectime;
         $event->recdesc = $request->recdesc ?? $event->recdesc;
-        $event->boolparty = $request->boolparty ?? 1;
+        $event->boolparty = $request->boolparty ?? $event->boolparty;
         $event->parname = $request->parname ?? $event->parname;
         $event->paraddress = $request->paraddress ?? $event->paraddress;
         $event->parcountry = $request->parcountry ?? $event->parcountry;

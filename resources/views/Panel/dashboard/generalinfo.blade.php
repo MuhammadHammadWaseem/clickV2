@@ -79,15 +79,15 @@
         }
 
         .general-active::after {
-        width: 5px;
-        height: 100%;
-        background-color: #C09D2A;
-        position: absolute;
-        left: 0;
-        right: 0;
-        content: "";
-        top: 0;
-    }
+            width: 5px;
+            height: 100%;
+            background-color: #C09D2A;
+            position: absolute;
+            left: 0;
+            right: 0;
+            content: "";
+            top: 0;
+        }
 
         .general-active img {
             filter: none !important;
@@ -173,25 +173,112 @@
         }
 
         #StepForm textarea {
-             overflow: auto;
+            overflow: auto;
             height: 100px !important;
         }
 
-        #StepForm textarea::-webkit-scrollbar{
+        #StepForm textarea::-webkit-scrollbar {
             width: 5px;
         }
 
         #StepForm .tab {
-    text-align: center;
-    height: 200px;
-    overflow: scroll;
-    overflow-x: hidden;
-    margin-bottom: 20px;
-    padding-right: 5px;
+            text-align: center;
+            height: 200px;
+            overflow: scroll;
+            overflow-x: hidden;
+            margin-bottom: 20px;
+            padding-right: 5px;
+        }
+
+        #StepForm .tab::-webkit-scrollbar {
+            width: 5px;
+        }
+
+
+
+        /* The switch - the container */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+            margin: 0;
+        }
+
+        /* Hide the default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider - the box */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        /* The slider when checked */
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+        }
+
+        /* When the checkbox is checked, change the background */
+        input:checked+.slider {
+            background-color: #A9967D;
+        }
+
+        /* When the checkbox is checked, move the slider */
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+
+
+        .custom_toggle_checked_box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #80808040;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .custom_toggle_checked_box h2 {
+            font-size: 25px;
+            color: #4A4A4A;
+            font-weight: 500;
+        }
+
+        .box-styling.ceremony-box {
+            height: fit-content !important;
+            margin-bottom: 20px;
+        }
+
+
+
+        #StepForm .tab {
+    height: 100%;
+    overflow: hidden;
 }
 
-#StepForm .tab::-webkit-scrollbar{
-    width: 5px;
+
+#registrationForm .tab:nth-child(6), #registrationForm .tab:nth-child(7), #registrationForm .tab:nth-child(8) {
+    overflow: hidden;
 }
 
 
@@ -216,12 +303,12 @@
             }
 
             #StepForm .two-box-inline #nextButton {
-    float: right !important;
-}
+                float: right !important;
+            }
 
-#StepForm .two-box-inline #prevButton{
-float: left !important;
-}
+            #StepForm .two-box-inline #prevButton {
+                float: left !important;
+            }
         }
     </style>
 
@@ -331,13 +418,27 @@ float: left !important;
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="box-styling ceremony-box">
-                        <div class="text">
-                            <div class="align-text-box">
-                                <h2>{{ __('genralInfo.Ceremony') }}</h2>
-                            </div>
 
+
+
+
+
+                <div class="col-lg-4 col-md-6">
+
+
+
+                    <div class="box-styling ceremony-box">
+
+                        <div class="custom_toggle_checked_box">
+                            <h2>{{ __('genralInfo.Ceremony') }}</h2>
+                            <label class="switch">
+                                <input type="checkbox" id="ceremonyToggle" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+
+                        <div class="text" id="ceremonyBox">
                             <div class="person-box">
                                 <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
                                     name="ceraddress" value="{{ $event->ceraddress }}">
@@ -350,13 +451,26 @@ float: left !important;
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="box-styling ceremony-box">
-                        <div class="text">
-                            <div class="align-text-box">
-                                <h2>{{ __('genralInfo.Recption') }}</h2>
-                            </div>
 
+
+
+                <div class="col-lg-4 col-md-6">
+
+
+
+
+                    <div class="box-styling ceremony-box">
+
+                        <div class="custom_toggle_checked_box">
+                            <h2>{{ __('genralInfo.Recption') }}</h2>
+                            <label class="switch">
+                                <input type="checkbox" id="receptionToggle" name="boolreception" {{ $event->boolreception == 1 ? 'checked' : '' }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+
+                        <div class="text" id="recBox">
                             <div class="person-box">
                                 <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
                                     name="recaddress" value="{{ $event->recaddress }}">
@@ -370,12 +484,28 @@ float: left !important;
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-4 col-md-6">
+
+
+
+
+
+
                     <div class="box-styling ceremony-box">
-                        <div class="text">
-                            <div class="align-text-box">
-                                <h2>{{ __('genralInfo.Custom Event') }}</h2>
-                            </div>
+
+                        <div class="custom_toggle_checked_box">
+                            <h2>{{ __('genralInfo.Custom Event') }}</h2>
+                            <label class="switch">
+                                <input type="checkbox" id="partyToggle" name="boolparty" {{ $event->boolparty == 1 ? 'checked' : '' }}>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+
+                        <div class="text" id="parBox">
                             <div class="person-box">
                                 <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
                                     value="{{ $event->parname }}">
@@ -390,9 +520,13 @@ float: left !important;
                         </div>
                     </div>
                 </div>
+
+
+
+
                 <div class="col-lg-12 col-md-12">
                     <button class="w-100 save t-btn" type="button"
-                    id="submitEditEvent">{{ __('genralInfo.Save') }}</button>
+                        id="submitEditEvent">{{ __('genralInfo.Save') }}</button>
                 </div>
                 </form>
             </div>
@@ -677,7 +811,7 @@ float: left !important;
         <!-- Genereal Info -->
         <div class="modal fade modal-01 modal-02 upload-form-another-event" id="StepForm" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -883,6 +1017,53 @@ float: left !important;
                     )
                         ? 'true'
                         : 'false' }};
+
+                        var showCeremonyBox = {{ json_encode($event->boolcerimony) == 1 ? 'true' : 'false' }};
+                        var showRecBox = {{ json_encode($event->boolreception) == 1 ? 'true' : 'false' }};
+                        var showParBox = {{ json_encode($event->boolparty) == 1 ? 'true' : 'false' }};
+
+                        if(showCeremonyBox == false){
+                            $("#ceremonyBox").hide();
+                        }else{
+                            $("#ceremonyBox").show();
+                        }
+
+                        if(showRecBox == false){
+                            $("#recBox").hide();
+                        }else{
+                            $("#recBox").show();
+                        }
+
+                        if(showParBox == false){
+                            $("#parBox").hide();
+                        }else{
+                            $("#parBox").show();
+                        }
+
+                        $("#ceremonyToggle").on("click", function() {
+                            if(this.checked == false){
+                                $("#ceremonyBox").hide();
+                            }else{
+                                $("#ceremonyBox").show();
+                            }
+                        });
+
+                        $("#receptionToggle").on("click", function() {
+                            if(this.checked == false){
+                                $("#recBox").hide();
+                            }else{
+                                $("#recBox").show();
+                            }
+                        });
+
+                        $("#partyToggle").on("click", function() {
+                            if(this.checked == false){
+                                $("#parBox").hide();
+                            }else{
+                                $("#parBox").show();
+                            }
+                        });
+
                 initMap();
 
                 if (showModal) {
@@ -997,7 +1178,12 @@ float: left !important;
             $(document).ready(function() {
                 $('#submitEditEvent').click(function() {
                     // Get the form data
-                    var formData = new FormData($('#editEventForm')[0])
+                    var formData = new FormData($('#editEventForm')[0]);
+
+                    $("#ceremonyToggle").prop('checked') == true ? formData.append('boolcerimony', 1) : formData.append('boolcerimony', 0);
+                    $("#receptionToggle").prop('checked') == true ? formData.append('boolreception', 1) : formData.append('boolreception', 0);
+                    $("#partyToggle").prop('checked') == true ? formData.append('boolparty', 1) : formData.append('boolparty', 0);
+
                     var eventId = formData.get('event_id'); // Get event_id from form data
                     // Generate the URL using Blade syntax
                     var updateUrl = `{{ route('panel.event.updateEvent', ':id') }}`.replace(':id', eventId);
