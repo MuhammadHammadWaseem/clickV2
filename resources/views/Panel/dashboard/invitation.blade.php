@@ -1551,6 +1551,16 @@
             settings = 1;
         }
 
+        $("#two_sided").on("click",function(){
+            $("#front").click();
+        });
+
+        if(settings == 1){
+            if(cardData.two_sided == 1){
+                $("#front").prop("checked",true);
+            }
+        }
+
         $("#save1").on("click", function () {
             const saveBtn = $(this);
             saveBtn.text('Saving...').prop('disabled', true);
