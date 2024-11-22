@@ -1551,7 +1551,18 @@
             settings = 1;
         }
 
-        console.log(settings);
+        $("#save1").on("click", function () {
+            const saveBtn = $(this);
+            saveBtn.text('Saving...').prop('disabled', true);
+
+            // Simulate a save operation (replace this with actual save logic)
+            setTimeout(function () {
+                // On successful save
+                saveBtn.text('Saved').prop('disabled', false);
+            }, 1000); // Simulates a 2-second save process
+        });
+
+
 
         $("#two_sided").on("click", function (event) {
             if (settings == 0) {

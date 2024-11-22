@@ -109,11 +109,11 @@ function updateAlignmentLines(object) {
 
 function alignObjectsVertically() {
   const activeObjects = canv.getActiveObjects();
-  
+
   if (activeObjects.length > 1) {
     // Calculate the average X position for all selected objects
     const avgX = activeObjects.reduce((sum, obj) => sum + obj.left + obj.width * obj.scaleX / 2, 0) / activeObjects.length;
-    
+
     activeObjects.forEach(obj => {
       obj.set({ left: avgX - (obj.width * obj.scaleX) / 2 }).setCoords();
     });
@@ -127,11 +127,11 @@ function alignObjectsVertically() {
 
 function alignObjectsHorizontally() {
   const activeObjects = canv.getActiveObjects();
-  
+
   if (activeObjects.length > 1) {
     // Calculate the average Y position for all selected objects
     const avgY = activeObjects.reduce((sum, obj) => sum + obj.top + obj.height * obj.scaleY / 2, 0) / activeObjects.length;
-    
+
     activeObjects.forEach(obj => {
       obj.set({ top: avgY - (obj.height * obj.scaleY) / 2 }).setCoords();
     });
@@ -259,12 +259,12 @@ function getTemplatewithId(templateId) {
         // Remove loading message
         canv.remove(loadingText);
 
-        $("#front").prop("disabled",true);
-        $("#back").prop("disabled",true);
-        setTimeout(function(){
+        $("#front").prop("disabled", true);
+        $("#back").prop("disabled", true);
+        setTimeout(function () {
           saveAll();
-          $("#front").prop("disabled",false);
-          $("#back").prop("disabled",false);
+          $("#front").prop("disabled", false);
+          $("#back").prop("disabled", false);
         }, 1000);
       } else {
         console.error('No template data found.');
@@ -333,7 +333,7 @@ function selectedObject(event) {
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
         event.preventDefault();
       }
-      
+
       switch (event.key) {
         case 'ArrowUp':
           activeObject.top -= step;
@@ -1980,105 +1980,163 @@ function saveData() {
 }
 
 
+// Save all function
 function saveAll() {
   const backElement = document.getElementById('back');
-  if (backElement.checked) {
-    var saveBtns = document.getElementsByClassName("SaveBtn");
-    for (var i = 0; i < saveBtns.length; i++) {
-      saveBtns[i].innerText = "Saving...";
-      saveBtns[i].classList.add("disabled-button");
-      saveBtns[i].disabled = true;
-    }
-    const json = JSON.stringify(canv.toJSON());
-    const dddd = canv.toDataURL({
-      format: "png",
-      multiplier: 1,
-    });
-    const blob = new Blob([json], { type: "application/json" });
+  const saveBtns = document.getElementsByClassName("SaveBtn");
 
-    const formData = new FormData();
-    var filename = window.location.pathname.split("/")[2] + ".json";
-    formData.append("json_blob", [json]);
-    formData.append("event_id", window.location.pathname.split("/")[2]);
-    formData.append("_token", this.token);
-    formData.append("data_url", dddd)
+  // Update button text to "Saving..." and disable buttons
+  for (let i = 0; i < saveBtns.length; i++) {
+    saveBtns[i].innerText = "Saving...";
+    saveBtns[i].classList.add("disabled-button");
+    saveBtns[i].disabled = true;
+  }
 
-    fetch("/save-blob/back", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          loadOldData2();
-          document.getElementById("save1").innerHTML = `<svg width="41" height="40" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25.1634 4.16669C13.6759 4.16669 4.33008 13.5125 4.33008 25C4.33008 36.4875 13.6759 45.8334 25.1634 45.8334C36.6509 45.8334 45.9967 36.4875 45.9967 25C45.9967 13.5125 36.6509 4.16669 25.1634 4.16669ZM25.1634 41.6667C15.9738 41.6667 8.49675 34.1896 8.49675 25C8.49675 15.8104 15.9738 8.33335 25.1634 8.33335C34.353 8.33335 41.8301 15.8104 41.8301 25C41.8301 34.1896 34.353 41.6667 25.1634 41.6667Z" fill="#C09D2A"/>
-        <path d="M20.9949 28.3063L16.2053 23.525L13.2637 26.475L20.9991 34.1938L34.9699 20.2229L32.0241 17.2771L20.9949 28.3063Z" fill="#C09D2A"/>
-        </svg> Saved`;
-          document.getElementById("save1").disabled = false;
-          document.getElementById("save1").classList.remove("disabled-button");
+  const json = JSON.stringify(canv.toJSON());
+  const dddd = canv.toDataURL({ format: "png", multiplier: 1 });
+  const blob = new Blob([json], { type: "application/json" });
+  const formData = new FormData();
+  const filename = window.location.pathname.split("/")[2] + ".json";
 
-          document.getElementsByClassName("saveBtn").innerText = "Saved";
-          for (var i = 0; i < saveBtns.length; i++) {
-            saveBtns[i].innerText = "Saved";
-            saveBtns[i].disabled = false;
-            saveBtns[i].classList.remove("disabled-button");
-          }
-        } else {
-          console.error("Failed to save Blob data on the server.");
+  formData.append("json_blob", json);
+  formData.append("event_id", window.location.pathname.split("/")[2]);
+  formData.append("_token", this.token);
+  formData.append("data_url", dddd);
+
+  // Determine the appropriate URL
+  const url = backElement && backElement.checked ? "/save-blob/back" : "/save-blob";
+
+  fetch(url, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        // On success, update the button text to "Save"
+        for (let i = 0; i < saveBtns.length; i++) {
+          saveBtns[i].innerText = "Save";
+          saveBtns[i].disabled = false;
+          saveBtns[i].classList.remove("disabled-button");
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    // saveSetting();
-
-
-  } else {
-    var saveBtns = document.getElementsByClassName("SaveBtn");
-    for (var i = 0; i < saveBtns.length; i++) {
-      saveBtns[i].innerText = "Saving...";
-      saveBtns[i].classList.add("disabled-button");
-      saveBtns[i].disabled = true;
-    }
-    const json = JSON.stringify(canv.toJSON());
-    const dddd = canv.toDataURL({
-      format: "png",
-      multiplier: 1,
-    });
-    const blob = new Blob([json], { type: "application/json" });
-
-    const formData = new FormData();
-    var filename = window.location.pathname.split("/")[2] + ".json";
-    formData.append("json_blob", [json]);
-    formData.append("event_id", window.location.pathname.split("/")[2]);
-    formData.append("_token", this.token);
-    formData.append("data_url", dddd)
-
-    fetch("/save-blob", {
-      method: "POST",
-      body: formData,
+      } else {
+        console.error("Failed to save Blob data on the server.");
+        resetSaveButtons();
+      }
     })
-      .then((response) => {
-        if (response.ok) {
-          loadOldData2();
+    .catch((error) => {
+      console.error("Error:", error);
+      resetSaveButtons();
+    });
 
-          document.getElementsByClassName("saveBtn").innerText = "Saved";
-          for (var i = 0; i < saveBtns.length; i++) {
-            saveBtns[i].innerText = "Saved";
-            saveBtns[i].disabled = false;
-            saveBtns[i].classList.remove("disabled-button");
-          }
-        } else {
-          console.error("Failed to save Blob data on the server.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    // saveSetting();
-
+  function resetSaveButtons() {
+    // Reset the buttons in case of an error
+    for (let i = 0; i < saveBtns.length; i++) {
+      saveBtns[i].innerText = "Save";
+      saveBtns[i].disabled = false;
+      saveBtns[i].classList.remove("disabled-button");
+    }
   }
 }
+
+// function saveAll() {
+//   const backElement = document.getElementById('back');
+//   if (backElement.checked) {
+//     var saveBtns = document.getElementsByClassName("SaveBtn");
+//     for (var i = 0; i < saveBtns.length; i++) {
+//       saveBtns[i].innerText = "Saving...";
+//       saveBtns[i].classList.add("disabled-button");
+//       saveBtns[i].disabled = true;
+//     }
+//     const json = JSON.stringify(canv.toJSON());
+//     const dddd = canv.toDataURL({
+//       format: "png",
+//       multiplier: 1,
+//     });
+//     const blob = new Blob([json], { type: "application/json" });
+
+//     const formData = new FormData();
+//     var filename = window.location.pathname.split("/")[2] + ".json";
+//     formData.append("json_blob", [json]);
+//     formData.append("event_id", window.location.pathname.split("/")[2]);
+//     formData.append("_token", this.token);
+//     formData.append("data_url", dddd)
+
+//     fetch("/save-blob/back", {
+//       method: "POST",
+//       body: formData,
+//     })
+//       .then((response) => {
+//         if (response.ok) {
+//           loadOldData2();
+//           document.getElementById("save1").innerHTML = `<svg width="41" height="40" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+//         <path d="M25.1634 4.16669C13.6759 4.16669 4.33008 13.5125 4.33008 25C4.33008 36.4875 13.6759 45.8334 25.1634 45.8334C36.6509 45.8334 45.9967 36.4875 45.9967 25C45.9967 13.5125 36.6509 4.16669 25.1634 4.16669ZM25.1634 41.6667C15.9738 41.6667 8.49675 34.1896 8.49675 25C8.49675 15.8104 15.9738 8.33335 25.1634 8.33335C34.353 8.33335 41.8301 15.8104 41.8301 25C41.8301 34.1896 34.353 41.6667 25.1634 41.6667Z" fill="#C09D2A"/>
+//         <path d="M20.9949 28.3063L16.2053 23.525L13.2637 26.475L20.9991 34.1938L34.9699 20.2229L32.0241 17.2771L20.9949 28.3063Z" fill="#C09D2A"/>
+//         </svg> Save`;
+//           document.getElementById("save1").disabled = false;
+//           document.getElementById("save1").classList.remove("disabled-button");
+
+//           document.getElementsByClassName("saveBtn").innerText = "Save";
+//           for (var i = 0; i < saveBtns.length; i++) {
+//             saveBtns[i].innerText = "Save";
+//             saveBtns[i].disabled = false;
+//             saveBtns[i].classList.remove("disabled-button");
+//           }
+//         } else {
+//           console.error("Failed to save Blob data on the server.");
+//         }
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//       });
+//     // saveSetting();
+
+
+//   } else {
+//     var saveBtns = document.getElementsByClassName("SaveBtn");
+//     for (var i = 0; i < saveBtns.length; i++) {
+//       saveBtns[i].innerText = "Saving...";
+//       saveBtns[i].classList.add("disabled-button");
+//       saveBtns[i].disabled = true;
+//     }
+//     const json = JSON.stringify(canv.toJSON());
+//     const dddd = canv.toDataURL({
+//       format: "png",
+//       multiplier: 1,
+//     });
+//     const blob = new Blob([json], { type: "application/json" });
+
+//     const formData = new FormData();
+//     var filename = window.location.pathname.split("/")[2] + ".json";
+//     formData.append("json_blob", [json]);
+//     formData.append("event_id", window.location.pathname.split("/")[2]);
+//     formData.append("_token", this.token);
+//     formData.append("data_url", dddd)
+
+//     fetch("/save-blob", {
+//       method: "POST",
+//       body: formData,
+//     })
+//       .then((response) => {
+//         if (response.ok) {
+//           loadOldData2();
+
+//           document.getElementsByClassName("saveBtn").innerText = "Save";
+//           for (var i = 0; i < saveBtns.length; i++) {
+//             saveBtns[i].innerText = "Save";
+//             saveBtns[i].disabled = false;
+//             saveBtns[i].classList.remove("disabled-button");
+//           }
+//         } else {
+//           console.error("Failed to save Blob data on the server.");
+//         }
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//       });
+//     // saveSetting();
+
+//   }
+// }
 
 const stickers1 = [];
 function loadCardImagesFromDB(data) {
@@ -2585,6 +2643,15 @@ function saveState() {
   // Push current state to undo stack
   undoStack.push(currentState);
   currentIndex = undoStack.length - 1;
+  
+  $("#front").prop("disabled", true);
+  $("#back").prop("disabled", true);
+ 
+  setTimeout(function () {
+    saveAll();
+    $("#front").prop("disabled", false);
+    $("#back").prop("disabled", false);
+  }, 1000);
 }
 
 function undo() {
