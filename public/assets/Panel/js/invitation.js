@@ -2290,7 +2290,7 @@ function loadBgImagesFromDB(imgData) {
       selectedBackground = data.bgName;
 
       // After the background data is retrieved, render the images and set the selected one
-      renderBgImages(imgData, selectedBackground);
+      // renderBgImages(imgData, selectedBackground);
     },
     error: function (xhr, status, error) {
       console.log(error);
@@ -2298,29 +2298,29 @@ function loadBgImagesFromDB(imgData) {
   });
 }
 
-function renderBgImages(imgData, selectedBackground) {
-  let doc = document.getElementById("bgImgData");
-  if (imgData.length > 0) {
-    let tags = "";
-    for (let i = 0; i < imgData.length; i++) {
-      const isChecked = imgData[i].img === selectedBackground ? "checked" : "";
-      tags +=
-        "<label class='borderPc py-2'>" +
-        "<input type='radio' onclick='backgroundSelecetor(this.value)' name='test' class='bgName' value='" +
-        imgData[i].img +
-        "' id='" +
-        imgData[i].img +
-        "' " + isChecked + ">" +
-        "<img src='https://clickadmin.searchmarketingservices.online/eventcards/" +
-        imgData[i].img +
-        "' alt='Option 1' style='z-index: -10'>" +
-        "</label>";
-    }
-    doc.innerHTML = tags;
-  } else {
-    doc.innerHTML = "";
-  }
-}
+// function renderBgImages(imgData, selectedBackground) {
+//   let doc = document.getElementById("bgImgData");
+//   if (imgData.length > 0) {
+//     let tags = "";
+//     for (let i = 0; i < imgData.length; i++) {
+//       const isChecked = imgData[i].img === selectedBackground ? "checked" : "";
+//       tags +=
+//         "<label class='borderPc py-2'>" +
+//         "<input type='radio' onclick='backgroundSelecetor(this.value)' name='test' class='bgName' value='" +
+//         imgData[i].img +
+//         "' id='" +
+//         imgData[i].img +
+//         "' " + isChecked + ">" +
+//         "<img src='https://clickadmin.searchmarketingservices.online/eventcards/" +
+//         imgData[i].img +
+//         "' alt='Option 1' style='z-index: -10'>" +
+//         "</label>";
+//     }
+//     doc.innerHTML = tags;
+//   } else {
+//     doc.innerHTML = "";
+//   }
+// }
 
 function switchToOld() {
   window.location =

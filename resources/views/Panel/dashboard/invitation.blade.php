@@ -1264,7 +1264,7 @@
     </div>
     <!-- Animations Modal -->
 
-    <div style="text-align: center;" id="bgImgData">
+    {{-- <div style="text-align: center;" id="bgImgData">
         <label class="borderPc py-2">
             <input type="radio" onclick="backgroundSelecetor(this.value)" name="test" value="bg4.webp"
                 id="bg4">
@@ -1292,7 +1292,7 @@
                 id="bg1">
             <img src="/assets/images/cardAnimation/bg1.jpg" alt="Option 4">
         </label>
-    </div>
+    </div> --}}
 
     <!-- IframeModal -->
     <!-- Modal -->
