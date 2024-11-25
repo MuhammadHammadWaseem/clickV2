@@ -165,7 +165,7 @@
                                                             <tr>
                                                                 <td valign="top" style="color:#ffffff">Powered
                                                                     by&nbsp;&nbsp;&nbsp;<img
-                                                                        src="https://clickinvitation.com//assets/images/logo/logoNewWhite.png"
+                                                                        src="https://clickinvitation.com/assets/images/logo/logoNewWhite.png"
                                                                         alt="Click Invitation"
                                                                         style="vertical-align:middle; width: 115px;"
                                                                         class="CToWUd" data-bit="iit"></td>
