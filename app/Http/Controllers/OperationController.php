@@ -1025,7 +1025,7 @@ class OperationController extends Controller
 
     public function CheckInQr($card_id, $guest_code, $lang)
     {
-        $url = url('/guest-checked/' . $card_id . '/' . $guest_code . '/' . $lang);
+        $url = url('/check-in/' . $card_id . '/' . $guest_code . '/' . $lang);
         return view('QrCode', compact('url', 'guest_code'));
     }
 
