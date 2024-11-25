@@ -160,7 +160,7 @@ return[
     'member_details' => 'Member Details',
     'note' => 'Note',
     'other_details' => 'Other Details',
-    'attending_event' => 'Attending Event',
+    'status' => 'Status',
     'meal' => 'Meal',
     'table' => 'Table',
     'add_more_guest' => 'Would You Like To Add Another Guest For Your Event?',

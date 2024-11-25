@@ -159,7 +159,7 @@ return[
     'member_details' => 'Détails du membre',
     'note' => 'Remarque',
     'other_details' => 'Autres détails',
-    'attending_event' => 'Participation à l\'événement',
+    'status' => 'statut',
     'meal' => 'Repas',
     'table' => 'Table',
     'add_more_guest' => 'Souhaitez-vous ajouter un autre invité pour votre événement ?',

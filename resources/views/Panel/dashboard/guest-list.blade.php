@@ -1777,7 +1777,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                             <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                             <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
 
                                         </tr>`;
 
@@ -1886,7 +1886,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                                     <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                                     <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
@@ -1989,7 +1989,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if checkin == 1
@@ -2094,7 +2094,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                                 </tr>`;
 
                                 // Loop through each member of the guest and add them only if declined == 1
@@ -2201,7 +2201,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                 <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                 <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                             </tr>`;
 
                             // Loop through each member of the guest and add them only if checkin == 1
@@ -2310,7 +2310,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                                 </tr>
                                                 <tr class="divider-line"></tr>
                                                 <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
@@ -2413,7 +2413,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.note') }}</strong></td>
                                                     <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                                    <td><strong>{{ __('guestlistpage.attending_event') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
                                                 </tr>`;
 
                                     guest.members.forEach(function(member) {
