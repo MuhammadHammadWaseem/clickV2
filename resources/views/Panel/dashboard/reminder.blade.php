@@ -314,7 +314,7 @@
                                 });
                             } else {
                                 // General error handling
-                                toastr.error('Failed to upload photos. Please try again.');
+                                toastr.error('Failed to sent email. Please try again.');
                                 console.error(xhr.responseText);
                             }
                         }
