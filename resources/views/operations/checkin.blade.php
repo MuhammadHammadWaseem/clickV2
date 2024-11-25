@@ -38,6 +38,27 @@
 
     <script src="/assets/jspanel/sortableang.js"></script>
     <script src="/assets/jspanel/ng-img-crop.js"></script>
+    <style>
+
+@media only screen and (max-width: 575px){
+        .operations .giftl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.operations .giftl .form-check {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+}
+}
+    </style>
 </head>
 
 
@@ -52,11 +73,11 @@
 
     <section class="operations" ng-app="sampleApp" ng-controller="SorryCtrl">
         <div class="container webpage">
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center" style="    justify-content: center;">
                 <div class="col-12 col-sm-9">
                     <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()""><i
                             class="fas fa-chevron-left"></i>{{ __('checkin.BACK TO INVITATION') }}</button>
-                    <div class="card mb-4 box-styling">
+                    <div class="card mb-4 box-styling" style="margin-right:0; ">
                         <h4 class="card-header text-center"><i
                                 class="fal fa-user-check"></i>{{ __('checkin.CHECK-IN') }}</h4>
                                 <h6 class="card-header text-center">Please confirm tour attendance and check in once you are at the reception hall the day of the event.</h2>

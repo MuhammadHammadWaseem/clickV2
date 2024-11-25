@@ -245,6 +245,24 @@
     font-size: 12px !important;
 }
 
+
+#exampleModalCenter02 .modal-content form {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#exampleModalCenter02 .modal-content form::-webkit-scrollbar{
+    width: 5px;
+}
+
+#exampleModalCenter02 .modal-content{
+    border-radius: 15px;
+}
+
+
+
+
 @media only screen and (max-width: 1400px){
         .two-outside-boxes .main-card-box {
     padding: 50px 20px !important;

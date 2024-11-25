@@ -568,7 +568,7 @@
                                             <label for="nm1">{{ __('attending.Name') }}</label>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-3">
+                                    <div class="col-md-3">
                                         <div class="form-floating mb-2">
                                             <input type="email" class="form-control"
                                                 ng-model="nm.emailmember[$index]" placeholder="E-mail"
@@ -590,7 +590,7 @@
                                                 id="nm4">
                                             <label for="nm4">{{ __('attending.Whatsapp') }}</label>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="col-md-3">
                                         <select class="form-select mb-2" ng-model="nm.idmealmember[$index]"
                                             style="padding:1rem 0.75rem!important;">

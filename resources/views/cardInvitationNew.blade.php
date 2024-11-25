@@ -59,13 +59,13 @@
             </div>
         </div>
         @if ($card[0]->two_sided == 1)
-            <button id="flipButton" class="btn t-btn">Flip Card</button>
+            <button id="flipButton" class="btn t-btn extra-card">Flip Card</button>
         @endif
     </div>
 
     @if ($card[0]->rsvp != '0,0,0,0,0,0')
         <!-- Button to submit RSVP -->
-        <a class="btn t-btn extra-card " id="submit-rsvp" data-bs-toggle="offcanvas" href="#offcanvasExample"
+        <a class="btn t-btn extra-card" id="submit-rsvp" data-bs-toggle="offcanvas" href="#offcanvasExample"
             role="button" aria-controls="offcanvasExample"
             style="
      
