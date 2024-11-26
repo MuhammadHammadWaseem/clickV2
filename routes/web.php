@@ -217,6 +217,7 @@ Route::get('/check-in/{cardId}/{guestcode}/{lang}', [OperationController::class,
 Route::post('/show-opguests', [OperationController::class, 'showopguests']);
 Route::post('/change-check', [OperationController::class, 'changecheck']);
 Route::get('/add-photos/{cardId}/{guestcode}/{lang}', [OperationController::class, 'addphotos']);
+Route::get('/add-photos/ack/{cardId}/{guestcode}/{lang}', [OperationController::class, 'addphotos']);
 Route::post('/new-guest', [OperationController::class, 'newguest']);
 Route::get('/sendInvite-whatsapp', [OperationController::class, 'sendWhatsapp']);
 Route::get('/sendInvite-email', [OperationController::class, 'sendEmail']);
