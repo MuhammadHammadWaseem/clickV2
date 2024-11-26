@@ -83,7 +83,7 @@
             <p style="font-size: 14px;">{{ $data['formattedDate'] }}</p>
 
             <p>
-                <a href="{{ url('/') .'/'. 'cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" class="button" target="_blank">Open Invitation</a>
+                <a href="{{ url('/') .'/'. '/cardInvitations/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data['guest']['name'] . '/' . $data['lang'] }}" class="button" target="_blank">Open Invitation</a>
             </p>
             <p>
                 <a href="{{ url('/') .'/'. 'CheckInQr/' . $data['cardId']['id_card'] . '/' . $data['guest']['code'] . '/' . $data->lang }}" class="button" target="_blank">Check In</a>

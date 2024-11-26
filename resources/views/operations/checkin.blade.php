@@ -90,7 +90,8 @@
                                     <p ng-show="guest.table.name">{{ __('checkin.TABLE') }}: @{{ guest.table.name }}</p>
                                 </div>
                                 <div class="col">
-                                    <p ng-show="guest.table.guest_number">{{ __('checkin.SEAT') }}: @{{ guest.seat }}</p>
+                                    {{-- <p ng-show="guest.table.guest_number">{{ __('checkin.SEAT') }}: @{{ guest.seat }}</p> --}}
+                                    <p ng-show="guest.table.number"> TABLE #: @{{ guest.table.number }}</p>
                                 </div>
                                 <div class="col">
                                     <div class="form-check">
@@ -114,7 +115,8 @@
                                     <p ng-show="g.table.name">{{ __('checkin.TABLE') }}: @{{ g.table.name }}</p>
                                 </div>
                                 <div class="col">
-                                    <p ng-show="g.table.guest_number">{{ __('checkin.SEAT') }}: @{{ g.seat }}</p>
+                                    {{-- <p ng-show="g.table.guest_number">{{ __('checkin.SEAT') }}: @{{ g.seat }}</p> --}}
+                                    <p ng-show="g.table.guest_number">{{ __('checkin.SEAT') }}: @{{ g.table.guest_number }}</p>
                                 </div>
                                 <div class="col">
                                     <div class="form-check">
@@ -192,6 +194,7 @@
                         },
                     }).then(function(response) {
                         $scope.guest = response.data;
+                        console.log($scope.guest);
                     });
                 };
 

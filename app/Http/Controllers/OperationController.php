@@ -289,6 +289,7 @@ class OperationController extends Controller
 
     public function checkin(Request $request)
     {
+    
         $guest = Guest::where('code', $request->route('guestcode'))->first();
 
 
@@ -743,7 +744,7 @@ class OperationController extends Controller
                                         font-family: cursive;
                                     ">
                                     Vous avez une invitation pour
-                                       
+
                                         </div>
                                         <div style="
                                         text-align: center;
@@ -755,11 +756,11 @@ class OperationController extends Controller
                                         ' . $event->type . '
                                         </div>
                                         </td>
-                                </tr>    
-                                
+                                </tr>
+
                                 <tr>
                                         <td>
-                                        
+
                                         <a href="https://clickinvitation.com/cardInvitation/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '" style="
                                         background: #6633ff;
                                         color: white;
@@ -772,15 +773,15 @@ class OperationController extends Controller
                                         margin: 10px auto;
                                         text-align: center;
                                         width: 250px;
-                                    ">Cliquez ici pour voir la convocation</a>                            
+                                    ">Cliquez ici pour voir la convocation</a>
                                         </td>
                                     </tr>
-                                    
+
                                 </table>
 
 
                                 <table width="100%"  cellpadding="20"  style="background:#663399; color:#fff; font-size:12px; font-family: Calibri, arial, sans-serif !important; text-align:center; border:none; border-bottom-left-radius:20px; border-bottom-right-radius:20px;  " >
-                                    <tr>                   
+                                    <tr>
                                         <td>
                                             <p> This is an automated message please do not reply.<br>
                                                 EventMasterPlan.com' . date('Y') . '. All rights reserved.<br>
@@ -790,7 +791,7 @@ class OperationController extends Controller
                                             </p>
                                         </td>
                                     </tr>
-                                </table>                
+                                </table>
                             </td>
                         </tr>
                     </table>
