@@ -1796,17 +1796,13 @@ function canvaClear() {
   // updateCanvasHistory();
   canv.clear();
 
-  // Set the background color to white
-  canv.backgroundColor = "white";
-
   // Create a new Fabric.js canvas instance
   canv.add(
     new fabric.Rect({
       width: canv.width,
       height: canv.height,
-      fill: "white",
+      fill: "transparent",
       selectable: false,
-      evented: false,
     })
   );
   // Attach event listeners to the new canvas instance
@@ -1814,10 +1810,13 @@ function canvaClear() {
     "mouse:down": selectedObject,
   });
 
-  // Re-render the canvas to apply changes
-  canv.renderAll();
+  const color = "white";
 
-  saveAll();
+  canv.setBackgroundColor(color, function () {
+    canv.renderAll();
+    saveState();
+    saveAll();
+  });
 }
 
 function dublicateObject() {
