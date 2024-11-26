@@ -106,9 +106,9 @@ class messageController extends Controller
 
                 $lang = App::getLocale();
                 // echo $lang;
-                if ($guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
+                // if ($guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
 
-                    if ($event && $guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
+                    if ($event && $guestsend['email']) {
                         SmsEmailJob::dispatch(
                             0, // fake
                             $lang,
@@ -119,7 +119,7 @@ class messageController extends Controller
                         );
                     }
 
-            }
+            // }
         }
 
     }
