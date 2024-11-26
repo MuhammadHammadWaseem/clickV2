@@ -60,9 +60,9 @@ class reminderController extends Controller
 
                 $lang = App::getLocale();
                 // echo $lang;
-                if ($guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
+                // if ($guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
 
-                    if ($event && $guestsend['email'] && $guestsend['parent_id_guest'] == 0) {
+                    if ($event && $guestsend['email']) {
                         AckMailJob::dispatch(
                             0, // fake
                             $lang,
@@ -73,7 +73,7 @@ class reminderController extends Controller
                         );
                     }
 
-            }
+            // }
         }
 
     }
