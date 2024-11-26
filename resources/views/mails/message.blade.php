@@ -85,7 +85,7 @@
 
                                                         @if (!$fake)
                                                         <a style="font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
-                                                            href="https://clickinvitation.com/add-photos/ack/{{ $cardId }}/{{ $guest->code }}/{{ $lang }}">
+                                                            href="{{ env('APP_URL') }}/add-photos/ack/{{ $cardId }}/{{ $guest->code }}/{{ $lang }}">
                                                             ADD YOUR PHOTOS
                                                         </a>
                                                     @endif
@@ -97,7 +97,7 @@
                                                         </a>
                                                     @endif
                                                     <a style="font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
-                                                        href="https://clickinvitation.com/website/{{ $event->id_event }}">
+                                                        href="{{ env('APP_URL') }}/website/{{ $event->id_event }}">
                                                         GO TO WEBSITE
                                                     </a>
                                                 </center>
@@ -132,9 +132,9 @@
                                                         Clickinvitation.com <?php echo date('Y'); ?>. All rights reserved.<br>
                                                         <a style="color:rgb(61, 0, 243);"
                                                             href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a style="color:rgb(61, 0, 243);" href="https://clickinvitation.com/privacy-policy">Privacy
+                                                        <a style="color:rgb(61, 0, 243);" href="{{ env('APP_URL') }}/privacy-policy">Privacy
                                                             Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a style="color:rgb(61, 0, 243);" href="https://clickinvitation.com/termos-of-use">Terms and
+                                                        <a style="color:rgb(61, 0, 243);" href="{{ env('APP_URL') }}/termos-of-use">Terms and
                                                             Conditions</a>
                                                     </p>
                                                 </td>
