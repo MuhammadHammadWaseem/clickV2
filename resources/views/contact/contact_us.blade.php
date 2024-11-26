@@ -41,8 +41,8 @@
     	                                <p> This is an automated message please do not reply.<br>
     	                                    EventMasterPlan.com' . date('Y') . '. All rights reserved.<br>
     	                                    <a style="color:white;"  href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	                                    <a style="color:white;" href="https://clickinvitation.com/privacy-policy">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	                                    <a style="color:white;" href="https://clickinvitation.com/termos-of-use">Terms and Conditions</a>
+    	                                    <a style="color:white;" href="{{ env('APP_URL') }}/privacy-policy">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	                                    <a style="color:white;" href="{{ env('APP_URL') }}/terms-of-use">Terms and Conditions</a>
     	                                </p>
     	                            </td>
     	                        </tr>

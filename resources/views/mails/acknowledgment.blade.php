@@ -134,7 +134,7 @@
                                                             href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <a style="color:rgb(61, 0, 243);" href="{{ env('APP_URL') }}/privacy-policy">Privacy
                                                             Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <a style="color:rgb(61, 0, 243);" href="{{ env('APP_URL') }}/termos-of-use">Terms and
+                                                        <a style="color:rgb(61, 0, 243);" href="{{ env('APP_URL') }}/terms-of-use">Terms and
                                                             Conditions</a>
                                                     </p>
                                                 </td>

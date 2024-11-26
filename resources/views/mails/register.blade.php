@@ -43,7 +43,7 @@
 								clickinvitation.com <?php  echo date('Y'); ?>. All rights reserved.<br>
 								<a style="color:white;"  href="mailto:info@clickinvitation.com">info@clickinvitation.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a style="color:white;" href="{{ env('APP_URL') }}/privacy-policy">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a style="color:white;" href="{{ env('APP_URL') }}/termos-of-use">Terms and Conditions</a>
+								<a style="color:white;" href="{{ env('APP_URL') }}/terms-of-use">Terms and Conditions</a>
 							</p>
 						</td>
 

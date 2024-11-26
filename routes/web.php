@@ -43,6 +43,9 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/tutorial', [WebController::class, 'tutorial'])->name('tutorial');
     Route::get('/packages', [WebController::class, 'packages'])->name('packages');
     Route::get('/privacy-policy', [WebController::class, 'privacyPolicy'])->name('privacy-policy');
+    Route::get('/terms-of-use', function () {
+        return redirect('/privacy-policy');
+    });
 
 
     Route::middleware('guest')->group(function () {
