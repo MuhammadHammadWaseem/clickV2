@@ -228,8 +228,9 @@
 
     .accordian-table-content .table-box tr {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         align-items: center;
+        gap: 30px;
     }
 
     .accordion-content .table-box tr {
@@ -1761,6 +1762,18 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                             <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                             <td>${guest.notes || 'No Notes'}</td>
+
+                                            ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
+
                                             <td>
                                                 <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                 data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -1882,6 +1895,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                                     <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                                     <td>${guest.notes || 'No Notes'}</td>
+                                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -1997,6 +2020,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                     <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
+                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2114,6 +2147,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                     <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
+                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2232,6 +2275,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                 <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                 <td>${guest.notes || 'No Notes'}</td>
+                                                ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal" data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">
                                                         {{ __('guestlistpage.add_member') }}
@@ -2346,6 +2399,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                     <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                     <td>${guest.notes || 'No Notes'}</td>
+                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2465,6 +2528,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
                                                 <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                 <td>${guest.notes || 'No Notes'}</td>
+                                                ${(guest.declined == 1 && guest.opened != 2 ) ?
+                                            `<td>Declined</td>` :``}
+                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
+                                            `<td>Confirmed</td>` :``}
+                                            ${(guest.checkin == 1 ) ?
+                                            `<td>Checkin</td>` :``}
+                                            ${(guest.opened == 1 ) ?
+                                            `<td>Opened</td>` :``}
+                                            ${(guest.opened == null || guest.opened == 0 ) ?
+                                            `<td>Not Open</td>` :``}
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
