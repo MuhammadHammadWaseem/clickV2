@@ -1753,8 +1753,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                    ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                    ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                 </span>
                                             </td>
@@ -1795,19 +1795,31 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         </ul>
                                     </td>
 
-                                    ${(member.opened == 2 && member.declined != 1) ? `
+                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                         <td class="accordian_img_acces">
-                                            <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                            Confirmed
                                         </td>` : ''}
                                     ${(member.declined == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                            Declined
+                                        </td>` : ''}
+                                    ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
                                         </td>` : ''}
 
                                         ${(member.opened != 2 && member.declined != 1) ? `
                                             <td class="accordian_img_acces">
                                         </td>` : ''}
-                                        
+
                                         <td>
                                             <li><strong>Email: ${member.email || 'No Email'}</strong>
                                             <li><strong>Phone : ${member.phone || 'No Phone'}</strong>
@@ -1862,8 +1874,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                                            ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                                         </span>
                                                                     </td>
@@ -1907,14 +1919,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2 && member.declined != 1) ? `
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                     <td class="accordian_img_acces">
-                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                        Confirmed
                                                     </td>` : ''}
                                                 ${(member.declined == 1) ? `
                                                     <td class="accordian_img_acces">
-                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                        Declined
                                                     </td>` : ''}
+                                                    ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -1965,8 +1989,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                            ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
@@ -2008,14 +2032,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2 && member.declined != 1) ? `
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                                                                                     <td class="accordian_img_acces">
-                                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                        Confirmed
                                                                                                                     </td>` : ''}
                                                 ${(member.declined == 1) ? `
                                                                                                                     <td class="accordian_img_acces">
-                                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                        Declined
                                                                                                                     </td>` : ''}
+                                                                                                                    ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -2070,8 +2106,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                            ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
@@ -2113,14 +2149,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                     </ul>
                                                 </td>
-                                                ${(member.opened == 2 && member.declined != 1) ? `
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                                                                                     <td class="accordian_img_acces">
-                                                                                                                        <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                                        Confirmed
                                                                                                                     </td>` : ''}
                                                 ${(member.declined == 1) ? `
                                                                                                                     <td class="accordian_img_acces">
-                                                                                                                        <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                                        Declined
                                                                                                                     </td>` : ''}
+                                                                                                                    ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                             </tr>`;
                                     }
                                 });
@@ -2176,8 +2224,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                        ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                        ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                     </span>
                                                 </td>
@@ -2220,14 +2268,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened == 2 && member.declined != 1) ? `
+                                            ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                 <td class="accordian_img_acces">
-                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                    Confirmed
                                                 </td>` : ''}
                                             ${(member.declined == 1) ? `
                                                 <td class="accordian_img_acces">
-                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                    Declined
                                                 </td>` : ''}
+                                                ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                         </tr>`;
                                 }
                             });
@@ -2278,8 +2338,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                            ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
@@ -2324,14 +2384,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                         </ul>
                                                     </td>
-                                                    ${(member.opened == 2 && member.declined != 1) ? `
+                                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                                                                 <td class="accordian_img_acces">
-                                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                                    Confirmed
                                                                                                 </td>` : ''}
                                                     ${(member.declined == 1) ? `
                                                                                                 <td class="accordian_img_acces">
-                                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                                    Declined
                                                                                                 </td>` : ''}
+                                                                                                ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                                 </tr>`;
                                         }
                                     });
@@ -2385,8 +2457,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
                                                     <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
-                                                        ${(guest.members_number == guest.members.length ) ? 
-                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
+                                                        ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                     </span>
                                                 </td>
@@ -2432,14 +2504,26 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                                 </ul>
                                             </td>
-                                            ${(member.opened == 2 && member.declined != 1) ? `
+                                            ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                                                                 <td class="accordian_img_acces">
-                                                                                    <img src="{{ asset('assets/images/tick-green-img.png') }}" alt="Tick">
+                                                                                    Confirmed
                                                                                 </td>` : ''}
                                             ${(member.declined == 1) ? `
                                                                                 <td class="accordian_img_acces">
-                                                                                    <img src="{{ asset('assets/images/cancel-red-img.png') }}" alt="Declined">
+                                                                                    Declined
                                                                                 </td>` : ''}
+                                                                                ${(member.checkin == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Checkin
+                                        </td>` : ''}
+                                    ${(member.opened == 1) ? `
+                                        <td class="accordian_img_acces">
+                                            Opened
+                                        </td>` : ''}
+                                    ${(member.opened == null || member.opened == 0) ? `
+                                        <td class="accordian_img_acces">
+                                            Not Open
+                                        </td>` : ''}
                                         </tr>`;
                                     });
 
@@ -2830,7 +2914,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     if(response.error){
                         toastr.error(response.error);
                     }else{
-                        
+
                         // Optionally reload guest list
                         showGuest("1");
                         toastr.success('Guest updated successfully');
