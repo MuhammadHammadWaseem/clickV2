@@ -41,6 +41,12 @@ class SmsEmail extends Mailable
         );
     }
 
+    public function build()
+    {
+        return $this->from('clickinvitation@gmail.com', 'clickinvitation') // Change email and name as needed
+                    ->view('mails.acknowledgment');
+    }
+
     /**
      * Get the message content definition.
      */
