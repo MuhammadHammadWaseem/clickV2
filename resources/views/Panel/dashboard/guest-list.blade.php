@@ -228,7 +228,7 @@
 
     .accordian-table-content .table-box tr {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         gap: 30px;
     }
@@ -1747,32 +1747,38 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <td>
                                                 <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                 ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                <span>
+                                                <span style="line-height: 2;">
                                                     <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                       <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                     </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                     ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                 </span>
                                             </td>
-                                            <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                            <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+
                                             <td>${guest.notes || 'No Notes'}</td>
 
-                                            ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+                                            <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : (guest.opened == null || guest.opened == 0) && guest.declined != 1
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
 
                                             <td>
                                                 <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -1824,18 +1830,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
 
-                                        ${(member.opened != 2 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                        </td>` : ''}
-
                                         <td>
-                                            <li><strong>Email: ${member.email || 'No Email'}</strong>
-                                            <li><strong>Phone : ${member.phone || 'No Phone'}</strong>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
                                         </td>
                                         </tr>`;
 
@@ -1880,31 +1884,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                                                                        <span class="${guest.opened == 0 ? 'd-none' : ''} ${guest.opened == null ? 'd-none' : ''}">
+                                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''} ${guest.opened == null ? 'd-none' : ''}">
                                                                             <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                                             ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
-                                                                        </span>
+                                                                        </>
                                                                     </td>
-                                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+                                                                    
                                                                     <td>${guest.notes || 'No Notes'}</td>
-                                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+
+                                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+
                                                                     <td>
                                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -1958,10 +1970,17 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ?`
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                             </tr>`;
                                     }
                                 });
@@ -2005,31 +2024,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''}">
                                                             <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                             ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
-                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+
                                                     <td>${guest.notes || 'No Notes'}</td>
-                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2081,10 +2108,18 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+
                                             </tr>`;
                                     }
                                 });
@@ -2132,31 +2167,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                                                        <span class="${guest.declined == 0 ? 'd-none' : ''} ${guest.declined == null ? 'd-none' : ''}">
+                                                        <span style="line-height: 2;" class="${guest.declined == 0 ? 'd-none' : ''} ${guest.declined == null ? 'd-none' : ''}">
                                                             <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                             ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
-                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+
                                                     <td>${guest.notes || 'No Notes'}</td>
-                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2208,10 +2251,17 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ?`
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                             </tr>`;
                                     }
                                 });
@@ -2260,31 +2310,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                                                    <span class="${guest.checkin == 0 ? 'd-none' : ''} ${guest.checkin == null ? 'd-none' : ''}">
+                                                    <span style="line-height: 2;" class="${guest.checkin == 0 ? 'd-none' : ''} ${guest.checkin == null ? 'd-none' : ''}">
                                                         <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                     </span>
                                                 </td>
-                                                <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+
                                                 <td>${guest.notes || 'No Notes'}</td>
-                                                ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+
+                                                <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal" data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">
                                                         {{ __('guestlistpage.add_member') }}
@@ -2337,10 +2395,17 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                         </tr>`;
                                 }
                             });
@@ -2384,31 +2449,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <td>
                                                         <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                         ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                        <span class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''}">
                                                             <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                             ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                         </span>
                                                     </td>
-                                                    <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                    <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
+
                                                     <td>${guest.notes || 'No Notes'}</td>
-                                                    ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+
                                                     <td>
                                                         <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                         data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2463,10 +2536,17 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                                 </tr>`;
                                         }
                                     });
@@ -2513,31 +2593,38 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <td>
                                                     <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                                     ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
-                                                    <span>
+                                                    <span style="line-height: 2;">
                                                         <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
                                                     <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
                                                           <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                                                         </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
                                                     <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
-                                                    <br>Table: ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}
                                                         ${(guest.members_number == guest.members.length ) ?
                                                         `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
                                                         `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
                                                     </span>
                                                 </td>
-                                                <td>Meal: ${guest.meal ? guest.meal.name : 'N/A'}</td>
-                                                <td>Allergies: ${guest.allergies == 1 ? 'Yes' : 'No'}</td>
                                                 <td>${guest.notes || 'No Notes'}</td>
-                                                ${(guest.declined == 1 && guest.opened != 2 ) ?
-                                            `<td>Declined</td>` :``}
-                                            ${(guest.declined != 1 && guest.opened == 2 && guest.checkin != 1 ) ?
-                                            `<td>Confirmed</td>` :``}
-                                            ${(guest.checkin == 1 ) ?
-                                            `<td>Checkin</td>` :``}
-                                            ${(guest.opened == 1 ) ?
-                                            `<td>Opened</td>` :``}
-                                            ${(guest.opened == null || guest.opened == 0 ) ?
-                                            `<td>Not Open</td>` :``}
+                                                <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
+                                                    guest.declined == 1 && guest.opened != 2
+                                                        ? "Declined"
+                                                        : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
+                                                        ? "Confirmed"
+                                                        : guest.checkin == 1
+                                                        ? "Checkin"
+                                                        : guest.opened == 1
+                                                        ? "Opened"
+                                                        : guest.opened == null || guest.opened == 0
+                                                        ? "Not Open"
+                                                        : "Unknown"
+                                                }
+                                            </td>
+                                            
+
                                                 <td>
                                                     <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2593,10 +2680,18 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <td class="accordian_img_acces">
                                             Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
                                             Not Open
                                         </td>` : ''}
+
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+
                                         </tr>`;
                                     });
 
