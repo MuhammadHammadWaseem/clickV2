@@ -389,7 +389,7 @@ form#guestForm::-webkit-scrollbar{
     cursor: pointer;
     transition: background-color 0.2s linear;
     border-radius: 15px;
-    width:350px;
+    width:100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -400,12 +400,12 @@ form#guestForm::-webkit-scrollbar{
 
 .guest-list-card span {
     color: #7A7A7A;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .guest-list-card .top-main-name-open span {
     color: #5A5A5A;
-    font-size: 20px;
+    font-size: 17px;
     font-style: italic;
     font-weight: 600;
 }
@@ -419,6 +419,11 @@ form#guestForm::-webkit-scrollbar{
     justify-content: space-between; 
 }
 
+button#addMember {
+    font-size: 13px;
+    padding: 5px;
+}
+
 .guest-list-card.accordion.is-open {
     width: 100%;
     transition: .3s;
@@ -429,13 +434,13 @@ form#guestForm::-webkit-scrollbar{
 }
 
 div#GuestList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap:40px;
-
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
 }
+
+
 
 
 .guest-list-card-main .accordion-content {
@@ -531,6 +536,10 @@ div#GuestList {
    font-size: 12px !important;
 }
 
+.guest-list-card-main{
+    width: 100%;
+}
+
 
 
     @media only screen and (max-width: 1500px) {
@@ -548,6 +557,13 @@ div#GuestList {
             margin: 10px 0;
         }
 
+    }
+
+    @media only screen and (max-width: 1300px){
+
+        div#GuestList {
+    grid-template-columns: 1fr 1fr 1fr;
+}
     }
 
     @media only screen and (max-width: 1199px) {
@@ -618,6 +634,10 @@ p#guestMemberTotal {
     }
 
     @media only screen and (max-width: 767px) {
+
+        div#GuestList {
+    grid-template-columns: 1fr 1fr;
+}
 
         .accordian-table-content .table-box {
             overflow: hidden !important;
@@ -692,6 +712,19 @@ p#guestMemberTotal {
     }
 
     @media only screen and (max-width: 575px) {
+
+        .guest-list-card-main {
+    width: 90%;
+}
+
+
+        .box-styling.event-photos-gallery.events-lists-sec-01.guest-list {
+    padding: 15px;
+}
+
+        div#GuestList {
+    grid-template-columns: 1fr;
+}
 
         .col-12.col-md-12.text-center.d-flex.align-items-center.justify-content-center.flex-wrap.flex-d-md-row p {
         font-weight: 600;
@@ -1902,7 +1935,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                            
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -1953,9 +1986,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 
                                         ${(guest.members_number == guest.members.length ) ? 
                                                             `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 14px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
-
+                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2128,7 +2161,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -2183,6 +2215,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
+                                                            
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
@@ -2355,7 +2389,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -2409,6 +2442,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2588,7 +2622,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -2642,6 +2675,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2822,7 +2856,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -2876,6 +2909,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -3051,7 +3085,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -3105,6 +3138,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -3281,7 +3315,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="top-main-name-open">
                                             
                                         <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
                                             <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
                                         </span>
 
@@ -3336,6 +3369,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                 
+                                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
@@ -3845,28 +3879,23 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             var formData = $('#EditguestForm').serialize();
 
             $.ajax({
-                url: "{{ route('panel.event.guests.update', ':id') }}"
-                    .replace(':id', guestId),
+                url: "{{ route('panel.event.guests.update', ':id') }}".replace(':id', guestId),
                 type: "POST",
                 data: formData,
                 success: function(response) {
                     if(response.error){
                         toastr.error(response.error);
                     }else{
-
-                        // Optionally reload guest list
                         showGuest("1");
                         toastr.success('Guest updated successfully');
-                    $('#EditGuestClose').click();
-                    $('#modifier').css('display', 'none');
-                    $('#modifierButton').css('display', 'none');
-
-                    // Uncheck the checkbox
-                    if (clickedCheckbox) {
-                        clickedCheckbox.checked =
-                            false; // Uncheck the checkbox
+                        $('#EditGuestClose').click();
+                        $('#modifier').css('display', 'none');
+                        $('#modifierButton').css('display', 'none');
+                        console.log(clickedCheckbox);
+                        if (clickedCheckbox) {
+                            clickedCheckbox.checked = false;
+                        }
                     }
-                }
                 },
                 error: function(xhr, status, error) {
                         // Handle validation or server errors
