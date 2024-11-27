@@ -380,159 +380,6 @@ form#guestForm::-webkit-scrollbar{
 
 }
 
-.guest-list-card {
-    background-color: #D9D9D9;
-    text-align: left;
-    padding: 13px;
-    font-size: 18px;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.2s linear;
-    border-radius: 15px;
-    width:350px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    gap: 15px;
-    transition: .3s;
-}
-
-.guest-list-card span {
-    color: #7A7A7A;
-    font-size: 18px;
-}
-
-.guest-list-card .top-main-name-open span {
-    color: #5A5A5A;
-    font-size: 20px;
-    font-style: italic;
-    font-weight: 600;
-}
-
-
-.guest-list-card .top-main-name-open {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    justify-content: space-between; 
-}
-
-.guest-list-card.accordion.is-open {
-    width: 100%;
-    transition: .3s;
-}
-
-.box-styling.event-photos-gallery.events-lists-sec-01.guest-list{
-    height: 100% !important;
-}
-
-div#GuestList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap:40px;
-
-}
-
-
-.guest-list-card-main .accordion-content {
-    width: 0;
-}
-
-.guestlistmodal .modal-dialog .modal-body {
-    height: 500px;
-    overflow: scroll;
-    overflow-x: hidden;
-    padding: 0 40px;
-}
-
-.view_note_modal .modal-dialog .modal-body {
-    padding:40px;
-}
-
-.guestlistmodal .modal-dialog .modal-header, .view_note_modal .modal-dialog .modal-header{
-    padding: 40px 40px 0px;
-}
-
-.guestlistmodal .modal-dialog .modal-footer button, .view_note_modal .modal-dialog .modal-footer button {
-    background-color: #C9C9C9;
-    padding: 5px 15px;
-    color: #777777;
-    font-size: 17px;
-    font-weight: 400;
-    border-radius: 10px;
-}
-
-.guestlistmodal .modal-dialog {
-    max-width: 1100px !important;
-}
-
-.guestlistmodal .modal-content, .view_note_modal .modal-content {
-    background-color: #F1F1F1;
-    border-radius: 10px;
-    border: 1px solid #AAAAAA;
-}
-
-.guestlistmodal .modal-dialog .modal-footer, .view_note_modal .modal-dialog .modal-footer {
-    padding: 10px 40px 40px;
-    justify-content: flex-start;
-}
-
-
-.modal-header .close span {
-    font-size: 40px;
-    font-weight: 300;
-}
-
-
-
-
-.modal-body .table-box td {
-    color: #7A7A7A;
-    font-size: 12px !important;
-}
-
-.modal-body .table-box td strong {
-    color: #3A3A3A;
-    font-size: 15px !important;
-    font-weight: 500;
-}
-
-.modal-header div span {
-    font-size: 20px;
-    color: #7A7A7A;
-
-}
-
-.modal-title {
-    text-transform: capitalize;
-    color: #4A4A4A;
-}
-
-
-.modal-body td.align_data_text {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    column-gap: 5px;
-}
-
-
-.modal-body td.align_data_text strong {
-    color: #7A7A7A;
-    font-size: 15px !important;
-}
-
-.modal-body ul strong {
-    color: #7A7A7A !important;
-   font-size: 12px !important;
-}
-
-
-
     @media only screen and (max-width: 1500px) {
         .accordian-table-content .table-box table tr td {
             font-size: 12px;
@@ -1893,126 +1740,58 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         guests.forEach(function(guest) {
                             // ALL GUESTS
                             var accordion = `
-                            
+                            <div class="accordion">
+                                <div class="table-box" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                <span style="line-height: 2;">
+                                                    <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                    ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                </span>
+                                            </td>
 
-                            <div class="guest-list-card-main">
-
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
-
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                            <td>${guest.notes || 'No Notes'}</td>
+                                                                                                                                                    
+                                            <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
-                                                        : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Opened"
+                                                        : (guest.opened == null || guest.opened == 0) && guest.declined != 1
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
-                                    </div>
-
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
+                                            <td>
+                                                <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
+                            <div class="accordion-content">
+                                <div class="table-box">
                                     <table>
-                                        
+                                        <p class="after-line-effect">Members</p>
                                         <tr>
                                             <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
                                             <td><strong>{{ __('guestlistpage.note') }}</strong></td>
@@ -2025,49 +1804,43 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 accordion += `
                                 <tr class="divider-line"></tr>
                                 <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
+                                    <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
                                     <td>${member.notes || 'No Notes'}</td>
                                     <td>
                                         <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                            <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
                                             <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
                                         </ul>
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                            Confirmed
                                         </td>` : ''}
                                     ${(member.declined == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                            Declined
                                         </td>` : ''}
                                     ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                         </tr>`;
 
                             });
@@ -2076,22 +1849,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <tr class="divider-line"></tr>
                                     </table>
                                 </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-
-
-
                             </div>`;
 
                             $('#GuestList').append(accordion); // Append each accordion to the list
@@ -2117,208 +1874,121 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             // Update the totals display with separate checked-in counts for guests and members
                                             $('#guestMemberTotal').html(`TOTAL: ${attendingGuestsCount + attendingMembersCount} ${br} (guests ${attendingGuestsCount} - members ${attendingMembersCount})`);
 
-                                                // ALL GUESTS
-                            var accordion = `
-                            
+                                                // Show guest and their members if the guest is checked in
+                                                var accordion = `
+                                                    <div class="accordion">
+                                                        <div class="table-box" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                            <div class="guest-list-card-main">
+                                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''} ${guest.opened == null ? 'd-none' : ''}">
+                                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                                        </>
+                                                                    </td>
+                                                                    
+                                                                    <td>${guest.notes || 'No Notes'}</td>
 
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
-
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        <div class="table-box">
+                                                            <table>
+                                                                <p class="after-line-effect">Members</p>
+                                                                <tr>
+                                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                                                </tr>`;
 
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
-                                    </div>
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 2) {
+                                        attendingMembersCount++; // Count attending member
 
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
-                            guest.members.forEach(function(member) {
-                                if (member.opened == 2) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                    <td class="accordian_img_acces">
+                                                        Confirmed
+                                                    </td>` : ''}
+                                                ${(member.declined == 1) ? `
+                                                    <td class="accordian_img_acces">
+                                                        Declined
+                                                    </td>` : ''}
+                                                    ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ?`
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
-                                        </tr>`;
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+                                            </tr>`;
                                     }
-                            });
+                                });
 
-                            accordion += `
+                                accordion += `
                                     <tr class="divider-line"></tr>
                                     </table>
                                 </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-
-
-
                             </div>`;
 
                                 $('#GuestList').append(accordion); // Append each accordion to the list
@@ -2344,210 +2014,121 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 }
                                 var br='<br>';
                                 $('#guestMemberTotal').html(`TOTAL: ${openedGuestsCount} ${br} (guests ${openedGuestsCount} - members ${openedMembersCount})`);
-                                // ALL GUESTS
-                            var accordion = `
-                            
+                                // Show guest and their members if the guest is checked in
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                            <div class="guest-list-card-main">
+                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                        </span>
+                                                    </td>
 
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
+                                                    <td>${guest.notes || 'No Notes'}</td>
 
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                                </tr>`;
 
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
-                            guest.members.forEach(function(member) {
-
-                                if (member.opened == 1) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.opened == 1) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        Confirmed
+                                                                                                                    </td>` : ''}
+                                                ${(member.declined == 1) ? `
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        Declined
+                                                                                                                    </td>` : ''}
+                                                                                                                    ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
-                                        </tr>`;
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+
+                                            </tr>`;
                                     }
-                            });
+                                });
 
-                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    </table>
-                                </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
+                                accordion += `
+                                        <tr class="divider-line"></tr>
+                                        </table>
                                     </div>
-                                    </div>
-
-
-
-
-                            </div>`;
+                                </div>`;
 
                                 $('#GuestList').append(accordion); // Append each accordion to the list
                             }
@@ -2577,209 +2158,118 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(`TOTAL: ${declinedGuestsCount + declinedMembersCount} ${br} (guests ${declinedGuestsCount} - members ${declinedMembersCount})`);
 
-                                // ALL GUESTS
-                            var accordion = `
-                            
+                                var accordion = `
+                                    <div class="accordion">
+                                        <div class="table-box" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                            <div class="guest-list-card-main">
+                                                        <span style="line-height: 2;" class="${guest.declined == 0 ? 'd-none' : ''} ${guest.declined == null ? 'd-none' : ''}">
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                        </span>
+                                                    </td>
 
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
+                                                    <td>${guest.notes || 'No Notes'}</td>
 
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                                </tr>`;
 
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
-                            guest.members.forEach(function(member) {
-                                if (member.declined == 1) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                // Loop through each member of the guest and add them only if declined == 1
+                                guest.members.forEach(function(member) {
+                                    if (member.declined == 1) {
+                                        accordion += `
+                                            <tr class="divider-line"></tr>
+                                            <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                                <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                <td>${member.notes || 'No Notes'}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                        <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                    </ul>
+                                                </td>
+                                                ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        Confirmed
+                                                                                                                    </td>` : ''}
+                                                ${(member.declined == 1) ? `
+                                                                                                                    <td class="accordian_img_acces">
+                                                                                                                        Declined
+                                                                                                                    </td>` : ''}
+                                                                                                                    ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
-                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
+                                    ${(member.opened == null || member.opened == 0) && member.declined != 1 ?`
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
-                                        </tr>`;
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+                                            </tr>`;
                                     }
-                            });
-
-                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    </table>
-                                </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
+                                });
+                                accordion += `
+                                        <tr class="divider-line"></tr>
+                                        </table>
                                     </div>
-                                    </div>
-
-
-
-
-                            </div>`;
+                                </div>`;
 
                                 $('#GuestList').append(accordion); // Append each accordion to the list
                             }
@@ -2811,208 +2301,119 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     guests.forEach(function(guest) {
                         // Only include guests who are checked-in
                         if (guest.checkin == 1 || guest.members.some(member => member.checkin == 1)) {
-                            // ALL GUESTS
                             var accordion = `
-                            
+                                <div class="accordion">
+                                    <div class="table-box" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
 
-                            <div class="guest-list-card-main">
+                                                    <span style="line-height: 2;" class="${guest.checkin == 0 ? 'd-none' : ''} ${guest.checkin == null ? 'd-none' : ''}">
+                                                        <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                        ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                    </span>
+                                                </td>
 
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
+                                                <td>${guest.notes || 'No Notes'}</td>
 
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                                <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
+                                                <td>
+                                                    <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal" data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">
+                                                        {{ __('guestlistpage.add_member') }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
-
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
                                 </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
+                                <div class="accordion-content">
+                                    <div class="table-box">
+                                        <table>
+                                            <p class="after-line-effect">Members</p>
+                                            <tr>
+                                                <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                            </tr>`;
 
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
+                            // Loop through each member of the guest and add them only if checkin == 1
                             guest.members.forEach(function(member) {
                                 if (member.checkin == 1) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                    accordion += `
+                                        <tr class="divider-line"></tr>
+                                        <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                            <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                            ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                            <td>${member.notes || 'No Notes'}</td>
+                                            <td>
+                                                <ul>
+                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                </ul>
+                                            </td>
+                                            ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                <td class="accordian_img_acces">
+                                                    Confirmed
+                                                </td>` : ''}
+                                            ${(member.declined == 1) ? `
+                                                <td class="accordian_img_acces">
+                                                    Declined
+                                                </td>` : ''}
+                                                ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
                                         </tr>`;
-                                    }
+                                }
                             });
 
                             accordion += `
-                                    <tr class="divider-line"></tr>
-                                    </table>
+                                <tr class="divider-line"></tr>
+                                </table>
                                 </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-
-
-
                             </div>`;
 
                             // Append the accordion to the GuestList
@@ -3040,212 +2441,126 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(`TOTAL: ${notOpenedGuestsCount} ${br} (guests ${notOpenedGuestsCount} - members ${notOpenedMembersCount})`);
                                 // Show guest and their members if the guest is checked in
-                                // ALL GUESTS
-                            var accordion = `
-                            
+                                var accordion = `
+                                    <div class="accordion" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                        <div class="table-box">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                        ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                        <span style="line-height: 2;" class="${guest.opened == 0 ? 'd-none' : ''}">
+                                                            <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                            ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                        </span>
+                                                    </td>
 
-                            <div class="guest-list-card-main">
+                                                    <td>${guest.notes || 'No Notes'}</td>
 
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
-
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                                    <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                        data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
+                                    `;
 
-
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
-                            guest.members.forEach(function(member) {
-                                if ((member.opened == 0 || member.opened == null)) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                // Loop through each member of the guest and add them only if checkin == 1
+                                if (guest.members && guest.members.length > 0) {
+                                    csvContent += "MEMBER, , , , , \n";
+                                    guest.members.forEach(function(member) {
+                                        if ((member.opened == 0 || member.opened == null)) {
+                                            accordion += `
+                                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                                </tr>
+                                                <tr class="divider-line"></tr>
+                                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                                    <td><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                    ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</td>
+                                                    <td>${member.notes || 'No Notes'}</td>
+                                                    <td>
+                                                        <ul>
+                                                            <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                        </ul>
+                                                    </td>
+                                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                                                                <td class="accordian_img_acces">
+                                                                                                    Confirmed
+                                                                                                </td>` : ''}
+                                                    ${(member.declined == 1) ? `
+                                                                                                <td class="accordian_img_acces">
+                                                                                                    Declined
+                                                                                                </td>` : ''}
+                                                                                                ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
-                                        </tr>`;
-                                    }
-                            });
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+                                                </tr>`;
+                                        }
+                                    });
 
-                            accordion += `
-                                    <tr class="divider-line"></tr>
-                                    </table>
-                                </div>
-
-
-
+                                    accordion += `
+                                            <tr class="divider-line"></tr>
+                                            </table>
                                         </div>
+                                    </div>`;
 
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-
-
-
-                            </div>`;
                                 }
                                 // Append the accordion to the GuestList
                                 $('#GuestList').append(accordion);
+                            }
                         });
                     }
 
@@ -3270,208 +2585,122 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
 
                             guests.forEach(function(guest) {
-                                // ALL GUESTS
-                            var accordion = `
-                            
-
-                            <div class="guest-list-card-main">
-
-                                <div class="guest-list-card" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
-                                        
-                                        <div class="top-main-name-open">
-                                            
-                                        <span>
-                                            <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
-                                            <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</span>
-                                        </span>
-
-                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}">
-                                            <path d="M14.1667 20.9255H12.5V28.4255H20V26.7589H14.1667V20.9255ZM20 15.0922H25.8333V20.9255H27.5V13.4255H20V15.0922Z" fill="#568500"/>
-                                            <circle cx="20" cy="20.9255" r="20" fill="#568500" fill-opacity="0.2"/>
-                                            </svg>
-
-                                        </div>
-
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}</span>
-                                
-                                        <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}</span>
-                                
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}"><strong>Allergies:</strong>  ${guest.allergies == 1 ? 'Yes' : 'No'}</span>
-                                    
-                                    <span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" >
-                                    
-                                        <strong>Status:</strong> ${
+                                let accordion = `
+                                <div class="accordion" ${(guest.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')} ${(guest.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')}>
+                                    <div class="table-box">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)">
+                                                    ${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}
+                                                    <span style="line-height: 2;">
+                                                        <br><i class="fa fa-whatsapp"></i> ${(guest.whatsapp == null || guest.whatsapp == '') ? 'N/A' : guest.whatsapp}
+                                                    <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                        </svg> ${(guest.phone == null || guest.phone == '') ? 'N/A' : guest.phone}
+                                                    <br><i class="fa fa-envelope-o" aria-hidden="true"></i> ${(guest.email == null || guest.email == '') ? 'N/A' : guest.email}
+                                                        ${(guest.members_number == guest.members.length ) ?
+                                                        `<br><span class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` :
+                                                        `<br><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})` }
+                                                    </span>
+                                                </td>
+                                                <td>${guest.notes || 'No Notes'}</td>
+                                                <td>
+                                                <strong>Meal:</strong> ${guest.meal ? guest.meal.name : 'N/A'}<br>
+                                                <strong>Allergies:</strong> ${guest.allergies == 1 ? 'Yes' : 'No'}<br>
+                                                <strong>Table:</strong> ${(guest.id_table !== 0 && guest.id_table !== null && guest.table != undefined) ? guest.table.name : 'N/A'}<br>
+                                                <strong>Status:</strong> ${
                                                     guest.declined == 1 && guest.opened != 2
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Declined</span>"
+                                                        ? "Declined"
                                                         : guest.declined != 1 && guest.opened == 2 && guest.checkin != 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Confirmed</span>"
+                                                        ? "Confirmed"
                                                         : guest.checkin == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Checkin</span>"
+                                                        ? "Checkin"
                                                         : guest.opened == 1
-                                                        ? "<span style='background-color:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:3px 10px; font-size:13px;'>Opened</span>"
+                                                        ? "Opened"
                                                         : guest.opened == null || guest.opened == 0
-                                                        ? "<span style='background-color:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:3px 10px; font-size:13px;'>Not Open</span>"
+                                                        ? "Not Open"
                                                         : "Unknown"
                                                 }
-                                        
-                                    </span>
-                                    
-                                    <span>
-                                        <strong>Notes:</strong>
-                                        <a href="javascript:void(0)" data-toggle="modal" data-target="#viewnotes${guest.id_guest}" style="color:#7A7A7A; font-style:italic; text-decoration:underline;">View Notes</a>
-                                    </span>
-                                
-                                        ${(guest.members_number == guest.members.length ) ? 
-                                                            `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
-                                                            `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 18px; color: #7A7A7A;"><span class="text-success">{{ __('guestlistpage.open') }}</span> (${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
+                                            </td>
+                                            
 
-
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                <td>
+                                                    <button type="button" class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
-                                    
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
+                                </div>`;
 
+                                // If the guest has members, iterate over each member to create their row
+                                if (Array.isArray(guest.members) && guest.members.length > 0) {
+                                    accordion += `
+                                    <div class="accordion-content">
+                                        <div class="table-box">
+                                            <table>
+                                                <p class="after-line-effect">Members</p>
+                                                <tr>
+                                                    <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.note') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
+                                                    <td><strong>{{ __('guestlistpage.status') }}</strong></td>
+                                                </tr>`;
 
-
-
-                                    
-
-                            <!-- Modal -->
-                            <div class="modal fade view_note_modal" id="viewnotes${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name} Note</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ${guest.notes || 'No Notes'}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-
-                                    
-
-                                    <!-- Modal -->
-
-
-                                    <div class="modal fade guestlistmodal" id="exampleModalCenter${guest.id_guest}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div>
-                                                <h5 class="modal-title" id="exampleModalLongTitle">${guest.titleGuest == null ? ' ' : guest.titleGuest} ${guest.name}</h5>
-                                                <span>Members Details</span>     
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-
-                                        <div class="modal-body">
-                                            
-                                           
-                                            <div class="table-box">
-                                    <table>
-                                        
-                                        <tr>
-                                            <td><strong>{{ __('guestlistpage.member_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.note') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.other_details') }}</strong></td>
-                                            <td><strong>{{ __('guestlistpage.status') }}</strong></td>
-
-                                        </tr>`;
-
-                            guest.members.forEach(function(member) {
-                                accordion += `
-                                <tr class="divider-line"></tr>
-                                <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
-                                    <td class="align_data_text"><input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
-                                        
-                                        <div>
-                                            <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
-                                            <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
-                                        </div>
-                                        
-                                        </td>
-                                    <td>${member.notes || 'No Notes'}</td>
-                                    <td>
-                                        <ul>
-                                            <li><strong>{{ __('guestlistpage.meal') }}:</strong> ${member.meal ? member.meal.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.table') }}:</strong> ${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
-                                            <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
-                                        </ul>
-                                    </td>
-
-                                    ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                    guest.members.forEach(function(member) {
+                                        accordion += `
+                                        <tr class="divider-line"></tr>
+                                        <tr ${(member.declined == 1 ? 'style="background-color: #ffdbdb  !important;"' : '')} ${(member.checkin == 1 ? 'style="background-color: #dbffdb  !important;"' : '')}>
+                                            <td>
+                                                <input type="checkbox" class="check_box_style" data-guest-id="${member.id_guest}" onclick="showButton(event)">
+                                                ${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}
+                                            </td>
+                                            <td>${member.notes || 'No Notes'}</td>
+                                            <td>
+                                                <ul>
+                                                    <li><strong>{{ __('guestlistpage.meal') }}: </strong>${member.meal ? member.meal.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.table') }}: </strong>${(member.id_table !== 0 && member.id_table !== null && member.table != undefined) ? member.table.name : 'N/A'}</li>
+                                                    <li><strong>{{ __('guestlistpage.allergies') }}: </strong>${member.allergies == 1 ? 'Yes' : 'No'}</li>
+                                                </ul>
+                                            </td>
+                                            ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
+                                                                                <td class="accordian_img_acces">
+                                                                                    Confirmed
+                                                                                </td>` : ''}
+                                            ${(member.declined == 1) ? `
+                                                                                <td class="accordian_img_acces">
+                                                                                    Declined
+                                                                                </td>` : ''}
+                                                                                ${(member.checkin == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                        </td>` : ''}
-                                    ${(member.declined == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                        </td>` : ''}
-                                    ${(member.checkin == 1) ? `
-                                        <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checkin</span>
+                                            Checkin
                                         </td>` : ''}
                                     ${(member.opened == 1) ? `
                                         <td class="accordian_img_acces">
-                                            <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                            Opened
                                         </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 ? `
                                         <td class="accordian_img_acces">
-                                           <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                            Not Open
                                         </td>` : ''}
 
+                                        <td>
+                                            <li><strong><i class="fa fa-envelope-o" aria-hidden="true"></i> ${member.email || 'No Email'}</strong>
+                                            <li><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                                      <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                                    </svg> ${member.phone || 'No Phone'}</strong>
+                                        </td>
+
                                         </tr>`;
+                                    });
 
-                            });
-
-                            accordion += `
-                                    <tr class="divider-line"></tr>
+                                    accordion += `
+                                        <tr class="divider-line"></tr>
                                     </table>
-                                </div>
-
-
-
-                                        </div>
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
                                     </div>
-                                    </div>
-
-
-
-
-                            </div>`;
+                                </div>`;
+                                }
 
                                 // Append each accordion to the list
                                 $('#GuestList').append(accordion);
