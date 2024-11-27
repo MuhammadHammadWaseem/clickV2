@@ -437,8 +437,9 @@
     div#GuestList {
         display: grid;
         gap: 40px;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 22% 22% 22% 22%;
         justify-items: center;
+        justify-content: center;
     }
 
 
