@@ -2014,7 +2014,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 14px; color: #7A7A7A;">(<span class="text-success">{{ __('guestlistpage.open') }}</span> ${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
