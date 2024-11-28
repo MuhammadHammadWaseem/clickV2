@@ -855,9 +855,9 @@
                 <div class="box-styling event-photos-gallery events-lists-sec-01 guest-list">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2>{{ __('guestlistpage.guest_list') }}</h2>
+                            <h2><input type="checkbox" name="check_all" class="check_box_style" style="margin-bottom: -1px" id="check_all" onclick="selectAll(event)"> {{ __('guestlistpage.guest_list') }}</h2>
                             {{-- <p>{{ __('guestlistpage.guest_list_description') }}</p> --}}
-
+                            
                         </div>
                         <div class="two-btn-align">
                             <div class="export-hover-links">
@@ -1946,8 +1946,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
-
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
                         guests.forEach(function(guest) {
+                            console.log(guest);
                             // ALL GUESTS
                             var accordion = `
                             
@@ -2160,6 +2162,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
                         var attendingGuestsCount = 0;
                         var attendingMembersCount = 0;
 
@@ -2395,6 +2399,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
 
                         guests.forEach(function(guest) {
                             // Check if guest or any member has opened == 1 (opened)
@@ -2621,6 +2627,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
                         var declinedGuestsCount = 0;
                         var declinedMembersCount = 0;
                         guests.forEach(function(guest) {
@@ -2858,6 +2866,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
                         var checkedInGuestsCount = 0;
                         var checkedInMembersCount = 0;
 
@@ -3098,6 +3108,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
                         var notOpenedGuestsCount = 0;
                         var notOpenedMembersCount = 0;
 
@@ -3328,6 +3340,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             $('#GuestList').empty();
                             $('#GuestList').append('<h4 class="text-center mb-5">No guests found</h4>');
                         }
+                        $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
+                        $("#check_all").attr("data-guests", JSON.stringify(guests));
 
                         if (Array.isArray(guests) && guests.length > 0) {
                             // Sort guests array based on the filter
@@ -4088,6 +4102,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         function showButton(event) {
             var clickedCheckbox = event.target;
             let selectedID = clickedCheckbox.getAttribute('data-guest-id');
+            console.log(selectedID);
             const modifierDiv = document.querySelector(".modifier");
 
             // Add or remove the guest ID from the array based on the checkbox state
@@ -4136,6 +4151,74 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             const countDisplay = modifierDiv.querySelector('p');
             countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
         }
+
+        function selectAll(event) {
+            var clickedCheckbox = event.target;
+            let selectedIDs = clickedCheckbox.getAttribute('data-guests');
+            selectedIDs = JSON.parse(selectedIDs); // Parse the JSON string
+
+            idArray = [];
+
+            // Loop through selected IDs and extract both guest and member IDs
+            selectedIDs.forEach(selected => {
+                if (selected.id_guest) {
+                    idArray.push(selected.id_guest); // Add guest ID
+                }
+                if (selected.members) { // Check if members exist
+                    selected.members.forEach(member => {
+                        if (member.id_guest) {
+                            idArray.push(member.id_guest); // Add member guest ID
+                        }
+                    });
+                }
+            });
+
+            const modifierDiv = document.querySelector(".modifier");
+
+            // Add or remove the guest IDs from the array based on the checkbox state
+            if (clickedCheckbox.checked) {
+                idArray.forEach(id => {
+                    if (!idArray.includes(id)) {
+                        idArray.push(id); // Add selected guest or member ID to array
+                    }
+                });
+            } else {
+                idArray = idArray.filter(id => !idArray.includes(id)); // Remove unchecked guest or member IDs
+            }
+
+            // Show or hide modifier buttons based on selections
+            if (idArray.length > 0) {
+                modifierDiv.style.display = "block"; // Show the buttons
+            } else {
+                modifierDiv.style.display = "none"; // Hide the buttons
+            }
+
+            // Show or hide buttons based on the number of selected guests/members
+            const editButton = document.querySelector('.edit-btn');
+            const deleteButtonSingle = document.querySelector('.delete-btn-single');
+            const deleteButtonAll = document.querySelector('.delete-btn-all');
+            const declineButton = document.querySelector('.decline-btn');
+            const declineAllButton = document.querySelector('.decline-all-btn');
+
+            if (idArray.length === 1) {
+                editButton.style.display = "block";
+                deleteButtonSingle.style.display = "block";
+                deleteButtonAll.style.display = "none"; // Hide Delete All when only one is selected
+                declineButton.style.display = "block"; // Show Decline button for one selection
+                declineAllButton.style.display = "none"; // Hide Decline All
+            } else if (idArray.length > 1) {
+                editButton.style.display = "none"; // Hide Edit button for multiple selections
+                deleteButtonSingle.style.display = "none"; // Hide single Delete button
+                deleteButtonAll.style.display = "block"; // Show Delete All button
+                declineButton.style.display = "none"; // Hide Decline button
+                declineAllButton.style.display = "block"; // Show Decline All button
+            }
+
+            // Update the selected count display
+            const countDisplay = modifierDiv.querySelector('p');
+            countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
+        }
+
 
         // Decline all selected guests
         function declineAllGuests() {
@@ -4381,6 +4464,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 // Send the checked form options
             };
 
+            console.log(idArray);
             if (idArray.length === 1) {
                 dataToSend.guestid = idArray[0]; // Send a single guest ID
             } else {
