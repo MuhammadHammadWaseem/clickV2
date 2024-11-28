@@ -1949,7 +1949,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
                         $("#check_all").attr("data-guests", JSON.stringify(guests));
                         guests.forEach(function(guest) {
-                            console.log(guest);
                             // ALL GUESTS
                             var accordion = `
                             
@@ -2014,6 +2013,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<span data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" class="text-danger">{{ __('guestlistpage.all members allowed added') }}</span>` : 
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 14px; color: #7A7A7A;">(<span class="text-success">{{ __('guestlistpage.open') }}</span> ${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
+                                            <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
@@ -3943,7 +3943,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         $('#EditGuestClose').click();
                         $('#modifier').css('display', 'none');
                         $('#modifierButton').css('display', 'none');
-                        console.log(clickedCheckbox);
                         if (clickedCheckbox) {
                             clickedCheckbox.checked = false;
                         }
@@ -4102,7 +4101,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         function showButton(event) {
             var clickedCheckbox = event.target;
             let selectedID = clickedCheckbox.getAttribute('data-guest-id');
-            console.log(selectedID);
             const modifierDiv = document.querySelector(".modifier");
 
             // Add or remove the guest ID from the array based on the checkbox state
@@ -4472,7 +4470,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 // Send the checked form options
             };
 
-            console.log(idArray);
             if (idArray.length === 1) {
                 dataToSend.guestid = idArray[0]; // Send a single guest ID
             } else {
