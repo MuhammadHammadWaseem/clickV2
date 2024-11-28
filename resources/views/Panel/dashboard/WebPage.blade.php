@@ -81,17 +81,17 @@
 
 
     #exampleModalCenter03 .modal-dialog {
-    max-width: 550px !important;
-}
+        max-width: 550px !important;
+    }
 
 
-#settingForm label {
-    font-size: 14px;
-}
+    #settingForm label {
+        font-size: 14px;
+    }
 
-#settingForm select#font_style {
-    margin: 0;
-}
+    #settingForm select#font_style {
+        margin: 0;
+    }
 
     @media only screen and (max-width: 991px) {
         .two-btn-inline {
@@ -171,6 +171,75 @@
         }
 
     }
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    form#settingForm {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 </style>
 
 @section('content')
@@ -222,6 +291,154 @@
                                 <input type="color" id="bride_name_color" name="bride_name_color"
                                     value="{{ old('bride_name_color', $WebsiteSetting->bride_name_color ?? '') }}">
                             </div>
+
+                            {{-- new --}}
+                            <select id="bridefnameSize" name="bridefnameSize">
+                                @for ($size = 10; $size <= 50; $size += 2)
+                                    <option value="{{ $size }}"
+                                        {{ old('bridefnameSize', $WebsiteSetting->bridefnameSize ?? '') == $size ? 'selected' : '' }}>
+                                        {{ $size }}
+                                    </option>
+                                @endfor
+                            </select>
+                            
+                            <div class="custom-box">
+                                <label for="bridefname">Bride First Name</label>
+                                <input type="text" id="bridefname" name="bridefname"
+                                    value="{{ old('bridefname', $event->bridefname ?? '') }}">
+                            </div>
+                            <div class="custom-box">
+                                <label for="bridelnameSize">Bride Last Name Size</label>
+                                <select id="bridelnameSize" name="bridelnameSize">
+                                    @for ($size = 10; $size <= 50; $size += 2)
+                                        <option value="{{ $size }}"
+                                            {{ old('bridelnameSize', $WebsiteSetting->bridelnameSize ?? '') == $size ? 'selected' : '' }}>
+                                            {{ $size }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="custom-box">
+                                <label for="bridelname">Bride Last Name</label>
+                                <input type="text" id="bridelname" name="bridelname"
+                                    value="{{ old('bridelname', $event->bridelname ?? '') }}">
+                            </div>
+                            <div class="custom-box">
+                                <label for="is_bride_fname">Show Bride First Name</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_bride_fname" name="is_bride_fname">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="custom-box">
+                                <label for="is_bride_lname">Show Bride Last Name</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_bride_lname" name="is_bride_lname">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="groomfnameSize">Groom First Name Size</label>
+                                <select id="groomfnameSize" name="groomfnameSize">
+                                    @for ($size = 10; $size <= 50; $size += 2)
+                                        <option value="{{ $size }}"
+                                            {{ old('groomfnameSize', $WebsiteSetting->groomfnameSize ?? '') == $size ? 'selected' : '' }}>
+                                            {{ $size }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="custom-box">
+                                <label for="groomfname">Groom First Name</label>
+                                <input type="text" id="groomfname" name="groomfname"
+                                    value="{{ old('groomfname', $event->groomfname ?? '') }}">
+                            </div>
+                            <div class="custom-box">
+                                <label for="groomlnameSize">Groom Last Name Size</label>
+                                <select id="groomlnameSize" name="groomlnameSize">
+                                    @for ($size = 10; $size <= 50; $size += 2)
+                                        <option value="{{ $size }}"
+                                            {{ old('groomlnameSize', $WebsiteSetting->groomlnameSize ?? '') == $size ? 'selected' : '' }}>
+                                            {{ $size }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="custom-box">
+                                <label for="groomlname">Groom Last Name</label>
+                                <input type="text" id="groomlname" name="groomlname"
+                                    value="{{ old('groomlname', $event->groomlname ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="is_groom_fname">Show Groom First Name</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_groom_fname" name="is_groom_fname">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="custom-box">
+                                <label for="is_groom_lname">Show Groom Last Name</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_groom_lname" name="is_groom_lname">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="symbolSize">Symbol Size</label>
+                                <select id="symbolSize" name="symbolSize">
+                                    @for ($size = 10; $size <= 50; $size += 2)
+                                        <option value="{{ $size }}"
+                                            {{ old('symbolSize', $WebsiteSetting->symbolSize ?? '') == $size ? 'selected' : '' }}>
+                                            {{ $size }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="custom-box">
+                                <label for="symbol">Symbol</label>
+                                <input type="text" id="symbol" name="symbol"
+                                    value="{{ old('symbol', $WebsiteSetting->symbol ?? '') }}">
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="is_symbol">Show Symbol</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_symbol" name="is_symbol">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="is_heart">Show Heart</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_heart" name="is_heart">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="custom-box">
+                                <label for="dateSize">Event Date Size</label>
+                                <select id="dateSize" name="dateSize">
+                                    @for ($size = 10; $size <= 50; $size += 2)
+                                        <option value="{{ $size }}"
+                                            {{ old('dateSize', $WebsiteSetting->dateSize ?? '') == $size ? 'selected' : '' }}>
+                                            {{ $size }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="custom-box">
+                                <label for="is_date">Show Event Date</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_date" name="is_date">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            {{-- new --}}
+
 
                             <div class="custom-box">
                                 <label for="groom_name_color">{{ __('webpage.Groom Name Color:') }}</label>
@@ -764,32 +981,32 @@
     </div>
 
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter023" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Guest List For Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Add your guest list and send invitations') }}</p>
                     </div>
-                    <div class="modal-body">
-                        <div class="text">
-                            <h2>{{ __('genralInfo.Would You Like To Add A Guest List For Your Event?') }}</h2>
-                            <p>{{ __('genralInfo.Add your guest list and send invitations') }}</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noGuestList">{{ __('genralInfo.Later') }}</button>
-                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter1"><a class="text-light"
-                                href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noGuestList">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.guests-list', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
                 </div>
             </div>
         </div>
-        <div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
+    </div>
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter024" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -817,33 +1034,33 @@
     </div>
 
     <div class="modal fade modal-01 modal-02" id="exampleModalCenter025" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
+                        <p>{{ __('genralInfo.Share the memories') }}</p>
                     </div>
-                    <div class="modal-body">
-                        <div class="text">
-                            <h2>{{ __('genralInfo.Would You Like To Add A Photos & Videos Of Your Event?') }}</h2>
-                            <p>{{ __('genralInfo.Share the memories') }}</p>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                            id="noPhotos">{{ __('genralInfo.Later') }}</button>
-                        <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
-                            data-target="#exampleModalCenter1"><a class="text-light"
-                                href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        id="noPhotos">{{ __('genralInfo.Later') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" data-toggle="modal"
+                        data-target="#exampleModalCenter1"><a class="text-light"
+                            href="{{ route('panel.event.photos', ['id' => $event->id_event]) }}">{{ __('genralInfo.I Do') }}</a></button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
+    <div class="modal fade modal-01 modal-02" id="exampleModalCenter026" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -869,7 +1086,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -888,23 +1104,55 @@
         });
 
         $("#noGuestList").on("click", function() {
-                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
-                successModal.show();
-            });
-            $("#noTable").on("click", function() {
-                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
-                successModal.show();
-            });
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter024'));
+            successModal.show();
+        });
+        $("#noTable").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter025'));
+            successModal.show();
+        });
 
-            $("#noPhotos").on("click", function() {
-                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
-                successModal.show();
-            });
+        $("#noPhotos").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
+            successModal.show();
+        });
         var mainImage = @json($event->mainimage);
         var cerImage = @json($event->cerimg);
         var recImage = @json($event->recimg);
         var parImage = @json($event->parimg);
         console.log(mainImage, cerImage, recImage, parImage);
+
+        var is_bride_fname = @json($WebsiteSetting->is_bride_lname);
+        var is_bride_lname = @json($WebsiteSetting->is_bride_lname);
+        var is_groom_fname = @json($WebsiteSetting->is_groom_fname);
+        var is_groom_lname = @json($WebsiteSetting->is_groom_lname);
+        var is_symbol = @json($WebsiteSetting->is_symbol);
+        var is_heart = @json($WebsiteSetting->is_heart);
+        var is_date = @json($WebsiteSetting->is_date);
+
+        if (is_bride_fname == 1) {
+            $('#is_bride_fname').prop('checked', true);
+        }
+        if (is_bride_lname == 1) {
+            $('#is_bride_lname').prop('checked', true);
+        }
+        if (is_groom_fname == 1) {
+            $('#is_groom_fname').prop('checked', true);
+        }
+        if (is_groom_lname == 1) {
+            $('#is_groom_lname').prop('checked', true);
+        }
+        if (is_symbol == 1) {
+            $('#is_symbol').prop('checked', true);
+        }
+        if (is_heart == 1) {
+            $('#is_heart').prop('checked', true);
+        }
+        if (is_date == 1) {
+            $('#is_date').prop('checked', true);
+        }
+
+        console.log(is_bride_fname, is_bride_lname, is_groom_fname, is_groom_lname, is_symbol, is_heart, is_date);
 
         if (mainImage == '' || mainImage == null) {
             var successModal = new bootstrap.Modal(document.getElementById('changeMainPhoto'));
@@ -1143,9 +1391,28 @@
                     }
                 });
             });
+
             $('#settingForm').on('submit', function(e) {
                 e.preventDefault();
+
+                var bride_fname = $("#is_bride_fname").is(':checked');
+                var bride_lname = $("#is_bride_lname").is(':checked');
+                var groom_fname = $("#is_groom_fname").is(':checked');
+                var groom_lname = $("#is_groom_lname").is(':checked');
+                var is_symbol = $("#is_symbol").is(':checked');
+                var is_heart = $("#is_heart").is(':checked');
+                var is_date = $("#is_date").is(':checked');
+
+                // Create a FormData object to handle the file upload and other form data
                 var formData = new FormData(this);
+
+                formData.append('is_bride_fname', bride_fname ? 1 : 0);
+                formData.append('is_bride_lname', bride_lname ? 1 : 0);
+                formData.append('is_groom_fname', groom_fname ? 1 : 0);
+                formData.append('is_groom_lname', groom_lname ? 1 : 0);
+                formData.append('is_symbol', is_symbol ? 1 : 0);
+                formData.append('is_heart', is_heart ? 1 : 0);
+                formData.append('is_date', is_date ? 1 : 0);
 
                 $.ajax({
                     url: "{{ route('website.update', $event->id_event) }}",

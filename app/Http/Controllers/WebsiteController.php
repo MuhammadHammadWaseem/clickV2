@@ -39,6 +39,7 @@ class WebsiteController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         // Validate input colors
         $request->validate([
             'bride_name_color' => 'nullable|string|max:7',
@@ -47,7 +48,20 @@ class WebsiteController extends Controller
             'event_date_color' => 'nullable|string|max:7',
             'font_style' => 'nullable|string|max:50',
             'event_name_color' => 'nullable|string|max:50',
+            'bridefname' => 'nullable|string|max:50',
+            'bridelname' => 'nullable|string|max:50',
+            'groomfname' => 'nullable|string|max:50',
+            'groomlname' => 'nullable|string|max:50',
         ]);
+
+
+        $myEvent = Event::where('id_event', $id)->first();
+
+        $myEvent->bridefname = $request->input('bridefname');
+        $myEvent->bridelname = $request->input('bridelname');
+        $myEvent->groomfname = $request->input('groomfname');
+        $myEvent->groomlname = $request->input('groomlname');
+        $myEvent->save();
 
         // Find the existing event by id, or create a new one if not found
         $event = WebsiteSetting::updateOrCreate(
@@ -60,6 +74,20 @@ class WebsiteController extends Controller
                 'event_date_color' => $request->input('event_date_color'),
                 'font_style' => $request->input('font_style'),
                 'event_name_color' => $request->input('event_name_color'),
+                'is_bride_fname' => $request->input('is_bride_fname'),
+                'is_bride_lname' => $request->input('is_bride_lname'),
+                'is_groom_fname' => $request->input('is_groom_fname'),
+                'is_groom_lname' => $request->input('is_groom_lname'),
+                'is_heart' => $request->input('is_heart'),
+                'is_symbol' => $request->input('is_symbol'),
+                'symbol' => $request->input('symbol'),
+                'is_date' => $request->input('is_date'),
+                'groomlnameSize' => $request->input('groomlnameSize'),
+                'groomfnameSize' => $request->input('groomfnameSize'),
+                'bridelnameSize' => $request->input('bridelnameSize'),
+                'bridefnameSize' => $request->input('bridefnameSize'),
+                'symbolSize' => $request->input('symbolSize'),
+                'dateSize' => $request->input('dateSize'),
             ]
         );
 
