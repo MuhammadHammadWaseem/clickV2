@@ -4177,6 +4177,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
             // Add or remove the guest IDs from the array based on the checkbox state
             if (clickedCheckbox.checked) {
+                var checkboxes = document.querySelectorAll('.check_box_style');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
                 idArray.forEach(id => {
                     if (!idArray.includes(id)) {
                         idArray.push(id); // Add selected guest or member ID to array
@@ -4184,6 +4188,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 });
             } else {
                 idArray = idArray.filter(id => !idArray.includes(id)); // Remove unchecked guest or member IDs
+                var checkboxes = document.querySelectorAll('.check_box_style');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
             }
 
             // Show or hide modifier buttons based on selections
