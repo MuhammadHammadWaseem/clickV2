@@ -1949,6 +1949,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
                         $("#check_all").attr("data-guests", JSON.stringify(guests));
                         guests.forEach(function(guest) {
+
+                            console.log(guest.name, guest.members);
+                            $("#groupCheck").attr("data-members", JSON.stringify([guest.members]));
+
                             // ALL GUESTS
                             var accordion = `
                             
@@ -2014,6 +2018,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 14px; color: #7A7A7A;">(<span class="text-success">{{ __('guestlistpage.open') }}</span> ${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
+                                            <span>
+                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}" data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                            </span>
+
                                 
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -4098,56 +4106,52 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
         function showButton(event) {
-            var clickedCheckbox = event.target;
-            let selectedID = clickedCheckbox.getAttribute('data-guest-id');
-            const modifierDiv = document.querySelector(".modifier");
+    var clickedCheckbox = event.target;
+    let selectedID = clickedCheckbox.getAttribute('data-guest-id');
+    const modifierDiv = document.querySelector(".modifier");
 
-            // Add or remove the guest ID from the array based on the checkbox state
-            if (clickedCheckbox.checked && selectedID) {
-                if (!idArray.includes(selectedID)) {
-                    idArray.push(selectedID); // Add selected guest ID to array
-                }
-            } else {
-                idArray = idArray.filter(id => id !==
-                    selectedID); // Remove unchecked guest ID from array
-            }
-
-            // Show or hide modifier buttons based on selections
-            if (idArray.length > 0) {
-                modifierDiv.style.display = "block"; // Show the buttons
-            } else {
-                modifierDiv.style.display = "none"; // Hide the buttons
-            }
-
-            // Show or hide buttons based on the number of selected guests
-            const editButton = document.querySelector('.edit-btn');
-            const deleteButtonSingle = document.querySelector('.delete-btn-single');
-            const deleteButtonAll = document.querySelector('.delete-btn-all');
-            const declineButton = document.querySelector('.decline-btn');
-            const declineAllButton = document.querySelector('.decline-all-btn');
-
-            if (idArray.length === 1) {
-                editButton.style.display = "block";
-                deleteButtonSingle.style.display = "block";
-                deleteButtonAll.style.display =
-                    "none"; // Hide Delete All when only one guest is selected
-                declineButton.style.display =
-                    "block"; // Show Decline button for one guest
-                declineAllButton.style.display = "none"; // Hide Decline All
-            } else if (idArray.length > 1) {
-                editButton.style.display =
-                    "none"; // Hide Edit button for multiple selections
-                deleteButtonSingle.style.display =
-                    "none"; // Hide single Delete button
-                deleteButtonAll.style.display = "block"; // Show Delete All button
-                declineButton.style.display = "none"; // Hide Decline button
-                declineAllButton.style.display = "block"; // Show Decline All button
-            }
-
-            // Update the selected count display
-            const countDisplay = modifierDiv.querySelector('p');
-            countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
+    // Add or remove the guest ID from the array based on the checkbox state
+    if (clickedCheckbox.checked && selectedID) {
+        if (!idArray.includes(selectedID)) {
+            idArray.push(selectedID); // Add selected guest ID to array
         }
+    } else {
+        idArray = idArray.filter(id => id !== selectedID); // Remove unchecked guest ID from array
+    }
+
+    // Show or hide modifier buttons based on selections
+    if (idArray.length > 0) {
+        modifierDiv.style.display = "block"; // Show the buttons
+    } else {
+        modifierDiv.style.display = "none"; // Hide the buttons
+    }
+
+    // Show or hide buttons based on the number of selected guests
+    const editButton = document.querySelector('.edit-btn');
+    const deleteButtonSingle = document.querySelector('.delete-btn-single');
+    const deleteButtonAll = document.querySelector('.delete-btn-all');
+    const declineButton = document.querySelector('.decline-btn');
+    const declineAllButton = document.querySelector('.decline-all-btn');
+
+    if (idArray.length === 1) {
+        editButton.style.display = "block";
+        deleteButtonSingle.style.display = "block";
+        deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
+        declineButton.style.display = "block"; // Show Decline button for one guest
+        declineAllButton.style.display = "none"; // Hide Decline All
+    } else if (idArray.length > 1) {
+        editButton.style.display = "none"; // Hide Edit button for multiple selections
+        deleteButtonSingle.style.display = "none"; // Hide single Delete button
+        deleteButtonAll.style.display = "block"; // Show Delete All button
+        declineButton.style.display = "none"; // Hide Decline button
+        declineAllButton.style.display = "block"; // Show Decline All button
+    }
+
+    // Update the selected count display
+    const countDisplay = modifierDiv.querySelector('p');
+    countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
+}
+
 
         function selectAll(event) {
             var clickedCheckbox = event.target;
@@ -4592,5 +4596,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 };
             });
         }
+
+        function selectAllMembers(event, guestId) {
+    // Get the Select All checkbox status
+    const isChecked = event.target.checked;
+
+    console.log("Main Guest ID:", guestId);
+
+    // Find all member checkboxes within the modal of the specific guest
+    const memberCheckboxes = document.querySelectorAll(`#exampleModalCenter${guestId} .check_box_style`);
+
+    // Add or remove the main guest ID from idArray
+    if (isChecked) {
+        if (!idArray.includes(guestId.toString())) {
+            idArray.push(guestId.toString()); // Add the main guest ID
+        }
+    } else {
+        idArray = idArray.filter(id => id !== guestId.toString()); // Remove the main guest ID
+    }
+
+    // Process each member checkbox within the modal
+    memberCheckboxes.forEach(checkbox => {
+        checkbox.checked = isChecked;
+
+        // Ensure each checkbox has the correct guest ID
+        if (!checkbox.hasAttribute('data-guest-id')) {
+            checkbox.setAttribute('data-guest-id', guestId);
+        }
+
+        // Trigger showButton for each checkbox
+        showButton({ target: checkbox });
+    });
+    }
+
+
     </script>
 @endsection
