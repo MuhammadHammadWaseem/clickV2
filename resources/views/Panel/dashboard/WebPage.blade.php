@@ -192,7 +192,7 @@
                 <div class="box-styling website-preview ">
                     <div class="text">
                         <h2>{{ __('webpage.webpriview') }} </h2>
-                        <p>{{ __('webpage.webpriviewdesc') }}</p>
+                        {{-- <p>{{ __('webpage.webpriviewdesc') }}</p> --}}
                     </div>
                     <div class="iframe-box">
                         {{-- <img src="{{ asset('assets/Panel/images/website-preview-iframe.png') }}" alt=""> --}}

@@ -2,7 +2,7 @@
 return [
 
     'title' => 'Votre Page Web',
-    'description' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page et apporter toutes les modifications nécessaires ainsi qu\'uploader de nouvelles photos. Téléchargez des photos pour la galerie d\'images. Liez votre compte Facebook et Instagram.',
+    'description' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page et apporter toutes les modifications nécessaires ainsi qu\'uploader de nouvelles photos. Téléchargez des photos pour la galerie d\'images.',
     'webpriview' => 'Aperçu du Site Web',
     'webpriviewdesc' => 'Cette page est destinée à examiner votre page avant d\'envoyer l\'invitation. Ici, vous pouvez voir la mise en page.',
     'Website Information' => 'Informations sur le Site Web',

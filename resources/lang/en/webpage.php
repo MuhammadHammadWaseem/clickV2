@@ -4,7 +4,7 @@ return[
     'title' => 'Your Web Page',
     'description' => 'This page is to review your page before you send the invitation out, so here you can
     see the layout and make all the changes necessary and upload new pictures. Upload
-    pictures for picture gallery. Link your Facebook and Instagram account.',
+    pictures for picture gallery.',
     'webpriview' => 'Website Preview',
     'webpriviewdesc' => 'This page is to review your page before you send the invitation out, so here you can
     see the layout.',
