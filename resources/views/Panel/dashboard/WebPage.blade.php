@@ -52,22 +52,15 @@
         width: -webkit-fill-available;
     }
 
-    form.custom-style input {
-        background-color: transparent !important;
-        border: 2px solid transparent !important;
-        border-radius: 16px;
-        height: 50px;
-        padding: 0px !important;
-        width: 100%;
-    }
+     form.custom-style input, form.custom-style select {
+            background-color: #EDEDED;
+    border: 2px solid #999999;
+    border-radius: 16px;
+    height: 50px;
+    padding: 0px 20px;
+    width: 100%;
+}
 
-    form.custom-style select {
-        background-color: #EDEDED;
-        border: 1px solid #999999;
-        border-radius: 30px;
-        padding: 10px 20px;
-        margin-bottom: 20px;
-    }
 
     .box-styling.ceremony-box.web-page-three-boxes .text img {
         width: 100%;
@@ -84,9 +77,63 @@
         max-width: 550px !important;
     }
 
+    /* The switch - the container */
+    .switch {
+            position: relative !important;
+            display: inline-block !important;
+            width: 34px !important;
+            height: 20px !important;
+            margin: 0 !important;
+        }
+
+        /* Hide the default HTML checkbox */
+        .switch input {
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* The slider - the box */
+        .slider {
+            position: absolute !important;
+            cursor: pointer !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background-color: #ccc !important;
+            transition: 0.4s !important;
+            border-radius: 34px !important;
+        }
+
+        /* The slider when checked */
+        .slider:before {
+            position: absolute !important;
+            content: "" !important;
+            height: 12px !important;
+            width: 12px !important;
+            border-radius: 50% !important;
+            left: 4px !important;
+            bottom: 4px !important;
+            background-color: white !important;
+            transition: 0.4s !important;
+        }
+
+        /* When the checkbox is checked, change the background */
+        input:checked+.slider {
+            background-color: #A9967D !important;
+        }
+
+        /* When the checkbox is checked, move the slider */
+        input:checked+.slider:before {
+            transform: translateX(14px) !important;
+        }
+
 
     #settingForm label {
-        font-size: 14px;
+        font-size: 15px !important;
+    color: #7A7A7A;
+    margin: 10px 0;
     }
 
     #settingForm select#font_style {
@@ -236,10 +283,42 @@
     }
 
     form#settingForm {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex-direction: column !important;
+    background-color: #e0e0e029;
+    border: 1px solid #CCCCCC;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+
+form#settingForm .setting_form-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+form#settingForm .setting_form-display .box-styling {
+    width: 30%;
+    margin: 0;
+    height: auto;
+}
+
+form#settingForm h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form#settingForm .setting_form-display .box-styling h3 {
+    text-align: left;
+}
+
+
 </style>
 
 @section('content')
@@ -281,242 +360,287 @@
             </div>
 
             <div class="col-lg-12">
-                <div class="box-styling">
+                <div class="container-fluid">
                     <form action="{{ route('website.update', $event->id_event) }}" method="POST" id="settingForm"
                         class="custom-style">
+
+                        
                         @csrf
                         @if ($eventType->couple_event)
-                            <div class="custom-box">
-                                <label for="bride_name_color">{{ __('webpage.Bride Name Color:') }}</label>
-                                <input type="color" id="bride_name_color" name="bride_name_color"
-                                    value="{{ old('bride_name_color', $WebsiteSetting->bride_name_color ?? '') }}">
+
+                        <h3>Website Setting</h3>
+
+                            <div class="setting_form-display">
+                                <div class="box-styling">
+
+                                    <h3>Bride Setting</h3>
+
+                                    <div class="custom-box">
+                                        <label for="bride_name_color">Text Color</label>
+                                        <input type="color" id="bride_name_color" name="bride_name_color"
+                                            value="{{ old('bride_name_color', $WebsiteSetting->bride_name_color ?? '') }}">
+                                    </div>
+        
+                                    {{-- new --}}
+                                    <div class="custom-box">
+                                        <label for="bridenamesize">First Name Size</label>
+                                    <select id="bridefnameSize" name="bridefnameSize">
+                                        @for ($size = 10; $size <= 50; $size += 2)
+                                            <option value="{{ $size }}"
+                                                {{ old('bridefnameSize', $WebsiteSetting->bridefnameSize ?? '') == $size ? 'selected' : '' }}>
+                                                {{ $size }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                    
+                                    <div class="custom-box">
+                                        <label for="bridefname">First Name</label>
+                                        <input type="text" id="bridefname" name="bridefname"
+                                            value="{{ old('bridefname', $event->bridefname ?? '') }}">
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="bridelnameSize">Last Name Size</label>
+                                        <select id="bridelnameSize" name="bridelnameSize">
+                                            @for ($size = 10; $size <= 50; $size += 2)
+                                                <option value="{{ $size }}"
+                                                    {{ old('bridelnameSize', $WebsiteSetting->bridelnameSize ?? '') == $size ? 'selected' : '' }}>
+                                                    {{ $size }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="bridelname">Last Name</label>
+                                        <input type="text" id="bridelname" name="bridelname"
+                                            value="{{ old('bridelname', $event->bridelname ?? '') }}">
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="is_bride_fname">Show First Name</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_bride_fname" name="is_bride_fname">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="is_bride_lname">Show Last Name</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_bride_lname" name="is_bride_lname">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+    
+                                <div class="box-styling">
+
+                                    <h3>Groom Setting</h3>
+    
+                                    <div class="custom-box">
+                                        <label for="groom_name_color">Text Color</label>
+                                        <input type="color" id="groom_name_color" name="groom_name_color"
+                                            value="{{ old('groom_name_color', $WebsiteSetting->groom_name_color ?? '') }}">
+                                    </div>
+    
+    
+                                    <div class="custom-box">
+                                        <label for="groomfnameSize">First Name Size</label>
+                                        <select id="groomfnameSize" name="groomfnameSize">
+                                            @for ($size = 10; $size <= 50; $size += 2)
+                                                <option value="{{ $size }}"
+                                                    {{ old('groomfnameSize', $WebsiteSetting->groomfnameSize ?? '') == $size ? 'selected' : '' }}>
+                                                    {{ $size }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="groomfname">First Name</label>
+                                        <input type="text" id="groomfname" name="groomfname"
+                                            value="{{ old('groomfname', $event->groomfname ?? '') }}">
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="groomlnameSize"> Last Name Size</label>
+                                        <select id="groomlnameSize" name="groomlnameSize">
+                                            @for ($size = 10; $size <= 50; $size += 2)
+                                                <option value="{{ $size }}"
+                                                    {{ old('groomlnameSize', $WebsiteSetting->groomlnameSize ?? '') == $size ? 'selected' : '' }}>
+                                                    {{ $size }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="groomlname">Last Name</label>
+                                        <input type="text" id="groomlname" name="groomlname"
+                                            value="{{ old('groomlname', $event->groomlname ?? '') }}">
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="is_groom_fname">Show First Name</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_groom_fname" name="is_groom_fname">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="is_groom_lname">Show Last Name</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_groom_lname" name="is_groom_lname">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+    
+                                    
+    
+                                </div>
+    
+    
+                                <div class="box-styling">
+
+                                    <h3>Symbol Setting</h3>
+    
+    
+                                    <div class="custom-box">
+                                        <label for="symbolSize">Symbol Size</label>
+                                        <select id="symbolSize" name="symbolSize">
+                                            @for ($size = 10; $size <= 50; $size += 2)
+                                                <option value="{{ $size }}"
+                                                    {{ old('symbolSize', $WebsiteSetting->symbolSize ?? '') == $size ? 'selected' : '' }}>
+                                                    {{ $size }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="symbol">Symbol</label>
+                                        <input type="text" id="symbol" name="symbol"
+                                            value="{{ old('symbol', $WebsiteSetting->symbol ?? '') }}">
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="is_symbol">Show Symbol</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_symbol" name="is_symbol">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="is_heart">Show Heart</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_heart" name="is_heart">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="dateSize">Event Date Size</label>
+                                        <select id="dateSize" name="dateSize">
+                                            @for ($size = 10; $size <= 50; $size += 2)
+                                                <option value="{{ $size }}"
+                                                    {{ old('dateSize', $WebsiteSetting->dateSize ?? '') == $size ? 'selected' : '' }}>
+                                                    {{ $size }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="is_date">Show Event Date</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_date" name="is_date">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    {{-- new --}}
+        
+        
+                                    
+        
+                                    <div class="custom-box">
+                                        <label for="and_symbol_color">{{ __('webpage."And" Symbol Color:') }}</label>
+                                        <input type="color" id="and_symbol_color" name="and_symbol_color"
+                                            value="{{ old('and_symbol_color', $WebsiteSetting->and_symbol_color ?? '') }}">
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
+                                        <input type="color" id="event_date_color" name="event_date_color"
+                                            value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
+                                    </div>
+        
+                                    <div class="custom-box">
+                                        <label for="font_style">{{ __('webpage.Font Style:') }}</label>
+        
+                                        <select id="font_style" name="font_style">
+                                            <option value="Arial"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
+                                                Arial
+                                            </option>
+                                            <option value="Times New Roman"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
+                                                Times New Roman</option>
+                                            <option value="Courier New"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
+                                                Courier New</option>
+                                            <option value="Georgia"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
+                                                Georgia</option>
+                                            <option value="Verdana"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
+                                                Verdana</option>
+                                            <!-- Add more font options as needed -->
+                                        </select>
+                                    </div>
+                                @else
+                                    <div class="custom-box">
+                                        <label for="event_name_color">{{ __('webpage.Event Name Color:') }}</label>
+                                        <input type="color" id="event_name_color" name="event_name_color"
+                                            value="{{ old('event_name_color', $WebsiteSetting->event_name_color ?? '') }}">
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
+                                        <input type="color" id="event_date_color" name="event_date_color"
+                                            value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
+                                    </div>
+                                    <div class="custom-box">
+                                        <label for="font_style">{{ __('webpage.Font Style:') }}</label>
+        
+                                        <select id="font_style" name="font_style">
+                                            <option value="Arial"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
+                                                Arial
+                                            </option>
+                                            <option value="Times New Roman"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
+                                                Times New Roman</option>
+                                            <option value="Courier New"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
+                                                Courier New</option>
+                                            <option value="Georgia"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
+                                                Georgia</option>
+                                            <option value="Verdana"
+                                                {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
+                                                Verdana</option>
+                                            <!-- Add more font options as needed -->
+                                        </select>
+                                    </div>
+                                @endif
+                                </div>
                             </div>
 
-                            {{-- new --}}
-                            <select id="bridefnameSize" name="bridefnameSize">
-                                @for ($size = 10; $size <= 50; $size += 2)
-                                    <option value="{{ $size }}"
-                                        {{ old('bridefnameSize', $WebsiteSetting->bridefnameSize ?? '') == $size ? 'selected' : '' }}>
-                                        {{ $size }}
-                                    </option>
-                                @endfor
-                            </select>
+
+                            <button type="submit" class="btn t-btn">{{ __('webpage.Save') }}</button>
+
+
+
                             
-                            <div class="custom-box">
-                                <label for="bridefname">Bride First Name</label>
-                                <input type="text" id="bridefname" name="bridefname"
-                                    value="{{ old('bridefname', $event->bridefname ?? '') }}">
-                            </div>
-                            <div class="custom-box">
-                                <label for="bridelnameSize">Bride Last Name Size</label>
-                                <select id="bridelnameSize" name="bridelnameSize">
-                                    @for ($size = 10; $size <= 50; $size += 2)
-                                        <option value="{{ $size }}"
-                                            {{ old('bridelnameSize', $WebsiteSetting->bridelnameSize ?? '') == $size ? 'selected' : '' }}>
-                                            {{ $size }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="custom-box">
-                                <label for="bridelname">Bride Last Name</label>
-                                <input type="text" id="bridelname" name="bridelname"
-                                    value="{{ old('bridelname', $event->bridelname ?? '') }}">
-                            </div>
-                            <div class="custom-box">
-                                <label for="is_bride_fname">Show Bride First Name</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_bride_fname" name="is_bride_fname">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="custom-box">
-                                <label for="is_bride_lname">Show Bride Last Name</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_bride_lname" name="is_bride_lname">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="groomfnameSize">Groom First Name Size</label>
-                                <select id="groomfnameSize" name="groomfnameSize">
-                                    @for ($size = 10; $size <= 50; $size += 2)
-                                        <option value="{{ $size }}"
-                                            {{ old('groomfnameSize', $WebsiteSetting->groomfnameSize ?? '') == $size ? 'selected' : '' }}>
-                                            {{ $size }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="custom-box">
-                                <label for="groomfname">Groom First Name</label>
-                                <input type="text" id="groomfname" name="groomfname"
-                                    value="{{ old('groomfname', $event->groomfname ?? '') }}">
-                            </div>
-                            <div class="custom-box">
-                                <label for="groomlnameSize">Groom Last Name Size</label>
-                                <select id="groomlnameSize" name="groomlnameSize">
-                                    @for ($size = 10; $size <= 50; $size += 2)
-                                        <option value="{{ $size }}"
-                                            {{ old('groomlnameSize', $WebsiteSetting->groomlnameSize ?? '') == $size ? 'selected' : '' }}>
-                                            {{ $size }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="custom-box">
-                                <label for="groomlname">Groom Last Name</label>
-                                <input type="text" id="groomlname" name="groomlname"
-                                    value="{{ old('groomlname', $event->groomlname ?? '') }}">
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="is_groom_fname">Show Groom First Name</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_groom_fname" name="is_groom_fname">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="custom-box">
-                                <label for="is_groom_lname">Show Groom Last Name</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_groom_lname" name="is_groom_lname">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="symbolSize">Symbol Size</label>
-                                <select id="symbolSize" name="symbolSize">
-                                    @for ($size = 10; $size <= 50; $size += 2)
-                                        <option value="{{ $size }}"
-                                            {{ old('symbolSize', $WebsiteSetting->symbolSize ?? '') == $size ? 'selected' : '' }}>
-                                            {{ $size }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="custom-box">
-                                <label for="symbol">Symbol</label>
-                                <input type="text" id="symbol" name="symbol"
-                                    value="{{ old('symbol', $WebsiteSetting->symbol ?? '') }}">
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="is_symbol">Show Symbol</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_symbol" name="is_symbol">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="is_heart">Show Heart</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_heart" name="is_heart">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                            <div class="custom-box">
-                                <label for="dateSize">Event Date Size</label>
-                                <select id="dateSize" name="dateSize">
-                                    @for ($size = 10; $size <= 50; $size += 2)
-                                        <option value="{{ $size }}"
-                                            {{ old('dateSize', $WebsiteSetting->dateSize ?? '') == $size ? 'selected' : '' }}>
-                                            {{ $size }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="custom-box">
-                                <label for="is_date">Show Event Date</label>
-                                <label class="switch">
-                                    <input type="checkbox" id="is_date" name="is_date">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            {{-- new --}}
 
 
-                            <div class="custom-box">
-                                <label for="groom_name_color">{{ __('webpage.Groom Name Color:') }}</label>
-                                <input type="color" id="groom_name_color" name="groom_name_color"
-                                    value="{{ old('groom_name_color', $WebsiteSetting->groom_name_color ?? '') }}">
-                            </div>
 
-                            <div class="custom-box">
-                                <label for="and_symbol_color">{{ __('webpage."And" Symbol Color:') }}</label>
-                                <input type="color" id="and_symbol_color" name="and_symbol_color"
-                                    value="{{ old('and_symbol_color', $WebsiteSetting->and_symbol_color ?? '') }}">
-                            </div>
 
-                            <div class="custom-box">
-                                <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
-                                <input type="color" id="event_date_color" name="event_date_color"
-                                    value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
-                            </div>
 
-                            <div class="custom-box">
-                                <label for="font_style">{{ __('webpage.Font Style:') }}</label>
-
-                                <select id="font_style" name="font_style">
-                                    <option value="Arial"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
-                                        Arial
-                                    </option>
-                                    <option value="Times New Roman"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
-                                        Times New Roman</option>
-                                    <option value="Courier New"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
-                                        Courier New</option>
-                                    <option value="Georgia"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
-                                        Georgia</option>
-                                    <option value="Verdana"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
-                                        Verdana</option>
-                                    <!-- Add more font options as needed -->
-                                </select>
-                            </div>
-                        @else
-                            <div class="custom-box">
-                                <label for="event_name_color">{{ __('webpage.Event Name Color:') }}</label>
-                                <input type="color" id="event_name_color" name="event_name_color"
-                                    value="{{ old('event_name_color', $WebsiteSetting->event_name_color ?? '') }}">
-                            </div>
-                            <div class="custom-box">
-                                <label for="event_date_color">{{ __('webpage.Event Date Color:') }}</label>
-                                <input type="color" id="event_date_color" name="event_date_color"
-                                    value="{{ old('event_date_color', $WebsiteSetting->event_date_color ?? '') }}">
-                            </div>
-                            <div class="custom-box">
-                                <label for="font_style">{{ __('webpage.Font Style:') }}</label>
-
-                                <select id="font_style" name="font_style">
-                                    <option value="Arial"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Arial' ? 'selected' : '' }}>
-                                        Arial
-                                    </option>
-                                    <option value="Times New Roman"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Times New Roman' ? 'selected' : '' }}>
-                                        Times New Roman</option>
-                                    <option value="Courier New"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Courier New' ? 'selected' : '' }}>
-                                        Courier New</option>
-                                    <option value="Georgia"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Georgia' ? 'selected' : '' }}>
-                                        Georgia</option>
-                                    <option value="Verdana"
-                                        {{ old('font_style', $WebsiteSetting->font_style ?? '') == 'Verdana' ? 'selected' : '' }}>
-                                        Verdana</option>
-                                    <!-- Add more font options as needed -->
-                                </select>
-                            </div>
-                        @endif
-                        <button type="submit">{{ __('webpage.Save') }}</button>
+                        
                     </form>
                 </div>
             </div>
