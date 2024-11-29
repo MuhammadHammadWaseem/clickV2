@@ -20,7 +20,24 @@ class WebPageController extends Controller
 
         $photogallery = PhotoGallery::where('id_event', $event->id_event)->get();
         $videogallery = VideoGallery::where('id_event', $event->id_event)->get();
-        $WebsiteSetting = WebsiteSetting::where('id_event', $id)->first();
+        $WebsiteSetting = WebsiteSetting::where('id_event', $id)->first() ?? (object)[
+            'id_event' => $id,
+            'is_bride_fname' => 1,
+            'is_bride_lname' => 1,
+            'is_groom_fname' => 1,
+            'is_groom_lname' => 1,
+            'is_symbol' => 1,
+            'symbol' => '&',
+            'is_heart' => 1,
+            'is_date' => 1,
+            'groomlnameSize' => 50,
+            'groomfnameSize' => 50,
+            'bridelnameSize' => 50,
+            'bridefnameSize' => 50,
+            'symbolSize' => 50,
+            'dateSize' => 50,
+            
+        ];
         $eventType = EventType::where('id_eventtype', $event->type_id)->first();
 
         return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery','WebsiteSetting','eventType'));

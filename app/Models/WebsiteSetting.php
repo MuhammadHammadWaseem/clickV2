@@ -25,7 +25,6 @@ class WebsiteSetting extends Model
         'event_date_color',
         'font_style',
         'event_name_color',
-
         'groomlnameSize',
         'groomfnameSize',
         'bridelnameSize',
