@@ -349,7 +349,9 @@
 
                 <div class="col-12">
                     <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px; color: #212529" class="back"
-                        id="backBtn">
+                        {{-- id="backBtn" --}}
+                        onclick="history.back()"
+                        >
                         <i class="fas fa-chevron-left"></i>
                         {{ __('attending.BACK TO INVITATION') }}</button>
                     {{-- <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px; color: #212529" class="back"
