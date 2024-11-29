@@ -2256,6 +2256,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
                                                             
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
@@ -2487,9 +2490,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
-                                                    data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
+                                                            <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                            data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
                                     </div>
 
@@ -2727,7 +2732,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
@@ -2968,7 +2975,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
@@ -3200,7 +3209,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
                                     <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
@@ -3432,7 +3443,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                 
                                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                    <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
+                                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                                            </span>
+                                                            <button type="button" ${(guest.members.length >= guest.members_number ? 'disabled' : '')} class="btn btn-primary t-btn t-btn-theme" id="addMember" data-toggle="modal"
                                                     data-target="#AddMember" data-parentidguest-id="${guest.id_guest}">{{ __('guestlistpage.add_member') }}</button>
                                     
                                     </div>
