@@ -1256,7 +1256,7 @@ form#settingForm{
         var parImage = @json($event->parimg);
         console.log(mainImage, cerImage, recImage, parImage);
 
-        var is_bride_fname = @json($WebsiteSetting->is_bride_lname);
+        var is_bride_fname = @json($WebsiteSetting->is_bride_fname);
         var is_bride_lname = @json($WebsiteSetting->is_bride_lname);
         var is_groom_fname = @json($WebsiteSetting->is_groom_fname);
         var is_groom_lname = @json($WebsiteSetting->is_groom_lname);
