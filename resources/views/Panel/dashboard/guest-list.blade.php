@@ -855,9 +855,11 @@
                 <div class="box-styling event-photos-gallery events-lists-sec-01 guest-list">
                     <div class="two-things-align">
                         <div class="text">
-                            <h2><input type="checkbox" name="check_all" class="check_box_style" style="margin-bottom: -1px" id="check_all" onclick="selectAll(event)"> {{ __('guestlistpage.guest_list') }}</h2>
+                            <h2><input type="checkbox" name="check_all" class="check_box_style"
+                                    style="margin-bottom: -1px" id="check_all" onclick="selectAll(event)">
+                                {{ __('guestlistpage.guest_list') }}</h2>
                             {{-- <p>{{ __('guestlistpage.guest_list_description') }}</p> --}}
-                            
+
                         </div>
                         <div class="two-btn-align">
                             <div class="export-hover-links">
@@ -1927,12 +1929,12 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     // Update totals with a line break
                     $('#guestMemberTotal').html(
                         `TOTAL: ${totalGuests + totalMembers} ${br}(guests ${totalGuests} - members ${totalMembers})`
-                        );
+                    );
 
 
                     $('#totalCheckIn').html(
                         `<i class="fa fa-check-square" aria-hidden="true"></i> CHECKED-IN ${checkedInCount}`
-                        );
+                    );
                     $('#totalDecline').html(
                         `<i class="fa fa-times" aria-hidden="true"></i> DECLINED ${declinedCount}`);
                     $('#totalinvite').html(
@@ -2018,8 +2020,9 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                             `<p data-toggle="modal" data-target="#exampleModalCenter${guest.id_guest}" style="font-size: 14px; color: #7A7A7A;">(<span class="text-success">{{ __('guestlistpage.open') }}</span> ${guest.members.length} {{ __('guestlistpage.of') }} ${guest.members_number} {{ __('guestlistpage.allowed') }})</p>` }
 
                                             <span><input type="checkbox" class="check_box_style" data-guest-id="${guest.id_guest}" onclick="showButton(event)"> Send Invitaions</span>
-                                            <span>
-                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}" data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
+                                            
+                                            <span class="${(guest.members.length == 0 ? 'd-none' : '')}">
+                                            <input type="checkbox" class="check_box_style" id="groupCheck${guest.id_guest}"  data-guest-id="${guest.id_guest}" onclick="selectAllMembers(event, ${guest.id_guest})"> Select All
                                             </span>
 
                                 
@@ -2114,25 +2117,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
 
@@ -2185,7 +2188,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 // Update the totals display with separate checked-in counts for guests and members
                                 $('#guestMemberTotal').html(
                                     `TOTAL: ${attendingGuestsCount + attendingMembersCount} ${br} (guests ${attendingGuestsCount} - members ${attendingMembersCount})`
-                                    );
+                                );
 
                                 // ALL GUESTS
                                 var accordion = `
@@ -2346,25 +2349,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
                                     }
@@ -2418,7 +2421,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(
                                     `TOTAL: ${openedGuestsCount} ${br} (guests ${openedGuestsCount} - members ${openedMembersCount})`
-                                    );
+                                );
                                 // ALL GUESTS
                                 var accordion = `
                             
@@ -2578,25 +2581,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
                                     }
@@ -2650,14 +2653,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                                 // Update totals
                                 if (guest.members && guest.members.some(member => member.declined ==
-                                    1)) {
+                                        1)) {
                                     declinedMembersCount += guest.members.filter(member => member
                                         .declined == 1).length;
                                 }
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(
                                     `TOTAL: ${declinedGuestsCount + declinedMembersCount} ${br} (guests ${declinedGuestsCount} - members ${declinedMembersCount})`
-                                    );
+                                );
 
                                 // ALL GUESTS
                                 var accordion = `
@@ -2817,25 +2820,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
                                     }
@@ -2881,7 +2884,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         guests.forEach(function(guest) {
                             // Check if the main guest is checked in
                             if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
-                                1)) {
+                                    1)) {
                                 checkedInGuestsCount++;
                             }
 
@@ -2895,11 +2898,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         // Update the totals display with separate checked-in counts for guests and members
                         $('#guestMemberTotal').html(
                             `TOTAL: ${checkedInGuestsCount + checkedInMembersCount} ${br} (guests ${checkedInGuestsCount} - members ${checkedInMembersCount})`
-                            );
+                        );
                         guests.forEach(function(guest) {
                             // Only include guests who are checked-in
                             if (guest.checkin == 1 || guest.members.some(member => member.checkin ==
-                                1)) {
+                                    1)) {
                                 // ALL GUESTS
                                 var accordion = `
                             
@@ -3058,25 +3061,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
                                     }
@@ -3130,7 +3133,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(
                                     `TOTAL: ${notOpenedGuestsCount} ${br} (guests ${notOpenedGuestsCount} - members ${notOpenedMembersCount})`
-                                    );
+                                );
                                 // Show guest and their members if the guest is checked in
                                 // ALL GUESTS
                                 var accordion = `
@@ -3290,25 +3293,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
                                     }
@@ -3520,25 +3523,25 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     </td>
 
                                     ${(member.opened == 2 && member.declined != 1 && member.checkin != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Confirmed</span>
+                                                </td>` : ''}
                                     ${(member.declined == 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(255, 0, 0, 0.3); color:#FF0000; border-radius:10px; padding:10px; font-size:15px !important;">Declined</span>
+                                                </td>` : ''}
                                     ${(member.checkin == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Checked-In</span>
+                                                </td>` : ''}
                                     ${(member.opened == 1 && member.declined != 1) ? `
-                                            <td class="accordian_img_acces">
-                                                <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                    <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;">Opened</span>
+                                                </td>` : ''}
                                     ${(member.opened == null || member.opened == 0) && member.declined != 1 && member.checkin != 1 ? `
-                                            <td class="accordian_img_acces">
-                                               <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
-                                            </td>` : ''}
+                                                <td class="accordian_img_acces">
+                                                   <span style="background:rgba(86, 133, 0, 0.3); color:#568500; border-radius:10px; padding:10px; font-size:15px !important;"> Not Open</span>
+                                                </td>` : ''}
 
                                         </tr>`;
 
@@ -4100,57 +4103,55 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 });
             });
 
-
         let idArray = []; // Store selected guest IDs
         var clickedCheckbox = '';
 
-
         function showButton(event) {
-    var clickedCheckbox = event.target;
-    let selectedID = clickedCheckbox.getAttribute('data-guest-id');
-    const modifierDiv = document.querySelector(".modifier");
+            var clickedCheckbox = event.target;
+            let selectedID = clickedCheckbox.getAttribute('data-guest-id');
+            const modifierDiv = document.querySelector(".modifier");
 
-    // Add or remove the guest ID from the array based on the checkbox state
-    if (clickedCheckbox.checked && selectedID) {
-        if (!idArray.includes(selectedID)) {
-            idArray.push(selectedID); // Add selected guest ID to array
+            // Add or remove the guest ID from the array based on the checkbox state
+            if (clickedCheckbox.checked && selectedID) {
+                if (!idArray.includes(selectedID)) {
+                    idArray.push(selectedID); // Add selected guest ID to array
+                }
+            } else {
+                idArray = idArray.filter(id => id !== selectedID); // Remove unchecked guest ID from array
+            }
+
+            // Show or hide modifier buttons based on selections
+            if (idArray.length > 0) {
+                modifierDiv.style.display = "block"; // Show the buttons
+            } else {
+                modifierDiv.style.display = "none"; // Hide the buttons
+            }
+
+            // Show or hide buttons based on the number of selected guests
+            const editButton = document.querySelector('.edit-btn');
+            const deleteButtonSingle = document.querySelector('.delete-btn-single');
+            const deleteButtonAll = document.querySelector('.delete-btn-all');
+            const declineButton = document.querySelector('.decline-btn');
+            const declineAllButton = document.querySelector('.decline-all-btn');
+
+            if (idArray.length === 1) {
+                editButton.style.display = "block";
+                deleteButtonSingle.style.display = "block";
+                deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
+                declineButton.style.display = "block"; // Show Decline button for one guest
+                declineAllButton.style.display = "none"; // Hide Decline All
+            } else if (idArray.length > 1) {
+                editButton.style.display = "none"; // Hide Edit button for multiple selections
+                deleteButtonSingle.style.display = "none"; // Hide single Delete button
+                deleteButtonAll.style.display = "block"; // Show Delete All button
+                declineButton.style.display = "none"; // Hide Decline button
+                declineAllButton.style.display = "block"; // Show Decline All button
+            }
+
+            // Update the selected count display
+            const countDisplay = modifierDiv.querySelector('p');
+            countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
         }
-    } else {
-        idArray = idArray.filter(id => id !== selectedID); // Remove unchecked guest ID from array
-    }
-
-    // Show or hide modifier buttons based on selections
-    if (idArray.length > 0) {
-        modifierDiv.style.display = "block"; // Show the buttons
-    } else {
-        modifierDiv.style.display = "none"; // Hide the buttons
-    }
-
-    // Show or hide buttons based on the number of selected guests
-    const editButton = document.querySelector('.edit-btn');
-    const deleteButtonSingle = document.querySelector('.delete-btn-single');
-    const deleteButtonAll = document.querySelector('.delete-btn-all');
-    const declineButton = document.querySelector('.decline-btn');
-    const declineAllButton = document.querySelector('.decline-all-btn');
-
-    if (idArray.length === 1) {
-        editButton.style.display = "block";
-        deleteButtonSingle.style.display = "block";
-        deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
-        declineButton.style.display = "block"; // Show Decline button for one guest
-        declineAllButton.style.display = "none"; // Hide Decline All
-    } else if (idArray.length > 1) {
-        editButton.style.display = "none"; // Hide Edit button for multiple selections
-        deleteButtonSingle.style.display = "none"; // Hide single Delete button
-        deleteButtonAll.style.display = "block"; // Show Delete All button
-        declineButton.style.display = "none"; // Hide Decline button
-        declineAllButton.style.display = "block"; // Show Decline All button
-    }
-
-    // Update the selected count display
-    const countDisplay = modifierDiv.querySelector('p');
-    countDisplay.textContent = `${idArray.length} GUEST(S) SELECTED`;
-}
 
 
         function selectAll(event) {
@@ -4598,36 +4599,39 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         }
 
         function selectAllMembers(event, guestId) {
-    // Get the Select All checkbox status
-    const isChecked = event.target.checked;
+            // Get the Select All checkbox status
+            const isChecked = event.target.checked;
 
-    console.log("Main Guest ID:", guestId);
+            console.log("Main Guest ID:", guestId);
 
-    // Find all member checkboxes within the modal of the specific guest
-    const memberCheckboxes = document.querySelectorAll(`#exampleModalCenter${guestId} .check_box_style`);
+            // Find all member checkboxes within the modal of the specific guest
+            const memberCheckboxes = document.querySelectorAll(`#exampleModalCenter${guestId} .check_box_style`);
 
-    // Add or remove the main guest ID from idArray
-    if (isChecked) {
-        if (!idArray.includes(guestId.toString())) {
-            idArray.push(guestId.toString()); // Add the main guest ID
+            // Add or remove the main guest ID from idArray
+            if (isChecked) {
+                if (!idArray.includes(guestId.toString())) {
+                    idArray.push(guestId.toString()); // Add the main guest ID
+                }
+            } else {
+                idArray = idArray.filter(id => id !== guestId.toString()); // Remove the main guest ID
+            }
+
+            // Process each member checkbox within the modal
+            memberCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+
+                // Ensure each checkbox has the correct guest ID
+                if (!checkbox.hasAttribute('data-guest-id')) {
+                    checkbox.setAttribute('data-guest-id', guestId);
+                }
+
+                // Trigger showButton for each checkbox
+                showButton({
+                    target: checkbox
+                });
+            });
         }
-    } else {
-        idArray = idArray.filter(id => id !== guestId.toString()); // Remove the main guest ID
-    }
 
-    // Process each member checkbox within the modal
-    memberCheckboxes.forEach(checkbox => {
-        checkbox.checked = isChecked;
-
-        // Ensure each checkbox has the correct guest ID
-        if (!checkbox.hasAttribute('data-guest-id')) {
-            checkbox.setAttribute('data-guest-id', guestId);
-        }
-
-        // Trigger showButton for each checkbox
-        showButton({ target: checkbox });
-    });
-    }
 
 
     </script>
