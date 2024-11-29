@@ -294,24 +294,24 @@
                 @if ($eventType->couple_event)
                     <div class="bridename">
                         <p class="firstname"
-                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ $WebsiteSetting->is_bride_fname == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->bridefnameSize ? 'font-size: ' . $WebsiteSetting->bridefnameSize . 'px;' : '' }}">
+                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_bride_fname) && $WebsiteSetting->is_bride_fname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->bridefnameSize) && $WebsiteSetting->bridefnameSize ? 'font-size: ' . $WebsiteSetting->bridefnameSize . 'px;' : '' }}">
                             {{ $event->bridefname }}</p>
                         <p class="secondname"
-                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ $WebsiteSetting->is_bride_lname == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->bridelnameSize ? 'font-size: ' . $WebsiteSetting->bridelnameSize . 'px;' : '' }}">
+                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_bride_lname) && $WebsiteSetting->is_bride_lname == 1 ? 'display: block;' : 'display: none;' }}; {{  isset($WebsiteSetting->bridelnameSize) && $WebsiteSetting->bridelnameSize ? 'font-size: ' . $WebsiteSetting->bridelnameSize . 'px;' : '' }}">
                             {{ $event->bridelname }}</p>
                     </div>
                     <div class="and">
-                        <p style="color: {{ $WebsiteSetting->and_symbol_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ $WebsiteSetting->is_symbol == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->symbolSize ? 'font-size: ' . $WebsiteSetting->symbolSize . 'px;' : '' }}">{{ $WebsiteSetting->symbol }}</p>
+                        <p style="color: {{ $WebsiteSetting->and_symbol_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_symbol) && $WebsiteSetting->is_symbol == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->symbolSize) && $WebsiteSetting->symbolSize ? 'font-size: ' . $WebsiteSetting->symbolSize . 'px;' : '' }}">{{ $WebsiteSetting->symbol ?? '&' }}</p>
                     </div>
                     <div class="groomname">
                         <p class="firstname"
-                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ $WebsiteSetting->is_groom_fname == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->groomfnameSize ? 'font-size: ' . $WebsiteSetting->groomfnameSize . 'px;' : '' }}">
+                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_groom_fname) && $WebsiteSetting->is_groom_fname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->groomfnameSize) && $WebsiteSetting->groomfnameSize ? 'font-size: ' . $WebsiteSetting->groomfnameSize . 'px;' : '' }}">
                             {{ $event->groomfname }}</p>
                         <p class="secondname"
-                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ $WebsiteSetting->is_groom_lname == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->groomlnameSize ? 'font-size: ' . $WebsiteSetting->groomlnameSize . 'px;' : '' }}">
+                            style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_groom_lname) && $WebsiteSetting->is_groom_lname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->groomlnameSize) && $WebsiteSetting->groomlnameSize ? 'font-size: ' . $WebsiteSetting->groomlnameSize . 'px;' : '' }}">
                             {{ $event->groomlname }}</p>
                     </div>
-                    <div class="h" style="{{ $WebsiteSetting->is_heart == 1 ? 'display: block;' : 'display: none;' }};">
+                    <div class="h" style="{{ isset($WebsiteSetting->is_heart) && $WebsiteSetting->is_heart == 1 ? 'display: block;' : 'display: none;' }};">
                         <hr>
                         <i class="far fa-heart"></i>
                         <hr>
@@ -323,7 +323,7 @@
                 @endif
             @endif
             <div class="date">
-                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }}; {{ $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}"></p>
+                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ isset($WebsiteSetting->is_date) && $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->dateSize) && $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}"></p>
             </div>
         </div>
         <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
