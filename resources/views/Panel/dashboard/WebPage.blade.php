@@ -1256,13 +1256,13 @@ form#settingForm{
         var parImage = @json($event->parimg);
         console.log(mainImage, cerImage, recImage, parImage);
 
-        var is_bride_fname = @json($WebsiteSetting->is_bride_fname ?? 0);
-        var is_bride_lname = @json($WebsiteSetting->is_bride_lname ?? 0);
-        var is_groom_fname = @json($WebsiteSetting->is_groom_fname ?? 0);
-        var is_groom_lname = @json($WebsiteSetting->is_groom_lname ?? 0);
-        var is_symbol = @json($WebsiteSetting->is_symbol ?? 0);
-        var is_heart = @json($WebsiteSetting->is_heart ?? 0);
-        var is_date = @json($WebsiteSetting->is_date ?? 0);
+        var is_bride_fname = @json($WebsiteSetting->is_bride_fname ?? 1);
+        var is_bride_lname = @json($WebsiteSetting->is_bride_lname ?? 1);
+        var is_groom_fname = @json($WebsiteSetting->is_groom_fname ?? 1);
+        var is_groom_lname = @json($WebsiteSetting->is_groom_lname ?? 1);
+        var is_symbol = @json($WebsiteSetting->is_symbol ?? 1);
+        var is_heart = @json($WebsiteSetting->is_heart ?? 1);
+        var is_date = @json($WebsiteSetting->is_date ?? 1);
 
         if (is_bride_fname == 1) {
             $('#is_bride_fname').prop('checked', true);
