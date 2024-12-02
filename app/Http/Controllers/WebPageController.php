@@ -9,6 +9,7 @@ use App\Models\VideoGallery;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WebsiteSetting;
 use App\Models\EventType;
+use Illuminate\Support\Facades\Validator;
 
 class WebPageController extends Controller
 {
@@ -20,7 +21,7 @@ class WebPageController extends Controller
 
         $photogallery = PhotoGallery::where('id_event', $event->id_event)->get();
         $videogallery = VideoGallery::where('id_event', $event->id_event)->get();
-        $WebsiteSetting = WebsiteSetting::where('id_event', $id)->first() ?? (object)[
+        $WebsiteSetting = WebsiteSetting::where('id_event', $id)->first() ?? (object) [
             'id_event' => $id,
             'is_bride_fname' => 1,
             'is_bride_lname' => 1,
@@ -36,32 +37,82 @@ class WebPageController extends Controller
             'bridefnameSize' => 50,
             'symbolSize' => 50,
             'dateSize' => 50,
-            
+
         ];
         $eventType = EventType::where('id_eventtype', $event->type_id)->first();
 
-        return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery','WebsiteSetting','eventType'));
+        return view('Panel.dashboard.WebPage', compact('event', 'photogallery', 'videogallery', 'WebsiteSetting', 'eventType'));
     }
+
+    // public function storeImages(Request $request)
+    // {
+    //     $request->validate([
+    //         'gall.*' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048', // Adjust file size as needed
+    //     ]);
+
+    //     if ($request->hasFile('gall')) {
+    //         $eventFolder = public_path('event-images/' . $request->idevent . '/photogallery');
+
+    //         // Create directory if it doesn't exist
+    //         if (!file_exists($eventFolder)) {
+    //             mkdir($eventFolder, 0777, true);
+    //         }
+
+    //         $newImages = [];
+
+    //         foreach ($request->file('gall') as $photo) {
+    //             if ($photo->isValid()) {
+    //                 // Create a new Photogallery record
+    //                 $photogallery = new PhotoGallery;
+    //                 $photogallery->id_event = $request->idevent;
+    //                 $photogallery->guestCode = $request->guestCode ?? null;
+    //                 $photogallery->save();
+
+    //                 // Store image ID in the newImages array
+    //                 $newImages[] = $photogallery->id_photogallery;
+
+    //                 // Move uploaded file to the appropriate folder
+    //                 $photo->move($eventFolder, $photogallery->id_photogallery . ".jpg");
+    //             }
+    //         }
+
+    //         return response()->json(['success' => 'Photos uploaded successfully!', 'photos' => $newImages]);
+    //     } else {
+    //         return response()->json(['error' => 'No files uploaded.'], 400);
+    //     }
+    // }
 
     public function storeImages(Request $request)
     {
-        $request->validate([
-            'gall.*' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048', // Adjust file size as needed
-        ]);
-
         if ($request->hasFile('gall')) {
             $eventFolder = public_path('event-images/' . $request->idevent . '/photogallery');
 
-            // Create directory if it doesn't exist
+            // Directory create karein agar exist nahi karta
             if (!file_exists($eventFolder)) {
                 mkdir($eventFolder, 0777, true);
             }
 
             $newImages = [];
+            $failedImages = [];
 
-            foreach ($request->file('gall') as $photo) {
+            foreach ($request->file('gall') as $key => $photo) {
+                // Validate each file individually
+                $validator = Validator::make(
+                    ['file' => $photo],
+                    ['file' => 'image|mimes:jpg,jpeg,png,gif,webp|max:2048']
+                );
+
+                if ($validator->fails()) {
+                    // Failed validation - add file name to failedImages
+                    $failedImages[] = [
+                        'file' => $photo->getClientOriginalName(),
+                        'error' => $validator->errors()->first('file'),
+                    ];
+                    continue;
+                }
+
                 if ($photo->isValid()) {
-                    // Create a new Photogallery record
+                    // Photogallery record create karein
                     $photogallery = new PhotoGallery;
                     $photogallery->id_event = $request->idevent;
                     $photogallery->guestCode = $request->guestCode ?? null;
@@ -70,38 +121,93 @@ class WebPageController extends Controller
                     // Store image ID in the newImages array
                     $newImages[] = $photogallery->id_photogallery;
 
-                    // Move uploaded file to the appropriate folder
+                    // Image ko folder me move karein
                     $photo->move($eventFolder, $photogallery->id_photogallery . ".jpg");
                 }
             }
 
-            return response()->json(['success' => 'Photos uploaded successfully!', 'photos' => $newImages]);
+            return response()->json([
+                'success' => 'Process completed.',
+                'photos' => $newImages,
+                'failed' => $failedImages,
+            ]);
         } else {
             return response()->json(['error' => 'No files uploaded.'], 400);
         }
     }
 
+    // public function storeVideos(Request $request)
+    // {
+    //     $event = Event::where('id_event', $request->idevent)->first();
+    //     if ($event) {
+    //         // Validate video file if it exists
+    //         if ($request->hasFile('vid')) {
+    //             $video = $request->file('vid');
+    //             $maxSize = 15 * 1024 * 1024; // 15 MB in bytes
+
+    //             if ($video->getSize() > $maxSize) {
+    //                 return response()->json(['error' => 'The video is too large to upload. Maximum size allowed is 15 MB.'], 422);
+    //             }
+
+    //             if (!file_exists('public/event-images/' . $request->idevent . '/videos')) {
+    //                 mkdir('public/event-images/' . $request->idevent . '/videos', 0777, true);
+    //             }
+
+    //             $filename = time() . '.' . $video->getClientOriginalExtension();
+    //             $video->move(public_path('event-images/' . $request->idevent . '/videos'), $filename);
+
+    //             // Save the video path to the event
+
+    //             $videogallery = new VideoGallery;
+    //             $videogallery->id_event = $request->idevent;
+    //             $videogallery->guest_code = $request->guest_code ?? null;
+    //             $videogallery->video = $filename;
+    //             $videogallery->save();
+
+    //             $uploadedVideo = 'event-images/' . $request->idevent . '/videos/' . $videogallery->video;
+    //             $id = $videogallery->id;
+
+    //             return response()->json([
+    //                 'success' => 'Videos uploaded successfully!',
+    //                 'videos' => $uploadedVideo,
+    //                 'id' => $id
+    //             ]);
+    //         }
+
+    //         return redirect()->back();
+    //     } else
+    //         return response()->json(['error' => 'Event not found.'], 404);
+    // }
+
     public function storeVideos(Request $request)
     {
         $event = Event::where('id_event', $request->idevent)->first();
-        if ($event) {
-            // Validate video file if it exists
-            if ($request->hasFile('vid')) {
-                $video = $request->file('vid');
-                $maxSize = 15 * 1024 * 1024; // 15 MB in bytes
 
+        if (!$event) {
+            return response()->json(['error' => 'Event not found.'], 404);
+        }
+
+        if ($request->hasFile('vid')) {
+            $uploadedVideos = [];
+            $failedVideos = [];
+            $videos = $request->file('vid');
+            $maxSize = 15 * 1024 * 1024; // 15 MB in bytes
+
+            foreach ($videos as $video) {
                 if ($video->getSize() > $maxSize) {
-                    return response()->json(['error' => 'The video is too large to upload. Maximum size allowed is 15 MB.'], 422);
+                    $failedVideos[] = [
+                        'file' => $video->getClientOriginalName(),
+                        'error' => 'The video size exceeds 15 MB.'
+                    ];
+                    continue;
                 }
 
-                if (!file_exists('public/event-images/' . $request->idevent . '/videos')) {
-                    mkdir('public/event-images/' . $request->idevent . '/videos', 0777, true);
+                if (!file_exists(public_path('event-images/' . $request->idevent . '/videos'))) {
+                    mkdir(public_path('event-images/' . $request->idevent . '/videos'), 0777, true);
                 }
 
-                $filename = time() . '.' . $video->getClientOriginalExtension();
+                $filename = time() . '_' . uniqid() . '.' . $video->getClientOriginalExtension();
                 $video->move(public_path('event-images/' . $request->idevent . '/videos'), $filename);
-
-                // Save the video path to the event
 
                 $videogallery = new VideoGallery;
                 $videogallery->id_event = $request->idevent;
@@ -109,21 +215,23 @@ class WebPageController extends Controller
                 $videogallery->video = $filename;
                 $videogallery->save();
 
-                $uploadedVideo = 'event-images/' . $request->idevent . '/videos/'. $videogallery->video;
-                $id = $videogallery->id;
-
-                return response()->json([
-                    'success' => 'Videos uploaded successfully!',
-                    'videos' => $uploadedVideo,
-                    'id' => $id
-                ]);
+                $uploadedVideos[] = [
+                    'id' => $videogallery->id,
+                    'path' => 'event-images/' . $request->idevent . '/videos/' . $filename
+                ];
             }
 
-            return redirect()->back();
-        } else
-            return response()->json(['error' => 'Event not found.'], 404);
+            return response()->json([
+                'success' => 'Video upload process completed.',
+                'uploaded' => $uploadedVideos,
+                'failed' => $failedVideos
+            ]);
+        }
+
+        return response()->json(['error' => 'No videos found to upload.'], 422);
     }
-    
+
+
     public function deleteVideo(Request $request)
     {
         $photogallery = VideoGallery::where('id', $request->id)->first();
@@ -146,7 +254,7 @@ class WebPageController extends Controller
         return response()->json(['error' => 'Video not found or unauthorized action'], 404);
     }
 
-    
+
     public function storeUsersImages(Request $request)
     {
         $request->validate([
@@ -297,8 +405,8 @@ class WebPageController extends Controller
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath); // Remove the old image
                 }
-            }   
-            
+            }
+
             // Store the uploaded image
             $image = $request->file('mainimage');
             $filename = time() . '.' . $image->extension();

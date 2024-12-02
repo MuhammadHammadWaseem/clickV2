@@ -427,8 +427,8 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="vid" name="vid" accept="video/*"
-                                style="display: none;" />
+                            <input type="file" id="vid" name="vid[]" accept="video/*"
+                                style="display: none;" multiple />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
 
                             <!-- Button to trigger the file input -->
@@ -631,6 +631,7 @@
                         $("#NoItems").hide();
                         $("#noImages").hide();
 
+                        if (response.photos && response.photos.length > 0) {
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
                             var newImage = `
@@ -656,6 +657,16 @@
                             $('#PhotoBox').append(newImage);
 
                         });
+
+                        toastr.success(`${response.photos.length} photos uploaded successfully.`);
+                    }
+
+                    // Handle failed uploads
+                    if (response.failed && response.failed.length > 0) {
+                        response.failed.forEach(function(failure) {
+                            toastr.error(`Failed to upload "${failure.file}": ${failure.error}`);
+                        });
+                    }
 
                         $("#closeBtn").click();
 
@@ -683,65 +694,122 @@
                 });
             });
 
+            // $('#uploadVideosForm').on('submit', function(e) {
+            //     e.preventDefault(); // Prevent the form from submitting the traditional way
+
+            //     $("#uploadPhotosBtn").prop('disabled',true);
+            //     $("#uploadPhotosBtn").text('Uploading...');
+
+            //     var formData = new FormData(this); // Use FormData to handle the files
+
+            //     $.ajax({
+            //         url: "{{ route('panel.event.store.videos') }}", // Laravel route for storing videos
+            //         type: 'POST', // HTTP method
+            //         data: formData, // The form data
+            //         contentType: false, // Prevent jQuery from setting the content-type header
+            //         processData: false, // Prevent jQuery from processing the form data
+            //         success: function(response) {
+            //             if (response.success) {
+
+            //                 $("#uploadPhotosBtn").prop('disabled',false);
+            //                 $("#uploadPhotosBtn").text('Submit');
+
+            //                 $('#vid').val(''); // Clear the file input
+            //                 toastr.success(response.success); // Show success notification
+            //                 $('#addVideoModalCloseBtn').click(); // Close the modal
+            //                 var successModal = new bootstrap.Modal(document.getElementById(
+            //                 'exampleModalCenter022'));
+            //             successModal.show();
+            //                 // Append the video to your page
+            //                 var newVideo = `
+            //                     <div class="box" id="video-box-${response.id}">
+            //                         <video width="100%" height="200" controls>
+            //                             <source src="/${response.videos}" type="video/mp4">
+            //                             Your browser does not support the video tag.
+            //                         </video>
+            //                         <button type="button" class="delete-video-btn" data-id="${response.id}"
+            //                         data-eventId="{{ $event->id_event }}"><svg width="28" height="29"
+            //                             viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //                             <path
+            //                                 d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+            //                                 fill="#F1F1F1" />
+            //                             <path
+            //                                 d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+            //                                 fill="#F1F1F1" />
+            //                         </svg>
+            //                     </button>
+            //                     </div>
+            //                     `;
+            //                 $('#main-video-gallery-box').append(newVideo);
+            //             }
+            //             $("#uploadPhotosBtn").prop('disabled',false);
+            //             $("#uploadPhotosBtn").text('Submit');
+            //         },
+            //         error: function(xhr) {
+            //             $("#uploadPhotosBtn").prop('disabled',false);
+            //             $("#uploadPhotosBtn").text('Submit');
+            //             toastr.error('Failed to upload the videos. Please try again.');
+            //             console.error(xhr.responseText); // Log the error for debugging
+            //         }
+            //     });
+            // });
+
             $('#uploadVideosForm').on('submit', function(e) {
-                e.preventDefault(); // Prevent the form from submitting the traditional way
+    e.preventDefault(); // Prevent default form submission
 
-                $("#uploadPhotosBtn").prop('disabled',true);
-                $("#uploadPhotosBtn").text('Uploading...');
+    $("#uploadPhotosBtn").prop('disabled', true);
+    $("#uploadPhotosBtn").text('Uploading...');
 
-                var formData = new FormData(this); // Use FormData to handle the files
+    var formData = new FormData(this); // Collect the form data
 
-                $.ajax({
-                    url: "{{ route('panel.event.store.videos') }}", // Laravel route for storing videos
-                    type: 'POST', // HTTP method
-                    data: formData, // The form data
-                    contentType: false, // Prevent jQuery from setting the content-type header
-                    processData: false, // Prevent jQuery from processing the form data
-                    success: function(response) {
-                        if (response.success) {
+    $.ajax({
+        url: "{{ route('panel.event.store.videos') }}", // Laravel route
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $("#uploadPhotosBtn").prop('disabled', false);
+            $("#uploadPhotosBtn").text('Submit');
+            $('#vid').val(''); // Clear the file input
 
-                            $("#uploadPhotosBtn").prop('disabled',false);
-                            $("#uploadPhotosBtn").text('Submit');
-
-                            toastr.success(response.success); // Show success notification
-                            $('#vid').val(''); // Clear the file input
-                            $('#addVideoModalCloseBtn').click(); // Close the modal
-                            var successModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter022'));
-                        successModal.show();
-                            // Append the video to your page
-                            var newVideo = `
-                                <div class="box" id="video-box-${response.id}">
-                                    <video width="100%" height="200" controls>
-                                        <source src="/${response.videos}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <button type="button" class="delete-video-btn" data-id="${response.id}"
-                                    data-eventId="{{ $event->id_event }}"><svg width="28" height="29"
-                                        viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
-                                            fill="#F1F1F1" />
-                                        <path
-                                            d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
-                                            fill="#F1F1F1" />
-                                    </svg>
-                                </button>
-                                </div>
-                                `;
-                            $('#main-video-gallery-box').append(newVideo);
-                        }
-                        $("#uploadPhotosBtn").prop('disabled',false);
-                        $("#uploadPhotosBtn").text('Submit');
-                    },
-                    error: function(xhr) {
-                        $("#uploadPhotosBtn").prop('disabled',false);
-                        $("#uploadPhotosBtn").text('Submit');
-                        toastr.error('Failed to upload the videos. Please try again.');
-                        console.error(xhr.responseText); // Log the error for debugging
-                    }
+            // Handle successful uploads
+            if (response.uploaded && response.uploaded.length > 0) {
+                response.uploaded.forEach(function(video) {
+                    var newVideo = `
+                        <div class="box" id="video-box-${video.id}">
+                            <video width="100%" height="200" controls>
+                                <source src="/${video.path}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <button type="button" class="delete-video-btn" data-id="${video.id}"
+                                data-eventId="{{ $event->id_event }}">
+                                Delete
+                            </button>
+                        </div>`;
+                    $('#main-video-gallery-box').append(newVideo);
                 });
-            });
+                toastr.success(`${response.uploaded.length} videos uploaded successfully.`);
+            }
+
+            // Handle failed uploads
+            if (response.failed && response.failed.length > 0) {
+                response.failed.forEach(function(failure) {
+                    toastr.error(`Failed to upload "${failure.file}": ${failure.error}`);
+                });
+            }
+
+            $('#addVideoModalCloseBtn').click(); // Close modal
+        },
+        error: function(xhr) {
+            $("#uploadPhotosBtn").prop('disabled', false);
+            $("#uploadPhotosBtn").text('Submit');
+            toastr.error('Failed to upload the videos. Please try again.');
+            console.error(xhr.responseText);
+        }
+    });
+});
+
 
             $(document).on('click', '.delete-video-btn', function() {
                 var videoId = $(this).data('id');

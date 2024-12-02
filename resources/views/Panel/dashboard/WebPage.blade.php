@@ -1422,6 +1422,7 @@ form#settingForm{
                         const iframe = document.querySelector('iframe');
                         iframe.src = iframe.src;
 
+                        if (response.photos && response.photos.length > 0) {
                         // Append the new images to the gallery
                         response.photos.forEach(function(photoId) {
                             var newImage = `
@@ -1437,12 +1438,23 @@ form#settingForm{
 
                         });
 
+                        // Show success message for uploaded images
+                        toastr.success(`${response.photos.length} photos uploaded successfully.`);
+                        }
+
+                        // Handle failed uploads
+                        if (response.failed && response.failed.length > 0) {
+                            response.failed.forEach(function(failure) {
+                                toastr.error(`Failed to upload "${failure.file}": ${failure.error}`);
+                            });
+                        }
+
                         $("#closeBtn").click();
 
                         // Trigger the modal to show success message
-                        var myModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter03'));
+                        var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter03'));
                         myModal.show();
+
 
                     },
                     error: function(xhr) {
