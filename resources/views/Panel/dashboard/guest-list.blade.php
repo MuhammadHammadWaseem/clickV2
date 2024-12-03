@@ -1951,8 +1951,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         $("#check_all").attr("data-guests", JSON.stringify([])); // Clear first
                         $("#check_all").attr("data-guests", JSON.stringify(guests));
                         guests.forEach(function(guest) {
-
-                            console.log(guest.name, guest.members);
                             $("#groupCheck").attr("data-members", JSON.stringify([guest.members]));
 
                             // ALL GUESTS
@@ -4615,8 +4613,6 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         function selectAllMembers(event, guestId) {
             // Get the Select All checkbox status
             const isChecked = event.target.checked;
-
-            console.log("Main Guest ID:", guestId);
 
             // Find all member checkboxes within the modal of the specific guest
             const memberCheckboxes = document.querySelectorAll(`#exampleModalCenter${guestId} .check_box_style`);
