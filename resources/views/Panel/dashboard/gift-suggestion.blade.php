@@ -606,7 +606,6 @@
                 mealId), // Ensure the correct URL
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
                     var container = $('.meal-name-boxes');
                     container.empty();
                     var gifts = response.gifts;
@@ -691,12 +690,10 @@
         // For Update Gift
         $('#editGiftForm').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
-            console.log("Updating gift..."); // Add debug log
 
             var myModal = new bootstrap.Modal(document.getElementById('editGiftModal'));
             var formData = $(this).serialize(); // Serialize form data
-            var giftId2 = $("#gift_id").val(); // Get the stored giftId from the form's data
-            console.log("Gift ID: " + giftId2); // Debug log for gift ID
+            var giftId2 = $("#gift_id").val();
 
             $.ajax({
                 url: "{{ route('panel.event.gift.update', ':id') }}".replace(':id', giftId2),
@@ -723,12 +720,10 @@
         // For Delete Gift
         $(document).on('click', '.delete-gift-btn', function() {
             var giftId = $(this).data('id');
-            console.log(giftId);
 
             var myModal = new bootstrap.Modal(document.getElementById('deleteGiftModal'));
             myModal.show();
             $('#confirmDeleteBtn').off('click').on('click', function() {
-                console.log("Deleting gift..."); // Add debug log
                 $.ajax({
                     url: "{{ route('panel.event.gift.delete', ':id') }}".replace(':id', giftId),
                     type: 'DELETE', // Change this to DELETE
@@ -755,10 +750,6 @@
             var transferType = $('#transferType').val();
             var transferLink = $('#transferLink').val();
             var eventId = "{{ $eventId }}"; // Use your event ID dynamically
-
-            console.log("transferType", transferType);
-            console.log("transferLink", transferLink);
-            console.log("eventId", eventId);
             $.ajax({
                 url: "{{ route('panel.event.savetransfer', ':id') }}".replace(':id', eventId),
                 type: 'POST', // Change this to POST
@@ -769,7 +760,6 @@
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    console.log(response.success);
                     if (response.success == true) {
                         toastr.success('Transfer data saved successfully!');
                     } else {
