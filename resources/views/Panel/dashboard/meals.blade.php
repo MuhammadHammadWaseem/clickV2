@@ -131,7 +131,7 @@
 
                     <button type="button" data-dismiss="modal" class="d-none"
                         id="closeMealAddForm2">{{ __('meal.close_button') }}</button>
-                        
+
                     <button type="submit" class="submit-btn">{{ __('meal.save_changes_button') }}</button>
                     </form>
                 </div>
@@ -466,8 +466,6 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    console.log(response);
-                    // $("#closeMealAddForm").click();
                     $("#closeMealAddForm2").click();
                     showMeals();
                     toastr.success(response.message);
@@ -539,14 +537,11 @@
                     url: "{{ route('panel.event.meals.edit', '') }}/" + mealId,
                     type: 'GET',
                     success: function(response) {
-                        console.log(response);
-                        // Set the meal name and description in the form
-                        $('input[name="namemeal"]').val(response.name);
-                        $('textarea[name="descriptionmeal"]').val(response.description);
-                        $('input[name="id_event"]').val(response
-                            .id_event); // Ensure you set the event ID if required
-                        $('#event_id').val(
-                            mealId); // Set the hidden meal ID for the update request
+                        $('#editMealForm input[name="namemeal"]').val(response.name);
+                        $('#editMealForm textarea[name="descriptionmeal"]').val(response
+                            .description);
+                        $('#editMealForm input[name="id_event"]').val(response.id_event);
+                        $('#event_id').val(mealId);
                     },
                     error: function(xhr) {
                         alert('Error fetching meal data');
@@ -574,7 +569,6 @@
                 });
             });
         });
-
 
 
         // Handle the actual deletion when "Yes, Delete" is clicked in the modal
