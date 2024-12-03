@@ -140,26 +140,26 @@
                     </div>
                     <div class="main-event-gallery-box" id="main-video-gallery-box">
                         @forelse ($videogallery as $video)
-                        @if (file_exists('event-images/' . $video->id_event . '/videos/' . $video->video))
-                            <div class="box" id="video-box-{{ $video->id }}">
-                                <video width="100%" height="200" controls>
-                                    <source
-                                        src="{{ asset('event-images/' . $video->id_event . '/videos/' . $video->video) }}"
-                                        type="video/mp4">
-                                    <p>{{ __('photos.video_support') }}</p>
-                                </video>
-                                <button type="button" class="delete-video-btn" data-id="{{ $video->id }}"
-                                    data-eventId="{{ $video->id_event }}"><svg width="28" height="29"
-                                        viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
-                                            fill="#F1F1F1" />
-                                        <path
-                                            d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
-                                            fill="#F1F1F1" />
-                                    </svg>
-                                </button>
-                            </div>
+                            @if (file_exists('event-images/' . $video->id_event . '/videos/' . $video->video))
+                                <div class="box" id="video-box-{{ $video->id }}">
+                                    <video width="100%" height="200" controls>
+                                        <source
+                                            src="{{ asset('event-images/' . $video->id_event . '/videos/' . $video->video) }}"
+                                            type="video/mp4">
+                                        <p>{{ __('photos.video_support') }}</p>
+                                    </video>
+                                    <button type="button" class="delete-video-btn" data-id="{{ $video->id }}"
+                                        data-eventId="{{ $video->id_event }}"><svg width="28" height="29"
+                                            viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+                                                fill="#F1F1F1" />
+                                            <path
+                                                d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+                                    </button>
+                                </div>
                             @endif
                         @empty
                             <p>{{ __('photos.no_videos') }}</p>
@@ -246,30 +246,30 @@
     </div>
 
     <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter022" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text">
-                    <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
-                    <h2>{{ __('photos.video_added_successfully') }}</h2>
-                    <p>{{ __('photos.video_added_message') }}</p>
-
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="successVideoCloseBtn1" class="btn btn-secondary"
-                    data-dismiss="modal">{{ __('photos.close') }}</button>
+                <div class="modal-body">
+                    <div class="text">
+                        <img src="{{ asset('assets/Panel/images/circle-check.png') }}" alt="">
+                        <h2>{{ __('photos.video_added_successfully') }}</h2>
+                        <p>{{ __('photos.video_added_message') }}</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="successVideoCloseBtn1" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('photos.close') }}</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <div class="modal fade modal-01 modal-02 modal-03" id="exampleModalCenter05" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -427,8 +427,8 @@
                     <div class="modal-body">
                         <div class="text">
                             @csrf
-                            <input type="file" id="vid" name="vid[]" accept="video/*"
-                                style="display: none;" multiple />
+                            <input type="file" id="vid" name="vid[]" accept="video/*" style="display: none;"
+                                multiple />
                             <input type="hidden" name="idevent" value="{{ $event->id_event }}" />
 
                             <!-- Button to trigger the file input -->
@@ -441,7 +441,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="submit-btn btn btn-primary t-btn" id="uploadPhotosBtn">{{ __('photos.submit') }}</button>
+                        <button type="submit" class="submit-btn btn btn-primary t-btn"
+                            id="uploadPhotosBtn">{{ __('photos.submit') }}</button>
                         <button type="button" id="addVideoModalCloseBtn" class="btn btn-secondary"
                             data-dismiss="modal">{{ __('photos.close') }}</button>
                     </div>
@@ -588,13 +589,14 @@
 
         // Display video file name when a file is selected
         document.getElementById('vid').addEventListener('change', function(event) {
-            const file = event.target.files[0];
+            const files = event.target.files;
             const previewContainer = document.getElementById('videoPreviewContainer');
 
-            if (!file) {
+            if (files.length === 0) {
                 previewContainer.textContent = 'No File Selected';
             } else {
-                previewContainer.textContent = file.name; // Show the selected video file name
+                const fileNames = Array.from(files).map(file => file.name); // Get file names as an array
+                previewContainer.innerHTML = fileNames.join('<br>'); // Display each name on a new line
             }
         });
 
@@ -606,6 +608,7 @@
             var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter026'));
             successModal.show();
         });
+
         function hidemodel() {
             $("#successmodalCloseBtn1").click();
             var successModal = new bootstrap.Modal(document.getElementById(
@@ -632,9 +635,9 @@
                         $("#noImages").hide();
 
                         if (response.photos && response.photos.length > 0) {
-                        // Append the new images to the gallery
-                        response.photos.forEach(function(photoId) {
-                            var newImage = `
+                            // Append the new images to the gallery
+                            response.photos.forEach(function(photoId) {
+                                var newImage = `
                             <div class="box" id="photo-box-${photoId}">
                                 <a href="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg"
                                     data-fancybox="images" tabindex="0">
@@ -653,20 +656,23 @@
                             </button>
                             </div>`;
 
-                            // $('.main-event-gallery-box').append(newImage);
-                            $('#PhotoBox').append(newImage);
+                                // $('.main-event-gallery-box').append(newImage);
+                                $('#PhotoBox').append(newImage);
 
-                        });
+                            });
 
-                        toastr.success(`${response.photos.length} photos uploaded successfully.`);
-                    }
+                            toastr.success(
+                                `${response.photos.length} photos uploaded successfully.`);
+                        }
 
-                    // Handle failed uploads
-                    if (response.failed && response.failed.length > 0) {
-                        response.failed.forEach(function(failure) {
-                            toastr.error(`Failed to upload "${failure.file}": ${failure.error}`);
-                        });
-                    }
+                        // Handle failed uploads
+                        if (response.failed && response.failed.length > 0) {
+                            response.failed.forEach(function(failure) {
+                                toastr.error(
+                                    `Failed to upload "${failure.file}": ${failure.error}`
+                                    );
+                            });
+                        }
 
                         $("#closeBtn").click();
 
@@ -722,24 +728,24 @@
             //             successModal.show();
             //                 // Append the video to your page
             //                 var newVideo = `
-            //                     <div class="box" id="video-box-${response.id}">
-            //                         <video width="100%" height="200" controls>
-            //                             <source src="/${response.videos}" type="video/mp4">
-            //                             Your browser does not support the video tag.
-            //                         </video>
-            //                         <button type="button" class="delete-video-btn" data-id="${response.id}"
-            //                         data-eventId="{{ $event->id_event }}"><svg width="28" height="29"
-            //                             viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            //                             <path
-            //                                 d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
-            //                                 fill="#F1F1F1" />
-            //                             <path
-            //                                 d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
-            //                                 fill="#F1F1F1" />
-            //                         </svg>
-            //                     </button>
-            //                     </div>
-            //                     `;
+        //                     <div class="box" id="video-box-${response.id}">
+        //                         <video width="100%" height="200" controls>
+        //                             <source src="/${response.videos}" type="video/mp4">
+        //                             Your browser does not support the video tag.
+        //                         </video>
+        //                         <button type="button" class="delete-video-btn" data-id="${response.id}"
+        //                         data-eventId="{{ $event->id_event }}"><svg width="28" height="29"
+        //                             viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //                             <path
+        //                                 d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+        //                                 fill="#F1F1F1" />
+        //                             <path
+        //                                 d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+        //                                 fill="#F1F1F1" />
+        //                         </svg>
+        //                     </button>
+        //                     </div>
+        //                     `;
             //                 $('#main-video-gallery-box').append(newVideo);
             //             }
             //             $("#uploadPhotosBtn").prop('disabled',false);
@@ -755,60 +761,71 @@
             // });
 
             $('#uploadVideosForm').on('submit', function(e) {
-    e.preventDefault(); // Prevent default form submission
+                e.preventDefault(); // Prevent default form submission
 
-    $("#uploadPhotosBtn").prop('disabled', true);
-    $("#uploadPhotosBtn").text('Uploading...');
+                $("#uploadPhotosBtn").prop('disabled', true);
+                $("#uploadPhotosBtn").text('Uploading...');
 
-    var formData = new FormData(this); // Collect the form data
+                var formData = new FormData(this); // Collect the form data
 
-    $.ajax({
-        url: "{{ route('panel.event.store.videos') }}", // Laravel route
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(response) {
-            $("#uploadPhotosBtn").prop('disabled', false);
-            $("#uploadPhotosBtn").text('Submit');
-            $('#vid').val(''); // Clear the file input
+                $.ajax({
+                    url: "{{ route('panel.event.store.videos') }}", // Laravel route
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $("#uploadPhotosBtn").prop('disabled', false);
+                        $("#uploadPhotosBtn").text('Submit');
+                        $('#vid').val(''); // Clear the file input
 
-            // Handle successful uploads
-            if (response.uploaded && response.uploaded.length > 0) {
-                response.uploaded.forEach(function(video) {
-                    var newVideo = `
-                        <div class="box" id="video-box-${video.id}">
-                            <video width="100%" height="200" controls>
-                                <source src="/${video.path}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <button type="button" class="delete-video-btn" data-id="${video.id}"
-                                data-eventId="{{ $event->id_event }}">
-                                Delete
-                            </button>
-                        </div>`;
-                    $('#main-video-gallery-box').append(newVideo);
+                        // Handle successful uploads
+                        if (response.uploaded && response.uploaded.length > 0) {
+                            response.uploaded.forEach(function(video) {
+                                var newVideo = `
+                                    <div class="box" id="video-box-${video.id}">
+                                        <video width="100%" height="200" controls>
+                                            <source src="/${video.path}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <button type="button" class="delete-video-btn" data-id="${video.id}"
+                                            data-eventId="{{ $event->id_event }}">
+                                            <svg width="28" height="29"
+                                            viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+                                                fill="#F1F1F1" />
+                                            <path
+                                                d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+                                        </button>
+                                    </div>`;
+                                $('#main-video-gallery-box').append(newVideo);
+                            });
+                            toastr.success(
+                                `${response.uploaded.length} videos uploaded successfully.`);
+                        }
+
+                        // Handle failed uploads
+                        if (response.failed && response.failed.length > 0) {
+                            response.failed.forEach(function(failure) {
+                                toastr.error(
+                                    `Failed to upload "${failure.file}": ${failure.error}`
+                                    );
+                            });
+                        }
+
+                        $('#addVideoModalCloseBtn').click(); // Close modal
+                    },
+                    error: function(xhr) {
+                        $("#uploadPhotosBtn").prop('disabled', false);
+                        $("#uploadPhotosBtn").text('Submit');
+                        toastr.error('Failed to upload the videos. Please try again.');
+                        console.error(xhr.responseText);
+                    }
                 });
-                toastr.success(`${response.uploaded.length} videos uploaded successfully.`);
-            }
-
-            // Handle failed uploads
-            if (response.failed && response.failed.length > 0) {
-                response.failed.forEach(function(failure) {
-                    toastr.error(`Failed to upload "${failure.file}": ${failure.error}`);
-                });
-            }
-
-            $('#addVideoModalCloseBtn').click(); // Close modal
-        },
-        error: function(xhr) {
-            $("#uploadPhotosBtn").prop('disabled', false);
-            $("#uploadPhotosBtn").text('Submit');
-            toastr.error('Failed to upload the videos. Please try again.');
-            console.error(xhr.responseText);
-        }
-    });
-});
+            });
 
 
             $(document).on('click', '.delete-video-btn', function() {

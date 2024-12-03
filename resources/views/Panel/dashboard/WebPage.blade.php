@@ -1431,7 +1431,17 @@ form#settingForm{
                                         data-fancybox="images" tabindex="0">
                                         <img src="{{ asset('event-images/' . $event->id_event . '/photogallery/') }}/${photoId}.jpg" alt="">
                                     </a>
-                                    <button type="button" class="delete-image-btn" data-id="${photoId}" data-eventId="{{ $currentEventId }}">Delete</button>
+                                    <button type="button" class="delete-image-btn" data-id="${photoId}" data-eventId="{{ $currentEventId }}">
+                                        <svg width="28" height="29"
+                                            viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6.03181 23.7043C6.03181 24.308 6.27163 24.887 6.69853 25.3139C7.12542 25.7408 7.70441 25.9806 8.30813 25.9806H19.6897C20.2934 25.9806 20.8724 25.7408 21.2993 25.3139C21.7262 24.887 21.966 24.308 21.966 23.7043V10.0464H24.2423V7.7701H19.6897V5.49378C19.6897 4.89007 19.4499 4.31108 19.023 3.88419C18.5961 3.45729 18.0171 3.21747 17.4134 3.21747H10.5844C9.98072 3.21747 9.40173 3.45729 8.97484 3.88419C8.54795 4.31108 8.30813 4.89007 8.30813 5.49378V7.7701H3.75549V10.0464H6.03181V23.7043ZM10.5844 5.49378H17.4134V7.7701H10.5844V5.49378ZM9.44628 10.0464H19.6897V23.7043H8.30813V10.0464H9.44628Z"
+                                                fill="#F1F1F1" />
+                                            <path
+                                                d="M10.585 12.3228H12.8613V21.4281H10.585V12.3228ZM15.1376 12.3228H17.4139V21.4281H15.1376V12.3228Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+                                    </button>
                                 </div>`;
 
                             $('.main-event-gallery-box').append(newImage);
