@@ -114,7 +114,7 @@ ul.drop-menu li a {
 .header-buttons {
     width: 20%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     column-gap: 20px;
 }
     </style>
@@ -178,32 +178,33 @@ ul.drop-menu li a {
                         <span class="header-buttons">
                             <a class="register" href="{{ route('panel.index') }}" style="text-decoration: none; color:black;">{{ __('new_home.Panel') }}</a>
                             <button class="login"> <a href="{{ route('web.logout') }}" style="text-decoration: none; color:black;">{{ __('new_home.Logout') }}</a> </button>
-                        </span>
-                        <div class="langauge-person">
-                            <div class="language-box">
+                            <div class="langauge-person">
                                 <div class="language-box">
-                                    <div class="nav-box">
-                                        <ul>
-                                            <li class="drop-down-link"><a href="#"><img
-                                                        src="{{ asset('assets/Panel/images/translate-icon.png') }}"
-                                                        alt=""><i class="fa fa-angle-down"
-                                                        aria-hidden="true">
-                                                        {{ Config::get('languages')[App::getLocale()] }}</i></a>
-                                                <ul class="drop-menu">
-                                                    @foreach (Config::get('languages') as $lang => $language)
-                                                        @if ($lang != App::getLocale())
-                                                            <li><a
-                                                                    href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
-                                                            </li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                    <div class="language-box">
+                                        <div class="nav-box">
+                                            <ul>
+                                                <li class="drop-down-link"><a href="#"><img
+                                                            src="{{ asset('assets/Panel/images/translate-icon.png') }}"
+                                                            alt=""><i class="fa fa-angle-down"
+                                                            aria-hidden="true">
+                                                            {{ Config::get('languages')[App::getLocale()] }}</i></a>
+                                                    <ul class="drop-menu">
+                                                        @foreach (Config::get('languages') as $lang => $language)
+                                                            @if ($lang != App::getLocale())
+                                                                <li><a
+                                                                        href="{{ route('lang.switch', $lang) }}">{{ $language }}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </span>
+                        
                     @endauth
 
                     <button class="nav-toggler">

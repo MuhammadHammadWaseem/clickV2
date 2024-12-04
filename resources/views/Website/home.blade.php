@@ -28,12 +28,13 @@
     }
 
     a.site-logo {
-        width: 31% !important;
+        width: 100% !important;
+        text-align: center;
 
     }
 
     .header-buttons {
-        width: 25% !important;
+        width: 100% !important;
     }
 
     .site-navbar ul li a {
@@ -42,9 +43,9 @@
 
 
 
-    .site-navbar ul li a {
+    /* .site-navbar ul li a {
         font-size: 12px !important;
-    }
+    } */
 
 
 
