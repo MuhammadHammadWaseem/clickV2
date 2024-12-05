@@ -53,7 +53,7 @@ button.login {
 }
 
 .header-buttons {
-  width: 15%;
+  width: 100% !important;
   display: flex;
   justify-content: space-evenly;
 }
@@ -1026,12 +1026,13 @@ p.text17 {
 }
 
 a.site-logo {
-  width: 36%;
+  width: 100%;
   font-size: 26px;
   font-weight: 800;
   text-transform: uppercase;
   color: #000;
   text-decoration: none;
+  text-align: center;
 }
 
 .site-navbar ul {
@@ -2055,6 +2056,12 @@ button.btn-new:hover {
   text-decoration: none;
   text-transform: capitalize;
   line-height: normal;
+}
+.liststylesn .quicklinksstyle{
+  padding: 0px 0 10px 0;
+}
+.liststylesn p{
+  margin-bottom: 10px !important;
 }
 
 .quicklinksstyle:hover {
