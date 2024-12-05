@@ -20,7 +20,7 @@
                     font-family: 'poppins';
                     font-weight: 600;">
             {{ __('footer.Quick Links') }}</h4>
-        <ul style="padding-top: 10px;">
+        <ul style="padding-top: 10px; padding-left:0;">
             <li class="liststylesn"><a class="quicklinksstyle" href="/events">{{ __('footer.events') }}</a></li>
             <li class="liststylesn"><a class="quicklinksstyle" href="/features">{{ __('footer.features') }}</a></li>
             <li class="liststylesn"><a class="quicklinksstyle" href="/about">{{ __('footer.about') }}</a></li>
@@ -36,7 +36,7 @@
       font-size: 16px;
       font-family: 'poppins';
       font-weight: 600;">{{ __('footer.contact_us') }}</h4>
-        <ul style="padding-top: 10px;">
+        <ul style="padding-top: 10px; padding-left:0;">
             <li class="liststylesn">
                 <p
                     style="margin: 0 auto;

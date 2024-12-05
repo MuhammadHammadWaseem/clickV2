@@ -70,6 +70,12 @@
             
             $imgW = $w + 2*$outerFrame;
             $imgH = $h + 2*$outerFrame;
+
+            // if (extension_loaded('gd')) {
+            //     dd("GD extension is enabled.",gd_info());
+            // } else {
+            //     dd("GD extension is NOT enabled.");
+            // }
             
             $base_image =ImageCreate($imgW, $imgH);
             

@@ -10,11 +10,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/lib.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/Panel/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/webStyle.css') }}">
-    <link rel="preconnect" href="https://fonts.gstatic.com/">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    {{-- <link rel="preconnect" href="https://fonts.gstatic.com/"> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> --}}
 
     <style>
         section {
@@ -164,9 +162,6 @@
             width: 100%;
             text-align: center;
         }
-        body {
-    font-family: "Poppins", sans-serif;
-}
 
         .header-buttons {
     width: 100%;
@@ -174,9 +169,15 @@
     justify-content: flex-end;
     column-gap: 20px;
 }
+body{
+    font-family: "Poppins", sans-serif !important;
+}
 
+.site-navbar ul li a, a.register, .quicklinksstyle{
+    font-family: "Poppins", sans-serif !important;
+}
         .site-navbar ul li a {
-    padding: 12px !important;
+    padding: 7px !important;
 }
 
         @media only screen and (max-width: 1600px) {
@@ -769,7 +770,6 @@
                     style="margin: 0 auto;
                             width: 100%;
                             padding-top: 15px;
-                            font-family: 'poppins';
                             font-size: 14px;
                             font-weight: 400;
                             color: #000000;
@@ -781,7 +781,6 @@
                 <h4
                     style="text-align: center;
                             font-size: 16px;
-                            font-family: 'poppins';
                             font-weight: 600;">
                     {{ __('footer.Quick Links') }}</h4>
                 <ul style="padding-top: 10px;">
@@ -805,7 +804,6 @@
                 <h4
                     style="
               font-size: 16px;
-              font-family: 'poppins';
               font-weight: 600;">
                     {{ __('footer.contact_us') }}</h4>
                 <ul style="padding-top: 10px;">
@@ -814,7 +812,7 @@
                             style="margin: 0 auto;
         
         
-                  font-family: 'poppins';
+                  
                   font-size: 14px;
                   font-weight: 400;
                   color: #000000;
@@ -845,7 +843,7 @@
                 <p
                     style="margin: 0 auto;
         width: 100%;
-        font-family: 'poppins';
+        
         font-size: 14px;
         font-weight: 400;
         color: #000000;
@@ -857,7 +855,7 @@
                 <p
                     style="margin: 0 auto;
               width: 100%;
-              font-family: 'poppins';
+              
               font-size: 14px;
               font-weight: 400;
               color: #000000;
