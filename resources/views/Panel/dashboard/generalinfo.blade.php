@@ -955,10 +955,11 @@ input:checked+.slider:after {
                         <!-- Step 5 -->
                         <div class="tab">
                             <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
-                                <label>
-                                    <input type="checkbox" id="ceremonyToggle2" class="check_box_style" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
-                                </label>
                                 <h2>{{ __('genralInfo.Ceremony') }}</h2>
+                                <label class="d-flex">
+                                    <input type="checkbox" id="ceremonyToggle2" class="check_box_style" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
+                                    No Ceremony
+                                </label>
                            
                             </div>
                             <div id="ceremonyBox2">
@@ -973,10 +974,11 @@ input:checked+.slider:after {
                         <!-- Step 6 -->
                         <div class="tab">
                             <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
-                            <label>
+                                <h2>{{ __('genralInfo.Recption') }}</h2>
+                            <label class="d-flex">
                                 <input type="checkbox" id="receptionToggle2" class="check_box_style" name="boolreception" {{ $event->boolreception == 1 ? 'checked' : '' }}>
+                                No Reception
                             </label>
-                            <h2>{{ __('genralInfo.Recption') }}</h2>
                             </div>
                             <div id="recBox2">
 
@@ -992,10 +994,11 @@ input:checked+.slider:after {
                         <!-- Step 7 -->
                         <div class="tab">
                             <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
-                            <label>
+                                <h2>{{ __('genralInfo.Custom Event') }}</h2>
+                            <label class="d-flex">
                                 <input type="checkbox" id="partyToggle2" class="check_box_style" name="boolparty" {{ $event->boolparty == 1 ? 'checked' : '' }}>
+                                No Party
                             </label>
-                            <h2>{{ __('genralInfo.Custom Event') }}</h2>
                             </div>
                             <div id="parBox2">
                                 <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
