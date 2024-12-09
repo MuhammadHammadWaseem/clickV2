@@ -195,58 +195,122 @@
         }
 
 
+        input[type="checkbox"].check_box_style {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px !important;
+    background-color: #EDEDED !important;
+    position: relative !important;
+    cursor: pointer !important;
+    margin-bottom: 10px !important;
+    margin-right: 0px !important;
+    padding: 0 !important;
+}
+
+input[type="checkbox"].check_box_style:checked {
+    background-color: #7B7BFF !important;
+}
+
+input[type="checkbox"].check_box_style:checked::after {
+    content: '';
+    position: absolute !important;
+    display: block !important;
+    left: 6px !important;
+    top: 1.5px !important;
+    width: 6px !important;
+    height: 11px !important;
+    border: solid white !important;
+    border-width: 0 2px 2px 0 !important;
+    transform: rotate(45deg) !important;
+}
+
+
 
         /* The switch - the container */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 34px;
-            height: 20px;
-            margin: 0;
-        }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Increased width for text */
+    height: 24px; /* Adjust height */
+    margin: 0;
+}
 
-        /* Hide the default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+/* Hide the default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-        /* The slider - the box */
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.4s;
-            border-radius: 34px;
-        }
+/* The slider - the box */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+}
 
-        /* The slider when checked */
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.4s;
-        }
+/* The slider when checked */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
 
-        /* When the checkbox is checked, change the background */
-        input:checked+.slider {
-            background-color: #A9967D;
-        }
+/* The slider text */
+.slider-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 
-        /* When the checkbox is checked, move the slider */
-        input:checked+.slider:before {
-            transform: translateX(14px);
-        }
+/* When the checkbox is checked, change the background */
+input:checked+.slider {
+    background-color: #A9967D;
+}
+
+/* When the checkbox is checked, move the slider */
+input:checked+.slider:before {
+    transform: translateX(26px); /* Adjust for the larger width */
+}
+
+/* Add "Yes" and "No" text */
+.slider:after {
+    content: "No";
+    position: absolute;
+    right: 5px;
+    color: #fff;
+}
+
+input:checked+.slider:after {
+    content: "Yes";
+    left: 5px;
+    color: #fff;
+}
+
 
 
         .custom_toggle_checked_box {
@@ -431,10 +495,12 @@
 
                         <div class="custom_toggle_checked_box">
                             <h2>{{ __('genralInfo.Ceremony') }}</h2>
-                            <label class="switch">
-                                <input type="checkbox" id="ceremonyToggle" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
-                                <span class="slider round"></span>
-                            </label>
+                            <abbr title="Toggle this on if your event includes a ceremony to display it on your event page">
+                                <label class="switch">
+                                    <input type="checkbox" id="ceremonyToggle" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
+                                    <span class="slider round"></span>
+                                </label>
+                            </abbr>
                         </div>
 
 
@@ -463,10 +529,12 @@
 
                         <div class="custom_toggle_checked_box">
                             <h2>{{ __('genralInfo.Recption') }}</h2>
+                            <abbr title="Toggle this on if your event includes a ceremony to display it on your event page">
                             <label class="switch">
                                 <input type="checkbox" id="receptionToggle" name="boolreception" {{ $event->boolreception == 1 ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                             </label>
+                            </abbr>
                         </div>
 
 
@@ -498,10 +566,12 @@
 
                         <div class="custom_toggle_checked_box">
                             <h2>{{ __('genralInfo.Custom Event') }}</h2>
+                            <abbr title="Toggle this on if your event includes a ceremony to display it on your event page">
                             <label class="switch">
                                 <input type="checkbox" id="partyToggle" name="boolparty" {{ $event->boolparty == 1 ? 'checked' : '' }}>
                                 <span class="slider round"></span>
                             </label>
+                            </abbr>
                         </div>
 
 
@@ -884,40 +954,59 @@
                         </div>
                         <!-- Step 5 -->
                         <div class="tab">
-                            <h2>{{ __('genralInfo.Ceremony') }}</h2>
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
+                            <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
+                                <label>
+                                    <input type="checkbox" id="ceremonyToggle2" class="check_box_style" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
+                                </label>
+                                <h2>{{ __('genralInfo.Ceremony') }}</h2>
+                           
+                            </div>
+                            <div id="ceremonyBox2">
+                                <input type="text" placeholder="{{ __('genralInfo.location') }}" id="ceraddress"
                                 name="ceraddress" value="{{ $event->ceraddress }}">
-                            <input type="time" placeholder="Event Time" name="certime"
+                                <input type="time" placeholder="Event Time" name="certime"
                                 value="{{ $event->certime }}">
-                            <input type="hidden" id="cerAddressLink">
-                            {{-- <div id="mapView" style="width: 100%; height: 400px;"></div> --}}
-                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
+                                <input type="hidden" id="cerAddressLink">
+                                <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="cerdesc">{{ $event->cerdesc }}</textarea>
+                            </div>
                         </div>
                         <!-- Step 6 -->
                         <div class="tab">
+                            <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
+                            <label>
+                                <input type="checkbox" id="receptionToggle2" class="check_box_style" name="boolreception" {{ $event->boolreception == 1 ? 'checked' : '' }}>
+                            </label>
                             <h2>{{ __('genralInfo.Recption') }}</h2>
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
+                            </div>
+                            <div id="recBox2">
+
+                                <input type="text" placeholder="{{ __('genralInfo.location') }}" id="recaddress"
                                 name="recaddress" value="{{ $event->recaddress }}">
-                            <input type="hidden" id="recAddressLink">
-                            <input type="time" placeholder="Event Time" name="rectime"
+                                <input type="hidden" id="recAddressLink">
+                                <input type="time" placeholder="Event Time" name="rectime"
                                 value="{{ $event->rectime }}">
-                            {{-- <div id="RecmapView" style="width: 100%; height: 400px;"></div> --}}
-                            <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
+                                <textarea placeholder="{{ __('genralInfo.Event Description') }}" name="recdesc">{{ $event->recdesc }}</textarea>
+                            </div>
 
                         </div>
                         <!-- Step 7 -->
                         <div class="tab">
+                            <div style="display: flex; flex-direction: row;justify-content: center;align-items: center; gap:20px;">
+                            <label>
+                                <input type="checkbox" id="partyToggle2" class="check_box_style" name="boolparty" {{ $event->boolparty == 1 ? 'checked' : '' }}>
+                            </label>
                             <h2>{{ __('genralInfo.Custom Event') }}</h2>
-
-                            <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
+                            </div>
+                            <div id="parBox2">
+                                <input type="text" placeholder="{{ __('genralInfo.Event Name') }}" name="parname"
                                 value="{{ $event->parname }}">
-                            <input type="hidden" id="parAddressLink">
-                            <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress"
+                                <input type="hidden" id="parAddressLink">
+                                <input type="text" placeholder="{{ __('genralInfo.location') }}" id="paraddress"
                                 name="paraddress" value="{{ $event->paraddress }}">
-                            <input type="time" placeholder="Event Time" name="partime"
+                                <input type="time" placeholder="Event Time" name="partime"
                                 value="{{ $event->partime }}">
-                            {{-- <div id="ParmapView" style="width: 100%; height: 400px;"></div> --}}
-                            <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
+                                <textarea placeholder="{{ __('genralInfo.Custom Event') }}" name="pardesc">{{ $event->pardesc }}</textarea>
+                            </div>
 
                         </div>
                         <div style="overflow:auto;">
@@ -1033,20 +1122,26 @@
 
                         if(showCeremonyBox == false){
                             $("#ceremonyBox").hide();
+                            $("#ceremonyBox2").hide();
                         }else{
                             $("#ceremonyBox").show();
+                            $("#ceremonyBox2").show();
                         }
 
                         if(showRecBox == false){
                             $("#recBox").hide();
+                            $("#recBox2").hide();
                         }else{
                             $("#recBox").show();
+                            $("#recBox2").show();
                         }
 
                         if(showParBox == false){
                             $("#parBox").hide();
+                            $("#parBox2").hide();
                         }else{
                             $("#parBox").show();
+                            $("#parBox2").show();
                         }
 
                         $("#ceremonyToggle").on("click", function() {
@@ -1054,6 +1149,17 @@
                                 $("#ceremonyBox").hide();
                             }else{
                                 $("#ceremonyBox").show();
+                            }
+                        });
+                        $("#ceremonyToggle2").on("click", function() {
+                            if(this.checked == false){
+                                $("#ceremonyBox").hide();
+                                $("#ceremonyBox2").hide();
+                                $("#ceremonyToggle").prop("checked", false);
+                            }else{
+                                $("#ceremonyBox").show();
+                                $("#ceremonyBox2").show();
+                                $("#ceremonyToggle").prop("checked", true);
                             }
                         });
 
@@ -1064,12 +1170,34 @@
                                 $("#recBox").show();
                             }
                         });
+                        $("#receptionToggle2").on("click", function() {
+                            if(this.checked == false){
+                                $("#recBox2").hide();
+                                $("#recBox").hide();
+                                $("#receptionToggle").prop("checked", false);
+                            }else{
+                                $("#recBox2").show();
+                                $("#recBox").show();
+                                $("#receptionToggle").prop("checked", true);
+                            }
+                        });
 
                         $("#partyToggle").on("click", function() {
                             if(this.checked == false){
                                 $("#parBox").hide();
                             }else{
                                 $("#parBox").show();
+                            }
+                        });
+                        $("#partyToggle2").on("click", function() {
+                            if(this.checked == false){
+                                $("#parBox2").hide();
+                                $("#parBox").hide();
+                                $("#partyToggle").prop("checked", false);
+                            }else{
+                                $("#parBox2").show();
+                                $("#parBox").show();
+                                $("#partyToggle").prop("checked", true);
                             }
                         });
 
@@ -1296,6 +1424,10 @@
 
             function submitStep() {
                 var formData = new FormData($('#registrationForm')[0]); // Using FormData to support file uploads
+
+                $("#ceremonyToggle2").prop('checked') == true ? formData.append('boolcerimony', 1) : formData.append('boolcerimony', 0);
+                $("#receptionToggle2").prop('checked') == true ? formData.append('boolreception', 1) : formData.append('boolreception', 0);
+                $("#partyToggle2").prop('checked') == true ? formData.append('boolparty', 1) : formData.append('boolparty', 0);
 
                 $.ajax({
                     url: "{{ route('panel.event.updateEvent', $event->id_event) }}",
