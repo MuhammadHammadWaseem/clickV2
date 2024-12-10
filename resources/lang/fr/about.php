@@ -2,10 +2,11 @@
 
 return [
     'Our' => 'Notre',
+    'title' => 'Notre',
     'Vision' => 'Vision : ',
     'celebrate' => 'Célébrer des Moments, Créer des Connexions',
-    'description' => 'Chez ClickInvitation, nous croyons que chaque événement, qu\'il soit grand ou intime, marque un moment significatif dans la vie de quelqu\'un. Des mariages qui unissent les âmes aux anniversaires qui suscitent la joie, notre mission est d\'amplifier l\'impact de ces moments en livrant des invitations qui reflètent l\'essence de chaque occasion. Nous nous efforçons de favoriser les connexions, de permettre la créativité et d\'améliorer l\'art de la célébration.<br> ac aliquet odio mattis.',
-    'description2' => '<br> ac aliquet odio mattis.',
+    'description' => 'Chez ClickInvitation, nous croyons que chaque événement, qu\'il soit grand ou intime, marque un moment significatif dans la vie de quelqu\'un. Des mariages qui unissent les âmes aux anniversaires qui suscitent la joie, notre mission est d\'amplifier l\'impact de ces moments en livrant des invitations qui reflètent l\'essence de chaque occasion. Nous nous efforçons de favoriser les connexions, de permettre la créativité et d\'améliorer l\'art de la célébration.',
+    'description2' => 'ac aliquet odio mattis.',
     'craftsmanship_title' => 'Artisanat dans',
     'craftsmanship_digital_design' => 'Conception Numérique',
     'craftsmanship_tagline' => 'Où la Créativité Rencontre la Technologie',

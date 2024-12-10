@@ -11,6 +11,31 @@ body {
     padding-top: 120px;
 }
 
+.tab-content h2, .tab-content h3{
+    width: 350px;
+    flex: 0 0 auto;
+    font-weight: 700 !important;
+}
+.tab-wrap p{
+    margin-top: 0 !important;
+}
+
+.tab-content img {
+    width: 25px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+@media only screen and (max-width: 767px) {
+    .tab-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+}
+
 </style>
 @section('title')
     Discover Our Comprehensive Features For Unforgettable Events

@@ -2,10 +2,11 @@
 
 return[
 'Our' => 'Our',
+'title' => 'Our',
 'Vision' => 'Vision: ',
 'celebrate' => 'Celebrate Moments, Create Connections',
-'description' => 'At ClickInvitation, we believe that every event, whether grand or intimate, marks a significant moment in someone\'s life. From weddings that unite souls to birthdays that spark joy, our mission is to amplify the impact of these moments by delivering invitations that reflect the essence of each occasion. We strive to foster connections, enable creativity, and enhance the art of celebration.<br> ac aliquet odio mattis.',
-'description2' => '<br> ac aliquet odio mattis.',
+'description' => 'At ClickInvitation, we believe that every event, whether grand or intimate, marks a significant moment in someone\'s life. From weddings that unite souls to birthdays that spark joy, our mission is to amplify the impact of these moments by delivering invitations that reflect the essence of each occasion. We strive to foster connections, enable creativity, and enhance the art of celebration.',
+'description2' => 'ac aliquet odio mattis.',
 'craftsmanship_title' => 'Craftsmanship in',
 'craftsmanship_digital_design' => 'Digital Design',
 'craftsmanship_tagline' => 'Where Creativity Meets Technology',
