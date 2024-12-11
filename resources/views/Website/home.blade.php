@@ -611,7 +611,7 @@
 
 
         <h2 class="heading-center fifth">
-            {{ __('home.FREQUENTLY') }} <span class="bold-text">{{ __('home.ASK') }} </span>{{ __('home.FREQUENTLY') }}
+            {{ __('home.FREQUENTLY') }} <span class="bold-text">{{ __('home.ASK') }} </span>{{ __('home.QUESTIONS') }}
         </h2>
 
         <div class="accordion">
@@ -765,7 +765,7 @@
 
             </p>
             <a href="/about" class="view-more-events third">
-                {{ __('home.DISCOVER_MORE_INFO_TEXT') }} <img src="assets/newimages/Group 12 (3).png" alt="">
+                {{ __('home.DISCOVER_MORE_INFO_TEXT') }} <img src="assets/newimages/Group 12 (3).png" style="filter: invert(1);" alt="">
             </a>
 
         </div>
