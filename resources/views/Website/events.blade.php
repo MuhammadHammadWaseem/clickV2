@@ -38,7 +38,7 @@ body {
             <div class="child-img2"> <img src="assets/newimages/Component 33 (4).png"
                     alt="first-birthday-party-invitation-cards"></div>
             <div class="child-img3">
-                <img src="assets/newimages/Component 34 (1).png" alt="rsvp-wedding-cards">
+                <img src="assets/newimages/Component 34 (10).png" alt="rsvp-wedding-cards">
                 <a href="#wedding-section"><img src="assets/newimages/Component 37.png"
                         alt="paperless-birthday-party-invitations" class="scroll-below"></a>
             </div>
