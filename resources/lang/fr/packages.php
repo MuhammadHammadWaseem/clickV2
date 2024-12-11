@@ -1,7 +1,7 @@
 <?php
 return [
     'select_a_package' => 'Sélectionnez un forfait',
-    'description' => 'Lorem Ipsum est simplement du texte factice utilisé dans l\'imprimerie et la composition.',
+    'description' => 'Choisissez le forfait parfait qui correspond à vos besoins et à votre budget, conçu pour une valeur et une satisfaction maximales !',
     'basic_package' => 'Forfait de base',
     'price_basic' => '23',
     'general_info' => 'Informations générales',

@@ -1,7 +1,7 @@
 <?php
 return [
         'select_a_package' => 'Select A Package',
-        'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        'description' => 'Pick the perfect package that suits your needs and budget—designed for maximum value and satisfaction!',
         'basic_package' => 'Basic Package',
         'price_basic' => '23',
         'general_info' => 'General Info',
