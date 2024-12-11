@@ -114,7 +114,7 @@ body {
                         {{ __('feature.gifts_payment_gateway_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.gifts_payment_gateway_description') }}<span class="bold-text font-default">{{ __('feature.gifts_payment_gateway_highlight') }}</span>
+                        {{ __('feature.gifts_payment_gateway_description') }}<span class="bold-text font-default"> {{ __('feature.gifts_payment_gateway_highlight') }}</span>
                     </p>
 
             </div>
@@ -125,7 +125,7 @@ body {
                         {{ __('feature.main_meal_choices_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.main_meal_choices_description') }}<span class="bold-text font-default">{{ __('feature.main_meal_choices_highlight') }}</span>
+                        {{ __('feature.main_meal_choices_description') }}<span class="bold-text font-default"> {{ __('feature.main_meal_choices_highlight') }}</span>
                     </p>
 
 
@@ -138,7 +138,7 @@ body {
                         {{ __('feature.pre_made_invitations_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.pre_made_invitations_description') }}<span class="bold-text font-default">{{ __('feature.pre_made_invitations_highlight') }}</span>
+                        {{ __('feature.pre_made_invitations_description') }}<span class="bold-text font-default"> {{ __('feature.pre_made_invitations_highlight') }}</span>
                     </p>
 
 
@@ -151,7 +151,7 @@ body {
                         {{ __('feature.tables_and_seating_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.tables_and_seating_description') }}<span class="bold-text font-default">{{ __('feature.tables_and_seating_highlight') }}</span>
+                        {{ __('feature.tables_and_seating_description') }}<span class="bold-text font-default"> {{ __('feature.tables_and_seating_highlight') }}</span>
                     </p>
 
 
@@ -164,7 +164,7 @@ body {
                         {{ __('feature.messaging_system_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.messaging_system_description') }}<span class="bold-text font-default">{{ __('feature.messaging_system_highlight') }}</span>
+                        {{ __('feature.messaging_system_description') }}<span class="bold-text font-default"> {{ __('feature.messaging_system_highlight') }}</span>
                     </p>
 
 
@@ -177,7 +177,7 @@ body {
                         {{ __('feature.qr_code_checkin_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.qr_code_checkin_description') }}<span class="bold-text font-default">{{ __('feature.qr_code_checkin_highlight') }}</span>
+                        {{ __('feature.qr_code_checkin_description') }}<span class="bold-text font-default"> {{ __('feature.qr_code_checkin_highlight') }}</span>
                     </p>
 
 
@@ -190,7 +190,7 @@ body {
                         {{ __('feature.guest_table_numbers_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.guest_table_numbers_description') }}<span class="bold-text font-default">{{ __('feature.guest_table_numbers_highlight') }}</span>
+                        {{ __('feature.guest_table_numbers_description') }}<span class="bold-text font-default"> {{ __('feature.guest_table_numbers_highlight') }}</span>
                     </p>
 
 
@@ -203,7 +203,7 @@ body {
                         {{ __('feature.adding_family_members_title') }}
                     </h3>
                     <p>
-                        {{ __('feature.adding_family_members_description') }}<span class="bold-text font-default">{{ __('feature.adding_family_members_highlight') }}</span>
+                        {{ __('feature.adding_family_members_description') }}<span class="bold-text font-default"> {{ __('feature.adding_family_members_highlight') }}</span>
                     </p>
 
 
