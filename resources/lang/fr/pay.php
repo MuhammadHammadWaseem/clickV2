@@ -23,4 +23,5 @@ return [
     'canada_2' => 'canada 2',
     'us_1' => 'États-Unis 1',
     'us_2' => 'États-Unis 2',
+    'Payment' => 'Paiement',
 ];

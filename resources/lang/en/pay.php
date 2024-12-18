@@ -23,6 +23,7 @@ return[
     'canada_2' => 'canada 2',
     'us_1' => 'us 1',
     'us_2' => 'us 2',
+    'Payment' => 'Payment',
 
 
 ];

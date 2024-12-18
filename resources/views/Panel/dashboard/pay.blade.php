@@ -66,7 +66,8 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>{{ __('pay.payment_with_paypal') }}</h2>
+                        <h2>{{ __('pay.Payment') }}</h2>
+                        {{-- <h2>{{ __('pay.payment_with_paypal') }}</h2> --}}
                         <p>{{ __('pay.payment_access_area') }}</p>
                     </div>
                 </div>
