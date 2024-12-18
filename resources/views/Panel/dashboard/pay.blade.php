@@ -130,7 +130,11 @@
                             <div class="two-btn-form-align">
                                 <button>{{ __('pay.cancel') }}</button>
 
-                                <div> <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button disabled style="color:#ffffff; font-size:14px; font-family:Montserrat; font-weight:normal; background-color:#212529; padding:7px 16px; display:inline-block; border-radius:3px; border:1px solid #212529; box-shadow:0 2px 4px 0 rgba(0,0,0,0.25); ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149"></script> </div>
+                                {{-- <div> <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button disabled style="color:#ffffff; font-size:14px; font-family:Montserrat; font-weight:normal; background-color:#212529; padding:7px 16px; display:inline-block; border-radius:3px; border:1px solid #212529; box-shadow:0 2px 4px 0 rgba(0,0,0,0.25); ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149"></script> </div> --}}
+                                <div>
+                                    <button disabled style="color:#ffffff; font-size:14px; font-family:Trebuchet MS; font-weight:normal; background-color:#4177B4; padding:7px 16px; display:inline-block; border-radius:3px; border:1px solid #4A90E2; box-shadow:0 2px 4px 0 rgba(0,0,0,0.25); ">BUY NOW</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/6f6467737971493451525745456634444844365072674141415a50623247654c"></script>
+                                </div>
+                                
                                 
                                 <button id="canBtn" class="d-none"><a id="can" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>
                                 <button id="usaBtn" class="d-none"><a id="usa" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>

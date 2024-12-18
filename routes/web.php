@@ -171,9 +171,12 @@ Route::group(['as' => 'panel.'], function () {
             // Pay
             Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index')->middleware('PaidUserCheck');
             Route::post('{id}/pay-datas', [PayController::class, 'paydatas'])->name('pay.get');
+            
+            
         });
     });
 });
+Route::get('pay-confirm', [PayController::class, 'payConfirm']);
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
 Route::post('website/edit/{id}', [WebsiteController::class, 'update'])->name('website.update');
 Route::get('events/{id}/show-gallery', [WebsiteController::class, 'showGallery'])->name('showGallery');

@@ -7,6 +7,7 @@ use App\Models\Data;
 use App\Models\Code;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Helpers\GeneralHelper;
 
 class PayController extends Controller
 {
@@ -88,5 +89,11 @@ class PayController extends Controller
         return '[{"subcan":"' . $subCA . ' CAD", "tpscan":"' . $newTpsCan . ' CAD", "tvqcan":"' . $newTvqCA . ' CAD", 
                   "subusa":"' . $subUsa . ' USD", "tpsusa":"' . $newTpsUSA . ' USD", "tvqusa":"' . $newTvqUSA . ' USD",
                   "totusa":"' . $totusa . ' USD","totcan":"' . $totcan . ' CAD", "linkcan":"' . $linkcan . ' CAD","linkusa":"' . $linkusa . ' CAD","discount":"' . $discount . '%","subusao":"' . $subUsao . ' USD","subcano":"' . $subCAo . ' CAD"}]';
+    }
+
+    public function payConfirm(Request $request)
+    {
+        $eventId = GeneralHelper::getEventId();
+        dd("Event ID: ".$eventId, "Request: ", $request->all(), "User: ", auth()->user());
     }
 }
