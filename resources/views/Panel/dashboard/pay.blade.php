@@ -114,7 +114,7 @@
 
                             </div>
                             <span class="divider-seperater"></span>
-                            <div class="form-row">
+                            {{-- <div class="form-row">
                                 <div class="form-group discont-cd">
                                     <input type="text" id="code" placeholder="Discount {{ __('pay.discount_code') }}">
                                     <button type="button" onclick="verify()">{{ __('pay.verify') }}</button>
@@ -125,9 +125,12 @@
                                     <table id="usaTable" class="d-none">
                                     </table>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="two-btn-form-align">
                                 <button>{{ __('pay.cancel') }}</button>
+
+                                <div> <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button disabled style="color:#ffffff; font-size:14px; font-family:Montserrat; font-weight:normal; background-color:#212529; padding:7px 16px; display:inline-block; border-radius:3px; border:1px solid #212529; box-shadow:0 2px 4px 0 rgba(0,0,0,0.25); ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149"></script> </div>
+                                
                                 <button id="canBtn" class="d-none"><a id="can" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>
                                 <button id="usaBtn" class="d-none"><a id="usa" class="text-white" href="">{{ __('pay.pay_now') }}</a></button>
                             </div>
@@ -143,7 +146,7 @@
 @endsection
 
 @section('scripts')
-    <script>
+    {{-- <script>
         function verify() {
             let code = $("#code").val();
             $.ajax({
@@ -307,5 +310,5 @@
                 `);
             }
         });
-    </script>
+    </script> --}}
 @endsection
