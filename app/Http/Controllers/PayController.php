@@ -8,11 +8,16 @@ use App\Models\Code;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Helpers\GeneralHelper;
+use Illuminate\Support\Facades\Log;
 
 class PayController extends Controller
 {
     public function index($id)
     {
+        session()->start();
+        $eventId = GeneralHelper::getEventId();
+        session(['event_id' => $eventId]);
+        Log::info('Session data before redirect', ['event_id' => session('event_id')]);
         return view('Panel.dashboard.pay');
     }
 
@@ -93,7 +98,11 @@ class PayController extends Controller
 
     public function payConfirm(Request $request)
     {
+        session()->start();
         $eventId = GeneralHelper::getEventId();
-        dd("Event ID: ".$eventId, "Request: ", $request->all(), "User: ", auth()->user());
+        Log::info('Session data after redirect', ['event_id' => session('event_id')]);
+        // dd("Event ID: ".$eventId, "Request: ", $request->all(), "User: ", auth()->user());
+        return view('Panel.dashboard.paySucccess');
+
     }
 }
