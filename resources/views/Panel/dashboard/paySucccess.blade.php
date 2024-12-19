@@ -15,18 +15,9 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>{{ __('pay.Payment') }}</h2>
-                        {{-- <h2>{{ __('pay.payment_with_paypal') }}</h2> --}}
-                        <p>{{ __('pay.payment_access_area') }}</p>
+                        <h2>Congratulations!</h2>
+                        <p>Your payment was successful.</p>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="box-styling website-preview ">
-                    <div class="payment-form-submit">
-                        <h1>Payment Success</h1>
-                    </div>
-
                 </div>
             </div>
         </div>
