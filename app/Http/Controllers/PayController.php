@@ -98,11 +98,9 @@ class PayController extends Controller
 
     public function payConfirm(Request $request)
     {
-        session()->start();
-        $eventId = GeneralHelper::getEventId();
+        $requestData = $request->all();
         Log::info('Session data after redirect', ['event_id' => session('event_id')]);
-        // dd("Event ID: ".$eventId, "Request: ", $request->all(), "User: ", auth()->user());
-        return view('Panel.dashboard.paySucccess');
+        return view('Panel.dashboard.paySucccess',compact("requestData"));
 
     }
 }
