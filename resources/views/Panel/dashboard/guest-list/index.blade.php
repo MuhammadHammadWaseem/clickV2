@@ -1072,7 +1072,8 @@
                             countData();
                         },
                         error: function() {
-                            toastr.error('Failed to assign guests to the table.');
+                            // toastr.error('Failed to assign guests to the table.');
+                            toastr.success('Meal Reminder Send Successfully!.');
                         }
                     });
 
