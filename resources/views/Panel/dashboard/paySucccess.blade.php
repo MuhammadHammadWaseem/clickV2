@@ -34,7 +34,6 @@
         use App\Helpers\GeneralHelper;
         $currentEventId = GeneralHelper::getEventId();
         $user = auth()->user();
-        dd("Data" ,$requestData, "Event Id" ,$currentEventId);
         if ($requestData != null) {
             $events = \App\Models\Event::where('id_event', $currentEventId)->first();
             $events->paid = 1;
@@ -73,8 +72,6 @@
     </div>
 
     <script>
-    console.log("Event Id" ,{{ $currentEventId }});
-    console.log("User Id" ,{{ $user->id }});
     </script>
 </body>
 </html>
