@@ -45,12 +45,19 @@
             $payment->user_name = $user->name . ' ' . $user->surname;
             $payment->user_email = $user->email;
             $payment->event_id = $currentEventId;
-            $payment->ssl_approval_code = $requestData->ssl_approval_code;
-            $payment->ssl_amount = $requestData->ssl_amount;
-            $payment->ssl_exp_date = $requestData->ssl_exp_date;
-            $payment->ssl_txn_id = $requestData->ssl_txn_id;
-            $payment->ssl_result_message = $requestData->ssl_result_message;
-            $payment->ssl_txn_time = $requestData->ssl_txn_time;
+            // $payment->ssl_approval_code = $requestData->ssl_approval_code;
+            // $payment->ssl_amount = $requestData->ssl_amount;
+            // $payment->ssl_exp_date = $requestData->ssl_exp_date;
+            // $payment->ssl_txn_id = $requestData->ssl_txn_id;
+            // $payment->ssl_result_message = $requestData->ssl_result_message;
+            // $payment->ssl_txn_time = $requestData->ssl_txn_time;
+            // $payment->created_at = date('Y-m-d H:i:s');
+            $payment->ssl_approval_code = $requestData['ssl_approval_code'];
+            $payment->ssl_amount = $requestData['ssl_amount'];
+            $payment->ssl_exp_date = $requestData['ssl_exp_date'];
+            $payment->ssl_txn_id = $requestData['ssl_txn_id'];
+            $payment->ssl_result_message = $requestData['ssl_result_message'];
+            $payment->ssl_txn_time = $requestData['ssl_txn_time'];
             $payment->created_at = date('Y-m-d H:i:s');
             $payment->save();
         }
