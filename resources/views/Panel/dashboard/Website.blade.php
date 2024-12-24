@@ -323,7 +323,7 @@
                 @endif
             @endif
             <div class="date">
-                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ isset($WebsiteSetting->is_date) && $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->dateSize) && $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}"></p>
+                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ isset($WebsiteSetting->is_date) && $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }} {{ isset($WebsiteSetting->dateSize) && $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}"></p>
             </div>
         </div>
         <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
@@ -752,9 +752,23 @@
         const geocoder = new Geocoder();
 
         // Fetch addresses from Blade variables (these should be passed from your controller)
-        const address = document.getElementById("ceraddress").value;
-        const recaddress = document.getElementById("recaddress").value;
-        const paraddress = document.getElementById("paraddress").value;
+        
+        let address = "";
+        let recaddress = "";
+        let paraddress = "";
+        
+        if({{ $event->boolcerimony }} == 1){
+            address = document.getElementById("ceraddress").value;
+        }
+        
+        if({{ $event->boolreception }} == 1){
+            recaddress = document.getElementById("recaddress").value;
+        }
+        
+        if({{ $event->boolparty }} == 1){
+            paraddress = document.getElementById("paraddress").value;
+        }
+        
 
         if (address) {
             geocodeAddress(geocoder, address, "mapView", "cerAddressLink");
@@ -798,9 +812,16 @@
     }
 
     // Add event listeners for input fields
-    document.getElementById("ceraddress").addEventListener("input", initMap);
-    document.getElementById("recaddress").addEventListener("input", initMap);
-    document.getElementById("paraddress").addEventListener("input", initMap);
+    if({{ $event->boolcerimony }} == 1){
+        document.getElementById("ceraddress").addEventListener("input", initMap);
+    }
+    
+    if({{ $event->boolreception }} == 1){
+        document.getElementById("recaddress").addEventListener("input", initMap);
+    }
+    if({{ $event->boolparty }} == 1){
+        document.getElementById("paraddress").addEventListener("input", initMap);
+    }
 
     // Initialize map on page load
     window.onload = function() {
@@ -831,6 +852,7 @@
         } else if (parseInt(min) < 10) {
             min = "0" + min;
         }
+        console.log("s", newEDate);
         eDate.innerHTML = months[newEDate.getMonth()] + " " + newEDate.getDate() + ", " + newEDate.getFullYear() + " " +
             newEDate.getHours() + ":" + min;
     }

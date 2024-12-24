@@ -40,7 +40,7 @@ class PayController extends Controller
         $subUsao = 0;
         $subCAo = 0;
 
-        if ($request->has('code')) {
+        if ($request->has('code') && $request->code != '') {
             $code = Code::where('code', $request->code)->first();
             $code = DB::table('coupon')->where(['code' => $request->code])->get();
             //return $code[0]->discount;

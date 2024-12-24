@@ -48,10 +48,15 @@ class WebsiteController extends Controller
             'event_date_color' => 'nullable|string|max:7',
             'font_style' => 'nullable|string|max:50',
             'event_name_color' => 'nullable|string|max:50',
-            'bridefname' => 'nullable|string|max:50',
-            'bridelname' => 'nullable|string|max:50',
-            'groomfname' => 'nullable|string|max:50',
-            'groomlname' => 'nullable|string|max:50',
+            'bridefname' => 'required|string|max:50',
+            'bridelname' => 'required|string|max:50',
+            'groomfname' => 'required|string|max:50',
+            'groomlname' => 'required|string|max:50',
+        ], [
+            'bridefname' => 'The bride first name field is required.',
+            'bridelname' => 'The bride last name field is required.',
+            'groomfname' => 'The groom first name field is required.',
+            'groomlname' => 'The groom last name field is required.',
         ]);
 
 

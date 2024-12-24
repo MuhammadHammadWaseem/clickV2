@@ -24,6 +24,9 @@ return[
     'us_1' => 'us 1',
     'us_2' => 'us 2',
     'Payment' => 'Payment',
-
+    'Pay with PayPal' => 'Pay with PayPal',
+    'Pay with Converge Pay' => 'Pay with Converge Pay',
+    'PAYMENT_VERIFIED' => 'Coupon code applied successfully',
+    'PAYMENT_ERROR' => 'Invalid coupon code',
 
 ];

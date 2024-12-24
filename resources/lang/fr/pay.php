@@ -24,4 +24,8 @@ return [
     'us_1' => 'États-Unis 1',
     'us_2' => 'États-Unis 2',
     'Payment' => 'Paiement',
+    'Pay with PayPal' => 'Payer avec PayPal',
+    'Pay with Converge Pay' => 'Payez avec Converge Pay',
+    'PAYMENT_VERIFIED' => 'Code promo appliqué avec succès',
+    'PAYMENT_ERROR' => 'Code promo invalide',
 ];

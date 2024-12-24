@@ -1582,9 +1582,20 @@ form#settingForm{
                         iframe.src = iframe.src;
                     },
                     error: function(xhr) {
-                        // Handle error (e.g., display error messages)
-                        toastr.error('Failed to Update Setting. Please try again.');
+                        const errors = xhr.responseJSON.errors;
+                        if (Array.isArray(errors)) {
+                            errors.forEach(function(error) {
+                                toastr.error(error);
+                            });
+                        } else if (typeof errors === 'object') {
+                            Object.values(errors).flat().forEach(function(error) {
+                                toastr.error(error);
+                            });
+                        } else {
+                            toastr.error(xhr.responseJSON.message || 'An unexpected error occurred.');
+                        }
                     }
+
                 });
             });
 
