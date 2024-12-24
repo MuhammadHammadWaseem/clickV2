@@ -34,10 +34,12 @@
         use App\Helpers\GeneralHelper;
         $currentEventId = GeneralHelper::getEventId();
         $user = auth()->user();
+        dd("Data" ,$requestData, "Event Id" ,$currentEventId);
         if ($requestData != null) {
             $events = \App\Models\Event::where('id_event', $currentEventId)->first();
             $events->paid = 1;
             $events->save();
+
 
             $payment = new \App\Models\EventPayment();
             $payment->user_id = $user->id;
