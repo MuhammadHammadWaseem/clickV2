@@ -273,7 +273,7 @@
                             </div> --}}
 
                             {{-- 0.01$ --}}
-                            <div>
+                            {{-- <div>
                                 <button disabled
                                     style="background-color: #A9967D;
                                     color: #fff;
@@ -286,13 +286,19 @@
                                 <script
                                     src="https://www.convergepay.com/hosted-payments/buy_button_script/585673556367787a53516965575437756137636961514141415a5063582f4e38">
                                 </script>
-                            </div>
+                            </div> --}}
 
 
                             {{-- 1$ --}}
-                            {{-- <div>
-                                    <button disabled style="color:#ffffff; font-size:14px; font-family:Trebuchet MS; font-weight:normal; background-color:#4177B4; padding:7px 16px; display:inline-block; border-radius:3px; border:1px solid #4A90E2; box-shadow:0 2px 4px 0 rgba(0,0,0,0.25); ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/7870536c735330415448717a6b725a4461625a6877414141415a5062365a306e"></script>
-                                </div> --}}
+                            <div>
+                                    <button disabled style="background-color: #A9967D;
+                                    color: #fff;
+                                    border-color: #A9967D;
+                                    padding: 10px 20px;
+                                    font-size: 16px;cursor: pointer;
+                                    transition: background-color 0.3s, color 0.3s;
+                                    border-radius: 5px; ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/7870536c735330415448717a6b725a4461625a6877414141415a5062365a306e"></script>
+                                </div>
 
                         </div>
                     </div>
