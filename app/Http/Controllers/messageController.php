@@ -142,7 +142,7 @@ class messageController extends Controller
 
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOyqSschCHIXhUyZBeJqurIW8ZBtjTZBYWOLCqnCrW8morXKZCK9aZBhTLc7XMKYxMTZBCKV85NoToguo5bNq5J88SFWyJEulKZCnX9jndDeN6p4ZB7Qr9HtVlG65pEZCBmqKXsxVNK5mv0HemfAOcg1MmCv9KRSAWZAiLwH4eWWW357MoZD', 'Content-Type: application/json'));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOwYeZBaEMzSDd8ScLZCd2n7ZBSprrR1H1LojyJO1CBVYXNsEAQmyuC5yQZAE15FDw6H5BQEtG5KMnGWXZBQ6fnu8NP5cevCvb4vZCahtXCDvZCwC3sKOvjAGcZBhx2RZCm6pyk79jDhLvsqPIfYfiJAJCOfmbJpK8IFxAGFwV0Up0cX1S8VNrVj35qzwkZCYBieuFn6W70ZBPGEq3Tg', 'Content-Type: application/json'));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 
