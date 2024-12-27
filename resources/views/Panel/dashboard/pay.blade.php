@@ -257,7 +257,7 @@
                         <div class=""
                             style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 80px;">
                             {{-- Original --}}
-                            {{-- <div>
+                            <div>
                                 <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button
                                     style="background-color: #A9967D;
                                     color: #fff;
@@ -270,7 +270,7 @@
                                 <script
                                     src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
                                 </script>
-                            </div> --}}
+                            </div>
 
                             {{-- 0.01$ --}}
                             {{-- <div>
@@ -290,7 +290,7 @@
 
 
                             {{-- 1$ --}}
-                            <div>
+                            {{-- <div>
                                     <button disabled style="background-color: #A9967D;
                                     color: #fff;
                                     border-color: #A9967D;
@@ -298,7 +298,7 @@
                                     font-size: 16px;cursor: pointer;
                                     transition: background-color 0.3s, color 0.3s;
                                     border-radius: 5px; ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/7870536c735330415448717a6b725a4461625a6877414141415a5062365a306e"></script>
-                                </div>
+                                </div> --}}
 
                         </div>
                     </div>
