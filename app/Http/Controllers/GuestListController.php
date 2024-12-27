@@ -1076,7 +1076,7 @@ class GuestListController extends Controller
 
                         $curl = curl_init();
                         curl_setopt($curl, CURLOPT_URL, $url);
-                        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOwYeZBaEMzSDd8ScLZCd2n7ZBSprrR1H1LojyJO1CBVYXNsEAQmyuC5yQZAE15FDw6H5BQEtG5KMnGWXZBQ6fnu8NP5cevCvb4vZCahtXCDvZCwC3sKOvjAGcZBhx2RZCm6pyk79jDhLvsqPIfYfiJAJCOfmbJpK8IFxAGFwV0Up0cX1S8VNrVj35qzwkZCYBieuFn6W70ZBPGEq3Tg', 'Content-Type: application/json'));
+                        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOxUHRZCcGZCm4B7Fhc32mTtfi3yendDzq1lo1uZBZC8oM7OZCtabP3ocGn9DZBiaoZBnMfARt0dC4neJpebK2TnLaWfVE9ZAFdv5d2nnc2dkcr4q1zhNF9NOW8hOuRrB84ck1CKPz6YNNdVchE0baSCKCezaeBCQgnIz5klW6fUiPQSmrcmSvxmhbg2D7qgIbhJoDGAzuZCLNDIK1CgZDZD', 'Content-Type: application/json'));
                         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                         $data3 = [
 
