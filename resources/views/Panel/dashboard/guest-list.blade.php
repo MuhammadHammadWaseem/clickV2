@@ -4364,6 +4364,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         idArray = []; // Reset the selected guests array
                         $('.delete-btn-all')
                             .hide(); // Hide delete all button
+                            $("#closeMemberModal").trigger("click");
                     },
                     error: function(xhr) {
                         alert('Something went wrong: ' + xhr
@@ -4421,9 +4422,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     success: function(response) {
                         showGuest("1"); // Reload the guest list
                         toastr.success('Guest deleted successfully');
-                        $('#delguestModalClose').click(); // Hide modal after successful deletion
+                        $('#delguestModalClose').click();
+                        $('#closeMemberModal').click();
                         guestId = null; // Reset the guest ID
                         $('.delete-btn').hide(); // Hide delete button
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray = [];
                     },
                     error: function(xhr) {
                         alert('Something went wrong: ' + xhr.responseText);
@@ -4579,6 +4584,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     $('.delete-btn-all')
                         .hide(); // Hide delete all button
                     $("#closeDispalyModal").click();
+                    $("#closeMemberModal").click();
                 },
                 error: function(xhr) {
                     alert('Something went wrong: ' + xhr.responseText);

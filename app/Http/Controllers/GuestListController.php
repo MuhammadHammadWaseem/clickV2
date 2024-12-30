@@ -527,6 +527,7 @@ class GuestListController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $guest = Guest::where('id_guest', $request->idguest)->first();
         $members = Guest::where('parent_id_guest', $request->idguest)->get();
 
@@ -548,9 +549,13 @@ class GuestListController extends Controller
             $guest->id_meal = $request->meal ?? 0;
             $guest->notes = $request->notes ?? '';
             $guest->members_number = $request->members ?? 0;
-            $guest->opened = ($request->confirm == "1") ? 1 : 0;
-
+            $guest->opened = ($request->confirm == "1") ? 2 : 0;
             $guest->save();
+            
+            if($guest->opened == 1){
+                $guest->declined = 0;
+                $guest->save();
+            }
             return response()->json(["message" => "Guest added successfully!"]);
         }
         return response()->json(["message" => "Guest added successfully!"]);
