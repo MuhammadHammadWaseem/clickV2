@@ -4336,6 +4336,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         idArray = []; // Reset the selected guests array
                         $('.decline-all-btn')
                             .hide(); // Hide Decline All button
+                            $("#closeMemberModal").trigger("click");
                     },
                     error: function(xhr) {
                         alert('Something went wrong: ' + xhr
