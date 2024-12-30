@@ -4451,14 +4451,14 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     },
                     success: function(response) {
                         showGuest("1"); // Reload the guest list
-                        toastr.success(
-                            'Guests deleted successfully');
-                        $('#modifier').css('display',
-                            'none'); // Hide modifier section
-                        idArray
-                            = []; // Reset the selected guests array
-                        $('.delete-btn-all')
-                            .hide(); // Hide delete all button
+                        $('#closeMemberModal').click(); // Hide delete all button
+                        toastr.success('Guests deleted successfully');
+                        $('#modifier').css('display', 'none'); // Hide modifier section
+                        $('.delete-btn-all').hide(); // Hide delete all button
+                        $('#closeMemberModal').trigger('click'); // Hide delete all button
+                        idArray = []; // Reset the selected guests array
+                        // $('.modal-backdrop').removeClass('fade show').hide();
+
                     },
                     error: function(xhr) {
                         alert('Something went wrong: ' + xhr
