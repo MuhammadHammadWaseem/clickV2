@@ -745,6 +745,23 @@
             font-size: 14px;
         }
     }
+    input#guestSearchInput {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 50px;
+        height: 50px;
+        border: 1px solid #999999;
+        padding-left: 20px;
+        font-size: 17px;
+        padding-right: 15px;
+        outline: none;
+        color: #4A4A4A;
+        box-shadow: none;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
 </style>
 @section('content')
     @php
@@ -909,7 +926,9 @@
 
                     <div class="accordian-table-content">
 
+
                         <div class="table-box">
+                            <input type="text" id="guestSearchInput" placeholder="Search by Main Guest or Members..." class="form-control mb-3">
                             <table>
                                 {{-- <tr>
                                     <th>Names</th>
@@ -1746,6 +1765,59 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <!-- #region datatables files -->
 @section('scripts')
     <script>
+
+        $(document).ready(function () {
+            // Search function
+            $('#guestSearchInput').on('keyup', function () {
+                const searchText = $(this).val().toLowerCase();
+                // Loop through each guest card
+                $('#GuestList .guest-list-card-main').each(function () {
+                    const guestCard = $(this);
+
+                    // Extract main guest name
+                    const mainGuestName = guestCard.find('.top-main-name-open span').text().toLowerCase().trim();
+                    const guestEmail = guestCard.find('span i.fa-envelope-o').parent().text().toLowerCase();
+                    const guestPhone = $(this).find('span svg.bi-telephone').parent().text().toLowerCase();
+
+                    // Extract names of all members
+                    const memberNames = guestCard
+                        .find('table tr td strong') // Adjust selector to match member name elements
+                        .map(function () {
+                            return $(this).text().trim().toLowerCase(); // Get and normalize text
+                        })
+                        .get();
+                    const memberEmails = guestCard
+                        .find('table tr td span') // Adjust selector to match member name elements
+                        .map(function () {
+                            return $(this).text().trim().toLowerCase(); // Get and normalize text
+                        })
+                        .get();
+
+                        const memberPhone = guestCard
+                        .find('table tr td p') // Adjust selector to match member name elements
+                        .map(function () {
+                            return $(this).text().trim().toLowerCase(); // Get and normalize text
+                        })
+                        .get();
+
+
+                    // Check if any member name matches the search query
+                    const memberMatch = memberNames.some((name) => name.includes(searchText)) || memberEmails.some((email) => email.includes(searchText)) || memberPhone.some((phone) => phone.includes(searchText));
+                    const isMainGuestMatch = mainGuestName.includes(searchText) || guestEmail.includes(searchText) || guestPhone.includes(searchText);
+
+                    // Show the card if:
+                    // 1. The main guest name matches
+                    // 2. A member matches and the main guest is not the searched name
+                    if (isMainGuestMatch || (memberMatch && !isMainGuestMatch)) {
+                        guestCard.show();
+                    } else {
+                        guestCard.hide();
+                    }
+                });
+            });
+        });
+
+
         $("#add_meal").on("click", function() {
             var successModal = new bootstrap.Modal(document.getElementById('AddGuest'));
             successModal.show();
@@ -2097,11 +2169,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div>
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
-
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
-                                         ${member.email || 'No Email'}    
-                                            
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
+                                                        ${member.email || 'No Email'}    
+                                                        </span>
                                         </div>
                                         
                                         </td>
@@ -2333,10 +2404,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                                    </span>
+
                                         </div>
                                         
                                         </td>
@@ -2567,10 +2639,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                         </span>
                                         </div>
                                         
                                         </td>
@@ -2808,10 +2880,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                         </span>
                                         </div>
                                         
                                         </td>
@@ -3051,10 +3123,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                         </span>
                                         </div>
                                         
                                         </td>
@@ -3285,10 +3357,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                         </span>
                                         </div>
                                         
                                         </td>
@@ -3518,10 +3590,10 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <strong>${member.titleGuest == null ? ' ' : member.titleGuest} ${member.name}</strong>
                                             <br>
 
-                                             ${member.phone || 'No Phone'}
-                                                    <br>
+                                            <p>${member.phone || 'No Phone'}</p>
+                                                    <span>
                                          ${member.email || 'No Email'}    
-                                            
+                                         </span>
                                         </div>
                                         
                                         </td>
@@ -3588,6 +3660,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     }
 
                     accordionFunctionality();
+                    $('#guestSearchInput').trigger('keyup');
                 },
                 error: function(xhr, status, error) {
                     console.error("An error occurred while fetching guests:", error);

@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="three-things-align">
-                        <div class="payment-select-option">
+                        {{-- <div class="payment-select-option">
                             <select id="transferType" required name="type">
                                 <option value="TRANSFER TYPE"
                                     {{ $event->transfer_type == 'TRANSFER TYPE' ? 'selected' : '' }}>
@@ -170,7 +170,39 @@
                                     {{ $event->transfer_type == 'INTERAC TRANSFER' ? 'selected' : '' }}>
                                     {{ __('giftsuggestion.interac_transfer') }}</option>
                             </select>
+                        </div> --}}
+                        <div class="payment-select-option">
+                            <select id="transferType" required name="type">
+                                <option value="TRANSFER TYPE"
+                                    {{ $event->transfer_type == 'TRANSFER TYPE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.TRANSFER TYPE') }}</option>
+                                <option value="PAYPAL" {{ $event->transfer_type == 'PAYPAL' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.paypal') }}</option>
+                                <option value="STRIPE" {{ $event->transfer_type == 'STRIPE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.stripe') }}</option>
+                                <option value="INTERAC TRANSFER" {{ $event->transfer_type == 'INTERAC TRANSFER' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.interac_transfer') }}</option>
+                                <option value="INTERAC E-TRANSFER" {{ $event->transfer_type == 'INTERAC E-TRANSFER' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.interac_e_transfer') }}</option>
+                                <option value="ZELLE" {{ $event->transfer_type == 'ZELLE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.zelle') }}</option>
+                                <option value="VENMO" {{ $event->transfer_type == 'VENMO' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.venmo') }}</option>
+                                <option value="CASH APP" {{ $event->transfer_type == 'CASH APP' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.cash_app') }}</option>
+                                <option value="APPLE PAY" {{ $event->transfer_type == 'APPLE PAY' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.apple_pay') }}</option>
+                                <option value="GOOGLE PAY" {{ $event->transfer_type == 'GOOGLE PAY' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.google_pay') }}</option>
+                                <option value="BANK TRANSFERS" {{ $event->transfer_type == 'BANK TRANSFERS' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.bank_transfers') }}</option>
+                                <option value="WESTERN UNION" {{ $event->transfer_type == 'WESTERN UNION' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.western_union') }}</option>
+                                <option value="MONEYGRAM" {{ $event->transfer_type == 'MONEYGRAM' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.moneygram') }}</option>
+                            </select>
                         </div>
+                        
                         <input type="text" id="transferLink" placeholder="Enter link" required
                             value="{{ $event->transfer_link }}">
                         <button class="t-btn btn btn-primary" id="saveTransferBtn"

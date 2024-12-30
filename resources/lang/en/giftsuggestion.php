@@ -50,6 +50,16 @@ return[
 'No, I Don’t' => 'No, I Don’t',
 'Yes, Create Invitation' => 'Yes, Create Invitation',
 'add_message' => 'Would You Like To Add Another Gift Suggestion For Your Event?',
+    'interac_e_transfer' => 'Interac e-Transfer',
+    'zelle' => 'Zelle',
+    'venmo' => 'Venmo',
+    'cash_app' => 'Cash App',
+    'apple_pay' => 'Apple Pay',
+    'google_pay' => 'Google Pay',
+    'bank_transfers' => 'Bank Transfers',
+    'western_union' => 'Western Union',
+    'moneygram' => 'MoneyGram',
+
 
 
 ];

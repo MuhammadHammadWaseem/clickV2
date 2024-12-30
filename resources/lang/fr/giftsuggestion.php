@@ -25,7 +25,7 @@ return [
 
     'paypal' => 'PayPal',
     'stripe' => 'Stripe',
-    'interac_transfer' => 'Transfert Interac',
+    'interac_transfer' => 'Virement Interac',
     'title_add' => 'Suggestion Ajoutée avec Succès',
     'message_add' => 'Votre suggestion de cadeau a été ajoutée avec succès.',
     'title_delete' => 'Suggestion Supprimée avec Succès',
@@ -50,5 +50,15 @@ return [
     'No, I Don’t' => 'Non, je ne veux pas',
     'Yes, Create Invitation' => 'Oui, Créer l\'Invitation',
     'add_message' => 'Souhaitez-vous ajouter une autre suggestion de cadeau pour votre événement ?',
+
+    'interac_e_transfer' => 'Virement électronique Interac',
+    'zelle' => 'Zelle',
+    'venmo' => 'Venmo',
+    'cash_app' => 'Application de trésorerie',
+    'apple_pay' => 'Apple payer',
+    'google_pay' => 'Google payer',
+    'bank_transfers' => 'Virements bancaires',
+    'western_union' => 'Western Union',
+    'moneygram' => 'MoneyGram',
 
 ];
