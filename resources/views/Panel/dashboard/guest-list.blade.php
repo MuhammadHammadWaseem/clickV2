@@ -4034,6 +4034,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         toastr.error(response.error);
                     } else {
                         showGuest("1");
+                        idArray = [];
                         toastr.success('Guest updated successfully');
                         $('#EditGuestClose').click();
                         $('#closeMemberModal').click();
