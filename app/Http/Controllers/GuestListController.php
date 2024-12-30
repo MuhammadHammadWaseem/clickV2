@@ -552,7 +552,7 @@ class GuestListController extends Controller
             $guest->opened = ($request->confirm == "1") ? 2 : 0;
             $guest->save();
             
-            if($guest->opened == 1){
+            if($guest->opened == 1 || $guest->opened == 2){
                 $guest->declined = 0;
                 $guest->save();
             }
