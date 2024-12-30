@@ -84,4 +84,5 @@ return [
     'no_cards' => 'No Cards!',
     'discard_changes' => 'Discard Changes',
     'save_changes' => 'Save Changes',
+    'download_card' => 'Download Card',
 ];

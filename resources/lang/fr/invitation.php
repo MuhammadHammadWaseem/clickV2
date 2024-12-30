@@ -84,4 +84,5 @@ return [
     'no_cards' => 'Pas de Cartes !',
     'discard_changes' => 'Annuler les Modifications',
     'save_changes' => 'Enregistrer les Modifications',
+    'download_card' => 'Télécharger la carte',
 ];

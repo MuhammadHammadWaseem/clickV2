@@ -2221,7 +2221,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeMemberModal">Close</button>
                                         </div>
                                         </div>
                                     </div>
@@ -4036,6 +4036,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         showGuest("1");
                         toastr.success('Guest updated successfully');
                         $('#EditGuestClose').click();
+                        $('#closeMemberModal').click();
                         $('#modifier').css('display', 'none');
                         $('#modifierButton').css('display', 'none');
                         if (clickedCheckbox) {

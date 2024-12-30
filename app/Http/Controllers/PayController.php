@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Log;
+use App\Models\Event;
 
 class PayController extends Controller
 {
@@ -103,4 +104,33 @@ class PayController extends Controller
         return view('Panel.dashboard.paySucccess',compact("requestData"));
 
     }
+
+    public function thankyou($eventId, Request $request)
+{
+    // Find the event by its ID
+    $event = Event::where('id_event', $eventId)->first();
+
+    // Get the amount from the URL query parameter
+    $amount = $request->get('amount');
+
+    // Check if the PayerID exists in the request
+    $payerId = $request->get('PayerID');
+
+    // If PayerID exists, update the event as paid and handle payment-related logic
+    if ($payerId) {
+        // Mark the event as paid
+        $event->paid = 1;
+
+        // Save the updated event
+        $event->save();
+        
+        // Redirect to the panel index page after successful payment
+        return redirect()->route('panel.index');
+    } else {
+        // If PayerID doesn't exist, show an error or handle the case where payment couldn't be confirmed
+        return redirect()->route('panel.index')
+        ->with('error', 'Payment verification failed. Please try again.');
+    }
+}
+
 }

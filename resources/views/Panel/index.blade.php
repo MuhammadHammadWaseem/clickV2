@@ -67,6 +67,19 @@
         {{-- <div class="main-logo">
             <a href="{{ route('web.index') }}"><img src="assets/images/main-logo.png" alt=""></a>
         </div> --}}
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

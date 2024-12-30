@@ -591,7 +591,7 @@
                                     d="M14.5829 15.3579V11.1962H12.5021V15.3579H9.38086L13.5425 20.56L17.7042 15.3579H14.5829Z"
                                     fill="#C09D2A" />
                             </svg>
-                            {{ __('invitation.download_pdf') }}
+                            {{ __('invitation.download_card') }}
                         </a>
                     </div>
 
@@ -1417,7 +1417,7 @@
                             <div class="box">
                                 <label>{{ __('invitation.invitation_message_title') }}</label>
                                 <input type="text" value="{{ $cardData->msgTitle ?? '' }}" id="msgTitle"
-                                    placeholder="We Are Going To Marriage.">
+                                    placeholder="You're Invited!">
                             </div>
                             <div class="box">
                                 <label for="font-selectorsetting">Guest Name’s Font Style</label>
