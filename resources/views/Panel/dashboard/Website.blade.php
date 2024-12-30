@@ -366,7 +366,7 @@
                                     <div class="col-md-4">
                                         <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
                                         @if ($event->imggroom)
-                                            <img src="{{ url('/') }}{{ $event->imggroom }}"
+                                            <img src="{{ url('/') }}/{{ $event->imggroom }}"
                                                 class="img-fluid rounded-start">
                                         @endif
                                     </div>
@@ -386,7 +386,7 @@
                                 <div class="row card g-0">
                                     <div class="col-md-4">
                                         @if ($event->imgbride)
-                                            <img src="{{ url('/') }}{{ $event->imgbride }}"
+                                            <img src="{{ url('/') }}/{{ $event->imgbride }}"
                                                 class="img-fluid rounded-start">
                                         @endif
                                     </div>
@@ -704,6 +704,7 @@
 
 </html>
 <script>
+    console.log("click!");
     $(document).ready(function() {
         initMap();
     });
