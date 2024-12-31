@@ -418,7 +418,7 @@ input:checked+.slider:after {
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview"
-                                                @if (file_exists($event->imggroom)) style="background-image: url('{{ asset($event->imggroom) }}');"
+                                                @if (file_exists($event->imggroom)) style="background-image: url('{{ asset($event->imggroom) }}?v={{ filemtime(public_path($event->imggroom)) }}');"
                                             @else
                                                 style="background-image: url('{{ asset('assets/Panel/images/groom-img.png') }}');" @endif>
                                             </div>
@@ -449,7 +449,7 @@ input:checked+.slider:after {
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview2"
-                                                @if (file_exists($event->imgbride)) style="background-image: url('{{ asset($event->imgbride) }}');"
+                                                @if (file_exists($event->imgbride)) style="background-image: url('{{ asset($event->imgbride) }}?v={{ filemtime(public_path($event->imgbride)) }}');"
                                             @else
                                                 style="background-image: url('{{ asset('assets/Panel/images/bride-img.png ') }}');" @endif>
                                             </div>
