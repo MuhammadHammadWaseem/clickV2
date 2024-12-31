@@ -36,8 +36,8 @@
         }
 
 
-        #StepForm #imageUpload,
-        #StepForm #imageUpload2 {
+        #StepForm #new_imageUpload,
+        #StepForm #new_imageUpload2 {
             height: 75px;
         }
 
@@ -907,8 +907,7 @@ input:checked+.slider:after {
                                     <!-- Step 2 -->
                                     <div class="tab">
                                         <h2>{{ __('genralInfo.Groom Details') }}</h2>
-                                        @if ($event->eventType->couple_event == '1')
-                                            <input type="file" required id="imageUpload" accept=".png, .jpg, .jpeg"
+                                            <input type="file" required id="new_imageUpload" accept=".png, .jpg, .jpeg"
                                                 name="groom_img" />
 
                                             <!-- Groom Image Display with Conditional Source -->
@@ -927,20 +926,20 @@ input:checked+.slider:after {
                                     <div class="tab">
                                         <h2>{{ __('genralInfo.Bride Details') }}</h2>
                                         <!-- Bride Image Upload -->
-                                        <input type="file" id="imageUpload2" accept=".png, .jpg, .jpeg"
+                                        <input type="file" id="new_imageUpload2" accept=".png, .jpg, .jpeg"
                                             name="bride_img" />
                                         <!-- bride Image Display with Conditional Source -->
                                         <img src="{{ file_exists($event->imgbride) ? asset($event->imgbride) : asset('assets/Panel/images/bride-img.png') }}"
-                                            alt="Groom Image" class="groom-image" height="100px" width="100px">
+                                        alt="Bride Image" class="bride-image" height="100px" width="100px">
+                                            {{-- alt="Groom Image" class="groom-image" height="100px" width="100px"> --}}
                                         <!-- Bride Information -->
                                         <input type="text" placeholder="{{ __('genralInfo.First Name') }}"
                                             name="bridefname" value="{{ $event->bridefname }}">
                                         <input type="text" placeholder="{{ __('genralInfo.Last Name') }}"
                                             name="bridelname" value="{{ $event->bridelname }}">
                                         <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
+                                    </div>
                                 @endif
-                        </div>
-                        @endif
                         <!-- Step 4 -->
                         <div class="tab">
                             <h2>
@@ -958,7 +957,7 @@ input:checked+.slider:after {
                                 <h2>{{ __('genralInfo.Ceremony') }}</h2>
                                 <label class="d-flex">
                                     <input type="checkbox" id="ceremonyToggle2" class="check_box_style" name="boolcerimony" {{ $event->boolcerimony == 1 ? 'checked' : '' }}>
-                                    No Ceremony
+                                    There is a Ceremony
                                 </label>
                            
                             </div>
@@ -977,7 +976,7 @@ input:checked+.slider:after {
                                 <h2>{{ __('genralInfo.Recption') }}</h2>
                             <label class="d-flex">
                                 <input type="checkbox" id="receptionToggle2" class="check_box_style" name="boolreception" {{ $event->boolreception == 1 ? 'checked' : '' }}>
-                                No Reception
+                                There is Reception
                             </label>
                             </div>
                             <div id="recBox2">
@@ -997,7 +996,7 @@ input:checked+.slider:after {
                                 <h2>{{ __('genralInfo.Custom Event') }}</h2>
                             <label class="d-flex">
                                 <input type="checkbox" id="partyToggle2" class="check_box_style" name="boolparty" {{ $event->boolparty == 1 ? 'checked' : '' }}>
-                                No Party
+                                There is a Custom Event
                             </label>
                             </div>
                             <div id="parBox2">
@@ -1059,6 +1058,35 @@ input:checked+.slider:after {
 
     @section('scripts')
         <script>
+            document.getElementById('new_imageUpload').addEventListener('change', function(event) {
+                const groomImagePreview = document.querySelector('.groom-image');
+                const file = event.target.files[0];
+
+                console.log("Groom", file);
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        groomImagePreview.src = e.target.result; // Set new image preview
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Bride Image Preview
+            document.getElementById('new_imageUpload2').addEventListener('change', function(event) {
+                const brideImagePreview = document.querySelector('.bride-image');
+                const file = event.target.files[0];
+                
+                console.log("Bride", file);
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        brideImagePreview.src = e.target.result; // Set new image preview
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
             $("#noWebsite").on("click", function() {
                 var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
                 successModal.show();
@@ -1439,6 +1467,7 @@ input:checked+.slider:after {
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        console.log("submit!");
                         toastr.success('Event updated successfully');
                         console.log(response);
 
@@ -1452,7 +1481,7 @@ input:checked+.slider:after {
                         if (event.date) {
                             $('input[name="event_date"]').val(event.date);
                         }
-
+                        console.log("formData",formData);
                         // Update Step 2 fields (Groom Details)
                         if (event.imggroom) {
                             $('#imagePreview').css('background-image', 'url("' + '{{ asset('') }}' + event
@@ -1538,6 +1567,22 @@ input:checked+.slider:after {
                         }
                         if (event.parimg) {
                             $('#customEventImage').attr('src', event.parimg);
+                        }
+
+                        // Update Step 2 fields (Groom Details)
+                        if (event.imggroom) {
+                            let groomImageUrl = '{{ asset('') }}' + event.imggroom + '?t=' + new Date().getTime();
+                            $('#imagePreview').css('background-image', 'url("' + groomImageUrl + '")');
+                        } else {
+                            $('#imagePreview').css('background-image', 'url("{{ asset('assets/Panel/images/bride-img.png') }}")');
+                        }
+
+                        // Update Step 3 fields (Bride Details)
+                        if (event.imgbride) {
+                            let brideImageUrl = '{{ asset('') }}' + event.imgbride + '?t=' + new Date().getTime();
+                            $('#imagePreview2').css('background-image', 'url("' + brideImageUrl + '")');
+                        } else {
+                            $('#imagePreview2').css('background-image', 'url("{{ asset('assets/Panel/images/groom-img.png') }}")');
                         }
 
                         // Close the modal
