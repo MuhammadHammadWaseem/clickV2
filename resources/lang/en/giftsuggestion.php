@@ -59,6 +59,7 @@ return[
     'bank_transfers' => 'Bank Transfers',
     'western_union' => 'Western Union',
     'moneygram' => 'MoneyGram',
+    'would you like to make or import your invitation card Now?' => 'would you like to make or import your invitation card Now?'
 
 
 

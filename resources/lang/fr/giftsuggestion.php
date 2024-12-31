@@ -60,5 +60,6 @@ return [
     'bank_transfers' => 'Virements bancaires',
     'western_union' => 'Western Union',
     'moneygram' => 'MoneyGram',
+    'would you like to make or import your invitation card Now?' => 'Souhaitez-vous créer ou importer votre carte d\'invitation maintenant ?'
 
 ];

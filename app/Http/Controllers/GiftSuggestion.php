@@ -85,6 +85,7 @@ public function savetransfer(Request $request)
         $event->save();
         return response()->json([
             'success' => true,
+            'data' => $event,
             'message' => "Updated Successfully"
         ]);
     }

@@ -304,7 +304,7 @@
                 <div class="modal-body">
                     <div class="text">
                         <h2>{{ __('giftsuggestion.want_to_send_invitations_to_guests') }}</h2>
-                        <p>{{ __('giftsuggestion.description_text') }}</p>
+                        <p>{{ __('giftsuggestion.would you like to make or import your invitation card Now?') }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -352,6 +352,72 @@
 
                     <button type="submit" class="submit-btn btn"
                         form="addGiftForm">{{ __('giftsuggestion.Add Suggestion') }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Add Payment Mood --}}
+    <div class="modal fade modal-01 add-new-meal" id="exampleModalCenter1122" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenter1122Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h2>{{ __('giftsuggestion.TRANSFER DATA') }}</h2>
+                        {{-- <p>{{ __('giftsuggestion.description_text2') }}</p> --}}
+                    </div>
+                    <div class="main-form-box">
+                        <form id="addGiftForm">
+                            @csrf
+                            <select id="transferType2" required name="type">
+                                <option value="TRANSFER TYPE"
+                                    {{ $event->transfer_type == 'TRANSFER TYPE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.TRANSFER TYPE') }}</option>
+                                <option value="PAYPAL" {{ $event->transfer_type == 'PAYPAL' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.paypal') }}</option>
+                                <option value="STRIPE" {{ $event->transfer_type == 'STRIPE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.stripe') }}</option>
+                                <option value="INTERAC TRANSFER" {{ $event->transfer_type == 'INTERAC TRANSFER' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.interac_transfer') }}</option>
+                                <option value="INTERAC E-TRANSFER" {{ $event->transfer_type == 'INTERAC E-TRANSFER' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.interac_e_transfer') }}</option>
+                                <option value="ZELLE" {{ $event->transfer_type == 'ZELLE' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.zelle') }}</option>
+                                <option value="VENMO" {{ $event->transfer_type == 'VENMO' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.venmo') }}</option>
+                                <option value="CASH APP" {{ $event->transfer_type == 'CASH APP' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.cash_app') }}</option>
+                                <option value="APPLE PAY" {{ $event->transfer_type == 'APPLE PAY' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.apple_pay') }}</option>
+                                <option value="GOOGLE PAY" {{ $event->transfer_type == 'GOOGLE PAY' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.google_pay') }}</option>
+                                <option value="BANK TRANSFERS" {{ $event->transfer_type == 'BANK TRANSFERS' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.bank_transfers') }}</option>
+                                <option value="WESTERN UNION" {{ $event->transfer_type == 'WESTERN UNION' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.western_union') }}</option>
+                                <option value="MONEYGRAM" {{ $event->transfer_type == 'MONEYGRAM' ? 'selected' : '' }}>
+                                    {{ __('giftsuggestion.moneygram') }}</option>
+                            </select>
+                            <input type="text" id="transferLink2" placeholder="Enter link" required
+                            value="{{ $event->transfer_link }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closePaymentModal"
+                        data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
+
+                        <button type="button" class="btn btn-secondary d-none" id="closePaymentModal2"
+                        data-dismiss="modal">{{ __('giftsuggestion.Cancel') }}</button>
+
+                        <button class="t-btn btn btn-primary" id="saveTransferBtn2"
+                        type="button">{{ __('giftsuggestion.SAVE') }}</button>
                     </form>
                 </div>
             </div>
@@ -575,6 +641,11 @@
             successModal.show();
         });
         $("#closeAddModal").on("click", function() {
+            var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter1122'));
+            // var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+            successModal.show();
+        });
+        $("#closePaymentModal").on("click", function() {
             var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
             successModal.show();
         });
@@ -613,8 +684,8 @@
                     $('#addGiftForm')[0].reset();
                         myModal.hide();
                         $("#closeAddModal1").click();
-                        var successModal = new bootstrap.Modal(document.getElementById(
-                            'exampleModalCenter09'));
+                        // var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter09'));
+                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter1122'));
                         successModal.show();
                         show();
                         // location.reload(); // Optionally reload to see the new gift in the list
@@ -794,6 +865,47 @@
                 success: function(response) {
                     if (response.success == true) {
                         toastr.success('Transfer data saved successfully!');
+                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter09'));
+                        successModal.show();
+                        var AddModal = new bootstrap.Modal(document.getElementById('exampleModalCenter1122'));
+                        AddModal.hide();
+                        $("#closePaymentModal2").click();
+                        console.log(response.data);
+                    } else {
+                        toastr.error('Failed to save transfer data. Please try again.');
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr);
+                    toastr.error('An error occurred. Please try again.');
+                }
+            });
+        });
+        $(document).on('click', '#saveTransferBtn2', function() {
+            var transferType = $('#transferType2').val();
+            var transferLink = $('#transferLink2').val();
+            var eventId = "{{ $eventId }}"; // Use your event ID dynamically
+            $.ajax({
+                url: "{{ route('panel.event.savetransfer', ':id') }}".replace(':id', eventId),
+                type: 'POST', // Change this to POST
+                data: {
+                    transfertype: transferType,
+                    transferlink: transferLink,
+                    eventId: eventId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.success == true) {
+                        toastr.success('Transfer data saved successfully!');
+                        var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter09'));
+                        successModal.show();
+                        var AddModal = new bootstrap.Modal(document.getElementById('exampleModalCenter1122'));
+                        AddModal.hide();
+                        $("#closePaymentModal2").click();
+                        $("#transferLink").val(response.data.transfer_link);
+                        $("#transferType").val(response.data.transfer_type);
+                        $("#transferType2").val('');
+                        $("#transferLink2").val('');
                     } else {
                         toastr.error('Failed to save transfer data. Please try again.');
                     }
