@@ -366,9 +366,9 @@
                                     <div class="col-md-4">
                                         <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
                                         @if ($event->imggroom)
-                                            <img src="{{ url('/') }}/{{ $event->imggroom }}"
-                                                class="img-fluid rounded-start">
+                                            <img src="{{ url('/') }}/{{ $event->imggroom }}?v={{ filemtime(public_path($event->imggroom)) }}" class="img-fluid rounded-start">
                                         @endif
+
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -386,7 +386,7 @@
                                 <div class="row card g-0">
                                     <div class="col-md-4">
                                         @if ($event->imgbride)
-                                            <img src="{{ url('/') }}/{{ $event->imgbride }}"
+                                            <img src="{{ url('/') }}/{{ $event->imgbride }}?v={{ filemtime(public_path($event->imgbride)) }}"
                                                 class="img-fluid rounded-start">
                                         @endif
                                     </div>
