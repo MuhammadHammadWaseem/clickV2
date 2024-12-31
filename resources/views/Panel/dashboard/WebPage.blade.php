@@ -1398,6 +1398,9 @@ form#settingForm{
         });
 
         $(document).ready(function() {
+            const iframe11 = document.querySelector('iframe');
+            iframe11.src = iframe11.src;
+
             $("#saveImagesModal").on("click", function() {
                 var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
                 myModal.show();
