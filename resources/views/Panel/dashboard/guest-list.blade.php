@@ -785,8 +785,10 @@
                 onclick="declineGuest()" style="display:none;">{{ __('guestlistpage.DECLINE') }}</button>
             <button class="btn btn-sm btn-danger decline-all-btn" style="display:none;"
                 onclick="declineAllGuests()">{{ __('guestlistpage.DECLINE_ALL') }}</button>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#undeclineguestModal"
-                style="display: none;">{{ __('guestlistpage.UNDECLINE') }}</button>
+            <button class="btn btn-sm btn-primary undecline-btn" data-bs-toggle="modal" data-bs-target="#undeclineguestModal"
+                onclick="undeclineGuest()" style="display:none;">{{ __('guestlistpage.UNDECLINE') }}</button>
+            <button class="btn btn-sm btn-primary undecline-all-btn" style="display:none;"
+                onclick="undeclineAllGuests()">{{ __('guestlistpage.UNDECLINE_ALL') }}</button>
         </div>
     </div>
 
@@ -4228,6 +4230,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             const deleteButtonAll = document.querySelector('.delete-btn-all');
             const declineButton = document.querySelector('.decline-btn');
             const declineAllButton = document.querySelector('.decline-all-btn');
+            const undeclineAllButton = document.querySelector('.undecline-all-btn');
+            const undeclineButton = document.querySelector('.undecline-btn');
 
             if (idArray.length === 1) {
                 editButton.style.display = "block";
@@ -4235,12 +4239,16 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 deleteButtonAll.style.display = "none"; // Hide Delete All when only one guest is selected
                 declineButton.style.display = "block"; // Show Decline button for one guest
                 declineAllButton.style.display = "none"; // Hide Decline All
+                undeclineAllButton.style.display = "none"; // Hide Undecline All
+                undeclineButton.style.display = "block";
             } else if (idArray.length > 1) {
                 editButton.style.display = "none"; // Hide Edit button for multiple selections
                 deleteButtonSingle.style.display = "none"; // Hide single Delete button
                 deleteButtonAll.style.display = "block"; // Show Delete All button
                 declineButton.style.display = "none"; // Hide Decline button
                 declineAllButton.style.display = "block"; // Show Decline All button
+                undeclineAllButton.style.display = "block"; // Hide Undecline All button
+                undeclineButton.style.display = "none"; // Hide Undecline button
             }
 
             // Update the selected count display
@@ -4383,7 +4391,63 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 });
             }
         }
+        function undeclineGuest() {
+            if (idArray.length === 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.undeclineguest', ['id' => $eventId]) }}", // Use the same route for multiple declines
+                    type: "POST",
+                    data: {
+                        guestid: idArray[0], // Send a single guest ID
+                        idevent: "{{ $eventId }}", // Include event ID
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
+                    success: function(response) {
+                        showGuest("1"); // Reload the guest list
+                        toastr.success('Guests U successfully');
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.delete-btn-all')
+                            .hide(); // Hide delete all button
+                            $("#closeMemberModal").trigger("click");
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
+                    }
+                });
+            }
+        }
 
+        function undeclineAllGuests() {
+            if (idArray.length > 1) {
+                $.ajax({
+                    url: "{{ route('panel.event.undeclineguest', ['id' => $eventId]) }}", // Your route for declining all
+                    type: "POST",
+                    data: {
+                        guestIds: idArray,
+                        idevent: "{{ $eventId }}",
+                        _token: "{{ csrf_token() }}" // Ensure CSRF token is included
+                    },
+                    success: function(response) {
+                        showGuest("1"); // Reload the guest list
+                        toastr.success(
+                            'Selected guests U successfully');
+                        $('#modifier').css('display',
+                            'none'); // Hide modifier section
+                        idArray = []; // Reset the selected guests array
+                        $('.decline-all-btn')
+                            .hide(); // Hide Decline All button
+                            $("#closeMemberModal").trigger("click");
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong: ' + xhr
+                            .responseText);
+                    }
+                });
+            }
+        }
+        
         $(document).on('change', '.guest-checkbox', function() {
             const guestId = $(this).val();
 

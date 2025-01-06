@@ -168,5 +168,6 @@ return[
     'of' => 'OF ',
     'allowed' => 'ALLOWED ',
     'all members allowed added' => 'All members allowed are added',
-    'Attending' => 'Attending'
+    'Attending' => 'Attending',
+    'UNDECLINE_ALL' => 'UNDECLINE ALL',
 ];

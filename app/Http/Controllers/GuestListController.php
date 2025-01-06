@@ -291,6 +291,7 @@ class GuestListController extends Controller
         if ($request->filter == "attending") {
             $guests = Guest::where('id_event', $eventId)
                 ->where('mainguest', 1)
+                ->where('opened', 2)
                 ->get();
             foreach ($guests as $g) {
                 // Fetch members associated with the main guest
@@ -801,6 +802,55 @@ class GuestListController extends Controller
                     $guest->opened = null;
                     $guest->checkin = null;
                     $guest->id_table = 0;
+                    $guest->save();
+                }
+                return response()->json(["success" => "All guests declined successfully"], 200);
+            } else {
+                return response()->json(["error" => "Event not found or access denied"], 400);
+            }
+        }
+    }
+    public function undeclineguest(Request $request)
+    {
+        // Check if no guest ID or guest IDs are provided
+        if (!$request->has('guestid') && !$request->has('guestIds')) {
+            return response()->json(["error" => "Guest ID not provided"], 400);
+        }
+
+        // If a single guest ID is provided
+        if ($request->has('guestid')) {
+            $guest = Guest::where('id_guest', $request->guestid)->first();
+
+            if ($guest) {
+                $event = Event::where('id_event', $request->idevent)->first();
+                if ($event && $event->id_user == Auth::id()) {
+                    // Update guest details
+                    $guest->declined = 0;
+                    $guest->opened = 2;
+                    $guest->save();
+                    return response()->json(["success" => "Guest declined successfully"], 200);
+                } else {
+                    return response()->json(["error" => "Event not found or access denied"], 400);
+                }
+            } else {
+                return response()->json(["error" => "Guest not found"], 400);
+            }
+        }
+        // If multiple guest IDs are provided
+        else {
+            $guests = Guest::whereIn('id_guest', $request->guestIds)->get();
+
+            if ($guests->isEmpty()) {
+                return response()->json(["error" => "Guests not found"], 400);
+            }
+
+            $event = Event::where('id_event', $request->idevent)->first();
+            if ($event && $event->id_user == Auth::id()) {
+                // Update all guests
+                foreach ($guests as $guest) {
+                    // Update guest details
+                    $guest->declined = 0;
+                    $guest->opened = 2;
                     $guest->save();
                 }
                 return response()->json(["success" => "All guests declined successfully"], 200);
