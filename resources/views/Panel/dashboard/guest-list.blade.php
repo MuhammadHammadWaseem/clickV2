@@ -1544,6 +1544,12 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="text">
                                 <h2>{{ __('guestlistpage.select_options_display') }}</h2>
                                 <div class="form-group">
+                                    <label
+                                        for="attending">{{ __('guestlistpage.Attending') }}</label>
+                                    <input type="checkbox" name="attending" id="attending"
+                                        {{ $card->rsvp[0] == 1 ? 'checked' : '' }}>
+                                </div>
+                                <div class="form-group">
                                     <label for="gift-suggestion">{{ __('guestlistpage.gift_suggestions') }}</label>
                                     <input type="checkbox" name="gift-suggestion" id="gift-suggestion"
                                         {{ $card->rsvp[2] == 1 ? 'checked' : '' }}>

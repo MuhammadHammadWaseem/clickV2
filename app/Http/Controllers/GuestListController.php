@@ -880,6 +880,7 @@ class GuestListController extends Controller
                 'checkin' => isset($options['at-reception-check-in']) ? 1 : 0,
                 'photos' => isset($options['upload-your-photo']) ? 1 : 0,
                 'website' => isset($options['go-to-the-website']) ? 1 : 0,
+                'attending' => isset($options['attending']) ? 1 : 0,
                 'rsp' => isset($options['learn-how-RSVP-works']) ? 1 : 0,
             ]);
         }

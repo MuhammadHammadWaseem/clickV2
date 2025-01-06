@@ -16,6 +16,7 @@ class GuestOption extends Model
         'checkin',
         'photos',
         'website',
-        'rsp'
+        'rsp',
+        'attending'
     ];
 }

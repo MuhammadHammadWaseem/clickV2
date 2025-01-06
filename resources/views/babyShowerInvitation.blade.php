@@ -82,7 +82,7 @@
         </div>
         <div class="offcanvas-body ">
 
-            @if ($card[0]->rsvp[0] == '1')
+           @if ($card[0]->rsvp[0] == '1' && $guestOptions->attending == 1)
                 <a href="{{env('APP_URL')}}/attending/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
                     class="btn t-btn modify ">{{ __('cardinvit.Attending') }}</a>
             @endif

@@ -167,4 +167,5 @@ return[
     'of' => 'DE',
     'allowed' => 'PERMISE',
     'all members allowed added' => 'Tous les membres autorisés sont ajoutés',
+    'Attending' => 'Participer'
 ];
