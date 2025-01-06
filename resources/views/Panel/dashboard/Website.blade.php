@@ -450,8 +450,8 @@
                     <div class="col text-center">
                         <h1>{{ __('website.gallery_title') }}</h1>
                         <h4 class="mt-4 mb-4">{{ __('website.gallery_subtitle') }}</h4>
-                        <button data-bs-toggle="modal" data-bs-target="#photogalleryModal"
-                            class="btn t-btn">{{ __('website.add_photos') }}</button>
+                        {{-- <button data-bs-toggle="modal" data-bs-target="#photogalleryModal"
+                            class="btn t-btn">{{ __('website.add_photos') }}</button> --}}
                         <hr>
                     </div>
                 </div>
