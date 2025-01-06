@@ -4033,11 +4033,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     if (response.error) {
                         toastr.error(response.error);
                     } else {
+                        $("#EditGuestClose").click();
+                        $("#closeMemberModal").click();
+                        $('.modal-backdrop').removeClass('fade show').hide();
+
                         showGuest("1");
                         idArray = [];
                         toastr.success('Guest updated successfully');
-                        $('#EditGuestClose').click();
-                        $('#closeMemberModal').click();
                         $('#modifier').css('display', 'none');
                         $('#modifierButton').css('display', 'none');
                         if (clickedCheckbox) {

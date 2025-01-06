@@ -393,11 +393,11 @@ class GuestListController extends Controller
 
 
         if ($request->filter == "opened") {
-            $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->where('opened', 1)->where('id_meal', null)->get();
+            $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->where('opened', 1)->get();
 
             foreach ($guests as $g) {
                 $NotConfim = 0;
-                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('opened')->get();
+                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->where('opened', 1)->get();
 
                 if ($g->opened) {
 

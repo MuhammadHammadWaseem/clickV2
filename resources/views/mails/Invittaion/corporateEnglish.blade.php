@@ -96,7 +96,10 @@
                                             {{ $data['cardId']['msgTitle'] ?? 'No Title Available' }}
                                         </p>
                                         <p style="font-size:16px; color:#333333;">
-                                            {{ ($data['event']['bridefname'] ?? '') . ' ' . ($data['event']['bridelname'] ?? '') }}
+                                            {{ ($data['event']['name'] ?? '') }}
+                                            {{-- {{ ($data['event']['groomfname'] ?? '') . ' ' . ($data['event']['groomlname'] ?? '') }}
+                                            &
+                                            {{ ($data['event']['bridefname'] ?? '') . ' ' . ($data['event']['bridelname'] ?? '') }} --}}
                                         </p>
                                         <p style="font-size:14px; color:#777;">
                                             {{ $data['formattedDate'] ?? 'Date not available' }}
