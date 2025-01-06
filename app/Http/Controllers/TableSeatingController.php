@@ -59,22 +59,40 @@ class TableSeatingController extends Controller
         //     FROM guests
         //     WHERE (id_event = ' . $id . ') AND 
         //     (
-        //         ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
-        //         (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
-        //     )
+        //         ((checkin = 1) AND declined IS NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+        //         (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined IS NULL))
+        //     ) AND opened != 0
         //     ORDER BY id_table ASC
         // ');
 
         $guests = DB::select('
-        SELECT *
+            SELECT *
             FROM guests
-            WHERE (id_event = ' . $id . ') AND 
-            (
-                ((checkin = 1) AND declined IS NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
-                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined IS NULL))
-            ) AND opened != 0
+            WHERE 
+                id_event = :event_id
+                AND (
+                    (
+                        checkin = 1 
+                        AND declined IS NULL 
+                        AND (
+                            id_meal IS NOT NULL 
+                            OR opened = 2
+                        )
+                    ) 
+                    OR 
+                    (
+                        (
+                            opened = 2 
+                            AND id_meal IS NOT NULL
+                        ) 
+                        AND (
+                            declined IS NULL OR declined = 0
+                        )
+                    )
+                )
+                AND opened != 0
             ORDER BY id_table ASC
-        ');
+        ', ['event_id' => $id]);
 
         foreach ($guests as $guest) {
 
