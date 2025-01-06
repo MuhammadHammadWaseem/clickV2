@@ -638,7 +638,7 @@
                         <div class="main-heading">
                             <ul>
                                 <li>{{ __('table.name') }}</li>
-                                <li>{{ __('table.number_of_guests') }}</li>
+                                <li>{{ __('table.meal') }}</li>
                                 <li>{{ __('table.table') }}</li>
                                 <li>{{ __('table.main_guest') }}</li>
                                 <li>{{ __('table.actions') }}</li>
@@ -1162,6 +1162,7 @@
                 const isChecked = guest.id_table === tableId ? 'checked' : '';
                 $("#sub-main-content").append(`
                 <div class="sub-main-content">
+                    <label for="guest-checkbox-${guest.id_guest}" style="display: block !important;">
                     <ul>
                         <li>${guest.titleGuest ?? ""} ${guest.name}</li>
                         <li>${guest.mealName ?? "-"}</li>
@@ -1172,9 +1173,10 @@
                         }
                         <li>${guest.mainGuest ? guest.mainGuest.name : ""}</li>
                         <li>
-                            <input type="checkbox" class="guest-checkbox" data-guest-id="${guest.id_guest}" ${isChecked}/>
+                            <input id="guest-checkbox-${guest.id_guest}" type="checkbox" class="guest-checkbox" data-guest-id="${guest.id_guest}" ${isChecked}/>
                         </li>
                     </ul>
+                    </label>
                 </div>
             `);
             });

@@ -58,5 +58,6 @@ return[
 'open' => 'OPEN ',
 'more_table' => 'Would You Like To Add Another Table For Your Event? ',
 'main_guest' => 'Main Guest',
+'meal' => 'Meal'
 
 ];
