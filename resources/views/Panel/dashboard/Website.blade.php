@@ -572,7 +572,7 @@
                                 <button class="btn t-btn mt-3" id="viewall">
                                     <a class="text-white text-decoration-none" target="_blank"
                                         href="{{ url("/events/$event->id_event/show-gallery") }}">
-                                        {{ __('website.view_all_photos') }}
+                                        {{ __('website.view_all_pictures') }}
                                     </a>
                                 </button>
                             </center>

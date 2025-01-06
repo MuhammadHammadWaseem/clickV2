@@ -25,5 +25,6 @@ return[
     'event_reception' => 'EVENT RECEPTION',
     'copyright' => 'Copyrights © 2022 All Rights Reserved by ClickInvitation',
     'view_all_photos' => 'View All Photos',
+    'view_all_pictures' => 'View All Pictures',
 
 ];

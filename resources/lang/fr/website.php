@@ -25,4 +25,5 @@ return [
     'event_reception' => 'RÉCEPTION DE L’ÉVÉNEMENT',
     'copyright' => 'Droits d\'auteur © 2022 Tous droits réservés par ClickInvitation',
     'view_all_photos' => 'Voir toutes les photos',
+    'view_all_pictures' => 'Voir toutes les photos',
 ];
