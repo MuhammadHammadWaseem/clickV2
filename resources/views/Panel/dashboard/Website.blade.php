@@ -568,17 +568,18 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <center>
-                                <button class="btn t-btn mt-3" id="viewall">
-                                    <a class="text-white text-decoration-none" target="_blank"
-                                        href="{{ url("/events/$event->id_event/show-gallery") }}">
-                                        {{ __('website.view_all_pictures') }}
-                                    </a>
-                                </button>
-                            </center>
                         </div>
                     </div>
                 @endif
+
+                <center>
+                    <button class="btn t-btn mt-3" id="viewall">
+                        <a class="text-white text-decoration-none" target="_blank"
+                            href="{{ url("/events/$event->id_event/show-gallery") }}">
+                            {{ __('website.view_all_pictures') }}
+                        </a>
+                    </button>
+                </center>
 
                 {{-- VIDEO --}}
             </div>
