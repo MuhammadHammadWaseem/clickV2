@@ -175,7 +175,8 @@
                             </div>
                         </div>
                         <div class="main_mobile_logo">
-                            <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
+                            <a href="{{ route('panel.index') }}"><img
+                                    src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -189,7 +190,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="main-logo">
-                        <a href="{{ route('panel.index') }}"><img src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
+                        <a href="{{ route('panel.index') }}"><img
+                                src="{{ asset('assets/images/dashboard-logo.png') }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -297,11 +299,13 @@
                             style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_bride_fname) && $WebsiteSetting->is_bride_fname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->bridefnameSize) && $WebsiteSetting->bridefnameSize ? 'font-size: ' . $WebsiteSetting->bridefnameSize . 'px;' : '' }}">
                             {{ $event->bridefname }}</p>
                         <p class="secondname"
-                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_bride_lname) && $WebsiteSetting->is_bride_lname == 1 ? 'display: block;' : 'display: none;' }}; {{  isset($WebsiteSetting->bridelnameSize) && $WebsiteSetting->bridelnameSize ? 'font-size: ' . $WebsiteSetting->bridelnameSize . 'px;' : '' }}">
+                            style="color: {{ $WebsiteSetting->bride_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_bride_lname) && $WebsiteSetting->is_bride_lname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->bridelnameSize) && $WebsiteSetting->bridelnameSize ? 'font-size: ' . $WebsiteSetting->bridelnameSize . 'px;' : '' }}">
                             {{ $event->bridelname }}</p>
                     </div>
                     <div class="and">
-                        <p style="color: {{ $WebsiteSetting->and_symbol_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_symbol) && $WebsiteSetting->is_symbol == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->symbolSize) && $WebsiteSetting->symbolSize ? 'font-size: ' . $WebsiteSetting->symbolSize . 'px;' : '' }}">{{ $WebsiteSetting->symbol ?? '&' }}</p>
+                        <p
+                            style="color: {{ $WebsiteSetting->and_symbol_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_symbol) && $WebsiteSetting->is_symbol == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->symbolSize) && $WebsiteSetting->symbolSize ? 'font-size: ' . $WebsiteSetting->symbolSize . 'px;' : '' }}">
+                            {{ $WebsiteSetting->symbol ?? '&' }}</p>
                     </div>
                     <div class="groomname">
                         <p class="firstname"
@@ -311,19 +315,24 @@
                             style="color: {{ $WebsiteSetting->groom_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }}; {{ isset($WebsiteSetting->is_groom_lname) && $WebsiteSetting->is_groom_lname == 1 ? 'display: block;' : 'display: none;' }}; {{ isset($WebsiteSetting->groomlnameSize) && $WebsiteSetting->groomlnameSize ? 'font-size: ' . $WebsiteSetting->groomlnameSize . 'px;' : '' }}">
                             {{ $event->groomlname }}</p>
                     </div>
-                    <div class="h" style="{{ isset($WebsiteSetting->is_heart) && $WebsiteSetting->is_heart == 1 ? 'display: block;' : 'display: none;' }};">
+                    <div class="h"
+                        style="{{ isset($WebsiteSetting->is_heart) && $WebsiteSetting->is_heart == 1 ? 'display: block;' : 'display: none;' }};">
                         <hr>
                         <i class="far fa-heart"></i>
                         <hr>
                     </div>
                 @else
                     <div class="bridename">
-                        <p class="firstname" style="color: {{ $WebsiteSetting->event_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">{{ $event->name }}</p>
+                        <p class="firstname"
+                            style="color: {{ $WebsiteSetting->event_name_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};">
+                            {{ $event->name }}</p>
                     </div>
                 @endif
             @endif
             <div class="date">
-                <p id='eventDate' style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ isset($WebsiteSetting->is_date) && $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }} {{ isset($WebsiteSetting->dateSize) && $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}"></p>
+                <p id='eventDate'
+                    style="color: {{ $WebsiteSetting->event_date_color ?? '#defaultColor' }}; font-family: {{ $WebsiteSetting->font_style ?? 'defaultFont' }};{{ isset($WebsiteSetting->is_date) && $WebsiteSetting->is_date == 1 ? 'display: block;' : 'display: none;' }} {{ isset($WebsiteSetting->dateSize) && $WebsiteSetting->dateSize ? 'font-size: ' . $WebsiteSetting->dateSize . 'px;' : '' }}">
+                </p>
             </div>
         </div>
         <a href="#thecouple"><i class="fal fa-chevron-down"></i></a>
@@ -366,7 +375,8 @@
                                     <div class="col-md-4">
                                         <!--<img src="https://picsum.photos/200/250?grayscale" class="img-fluid rounded-start">-->
                                         @if ($event->imggroom)
-                                            <img src="{{ url('/') }}/{{ $event->imggroom }}?v={{ filemtime(public_path($event->imggroom)) }}" class="img-fluid rounded-start">
+                                            <img src="{{ url('/') }}/{{ $event->imggroom }}?v={{ filemtime(public_path($event->imggroom)) }}"
+                                                class="img-fluid rounded-start">
                                         @endif
 
                                     </div>
@@ -528,39 +538,47 @@
 
 
                 {{-- VIDEO --}}
-                <div class="row">
-                    <div class="col">
-                        <h1 class="text-center mt-3 mb-3">{{ __('website.video') }}</h1>
-                        <div class="video-style">
-                            @php
-                                $videoExists = false;
-                            @endphp
-                            @foreach ($videogallery as $video)
-                                @if (file_exists(public_path('event-images/' . $video->id_event . '/videos/' . $video->video)))
-                                    @php
-                                        $videoExists = true;
-                                    @endphp
-                                    <video width="300" height="200" controls>
-                                        <source src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
-                                            type="video/mp4">
-                                        {{ __('website.video_support') }}
-                                    </video>
-                                @endif
-                            @endforeach
-                        </div>
+                @php
+                    $videoExists = false;
+                @endphp
+                @foreach ($videogallery as $video)
+                    @if (file_exists(public_path('event-images/' . $video->id_event . '/videos/' . $video->video)))
+                        @php
+                            $videoExists = true;
+                        @endphp
+                    @endif
+                @endforeach
 
-                        @if ($videoExists)
+                @if ($videoExists)
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="text-center mt-3 mb-3">{{ __('website.video') }}</h1>
+                            <div class="video-style">
+                                @foreach ($videogallery as $video)
+                                    @if (file_exists(public_path('event-images/' . $video->id_event . '/videos/' . $video->video)))
+                                        @php
+                                            $videoExists = true;
+                                        @endphp
+                                        <video width="300" height="200" controls>
+                                            <source
+                                                src="/event-images/{{ $video->id_event }}/videos/{{ $video->video }}"
+                                                type="video/mp4">
+                                            {{ __('website.video_support') }}
+                                        </video>
+                                    @endif
+                                @endforeach
+                            </div>
                             <center>
                                 <button class="btn t-btn mt-3" id="viewall">
                                     <a class="text-white text-decoration-none" target="_blank"
                                         href="{{ url("/events/$event->id_event/show-gallery") }}">
-                                        {{ __('website.view') }}
+                                        {{ __('website.view_all_photos') }}
                                     </a>
                                 </button>
                             </center>
-                        @endif
+                        </div>
                     </div>
-                </div>
+                @endif
 
                 {{-- VIDEO --}}
             </div>
@@ -753,23 +771,23 @@
         const geocoder = new Geocoder();
 
         // Fetch addresses from Blade variables (these should be passed from your controller)
-        
+
         let address = "";
         let recaddress = "";
         let paraddress = "";
-        
-        if({{ $event->boolcerimony }} == 1){
+
+        if ({{ $event->boolcerimony }} == 1) {
             address = document.getElementById("ceraddress").value;
         }
-        
-        if({{ $event->boolreception }} == 1){
+
+        if ({{ $event->boolreception }} == 1) {
             recaddress = document.getElementById("recaddress").value;
         }
-        
-        if({{ $event->boolparty }} == 1){
+
+        if ({{ $event->boolparty }} == 1) {
             paraddress = document.getElementById("paraddress").value;
         }
-        
+
 
         if (address) {
             geocodeAddress(geocoder, address, "mapView", "cerAddressLink");
@@ -813,14 +831,14 @@
     }
 
     // Add event listeners for input fields
-    if({{ $event->boolcerimony }} == 1){
+    if ({{ $event->boolcerimony }} == 1) {
         document.getElementById("ceraddress").addEventListener("input", initMap);
     }
-    
-    if({{ $event->boolreception }} == 1){
+
+    if ({{ $event->boolreception }} == 1) {
         document.getElementById("recaddress").addEventListener("input", initMap);
     }
-    if({{ $event->boolparty }} == 1){
+    if ({{ $event->boolparty }} == 1) {
         document.getElementById("paraddress").addEventListener("input", initMap);
     }
 
