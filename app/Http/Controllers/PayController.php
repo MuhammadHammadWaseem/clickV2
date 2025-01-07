@@ -59,7 +59,7 @@ class PayController extends Controller
                         $subCAo = $subCA;
                         $subUsa = $subUsa - ($subUsa / 100 * $code[0]->discount);
                         $subCA = $subCA - ($subCA / 100 * $code[0]->discount);
-                        DB::table('events')->where(['id_event' => $request->idevent])->update(['coupon_code' => $request->code]);
+                        DB::table('events')->where(['id_event' => $eventId])->update(['coupon_code' => $request->code]);
                     } else {
                         $couponMsg = "Invalid Coupon";
                     }
