@@ -82,9 +82,9 @@ class PayController extends Controller
         $totusaexp = explode(".", $totusa);
         $totcanexp = explode(".", $totcan);
 
-        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=2&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=2&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
         $newTvqUSA = number_format((($subUsa / 100) * $tvqUsa), 2, ".", "");
         $newTvqCA = number_format((($subCA / 100) * $tvqCA), 2, ".", "");
@@ -101,36 +101,34 @@ class PayController extends Controller
     {
         $requestData = $request->all();
         Log::info('Session data after redirect', ['event_id' => session('event_id')]);
-        return view('Panel.dashboard.paySucccess',compact("requestData"));
+        return view('Panel.dashboard.paySucccess', compact("requestData"));
 
     }
 
     public function thankyou($eventId, Request $request)
-{
-    // Find the event by its ID
-    $event = Event::where('id_event', $eventId)->first();
+    {
+        // Find the event by its ID
+        $event = Event::where('id_event', $eventId)->first();
 
-    // Get the amount from the URL query parameter
-    $amount = $request->get('amount');
+        // Get the amount from the URL query parameter
+        $amount = $request->get('amount');
 
-    // Check if the PayerID exists in the request
-    $payerId = $request->get('PayerID');
+        // Check if the PayerID exists in the request
+        $payerId = $request->get('PayerID');
 
-    // If PayerID exists, update the event as paid and handle payment-related logic
-    if ($payerId) {
-        // Mark the event as paid
-        $event->paid = 1;
+        // If PayerID exists, update the event as paid and handle payment-related logic
+        if ($payerId) {
+            // Mark the event as paid
+            $event->paid = 1;
 
-        // Save the updated event
-        $event->save();
-        
-        // Redirect to the panel index page after successful payment
-        return redirect()->route('panel.index');
-    } else {
-        // If PayerID doesn't exist, show an error or handle the case where payment couldn't be confirmed
-        return redirect()->route('panel.index')
-        ->with('error', 'Payment verification failed. Please try again.');
+            // Save the updated event
+            $event->save();
+            // Redirect to the panel index page after successful payment
+            return view('Panel.dashboard.paypalPaySucccess',compact('event'));
+        } else {
+            return redirect()->route('panel.index')
+                ->with('error', 'Payment verification failed. Please try again.');
+        }
     }
-}
 
 }
