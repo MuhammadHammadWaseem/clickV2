@@ -84,6 +84,31 @@
     .tab-buttons button:focus {
         outline: none;
     }
+    .convergePayBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #f0f0f0;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        margin-right: 10px;
+    }
+
+    .convergePayBtn .active {
+        background-color: #A9967D;
+        color: #fff;
+        border-color: #A9967D;
+    }
+
+    .convergePayBtn:hover {
+        background-color: #ddd;
+    }
+
+    .convergePayBtn:focus {
+        outline: none;
+    }
 
     /* Style for the visible selection box */
 .custom-select-selection {
@@ -175,9 +200,15 @@
             </div>
             <div class="col-lg-12">
 
-                <div class="tab-buttons">
-                    <button id="payPalBtn" onclick="switchTab(1)" class="active">{{ __('pay.Pay with PayPal') }}</button>
-                    <button id="convergePayBtn" onclick="switchTab(2)">{{ __('pay.Pay with Converge Pay') }}</button>
+                <div class="tab-buttons d-flex">
+                    <button id="payPalBtn" class="active">{{ __('pay.Pay with PayPal') }}</button>
+                    {{-- <button id="convergePayBtn" onclick="switchTab(2)">{{ __('pay.Pay with Converge Pay') }}</button> --}}
+                    <div>
+                        <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button class="convergePayBtn active">{{ __('pay.Pay with Converge Pay') }}</button>
+                        <script
+                            src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
+                        </script>
+                    </div>
                 </div>
 
                 {{-- Tab 1 --}}
