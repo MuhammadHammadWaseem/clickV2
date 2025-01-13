@@ -84,6 +84,7 @@
     .tab-buttons button:focus {
         outline: none;
     }
+
     .convergePayBtn {
         padding: 10px 20px;
         font-size: 16px;
@@ -111,75 +112,74 @@
     }
 
     /* Style for the visible selection box */
-.custom-select-selection {
-    background-color: #EDEDED !important;
-    border: 2px solid #999999 !important;
-    border-radius: 16px !important;
-    height: 50px !important;
-    padding: 0px 20px !important;
-    color: #7c7a7a !important;
-    display: flex;
-    align-items: center;
-}
+    .custom-select-selection {
+        background-color: #EDEDED !important;
+        border: 2px solid #999999 !important;
+        border-radius: 16px !important;
+        height: 50px !important;
+        padding: 0px 20px !important;
+        color: #7c7a7a !important;
+        display: flex;
+        align-items: center;
+    }
 
-/* Style for placeholder text in the selection box */
-.custom-select-selection .select2-selection__placeholder {
-    color: #b0b0b0 !important;
-    font-size: 14px !important;
-}
+    /* Style for placeholder text in the selection box */
+    .custom-select-selection .select2-selection__placeholder {
+        color: #b0b0b0 !important;
+        font-size: 14px !important;
+    }
 
-/* Style for selected text in the selection box */
-.custom-select-selection .select2-selection__rendered {
-    color: #7c7a7a !important;
-    font-size: 14px !important;
-}
+    /* Style for selected text in the selection box */
+    .custom-select-selection .select2-selection__rendered {
+        color: #7c7a7a !important;
+        font-size: 14px !important;
+    }
 
-/* Add hover effect */
-.custom-select-selection:hover {
-    border-color: #666666 !important;
-}
+    /* Add hover effect */
+    .custom-select-selection:hover {
+        border-color: #666666 !important;
+    }
 
 
-/* Dropdown container */
-.custom-select-dropdown {
-    background-color: #EDEDED !important;
-    border: 2px solid #999999 !important;
-    border-radius: 16px !important;
-    color: #7c7a7a !important;
-    padding: 0 !important;
-}
+    /* Dropdown container */
+    .custom-select-dropdown {
+        background-color: #EDEDED !important;
+        border: 2px solid #999999 !important;
+        border-radius: 16px !important;
+        color: #7c7a7a !important;
+        padding: 0 !important;
+    }
 
-/* Search box in the dropdown */
-.custom-select-dropdown .select2-search input {
-    width: 100% !important;
-    border: 1px solid #999999 !important;
-    border-radius: 8px !important;
-    padding: 8px !important;
-    color: #7c7a7a !important;
-    font-size: 14px !important;
-}
+    /* Search box in the dropdown */
+    .custom-select-dropdown .select2-search input {
+        width: 100% !important;
+        border: 1px solid #999999 !important;
+        border-radius: 8px !important;
+        padding: 8px !important;
+        color: #7c7a7a !important;
+        font-size: 14px !important;
+    }
 
-/* Dropdown options */
-.custom-select-dropdown .select2-results__option {
-    padding: 10px 20px !important;
-    cursor: pointer !important;
-}
+    /* Dropdown options */
+    .custom-select-dropdown .select2-results__option {
+        padding: 10px 20px !important;
+        cursor: pointer !important;
+    }
 
-/* Highlighted dropdown option */
-.custom-select-dropdown .select2-results__option--highlighted {
-    background-color: #d3d3d3 !important;
-    color: #333333 !important;
-}
+    /* Highlighted dropdown option */
+    .custom-select-dropdown .select2-results__option--highlighted {
+        background-color: #d3d3d3 !important;
+        color: #333333 !important;
+    }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    line-height: 46px !important;
-}
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 46px !important;
+    }
 
-.select2-container--default .select2-selection--single .select2-selection__arrow b {
-    margin-top: 9px !important;
-}
-
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        margin-top: 9px !important;
+    }
 </style>
 @section('content')
     @php
@@ -204,7 +204,8 @@
                     <button id="payPalBtn" class="active">{{ __('pay.Pay with PayPal') }}</button>
                     {{-- <button id="convergePayBtn" onclick="switchTab(2)">{{ __('pay.Pay with Converge Pay') }}</button> --}}
                     <div>
-                        <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button class="convergePayBtn active">{{ __('pay.Pay with Converge Pay') }}</button>
+                        <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button
+                            class="convergePayBtn active">{{ __('pay.Pay with Converge Pay') }}</button>
                         <script
                             src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
                         </script>
@@ -387,17 +388,19 @@
                 },
                 success: function(response) {
                     let res = JSON.parse(response);
+                    console.log(res[0].couponMsg);
 
-                    $("#can").attr('href', res[0].linkcan);
-                    $("#usa").attr('href', res[0].linkusa);
+                    if (res[0].couponMsg == '') {
+                        $("#can").attr('href', res[0].linkcan);
+                        $("#usa").attr('href', res[0].linkusa);
 
-                    $("#canadaTable").empty();
-                    $("#canadaTable").append(`
+                        $("#canadaTable").empty();
+                        $("#canadaTable").append(`
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                                <td id="subTotalCan">${res[0].subcano}</td>
-                                                            ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                    <td id="subTotalCan">${res[0].subcano}</td>
+                                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -413,13 +416,13 @@
                     </tr>
                     `);
 
-                    $("#usaTable").empty();
-                    $("#usaTable").append(`
+                        $("#usaTable").empty();
+                        $("#usaTable").append(`
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                        <td id="subTotalUSA">${res[0].subusao}</td>
-                                                        ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -435,7 +438,10 @@
                     </tr>
                 `);
 
-                    toastr.success("{{ __('pay.PAYMENT_VERIFIED') }}");
+                        toastr.success("{{ __('pay.PAYMENT_VERIFIED') }}");
+                    }else{
+                        toastr.error(res[0].couponMsg);
+                    }
 
                 },
                 error: function(xhr) {
@@ -468,8 +474,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                <td id="subTotalCan">${res[0].subcano}</td>
-                                                            ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                    <td id="subTotalCan">${res[0].subcano}</td>
+                                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -490,8 +496,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                        <td id="subTotalUSA">${res[0].subusao}</td>
-                                                        ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>

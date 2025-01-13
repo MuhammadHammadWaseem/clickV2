@@ -36,7 +36,7 @@ class PayController extends Controller
         $tpsCA = floatval($datas->tpscan1 . '.' . $datas->tpscan2);
         $tvqCA = floatval($datas->tvqcan1 . '.' . $datas->tvqcan2);
 
-        $couponMsg;
+        $couponMsg = "";
         $discount = 0;
         $subUsao = 0;
         $subCAo = 0;
@@ -49,7 +49,6 @@ class PayController extends Controller
             $dateNow = $current->format('Y-m-d');
 
             if ($code) {
-
                 if ($dateNow >= $code[0]->start_date && $dateNow <= $code[0]->expirydate) {
                     $couponUsed = DB::table('events')->where(['coupon_code' => $request->code])->count();
                     if ($couponUsed < $code[0]->count) {
@@ -94,7 +93,7 @@ class PayController extends Controller
 
         return '[{"subcan":"' . $subCA . ' CAD", "tpscan":"' . $newTpsCan . ' CAD", "tvqcan":"' . $newTvqCA . ' CAD", 
                   "subusa":"' . $subUsa . ' USD", "tpsusa":"' . $newTpsUSA . ' USD", "tvqusa":"' . $newTvqUSA . ' USD",
-                  "totusa":"' . $totusa . ' USD","totcan":"' . $totcan . ' CAD", "linkcan":"' . $linkcan . ' CAD","linkusa":"' . $linkusa . ' CAD","discount":"' . $discount . '%","subusao":"' . $subUsao . ' USD","subcano":"' . $subCAo . ' CAD"}]';
+                  "totusa":"' . $totusa . ' USD","totcan":"' . $totcan . ' CAD", "linkcan":"' . $linkcan . ' CAD","linkusa":"' . $linkusa . ' CAD","discount":"' . $discount . '%","subusao":"' . $subUsao . ' USD","subcano":"' . $subCAo . ' CAD","couponMsg":"' . $couponMsg . '"}]';
     }
 
     public function payConfirm(Request $request)
