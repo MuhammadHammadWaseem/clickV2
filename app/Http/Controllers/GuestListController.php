@@ -42,7 +42,7 @@ class GuestListController extends Controller
             'phone' => 'nullable',
             'whatsapp' => 'nullable',
             'allergies' => 'boolean',
-            'meal' => 'required|exists:meals,id_meal',
+            'meal' => 'nullable|exists:meals,id_meal',
             'members' => 'integer|min:1',
             'notes' => 'nullable|string'
         ], [
@@ -114,12 +114,8 @@ class GuestListController extends Controller
                 if ($request->confirm == 'Yes') {
                     $guest->opened = 2;
                 }
-
-                if ($request->mainguest == 1) {
-                    $guest->opened = null;
-                } else {
-                    $guest->opened = 2;
-                }
+                
+                $guest->opened = null;
 
                 $guest->members_number = $request->members ?? 0;
 

@@ -12,6 +12,7 @@
 
     .payment-form-submit .form-row {
         width: 100%;
+        flex-wrap: nowrap !important;
     }
 
     .payment-form-submit .form-row .form-group {
@@ -20,13 +21,21 @@
     }
 
     .payment-form-submit .form-row .form-group.discont-cd {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-        column-gap: 20px;
-        padding-right: 50px;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 20px;
+    padding-right: 50px;
+}
+
+input#code {
+    width: min-content;
+}   
+
+select#country {
+    width: 100%;
+}
 
     .payment-form-submit .divider-seperater {
         width: 100%;
@@ -179,6 +188,49 @@
 
     .select2-container--default .select2-selection--single .select2-selection__arrow b {
         margin-top: 9px !important;
+    }
+
+
+    @media only screen and (max-width: 767px) {
+        .payment-form-submit .form-row {
+    flex-wrap: wrap !important;
+}
+
+.payment-form-submit .form-row .form-group{
+    width: 100% !important;
+}
+
+.payment-form-submit form {
+    row-gap: 0;
+}
+
+.payment-form-submit .form-row .form-group.discont-cd {
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+input#code {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.payment-form-submit .divider-seperater {
+    margin: 0;
+}
+
+.tab-buttons.d-flex {
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.tab-buttons.d-flex button {
+    width: 100%;
+}
+
+
+.tab-buttons.d-flex div {
+    width: 100%;
+}
     }
 </style>
 @section('content')
