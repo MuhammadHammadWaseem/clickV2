@@ -170,4 +170,7 @@ return[
     'all members allowed added' => 'All members allowed are added',
     'Attending' => 'Attending',
     'UNDECLINE_ALL' => 'UNDECLINE ALL',
+    'select_number' => 'Select Number',
+    'custom_number' => 'Custom Number',
+    'enter_custom_number' => 'Enter Custom Number',
 ];

@@ -1069,11 +1069,32 @@
                             </select>
                         </div>
 
-                        <!-- Number of Members to Invite -->
+                        {{-- <!-- Number of Members to Invite -->
                         <div class="form-group">
                             <label for="members">{{ __('guestlistpage.number_of_members') }}</label>
                             <input type="number" class="form-control" id="members" name="members"
                                 placeholder="{{ __('guestlistpage.enter_number') }}">
+                        </div> --}}
+
+                        <div class="form-group">
+                            <label for="members">{{ __('guestlistpage.number_of_members') }}</label>
+                            <select class="form-control" id="members" name="members" onchange="handleMemberSelection()">
+                                <option disabled selected>{{ __('guestlistpage.select_number') }}</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="custom">{{ __('guestlistpage.custom_number') }}</option>
+                            </select>
+                            <input type="number" class="form-control mt-2 d-none" id="customMembers" 
+                                   placeholder="{{ __('guestlistpage.enter_custom_number') }}" min="0">
                         </div>
 
                         <!-- Notes Input -->
@@ -1776,6 +1797,22 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 @section('scripts')
     <script>
 
+        function handleMemberSelection() {
+            const membersSelect = document.getElementById('members');
+            const customInput = document.getElementById('customMembers');
+            
+            if (membersSelect.value === 'custom') {
+                customInput.classList.remove('d-none');
+                customInput.name = "members"; // Assign name dynamically
+                customInput.focus();
+                membersSelect.name = ""; // Remove name from select to avoid duplication
+            } else {
+                customInput.classList.add('d-none');
+                customInput.value = ""; // Clear custom input
+                customInput.name = ""; // Remove name from input
+                membersSelect.name = "members"; // Assign name back to select
+            }
+        }
         $(document).ready(function () {
             // Search function
             $('#guestSearchInput').on('keyup', function () {

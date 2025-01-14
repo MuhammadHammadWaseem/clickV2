@@ -616,6 +616,11 @@
             <div class="col-lg-12">
                 <div class="two-outside-boxes">
                     <div class="main-card-box">
+                            <h5 id="f_b_card" style="
+                            color: #f5f5f5;
+                            font-size: 20px;
+                            font-weight: 600;
+                            margin-bottom: 20px;">Front Card</h5>
                         <div class="main-img-box"
                             style="
                         display: flex;

@@ -169,4 +169,7 @@ return[
     'all members allowed added' => 'Tous les membres autorisés sont ajoutés',
     'Attending' => 'Participer',
     'UNDECLINE_ALL' => 'DÉCLINEZ TOUT',
+    'select_number' => 'Sélectionner un numéro',
+    'custom_number' => 'Numéro personnalisé',
+    'enter_custom_number' => 'Entrez un numéro personnalisé',
 ];

@@ -2721,8 +2721,10 @@ function toggleTwoSided(element) {
 
 function toggleSide(element) {
   if (element.id === 'front') {
+    $("#f_b_card").text("Front Card");
     handleJSONImport();
   } else if (element.id === 'back') {
+    $("#f_b_card").text("Back Card");
     handleJSONImport();
   }
 }
