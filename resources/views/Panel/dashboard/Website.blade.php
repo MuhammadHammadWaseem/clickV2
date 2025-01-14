@@ -515,10 +515,10 @@
                                             <div
                                                 class="carousel-item @if ($loop->first) active @endif">
                                                 <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                                    data-lightbox="gallery" data-title="Image {{ $loop->iteration }}"
+                                                    data-fancybox="gallery" data-title="Image {{ $loop->iteration }}"
                                                     class="img-thumbnail">
                                                     <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                                        class="d-block w-100" height="600px">
+                                                        alt="Thumbnail {{ $loop->iteration }}" class="d-block w-100" height="600px">
                                                 </a>
                                             </div>
                                         @endif
@@ -723,11 +723,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
-    <script src="/assets/jspanel/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+
 </body>
 
 </html>
 <script>
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // Slideshow options
+        slideShow: {
+            autoStart: true, // Automatically start the slideshow
+            speed: 3000,     // Time in milliseconds between slides
+        },
+        loop: true,          // Enable looping of images
+    });
+
     console.log("click!");
     $(document).ready(function() {
         initMap();

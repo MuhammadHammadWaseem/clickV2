@@ -56,9 +56,9 @@
                     @if (file_exists(public_path('event-images/' . $photo->id_event . '/photogallery/' . $photo->id_photogallery . '.jpg')))
                         <div class="col-md-2 mb-4">
                             <a href="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                data-lightbox="gallery" data-title="Image {{ $loop->index + 1 }}" class="gallery-image">
+                                data-fancybox="gallery" data-title="Image {{ $loop->index + 1 }}" class="gallery-image">
                                 <img src="/event-images/{{ $photo->id_event }}/photogallery/{{ $photo->id_photogallery }}.jpg"
-                                    class="img-fluid" alt="Gallery Image">
+                                    class="img-fluid" alt="Thumbnail {{ $loop->index + 1 }}">
                             </a>
                         </div>
                     @endif
@@ -91,6 +91,23 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+
 </body>
 
 </html>
+<script>
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // Slideshow options
+        slideShow: {
+            autoStart: true, // Automatically start the slideshow
+            speed: 3000,     // Time in milliseconds between slides
+        },
+        loop: true,          // Enable looping of images
+    });
+
+    </script>
