@@ -1601,6 +1601,9 @@
             if (settings == 0) {
                 toastr.error('Please Save the Setting First!');
 
+                var successModal = new bootstrap.Modal(document.getElementById('exampleModalCenter02'));
+                successModal.show();
+
                 // Prevent further actions
                 event.preventDefault();  // Stop the default behavior
                 event.stopPropagation(); // Prevent `onclick` functions from triggering
