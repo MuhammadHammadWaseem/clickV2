@@ -1062,6 +1062,7 @@
                         <div class="form-group">
                             <label for="meal">{{ __('guestlistpage.select_meal') }}</label>
                             <select class="form-control" id="meal" name="meal">
+                                <option disabled selected>{{ __('guestlistpage.select_meal') }}</option>
                                 @foreach ($meals as $meal)
                                     <option value="{{ $meal->id_meal }}">{{ $meal->name }}</option>
                                 @endforeach

@@ -43,7 +43,7 @@ class GuestListController extends Controller
             'whatsapp' => 'nullable',
             'allergies' => 'boolean',
             'meal' => 'nullable|exists:meals,id_meal',
-            'members' => 'integer|min:1',
+            'members' => 'nullable',
             'notes' => 'nullable|string'
         ], [
             'members.required' => 'Please specify the number of members invited.',
