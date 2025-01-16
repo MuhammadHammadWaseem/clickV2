@@ -244,17 +244,16 @@ input#code {
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>{{ __('pay.Payment') }}</h2>
-                        {{-- <h2>{{ __('pay.payment_with_paypal') }}</h2> --}}
+                        {{-- <h2>{{ __('pay.Payment') }}</h2> --}}
+                        <h2>{{ __('pay.payment_with_paypal') }}</h2>
                         <p>{{ __('pay.payment_access_area') }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
 
-                <div class="tab-buttons d-flex">
+                {{-- <div class="tab-buttons d-flex">
                     <button id="payPalBtn" class="active">{{ __('pay.Pay with PayPal') }}</button>
-                    {{-- <button id="convergePayBtn" onclick="switchTab(2)">{{ __('pay.Pay with Converge Pay') }}</button> --}}
                     <div>
                         <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button
                             class="convergePayBtn active">{{ __('pay.Pay with Converge Pay') }}</button>
@@ -262,7 +261,7 @@ input#code {
                             src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
                         </script>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Tab 1 --}}
                 <div class="box-styling website-preview " id="tab1" style="display: block;">
