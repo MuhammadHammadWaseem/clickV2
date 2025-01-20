@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'payment_with_paypal' => 'PAIEMENT AVEC PAYPAL',
+    'payment_with_paypal' => 'PAIEMENT PAR PAYPAL OU CARTE DE CRÉDIT',
     'payment_access_area' => 'Vous devez effectuer un paiement pour accéder à cette zone.',
     'name' => 'Nom',
     'phone' => 'Téléphone',

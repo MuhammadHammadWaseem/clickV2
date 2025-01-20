@@ -1,7 +1,7 @@
 <?php
 
 return[
-    'payment_with_paypal' => 'PAYMENT WITH PAYPAL',
+    'payment_with_paypal' => 'PAYMENT WITH PAYPAL OR CREDIT CARD',
     'payment_access_area' => 'You must make payment to access to this area.',
     'name' => 'Name',
     'phone' => 'Phone',

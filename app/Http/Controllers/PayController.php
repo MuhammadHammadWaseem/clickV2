@@ -54,8 +54,10 @@ class PayController extends Controller
                     if ($couponUsed < $code[0]->count) {
                         $discount = $code[0]->discount;
 
-                        $subUsao = $subUsa;
-                        $subCAo = $subCA;
+                        $subUsao = $subUsa - ($subUsa / 100 * $code[0]->discount);
+                        $subUsao = number_format($subUsao, 2);
+                        $subCAo = $subCA - ($subCA / 100 * $code[0]->discount);
+                        $subCAo = number_format($subCAo, 2);
                         $subUsa = $subUsa - ($subUsa / 100 * $code[0]->discount);
                         $subCA = $subCA - ($subCA / 100 * $code[0]->discount);
                         DB::table('events')->where(['id_event' => $eventId])->update(['coupon_code' => $request->code]);
