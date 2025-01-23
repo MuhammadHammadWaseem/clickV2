@@ -1401,7 +1401,7 @@
                         <div class="col-8">
                             <div class="main-side-media">
                                 <div class="image-box">
-                                    <img src="{{ asset('assets/images/examplecsv.png') }}" alt="">
+                                    <img src="{{ asset('assets/images/exampleCsv1.png') }}" alt="">
                                 </div>
                                 <div class="main-youtube-iframe">
                                     <iframe width="100%" height="315"

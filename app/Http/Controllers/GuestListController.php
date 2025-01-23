@@ -676,6 +676,7 @@ class GuestListController extends Controller
             // Insert guests into the database
             foreach ($data as $g) {
                 $guest = new Guest();
+                $guest->titleGuest = $g['title'] ?? null;
                 $guest->name = $g['name'] ?? null;
                 $guest->email = $g['email'] ?? null;
                 $guest->phone = $g['phone'] ?? null;
