@@ -146,6 +146,7 @@ body {
                             <li>{{ __('packages.meals') }}</li>
                             <li>{{ __('packages.gift_suggestions') }}</li>
                             <li>{{ __('packages.invitation') }}</li>
+                            <li>{{ __('packages.guest_list') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_basic') }}</p>
                         @guest
@@ -199,7 +200,6 @@ body {
                         <div class="box-unit-price">$99</div>
                         <ul>
                             <li>{{ __('packages.basic_package_contents') }}</li>
-                            <li>{{ __('packages.guest_list') }}</li>
                             <li>{{ __('packages.table_seating_arrangements') }}</li>
                             <li>{{ __('packages.photos') }}</li>
                             <li>{{ __('packages.acknowledgments') }}</li>
