@@ -139,13 +139,13 @@ body {
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
                         <div class="box-subtitle">{{ __('packages.basic_package') }}</div>
-                        <div class="box-unit-price">$23</div>
+                        <div class="box-unit-price">$49</div>
                         <ul>
                             <li>{{ __('packages.general_info') }}</li>
-                            <li>{{ __('packages.invitation') }}</li>
-                            <li>{{ __('packages.guest_list') }}</li>
-                            <li>{{ __('packages.messaging') }}</li>
+                            <li>{{ __('packages.webpage') }}</li>
+                            <li>{{ __('packages.meals') }}</li>
                             <li>{{ __('packages.gift_suggestions') }}</li>
+                            <li>{{ __('packages.invitation') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_basic') }}</p>
                         @guest
@@ -157,7 +157,7 @@ body {
                     </div>
 
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                {{-- <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
                         <div class="box-subtitle">{{ __('packages.standard_package') }}</div>
                         <div class="box-unit-price">$49</div>
@@ -175,8 +175,8 @@ body {
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endauth
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                </div> --}}
+                {{-- <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
                         <div class="box-subtitle">{{ __('packages.premium_package') }}</div>
                         <div class="box-unit-price">$69</div>
@@ -192,14 +192,18 @@ body {
                             <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
                         @endauth
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="packages-single-card box-styling">
                         <div class="box-subtitle">{{ __('packages.comprehensive_package') }}</div>
                         <div class="box-unit-price">$99</div>
                         <ul>
-                            <li>{{ __('packages.premium_package_contents') }}</li>
+                            <li>{{ __('packages.basic_package_contents') }}</li>
+                            <li>{{ __('packages.guest_list') }}</li>
+                            <li>{{ __('packages.table_seating_arrangements') }}</li>
+                            <li>{{ __('packages.photos') }}</li>
                             <li>{{ __('packages.acknowledgments') }}</li>
+                            <li>{{ __('packages.messaging') }}</li>
                         </ul>
                         <p>{{ __('packages.purpose_comprehensive') }}</p>
                         @guest
