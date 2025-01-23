@@ -106,15 +106,15 @@ body {
 
 </style>
 @section('title')
-    About Us | Event Organization Tool | Click Invitation
+    Packages | Event Organization Tool | Click Invitation
 @endsection
 @section('description')
     Click Invitation is the all-in-one tool that simplifies every aspect of planning and managing your events with our
-    intuitive platform. Learn more about us.
+    intuitive platform. Learn more about our packages.
 @endsection
 
 @section('tags')
-    <link rel="canonical" href="https://clickinvitation.com/about">
+    <link rel="canonical" href="https://clickinvitation.com/packages">
 @endsection
 
 
