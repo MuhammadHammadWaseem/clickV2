@@ -319,7 +319,7 @@ ul {
 }
 
 
-.modal-01 .modal-footer button {
+.modal-01 .modal-footer button, .modal-01 .modal-footer a.submit-btn {
   background-color: #C9C9C9;
   padding: 5px 15px;
   color: #777777;
@@ -332,13 +332,13 @@ ul {
   border: none;
 }
 
-.modal-01 .modal-footer button.submit-btn {
+.modal-01 .modal-footer button.submit-btn, .modal-01 .modal-footer a.submit-btn {
   background-color: #A9967D;
   color: white;
   transition: .3s;
 }
 
-.modal-01 .modal-footer button.submit-btn:hover {
+.modal-01 .modal-footer button.submit-btn:hover, .modal-01 .modal-footer a.submit-btn:hover {
   background-color: #A9964B;
 }
 

@@ -326,8 +326,21 @@
                 @if ($eventPackage)
                     <div class="alert alert-success">
                         <p>You currently have the <strong>{{ $eventPackage->package_name }}</strong> for this event.
-                        </p>
-                        <p>Price Paid: ${{ number_format($eventPackage->price_paid, 2) }}</p>
+                            
+                            {{-- <p>You currently have the 
+                                @if(count($purchasedPackages) > 1)
+                                    @foreach ($purchasedPackages as $package)
+                                        <strong>{{ $package->name }}</strong>
+                                        @if (!$loop->last)
+                                            &
+                                        @endif
+                                    @endforeach
+                                @else
+                                <strong>{{ $purchasedPackages->first()->name }}</strong>
+                                @endif
+                                for this event.
+                            </p>
+                            <p>Price Paid: ${{ number_format($eventPackage->price_paid, 2) }}</p> --}}
                     </div>
                 @endif
 
@@ -387,7 +400,7 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group d-none" id="package_div">
+                                {{-- <div class="form-group d-none" id="package_div">
                                     <select name="package" id="package">
                                         <option selected disabled>{{ __('pay.select_package') }}</option>
                                         @if ($eventPackage)
@@ -395,7 +408,11 @@
                                                 <option value="{{ $package->id }}"
                                                     data-price="{{ $package->upgrade_price }}"
                                                     data-id="{{ $package->id }}"
-                                                    {{ $package->is_purchased ? 'disabled' : '' }}>
+                                                    @if ($package->is_purchased)
+                                                    disabled
+                                                    style="background-color: #c5c5c5; color: #e7e7e7 !important;"
+                                                    @endif
+                                                    @class(['text-muted' => $package->is_purchased])>
                                                     {{ $package->name }}
                                                     @if ($package->is_purchased)
                                                         (Already Purchased)
@@ -413,7 +430,47 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                </div> --}}
+
+                                <div class="form-group d-none" id="package_div">
+                                    <select name="package" id="package">
+                                        <option selected disabled>{{ __('pay.select_package') }}</option>
+                                        @if ($eventPackage)
+                                            @foreach ($availablePackages as $package)
+                                                <option 
+                                                    value="{{ $package->id }}" 
+                                                    data-price="{{ $package->upgrade_price }}" 
+                                                    data-id="{{ $package->id }}" 
+                                                    @if ($package->is_disabled || $package->is_purchased)
+                                                        disabled
+                                                        style="background-color: #c5c5c5; color: #e7e7e7 !important;"
+                                                    @endif
+                                                    @class(['text-muted' => $package->is_disabled || $package->is_purchased])
+                                                >
+                                                    {{ $package->name }}
+                                                    @if ($package->is_purchased)
+                                                        (Already Purchased)
+                                                    @elseif ($package->upgrade_price > 0)
+                                                        (Upgrade for ${{ number_format($package->upgrade_price, 2) }})
+                                                    @else
+                                                        (Full Price: ${{ number_format($package->price, 2) }})
+                                                    @endif
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            @foreach ($packages as $package)
+                                                <option 
+                                                    value="{{ $package->id }}" 
+                                                    data-price="{{ $package->price }}" 
+                                                    data-id="{{ $package->id }}"
+                                                >
+                                                    {{ $package->name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
                                 </div>
+                                
 
                                 <div class="form-group d-none"
                                     style="display: flex;
@@ -529,8 +586,8 @@
                         <div class="col-4">
                             <div class="text">
                                 <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
-                                <p>{{ __('guestlistpage.upload_csv_description') }}</p>
-                                <a href="{{ asset('assets/files/CSV List.csv') }}" class="submit-btn"
+                                <p style="font-size: 11px;">{{ __('pay.upload_csv_description') }}</p>
+                                <a href="{{ asset('assets/files/CSV List.csv') }}" class="submit-btn mb-3"
                                     download>{{ __('guestlistpage.download_csv_example') }}</a>
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
@@ -558,7 +615,7 @@
                         <div class="col-8">
                             <div class="main-side-media">
                                 <div class="image-box">
-                                    <img src="{{ asset('assets/images/exampleCsv1.png') }}" alt="">
+                                    <img src="{{ asset('assets/images/CSVLIST.png') }}" alt="">
                                 </div>
                                 <div class="main-youtube-iframe">
                                     <iframe width="100%" height="315"

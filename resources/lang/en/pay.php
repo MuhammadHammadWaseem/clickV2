@@ -34,4 +34,5 @@ return[
     'we_do_it_for_you' => 'We do it for you',
     'upload_csv' => 'Upload CSV',
     'you_must_upload_a_CSV_file' => 'You must upload a CSV file before making the payment.',
+    'upload_csv_description' => 'Upload a CSV file with the columns: Name, Email, Cell Number, Whatsapp, Additional Comapagnon, Notes (optional).'
 ];

@@ -41,10 +41,9 @@ class PayController extends Controller
             ->where('package_event.start_date', '<=', now())
             // ->where('package_event.end_date', '>=', now())
             ->select('packages.id as package_id', 'packages.name as package_name', 'packages.price as package_price', 'package_event.price_paid')
-            ->orderByDesc('package_event.created_at')
+            ->orderByDesc('package_event.id')
             ->first();
 
-        // Fetch all packages and calculate the upgrade price
         $availablePackages = DB::table('packages')
             ->select('packages.*')
             ->get()
@@ -57,9 +56,13 @@ class PayController extends Controller
                     ? max(0, $package->price - $highestPurchasedPackage->price_paid)
                     : 0;
 
+                // Disable lower-tier packages if a higher-tier package is purchased
+                $package->is_disabled = $highestPurchasedPackage && $package->price < $highestPurchasedPackage->price_paid;
+
                 $package->is_purchased = $isPurchased;
                 return $package;
             });
+
 
         return view('Panel.dashboard.pay', compact('packages', 'eventPackage', 'availablePackages', 'purchasedPackages'));
     }
@@ -237,44 +240,65 @@ class PayController extends Controller
         return view('Panel.dashboard.paySucccess', compact("requestData"));
 
     }
-
     // public function thankyou($eventId, Request $request)
     // {
-    //     // $user = Auth::user();
-    //     // $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
-    //     // $package = Package::findOrFail(1);
+    //     if ($request->get('PayerID') != null) {
+    //         $user = Auth::user();
+    //         $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+    //         $selectedPackage = Package::findOrFail($request->get('package_id'));
 
-    //     // $userPackage = $user->packages()->where('package_id', $package->id)->first();
+    //         // Check if the user already has a package linked to this event
+    //         $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
 
-    //     // if (!$userPackage) {
-    //     //     $user->packages()->attach($package->id, [
-    //     //         'price_paid' => $package->price,
-    //     //         'start_date' => now(),
-    //     //         'end_date' => null,
-    //     //     ]);
-    //     // }
+    //         // If a package already exists
+    //         if ($currentEventPackage) {
+    //             // Check if the selected package is an upgrade
+    //             if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
+    //                 // Calculate the upgrade cost
+    //                 $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
 
-    //     // $userEvent->packages()->attach($package->id, [
-    //     //     'price_paid' => $package->price,
-    //     //     'start_date' => now(),
-    //     //     'end_date' => null,
-    //     // ]);
+    //                 // Update the package for the event
+    //                 $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
+    //                     'package_id' => $selectedPackage->id,
+    //                     'price_paid' => $selectedPackage->price,
+    //                     'start_date' => now(),
+    //                     'updated_at' => now(),
+    //                 ]);
 
-    //     // dd($package);
+    //                 return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //                     ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
+    //             }
 
+    //             // If the same or a lower package is selected, prevent redundant purchases
+    //             return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //                 ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
+    //         }
 
-    //     $event = Event::where('id_event', $eventId)->first();
-    //     $amount = $request->get('amount');
-    //     $payerId = $request->get('PayerID');
-    //     if ($payerId) {
-    //         $event->paid = 1;
-    //         $event->save();
-    //         return view('Panel.dashboard.paypalPaySucccess', compact('event'));
+    //         // If no package exists for this event, create a new record
+    //         $userEvent->packages()->attach($selectedPackage->id, [
+    //             'price_paid' => $selectedPackage->price,
+    //             'start_date' => now(),
+    //             'end_date' => null, // You can define a specific duration for the package here
+    //             'created_at' => now(),
+    //         ]);
+
+    //         // Optionally link the package to the user (if required for global access)
+    //         if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
+    //             $user->packages()->attach($selectedPackage->id, [
+    //                 'price_paid' => $selectedPackage->price,
+    //                 'start_date' => now(),
+    //                 'end_date' => null,
+    //             ]);
+    //         }
+
+    //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
     //     } else {
-    //         return redirect()->route('panel.index')
-    //             ->with('error', 'Payment verification failed. Please try again.');
+    //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //             ->with('error', "Payment verification failed. Please try again.");
     //     }
     // }
+
     public function thankyou($eventId, Request $request)
     {
         $user = Auth::user();
@@ -327,18 +351,6 @@ class PayController extends Controller
 
         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
-
-        // $event = Event::where('id_event', $eventId)->first();
-        // $amount = $request->get('amount');
-        // $payerId = $request->get('PayerID');
-        // if ($payerId) {
-        //     $event->paid = 1;
-        //     $event->save();
-        //     return view('Panel.dashboard.paypalPaySucccess', compact('event'));
-        // } else {
-        //     return redirect()->route('panel.index')
-        //         ->with('error', 'Payment verification failed. Please try again.');
-        // }
     }
 
     public function exportcsv(Request $request)
