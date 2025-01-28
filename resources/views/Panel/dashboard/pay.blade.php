@@ -434,7 +434,7 @@
 
                                 <div class="form-group d-none" id="package_div">
                                     <select name="package" id="package">
-                                        <option selected disabled>{{ __('pay.select_package') }}</option>
+                                        <option value="select" selected disabled>{{ __('pay.select_package') }}</option>
                                         @if ($eventPackage)
                                             @foreach ($availablePackages as $package)
                                                 <option 
@@ -826,7 +826,18 @@
 
 
         $("#country").on("change", function() {
+            $("#package_div").removeClass("d-none");
+            $("#package").val("select");
             $("#province").empty();
+
+            $("#upload_csv_btn").addClass("d-none");
+
+            $("#canadaTable").addClass("d-none");
+            $("#canBtn").addClass("d-none");
+            
+            $("#usaTable").addClass("d-none");
+            $("#usaBtn").addClass("d-none");
+
             const postalCodeInput = $("#postalCode");
 
             if (this.value == "canada") {
@@ -1018,10 +1029,10 @@
             });
         }
 
-        $("#country").on("change", function() {
-            $("#package_div").removeClass("d-none");
-        });
-        $("#package").on("change", function() {
+        // $("#country").on("change", function() {
+        //     $("#package_div").removeClass("d-none");
+        // });
+        $("#package").on("input", function() {
             let price = $('#package option:selected').attr('data-price');
             id = $('#package option:selected').attr('data-id');
             getPrice(id);
