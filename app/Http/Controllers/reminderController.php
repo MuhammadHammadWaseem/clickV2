@@ -26,8 +26,8 @@ class reminderController extends Controller
             FROM guests
             WHERE (id_event = ' . $eventId . ') AND
             (
-                ((checkin = 1) AND declined is NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
-                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL))
+                ((checkin = 1) AND (declined is NULL OR declined = 0) AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+                (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined is NULL OR declined = 0))
             )
         ');
 
