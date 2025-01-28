@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'AuthCheck' => \Illuminate\Auth\Middleware\AuthCheck::class,
         'payCheck' => \App\Http\Middleware\payCheck::class,
-        'PaidUserCheck' => \App\Http\Middleware\PaidUserCheck::class
+        'PaidUserCheck' => \App\Http\Middleware\PaidUserCheck::class,
+        'check.event.package' => \App\Http\Middleware\CheckEventPackage::class,
     ];
 }

@@ -9,6 +9,7 @@ return[
     'city' => 'City',
     'postal_code' => 'Postal Code',
     'select_country' => 'Select Country',
+    'select_package' => 'Select Package',
     'canada' => 'CANADA',
     'united_states' => 'UNITED STATES',
     'discount_code' => 'Discount Code',
@@ -28,5 +29,9 @@ return[
     'Pay with Converge Pay' => 'Pay with Converge Pay',
     'PAYMENT_VERIFIED' => 'Coupon code applied successfully',
     'PAYMENT_ERROR' => 'Invalid coupon code',
-
+    'basic_package' => 'Basic Package',
+    'comprehensive_package' => 'Comprehensive Package',
+    'we_do_it_for_you' => 'We do it for you',
+    'upload_csv' => 'Upload CSV',
+    'you_must_upload_a_CSV_file' => 'You must upload a CSV file before making the payment.',
 ];

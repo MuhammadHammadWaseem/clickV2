@@ -10,21 +10,103 @@ use Carbon\Carbon;
 use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Log;
 use App\Models\Event;
+use App\Models\Package;
+use Illuminate\Support\Facades\Auth;
 
 class PayController extends Controller
 {
     public function index($id)
     {
+        $user = Auth::user();
+        $packages = Package::all();
         session()->start();
         $eventId = GeneralHelper::getEventId();
         session(['event_id' => $eventId]);
         Log::info('Session data before redirect', ['event_id' => session('event_id')]);
-        return view('Panel.dashboard.pay');
+
+        // Fetch the user's purchased package for the event
+        $purchasedPackages = DB::table('package_event')
+            ->join('packages', 'package_event.package_id', '=', 'packages.id')
+            ->where('package_event.event_id', $eventId)
+            ->where('package_event.start_date', '<=', now())
+            ->select('package_event.*', 'packages.name', 'packages.price', 'packages.features', 'packages.description')
+            ->get();
+
+        $highestPurchasedPackage = $purchasedPackages->sortByDesc('price_paid')->first();
+
+        // Get the current package for this event, if any
+        $eventPackage = \DB::table('package_event')
+            ->join('packages', 'package_event.package_id', '=', 'packages.id')
+            ->where('package_event.event_id', $eventId)
+            ->where('package_event.start_date', '<=', now())
+            // ->where('package_event.end_date', '>=', now())
+            ->select('packages.id as package_id', 'packages.name as package_name', 'packages.price as package_price', 'package_event.price_paid')
+            ->orderByDesc('package_event.created_at')
+            ->first();
+
+        // Fetch all packages and calculate the upgrade price
+        $availablePackages = DB::table('packages')
+            ->select('packages.*')
+            ->get()
+            ->map(function ($package) use ($purchasedPackages, $highestPurchasedPackage) {
+                // Check if the package is already purchased
+                $isPurchased = $purchasedPackages->contains('package_id', $package->id);
+
+                // Calculate upgrade price only if not already purchased
+                $package->upgrade_price = !$isPurchased && $highestPurchasedPackage
+                    ? max(0, $package->price - $highestPurchasedPackage->price_paid)
+                    : 0;
+
+                $package->is_purchased = $isPurchased;
+                return $package;
+            });
+
+        return view('Panel.dashboard.pay', compact('packages', 'eventPackage', 'availablePackages', 'purchasedPackages'));
     }
 
     public function paydatas(Request $request)
     {
         $eventId = GeneralHelper::getEventId();
+        if ($request->has('id') && $request->id != null) {
+            // Get the current package for this event, if any
+
+            // Fetch the user's purchased package for the event
+            $purchasedPackages = DB::table('package_event')
+                ->join('packages', 'package_event.package_id', '=', 'packages.id')
+                ->where('package_event.event_id', $eventId)
+                ->where('package_event.start_date', '<=', now())
+                ->select('package_event.*', 'packages.name', 'packages.price', 'packages.features', 'packages.description')
+                ->get();
+
+            $highestPurchasedPackage = $purchasedPackages->sortByDesc('price_paid')->first();
+
+            // Get the current package for this event, if any
+            $eventPackage = \DB::table('package_event')
+                ->join('packages', 'package_event.package_id', '=', 'packages.id')
+                ->where('package_event.event_id', $eventId)
+                ->where('package_event.start_date', '<=', now())
+                // ->where('package_event.end_date', '>=', now())
+                ->select('packages.id as package_id', 'packages.name as package_name', 'packages.price as package_price', 'package_event.price_paid')
+                ->orderByDesc('package_event.created_at')
+                ->first();
+
+            // Fetch all packages and calculate the upgrade price
+            $package = DB::table('packages')
+                ->where('id', $request->id)
+                ->select('packages.*')
+                ->first();
+
+            if (!$package) {
+                return redirect()->back()->with('error', 'Package not found');
+            }
+
+            if ($eventPackage) {
+                $package->price = max(0, $package->price - $highestPurchasedPackage->price_paid);
+            }
+
+        } else {
+            $package = null;
+        }
         $datas = Data::where('id_data', 1)->first();
 
         $subUsa = floatval($datas->subusa1 . '.' . $datas->subusa2);
@@ -41,7 +123,7 @@ class PayController extends Controller
         $subUsao = 0;
         $subCAo = 0;
 
-        if ($request->has('code') && $request->code != '') {
+        if ($request->has('code') && $request->code != '' && $request->id == null) {
             $code = Code::where('code', $request->code)->first();
             $code = DB::table('coupon')->where(['code' => $request->code])->get();
             //return $code[0]->discount;
@@ -75,6 +157,51 @@ class PayController extends Controller
             $subCAo = 0;
         }
 
+        if ($request->has('id') && $request->id != null && $request->code == null) {
+            $subUsao = $package->price;
+            $subCAo = $package->price;
+            $subUsa = $package->price;
+            $subCA = $package->price;
+        }
+
+
+        if ($request->has('id') && $request->id != null && $request->code != null) {
+            $code = DB::table('coupon')->where(['code' => $request->code])->get();
+            $current = Carbon::now();
+            $dateNow = $current->format('Y-m-d');
+
+
+            $subUsao = $package->price;
+            $subCAo = $package->price;
+            $subUsa = $package->price;
+            $subCA = $package->price;
+
+            if ($code) {
+                if ($dateNow >= $code[0]->start_date && $dateNow <= $code[0]->expirydate) {
+                    $couponUsed = DB::table('events')->where(['coupon_code' => $request->code])->count();
+                    if ($couponUsed < $code[0]->count) {
+                        $discount = $code[0]->discount;
+
+                        $subUsao = $subUsa - ($subUsa / 100 * $code[0]->discount);
+                        $subUsao = number_format($subUsao, 2);
+                        $subCAo = $subCA - ($subCA / 100 * $code[0]->discount);
+                        $subCAo = number_format($subCAo, 2);
+                        $subUsa = $subUsa - ($subUsa / 100 * $code[0]->discount);
+                        $subCA = $subCA - ($subCA / 100 * $code[0]->discount);
+                        DB::table('events')->where(['id_event' => $eventId])->update(['coupon_code' => $request->code]);
+                    } else {
+                        $couponMsg = "Invalid Coupon";
+                    }
+                } else {
+                    $couponMsg = "Invalid Coupon";
+                }
+            }
+        } else {
+            $discount = 0;
+            $subUsao = 0;
+            $subCAo = 0;
+        }
+
 
         $totusa = number_format($subUsa + (($subUsa / 100) * $tpsUsa) + (($subUsa / 100) * $tvqUsa), 2);
         $totcan = number_format($subCA + (($subCA / 100) * $tpsCA) + (($subCA / 100) * $tvqCA), 2);
@@ -83,9 +210,14 @@ class PayController extends Controller
         $totusaexp = explode(".", $totusa);
         $totcanexp = explode(".", $totcan);
 
-        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        // $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        // $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+
+        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&package_id=" . $package->id . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+
+        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&package_id=" . $package->id . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+
 
         $newTvqUSA = number_format((($subUsa / 100) * $tvqUsa), 2, ".", "");
         $newTvqCA = number_format((($subCA / 100) * $tvqCA), 2, ".", "");
@@ -106,30 +238,148 @@ class PayController extends Controller
 
     }
 
+    // public function thankyou($eventId, Request $request)
+    // {
+    //     // $user = Auth::user();
+    //     // $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+    //     // $package = Package::findOrFail(1);
+
+    //     // $userPackage = $user->packages()->where('package_id', $package->id)->first();
+
+    //     // if (!$userPackage) {
+    //     //     $user->packages()->attach($package->id, [
+    //     //         'price_paid' => $package->price,
+    //     //         'start_date' => now(),
+    //     //         'end_date' => null,
+    //     //     ]);
+    //     // }
+
+    //     // $userEvent->packages()->attach($package->id, [
+    //     //     'price_paid' => $package->price,
+    //     //     'start_date' => now(),
+    //     //     'end_date' => null,
+    //     // ]);
+
+    //     // dd($package);
+
+
+    //     $event = Event::where('id_event', $eventId)->first();
+    //     $amount = $request->get('amount');
+    //     $payerId = $request->get('PayerID');
+    //     if ($payerId) {
+    //         $event->paid = 1;
+    //         $event->save();
+    //         return view('Panel.dashboard.paypalPaySucccess', compact('event'));
+    //     } else {
+    //         return redirect()->route('panel.index')
+    //             ->with('error', 'Payment verification failed. Please try again.');
+    //     }
+    // }
     public function thankyou($eventId, Request $request)
     {
-        // Find the event by its ID
-        $event = Event::where('id_event', $eventId)->first();
+        $user = Auth::user();
+        $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+        $selectedPackage = Package::findOrFail(1);
 
-        // Get the amount from the URL query parameter
-        $amount = $request->get('amount');
+        // Check if the user already has a package linked to this event
+        $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
 
-        // Check if the PayerID exists in the request
-        $payerId = $request->get('PayerID');
+        // If a package already exists
+        if ($currentEventPackage) {
+            // Check if the selected package is an upgrade
+            if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
+                // Calculate the upgrade cost
+                $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
 
-        // If PayerID exists, update the event as paid and handle payment-related logic
-        if ($payerId) {
-            // Mark the event as paid
-            $event->paid = 1;
+                // Update the package for the event
+                $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
+                    'package_id' => $selectedPackage->id,
+                    'price_paid' => $selectedPackage->price,
+                    'start_date' => now(),
+                    'updated_at' => now(),
+                ]);
 
-            // Save the updated event
-            $event->save();
-            // Redirect to the panel index page after successful payment
-            return view('Panel.dashboard.paypalPaySucccess',compact('event'));
-        } else {
-            return redirect()->route('panel.index')
-                ->with('error', 'Payment verification failed. Please try again.');
+                return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                    ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
+            }
+
+            // If the same or a lower package is selected, prevent redundant purchases
+            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
         }
+
+        // If no package exists for this event, create a new record
+        $userEvent->packages()->attach($selectedPackage->id, [
+            'price_paid' => $selectedPackage->price,
+            'start_date' => now(),
+            'end_date' => null, // You can define a specific duration for the package here
+            'created_at' => now(),
+        ]);
+
+        // Optionally link the package to the user (if required for global access)
+        if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
+            $user->packages()->attach($selectedPackage->id, [
+                'price_paid' => $selectedPackage->price,
+                'start_date' => now(),
+                'end_date' => null,
+            ]);
+        }
+
+        return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+            ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
+
+        // $event = Event::where('id_event', $eventId)->first();
+        // $amount = $request->get('amount');
+        // $payerId = $request->get('PayerID');
+        // if ($payerId) {
+        //     $event->paid = 1;
+        //     $event->save();
+        //     return view('Panel.dashboard.paypalPaySucccess', compact('event'));
+        // } else {
+        //     return redirect()->route('panel.index')
+        //         ->with('error', 'Payment verification failed. Please try again.');
+        // }
     }
+
+    public function exportcsv(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt',
+        ]);
+
+        $id = $request->id_event;
+        $file = $request->file('csv_file');
+
+        // Find the event by its ID
+        $event = Event::findOrFail($id);
+
+        // Check if a file already exists for this event
+        if ($event->event_data) {
+            $existingFilePath = public_path('storage/uploads/' . $event->event_data);
+
+            // Delete the existing file if it exists
+            if (file_exists($existingFilePath)) {
+                unlink($existingFilePath);
+            }
+        }
+
+        // Generate a unique file name for the new file
+        $fileName = time() . '_' . $file->getClientOriginalName();
+
+        // Store the new file in the public directory (e.g., 'public/uploads')
+        $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+        // Update the event record with the new file name
+        $event->event_data = $fileName;
+        $event->save();
+
+        // Return a success response
+        return response()->json([
+            'message' => 'File uploaded and updated successfully!',
+            'file_path' => asset('storage/' . $filePath),
+        ], 200);
+    }
+
+
 
 }

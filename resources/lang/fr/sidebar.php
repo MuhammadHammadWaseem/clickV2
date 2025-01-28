@@ -11,6 +11,7 @@ return [
     'Event Photos' => 'Photos de l’Événement',
     'Reminders' => 'Reconnaissance',
     'Custom Messages' => 'Messages Personnalisés',
+    'Buy Package' => 'Acheter un forfait',
     'Tutorials' => 'Tutoriels',
 
 ];

@@ -78,12 +78,12 @@ Route::group(['as' => 'panel.'], function () {
 
         // EVENT
         Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
-            Route::get('/{id}/general-infos', [PanelController::class, 'generalInfos'])->name('generalInfos');
+            Route::get('/{id}/general-infos', [PanelController::class, 'generalInfos'])->name('generalInfos')->middleware('check.event.package:General Info');
             Route::post('/updateEvent/{id}', [PanelController::class, 'updateEvent'])->name('updateEvent');
             Route::delete('/delete/{id}', [PanelController::class, 'deleteEvent'])->name('delete');
             Route::post('store', [PanelController::class, 'store'])->name('store');
 
-            Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage');
+            Route::get('/{id}/webpage', [WebPageController::class, 'index'])->name('webpage')->middleware('check.event.package:Webpage');
             Route::post('/{id}/store/images', [WebPageController::class, 'storeImages'])->name('store.images');
             Route::post('/{id}/delete/images', [WebPageController::class, 'deleteImages'])->name('delete.images');
             Route::post('/{id}/store/cerimage', [WebPageController::class, 'storeCerImage'])->name('store.cerimage');
@@ -94,17 +94,17 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('/delete/videos', [WebPageController::class, 'deleteVideo'])->name('delete.videos');
 
             // Photos
-            Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos')->middleware('payCheck');
+            Route::get('{id}/photos', [PhotoController::class, 'index'])->name('photos')->middleware('check.event.package:Photos');
 
             // Meals Route
-            Route::get('{id}/meals', [MealController::class, 'index'])->name('meals');
+            Route::get('{id}/meals', [MealController::class, 'index'])->name('meals')->middleware('check.event.package:Meals');
             Route::post('show/meals', [MealController::class, 'showMeals'])->name('meals.show');
             Route::post('/meals/store', [MealController::class, 'store'])->name('meals.store');
             Route::get('/meal/edit/{id}', [MealController::class, 'edit'])->name('meals.edit');
             Route::post('/meal/update/{id}', [MealController::class, 'update'])->name('meals.update');
             Route::delete('/meals/delete/{id}', [MealController::class, 'destroy'])->name('meals.destroy');
 
-            Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift');
+            Route::get('{id}/gift-suggestion', [GiftSuggestion::class, 'index'])->name('gift')->middleware('check.event.package:Gift Suggestions');
 
             // tutorial
             Route::get('{id}/tutorial', [TutorialController::class, 'index'])->name('tutorial');
@@ -118,7 +118,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::delete('gift/gift-suggestion/delete/{id}', [GiftSuggestion::class, 'destroy'])->name('gift.delete');
 
             // Guest
-            Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list')->middleware('payCheck');
+            Route::get('{id}/guests-list', [GuestListController::class, 'index'])->name('guests-list')->middleware('check.event.package:Guest List');
             Route::post('new-guest/{id}', [GuestListController::class, 'newguest'])->name('guests-list.store');
             Route::post('new-guest/show/{id}', [GuestListController::class, 'show'])->name('guests-list.show');
             Route::get('{id}/guests/edit', [GuestListController::class, 'edit'])->name('guests.edit');
@@ -135,14 +135,14 @@ Route::group(['as' => 'panel.'], function () {
             // Guest End
 
             // reminder
-            Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder')->middleware('payCheck');
+            Route::get('{id}/reminder', [reminderController::class, 'index'])->name('reminder')->middleware('check.event.package:Acknowledgments');
             Route::post('{id}/sendAckMail', [reminderController::class, 'sendAckMail'])->name('sendAckMail');
             Route::post('{id}/sendAcWhatsapp', [reminderController::class, 'sendAcWhatsapp'])->name('sendAcWhatsapp');
             Route::post('{id}/sendAcSms', [reminderController::class, 'sendAcSms'])->name('sendAcSms');
             Route::post('{id}/editsave', [reminderController::class, 'editsave'])->name('editsave');
 
             //message
-            Route::get('{id}/message', [messageController::class, 'index'])->name('message')->middleware('payCheck');
+            Route::get('{id}/message', [messageController::class, 'index'])->name('message')->middleware('check.event.package:Messaging');
             Route::post('{id}/editsaveMessage', [messageController::class, 'editsaveMessage'])->name('editsaveMessage');
             Route::post('{id}/sendSmsMail', [messageController::class, 'sendSmskMail'])->name('sendSmsMail');
             Route::post('{id}/sendSmsWhatsapp', [messageController::class, 'sendSmsWhatsapp'])->name('sendSmsWhatsapp');
@@ -151,29 +151,29 @@ Route::group(['as' => 'panel.'], function () {
 
 
             // Table eating
-            Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('payCheck');
-            Route::get('{id}/get-tables', [TableSeatingController::class, 'showTables'])->name('get.tables')->middleware('payCheck');
-            Route::get('{id}/get-table-guest', [TableSeatingController::class, 'showTableGuest'])->name('get.table.guest')->middleware('payCheck');
-            Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data')->middleware('payCheck');
-            Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table')->middleware('payCheck');
-            Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table')->middleware('payCheck');
-            Route::post('{id}/delete-table', [TableSeatingController::class, 'deleteTable'])->name('delete.table')->middleware('payCheck');
-            Route::post('set-tables', [TableSeatingController::class, 'setTable'])->name('set.table')->middleware('payCheck');
-            Route::post('set-guest-seat', [TableSeatingController::class, 'settablesseat'])->name('settablesseat')->middleware('payCheck');
-            Route::post('remove-guest', [TableSeatingController::class, 'removeGuest'])->name('removeGuest')->middleware('payCheck');
-            Route::post('editplan', [TableSeatingController::class, 'editplan'])->name('editplan')->middleware('payCheck');
+            Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('check.event.package:Table Seating Arrangements');
+            Route::get('{id}/get-tables', [TableSeatingController::class, 'showTables'])->name('get.tables');
+            Route::get('{id}/get-table-guest', [TableSeatingController::class, 'showTableGuest'])->name('get.table.guest');
+            Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data');
+            Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table');
+            Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table');
+            Route::post('{id}/delete-table', [TableSeatingController::class, 'deleteTable'])->name('delete.table');
+            Route::post('set-tables', [TableSeatingController::class, 'setTable'])->name('set.table');
+            Route::post('set-guest-seat', [TableSeatingController::class, 'settablesseat'])->name('settablesseat');
+            Route::post('remove-guest', [TableSeatingController::class, 'removeGuest'])->name('removeGuest');
+            Route::post('editplan', [TableSeatingController::class, 'editplan'])->name('editplan');
 
             //Invitation
-            Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation');
+            Route::get('{id}/invitation', [InvitationController::class, 'index'])->name('invitation')->middleware('check.event.package:Invitation');
             Route::post('{id}/invitation/setting/update', [InvitationController::class, 'settingUpdate'])->name('invitation.setting.update');
             Route::get('get-card/{event_id}', [InvitationController::class, 'getCard'])->name('getCard');
             Route::get('{id}/get-csrfToken', [InvitationController::class, 'csrfToken'])->name('invitation.getCsrftoken');
 
             // Pay
-            Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index')->middleware('PaidUserCheck');
+            Route::get('{id}/pay', [PayController::class, 'index'])->name('pay.index');
             Route::post('{id}/pay-datas', [PayController::class, 'paydatas'])->name('pay.get');
-            
-            
+
+            Route::post('{id}/export-csv', [PayController::class, 'exportcsv'])->name('export.csv');
         });
     });
 });

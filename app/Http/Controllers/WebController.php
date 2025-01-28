@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Event;
 use App\Models\EventType;
+use App\Models\Package;
 
 
 
@@ -275,7 +276,8 @@ class WebController extends Controller
 
     public function packages()
     {
-        return view("Website.package");
+        $packages = Package::all();
+        return view("Website.package",compact('packages'));
     }
     public function privacyPolicy()
     {

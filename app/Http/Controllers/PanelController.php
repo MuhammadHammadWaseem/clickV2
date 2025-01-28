@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Validator;
 use Carbon\Carbon;
 use App\Models\Event;
@@ -321,6 +322,8 @@ class PanelController extends Controller
 
         // Delete the event
         $event->delete();
+        
+        Session::forget('event_id');
 
         return response()->json([
             "message" => "Event deleted successfully",

@@ -1,28 +1,5 @@
 @extends('Panel.Layout.master')
 <style>
-    .pay-active a {
-        color: #C09D2A !important;
-    }
-
-    .pay-active img {
-        filter: none !important;
-    }
-
-    .pay-active {
-        background-color: #c09d2a29 !important;
-    }
-
-    .pay-active::after {
-        width: 5px;
-        height: 100%;
-        background-color: #C09D2A;
-        position: absolute;
-        left: 0;
-        right: 0;
-        content: "";
-        top: 0;
-    }
-
     .box-styling select {
         background-color: #EDEDED;
         border: 2px solid #999999;
@@ -44,21 +21,21 @@
     }
 
     .payment-form-submit .form-row .form-group.discont-cd {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        column-gap: 20px;
-        padding-right: 50px;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 20px;
+    padding-right: 50px;
+}
 
-    input#code {
-        width: min-content;
-    }
+input#code {
+    width: min-content;
+}   
 
-    select#country {
-        width: 100%;
-    }
+select#country {
+    width: 100%;
+}
 
     .payment-form-submit .divider-seperater {
         width: 100%;
@@ -216,73 +193,44 @@
 
     @media only screen and (max-width: 767px) {
         .payment-form-submit .form-row {
-            flex-wrap: wrap !important;
-        }
+    flex-wrap: wrap !important;
+}
 
-        .payment-form-submit .form-row .form-group {
-            width: 100% !important;
-        }
+.payment-form-submit .form-row .form-group{
+    width: 100% !important;
+}
 
-        .payment-form-submit form {
-            row-gap: 0;
-        }
+.payment-form-submit form {
+    row-gap: 0;
+}
 
-        .payment-form-submit .form-row .form-group.discont-cd {
-            flex-wrap: wrap;
-            padding: 0;
-        }
+.payment-form-submit .form-row .form-group.discont-cd {
+    flex-wrap: wrap;
+    padding: 0;
+}
 
-        input#code {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+input#code {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-        .payment-form-submit .divider-seperater {
-            margin: 0;
-        }
+.payment-form-submit .divider-seperater {
+    margin: 0;
+}
 
-        .tab-buttons.d-flex {
-            flex-wrap: wrap;
-            row-gap: 20px;
-        }
+.tab-buttons.d-flex {
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
 
-        .tab-buttons.d-flex button {
-            width: 100%;
-        }
+.tab-buttons.d-flex button {
+    width: 100%;
+}
 
 
-        .tab-buttons.d-flex div {
-            width: 100%;
-        }
-    }
-
-    #exampleModalCenter03 .modal-footer {
-        display: flex;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 20px 5px !important;
-    }
-
-    .modal-03 .modal-body .text {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        row-gap: 15px;
-        align-items: stretch !important;
-    }
-
-    .upload-form-csv .modal-body form label {
-        width: 100%;
-        height: 200px;
-        border: 5px dashed #A9967D;
-        border-radius: 10px;
-        display: flex;
-        padding: 50px 60px;
-    }
-
-    .upload-form-csv .modal-body form input {
-        display: none !important;
+.tab-buttons.d-flex div {
+    width: 100%;
+}
     }
 </style>
 @section('content')
@@ -293,8 +241,6 @@
 
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
-
-
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
@@ -305,31 +251,6 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Error:</strong> {{ session('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Success:</strong> {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-
-                @if ($eventPackage)
-                    <div class="alert alert-success">
-                        <p>You currently have the <strong>{{ $eventPackage->package_name }}</strong> for this event.
-                        </p>
-                        <p>Price Paid: ${{ number_format($eventPackage->price_paid, 2) }}</p>
-                    </div>
-                @endif
 
                 {{-- <div class="tab-buttons d-flex">
                     <button id="payPalBtn" class="active">{{ __('pay.Pay with PayPal') }}</button>
@@ -385,56 +306,11 @@
                                 </div>
 
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group d-none" id="package_div">
-                                    <select name="package" id="package">
-                                        <option selected disabled>{{ __('pay.select_package') }}</option>
-                                        @if ($eventPackage)
-                                            @foreach ($availablePackages as $package)
-                                                <option value="{{ $package->id }}"
-                                                    data-price="{{ $package->upgrade_price }}"
-                                                    data-id="{{ $package->id }}"
-                                                    {{ $package->is_purchased ? 'disabled' : '' }}>
-                                                    {{ $package->name }}
-                                                    @if ($package->is_purchased)
-                                                        (Already Purchased)
-                                                    @elseif ($package->upgrade_price > 0)
-                                                        (Upgrade for ${{ number_format($package->upgrade_price, 2) }})
-                                                    @else
-                                                        (Full Price: ${{ number_format($package->price, 2) }})
-                                                    @endif
-                                                </option>
-                                            @endforeach
-                                        @else
-                                            @foreach ($packages as $package)
-                                                <option value="{{ $package->id }}" data-price="{{ $package->price }}"
-                                                    data-id="{{ $package->id }}">{{ $package->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-
-                                <div class="form-group d-none"
-                                    style="display: flex;
-                                    align-content: center;
-                                    justify-content: space-around;
-                                    align-items: center;"
-                                    id="upload_csv_btn">
-                                    <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                                        data-target="#exampleModalCenter03">{{ __('pay.upload_csv') }}
-                                    </button>
-                                    <span>
-                                        {{ __('pay.you_must_upload_a_CSV_file') }}
-                                    </span>
-                                </div>
-                            </div>
-
-
                             <span class="divider-seperater"></span>
                             <div class="form-row">
                                 <div class="form-group discont-cd">
-                                    <input type="text" id="code" placeholder="{{ __('pay.discount_code') }}">
+                                    <input type="text" id="code"
+                                        placeholder="Discount {{ __('pay.discount_code') }}">
                                     <button type="button" id="verifyBtn"
                                         onclick="verify()">{{ __('pay.verify') }}</button>
                                 </div>
@@ -514,83 +390,12 @@
         </div>
 
     </div>
-
-    <div class="modal fade modal-01 modal-02 modal-03 upload-form-csv" id="exampleModalCenter03" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="text">
-                                <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
-                                <p>{{ __('guestlistpage.upload_csv_description') }}</p>
-                                <a href="{{ asset('assets/files/CSV List.csv') }}" class="submit-btn"
-                                    download>{{ __('guestlistpage.download_csv_example') }}</a>
-                            </div>
-                            <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="upload-container" onclick="document.getElementById('fileInput').click();">
-
-                                    <input type="hidden" id="id_event" name="id_event" value="{{ $currentEventId }}">
-                                    <input type="file" id="fileInput" name="csv_file"
-                                        onchange="showFileName()"accept=".csv" required>
-                                    <label for="csv_file"><img src="{{ asset('assets/images/upload_svg_image.png') }}"
-                                            alt="Upload Icon" /></label>
-                                </div>
-                                <div id="fileName" class="file-name"></div>
-                            </form>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" id="uploadCsvClose"
-                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
-                                <button type="button" class="submit-btn"
-                                    id="uploadCsvBtn">{{ __('pay.upload_csv') }}</button>
-                            </div>
-                        </div>
-
-
-                        <div class="col-8">
-                            <div class="main-side-media">
-                                <div class="image-box">
-                                    <img src="{{ asset('assets/images/exampleCsv1.png') }}" alt="">
-                                </div>
-                                <div class="main-youtube-iframe">
-                                    <iframe width="100%" height="315"
-                                        src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('scripts')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        function showFileName() {
-            const fileInput = document.getElementById('fileInput');
-            const fileNameDiv = document.getElementById('fileName');
-            const fileName = fileInput.files[0].name;
-            fileNameDiv.textContent = fileName;
-        };
-
-        let res = null;
-        let id = null;
-        let code = null;
         $("#verifyBtn").prop("disabled", true);
         $("#verifyBtn").css("cursor", "not-allowed");
 
@@ -624,17 +429,16 @@
         }
 
         function verify() {
-            code = $("#code").val();
+            let code = $("#code").val();
             $.ajax({
                 url: "{{ route('panel.event.pay.get', ['id' => $currentEventId]) }}",
                 type: 'POST',
                 data: {
                     _token: "{{ csrf_token() }}",
                     code: code,
-                    id: id
                 },
                 success: function(response) {
-                    res = JSON.parse(response);
+                    let res = JSON.parse(response);
                     console.log(res[0].couponMsg);
 
                     if (res[0].couponMsg == '') {
@@ -646,8 +450,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalCan">${res[0].subcano}</td>
-                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                    <td id="subTotalCan">${res[0].subcano}</td>
+                                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -668,8 +472,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -686,7 +490,7 @@
                 `);
 
                         toastr.success("{{ __('pay.PAYMENT_VERIFIED') }}");
-                    } else {
+                    }else{
                         toastr.error(res[0].couponMsg);
                     }
 
@@ -711,7 +515,7 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    res = JSON.parse(response);
+                    let res = JSON.parse(response);
 
                     $("#can").attr('href', res[0].linkcan);
                     $("#usa").attr('href', res[0].linkusa);
@@ -721,8 +525,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                            <td id="subTotalCan">${res[0].subcano}</td>
-                                                                                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                    <td id="subTotalCan">${res[0].subcano}</td>
+                                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -743,8 +547,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -781,6 +585,12 @@
                     .attr("maxlength", "7") // Max length for postal code, including space
                     .attr("title", "Enter a valid Canadian postal code (e.g., K1A 0B1)"); // Tooltip
 
+                $("#usaTable").addClass("d-none");
+                $("#canadaTable").removeClass("d-none");
+
+                $("#canBtn").removeClass("d-none");
+                $("#usaBtn").addClass("d-none");
+
                 $("#province").append(`
                     <select name="" id="select-2">
                         <option selected disabled>Province*</option>
@@ -811,6 +621,12 @@
                     .removeAttr("maxlength") // Remove max length for numbers
                     .attr("placeholder", "Zip Code*") // Update placeholder
                     .attr("title", "Enter a valid U.S. zip code (e.g., 90210)"); // Tooltip
+
+                $("#usaTable").removeClass("d-none");
+                $("#canadaTable").addClass("d-none");
+
+                $("#canBtn").addClass("d-none");
+                $("#usaBtn").removeClass("d-none");
 
                 $("#province").append(`
                     <select name="" id="select-2">
@@ -885,121 +701,6 @@
         $("#cancelBtn").on("click", function() {
             url = "{{ route('panel.event.generalInfos', ['id' => $currentEventId]) }}";
             window.location.href = url;
-        });
-
-        function getPrice(id) {
-            $.ajax({
-                url: "{{ route('panel.event.pay.get', ['id' => $currentEventId]) }}",
-                type: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id,
-                    code: code
-                },
-                success: function(response) {
-                    res = JSON.parse(response);
-                    console.log(res[0].couponMsg);
-
-                    $("#canadaTable").removeClass("d-none");
-                    $("#usaTable").addClass("d-none");
-
-                    $("#can").attr('href', res[0].linkcan);
-                    $("#usa").attr('href', res[0].linkusa);
-
-                    $("#canBtn").removeClass("d-none");
-
-                    $("#canadaTable").empty();
-                    $("#canadaTable").append(`
-                    <tr>
-                        <th>SUBTOTAL:</th>
-                        ${res[0].discount !== "0%" ? `
-                                                        <td id="subTotalCan">${res[0].subcano}</td>
-                                                    ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
-                    </tr>
-                    <tr>
-                        <th>TPS:</th>
-                        <td id="TPSCan">${res[0].tpscan}</td>
-                    </tr>
-                    <tr>
-                        <th>TVQ:</th>
-                        <td id="TVQCan">${res[0].tvqcan}</td>
-                    </tr>
-                    <tr>
-                        <th>TOTAL:</th>
-                        <td id="TotalCan" style="font-weight: bold;">${res[0].totcan}</td>
-                    </tr>
-                    `);
-
-                    $("#usaTable").empty();
-                    $("#usaTable").append(`
-                    <tr>
-                        <th>SUBTOTAL:</th>
-                        ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
-                    </tr>
-                    <tr>
-                        <th>TPS:</th>
-                        <td id="TPSUSA">${res[0].tpsusa}</td>
-                    </tr>
-                    <tr>
-                        <th>TVQ:</th>
-                        <td id="TVQUSA">${res[0].tvqusa}</td>
-                    </tr>
-                    <tr>
-                        <th>TOTAL:</th>
-                        <td id="TotalUSA" style="font-weight: bold;">${res[0].totusa}</td>
-                    </tr>
-                    `);
-
-                },
-                error: function(xhr) {
-                    toastr.error("{{ __('pay.PAYMENT_ERROR') }}");
-                    console.error(xhr.responseJSON);
-                    refresh();
-                }
-            });
-        }
-
-        $("#country").on("change", function() {
-            $("#package_div").removeClass("d-none");
-        });
-        $("#package").on("change", function() {
-            let price = $('#package option:selected').attr('data-price');
-            id = $('#package option:selected').attr('data-id');
-            getPrice(id);
-
-            if (id == 3) {
-                $("#upload_csv_btn").removeClass("d-none");
-            } else {
-                $("#upload_csv_btn").addClass("d-none");
-            }
-        });
-
-
-        document.getElementById('uploadCsvBtn').addEventListener('click', function() {
-            $("#uploadCsvBtn").attr("disabled", true);
-            $("#uploadCsvBtn").text("Uploading...");
-            const formData = new FormData(document.getElementById('csvUploadForm'));
-            $.ajax({
-                url: "{{ route('panel.event.export.csv', ['id' => $currentEventId]) }}",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    toastr.success("CSV uploaded successfully!");
-                    idArray = [];
-                    $("#uploadCsvClose").click();
-                    $("#uploadCsvBtn").attr("disabled", false);
-                    $("#uploadCsvBtn").text("Upload CSV");
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    $("#uploadCsvBtn").attr("disabled", false);
-                    $("#uploadCsvBtn").text("Upload CSV");
-                }
-            });
         });
     </script>
 @endsection

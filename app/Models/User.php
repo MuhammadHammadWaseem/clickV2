@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Package;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'user_packages')
+        ->withPivot(['start_date', 'end_date', 'price_paid'])
+            ->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'id_user', 'id');
+    }
+
+
 }

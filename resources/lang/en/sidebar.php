@@ -11,7 +11,7 @@ return[
     'Event Photos' => 'Event Photos',
     'Reminders' => 'Acknowledgment',
     'Custom Messages' => 'Custom Messages',
+    'Buy Package' => 'Buy Package',
     'Tutorials' => 'Tutorials',
-
 
 ];

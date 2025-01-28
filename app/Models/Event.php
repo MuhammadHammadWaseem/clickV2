@@ -80,9 +80,19 @@ class Event extends Model
     protected $keyType = 'int';
     public $timestamps = true;
 
-    public function eventType() {
+    public function eventType()
+    {
         return $this->belongsTo(EventType::class, 'type_id', 'id_eventtype');
     }
-    
-    
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'package_event', 'event_id', 'package_id')
+            ->withPivot(['price_paid', 'start_date', 'end_date'])
+            ->withTimestamps();
+    }
+
+
+
+
 }
