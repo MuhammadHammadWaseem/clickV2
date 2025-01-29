@@ -12,7 +12,7 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: auto; background-color: #ffffff; border: 1px solid #ddd; padding: 20px;">
         <tr>
             <td style="background-color: #A9967D; padding: 20px; text-align: center;">
-                <img src="{{ url('assets/images/dashboard-logo.png') }}" alt="Logo" style="max-width: 150px; margin-bottom: 10px;">
+                <img src="{{ url('assets/images/logo/logoNewWhite.png') }}" alt="Logo" style="max-width: 150px; margin-bottom: 10px;">
             </td>
         </tr>
         <tr>
