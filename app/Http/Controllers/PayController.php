@@ -242,128 +242,128 @@ class PayController extends Controller
 
     }
 
-    // public function thankyou($eventId, Request $request)
-    // {
-    //     if ($request->get('PayerID') != null) {
-    //         $user = Auth::user();
-    //         $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
-    //         $selectedPackage = Package::findOrFail($request->get('package_id'));
-
-    //         // Check if the user already has a package linked to this event
-    //         $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
-
-    //         // If a package already exists
-    //         if ($currentEventPackage) {
-    //             // Check if the selected package is an upgrade
-    //             if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
-    //                 // Calculate the upgrade cost
-    //                 $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
-
-    //                 // Update the package for the event
-    //                 $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
-    //                     'package_id' => $selectedPackage->id,
-    //                     'price_paid' => $selectedPackage->price,
-    //                     'start_date' => now(),
-    //                     'updated_at' => now(),
-    //                 ]);
-
-    //                 return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-    //                     ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
-    //             }
-
-    //             // If the same or a lower package is selected, prevent redundant purchases
-    //             return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-    //                 ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
-    //         }
-
-    //         // If no package exists for this event, create a new record
-    //         $userEvent->packages()->attach($selectedPackage->id, [
-    //             'price_paid' => $selectedPackage->price,
-    //             'start_date' => now(),
-    //             'end_date' => null, // You can define a specific duration for the package here
-    //             'created_at' => now(),
-    //         ]);
-
-    //         // Optionally link the package to the user (if required for global access)
-    //         if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
-    //             $user->packages()->attach($selectedPackage->id, [
-    //                 'price_paid' => $selectedPackage->price,
-    //                 'start_date' => now(),
-    //                 'end_date' => null,
-    //             ]);
-    //         }
-
-    //         if ($selectedPackage->id == 3) {
-    //             SendPackageMail::dispatch($user, $selectedPackage, $eventId);
-    //             Log::info("Email dispatched for package ID 3 to {$user->email}");
-    //         }
-
-    //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-    //             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
-    //     } else {
-    //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-    //             ->with('error', "Payment verification failed. Please try again.");
-    //     }
-    // }
-
     public function thankyou($eventId, Request $request)
     {
-        $user = Auth::user();
-        $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+        if ($request->get('PayerID') != null) {
+            $user = Auth::user();
+            $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+            $selectedPackage = Package::findOrFail($request->get('package_id'));
 
-        $selectedPackage = Package::findOrFail(3);
+            // Check if the user already has a package linked to this event
+            $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
 
-        // Check if the user already has a package linked to this event
-        $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
+            // If a package already exists
+            if ($currentEventPackage) {
+                // Check if the selected package is an upgrade
+                if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
+                    // Calculate the upgrade cost
+                    $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
 
-        // If a package already exists
-        if ($currentEventPackage) {
-            // Check if the selected package is an upgrade
-            if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
-                // Calculate the upgrade cost
-                $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
+                    // Update the package for the event
+                    $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
+                        'package_id' => $selectedPackage->id,
+                        'price_paid' => $selectedPackage->price,
+                        'start_date' => now(),
+                        'updated_at' => now(),
+                    ]);
 
-                // Update the package for the event
-                $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
-                    'package_id' => $selectedPackage->id,
-                    'price_paid' => $selectedPackage->price,
-                    'start_date' => now(),
-                    'updated_at' => now(),
-                ]);
+                    return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                        ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
+                }
 
+                // If the same or a lower package is selected, prevent redundant purchases
                 return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-                    ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
+                    ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
             }
 
-            // If the same or a lower package is selected, prevent redundant purchases
-            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-                ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
-        }
-
-        // If no package exists for this event, create a new record
-        $userEvent->packages()->attach($selectedPackage->id, [
-            'price_paid' => $selectedPackage->price,
-            'start_date' => now(),
-            'end_date' => null, // You can define a specific duration for the package here
-            'created_at' => now(),
-        ]);
-
-        // Optionally link the package to the user (if required for global access)
-        if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
-            $user->packages()->attach($selectedPackage->id, [
+            // If no package exists for this event, create a new record
+            $userEvent->packages()->attach($selectedPackage->id, [
                 'price_paid' => $selectedPackage->price,
                 'start_date' => now(),
-                'end_date' => null,
+                'end_date' => null, // You can define a specific duration for the package here
+                'created_at' => now(),
             ]);
-        }
-        if ($selectedPackage->id == 3) {
-            SendPackageMail::dispatch($user, $selectedPackage,$eventId);
-            Log::info("Email dispatched for package ID 3 to {$user->email}");
-        }
 
-        return redirect()->route('panel.event.pay.index', ['id' => $eventId])
-            ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
+            // Optionally link the package to the user (if required for global access)
+            if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
+                $user->packages()->attach($selectedPackage->id, [
+                    'price_paid' => $selectedPackage->price,
+                    'start_date' => now(),
+                    'end_date' => null,
+                ]);
+            }
+
+            if ($selectedPackage->id == 3) {
+                SendPackageMail::dispatch($user, $selectedPackage, $eventId);
+                Log::info("Email dispatched for package ID 3 to {$user->email}");
+            }
+
+            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
+        } else {
+            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                ->with('error', "Payment verification failed. Please try again.");
+        }
     }
+
+    // public function thankyou($eventId, Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+
+    //     $selectedPackage = Package::findOrFail(3);
+
+    //     // Check if the user already has a package linked to this event
+    //     $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
+
+    //     // If a package already exists
+    //     if ($currentEventPackage) {
+    //         // Check if the selected package is an upgrade
+    //         if ($selectedPackage->price > $currentEventPackage->pivot->price_paid) {
+    //             // Calculate the upgrade cost
+    //             $upgradeCost = $selectedPackage->price - $currentEventPackage->pivot->price_paid;
+
+    //             // Update the package for the event
+    //             $userEvent->packages()->updateExistingPivot($currentEventPackage->id, [
+    //                 'package_id' => $selectedPackage->id,
+    //                 'price_paid' => $selectedPackage->price,
+    //                 'start_date' => now(),
+    //                 'updated_at' => now(),
+    //             ]);
+
+    //             return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //                 ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
+    //         }
+
+    //         // If the same or a lower package is selected, prevent redundant purchases
+    //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //             ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
+    //     }
+
+    //     // If no package exists for this event, create a new record
+    //     $userEvent->packages()->attach($selectedPackage->id, [
+    //         'price_paid' => $selectedPackage->price,
+    //         'start_date' => now(),
+    //         'end_date' => null, // You can define a specific duration for the package here
+    //         'created_at' => now(),
+    //     ]);
+
+    //     // Optionally link the package to the user (if required for global access)
+    //     if (!$user->packages()->where('package_id', $selectedPackage->id)->exists()) {
+    //         $user->packages()->attach($selectedPackage->id, [
+    //             'price_paid' => $selectedPackage->price,
+    //             'start_date' => now(),
+    //             'end_date' => null,
+    //         ]);
+    //     }
+    //     if ($selectedPackage->id == 3) {
+    //         SendPackageMail::dispatch($user, $selectedPackage,$eventId);
+    //         Log::info("Email dispatched for package ID 3 to {$user->email}");
+    //     }
+
+    //     return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+    //         ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
+    // }
 
     public function exportcsv(Request $request)
     {
