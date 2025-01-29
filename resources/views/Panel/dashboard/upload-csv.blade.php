@@ -1,18 +1,18 @@
 @extends('Panel.Layout.master')
 <style>
-    .pay-active a {
+    .csv-active a {
         color: #C09D2A !important;
     }
 
-    .pay-active img {
+    .csv-active img {
         filter: none !important;
     }
 
-    .pay-active {
+    .csv-active {
         background-color: #c09d2a29 !important;
     }
 
-    .pay-active::after {
+    .csv-active::after {
         width: 5px;
         height: 100%;
         background-color: #C09D2A;
@@ -284,6 +284,23 @@
     .upload-form-csv .modal-body form input {
         display: none !important;
     }
+
+    div#tab1 .text {
+    margin-bottom: 30px;
+}
+
+div#tab1 .image-box img, div#tab1 .main-youtube-iframe {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+div#tab1 .col-4.modal-body {
+    align-content: center;
+}
+
+
 </style>
 @section('content')
     @php
@@ -295,277 +312,55 @@
         <div class="row">
 
 
+           
             <div class="col-lg-12">
-                <div class="box-styling your-web-page">
-                    <div class="text">
-                        {{-- <h2>{{ __('pay.Payment') }}</h2> --}}
-                        <h2>{{ __('pay.payment_with_paypal') }}</h2>
-                        <p>{{ __('pay.payment_access_area') }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Error:</strong> {{ session('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+                <div class="box-styling website-preview upload-form-csv modal-01" id="tab1" style="display: block;">
+                    <div class="row">
+                        <div class="col-4 modal-body">
+                            <div class="text">
+                                <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
+                                <p style="font-size: 11px;">{{ __('pay.upload_csv_description') }}</p>
+                                <a href="{{ asset('assets/files/CSV List.csv') }}" class="submit-btn mb-3"
+                                    download>{{ __('guestlistpage.download_csv_example') }}</a>
+                            </div>
+                            <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="upload-container" onclick="document.getElementById('fileInput').click();">
 
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Success:</strong> {{ session('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-
-                @if ($eventPackage)
-                    <div class="alert alert-success">
-                        <p>You currently have the <strong>{{ $eventPackage->package_name }}</strong> for this event.
-                            
-                            {{-- <p>You currently have the 
-                                @if(count($purchasedPackages) > 1)
-                                    @foreach ($purchasedPackages as $package)
-                                        <strong>{{ $package->name }}</strong>
-                                        @if (!$loop->last)
-                                            &
-                                        @endif
-                                    @endforeach
-                                @else
-                                <strong>{{ $purchasedPackages->first()->name }}</strong>
-                                @endif
-                                for this event.
-                            </p>
-                            <p>Price Paid: ${{ number_format($eventPackage->price_paid, 2) }}</p> --}}
-                    </div>
-                @endif
-
-                {{-- <div class="tab-buttons d-flex">
-                    <button id="payPalBtn" class="active">{{ __('pay.Pay with PayPal') }}</button>
-                    <div>
-                        <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button
-                            class="convergePayBtn active">{{ __('pay.Pay with Converge Pay') }}</button>
-                        <script
-                            src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
-                        </script>
-                    </div>
-                </div> --}}
-
-                {{-- Tab 1 --}}
-                <div class="box-styling website-preview " id="tab1" style="display: block;">
-                    <div class="payment-form-submit">
-                        <form action="">
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <input type="text" placeholder="{{ __('pay.name') }}*" required>
+                                    <input type="hidden" id="id_event" name="id_event" value="{{ $currentEventId }}">
+                                    <input type="file" id="fileInput" name="csv_file"
+                                        onchange="showFileName()"accept=".csv" required>
+                                    <label for="csv_file"><img src="{{ asset('assets/images/upload_svg_image.png') }}"
+                                            alt="Upload Icon" /></label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="tel" placeholder="{{ __('pay.phone') }}*" required>
+                                <div id="fileName" class="file-name"></div>
+                            </form>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="uploadCsvClose"
+                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
+                                <button type="button" class="submit-btn"
+                                    id="uploadCsvBtn">{{ __('pay.upload_csv') }}</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-8">
+                            <div class="main-side-media">
+                                <div class="image-box">
+                                    <img src="{{ asset('assets/images/CSVLIST.png') }}" alt="">
+                                </div>
+                                <div class="main-youtube-iframe">
+                                    <iframe width="100%" height="315"
+                                        src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 </div>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group" style="width: 100%">
-                                    <input type="text" placeholder="{{ __('pay.address') }}*" required>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <input type="text" placeholder="{{ __('pay.city') }}*" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" placeholder="{{ __('pay.postal_code') }}*" required
-                                        id="postalCode">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <select name="" id="country">
-                                        <option selected disabled>{{ __('pay.select_country') }}</option>
-                                        <option value="canada">{{ __('pay.canada') }}</option>
-                                        <option value="us">{{ __('pay.united_states') }}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group" id="province">
-                                </div>
-
-                            </div>
-
-                            <div class="form-row">
-                                {{-- <div class="form-group d-none" id="package_div">
-                                    <select name="package" id="package">
-                                        <option selected disabled>{{ __('pay.select_package') }}</option>
-                                        @if ($eventPackage)
-                                            @foreach ($availablePackages as $package)
-                                                <option value="{{ $package->id }}"
-                                                    data-price="{{ $package->upgrade_price }}"
-                                                    data-id="{{ $package->id }}"
-                                                    @if ($package->is_purchased)
-                                                    disabled
-                                                    style="background-color: #c5c5c5; color: #e7e7e7 !important;"
-                                                    @endif
-                                                    @class(['text-muted' => $package->is_purchased])>
-                                                    {{ $package->name }}
-                                                    @if ($package->is_purchased)
-                                                        (Already Purchased)
-                                                    @elseif ($package->upgrade_price > 0)
-                                                        (Upgrade for ${{ number_format($package->upgrade_price, 2) }})
-                                                    @else
-                                                        (Full Price: ${{ number_format($package->price, 2) }})
-                                                    @endif
-                                                </option>
-                                            @endforeach
-                                        @else
-                                            @foreach ($packages as $package)
-                                                <option value="{{ $package->id }}" data-price="{{ $package->price }}"
-                                                    data-id="{{ $package->id }}">{{ $package->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div> --}}
-
-                                <div class="form-group d-none" id="package_div">
-                                    <select name="package" id="package">
-                                        <option value="select" selected disabled>{{ __('pay.select_package') }}</option>
-                                        @if ($eventPackage)
-                                            @foreach ($availablePackages as $package)
-                                                <option 
-                                                    value="{{ $package->id }}" 
-                                                    data-price="{{ $package->upgrade_price }}" 
-                                                    data-id="{{ $package->id }}" 
-                                                    @if ($package->is_disabled || $package->is_purchased)
-                                                        disabled
-                                                        style="background-color: #c5c5c5; color: #e7e7e7 !important;"
-                                                    @endif
-                                                    @class(['text-muted' => $package->is_disabled || $package->is_purchased])
-                                                >
-                                                    {{ $package->name }}
-                                                    @if ($package->is_purchased)
-                                                        (Already Purchased)
-                                                    @elseif ($package->upgrade_price > 0)
-                                                        (Upgrade for ${{ number_format($package->upgrade_price, 2) }})
-                                                    @else
-                                                        (Full Price: ${{ number_format($package->price, 2) }})
-                                                    @endif
-                                                </option>
-                                            @endforeach
-                                        @else
-                                            @foreach ($packages as $package)
-                                                <option 
-                                                    value="{{ $package->id }}" 
-                                                    data-price="{{ $package->price }}" 
-                                                    data-id="{{ $package->id }}"
-                                                >
-                                                    {{ $package->name }}
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                
-
-                                {{-- <div class="form-group d-none"
-                                    style="display: flex;
-                                    align-content: center;
-                                    justify-content: space-around;
-                                    align-items: center;"
-                                    id="upload_csv_btn">
-                                    <button type="button" class="btn btn-primary t-btn t-btn-dark" data-toggle="modal"
-                                        data-target="#exampleModalCenter03">{{ __('pay.upload_csv') }}
-                                    </button>
-                                    <span>
-                                        {{ __('pay.you_must_upload_a_CSV_file') }}
-                                    </span>
-                                </div> --}}
-                            </div>
-
-
-                            <span class="divider-seperater"></span>
-                            <div class="form-row">
-                                <div class="form-group discont-cd">
-                                    <input type="text" id="code" placeholder="{{ __('pay.discount_code') }}">
-                                    <button type="button" id="verifyBtn"
-                                        onclick="verify()">{{ __('pay.verify') }}</button>
-                                </div>
-                                <div class="form-group table-reveal-data">
-                                    <table id="canadaTable" class="d-none">
-                                    </table>
-                                    <table id="usaTable" class="d-none">
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="two-btn-form-align">
-                                <button type="button" id="cancelBtn">{{ __('pay.cancel') }}</button>
-                                <button id="canBtn" class="d-none"><a id="can" class="text-white"
-                                        href="">{{ __('pay.pay_now') }}</a></button>
-                                <button id="usaBtn" class="d-none"><a id="usa" class="text-white"
-                                        href="">{{ __('pay.pay_now') }}</a></button>
-                            </div>
-
-                        </form>
-                    </div>
-
-                </div>
-
-                {{-- Tab 2 --}}
-                <div class="box-styling website-preview" id="tab2" style="display: none;">
-                    <div class="payment-form-submit">
-                        <div class=""
-                            style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 80px;">
-                            {{-- Original --}}
-                            <div>
-                                <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> <button
-                                    style="background-color: #A9967D;
-                                    color: #fff;
-                                    border-color: #A9967D;
-                                    padding: 10px 20px;
-                                    font-size: 16px;cursor: pointer;
-                                    transition: background-color 0.3s, color 0.3s;
-                                    border-radius: 5px; ">Pay
-                                    Now</button>
-                                <script
-                                    src="https://www.convergepay.com/hosted-payments/buy_button_script/56756a36767165445376656f61535a51584a4f5168414141415a457539687149">
-                                </script>
-                            </div>
-
-                            {{-- 0.01$ --}}
-                            {{-- <div>
-                                <button disabled
-                                    style="background-color: #A9967D;
-                                    color: #fff;
-                                    border-color: #A9967D;
-                                    padding: 10px 20px;
-                                    font-size: 16px;cursor: pointer;
-                                    transition: background-color 0.3s, color 0.3s;
-                                    border-radius: 5px; ">BUY
-                                    NOW</button>
-                                <script
-                                    src="https://www.convergepay.com/hosted-payments/buy_button_script/585673556367787a53516965575437756137636961514141415a5063582f4e38">
-                                </script>
-                            </div> --}}
-
-
-                            {{-- 1$ --}}
-                            {{-- <div>
-                                    <button disabled style="background-color: #A9967D;
-                                    color: #fff;
-                                    border-color: #A9967D;
-                                    padding: 10px 20px;
-                                    font-size: 16px;cursor: pointer;
-                                    transition: background-color 0.3s, color 0.3s;
-                                    border-radius: 5px; ">Pay Now</button><script src="https://www.convergepay.com/hosted-payments/buy_button_script/7870536c735330415448717a6b725a4461625a6877414141415a5062365a306e"></script>
-                                </div> --}}
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -702,8 +497,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalCan">${res[0].subcano}</td>
-                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                        <td id="subTotalCan">${res[0].subcano}</td>
+                                                    ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -724,8 +519,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                                                                                        <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                                                                        ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -776,8 +571,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                            <td id="subTotalCan">${res[0].subcano}</td>
-                                                                                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                                                                                <td id="subTotalCan">${res[0].subcano}</td>
+                                                                                                                            ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -798,8 +593,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                                                                                        <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                                                                        ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -832,7 +627,7 @@
 
             $("#canadaTable").addClass("d-none");
             $("#canBtn").addClass("d-none");
-            
+
             $("#usaTable").addClass("d-none");
             $("#usaBtn").addClass("d-none");
 
@@ -978,8 +773,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                        <td id="subTotalCan">${res[0].subcano}</td>
-                                                    ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                            <td id="subTotalCan">${res[0].subcano}</td>
+                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -1000,8 +795,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                        <td id="subTotalUSA">${res[0].subusao}</td>
+                                                        ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>

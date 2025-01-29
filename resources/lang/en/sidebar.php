@@ -12,6 +12,6 @@ return[
     'Reminders' => 'Acknowledgment',
     'Custom Messages' => 'Custom Messages',
     'Buy Package' => 'Buy Package',
+    'Upload CSV' => 'Upload CSV',
     'Tutorials' => 'Tutorials',
-
 ];

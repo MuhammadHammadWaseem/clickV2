@@ -1,6 +1,7 @@
 @php
     use App\Helpers\GeneralHelper;
     $eventId = GeneralHelper::getEventId();
+    $packageEvent = DB::table('package_event')->where('event_id', $eventId)->where('package_id', 3)->first();
 @endphp
 
 <div class="col-lg-2 col-md-2" id="sidebar" >
@@ -20,7 +21,10 @@
             <li class="poto-active"><a href="{{ route('panel.event.photos', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Event-Photos.png')}}" alt="">{{ __('sidebar.Event Photos') }}</a></li>
             <li class="reminder-active"><a href="{{ route('panel.event.reminder', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Reminders.png')}}" alt="">{{ __('sidebar.Reminders') }}</a></li>
             <li class="message-active"><a href="{{ route('panel.event.message', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Custom-Messages.png')}}" alt="">{{ __('sidebar.Custom Messages') }}</a></li>
-            <li class="pay-active"><a href="{{ route('panel.event.pay.index', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Custom-Messages.png')}}" alt="">{{ __('sidebar.Buy Package') }}</a></li>
+            <li class="pay-active"><a href="{{ route('panel.event.pay.index', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Icon 1.png')}}" alt="">{{ __('sidebar.Buy Package') }}</a></li>
+            @if($packageEvent)
+            <li class="csv-active"><a href="{{ route('panel.event.upload.csv', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Icon 2.png')}}" alt="">{{ __('sidebar.Upload CSV') }}</a></li>
+            @endif
             <li class="tutoriar-active"><a href="{{ route('panel.event.tutorial', ['id' => $eventId]) }}"><img src="{{ asset('assets/images/Tutorials.png')}}" alt="">{{ __('sidebar.Tutorials') }}</a></li>
         </ul>
     </div>

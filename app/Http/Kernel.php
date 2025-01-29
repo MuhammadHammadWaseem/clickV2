@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'payCheck' => \App\Http\Middleware\payCheck::class,
         'PaidUserCheck' => \App\Http\Middleware\PaidUserCheck::class,
         'check.event.package' => \App\Http\Middleware\CheckEventPackage::class,
+        'check.package' => \App\Http\Middleware\CheckPackageAccess::class,
     ];
 }

@@ -174,6 +174,8 @@ Route::group(['as' => 'panel.'], function () {
             Route::post('{id}/pay-datas', [PayController::class, 'paydatas'])->name('pay.get');
 
             Route::post('{id}/export-csv', [PayController::class, 'exportcsv'])->name('export.csv');
+
+            Route::get('{id}/upload-csv', [PayController::class, 'uploadcsv'])->name('upload.csv')->middleware('check.package');
         });
     });
 });
