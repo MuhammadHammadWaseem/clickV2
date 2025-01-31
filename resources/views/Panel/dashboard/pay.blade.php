@@ -326,9 +326,9 @@
                 @if ($eventPackage)
                     <div class="alert alert-success">
                         <p>You currently have the <strong>{{ $eventPackage->package_name }}</strong> for this event.
-                            
+
                             {{-- <p>You currently have the 
-                                @if(count($purchasedPackages) > 1)
+                                @if (count($purchasedPackages) > 1)
                                     @foreach ($purchasedPackages as $package)
                                         <strong>{{ $package->name }}</strong>
                                         @if (!$loop->last)
@@ -437,16 +437,14 @@
                                         <option value="select" selected disabled>{{ __('pay.select_package') }}</option>
                                         @if ($eventPackage)
                                             @foreach ($availablePackages as $package)
-                                                <option 
-                                                    value="{{ $package->id }}" 
-                                                    data-price="{{ $package->upgrade_price }}" 
-                                                    data-id="{{ $package->id }}" 
-                                                    @if ($package->is_disabled || $package->is_purchased)
-                                                        disabled
-                                                        style="background-color: #c5c5c5; color: #e7e7e7 !important;"
-                                                    @endif
-                                                    @class(['text-muted' => $package->is_disabled || $package->is_purchased])
-                                                >
+                                                <option value="{{ $package->id }}"
+                                                    data-price="{{ $package->upgrade_price }}"
+                                                    data-feature="{{ $package->description }}" data-id="{{ $package->id }}"
+                                                    @if ($package->is_disabled || $package->is_purchased) disabled
+                                                        style="background-color: #c5c5c5; color: #e7e7e7 !important;" @endif
+                                                    @class([
+                                                        'text-muted' => $package->is_disabled || $package->is_purchased,
+                                                    ])>
                                                     {{ $package->name }}
                                                     @if ($package->is_purchased)
                                                         (Already Purchased)
@@ -459,18 +457,15 @@
                                             @endforeach
                                         @else
                                             @foreach ($packages as $package)
-                                                <option 
-                                                    value="{{ $package->id }}" 
-                                                    data-price="{{ $package->price }}" 
-                                                    data-id="{{ $package->id }}"
-                                                >
+                                                <option value="{{ $package->id }}" data-price="{{ $package->price }}"
+                                                    data-id="{{ $package->id }}" data-feature="{{ $package->description }}">
                                                     {{ $package->name }}
                                                 </option>
                                             @endforeach
                                         @endif
                                     </select>
                                 </div>
-                                
+
 
                                 {{-- <div class="form-group d-none"
                                     style="display: flex;
@@ -502,6 +497,16 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div id="features-div" class="d-none">
+                                <p><span style="font-weight: bold; color: #A9967D;">Note:</span> This package includes:</p>
+                                <div>
+                                    <ul id="features-list">
+
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="two-btn-form-align">
                                 <button type="button" id="cancelBtn">{{ __('pay.cancel') }}</button>
                                 <button id="canBtn" class="d-none"><a id="can" class="text-white"
@@ -702,8 +707,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalCan">${res[0].subcano}</td>
-                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                            <td id="subTotalCan">${res[0].subcano}</td>
+                                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -724,8 +729,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                                                                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                                                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -776,8 +781,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                            <td id="subTotalCan">${res[0].subcano}</td>
-                                                                                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                                                                                                    <td id="subTotalCan">${res[0].subcano}</td>
+                                                                                                                                                ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -798,8 +803,8 @@
                     <tr>
                         <th>{{ __('pay.SUBTOTAL') }}</th>
                         ${res[0].discount !== "0%" ? `
-                                                                                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                                                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                                                                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                                                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>{{ __('pay.TPS') }}</th>
@@ -835,6 +840,8 @@
             
             $("#usaTable").addClass("d-none");
             $("#usaBtn").addClass("d-none");
+
+            $("#features-div").addClass("d-none");
 
             const postalCodeInput = $("#postalCode");
 
@@ -978,8 +985,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                        <td id="subTotalCan">${res[0].subcano}</td>
-                                                    ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                                                                                <td id="subTotalCan">${res[0].subcano}</td>
+                                                                            ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -1000,8 +1007,8 @@
                     <tr>
                         <th>SUBTOTAL:</th>
                         ${res[0].discount !== "0%" ? `
-                                                    <td id="subTotalUSA">${res[0].subusao}</td>
-                                                    ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
                     </tr>
                     <tr>
                         <th>TPS:</th>
@@ -1032,6 +1039,15 @@
         $("#package").on("input", function() {
             let price = $('#package option:selected').attr('data-price');
             id = $('#package option:selected').attr('data-id');
+            let features = $('#package option:selected').attr('data-feature');
+
+            // try {
+            //     features = JSON.parse(features); // ✅ Properly parse the JSON array
+            // } catch (e) {
+            //     console.error("Error parsing features:", e);
+            //     features = []; // Fallback to empty array if parsing fails
+            // }
+
             getPrice(id);
 
             if (id == 3) {
@@ -1039,6 +1055,14 @@
             } else {
                 $("#upload_csv_btn").addClass("d-none");
             }
+
+            $("#features-div").removeClass("d-none");
+            $("#features-list").empty();
+            $("#features-list").append(`<li>${features}</li>`);
+
+            // features.forEach(feature => {
+            //     $("#features-list").append(`<li>${feature}</li>`);
+            // });
         });
 
 
