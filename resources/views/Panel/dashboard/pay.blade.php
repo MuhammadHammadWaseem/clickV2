@@ -653,6 +653,15 @@
         let res = null;
         let id = null;
         let code = null;
+
+        $("#code").on("input", function() {
+            if ($(this).val().length > 0) {
+                $("#verifyBtn").prop("disabled", false);
+                $("#verifyBtn").css("cursor", "pointer");
+                code = $(this).val();
+            }
+        });
+
         $("#verifyBtn").prop("disabled", true);
         $("#verifyBtn").css("cursor", "not-allowed");
 
@@ -749,6 +758,52 @@
                         toastr.success("{{ __('pay.PAYMENT_VERIFIED') }}");
                     } else {
                         toastr.error(res[0].couponMsg);
+                        $("#can").attr('href', res[0].linkcan);
+                        $("#usa").attr('href', res[0].linkusa);
+
+                        $("#canadaTable").empty();
+                        $("#canadaTable").append(`
+                    <tr>
+                        <th>SUBTOTAL:</th>
+                        ${res[0].discount !== "0%" ? `
+                                                                            <td id="subTotalCan">${res[0].subcano}</td>
+                                                                        ` : `<td id="subTotalCan">${res[0].subcan}</td>`}
+                    </tr>
+                    <tr>
+                        <th>TPS:</th>
+                        <td id="TPSCan">${res[0].tpscan}</td>
+                    </tr>
+                    <tr>
+                        <th>TVQ:</th>
+                        <td id="TVQCan">${res[0].tvqcan}</td>
+                    </tr>
+                    <tr>
+                        <th>TOTAL:</th>
+                        <td id="TotalCan" style="font-weight: bold;">${res[0].totcan}</td>
+                    </tr>
+                    `);
+
+                        $("#usaTable").empty();
+                        $("#usaTable").append(`
+                    <tr>
+                        <th>SUBTOTAL:</th>
+                        ${res[0].discount !== "0%" ? `
+                                                                                                                                            <td id="subTotalUSA">${res[0].subusao}</td>
+                                                                                                                                            ` : `<td id="subTotalUSA">${res[0].subusa}</td>`}
+                    </tr>
+                    <tr>
+                        <th>TPS:</th>
+                        <td id="TPSUSA">${res[0].tpsusa}</td>
+                    </tr>
+                    <tr>
+                        <th>TVQ:</th>
+                        <td id="TVQUSA">${res[0].tvqusa}</td>
+                    </tr>
+                    <tr>
+                        <th>TOTAL:</th>
+                        <td id="TotalUSA" style="font-weight: bold;">${res[0].totusa}</td>
+                    </tr>
+                `);
                     }
 
                 },
@@ -769,6 +824,11 @@
                 processData: false,
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    code: code,
+                    id: id
                 },
                 success: function(response) {
                     res = JSON.parse(response);
@@ -1027,8 +1087,9 @@
                 },
                 error: function(xhr) {
                     toastr.error("{{ __('pay.PAYMENT_ERROR') }}");
-                    console.error(xhr.responseJSON);
-                    refresh();
+                    console.error(xhr);
+                    // refresh();
+                    
                 }
             });
         }

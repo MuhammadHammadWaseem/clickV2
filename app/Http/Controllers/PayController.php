@@ -100,6 +100,8 @@ class PayController extends Controller
                 ->select('packages.*')
                 ->first();
 
+                $packageId = $request->id;
+
             if (!$package) {
                 return redirect()->back()->with('error', 'Package not found');
             }
@@ -110,6 +112,7 @@ class PayController extends Controller
 
         } else {
             $package = null;
+            $packageId = null;
         }
         $datas = Data::where('id_data', 1)->first();
 
@@ -180,7 +183,7 @@ class PayController extends Controller
             $subUsa = $package->price;
             $subCA = $package->price;
 
-            if ($code) {
+            if ($code && count($code) > 0) {
                 if ($dateNow >= $code[0]->start_date && $dateNow <= $code[0]->expirydate) {
                     $couponUsed = DB::table('events')->where(['coupon_code' => $request->code])->count();
                     if ($couponUsed < $code[0]->count) {
@@ -194,12 +197,27 @@ class PayController extends Controller
                         $subCA = $subCA - ($subCA / 100 * $code[0]->discount);
                         DB::table('events')->where(['id_event' => $eventId])->update(['coupon_code' => $request->code]);
                     } else {
+                        $subUsao = $package->price;
+                        $subCAo = $package->price;
+                        $subUsa = $package->price;
+                        $subCA = $package->price;
                         $couponMsg = "Invalid Coupon";
                     }
                 } else {
+                    $subUsao = $package->price;
+                    $subCAo = $package->price;
+                    $subUsa = $package->price;
+                    $subCA = $package->price;
                     $couponMsg = "Invalid Coupon";
                 }
+            }else{
+                $subUsao = $package->price;
+                $subCAo = $package->price;
+                $subUsa = $package->price;
+                $subCA = $package->price;
+                $couponMsg = "Invalid Coupon";
             }
+
         } else {
             $discount = 0;
             $subUsao = 0;
@@ -218,9 +236,9 @@ class PayController extends Controller
 
         // $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&package_id=" . $package->id . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "&package_id=" . $packageId . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&package_id=" . $package->id . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&package_id=" . $packageId . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
 
         $newTvqUSA = number_format((($subUsa / 100) * $tvqUsa), 2, ".", "");
