@@ -5,6 +5,12 @@
         background-color: #F0F0F0;
     }
 
+    section{
+        background-color: #F0F0F0 !important;
+        margin:0 !important;
+        padding:100px 50px !important;
+    }
+
     .packages-single-card .box-subtitle {
         color: #A9967D;
         font-size: 16px;
@@ -16,6 +22,11 @@
         width: max-content;
     }
 
+    .text ul li p {
+    margin: 0 !important;
+    padding:10px 0;
+}
+
     section.events-lists-sec-01 {
         margin: 0 !important;
     }
@@ -24,9 +35,20 @@
         padding: 0 44px !important;
     }
 
-    .events-lists-sec-01 .text.text-center p {
-        width: 100%;
-    }
+    .text h2 {
+    font-size: 50px !important;
+    color: #4A4A4A;
+    font-weight: 600 !important;
+    font-family: 'Poppins' !important;
+    line-height: 1.5 !important;
+}
+
+.text p {
+    width: 100% !important;
+    color: #7A7A7A;
+    font-size: 20px !important;
+    margin: 10px 0 30px !important;
+}
 
     .box-styling {
         height: fit-content !important;
@@ -43,7 +65,7 @@
     }
 
     .packages-single-card ul li {
-        list-style: unset;
+        list-style: inside;
         color: #8B8B8B;
         font-size: 16px;
         font-weight: 500;
@@ -106,6 +128,375 @@
     body {
         padding-top: 120px;
     }
+
+    ul{
+        padding:0 !important;
+    }
+
+    .text ul li {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    margin: 0 0 10px 0;
+}
+
+.text-center{
+    padding:0 !important;
+}
+
+.text ul {
+    margin-bottom: 40px !important;
+}
+
+.events-lists-sec-03{
+    background-color:#E8E8E8 !important;
+    padding:70px 50px !important;
+}
+
+.events-lists-sec-02 .package-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text h3 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #4A4A4A;
+}
+
+.text h4 {
+    color: #4A4A4A;
+    font-size: 25px !important;
+    font-weight: 600;
+}
+
+.packages-box .text p {
+    font-size: 17px !important;
+    margin: 0 !important;
+}
+
+.packages-grid .packages-box {
+    background: #E3E3E3;
+    border: 1px solid #DDDDDD;
+    border-radius: 20px;
+    padding: 30px;
+    width: 30%;
+}
+
+.packages-grid {
+    gap: 20px;
+    margin-top: 20px;
+    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.packages-grid .packages-box .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.events-lists-sec-01 .text h2 {
+    margin-top: 100px;
+}
+
+.text {
+    align-content: center;
+}
+
+.events-lists-sec-04 {
+    padding-left: 0 !important;
+}
+
+.events-lists-sec-04 .container-fluid {
+    padding-left: 0;
+}
+
+.events-lists-sec-04 .container-fluid .package-image img {
+    width: 90%;
+}
+
+.events-lists-sec-04 .container-fluid .package-image {justify-content: flex-start;}
+
+.events-lists-sec-03 .text h3 ~ p {
+    color: #A9967D;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 15px 0 0;
+}
+
+.two-packages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #E9E9E9;
+}
+
+.events-lists-sec-05 {padding-left: 0 !important;padding-right: 0 !important;}
+
+.events-lists-sec-05 .container-fluid {
+    padding: 0;
+}
+
+.two-packages .packagesbox {
+    width: 100%;
+    padding: 110px 45px;
+}
+
+.two-packages .packagesbox .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.two-packages .packagesbox .text-center ul p {margin: 0 !important;!i;!;padding: 10px 0;}
+
+.two-packages .packagesbox .text-center ul {
+    margin: 0 !important;
+}
+
+.two-packages .packagesbox:last-child {
+    background: linear-gradient(180deg, #A9967D 0%, #675640 100%);
+    clip-path: polygon(18% 0, 100% 0%, 100% 100%, 0 100%);
+    margin-left: -10%;
+}
+
+.two-packages .packagesbox:last-child p, .two-packages .packagesbox:last-child path, .two-packages .packagesbox:last-child h3 {
+    color: #fff;
+    fill: #fff;
+}
+
+.events-lists-sec-05 .text {
+    width: 60%;
+    margin: auto;
+}
+
+.events-lists-last-sec .text {
+    width: 85%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 1600px) {
+    .packages-single-card .box-unit-price {
+    font-size: 40px;
+}
+.text p {
+    font-size: 16px !important;
+}
+
+.text h2 {
+    font-size: 40px !important;
+    line-height: 1.2 !important;
+}
+.text ul {
+    margin-bottom: 20px !important;
+}
+.text ul li p {
+    font-size: 14px !important;
+}
+
+.events-lists-last-sec .text {
+    margin: auto;
+}
+}
+@media only screen and (max-width: 1400px) {
+
+    .packages-grid .packages-box {
+    width: 48%;
+}
+
+.text h4 {
+    font-size: 18px !important;
+}
+
+.packages-box .text p {
+    font-size: 12px !important;
+}
+
+.text ul li p {
+    padding:0 !important;
+    }
+
+    .events-lists-sec-05 .text {
+    width: 100%;
+}
+.events-lists-sec-03 {
+    background-size: contain !important;
+}
+
+.text h2 {
+        font-size: 30px !important;
+    }
+    .select-packages-boxes .col-lg-3 {
+    width: 50%;
+}
+
+.select-packages-boxes .col-lg-3 {
+    width: 50%;
+}
+
+.packages-single-card {
+    min-height: 500px !important;
+}
+
+.packages-single-card a {
+    bottom: 20px;
+    position: absolute;
+    left: 20px;
+    width: 90% !important;
+}
+
+.packages-single-card {
+    position: relative;
+}
+}
+@media only screen and (max-width: 1024px) {}
+@media only screen and (max-width: 991px) {
+
+    .events-lists-sec-01 .text h2 {
+    margin-top: 50px;
+}
+
+    .select-packages-boxes .col-lg-3 {
+        width: 100%;
+    }
+
+    .packages-single-card a {
+        width: 94% !important;
+    }
+
+    section {
+    padding: 50px 50px !important;
+}
+
+.events-lists-sec-04 {
+    padding-left: 50px !important;
+}
+
+.two-packages {
+    flex-direction: column;
+}
+
+.two-packages .packagesbox {
+    padding: 50px 45px;
+}
+
+.two-packages .packagesbox:last-child {
+    margin: 0;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+}
+
+.events-lists-sec-05 .text {
+    padding: 0 20px !important;
+}
+
+.text {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.text ul li {
+    width: fit-content;
+    margin: auto auto 10px auto;
+}
+.packages-grid .packages-box .text, .events-lists-sec-03 .text, .events-lists-sec-01 .text {
+    margin: 0;
+}
+
+.events-lists-last-sec .text {
+    width: 100%;
+}
+
+.events-lists-last-sec{
+    background-size: cover !important;
+}
+
+.events-lists-sec-04 .container-fluid .package-image img {
+    width: 100%;
+}
+
+    .packages-single-card a {
+        position: relative !important;
+        width: 100% !important;
+        left:0 !important;
+    }
+
+    .packages-single-card {
+    min-height: fit-content !important;
+}
+
+}
+@media only screen and (max-width: 768px) {
+
+    .packages-grid .packages-box {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 575px) {
+
+    .select-packages-boxes {
+    padding: 0 10px !important;
+}
+
+.packages-single-card ul li{
+    text-align:center;
+}
+
+.box-styling{
+    text-align:center;
+}
+
+.packages-single-card .box-subtitle {
+    width: 100%;
+}
+
+section {
+        padding: 30px 10px !important;
+    }
+
+    .events-lists-sec-03 {
+    padding: 40px 10px !important;
+}
+
+    .events-lists-sec-04 {
+        padding-left: 10px !important;
+    }
+
+        .text {
+        margin-bottom: 20px;
+    }
+
+    .text p {
+    margin: 10px 0 10px !important;
+}
+
+.text h2 {
+        font-size: 22px !important;
+    }
+
+        .text p {
+        font-size: 13px !important;
+    }
+
+        .two-packages .packagesbox {
+        padding: 50px 10px;
+    }
+
+    .events-lists-sec-01 {
+    padding: 0 !important;
+}
+}
 </style>
 @section('title')
     Packages | Event Organization Tool | Click Invitation
@@ -138,67 +529,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="select-packages-boxes">
-                    {{-- <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">{{ __('packages.basic_package') }}</div>
-                        <div class="box-unit-price">$49</div>
-                        <ul>
-                            <li>{{ __('packages.general_info') }}</li>
-                            <li>{{ __('packages.webpage') }}</li>
-                            <li>{{ __('packages.meals') }}</li>
-                            <li>{{ __('packages.gift_suggestions') }}</li>
-                            <li>{{ __('packages.invitation') }}</li>
-                            <li>{{ __('packages.guest_list') }}</li>
-                        </ul>
-                        <p>{{ __('packages.purpose_basic') }}</p>
-                        @guest
-                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endguest
-                        @auth
-                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endauth
-                    </div>
-
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">{{ __('packages.comprehensive_package') }}</div>
-                        <div class="box-unit-price">$99</div>
-                        <ul>
-                            <li>{{ __('packages.basic_package_contents') }}</li>
-                            <li>{{ __('packages.table_seating_arrangements') }}</li>
-                            <li>{{ __('packages.photos') }}</li>
-                            <li>{{ __('packages.acknowledgments') }}</li>
-                            <li>{{ __('packages.messaging') }}</li>
-                        </ul>
-                        <p>{{ __('packages.purpose_comprehensive') }}</p>
-                        @guest
-                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endguest
-                        @auth
-                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endauth
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="packages-single-card box-styling">
-                        <div class="box-subtitle">{{ __('packages.We_do_it_for_you') }}</div>
-                        <div class="box-unit-price">$349</div>
-                        <p>{{ __('packages.purpose_comprehensive') }}</p>
-                        <p>
-                            {{ __('packages.details_comprehensive', [
-                                'description' => "In this package, we take care of everything from start to finish. This includes venue selection, full event planning and coordination, managing vendors and suppliers, budget tracking, custom invitation design, guest list management, on-day support, and post-event services like sending thank-you notes and feedback collection. Let us handle all the stress so you can enjoy your special day hassle-free!"
-                            ]) }}
-                        </p>
-                        @guest
-                            <a href="{{ route('web.login') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endguest
-                        @auth
-                            <a href="{{ route('panel.index') }}" class="btn t-btn">{{ __('packages.buy_now') }}</a>
-                        @endauth
-                    </div>
-                </div> --}}
-
                     @php
                         $displayedFeatures = [];
                     @endphp
@@ -235,6 +565,352 @@
         </div>
 
     </section>
+
+
+    <section class="events-lists-sec-02">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 align-content-center">
+                    <div class="text">
+                        <h2>Basic Package</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <ul>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                        </ul>
+                        <a href="#" class="btn t-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="package-image">
+                        <img src="assets/newimages/packages-banner.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-03">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg12">
+                    <div class="text text-center">
+                        <h3>This Package Includes</h3>
+                    </div>
+                    <div class="packages-grid">
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>General Info</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Webpage</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Meals</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Gift Suggestions</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Invitation</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Guest List</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-02 events-lists-sec-04">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="package-image">
+                        <img src="assets/newimages/comprehensive-img.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 align-content-center">
+                    <div class="text">
+                        <h2>Comprehensive Package</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <ul>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                        </ul>
+                        <a href="#" class="btn t-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-03">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg12">
+                    <div class="text text-center">
+                        <h3>This Package Includes</h3>
+                        <p>Everything In Basic Package + Including</p>
+                    </div>
+                    <div class="packages-grid">
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Seating Arrangements</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Photos</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Acknowledgments</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                        <div class="packages-box">
+                            <div class="text">
+                                <h4>Messaging</h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-02 events-lists-sec-05">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 align-content-center">
+                    <div class="text text-center">
+                        <h2>Comparison Between Basic & Comprehensive</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                    </div>
+                    <div class="two-packages">
+                        <div class="packagesbox">
+                            <div class="text text-center">
+                                <h3>Basic Package</h3>
+                                <ul>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="packagesbox">
+                            <div class="text text-center">
+                                <h3>Comprehensive Package</h3>
+                                <ul>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                    <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                        <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                        </svg>
+                                        <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-02">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 align-content-center">
+                    <div class="text">
+                        <h2>We Do It For You Package</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <ul>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                            <li><svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2.27084C6.75625 2.27084 2.08333 6.94376 2.08333 12.6875C2.08333 18.4313 6.75625 23.1042 12.5 23.1042C18.2437 23.1042 22.9167 18.4313 22.9167 12.6875C22.9167 6.94376 18.2437 2.27084 12.5 2.27084ZM12.5 21.0208C7.90521 21.0208 4.16667 17.2823 4.16667 12.6875C4.16667 8.09272 7.90521 4.35418 12.5 4.35418C17.0948 4.35418 20.8333 8.09272 20.8333 12.6875C20.8333 17.2823 17.0948 21.0208 12.5 21.0208Z" fill="#A9967D"/>
+                                <path d="M10.4156 14.3406L8.02083 11.95L6.55 13.425L10.4177 17.2844L17.4031 10.299L15.9302 8.82605L10.4156 14.3406Z" fill="#A9967D"/>
+                                </svg>
+                                <p>Lorem Ipsum is simply dummy text of the printing</p>
+                                </li>
+                        </ul>
+                        <a href="#" class="btn t-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="package-image">
+                        <img src="assets/newimages/packagesec-img.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-lists-sec-03 events-lists-last-sec" style="background-image: url(assets/newimages/packagelastsec-img.png); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg12">
+                    <div class="text text-center">
+                        <h2>Sit Back & Relax Because We Manage Everthing</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
 <script>
     $(document).ready(function() {
