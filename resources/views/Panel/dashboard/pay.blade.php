@@ -505,6 +505,7 @@
 
                                     </ul>
                                 </div>
+                                <a href="{{ route('web.packages') }}">View diffrence</a>
                             </div>
 
                             <div class="two-btn-form-align">
