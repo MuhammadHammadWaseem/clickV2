@@ -21,11 +21,15 @@ class SendPackageMail implements ShouldQueue
     protected $user;
     protected $package;
     protected $eventId;
-    public function __construct(User $user, $package, $eventId)
+    public $upgradeCost;
+    public $isUpgrade;
+    public function __construct(User $user, $package, $eventId, $upgradeCost, $isUpgrade)
     {
         $this->user = $user;
         $this->package = $package;
         $this->eventId = $eventId;
+        $this->upgradeCost = $upgradeCost;
+        $this->isUpgrade = $isUpgrade;
     }
 
     /**
@@ -33,6 +37,6 @@ class SendPackageMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->user->email)->send(new PackageConfirmationMail($this->user, $this->package, $this->eventId));
+        Mail::to($this->user->email)->send(new PackageConfirmationMail($this->user, $this->package, $this->eventId, $this->upgradeCost, $this->isUpgrade));
     }
 }

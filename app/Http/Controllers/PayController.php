@@ -286,6 +286,17 @@ class PayController extends Controller
     //                     'updated_at' => now(),
     //                 ]);
 
+    //                 // Set upgrade flag.
+    //                 $isUpgrade = true;
+
+    //                 if ($selectedPackage->id == 3) {
+    //                     SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+    //                     Log::info("Email dispatched for package ID 3 to {$user->email}");
+    //                 }
+
+    //                 // Dispatch the admin email with upgrade data.
+    //                 SendPackageMailToAdmin::dispatch("hw13604@gmail.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+
     //                 return redirect()->route('panel.event.pay.index', ['id' => $eventId])
     //                     ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
     //             }
@@ -312,12 +323,16 @@ class PayController extends Controller
     //             ]);
     //         }
 
+    //         // For a regular (non-upgrade) purchase, set the upgrade flag to false.
+    //         $isUpgrade = false;
+    //         $upgradeCost = 0;
+
     //         if ($selectedPackage->id == 3) {
-    //             SendPackageMail::dispatch($user, $selectedPackage, $eventId);
+    //             SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
     //             Log::info("Email dispatched for package ID 3 to {$user->email}");
     //         }
     //         // Send Mail to Admin
-    //         SendPackageMailToAdmin::dispatch("hw13604@gmail.com",$user, $selectedPackage, $eventId);
+    //         SendPackageMailToAdmin::dispatch("hw13604@gmail.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
 
     //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
     //             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
@@ -352,6 +367,17 @@ class PayController extends Controller
                     'updated_at' => now(),
                 ]);
 
+                // Set upgrade flag.
+                $isUpgrade = true;
+
+                if ($selectedPackage->id == 3) {
+                    SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+                    Log::info("Email dispatched for package ID 3 to {$user->email}");
+                }
+
+                // Dispatch the admin email with upgrade data.
+                SendPackageMailToAdmin::dispatch("hw13604@gmail.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+
                 return redirect()->route('panel.event.pay.index', ['id' => $eventId])
                     ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
             }
@@ -378,12 +404,16 @@ class PayController extends Controller
             ]);
         }
 
+        // For a regular (non-upgrade) purchase, set the upgrade flag to false.
+        $isUpgrade = false;
+        $upgradeCost = 0;
+
         if ($selectedPackage->id == 3) {
-            SendPackageMail::dispatch($user, $selectedPackage, $eventId);
+            SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
             Log::info("Email dispatched for package ID 3 to {$user->email}");
         }
         // Send Mail to Admin
-        SendPackageMailToAdmin::dispatch("hw13604@gmail.com",$user, $selectedPackage, $eventId);
+        SendPackageMailToAdmin::dispatch("hw13604@gmail.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
 
         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>New Package Purchase Notification</title>
+    <title>{{ $isUpgrade ? 'User Package Upgrade Notification' : 'New Package Purchase Notification' }}</title>
 </head>
 
 <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; text-align: center;">
@@ -21,22 +21,35 @@
             <td style="padding: 20px; text-align: center;">
                 <p style="font-size: 18px; color: #333;">Hello Admin,</p>
 
-                <p style="font-size: 18px; color: #333;">
-                    A new package purchase has been made on ClickInvitation.
-                </p>
-
-                <p style="font-size: 18px; color: #333;">
-                    <strong>User:</strong> {{ $userName }}
-                </p>
-
-                <p style="font-size: 18px; color: #333;">
-                    <strong>Package:</strong> <span style="color: #A9967D;">{{ $package['name'] }}</span>
-                </p>
-
-                <p style="font-size: 18px; color: #333;">
-                    <strong>Price:</strong> <span
-                        style="color: #A9967D;">${{ number_format($package['price'], 2) }}</span>
-                </p>
+                @if ($isUpgrade)
+                    <p style="font-size: 18px; color: #333;">
+                        A user has <strong>upgraded</strong> their package.
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>User:</strong> {{ $userName }}
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>New Package:</strong> <span style="color: #A9967D;">{{ $package->name }}</span>
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>Upgrade Cost:</strong> <span
+                            style="color: #A9967D;">${{ number_format($upgradeCost, 2) }}</span>
+                    </p>
+                @else
+                    <p style="font-size: 18px; color: #333;">
+                        A new package purchase has been made on ClickInvitation.
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>User:</strong> {{ $userName }}
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>Package:</strong> <span style="color: #A9967D;">{{ $package->name }}</span>
+                    </p>
+                    <p style="font-size: 18px; color: #333;">
+                        <strong>Price:</strong> <span
+                            style="color: #A9967D;">${{ number_format($package->price, 2) }}</span>
+                    </p>
+                @endif
 
                 <p style="font-size: 18px; color: #333;">
                     Please review the purchase details and take any necessary actions.

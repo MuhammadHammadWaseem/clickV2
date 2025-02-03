@@ -12,7 +12,8 @@ use App\Mail\PackageConfirmationMailToAdmin;
 use Illuminate\Support\Facades\Mail;
 
 class SendPackageMailToAdmin implements ShouldQueue
-{use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -21,12 +22,16 @@ class SendPackageMailToAdmin implements ShouldQueue
     protected $user;
     protected $package;
     protected $eventId;
-    public function __construct($mail, User $user, $package, $eventId)
+    protected $upgradeCost;
+    protected $isUpgrade;
+    public function __construct($mail, User $user, $package, $eventId, $upgradeCost, $isUpgrade)
     {
         $this->mail = $mail;
         $this->user = $user;
         $this->package = $package;
         $this->eventId = $eventId;
+        $this->upgradeCost = $upgradeCost;
+        $this->isUpgrade = $isUpgrade;
     }
 
     /**
@@ -34,6 +39,6 @@ class SendPackageMailToAdmin implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->mail)->send(new PackageConfirmationMailToAdmin($this->user, $this->package, $this->eventId));
+        Mail::to($this->mail)->send(new PackageConfirmationMailToAdmin($this->user, $this->package, $this->eventId, $this->upgradeCost, $this->isUpgrade));
     }
 }

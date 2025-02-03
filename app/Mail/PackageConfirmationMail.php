@@ -19,15 +19,19 @@ class PackageConfirmationMail extends Mailable
     public $user;
     public $package;
     public $eventId;
+    public $upgradeCost;
+    public $isUpgrade;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $package, $eventId)
+    public function __construct($user, $package, $eventId, $upgradeCost, $isUpgrade)
     {
         $this->user = $user;
         $this->package = $package;
         $this->eventId = $eventId;
+        $this->upgradeCost = $upgradeCost;
+        $this->isUpgrade = $isUpgrade;
     }
 
 
@@ -69,6 +73,8 @@ class PackageConfirmationMail extends Mailable
                 'userName' => $this->user->name,
                 'packageName' => $this->package,
                 'eventId' => $this->eventId,
+                'upgradeCost' => $this->upgradeCost,
+                'isUpgrade' => $this->isUpgrade,
             ]) // Pass variables directly here
             ->attach($filePath, [
                 'as' => 'CSV List.csv',

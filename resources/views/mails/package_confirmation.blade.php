@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>{{ $isUpgrade ? 'Package Upgrade Confirmation' : 'Package Purchase Confirmation' }}</title>
 </head>
 
 <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; text-align: center;">
@@ -17,11 +17,15 @@
         </tr>
         <tr>
             <td style="padding: 20px; text-align: center;">
-                <p style="font-size: 18px; color: #333;">Hello {{ $userName }},</p>
-                
-                <p style="font-size: 18px; color: #333;">Thank you for purchasing the <strong style="color: #A9967D;">{{ $package['name'] }}</strong> package.</p>
-                
-                <p style="font-size: 18px; color: #333;">The package price is <strong style="color: #A9967D;">${{ number_format($package['price'], 2) }}</strong>.</p>
+                @if($isUpgrade)
+          <p style="font-size: 18px; color: #333;">Hello {{ $userName }},</p>
+          <p style="font-size: 18px; color: #333;">Thank you for <strong style="color: #A9967D;">upgrading</strong> your package to <strong style="color: #A9967D;">{{ $package->name }}</strong>.</p>
+          <p style="font-size: 18px; color: #333;">The additional cost for the upgrade is <strong style="color: #A9967D;">${{ number_format($upgradeCost, 2) }}</strong>.</p>
+        @else
+          <p style="font-size: 18px; color: #333;">Hello {{ $userName }},</p>
+          <p style="font-size: 18px; color: #333;">Thank you for purchasing the <strong style="color: #A9967D;">{{ $package->name }}</strong> package.</p>
+          <p style="font-size: 18px; color: #333;">The package price is <strong style="color: #A9967D;">${{ number_format($package->price, 2) }}</strong>.</p>
+        @endif
                 
                 <p style="font-size: 18px; color: #333;">Attached to this email, you’ll find a sample CSV file. Please download it, fill in your details, and upload it back to us. This will help us handle your event smoothly.</p>
                 
