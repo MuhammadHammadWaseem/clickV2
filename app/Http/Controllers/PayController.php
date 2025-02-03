@@ -13,6 +13,7 @@ use App\Models\Event;
 use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendPackageMail;
+use App\Jobs\SendPackageMailToAdmin;
 
 class PayController extends Controller
 {
@@ -100,7 +101,7 @@ class PayController extends Controller
                 ->select('packages.*')
                 ->first();
 
-                $packageId = $request->id;
+            $packageId = $request->id;
 
             if (!$package) {
                 return redirect()->back()->with('error', 'Package not found');
@@ -210,7 +211,7 @@ class PayController extends Controller
                     $subCA = $package->price;
                     $couponMsg = "Invalid Coupon";
                 }
-            }else{
+            } else {
                 $subUsao = $package->price;
                 $subCAo = $package->price;
                 $subUsa = $package->price;
@@ -315,6 +316,8 @@ class PayController extends Controller
     //             SendPackageMail::dispatch($user, $selectedPackage, $eventId);
     //             Log::info("Email dispatched for package ID 3 to {$user->email}");
     //         }
+    //         // Send Mail to Admin
+    //         SendPackageMailToAdmin::dispatch("hw13604@gmail.com",$user, $selectedPackage, $eventId);
 
     //         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
     //             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
@@ -374,10 +377,13 @@ class PayController extends Controller
                 'end_date' => null,
             ]);
         }
+
         if ($selectedPackage->id == 3) {
-            SendPackageMail::dispatch($user, $selectedPackage,$eventId);
+            SendPackageMail::dispatch($user, $selectedPackage, $eventId);
             Log::info("Email dispatched for package ID 3 to {$user->email}");
         }
+        // Send Mail to Admin
+        SendPackageMailToAdmin::dispatch("hw13604@gmail.com",$user, $selectedPackage, $eventId);
 
         return redirect()->route('panel.event.pay.index', ['id' => $eventId])
             ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
