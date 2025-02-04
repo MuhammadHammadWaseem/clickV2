@@ -71,6 +71,8 @@ class Event extends Model
         'mtext',
         'code',
         'paid',
+        'event_data',
+        'guest_list_data',
         'json',
     ];
 

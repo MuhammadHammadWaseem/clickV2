@@ -66,7 +66,9 @@ class PackageConfirmationMail extends Mailable
         // Debug to check values
         \Log::info("Event ID inside Mail: " . $this->eventId);
 
-        $filePath = public_path('assets/files/CSV List.csv');
+        $filePath1 = public_path('assets/files/CSV List.csv');
+
+        $filePath2 = public_path('assets/files/Guest List.csv');
 
         return $this->subject('Package Purchase Confirmation')
             ->view('mails.package_confirmation', [
@@ -76,8 +78,12 @@ class PackageConfirmationMail extends Mailable
                 'upgradeCost' => $this->upgradeCost,
                 'isUpgrade' => $this->isUpgrade,
             ]) // Pass variables directly here
-            ->attach($filePath, [
+            ->attach($filePath1, [
                 'as' => 'CSV List.csv',
+                'mime' => 'text/csv',
+            ])
+            ->attach($filePath2, [
+                'as' => 'Guest List.csv',
                 'mime' => 'text/csv',
             ]);
     }

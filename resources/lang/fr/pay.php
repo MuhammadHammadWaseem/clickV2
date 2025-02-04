@@ -34,5 +34,6 @@ return [
     'we_do_it_for_you' => 'Nous le faisons pour vous',
     'upload_csv' => 'Télécharger CSV',
     'you_must_upload_a_CSV_file' => 'Vous devez télécharger un fichier CSV avant d\'effectuer le paiement.',
-    'upload_csv_description' => 'Téléchargez un fichier CSV avec les colonnes : Nom, Email, Numéro de portable, Whatsapp, Comapagnon supplémentaire, Notes (facultatif).'
+    'upload_csv_description' => 'Téléchargez un fichier CSV avec les colonnes : Nom, Email, Numéro de portable, Whatsapp, Comapagnon supplémentaire, Notes (facultatif).',
+    'upload_csv_description2' => 'Téléchargez un fichier CSV avec les colonnes : nom, e-mail, téléphone, WhatsApp, nombre de membres, notes. Séparé par un point-virgule ( ; ).'
 ];

@@ -310,9 +310,6 @@ div#tab1 .col-4.modal-body {
 
     <div class="col-lg-10 col-md-10" id="content">
         <div class="row">
-
-
-           
             <div class="col-lg-12">
                 <div class="box-styling website-preview upload-form-csv modal-01" id="tab1" style="display: block;">
                     <div class="row">
@@ -337,8 +334,8 @@ div#tab1 .col-4.modal-body {
                             </form>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" id="uploadCsvClose"
-                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button>
+                                {{-- <button type="button" class="btn btn-secondary" id="uploadCsvClose"
+                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button> --}}
                                 <button type="button" class="submit-btn"
                                     id="uploadCsvBtn">{{ __('pay.upload_csv') }}</button>
                             </div>
@@ -349,6 +346,56 @@ div#tab1 .col-4.modal-body {
                             <div class="main-side-media">
                                 <div class="image-box">
                                     <img src="{{ asset('assets/images/CSVLIST.png') }}" alt="">
+                                </div>
+                                <div class="main-youtube-iframe">
+                                    <iframe width="100%" height="315"
+                                        src="https://www.youtube.com/embed/u2usWXrfMGo?si=R76PqusEdkjgqqEi"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="box-styling website-preview upload-form-csv modal-01" id="tab1" style="display: block;">
+                    <div class="row">
+                        <div class="col-4 modal-body">
+                            <div class="text">
+                                <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
+                                <p style="font-size: 11px;">{{ __('pay.upload_csv_description2') }}</p>
+                                <a href="{{ asset('assets/files/Guest List.csv') }}" class="submit-btn mb-3"
+                                    download>{{ __('guestlistpage.download_csv_example') }}</a>
+                            </div>
+                            <form id="csvUploadForm2" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="upload-container" onclick="document.getElementById('fileInput2').click();">
+
+                                    <input type="hidden" id="id_event" name="id_event" value="{{ $currentEventId }}">
+                                    <input type="file" id="fileInput2" name="guest_list"
+                                        onchange="showFileName2()"accept=".csv" required>
+                                    <label for="guest_list"><img src="{{ asset('assets/images/upload_svg_image.png') }}"
+                                            alt="Upload Icon" /></label>
+                                </div>
+                                <div id="fileName2" class="file-name"></div>
+                            </form>
+
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary" id="uploadCsvClose"
+                                    data-dismiss="modal">{{ __('guestlistpage.Cancel') }}</button> --}}
+                                <button type="button" class="submit-btn"
+                                    id="uploadCsvBtn2">{{ __('pay.upload_csv') }}</button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-8">
+                            <div class="main-side-media">
+                                <div class="image-box">
+                                    <img src="{{ asset('assets/images/exampleCsv1.png') }}" alt="">
                                 </div>
                                 <div class="main-youtube-iframe">
                                     <iframe width="100%" height="315"
@@ -440,6 +487,12 @@ div#tab1 .col-4.modal-body {
             fileNameDiv.textContent = fileName;
         };
 
+        function showFileName2() {
+            const fileInput = document.getElementById('fileInput2');
+            const fileNameDiv = document.getElementById('fileName2');
+            const fileName = fileInput.files[0].name;
+            fileNameDiv.textContent = fileName;
+        };
         let res = null;
         let id = null;
         let code = null;
@@ -861,5 +914,31 @@ div#tab1 .col-4.modal-body {
                 }
             });
         });
+        document.getElementById('uploadCsvBtn2').addEventListener('click', function() {
+            $("#uploadCsvBtn2").attr("disabled", true);
+            $("#uploadCsvBtn2").text("Uploading...");
+            const formData = new FormData(document.getElementById('csvUploadForm2'));
+            $.ajax({
+                url: "{{ route('panel.event.export.guestlist', ['id' => $currentEventId]) }}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    toastr.success("Guest List uploaded successfully!");
+                    idArray = [];
+                    $("#uploadCsvClose").click();
+                    $("#uploadCsvBtn2").attr("disabled", false);
+                    $("#uploadCsvBtn2").text("Upload CSV");
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    $("#uploadCsvBtn2").attr("disabled", false);
+                    $("#uploadCsvBtn2").text("Upload CSV");
+                }
+            });
+        });
+
+        
     </script>
 @endsection
