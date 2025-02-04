@@ -48,8 +48,6 @@ class PackageConfirmationMailToAdmin extends Mailable
 
     public function build()
     {
-        // Debug to check values
-        \Log::info("Event ID inside Mail: " . $this->eventId);
 
         return $this->subject('Package Purchase Confirmation')
             ->view('mails.package_confirmation_admin', [
