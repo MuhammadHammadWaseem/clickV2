@@ -456,7 +456,7 @@ input:checked+.slider:after {
                                         </div>
                                     </div>
                                     <input type="text" placeholder="{{ __('genralInfo.First Name') }}" name="bridefname"
-                                        value="{{ $event->groomlname }}">
+                                        value="{{ $event->bridefname }}">
                                     <input type="text" placeholder="{{ __('genralInfo.Last Name') }}" name="bridelname"
                                         value="{{ $event->bridelname }}">
                                     <textarea placeholder="{{ __('genralInfo.Message Here') }}" name="bridesummary">{{ $event->bridesummary }}</textarea>
