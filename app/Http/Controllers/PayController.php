@@ -264,9 +264,12 @@ class PayController extends Controller
     public function thankyou($eventId, Request $request)
     {
         if ($request->get('PayerID') != null) {
+            Log::info('Event ID from route:', ['eventId' => $eventId]);
+            Log::info('guests from route:', ['guests' => $request->route('eventId')]);
             $user = Auth::user();
-            $userEvent = $user->events()->where('id_event', $eventId)->firstOrFail();
+            $userEvent = $user->events()->where('id_event', $request->route('eventId'))->firstOrFail();
             $selectedPackage = Package::findOrFail($request->get('package_id'));
+
 
             // Check if the user already has a package linked to this event
             $currentEventPackage = $userEvent->packages()->where('package_id', $selectedPackage->id)->first();
@@ -290,19 +293,19 @@ class PayController extends Controller
                     $isUpgrade = true;
 
                     if ($selectedPackage->id == 3) {
-                        SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+                        SendPackageMail::dispatch($user, $selectedPackage, $request->route('eventId'), $upgradeCost, $isUpgrade);
                         Log::info("Email dispatched for package ID 3 to {$user->email}");
                     }
 
                     // Dispatch the admin email with upgrade data.
-                    SendPackageMailToAdmin::dispatch("info@clickinvitation.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+                    SendPackageMailToAdmin::dispatch("info@clickinvitation.com", $user, $selectedPackage, $request->route('eventId'), $upgradeCost, $isUpgrade);
 
-                    return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                    return redirect()->route('panel.event.pay.index', ['id' => $request->route('eventId')])
                         ->with('success', "Package upgraded to {$selectedPackage->name}. Upgrade cost: $${upgradeCost}.");
                 }
 
                 // If the same or a lower package is selected, prevent redundant purchases
-                return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+                return redirect()->route('panel.event.pay.index', ['id' => $request->route('eventId')])
                     ->with('error', "You already have the {$currentEventPackage->name} package for this event.");
             }
 
@@ -328,16 +331,16 @@ class PayController extends Controller
             $upgradeCost = 0;
 
             if ($selectedPackage->id == 3) {
-                SendPackageMail::dispatch($user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+                SendPackageMail::dispatch($user, $selectedPackage, $request->route('eventId'), $upgradeCost, $isUpgrade);
                 Log::info("Email dispatched for package ID 3 to {$user->email}");
             }
             // Send Mail to Admin
-            SendPackageMailToAdmin::dispatch("info@clickinvitation.com", $user, $selectedPackage, $eventId, $upgradeCost, $isUpgrade);
+            SendPackageMailToAdmin::dispatch("info@clickinvitation.com", $user, $selectedPackage, $request->route('eventId'), $upgradeCost, $isUpgrade);
 
-            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+            return redirect()->route('panel.event.pay.index', ['id' => $request->route('eventId')])
                 ->with('success', "You have successfully purchased the {$selectedPackage->name}.");
         } else {
-            return redirect()->route('panel.event.pay.index', ['id' => $eventId])
+            return redirect()->route('panel.event.pay.index', ['id' => $request->route('eventId')])
                 ->with('error', "Payment verification failed. Please try again.");
         }
     }
