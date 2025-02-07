@@ -14,6 +14,7 @@ use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendPackageMail;
 use App\Jobs\SendPackageMailToAdmin;
+use App\Models\User;
 
 class PayController extends Controller
 {
@@ -266,8 +267,11 @@ class PayController extends Controller
         if ($request->get('PayerID') != null) {
             Log::info('Event ID from route:', ['eventId' => $eventId]);
             Log::info('guests from route:', ['guests' => $request->route('eventId')]);
-            $user = Auth::user();
-            $userEvent = $user->events()->where('id_event', $request->route('eventId'))->firstOrFail();
+            Log::info('guests from route:', ['user' => Auth::user()]);
+            // $user = Auth::user();
+            // $userEvent = $user->events()->where('id_event', $request->route('eventId'))->firstOrFail();
+            $userEvent = Event::where('id_event', $request->route('eventId'))->firstOrFail();
+            $user = User::where('id', $userEvent->id_user)->firstOrFail();
             $selectedPackage = Package::findOrFail($request->get('package_id'));
 
 
