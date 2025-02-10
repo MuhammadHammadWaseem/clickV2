@@ -28,11 +28,13 @@ class EventsEnglish extends Mailable
 
     public function build()
     {
-        return $this->from('info@clickinvitation.com')
+        $sanitizedName = preg_replace('/[^a-zA-Z0-9]/', '', $this->data['event']->name); // Remove invalid characters
+        $email = strtolower($sanitizedName) . '@clickinvitation.com'; // Convert to lowercase
+        // return $this->from($email)
+        return $this->from('noreply@clickinvitation.com', $this->data['event']->name)
                     ->view('mails.Invittaion.corporateEnglish')
-                    ->subject('Welcome to Click Invitation')
+                    ->subject($this->data['event']->name)
                     ->with([
-
                         'data' => $this->data,
                     ]);
     }

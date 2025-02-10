@@ -25,9 +25,9 @@ class EventsFrench extends Mailable
 
     public function content()
     {
-        return $this->from('info@clickinvitation.com')
+        return $this->from('noreply@clickinvitation.com', $this->data['event']->name)
                     ->view('mails.Invittaion.eventsFrench')
-                    ->subject('Welcome to Click Invitation')
+                    ->subject($this->data['event']->name)
                     ->with(['data' => $this->data]);
     }
 }
