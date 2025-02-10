@@ -14,8 +14,20 @@ class Gift extends Model
         'description',
         'link',
         'id_event',
+        'id_pick',
     ];
     public $timestamps = false;
 
     protected $table = "gifts";
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'id_event');
+    }
+
+    public function picker()
+    {
+        return $this->belongsTo(User::class, 'id_pick', 'id');
+    }
+
 }

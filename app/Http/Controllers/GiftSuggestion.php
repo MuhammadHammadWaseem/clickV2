@@ -18,7 +18,7 @@ class GiftSuggestion extends Controller
     public function show()
     {
         $eventId = GeneralHelper::getEventId();
-        $gifts = Gift::where('id_event', $eventId)->get();
+        $gifts = Gift::with('picker')->where('id_event', $eventId)->get();
         return response()->json(['gifts' => $gifts]);
     }
     // Store a new gift suggestion
