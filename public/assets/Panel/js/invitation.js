@@ -1983,6 +1983,9 @@ function saveData() {
     fetch("/save-blob", {
       method: "POST",
       body: formData,
+      headers: {
+        "X-CSRF-TOKEN": this.token,
+      },
     })
       .then((response) => {
         if (response.ok) {
