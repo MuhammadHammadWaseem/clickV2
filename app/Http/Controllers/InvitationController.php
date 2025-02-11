@@ -208,6 +208,7 @@ class InvitationController extends Controller
     private static $jsonFolderCreated = false;
     public function saveBlob(Request $request)
     {
+        \Log::info('Incoming Request Data:', $request->all());
         try {
             if (!self::$jsonFolderCreated) {
                 $folderName = 'Json';

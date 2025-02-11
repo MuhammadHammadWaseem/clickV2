@@ -1654,7 +1654,8 @@ function handleJSONImport() {
         } else {
         }
         const file = response.data;
-        fetch(`/Json/${file}`)
+        // fetch(`/Json/${file}`)
+        fetch(`/Json/${file}?t=${new Date().getTime()}`)
           .then((res) => {
             return res.json();
           })
@@ -1732,8 +1733,9 @@ function handleJSONImport() {
         } else {
         }
         const file = response.data;
-        fetch(`/Json/${file}`)
-          .then((res) => {
+        // fetch(`/Json/${file}`)
+        fetch(`/Json/${file}?t=${new Date().getTime()}`)
+        .then((res) => {
             return res.json();
           })
           .then(function (data) {
