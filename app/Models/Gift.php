@@ -27,7 +27,7 @@ class Gift extends Model
 
     public function picker()
     {
-        return $this->belongsTo(User::class, 'id_pick', 'id');
+        return $this->belongsTo(Guest::class, 'id_pick', 'id_guest');
     }
 
 }

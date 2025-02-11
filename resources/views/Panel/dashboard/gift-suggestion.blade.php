@@ -727,7 +727,7 @@
                             <div class="content">
                                 <a href="${gift.link}">${gift.link}</a>
                                 <p>${gift.description}</p>
-                                ${gift.picker ? `<p>picked by: ${gift.picker.name} ${gift.picker.surname}</p>` : ''}
+                                ${gift.picker ? `<p>picked by: ${gift.picker.name}</p>` : ''}
                             </div>
                         </div>
                     `;
