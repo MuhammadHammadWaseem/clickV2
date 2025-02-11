@@ -1021,7 +1021,7 @@ class GuestListController extends Controller
 
                                     }
                                 }
-                                Mail::to('talharao997az@gmail.com')->send(new CorporateEnglish($content));
+                                // Mail::to('talharao997az@gmail.com')->send(new CorporateEnglish($content));
                             } else {
                                 if ($event->type == "CORPORATE") {
                                     if ($guestTable !== null) {
@@ -1030,17 +1030,17 @@ class GuestListController extends Controller
                                         // Handle the case where $guestTable is null
                                     }
                                 }
-                                Mail::to('talharao997az@gmail.com')->send(new EventsEnglish($content));
+                                // Mail::to('talharao997az@gmail.com')->send(new EventsEnglish($content));
                             }
                         } elseif ($lang == 'fr') {
 
                             if ($event->type == "CORPORATE") {
                                 $body = '';
 
-                                Mail::to('talharao997az@gmail.com')->send(new CorporateFrench($content));
+                                // Mail::to('talharao997az@gmail.com')->send(new CorporateFrench($content));
                             } else {
                                 $body = '';
-                                Mail::to('talharao997az@gmail.com')->send(new EventsFrench($content));
+                                // Mail::to('talharao997az@gmail.com')->send(new EventsFrench($content));
                             }
                         }
 
