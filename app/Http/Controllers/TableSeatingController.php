@@ -552,7 +552,8 @@ class TableSeatingController extends Controller
             "isCouple" => $eventType->couple_event,
             "eventType" => $eventType,
             "eventData" => $eventData,
-            "guestOptions" => $guestOptions
+            "guestOptions" => $guestOptions,
+            "guest" => $guest,
         ]);
     }
 
