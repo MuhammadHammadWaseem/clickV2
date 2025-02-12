@@ -100,34 +100,33 @@
 
             
             @if($guest->mainguest != 1)
-
-           @if ($card[0]->rsvp[0] == '1' && $guestOptions->attending == 1)
-                <a href="{{env('APP_URL')}}/attending/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                    class="btn t-btn modify ">{{ __('cardinvit.Attending') }}</a>
-            @endif
+            {{-- @if ($card[0]->rsvp[0] == '1' && $guestOptions->attending == 1) --}}
+                <a href="{{ env('APP_URL') }}/attending/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+                    class="btn t-btn modify ">{{ __('cardinvit.Attending') }}</a><br>
+            {{-- @endif --}}
 
             @if ($card[0]->rsvp[2] == '1' && $guestOptions->gift == 1)
-                <a href="{{env('APP_URL')}}/gift-suggestion/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                    class="btn t-btn modify ">{{ __('cardinvit.Gift Suggestions') }}</a>
+                <a href="{{ env('APP_URL') }}/gift-suggestion/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+                    class="btn t-btn modify ">{{ __('cardinvit.Gift Suggestions') }}</a><br>
             @endif
 
-            @if ($card[0]->rsvp[4] == '1' && $guestOptions->checkin == 1)
-                <a href="{{env('APP_URL')}}/check-in/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                    class="btn t-btn modify ">{{ __('cardinvit.At the reception Check-In') }}</a>
-            @endif
+            {{-- @if ($card[0]->rsvp[4] == '1' && $guestOptions->checkin == 1) --}}
+                <a href="{{ env('APP_URL') }}/check-in/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+                    class="btn t-btn modify ">{{ __('cardinvit.At the reception Check-In') }}</a><br>
+            {{-- @endif --}}
 
-            @if ($card[0]->rsvp[6] == '1' && $guestOptions->photos == 1)
-                <a href="{{env('APP_URL')}}/add-photos/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
-                    class="btn t-btn modify ">{{ __('cardinvit.Upload your Photos') }}</a>
-            @endif
+            {{-- @if ($card[0]->rsvp[6] == '1' && $guestOptions->photos == 1) --}}
+                <a href="{{ env('APP_URL') }}/add-photos/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+                    class="btn t-btn modify ">{{ __('cardinvit.Upload your Photos') }}</a><br>
+            {{-- @endif --}}
 
             @if ($card[0]->rsvp[8] == '1')
-                <a href="{{env('APP_URL')}}/sorry-cant/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
+                <a href="{{ env('APP_URL') }}/sorry-cant/{{ $card[0]->id_card }}/{{ $guestCode }}/{{ $lang or '' }}"
                     class="btn t-btn modify ">{{ __('cardinvit.Unable to Attend') }}</a>
             @endif
 
             @if ($card[0]->rsvp[10] == '1' && $guestOptions->website == 1)
-                <a href="{{env('APP_URL')}}/website/{{ $card[0]->id_event }}"
+                <a href="{{ env('APP_URL') }}/website/{{ $card[0]->id_event }}"
                     class="btn t-btn modify ">{{ __('cardinvit.Go to the website') }}</a>
             @endif
             <br /><br /><br />
