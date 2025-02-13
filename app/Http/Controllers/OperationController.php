@@ -388,14 +388,19 @@ class OperationController extends Controller
                 $guest = new Guest;
                 $guest->titleGuest = $request->titleGuest;
                 $guest->name = $request->nameguest;
-                if ($request->has('emailguest'))
+                if ($request->has('emailguest')){
                     $guest->email = $request->emailguest;
-                if ($request->has('phoneguest'))
+                }
+                if ($request->has('phoneguest')){
                     \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
                     $guest->phone = (string) $request->phoneguest;
                     \Log::info('Phone Number Saved: ' . $guest->phone);
-                if ($request->has('whatsappguest'))
+                }
+                if ($request->has('whatsappguest')){
+                    \Log::info('WhatsApp Before Saving: ' . $request->whatsappguest);
                     $guest->whatsapp = (string) $request->whatsappguest;
+                    \Log::info('WhatsApp Saved: ' . $guest->whatsapp);
+                }
                 $guest->mainguest = $request->mainguest;
                 $guest->parent_id_guest = $request->parentidguest;
                 $guest->id_event = $request->idevent;
@@ -427,12 +432,16 @@ class OperationController extends Controller
             $guest->name = $request->nameguest;
             if ($request->has('emailguest'))
                 $guest->email = $request->emailguest;
-            if ($request->has('phoneguest'))
+            if ($request->has('phoneguest')){
                 \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
                 $guest->phone = (string) $request->phoneguest;
                 \Log::info('Phone Number Saved: ' . $guest->phone);
-            if ($request->has('whatsappguest'))
+            }
+            if ($request->has('whatsappguest')){
+                \Log::info('WhatsApp Before Saving: ' . $request->whatsappguest);
                 $guest->whatsapp = (string) $request->whatsappguest;
+                \Log::info('WhatsApp Saved: ' . $guest->whatsapp);
+            }
             $guest->mainguest = $request->mainguest;
             $guest->parent_id_guest = $request->parentidguest;
             $guest->id_event = $request->idevent;
