@@ -70,7 +70,7 @@
             <div class="row justify-content-md-center">
 
                 <div class="col-12">
-                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back"
+                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;color:#212529 !important;" class="back"
                         onclick="history.back()"><i
                             class="fas fa-chevron-left"></i>{{ __('sorrycant.BACK TO INVITATION') }}</button>
                     <div class="card mb-4 box-styling">

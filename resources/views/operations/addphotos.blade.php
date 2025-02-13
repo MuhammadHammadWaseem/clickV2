@@ -55,11 +55,11 @@
 
                 <div class="col-12">
                     @if (!$ack)
-                        <button style="font-size:13px; border: 0;background: rgba(0,0,0,0);" class="back"
+                        <button style="font-size:13px; border: 0;background: rgba(0,0,0,0);color:#212529 !important;" class="back"
                             onclick="history.back()""><i
                                 class="fas fa-chevron-left"></i>{{ __('addphotos.BACK TO INVITATION') }}</button>
                     @else
-                        <button style="font-size:13px; border: 0;background: rgba(0,0,0,0);" class="back"
+                        <button style="font-size:13px; border: 0;background: rgba(0,0,0,0);color:#212529 !important;" class="back"
                             onclick="history.back()""><i
                                 class="fas fa-chevron-left"></i>{{ __('addphotos.BACK TO INVITATION') }}</button>
                     @endif

@@ -75,7 +75,7 @@
         <div class="container webpage">
             <div class="row justify-content-md-center" style="    justify-content: center;">
                 <div class="col-12 col-sm-9">
-                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;" class="back" onclick="history.back()""><i
+                    <button style="border: 0;background: rgba(0,0,0,0);margin-top:15px;color:#212529 !important;" class="back" onclick="history.back()""><i
                             class="fas fa-chevron-left"></i>{{ __('checkin.BACK TO INVITATION') }}</button>
                     <div class="card mb-4 box-styling" style="margin-right:0; ">
                         <h4 class="card-header text-center"><i

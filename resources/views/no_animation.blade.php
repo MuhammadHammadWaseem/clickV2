@@ -481,6 +481,7 @@
     @media only screen and (max-width: 760px) {
         #flipButton {
             right: 40%!important;
+            font-size:12px;
         }
 
         #checkin {
@@ -490,6 +491,7 @@
             left: 86%!important;
             transform: translateX(-77%)!important;
             width: 44%!important;
+            font-size:12px;
         }
 
         #submit-rsvp {
@@ -499,16 +501,19 @@
             left: 40%!important;
             transform: translateX(-80%)!important;
             width: 45%!important;
+            font-size:12px;
         }
 
     }
     @media only screen and (max-width: 370px) {
         #checkin {
             width: 45%!important;
+            font-size:10px;
         }
 
         #submit-rsvp {
             width: 49%!important;
+            font-size:10px;
         }
 
     }
