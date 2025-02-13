@@ -385,6 +385,7 @@ class OperationController extends Controller
         if ($allowed) {
 
             if ($count < $allowed->members_number) {
+                dd($request->phoneguest);
                 $guest = new Guest;
                 $guest->titleGuest = $request->titleGuest;
                 $guest->name = $request->nameguest;
