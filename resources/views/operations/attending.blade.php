@@ -520,7 +520,7 @@
                                                     <p> {{ __('attending.Select Seat') }}</p>
                                                 </button> --}}
                                             @endif
-                                            <button ng-show="added < nummembers" class="btns addm mb-1 mt-1"
+                                            <button class="btns addm mb-1 mt-1"
                                                 data-bs-toggle="modal" ng-click="getguest(member.id_guest)"
                                                 data-bs-target="#editMemberModal">
                                                 <i class="fal fa-edit" style="color: #039b4f;"
