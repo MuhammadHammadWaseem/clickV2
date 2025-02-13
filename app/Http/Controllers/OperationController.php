@@ -195,7 +195,7 @@ class OperationController extends Controller
             $guest->phone = $request->phoneguest ?? '';
             $guest->whatsapp = $request->whatsappguest ?? '';
             $guest->allergies = $request->allergies == 1 ? 1 : 0;
-            $guest->id_meal = $request->idmealguest ?? '';
+            $guest->id_meal = $request->idmealguest ?? NULL;
             $guest->notes = $request->notesguest ?? '';
             if ($request->has('membersNumber')) {
                 $guest->members_number = $request->membersNumber;
