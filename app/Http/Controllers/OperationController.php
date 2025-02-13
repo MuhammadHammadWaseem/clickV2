@@ -392,7 +392,7 @@ class OperationController extends Controller
                     $guest->email = $request->emailguest;
                 if ($request->has('phoneguest'))
                     \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
-                    $guest->phone = $request->phoneguest;
+                    $guest->phone = (string) $request->phoneguest;
                     \Log::info('Phone Number Saved: ' . $guest->phone);
                 if ($request->has('whatsappguest'))
                     $guest->whatsapp = $request->whatsappguest;
@@ -429,7 +429,7 @@ class OperationController extends Controller
                 $guest->email = $request->emailguest;
             if ($request->has('phoneguest'))
                 \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
-                $guest->phone = $request->phoneguest;
+                $guest->phone = (string) $request->phoneguest;
                 \Log::info('Phone Number Saved: ' . $guest->phone);
             if ($request->has('whatsappguest'))
                 $guest->whatsapp = $request->whatsappguest;
