@@ -385,14 +385,15 @@ class OperationController extends Controller
         if ($allowed) {
 
             if ($count < $allowed->members_number) {
-                dd($request->phoneguest);
                 $guest = new Guest;
                 $guest->titleGuest = $request->titleGuest;
                 $guest->name = $request->nameguest;
                 if ($request->has('emailguest'))
                     $guest->email = $request->emailguest;
                 if ($request->has('phoneguest'))
+                    \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
                     $guest->phone = $request->phoneguest;
+                    \Log::info('Phone Number Saved: ' . $guest->phone);
                 if ($request->has('whatsappguest'))
                     $guest->whatsapp = $request->whatsappguest;
                 $guest->mainguest = $request->mainguest;
@@ -427,7 +428,9 @@ class OperationController extends Controller
             if ($request->has('emailguest'))
                 $guest->email = $request->emailguest;
             if ($request->has('phoneguest'))
+                \Log::info('Phone Number Before Saving: ' . $request->phoneguest);
                 $guest->phone = $request->phoneguest;
+                \Log::info('Phone Number Saved: ' . $guest->phone);
             if ($request->has('whatsappguest'))
                 $guest->whatsapp = $request->whatsappguest;
             $guest->mainguest = $request->mainguest;
