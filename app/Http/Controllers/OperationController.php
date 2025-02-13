@@ -395,7 +395,7 @@ class OperationController extends Controller
                     $guest->phone = (string) $request->phoneguest;
                     \Log::info('Phone Number Saved: ' . $guest->phone);
                 if ($request->has('whatsappguest'))
-                    $guest->whatsapp = $request->whatsappguest;
+                    $guest->whatsapp = (string) $request->whatsappguest;
                 $guest->mainguest = $request->mainguest;
                 $guest->parent_id_guest = $request->parentidguest;
                 $guest->id_event = $request->idevent;
@@ -432,7 +432,7 @@ class OperationController extends Controller
                 $guest->phone = (string) $request->phoneguest;
                 \Log::info('Phone Number Saved: ' . $guest->phone);
             if ($request->has('whatsappguest'))
-                $guest->whatsapp = $request->whatsappguest;
+                $guest->whatsapp = (string) $request->whatsappguest;
             $guest->mainguest = $request->mainguest;
             $guest->parent_id_guest = $request->parentidguest;
             $guest->id_event = $request->idevent;
