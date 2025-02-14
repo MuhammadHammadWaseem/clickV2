@@ -181,7 +181,7 @@ Route::group(['as' => 'panel.'], function () {
     });
 });
 Route::get('pay-confirm', [PayController::class, 'payConfirm']);
-Route::get('/event/{eventId}/thankyou', [PayController::class, 'thankyou'])->name('event.thankyou');
+Route::get('/event/{eventId}/{packageId}/thankyou', [PayController::class, 'thankyou'])->name('event.thankyou');
 
 Route::get('website/{id}', [WebsiteController::class, 'index'])->name('website');
 Route::post('website/edit/{id}', [WebsiteController::class, 'update'])->name('website.update');

@@ -238,9 +238,9 @@ class PayController extends Controller
 
         // $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . $packageId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "package_id=" . $packageId . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkusa = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totusaexp[0] . "%2e" . $totusaexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2f" . $packageId . "%2fthankyou%3famount=" . $totusaexp[0] . "." . $totusaexp[1] . "package_id=" . $packageId . "&currency_code=USD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
-        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . $packageId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "package_id=" . $packageId . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
+        $linkcan = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=info%40clickinvitation%2ecom&lc=EN&item_name=click%2dinvitation&amount=" . $totcanexp[0] . "%2e" . $totcanexp[1] . "&button_subtype=services&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2fclickinvitation%2ecom%2fevent%2f" . $eventId . "%2f" . $packageId . "%2fthankyou%3famount=" . $totcanexp[0] . "." . $totcanexp[1] . "package_id=" . $packageId . "&currency_code=CAD&bn=PP%2dBuyNowBF%3abtn_buynowCC_LG%2egif%3aNonHosted";
 
 
         $newTvqUSA = number_format((($subUsa / 100) * $tvqUsa), 2, ".", "");
@@ -262,19 +262,22 @@ class PayController extends Controller
 
     }
 
-    public function thankyou($eventId, Request $request)
+    public function thankyou($eventId, $packageId, Request $request)
     {
         if ($request->get('PayerID') != null) {
-            dd("Requeast", $request->all(),"Event ID from route", $request->route('eventId'), "user", Auth::user());
+            // dd("Request", $request->all(),"Event ID from route", $request->route('eventId'), "package ID from route", $request->route('packageId'));
             Log::info('Request:', ['request' => $request->all()]);
             Log::info('Event ID from route:', ['eventId' => $eventId]);
             Log::info('guests from route:', ['guests' => $request->route('eventId')]);
             Log::info('guests from route:', ['user' => Auth::user()]);
+            Log::info('Package ID from route:', ['packageId' => $request->route('packageId')]);
+            Log::info('Package ID:', ['packageId' => $packageId]);
+
             // $user = Auth::user();
             // $userEvent = $user->events()->where('id_event', $request->route('eventId'))->firstOrFail();
             $userEvent = Event::where('id_event', $request->route('eventId'))->firstOrFail();
             $user = User::where('id', $userEvent->id_user)->firstOrFail();
-            $selectedPackage = Package::findOrFail($request->get('package_id'));
+            $selectedPackage = Package::findOrFail($request->route('packageId'));
 
 
             // Check if the user already has a package linked to this event
