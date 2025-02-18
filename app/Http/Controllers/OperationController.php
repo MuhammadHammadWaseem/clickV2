@@ -630,7 +630,7 @@ class OperationController extends Controller
                                                                     <p style="text-align:center"><a
                                                                             href="' . env('APP_URL') . '/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '"
                                                                             target="_blank"><img
-                                                                                src="' . asset('card-images') . '/' . $event->id_event . '.png"
+                                                                                src="' . env('APP_URL') . asset('card-images') . '/' . $event->id_event . '.png"
                                                                                 border="0" style="margin-bottom:20px;max-width:100%"
                                                                                 class="CToWUd" data-bit="iit"></a>
                                                                     </p>
