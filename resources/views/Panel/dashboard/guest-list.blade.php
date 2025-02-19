@@ -1375,7 +1375,7 @@
                             <div class="text">
                                 <h2>{{ __('guestlistpage.upload_csv_title') }}</h2>
                                 <p>{{ __('guestlistpage.upload_csv_description') }}</p>
-                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn"
+                                <a href="{{ asset('assets/files/example.csv') }}" class="submit-btn mb-3"
                                     download>{{ __('guestlistpage.download_csv_example') }}</a>
                             </div>
                             <form id="csvUploadForm" method="POST" enctype="multipart/form-data">
