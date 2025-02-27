@@ -1576,7 +1576,7 @@ function downloadJSON() {
 function downloadImage() {
   canv.remove(centerLineVertical);
   canv.remove(centerLineHorizontal);
-  
+
   const imgData = canv.toDataURL({ format: "png", quality: 1 });
   const link = document.createElement("a");
   link.href = imgData;
@@ -1735,7 +1735,7 @@ function handleJSONImport() {
         const file = response.data;
         // fetch(`/Json/${file}`)
         fetch(`/Json/${file}?t=${new Date().getTime()}`)
-        .then((res) => {
+          .then((res) => {
             return res.json();
           })
           .then(function (data) {
@@ -1794,31 +1794,32 @@ function undoCanvas() {
   }
 }
 function canvaClear() {
-  // Clear the current canvas instance
-  // updateCanvasHistory();
-  canv.clear();
+  saveState();
+  saveAll();
 
-  // Create a new Fabric.js canvas instance
-  canv.add(
-    new fabric.Rect({
-      width: canv.width,
-      height: canv.height,
-      fill: "transparent",
-      selectable: false,
-    })
-  );
-  // Attach event listeners to the new canvas instance
-  canv.on({
-    "mouse:down": selectedObject,
-  });
+  setTimeout(() => {
+    // Clear the current canvas instance
+    canv.clear();
 
-  const color = "white";
+    // Create a new Fabric.js canvas instance
+    canv.add(
+      new fabric.Rect({
+        width: canv.width,
+        height: canv.height,
+        fill: "transparent",
+        selectable: false,
+      })
+    );
+    // Attach event listeners to the new canvas instance
+    canv.on({
+      "mouse:down": selectedObject,
+    });
 
-  canv.setBackgroundColor(color, function () {
-    canv.renderAll();
+    canv.setBackgroundColor("white", function () {
+      canv.renderAll();
+    });
     saveState();
-    saveAll();
-  });
+  }, 1000);
 }
 
 function dublicateObject() {
@@ -2667,10 +2668,10 @@ function saveState() {
   // Push current state to undo stack
   undoStack.push(currentState);
   currentIndex = undoStack.length - 1;
-  
+
   $("#front").prop("disabled", true);
   $("#back").prop("disabled", true);
- 
+
   setTimeout(function () {
     saveAll();
     $("#front").prop("disabled", false);
