@@ -35,6 +35,10 @@ return [
     'Tools' => 'Outils',
     'Save' => 'Enregistrer',
     'Add Card' => 'Ajouter une Carte',
+    'front_card' => 'Recto',
+    'back_card' => 'Modèle',
+   'custom_sticker' => 'Personnaliser un autocollant',
+   'background_image' => `d'arrière-plan`,
 
     'edit_invitation_card' => 'Modifier la Carte d\'Invitation',
     'description_text' => "Concevez votre invitation à votre façon : téléchargez une carte personnalisée, sélectionnez l'un de nos modèles ou commencez à partir d'une toile vierge.",

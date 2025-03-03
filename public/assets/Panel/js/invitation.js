@@ -164,7 +164,7 @@ canv.on('mouse:up', () => {
 });
 
 
-//get templates 
+//get templates
 function getTemplates() {
   $.ajax({
     type: "GET",
@@ -1469,15 +1469,15 @@ function sideimg1() {
   document.querySelector(".sidebaraddimg").style.display = "inline-block";
 }
 
-function sidebarbackaddimg() {
-  document.querySelector("#dynamicHeading").innerText = "Background Image";
+// function sidebarbackaddimg() {
+//   document.querySelector("#dynamicHeading").innerText = "Background Image";
 
-  document.querySelector(".sidebaraddtext").style.display = "none";
-  document.querySelector(".sidebar").style.display = "none";
-  document.querySelector("#viewTemplates").style.display = "none";
-  document.querySelector(".sidebaraddimg").style.display = "none";
-  document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
-}
+//   document.querySelector(".sidebaraddtext").style.display = "none";
+//   document.querySelector(".sidebar").style.display = "none";
+//   document.querySelector("#viewTemplates").style.display = "none";
+//   document.querySelector(".sidebaraddimg").style.display = "none";
+//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
+// }
 
 
 
@@ -1883,16 +1883,16 @@ function stickerLoad(data) {
   document.getElementById("btnSearch").innerText = `Search`;
 
 }
-function show() {
-  document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
+// function show() {
+//   document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
 
-  sideshow.style.display = "inline-block";
+//   sideshow.style.display = "inline-block";
 
-  document.querySelector("#viewTemplates").style.display = "none";
-  document.querySelector(".sidebaraddimg").style.display = "none";
-  document.querySelector(".sidebaraddtext").style.display = "none";
-  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
-}
+//   document.querySelector("#viewTemplates").style.display = "none";
+//   document.querySelector(".sidebaraddimg").style.display = "none";
+//   document.querySelector(".sidebaraddtext").style.display = "none";
+//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+// }
 
 function addStickerToCanvas(sticker) {
   fabric.Image.fromURL(
@@ -2291,7 +2291,7 @@ async function loadOldData2() {
     "/event/get-card/" + window.location.pathname.split("/")[2]
   );
 
-  //Get Animations 
+  //Get Animations
   GetAnimations();
 
   // Storing data in form of JSON
@@ -2482,7 +2482,7 @@ function saveAnimation() {
   });
 }
 
-// no of these 
+// no of these
 function saveNoneOfThese() {
   $.ajax({
     type: "POST",
@@ -2725,15 +2725,15 @@ function toggleTwoSided(element) {
 
 }
 
-function toggleSide(element) {
-  if (element.id === 'front') {
-    $("#f_b_card").text("Front Card");
-    handleJSONImport();
-  } else if (element.id === 'back') {
-    $("#f_b_card").text("Back Card");
-    handleJSONImport();
-  }
-}
+// function toggleSide(element) {
+//   if (element.id === 'front_card') {
+//     $("#f_b_card").text("Front Card");
+//     handleJSONImport();
+//   } else if (element.id === 'back_card') {
+//     $("#f_b_card").text("Back Card");
+//     handleJSONImport();
+//   }
+// }
 
 
 function loadCanvasState(state) {

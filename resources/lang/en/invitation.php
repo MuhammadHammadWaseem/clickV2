@@ -35,6 +35,10 @@ return [
     'Tools' => 'Tools',
     'Save' => 'Save',
     'Add Card' => 'Add Card',
+    'front_card' => 'Front Card',
+    'back_card' => 'Back Card',
+    'custom_sticker' => 'Customize a Sticker',
+    'background_image' => 'Background Image',
 
     'edit_invitation_card' => 'Edit Invitation Card',
     'description_text' => 'Design your invitation your way: upload a custom card, select from our templates, or start fresh with a blank canvas.',

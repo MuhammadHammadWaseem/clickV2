@@ -1,30 +1,27 @@
 @extends('Panel.Layout.master')
 <style>
+    .invitatin-active::after {
+        width: 5px;
+        height: 100%;
+        background-color: #C09D2A;
+        position: absolute;
+        left: 0;
+        right: 0;
+        content: "";
+        top: 0;
+    }
 
+    .invitatin-active a {
+        color: #C09D2A !important;
+    }
 
+    .invitatin-active img {
+        filter: none !important;
+    }
 
-.invitatin-active::after {
-  width: 5px;
-  height: 100%;
-  background-color: #C09D2A;
-  position: absolute;
-  left: 0;
-  right: 0;
-  content: "";
-  top: 0;
-}
-
-.invitatin-active a {
-  color: #C09D2A !important;
-}
-
-.invitatin-active img {
-  filter: none !important;
-}
-
-.invitatin-active {
-  background-color: #c09d2a29 !important;
-}
+    .invitatin-active {
+        background-color: #c09d2a29 !important;
+    }
 
 
     #txtTool h5 {
@@ -217,184 +214,187 @@
     }
 
     .two-outside-boxes .main-card-detaling-box {
-    height: 780px !important;
-}
-
-
-
-#editor .sidebaraddtext {
-    overflow-y: scroll;
-    height: 580px;
-    overflow-x:none !important;
-}
-
-#editor .sidebaraddtext::-webkit-scrollbar{
-    width: 5px;
-}
-
-
-.two-outside-boxes{
-    margin-top: 20px
-}
-
-.two-outside-boxes .main-card-box{
-    height: 100%;
-}
-
-.edit-cards-boxes .card-styling-box a{
-    font-size: 12px !important;
-}
-
-
-#exampleModalCenter02 .modal-content form {
-    height: 500px;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-
-#exampleModalCenter02 .modal-content form::-webkit-scrollbar{
-    width: 5px;
-}
-
-#exampleModalCenter02 .modal-content{
-    border-radius: 15px;
-}
-
-
-
-
-@media only screen and (max-width: 1400px){
-        .two-outside-boxes .main-card-box {
-    padding: 50px 20px !important;
-    position: relative;
-}
-
-.two-outside-boxes .main-card-detaling-box .text-styling-things ul {
-    display: flex;
-    column-gap: 30px;
-    flex-wrap: wrap;
-}
-
-.edit-cards-boxes .card-styling-box a {
-        text-align: center;
-
+        height: 780px !important;
     }
 
-.two-outside-boxes {
-    column-gap: 20px !important;
-}
+
+
+    #editor .sidebaraddtext {
+        overflow-y: scroll;
+        height: 580px;
+        overflow-x: none !important;
     }
 
-    @media only screen and (max-width: 1024px) {
+    #editor .sidebaraddtext::-webkit-scrollbar {
+        width: 5px;
+    }
+
+
+    .two-outside-boxes {
+        margin-top: 20px
+    }
+
     .two-outside-boxes .main-card-box {
-        padding: 50px 10px !important;
-    }
-}
-
-
-
-@media only screen and (max-width: 991px){
-.edit-cards-boxes .card-styling-box {
-    width: 16.5% !important;
-}
-.edit-cards-boxes{
-        justify-content: center;
-    }
-
-    canvas#canvas {
-    width: 100% !important;
-}
-
-.two-outside-boxes .main-card-detaling-box {
-    padding: 15px !important;
-}
-
-}
-
-@media only screen and (max-width: 767px){
-.edit-cards-boxes .card-styling-box {
-        width: 22% !important;
-    }
-    .edit-cards-boxes{
-        justify-content: center;
-    }
-
-}
-
-
-    @media only screen and (max-width: 575px){
-
-        .edit-cards-boxes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 10px;
-    row-gap: 10px;
-    justify-content: center;
-}
-        .two-outside-boxes .main-card-box {
-        width: 100%;
-    }
-
-    .edit-cards-boxes {
-        column-gap: 10px !important;
-        row-gap: 10px !important;
-    }
-
-    .edit-cards-boxes .card-styling-box {
-        width: 30% !important;
+        height: 100%;
     }
 
     .edit-cards-boxes .card-styling-box a {
-        height: 100px;
-        text-align: center !important;
-        font-size: 11px !important;
-    }
-
-    .box-styling .text p{
-        text-align: center !important;
+        font-size: 12px !important;
     }
 
 
-    #canvas{
-    position: absolute !important;
-    width: 388px !important;
-    height: 668px !important;
-    left: 0px !important;
-    top: 0px !important;
-    touch-action: none !important;
-    user-select: none !important;
-}
-
-.two-outside-boxes .main-card-box {
-        width: 100% !important;
+    #exampleModalCenter02 .modal-content form {
+        height: 500px;
+        overflow: scroll;
+        overflow-x: hidden;
     }
 
-    #canvas {
-        position: absolute !important;
-        width: 280px !important;
-        height: 668px !important;
-        left: 0px !important;
-        top: 0px !important;
-        touch-action: none !important;
-        user-select: none !important;
+    #exampleModalCenter02 .modal-content form::-webkit-scrollbar {
+        width: 5px;
     }
 
-    .two-outside-boxes .main-card-box {
-        padding: 20px 10px !important;
+    #exampleModalCenter02 .modal-content {
+        border-radius: 15px;
     }
 
-    .two-outside-boxes .main-card-box {
-    order: 2 !important;
-}
 
-#editor .sidebaraddtext {
-    overflow-y: scroll;
-    height: 580px;
-    overflow-x: none !important;
-    width: 100%;
-    padding-right: 5px;
-}
+
+
+    @media only screen and (max-width: 1400px) {
+        .two-outside-boxes .main-card-box {
+            padding: 50px 20px !important;
+            position: relative;
+        }
+
+        .two-outside-boxes .main-card-detaling-box .text-styling-things ul {
+            display: flex;
+            column-gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .edit-cards-boxes .card-styling-box a {
+            text-align: center;
+
+        }
+
+        .two-outside-boxes {
+            column-gap: 20px !important;
+        }
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .two-outside-boxes .main-card-box {
+            padding: 50px 10px !important;
+        }
+    }
+
+
+
+    @media only screen and (max-width: 991px) {
+        .edit-cards-boxes .card-styling-box {
+            width: 16.5% !important;
+        }
+
+        .edit-cards-boxes {
+            justify-content: center;
+        }
+
+        canvas#canvas {
+            width: 100% !important;
+        }
+
+        .two-outside-boxes .main-card-detaling-box {
+            padding: 15px !important;
+        }
+
+    }
+
+    @media only screen and (max-width: 767px) {
+        .edit-cards-boxes .card-styling-box {
+            width: 22% !important;
+        }
+
+        .edit-cards-boxes {
+            justify-content: center;
+        }
+
+    }
+
+
+    @media only screen and (max-width: 575px) {
+
+        .edit-cards-boxes {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 10px;
+            row-gap: 10px;
+            justify-content: center;
+        }
+
+        .two-outside-boxes .main-card-box {
+            width: 100%;
+        }
+
+        .edit-cards-boxes {
+            column-gap: 10px !important;
+            row-gap: 10px !important;
+        }
+
+        .edit-cards-boxes .card-styling-box {
+            width: 30% !important;
+        }
+
+        .edit-cards-boxes .card-styling-box a {
+            height: 100px;
+            text-align: center !important;
+            font-size: 11px !important;
+        }
+
+        .box-styling .text p {
+            text-align: center !important;
+        }
+
+
+        #canvas {
+            position: absolute !important;
+            width: 388px !important;
+            height: 668px !important;
+            left: 0px !important;
+            top: 0px !important;
+            touch-action: none !important;
+            user-select: none !important;
+        }
+
+        .two-outside-boxes .main-card-box {
+            width: 100% !important;
+        }
+
+        #canvas {
+            position: absolute !important;
+            width: 280px !important;
+            height: 668px !important;
+            left: 0px !important;
+            top: 0px !important;
+            touch-action: none !important;
+            user-select: none !important;
+        }
+
+        .two-outside-boxes .main-card-box {
+            padding: 20px 10px !important;
+        }
+
+        .two-outside-boxes .main-card-box {
+            order: 2 !important;
+        }
+
+        #editor .sidebaraddtext {
+            overflow-y: scroll;
+            height: 580px;
+            overflow-x: none !important;
+            width: 100%;
+            padding-right: 5px;
+        }
 
     }
 </style>
@@ -414,7 +414,8 @@
                         </div>
                     </div>
                     <div class="card-styling-box">
-                        <a type="button" data-toggle="modal" title="Envelope and Background Settings" data-target="#exampleModalCenter02">
+                        <a type="button" data-toggle="modal" title="Envelope and Background Settings"
+                            data-target="#exampleModalCenter02">
                             <svg width="41" height="40" viewBox="0 0 41 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -600,14 +601,15 @@
 
                             <div class="upload-container" onclick="document.getElementById('uploadStamp').click()">
                                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M20.6891 9.65745C20.7131 9.47642 20.7255 9.29539 20.7255 9.11539C20.7255 6.64128 18.4959 4.65409 16.0218 4.99118C15.3008 3.70731 13.9275 2.87289 12.4022 2.87289C10.877 2.87289 9.50361 3.70731 8.7826 4.99118C6.30329 4.65409 4.07888 6.64128 4.07888 9.11539C4.07888 9.29539 4.09136 9.47642 4.11529 9.65745C2.83246 10.3785 1.99805 11.7528 1.99805 13.2771C1.99805 14.8013 2.83246 16.1757 4.11529 16.8967C4.09129 17.0764 4.07913 17.2574 4.07888 17.4387C4.07888 19.9128 6.30329 21.8959 8.7826 21.5629C9.50361 22.8468 10.877 23.6812 12.4022 23.6812C13.9275 23.6812 15.3008 22.8468 16.0218 21.5629C18.4959 21.8959 20.7255 19.9128 20.7255 17.4387C20.7255 17.2587 20.7131 17.0777 20.6891 16.8967C21.972 16.1757 22.8064 14.8013 22.8064 13.2771C22.8064 11.7528 21.972 10.3785 20.6891 9.65745ZM19.1889 15.2788L18.0423 15.5837L18.4939 16.6792C18.5927 16.9185 18.6447 17.1817 18.6447 17.4387C18.6447 18.5863 17.7115 19.5196 16.5639 19.5196C16.3069 19.5196 16.0447 19.4675 15.8044 19.3687L14.7078 18.9172L14.4029 20.0637C14.2855 20.5047 14.0257 20.8945 13.6639 21.1726C13.3021 21.4506 12.8585 21.6014 12.4022 21.6014C11.9459 21.6014 11.5023 21.4506 11.1405 21.1726C10.7787 20.8945 10.5189 20.5047 10.4015 20.0637L10.0967 18.9172L9.00005 19.3687C8.75903 19.4677 8.50109 19.5189 8.24055 19.5196C7.09297 19.5196 6.15971 18.5863 6.15971 17.4387C6.15971 17.1817 6.21173 16.9185 6.31057 16.6792L6.76211 15.5837L5.61558 15.2788C5.17564 15.1599 4.78712 14.8995 4.51008 14.5376C4.23304 14.1758 4.08291 13.7328 4.08291 13.2771C4.08291 12.8213 4.23304 12.3783 4.51008 12.0165C4.78712 11.6547 5.17564 11.3942 5.61558 11.2753L6.76211 10.9705L6.31057 9.8749C6.21154 9.6339 6.1603 9.37595 6.15971 9.11539C6.15971 7.96781 7.09297 7.03456 8.24055 7.03456C8.49753 7.03456 8.75971 7.08658 9.00005 7.18542L10.0967 7.63696L10.4015 6.49042C10.5189 6.04946 10.7787 5.65963 11.1405 5.38155C11.5023 5.10347 11.9459 4.95271 12.4022 4.95271C12.8585 4.95271 13.3021 5.10347 13.6639 5.38155C14.0257 5.65963 14.2855 6.04946 14.4029 6.49042L14.7078 7.63696L15.8044 7.18542C16.0447 7.08658 16.3069 7.03456 16.5639 7.03456C17.7115 7.03456 18.6447 7.96781 18.6447 9.11539C18.6447 9.37238 18.5927 9.6356 18.4939 9.8749L18.0423 10.9705L19.1889 11.2753C19.6288 11.3942 20.0173 11.6547 20.2943 12.0165C20.5714 12.3783 20.7215 12.8213 20.7215 13.2771C20.7215 13.7328 20.5714 14.1758 20.2943 14.5376C20.0173 14.8995 19.6288 15.1599 19.1889 15.2788Z"
-                                    fill="#C09D2A" />
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.6891 9.65745C20.7131 9.47642 20.7255 9.29539 20.7255 9.11539C20.7255 6.64128 18.4959 4.65409 16.0218 4.99118C15.3008 3.70731 13.9275 2.87289 12.4022 2.87289C10.877 2.87289 9.50361 3.70731 8.7826 4.99118C6.30329 4.65409 4.07888 6.64128 4.07888 9.11539C4.07888 9.29539 4.09136 9.47642 4.11529 9.65745C2.83246 10.3785 1.99805 11.7528 1.99805 13.2771C1.99805 14.8013 2.83246 16.1757 4.11529 16.8967C4.09129 17.0764 4.07913 17.2574 4.07888 17.4387C4.07888 19.9128 6.30329 21.8959 8.7826 21.5629C9.50361 22.8468 10.877 23.6812 12.4022 23.6812C13.9275 23.6812 15.3008 22.8468 16.0218 21.5629C18.4959 21.8959 20.7255 19.9128 20.7255 17.4387C20.7255 17.2587 20.7131 17.0777 20.6891 16.8967C21.972 16.1757 22.8064 14.8013 22.8064 13.2771C22.8064 11.7528 21.972 10.3785 20.6891 9.65745ZM19.1889 15.2788L18.0423 15.5837L18.4939 16.6792C18.5927 16.9185 18.6447 17.1817 18.6447 17.4387C18.6447 18.5863 17.7115 19.5196 16.5639 19.5196C16.3069 19.5196 16.0447 19.4675 15.8044 19.3687L14.7078 18.9172L14.4029 20.0637C14.2855 20.5047 14.0257 20.8945 13.6639 21.1726C13.3021 21.4506 12.8585 21.6014 12.4022 21.6014C11.9459 21.6014 11.5023 21.4506 11.1405 21.1726C10.7787 20.8945 10.5189 20.5047 10.4015 20.0637L10.0967 18.9172L9.00005 19.3687C8.75903 19.4677 8.50109 19.5189 8.24055 19.5196C7.09297 19.5196 6.15971 18.5863 6.15971 17.4387C6.15971 17.1817 6.21173 16.9185 6.31057 16.6792L6.76211 15.5837L5.61558 15.2788C5.17564 15.1599 4.78712 14.8995 4.51008 14.5376C4.23304 14.1758 4.08291 13.7328 4.08291 13.2771C4.08291 12.8213 4.23304 12.3783 4.51008 12.0165C4.78712 11.6547 5.17564 11.3942 5.61558 11.2753L6.76211 10.9705L6.31057 9.8749C6.21154 9.6339 6.1603 9.37595 6.15971 9.11539C6.15971 7.96781 7.09297 7.03456 8.24055 7.03456C8.49753 7.03456 8.75971 7.08658 9.00005 7.18542L10.0967 7.63696L10.4015 6.49042C10.5189 6.04946 10.7787 5.65963 11.1405 5.38155C11.5023 5.10347 11.9459 4.95271 12.4022 4.95271C12.8585 4.95271 13.3021 5.10347 13.6639 5.38155C14.0257 5.65963 14.2855 6.04946 14.4029 6.49042L14.7078 7.63696L15.8044 7.18542C16.0447 7.08658 16.3069 7.03456 16.5639 7.03456C17.7115 7.03456 18.6447 7.96781 18.6447 9.11539C18.6447 9.37238 18.5927 9.6356 18.4939 9.8749L18.0423 10.9705L19.1889 11.2753C19.6288 11.3942 20.0173 11.6547 20.2943 12.0165C20.5714 12.3783 20.7215 12.8213 20.7215 13.2771C20.7215 13.7328 20.5714 14.1758 20.2943 14.5376C20.0173 14.8995 19.6288 15.1599 19.1889 15.2788Z"
+                                        fill="#C09D2A" />
                                 </svg>
                                 {{ __('invitation.upload_stamp') }}
                             </div>
-                            <input type="file" class="d-none" id="uploadStamp" onchange="uploadStamp(event)" accept="image/*">
+                            <input type="file" class="d-none" id="uploadStamp" onchange="uploadStamp(event)"
+                                accept="image/*">
                         </a>
                     </div>
 
@@ -616,11 +618,13 @@
             <div class="col-lg-12">
                 <div class="two-outside-boxes">
                     <div class="main-card-box">
-                            <h5 id="f_b_card" style="
+                        <h5 id="f_b_card"
+                            style="
                             color: #f5f5f5;
                             font-size: 20px;
                             font-weight: 600;
-                            margin-bottom: 20px;">Front Card</h5>
+                            margin-bottom: 20px;">
+                            {{ __('invitation.front_card') }}</h5>
                         <div class="main-img-box"
                             style="
                         display: flex;
@@ -645,14 +649,14 @@
 
                                         <div class="radio-box-related">
                                             <input type="radio" id="front" name="edit" value="front"
-                                                onchange="toggleSide(this)">
-                                            <label for="front">{{ __('invitation.front') }}</label>
+                                                onchange="toggleSide(this)" checked>
+                                            <label for="front">{{ __('invitation.front_card') }}</label>
                                         </div>
 
                                         <div class="radio-box-related">
                                             <input type="radio" id="back" name="edit" value="back"
                                                 onchange="toggleSide(this)">
-                                            <label for="back">{{ __('invitation.back') }}</label>
+                                            <label for="back">{{ __('invitation.back_card') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -955,48 +959,48 @@
                                         </div>
                                         <div class="text-styling-things">
                                             <ul>
-                                                <li><a onclick="boldBtn()" title="Bold"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="boldBtn()" title="Bold"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M21.3263 14.025C22.0824 13.0525 22.4951 11.8569 22.5 10.625C22.5 7.52375 19.9762 5 16.875 5H7.5V23.75H17.5C20.6012 23.75 23.125 21.2262 23.125 18.125C23.1233 17.3546 22.9627 16.5929 22.6532 15.8874C22.3437 15.1819 21.892 14.5479 21.3263 14.025ZM16.875 8.75C17.9088 8.75 18.75 9.59125 18.75 10.625C18.75 11.6588 17.9088 12.5 16.875 12.5H11.25V8.75H16.875ZM17.5 20H11.25V16.25H17.5C18.5338 16.25 19.375 17.0912 19.375 18.125C19.375 19.1588 18.5338 20 17.5 20Z"
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="italicBtn()" title="Italic"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="italicBtn()" title="Italic"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M23.75 8.75V5H11.25V8.75H14.835L11.265 21.25H6.25V25H18.75V21.25H15.165L18.735 8.75H23.75Z"
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="textRotationBtn()" title="Text Rotation"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
+                                                <li><a onclick="textRotationBtn()" title="Text Rotation"><svg
+                                                            width="30" height="30" viewBox="0 0 30 30"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M8.44774 10.9475L6.68024 9.18C5.66737 10.1937 4.88278 11.4122 4.37899 12.7538L6.72024 13.63C7.09868 12.6231 7.68762 11.7086 8.44774 10.9475ZM23.7502 16.2487C23.7543 14.9352 23.4973 13.6339 22.9943 12.4205C22.4914 11.207 21.7524 10.1055 20.8202 9.18C19.2542 7.60603 17.2043 6.60443 15.0002 6.33625V2.5L8.75024 7.5L15.0002 12.5V8.86125C16.5363 9.11492 17.9538 9.84469 19.0527 10.9475C19.7517 11.642 20.3058 12.4682 20.683 13.3785C21.0602 14.2887 21.253 15.2647 21.2502 16.25V16.2525C21.2502 16.665 21.209 17.0713 21.1427 17.4738C21.134 17.5275 21.129 17.5837 21.119 17.6375C20.8971 18.7902 20.4101 19.8755 19.6965 20.8075C19.4965 21.0687 19.2827 21.3225 19.0515 21.5538C18.7691 21.833 18.4648 22.0893 18.1415 22.32C17.2938 22.9406 16.3235 23.3732 15.2952 23.5888C15.1177 23.6263 14.939 23.6513 14.7577 23.675C14.6802 23.6863 14.6052 23.7012 14.5277 23.7087C13.735 23.79 12.9345 23.7465 12.1552 23.58L11.6252 26.0238C12.6655 26.2468 13.7345 26.3041 14.7927 26.1937C14.879 26.185 14.9652 26.1675 15.0515 26.1562C15.3077 26.1237 15.5627 26.0862 15.814 26.0337L15.8802 26.0225L15.879 26.0162C16.8125 25.8162 17.7119 25.4814 18.549 25.0225L18.5502 25.0237L18.5852 25C19.0269 24.7535 19.449 24.4736 19.8477 24.1625C20.1852 23.9012 20.5127 23.625 20.819 23.3188C21.129 23.01 21.4065 22.6775 21.6702 22.3375C21.6965 22.3025 21.7315 22.2712 21.7577 22.2362L21.7502 22.2312C22.3238 21.4695 22.784 20.6287 23.1165 19.735L23.1265 19.7388C23.1627 19.6413 23.189 19.5412 23.2215 19.4425C23.2677 19.305 23.3152 19.1662 23.3552 19.0262C23.4052 18.8512 23.4465 18.675 23.4865 18.4975C23.514 18.3738 23.5465 18.2538 23.569 18.1288C23.609 17.915 23.639 17.6988 23.664 17.4838C23.6765 17.3888 23.6927 17.2963 23.7015 17.2C23.7302 16.8888 23.7477 16.575 23.7477 16.2587C23.7502 16.2562 23.7502 16.2537 23.7502 16.2487ZM7.74649 20.7463L5.74649 22.2475C6.60663 23.3927 7.70148 24.3409 8.95774 25.0288L10.159 22.8362C9.21457 22.3202 8.39189 21.6075 7.74649 20.7463ZM6.25024 16.25C6.25024 16.0688 6.25649 15.8913 6.26899 15.7138L3.77649 15.535C3.6719 16.9671 3.87785 18.4049 4.38024 19.75L6.72149 18.8737C6.40833 18.0345 6.24871 17.1458 6.25024 16.25Z"
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="borderBtn()" title="Border"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="borderBtn()" title="Border"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M11.25 26.25H26.25V3.75H3.75V26.25H11.25ZM23.75 21.25V23.75H16.25V16.25H23.75V21.25ZM18.75 6.25H23.75V13.75H16.25V6.25H18.75ZM6.25 8.75V6.25H13.75V13.75H6.25V8.75ZM6.25 23.75V16.25H13.75V23.75H6.25Z"
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="moveForward()" title="Move Forward"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="moveForward()" title="Move Forward"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75ZM6.25 6.25H17.5L17.4963 17.5H6.25V6.25Z"
                                                                 fill="#4A4A4A" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="moveBackword()" title="Move Backward"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="moveBackword()" title="Move Backward"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M6.25 20H10V23.75C10 25.1287 11.1213 26.25 12.5 26.25H23.75C25.1287 26.25 26.25 25.1287 26.25 23.75V12.5C26.25 11.1213 25.1287 10 23.75 10H20V6.25C20 4.87125 18.8787 3.75 17.5 3.75H6.25C4.87125 3.75 3.75 4.87125 3.75 6.25V17.5C3.75 18.8787 4.87125 20 6.25 20ZM23.7463 23.75H12.5V12.5H23.75L23.7463 23.75Z"
@@ -1038,16 +1042,16 @@
                                         <div class="font-size-styling">
                                             <h4 class="disable-text-selection">Letter Spacing</h4>
                                             <ul>
-                                                <li><a onclick="increaseLetterSpacing()"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="increaseLetterSpacing()"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M23.75 13.75H16.25V6.25H13.75V13.75H6.25V16.25H13.75V23.75H16.25V16.25H23.75V13.75Z"
                                                                 fill="#F1F1F1" />
                                                         </svg>
                                                     </a></li>
-                                                <li><a onclick="decreaseLetterSpacing()"><svg width="30" height="30"
-                                                            viewBox="0 0 30 30" fill="none"
+                                                <li><a onclick="decreaseLetterSpacing()"><svg width="30"
+                                                            height="30" viewBox="0 0 30 30" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6.25 13.75H23.75V16.25H6.25V13.75Z" fill="#F1F1F1" />
                                                         </svg>
@@ -1096,14 +1100,22 @@
                                         <div class="other-editing">
                                             <h4>Other Editing</h4>
                                             <ul>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="alignObjectsVertically()">Align Vertically</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="alignObjectsHorizontally()">Align Horizontally</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textFlipBtn()">Flip Text</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textTransformBtn()">Text Transform</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="shadowBtn()">Text Shadow</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="textAlignmentBtn()">Text Alignment</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="neonText()">Text Neon Effect</a></li>
-                                                <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextMirror()">Text Mirror</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="alignObjectsVertically()">Align Vertically</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="alignObjectsHorizontally()">Align Horizontally</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textFlipBtn()">Flip Text</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textTransformBtn()">Text Transform</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="shadowBtn()">Text Shadow</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="textAlignmentBtn()">Text Alignment</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="neonText()">Text Neon Effect</a></li>
+                                                <li><a class="disable-text-selection" style="cursor: pointer;"
+                                                        onclick="applyTextMirror()">Text Mirror</a></li>
                                                 {{-- <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextIce()">Text Ice Effect</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextFire()">Text Fire Effect</a></li>
                                                 <li><a class="disable-text-selection" style="cursor: pointer;" onclick="applyTextRainbow()">Text Rainbow Effect</a></li>
@@ -1126,7 +1138,8 @@
                                 <div id="sidebarbackgroundaddimg1" style="display: none;">
                                     <div class="two-things-align">
                                         <div class="two-btn-align">
-                                            <button onclick="moveForward()" class="moveForward btn btn-primary t-btn">{{ __('invitation.move_forward') }}</button>
+                                            <button onclick="moveForward()"
+                                                class="moveForward btn btn-primary t-btn">{{ __('invitation.move_forward') }}</button>
                                             <button onclick="moveBackword()"
                                                 class="moveBackword btn btn-primary t-btn">{{ __('invitation.move_backward') }}</button>
                                         </div>
@@ -1195,8 +1208,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button onclick="moveForward()" class="moveForward other-editing-btn">{{ __('invitation.move_forward') }}</button>
-                                            <button onclick="moveBackword()" class="moveBackword other-editing-btn">{{ __('invitation.move_backward') }}</button>
+                                            <button onclick="moveForward()"
+                                                class="moveForward other-editing-btn">{{ __('invitation.move_forward') }}</button>
+                                            <button onclick="moveBackword()"
+                                                class="moveBackword other-editing-btn">{{ __('invitation.move_backward') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1258,8 +1273,8 @@
     </div>
 
     <!-- Animations Modal -->
-    <div class="modal fade modal-01 modal-02 modal-03" id="animationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade modal-01 modal-02 modal-03" id="animationModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1277,10 +1292,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeAnimationModal"  data-dismiss="modal" aria-label="Close">{{ __('invitation.close') }}</button>
-                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"  data-dismiss="modal" aria-label="Close">{{ __('invitation.save_animations') }}</button>
+                    <button type="button" class="btn btn-secondary" id="closeAnimationModal" data-dismiss="modal"
+                        aria-label="Close">{{ __('invitation.close') }}</button>
+                    <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveAnimation()"
+                        data-dismiss="modal" aria-label="Close">{{ __('invitation.save_animations') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveNoneOfThese()"
-                    data-dismiss="modal" aria-label="Close">{{ __('invitation.non_animations') }}</button>
+                        data-dismiss="modal" aria-label="Close">{{ __('invitation.non_animations') }}</button>
                 </div>
             </div>
         </div>
@@ -1335,7 +1352,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('invitation.close') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('invitation.close') }}</button>
                     </form>
                 </div>
             </div>
@@ -1483,13 +1501,15 @@
                                     value="{{ $cardData->envTitleColor ?? '#000000' }}">
                             </div>
                             <div class="box">
-                                <label for="colorPickerenvelope_innersetting">{{ __('invitation.envelope_inner_color') }}</label>
+                                <label
+                                    for="colorPickerenvelope_innersetting">{{ __('invitation.envelope_inner_color') }}</label>
                                 <input type="color" id="colorPickerenvelope_innersetting"
                                     name="colorPickerenvelope_innersetting"
                                     value="{{ $cardData->cardColorIn ?? '#000000' }}">
                             </div>
                             <div class="box">
-                                <label for="colorPickerenvelope_outsetting">{{ __('invitation.envelope_outer_color') }}</label>
+                                <label
+                                    for="colorPickerenvelope_outsetting">{{ __('invitation.envelope_outer_color') }}</label>
                                 <input type="color" id="colorPickerenvelope_outsetting"
                                     name="colorPickerenvelope_outsetting"
                                     value="{{ $cardData->cardColorOut ?? '#000000' }}">
@@ -1526,7 +1546,8 @@
                                 <div class="box">
                                     <input type="checkbox" id="flexCheckChecked6" name="flexCheckChecked6"
                                         value="">
-                                    <label for="flexCheckChecked6"> {{ __('invitation.apologies_for_not_attending') }}</label>
+                                    <label for="flexCheckChecked6">
+                                        {{ __('invitation.apologies_for_not_attending') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -1552,7 +1573,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('invitation.discard_changes') }}</button>
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{ __('invitation.discard_changes') }}</button>
                     <button type="button" class="submit-btn btn btn-primary t-btn" onclick="saveSetting()"
                         data-dismiss="modal">{{ __('invitation.save_changes') }}</button>
                 </div>
@@ -1563,7 +1585,6 @@
 
 @section('scripts')
     <script>
-
         var cardData = @json($cardData);
         var settings = 0;
 
@@ -1574,22 +1595,22 @@
             settings = 1;
         }
 
-        $("#two_sided").on("click",function(){
+        $("#two_sided").on("click", function() {
             $("#front").click();
         });
 
-        if(settings == 1){
-            if(cardData.two_sided == 1){
-                $("#front").prop("checked",true);
+        if (settings == 1) {
+            if (cardData.two_sided == 1) {
+                $("#front").prop("checked", true);
             }
         }
 
-        $("#save1").on("click", function () {
+        $("#save1").on("click", function() {
             const saveBtn = $(this);
             saveBtn.text('Saving...').prop('disabled', true);
 
             // Simulate a save operation (replace this with actual save logic)
-            setTimeout(function () {
+            setTimeout(function() {
                 // On successful save
                 saveBtn.text('Saved').prop('disabled', false);
             }, 1000); // Simulates a 2-second save process
@@ -1597,7 +1618,7 @@
 
 
 
-        $("#two_sided").on("click", function (event) {
+        $("#two_sided").on("click", function(event) {
             if (settings == 0) {
                 toastr.error('Please Save the Setting First!');
 
@@ -1605,7 +1626,7 @@
                 successModal.show();
 
                 // Prevent further actions
-                event.preventDefault();  // Stop the default behavior
+                event.preventDefault(); // Stop the default behavior
                 event.stopPropagation(); // Prevent `onclick` functions from triggering
                 return false;
             }
@@ -1723,6 +1744,49 @@
                 document.getElementById("flexCheckChecked" + (key + 1)).checked = false;
             }
         });
+
+    </script>
+    <script>
+
+const translations = {
+            front_card: "{{ __('invitation.front_card') }}",
+            back_card: "{{ __('invitation.back_card') }}"
+            back_card: "{{ __('invitation.back_card') }}"
+            custom_sticker: "{{ __('invitation.custom_sticker') }}"
+        };
+
+
+
+        function toggleSide(element) {
+            if (element.id === 'front') {
+                $("#f_b_card").text(translations.front_card);
+                handleJSONImport();
+            } else if (element.id === 'back') {
+                $("#f_b_card").text(translations.back_card);
+                handleJSONImport();
+            }
+        }
+
+        function show() {
+            document.querySelector("#dynamicHeading").innerText = "{{ __('invitation.custom_sticker') }}";
+
+            sideshow.style.display = "inline-block";
+
+            document.querySelector("#viewTemplates").style.display = "none";
+            document.querySelector(".sidebaraddimg").style.display = "none";
+            document.querySelector(".sidebaraddtext").style.display = "none";
+            document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+        }
+
+        function sidebarbackaddimg() {
+        document.querySelector("#dynamicHeading").innerText = translations.custom_sticker;
+
+        document.querySelector(".sidebaraddtext").style.display = "none";
+        document.querySelector(".sidebar").style.display = "none";
+        document.querySelector("#viewTemplates").style.display = "none";
+        document.querySelector(".sidebaraddimg").style.display = "none";
+        document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
+        }
     </script>
     <script src="{{ asset('assets/Panel/js/invitation.js') }}"></script>
 @endsection
