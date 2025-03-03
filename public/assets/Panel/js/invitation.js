@@ -1496,15 +1496,15 @@ function deleteImage() {
 
 
 
-function showTxtTool() {
-  document.querySelector("#dynamicHeading").innerText = "Editing Options";
+// function showTxtTool() {
+//   document.querySelector("#dynamicHeading").innerText = "Editing Options";
 
-  document.querySelector(".sidebaraddtext").style.display = "inline-block";
-  document.querySelector(".sidebaraddimg").style.display = "none";
-  document.querySelector(".sidebar").style.display = "none";
-  document.querySelector("#viewTemplates").style.display = "none";
-  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
-}
+//   document.querySelector(".sidebaraddtext").style.display = "inline-block";
+//   document.querySelector(".sidebaraddimg").style.display = "none";
+//   document.querySelector(".sidebar").style.display = "none";
+//   document.querySelector("#viewTemplates").style.display = "none";
+//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
+// }
 
 function increaseText() {
   var currentFontSize = selectedText.get("fontSize");
@@ -2447,16 +2447,16 @@ function closeSidebar() {
 }
 
 
-function addTemplate() {
-  document.querySelector("#dynamicHeading").innerText = "Customize a Templates";
+// function addTemplate() {
+//   document.querySelector("#dynamicHeading").innerText = "Customize a Templates";
 
-  document.querySelector("#viewTemplates").style.display = "inline-block";
-  document.querySelector(".sidebaraddimg").style.display = "none";
-  document.querySelector(".sidebaraddtext").style.display = "none";
-  document.querySelector(".sidebar").style.display = "none";
-  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+//   document.querySelector("#viewTemplates").style.display = "inline-block";
+//   document.querySelector(".sidebaraddimg").style.display = "none";
+//   document.querySelector(".sidebaraddtext").style.display = "none";
+//   document.querySelector(".sidebar").style.display = "none";
+//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
 
-}
+// }
 
 function saveAnimation() {
   var id_animation = document.querySelector('input[name="id_animation"]:checked').value;

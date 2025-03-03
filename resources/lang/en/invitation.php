@@ -35,9 +35,10 @@ return [
     'Tools' => 'Tools',
     'Save' => 'Save',
     'Add Card' => 'Add Card',
-    'front_card' => 'Front Card',
-    'back_card' => 'Back Card',
+    'front_card' => 'Front',
+    'back_card' => 'Back',
     'custom_sticker' => 'Customize a Sticker',
+    'customize_template' => 'Customize a Templates',
     'background_image' => 'Background Image',
 
     'edit_invitation_card' => 'Edit Invitation Card',

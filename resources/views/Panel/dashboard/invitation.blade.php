@@ -1750,9 +1750,9 @@
 
 const translations = {
             front_card: "{{ __('invitation.front_card') }}",
-            back_card: "{{ __('invitation.back_card') }}"
-            back_card: "{{ __('invitation.back_card') }}"
-            custom_sticker: "{{ __('invitation.custom_sticker') }}"
+            back_card: "{{ __('invitation.back_card') }}",
+            custom_sticker: "{{ __('invitation.custom_sticker') }}",
+            background_image: "{{ __('invitation.background_image') }}"
         };
 
 
@@ -1768,7 +1768,7 @@ const translations = {
         }
 
         function show() {
-            document.querySelector("#dynamicHeading").innerText = "{{ __('invitation.custom_sticker') }}";
+            document.querySelector("#dynamicHeading").innerText = "{!! __('invitation.custom_sticker') !!}";
 
             sideshow.style.display = "inline-block";
 
@@ -1778,14 +1778,36 @@ const translations = {
             document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
         }
 
+        function showTxtTool() {
+        document.querySelector("#dynamicHeading").innerText = "{!! __('invitation.editing_options') !!}";
+
+        document.querySelector(".sidebaraddtext").style.display = "inline-block";
+        document.querySelector(".sidebaraddimg").style.display = "none";
+        document.querySelector(".sidebar").style.display = "none";
+        document.querySelector("#viewTemplates").style.display = "none";
+        document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
+        }
+
         function sidebarbackaddimg() {
-        document.querySelector("#dynamicHeading").innerText = translations.custom_sticker;
+        document.querySelector("#dynamicHeading").innerText = "{!! __('invitation.background_image') !!}";
+        
 
         document.querySelector(".sidebaraddtext").style.display = "none";
         document.querySelector(".sidebar").style.display = "none";
         document.querySelector("#viewTemplates").style.display = "none";
         document.querySelector(".sidebaraddimg").style.display = "none";
         document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
+        }
+
+        function addTemplate() {
+        document.querySelector("#dynamicHeading").innerText = "{!! __('invitation.customize_template') !!}";
+
+        document.querySelector("#viewTemplates").style.display = "inline-block";
+        document.querySelector(".sidebaraddimg").style.display = "none";
+        document.querySelector(".sidebaraddtext").style.display = "none";
+        document.querySelector(".sidebar").style.display = "none";
+        document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+
         }
     </script>
     <script src="{{ asset('assets/Panel/js/invitation.js') }}"></script>
