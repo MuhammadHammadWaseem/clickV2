@@ -29,7 +29,7 @@ return [
     'Would You Like-desc' => 'Il est maintenant temps de personnaliser la page Web de votre événement. Définissez le thème et fournissez tous les détails dont vos invités ont besoin pour rester informés.    ',
     'No, it Don\'t' => 'Non, ça ne le fait pas',
     'Yes, it Does' => 'Oui, ça le fait',
-    'I Do' => 'Je fais',
+    'I Do' => 'Oui',
     'steps_title' => 'Étapes',
     'steps_description' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis susc.',
     'no_dont_button' => 'Non, je ne veux pas',
@@ -50,5 +50,6 @@ return [
     'Reminder & Acknowledgment Page' => 'Page de rappel et de reconnaissance',
     'Stay connected' => 'Restez connecté ! Définissez des rappels et des accusés de réception pour tenir les invités informés et préparés pour votre événement.',
     'Later' => 'Plus tard',
+    'Submit' => 'Soumettre',
 
 ];

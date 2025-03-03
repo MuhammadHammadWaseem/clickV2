@@ -1428,12 +1428,12 @@
                     document.getElementById("cutom-style-right").style.justifyContent = "space-between";
                 }
                 if (n == (x.length - 1)) {
-                    document.getElementById("nextButton").innerHTML = "Submit";
+                    document.getElementById("nextButton").innerHTML = "{{ __('genralInfo.Submit') }}";
                     document.getElementById("nextButton").onclick = function() {
                         submitStep();
                     };
                 } else {
-                    document.getElementById("nextButton").innerHTML = "Next";
+                    document.getElementById("nextButton").innerHTML = "{{ __('genralInfo.next_button') }}";
                     document.getElementById("nextButton").onclick = function() {
                         nextPrev(1);
                     };

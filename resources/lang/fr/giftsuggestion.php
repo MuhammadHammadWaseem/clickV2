@@ -37,7 +37,7 @@ return [
     'description_text' => 'Facilitez les cadeaux ! Ajoutez des suggestions de cadeaux ou une adresse de transfert pour ceux qui souhaitent contribuer.',
     'yes_add_gift_suggestions' => 'Oui, Ajouter des Suggestions de Cadeaux',
 
-    'add_new_gift_suggestions' => 'Ajouter de Nouvelles Suggestions de Cadeaux',
+    'add_new_gift_suggestions' => 'Ajouter de nouvelles suggestions de cadeaux',
     'description_text2' => 'Facilitez les cadeaux ! Ajoutez des suggestions de cadeaux ou une adresse de transfert pour ceux qui souhaitent contribuer.',
     'Add Suggestion' => 'Ajouter une Suggestion',
     'Delete Gift' => 'Supprimer le Cadeau',
