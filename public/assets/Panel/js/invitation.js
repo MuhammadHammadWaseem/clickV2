@@ -295,6 +295,7 @@ function selectedObject(event) {
   if (event.target != null) {
     var selectBox = document.getElementById("font-selector2");
     var colorPicker = document.getElementById("colorPicker");
+    var opacityRange = document.getElementById("opacityRange");
 
     // Get the selected option value
     var optionValue = event.target.fontFamily;
@@ -303,6 +304,11 @@ function selectedObject(event) {
     // Get the selected color value
     var colorValue = event.target.fill;
     colorPicker.value = colorValue;
+
+    // Get the selected opacity value
+    var opacityValue = event.target.opacity * 100;
+    opacityRange.value = opacityValue;
+
     saveState();
     // saveAll();
   }

@@ -1091,7 +1091,7 @@
                                             <div class="slider-container">
                                                 <div class="range-slider">
                                                     <input type="range" id="opacityRange" min="0"
-                                                        max="100" value="25" step="1"
+                                                        max="100" value="100" step="1"
                                                         oninput="changeOpacity(this)">
                                                 </div>
                                             </div>
