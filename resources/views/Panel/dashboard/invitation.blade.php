@@ -1585,6 +1585,8 @@
 
 @section('scripts')
     <script>
+         var appLocale = "{{ app()->getLocale() }}";
+         
         var cardData = @json($cardData);
         var settings = 0;
 

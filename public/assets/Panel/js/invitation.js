@@ -1427,12 +1427,15 @@ function updateControls(target) {
   //   document.getElementById("fontSelector").value = target.fontFamily;
   // }
 }
-
 function clicktextshow() {
   try {
     if (typeof selectedText.text === "string") {
       document.querySelector(".sidebaraddtext").style.display = "inline-block";
-      document.querySelector("#dynamicHeading").innerText = "Editing Options";
+      if(appLocale == "fr"){
+        document.querySelector("#dynamicHeading").innerText = "Options d'Édition";
+      }else{
+        document.querySelector("#dynamicHeading").innerText = "Editing Options";
+      }
       document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
       document.querySelector(".sidebaraddimg").style.display = "none";
 
