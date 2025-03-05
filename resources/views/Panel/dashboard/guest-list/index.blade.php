@@ -869,6 +869,148 @@
 @section('scripts')
     <script>
 
+function getTable() {
+            $.ajax({
+                url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
+                type: 'GET',
+                success: function(response) {
+                    let isCorporate = {{ $isCorporate }};
+
+                    if (isCorporate == 1) {
+
+                        $("#tableAppend").empty();
+                        response.table.forEach(table => {
+                            $("#tableAppend").append(`
+                                <div class="td-boxes-down-align">
+                                    <div class="top-box">
+                                        <div class="box">
+                                            <h5>${table.name}</h5>
+                                        </div>
+                                        <div class="box">
+                                            <h5>${table.number}</h5>
+                                        </div>
+                                        <div class="box">
+                                            ${(table.guest_number - table.guests.length <= 0) ? `
+                                                                                                                                                                        <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                    ` : `
+                                                                                                                                                                        <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                    `}
+                                        </div>
+                                        <div class="box">
+                                            <div class="three-action-align">
+                                                <button class="edit-table-btn" data-id="${table.id_table}">
+                                                    <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
+                                                </button>
+                                                <button class="delete-table-btn" data-id="${table.id_table}">
+                                                    <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
+                                                </button>
+                                                ${(isCorporate == 1) ? '' : `
+                                                                                                                                                                    <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
+                                                                                                                                                                        <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
+                                                                                                                                                                    </button>
+                                                                                                                                                                `}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom-box">
+                                        <div class="box">
+                                            <h4>Seat Name</h4>
+                                            ${table.seats.map(seat => `
+                                                                                                                                        <p>${seat.seat_name}</p>
+                                                                                                                                    `).join('')}
+                                        </div>
+                                        <div class="box">
+                                            <h4>Guest Name</h4>
+                                            ${table.seats.map(seat => `
+                                                                                                                                        ${(seat.guest) ? `<p>${seat.guest.name}</p>
+                                                ` : `
+                                                <p>No Guest Assigned</p>
+                                                `}
+                                                                                                                                        `).join('')}
+                                        </div>
+                                        <div class="box">
+                                            <h4>Email</h4>
+                                            ${table.seats.map(seat => `
+                                                                                                                ${(seat.guest && seat.guest.email) ? `<p>${seat.guest.email}</p>` : `<p>No Email Provided</p>`}
+                                                                                                                     `).join('')}
+                                        </div>
+                                        <div class="box">
+                                            <h4>Action</h4>
+                                            ${table.seats.map(seat => `
+                                                                                                                                        ${(!seat.guest) ? `
+                                                <p><a href="#" class="remove-btn-css" id="openGuestModal2" data-tableid="${seat.id_table}" data-id="${seat.id}">Select Guest</a></p>
+                                                ` : `
+                                                <p><a href="#" class="remove-btn-css" id="removeGuest" data-tableid="${seat.id_table}" data-id="${seat.id}" data-idguest="${seat.id_guest}">Remove Guest</a></p>
+                                                `}
+                                                                                                                                        `).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            `);
+                        });
+                    } else {
+                        totalTables = 0;
+                        $("#tableAppend").empty();
+                        response.table.forEach(table => {
+                            console.log("table.guests",table.guests);
+                            totalTables++;
+                            $("#tableAppend").append(`
+                                    <div class="td-boxes-down-align">
+                                        <div class="top-box">
+                                            <div class="box">
+                                                <h5>${table.name}</h5>
+                                            </div>
+                                            <div class="box">
+                                                <h5>${table.number}</h5>
+                                            </div>
+                                            <div class="box">
+                                                ${(table.guest_number - table.guests.length <= 0) ? `
+                                                                                                                                                                                                                                                                            <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                                                                        ` : `
+                                                                                                                                                                                                                                                                            <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
+                                                                                                                                                                                                                                                                        `}
+                                            </div>
+
+                                            <div class="box">
+                                                <div class="three-action-align">
+                                                    <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
+                                                            alt=""></button>
+                                                    <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
+                                                            alt=""></button>
+                                                    <button class="{{ $isCorporate == 1 ? 'd-none' : '' }}" id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
+                                                            alt=""></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-box">
+                                            <div class="box">
+                                                ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
+                                                ${table.guests.map(guest => `
+                                                                                                                                                                                                                                                                                                <p>${guest.name}</p>
+                                                                                                                                                                                                                                                                                            `).join('')}
+                                            </div>
+                                            <div class="box">
+                                                ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
+                                                ${table.guests.map(guest => `
+                                                                                                                                                                                                                                                                                                <p>${guest.meal_name}</p>
+                                                                                                                                                                                                                                                                                            `).join('')}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                `);
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    toastr.error('Failed to add gift. Please try again.');
+                }
+            });
+        }
+
         $(document).ready(function () {
             // Search function
             $('#guestSearchInput').on('keyup', function () {
@@ -1317,146 +1459,7 @@
         });
 
 
-        function getTable() {
-            $.ajax({
-                url: "{{ route('panel.event.get.tables', ['id' => $eventId]) }}",
-                type: 'GET',
-                success: function(response) {
-                    let isCorporate = {{ $isCorporate }};
 
-                    if (isCorporate == 1) {
-
-                        $("#tableAppend").empty();
-                        response.table.forEach(table => {
-                            $("#tableAppend").append(`
-                                <div class="td-boxes-down-align">
-                                    <div class="top-box">
-                                        <div class="box">
-                                            <h5>${table.name}</h5>
-                                        </div>
-                                        <div class="box">
-                                            <h5>${table.number}</h5>
-                                        </div>
-                                        <div class="box">
-                                            ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                                                        <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                    ` : `
-                                                                                                                                                                        <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                    `}
-                                        </div>
-                                        <div class="box">
-                                            <div class="three-action-align">
-                                                <button class="edit-table-btn" data-id="${table.id_table}">
-                                                    <img src="{{ asset('assets/images/edit-icon.png') }}" alt="">
-                                                </button>
-                                                <button class="delete-table-btn" data-id="${table.id_table}">
-                                                    <img src="{{ asset('assets/images/delet-icon.png') }}" alt="">
-                                                </button>
-                                                ${(isCorporate == 1) ? '' : `
-                                                                                                                                                                    <button id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}">
-                                                                                                                                                                        <img src="{{ asset('assets/images/Invitations.png') }}" alt="">
-                                                                                                                                                                    </button>
-                                                                                                                                                                `}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="bottom-box">
-                                        <div class="box">
-                                            <h4>Seat Name</h4>
-                                            ${table.seats.map(seat => `
-                                                                                                                                        <p>${seat.seat_name}</p>
-                                                                                                                                    `).join('')}
-                                        </div>
-                                        <div class="box">
-                                            <h4>Guest Name</h4>
-                                            ${table.seats.map(seat => `
-                                                                                                                                        ${(seat.guest) ? `<p>${seat.guest.name}</p>
-                                                ` : `
-                                                <p>No Guest Assigned</p>
-                                                `}
-                                                                                                                                        `).join('')}
-                                        </div>
-                                        <div class="box">
-                                            <h4>Email</h4>
-                                            ${table.seats.map(seat => `
-                                                                                                                ${(seat.guest && seat.guest.email) ? `<p>${seat.guest.email}</p>` : `<p>No Email Provided</p>`}
-                                                                                                                     `).join('')}
-                                        </div>
-                                        <div class="box">
-                                            <h4>Action</h4>
-                                            ${table.seats.map(seat => `
-                                                                                                                                        ${(!seat.guest) ? `
-                                                <p><a href="#" class="remove-btn-css" id="openGuestModal2" data-tableid="${seat.id_table}" data-id="${seat.id}">Select Guest</a></p>
-                                                ` : `
-                                                <p><a href="#" class="remove-btn-css" id="removeGuest" data-tableid="${seat.id_table}" data-id="${seat.id}" data-idguest="${seat.id_guest}">Remove Guest</a></p>
-                                                `}
-                                                                                                                                        `).join('')}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            `);
-                        });
-                    } else {
-                        totalTables = 0;
-                        $("#tableAppend").empty();
-                        response.table.forEach(table => {
-                            totalTables++;
-                            $("#tableAppend").append(`
-                                    <div class="td-boxes-down-align">
-                                        <div class="top-box">
-                                            <div class="box">
-                                                <h5>${table.name}</h5>
-                                            </div>
-                                            <div class="box">
-                                                <h5>${table.number}</h5>
-                                            </div>
-                                            <div class="box">
-                                                ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                                                                                                                                                            <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                                                                                                                        ` : `
-                                                                                                                                                                                                                                                                            <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                                                                                                                        `}
-                                            </div>
-
-                                            <div class="box">
-                                                <div class="three-action-align">
-                                                    <button class="edit-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/edit-icon.png') }}"
-                                                            alt=""></button>
-                                                    <button class="delete-table-btn" data-id="${table.id_table}"> <img src="{{ asset('assets/images/delet-icon.png') }}"
-                                                            alt=""></button>
-                                                    <button class="{{ $isCorporate == 1 ? 'd-none' : '' }}" id="openGuestModal" data-id="${table.id_table}" data-tableName="${table.name}" data-tableGuests="${table.guest_number}" data-tableGuestLength="${table.guests.length}"> <img src="{{ asset('assets/images/Invitations.png') }}"
-                                                            alt=""></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="bottom-box">
-                                            <div class="box">
-                                                ${(table.guests.length > 0) ? `<h4> Sitter</h4>` : ''}
-                                                ${table.guests.map(guest => `
-                                                                                                                                                                                                                                                                                                <p>${guest.name}</p>
-                                                                                                                                                                                                                                                                                            `).join('')}
-                                            </div>
-                                            <div class="box">
-                                                ${(table.guests.length > 0) ? `<h4> Meal</h4>` : ''}
-                                                ${table.guests.map(guest => `
-                                                                                                                                                                                                                                                                                                <p>${guest.meal_name}</p>
-                                                                                                                                                                                                                                                                                            `).join('')}
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <hr>
-                                `);
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    toastr.error('Failed to add gift. Please try again.');
-                }
-            });
-        }
 
         $(document).on('click', '.edit-table-btn', function() {
             const tableId = $(this).data('id'); // Assuming the button has a data-id attribute

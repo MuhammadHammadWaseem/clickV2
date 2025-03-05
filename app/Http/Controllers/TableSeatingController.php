@@ -34,7 +34,7 @@ class TableSeatingController extends Controller
         $tables = Table::where('id_event', $eventId)->orderBy('number')->get();
         foreach ($tables as $t) {
             // $t->guests= Guest::where('id_table',$t->id_table)->where('declined','=' , NULL)->get();
-            $t->guests = DB::select('SELECT guests.*, meals.name AS meal_name FROM guests LEFT JOIN meals ON guests.id_meal = meals.id_meal WHERE id_table = ? AND declined IS NULL', [$t->id_table]);
+            $t->guests = DB::select('SELECT guests.*, meals.name AS meal_name FROM guests LEFT JOIN meals ON guests.id_meal = meals.id_meal WHERE id_table = ? AND (declined IS NULL OR declined = 0)', [$t->id_table]);
             $t->seats = DB::table('seats')->where('seats.id_table', $t->id_table)->get();
             foreach ($t->seats as $seats) {
                 $seats->guest = Guest::where('id_guest', $seats->id_guest)->first();
@@ -45,7 +45,6 @@ class TableSeatingController extends Controller
 
             }
         }
-
         return response()->json([
             'success' => true,
             'table' => $tables,
@@ -57,7 +56,7 @@ class TableSeatingController extends Controller
         // $guests = DB::select('
         // SELECT *
         //     FROM guests
-        //     WHERE (id_event = ' . $id . ') AND 
+        //     WHERE (id_event = ' . $id . ') AND
         //     (
         //         ((checkin = 1) AND declined IS NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
         //         (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined IS NULL))
@@ -68,23 +67,23 @@ class TableSeatingController extends Controller
         $guests = DB::select('
             SELECT *
             FROM guests
-            WHERE 
+            WHERE
                 id_event = :event_id
                 AND (
                     (
-                        checkin = 1 
-                        AND declined IS NULL 
+                        checkin = 1
+                        AND declined IS NULL
                         AND (
-                            id_meal IS NOT NULL 
+                            id_meal IS NOT NULL
                             OR opened = 2
                         )
-                    ) 
-                    OR 
+                    )
+                    OR
                     (
                         (
-                            opened = 2 
+                            opened = 2
                             AND id_meal IS NOT NULL
-                        ) 
+                        )
                         AND (
                             declined IS NULL OR declined = 0
                         )
@@ -273,7 +272,7 @@ class TableSeatingController extends Controller
             //return $old2;
             if (count($old2) > 0) {
                 if ($old2[0]->id_guest != 0) {
-                    //DB::update("update guests set id_table = 0 where id =".$old2[0]->id_guest); 
+                    //DB::update("update guests set id_table = 0 where id =".$old2[0]->id_guest);
                     $guestOld = Guest::where('id_guest', $old2[0]->id_guest)->first();
                     if ($guestOld) {
                         $guestOld->id_table = 0;
