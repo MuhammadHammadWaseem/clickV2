@@ -632,7 +632,7 @@
                     </div>
                     <div class="modal-table-type-content">
                         <div class="search-box">
-                            <input type="text" id="guestSearchInput" placeholder="Search by Guest or Main Guest">
+                            <input type="text" id="guestSearchInput" placeholder="{{ __('guestlistpage.search_main_guest') }}">
                         </div>
 
                         <div class="main-heading">
@@ -873,20 +873,20 @@
             // Search function
             $('#guestSearchInput').on('keyup', function () {
                 const searchText = $(this).val().toLowerCase();
-            
+
                 // Loop through each guest row
                 $('#sub-main-content .sub-main-content').filter(function () {
                     // Get guest name and main guest name
                     const guestName = $(this).find('li').eq(0).text().toLowerCase();
                     const mainGuestName = $(this).find('li').eq(3).text().toLowerCase();
-                
+
                     // Check if either name contains the search text
                     const isMatch =
                         guestName.includes(searchText) || mainGuestName.includes(searchText);
-                
+
                     // Show or hide based on the match
                     $(this).toggle(isMatch);
-                
+
                     if (isMatch && mainGuestName) {
                         // Show other rows with the same main guest
                         const mainGuestRows = $(`#sub-main-content .sub-main-content`)

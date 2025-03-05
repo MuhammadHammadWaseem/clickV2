@@ -173,4 +173,9 @@ return[
     'select_number' => 'Select Number',
     'custom_number' => 'Custom Number',
     'enter_custom_number' => 'Enter Custom Number',
+    'search_main_guest' => 'Search by Main Guest or Members...',
+    'checked_in_c' => 'Checked-In',
+    'declined_c' => 'Declined',
+    'invite_guest_c' => 'Main Guests',
+    'invite_membrs_c' => 'Invited Members',
 ];

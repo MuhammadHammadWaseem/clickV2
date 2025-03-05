@@ -172,4 +172,10 @@ return[
     'select_number' => 'Sélectionner un numéro',
     'custom_number' => 'Numéro personnalisé',
     'enter_custom_number' => 'Entrez un numéro personnalisé',
+    'search_main_guest' => 'recherche par invité principal ou membre',
+    'checked_in_c' => 'enregistré à la réception',
+    'declined_c' => 'refusé',
+    'invite_guest_c' => 'Principal invités',
+    'invite_membrs_c' => 'membres invités',
+
 ];
