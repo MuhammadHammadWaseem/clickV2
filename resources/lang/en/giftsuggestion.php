@@ -22,6 +22,8 @@ return[
 'message_2' => 'so guests won\'t have to carry an envelope with money all day and nothing can be lost.',
 'title_suggest' => 'Gift Suggestions Details',
 'description_suggest' => 'After you decide what your guests’ choices are with the reception hall, here you can give the choice.',
+'name_gift' => 'Gift name (maximum 25 characters)',
+'add_link' => 'Add a link',
 
 'paypal' => 'PayPal',
 'stripe' => 'Stripe',

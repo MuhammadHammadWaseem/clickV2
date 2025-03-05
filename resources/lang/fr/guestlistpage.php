@@ -88,7 +88,7 @@ return[
     'name' => 'Nom',
     'enter_name' => 'Entrer le nom',
     'email' => 'E-mail',
-    'enter_email' => 'Entrer l\'e-mail',
+    'enter_email' => 'Entrer le courielle',
     'phone' => 'Téléphone',
     'phone_placeholder' => 'CODE DU PAYS PUIS NUMÉRO',
     'whatsapp' => 'WhatsApp',

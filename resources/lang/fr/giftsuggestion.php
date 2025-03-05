@@ -22,6 +22,8 @@ return [
     'message_2' => 'Ainsi, les invités n\'auront pas à porter une enveloppe contenant de l\'argent toute la journée et rien ne pourra être perdu.',
     'title_suggest' => 'Détails des Suggestions de Cadeaux',
     'description_suggest' => 'Après avoir décidé des choix de vos invités avec la salle de réception, vous pouvez leur donner le choix.',
+    'name_gift' => 'Nom du cadeau (maximum 25 caractères)',
+    'add_link' => 'Ajouter un lien',
 
     'paypal' => 'PayPal',
     'stripe' => 'Stripe',

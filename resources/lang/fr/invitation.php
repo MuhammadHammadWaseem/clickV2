@@ -46,7 +46,7 @@ return [
     'undo' => 'Annuler',
     'redo' => 'Rétablir',
     'add_card' => 'Ajouter une Carte',
-    'template' => 'Verso',
+    'template' => 'Modèles',
     'add_text' => 'Ajouter du Texte',
     'add_sticker' => 'Ajouter un Autocollant',
     'add_image' => 'Ajouter une Image',

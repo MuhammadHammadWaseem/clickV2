@@ -202,7 +202,7 @@
                                     {{ __('giftsuggestion.moneygram') }}</option>
                             </select>
                         </div>
-                        
+
                         <input type="text" id="transferLink" placeholder="Enter link" required
                             value="{{ $event->transfer_link }}">
                         <button class="t-btn btn btn-primary" id="saveTransferBtn"
@@ -337,10 +337,10 @@
                     <div class="main-form-box">
                         <form id="addGiftForm">
                             @csrf
-                            <input type="text" class="form-control" placeholder="Gift Name (Max 25 Characters)"
+                            <input type="text" class="form-control" placeholder="{{ __('giftsuggestion.name_gift') }}"
                                 name="name" required>
-                            <input type="url" class="form-control" placeholder="Add Link" name="link" required>
-                            <textarea class="form-control" placeholder="Description" name="description" required></textarea>
+                            <input type="url" class="form-control" placeholder="{{ __('giftsuggestion.add_link') }}" name="link" required>
+                            <textarea class="form-control" placeholder="{{ __('giftsuggestion.description_suggest') }}" name="description" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
