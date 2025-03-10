@@ -1302,6 +1302,7 @@ function getTable() {
             data.forEach(guest => {
                 console.log(guest.mainguest);
                 const isChecked = guest.id_table === tableId ? 'checked' : '';
+                console.log(guest.id_table , tableId,isChecked);
                 $("#sub-main-content").append(`
                 <div class="sub-main-content">
                     <label for="guest-checkbox-${guest.id_guest}" style="display: block !important;">
