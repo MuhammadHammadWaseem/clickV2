@@ -1301,7 +1301,7 @@ function getTable() {
         function appendGuests(data) {
             data.forEach(guest => {
                 console.log(guest.mainguest);
-                const isChecked = guest.id_table === tableId ? 'checked' : '';
+                const isChecked = guest.id_table == tableId ? 'checked' : '';
                 console.log(guest.id_table , tableId,isChecked);
                 $("#sub-main-content").append(`
                 <div class="sub-main-content">
