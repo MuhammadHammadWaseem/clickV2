@@ -1014,7 +1014,7 @@
         //       if (response) {
         //         console.log('Data Received:', response.data);
         //         const file = response.data;
-        fetch(`/Json/${file}?t=${new Date().getTime()}`)
+        fetch(`/Json/${file}`)
             .then((res) => res.json())
             .then(function(data) {
                 const jsonData = data;
@@ -1041,25 +1041,25 @@
 
     var file = $('#id_event').val();
 
-    // fetch(`/Json/${file}?t=${new Date().getTime()}`)
-    //     .then((res) => res.json())
-    //     .then(function(data) {
-    //         const jsonData = data;
-    //         console.log("aa",jsonData);
+    fetch(`/Json/${file}`)
+        .then((res) => res.json())
+        .then(function(data) {
+            const jsonData = data;
+            console.log("aa",jsonData);
 
-    //         // Assuming 'canv' is your canvas element
-    //         if (canv) {
-    //             canv.clear();
-    //             canv.loadFromJSON(jsonData, function() {
-    //                 // generateCanvasImageFromJSON(jsonData);
-    //                 canv.renderAll();
-    //             });
-    //         }
+            // Assuming 'canv' is your canvas element
+            if (canv) {
+                canv.clear();
+                canv.loadFromJSON(jsonData, function() {
+                    // generateCanvasImageFromJSON(jsonData);
+                    canv.renderAll();
+                });
+            }
 
-    //         // Assuming you want to display the JSON data in a div with id 'letter'
-    //         const letterDiv = document.getElementById("letter");
-    //         if (letterDiv) {
-    //             letterDiv.textContent = JSON.stringify(jsonData, null, 2); // Display JSON data
-    //         }
-    //     });
+            // Assuming you want to display the JSON data in a div with id 'letter'
+            const letterDiv = document.getElementById("letter");
+            if (letterDiv) {
+                letterDiv.textContent = JSON.stringify(jsonData, null, 2); // Display JSON data
+            }
+        });
 </script>
