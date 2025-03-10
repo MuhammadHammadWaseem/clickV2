@@ -154,6 +154,7 @@ Route::group(['as' => 'panel.'], function () {
             Route::get('{id}/guests-tables', [TableSeatingController::class, 'index'])->name('guests.index')->middleware('check.event.package:Table Seating Arrangements');
             Route::get('{id}/get-tables', [TableSeatingController::class, 'showTables'])->name('get.tables');
             Route::get('{id}/get-table-guest', [TableSeatingController::class, 'showTableGuest'])->name('get.table.guest');
+            Route::get('{id}/get-reminder-guest', [TableSeatingController::class, 'showReminderGuest'])->name('get.reminder.guest');
             Route::get('{id}/get-table-data', [TableSeatingController::class, 'showTableData'])->name('get.table.data');
             Route::post('{id}/store-table', [TableSeatingController::class, 'storeTables'])->name('store.table');
             Route::post('{id}/edit-table', [TableSeatingController::class, 'editTable'])->name('edit.table');

@@ -74,6 +74,70 @@ class TableSeatingController extends Controller
                         checkin = 1
                         AND declined IS NULL
                         AND (
+                            (id_meal IS NOT NULL AND id_meal != 0)
+                            OR opened = 2
+                        )
+                    )
+                    OR
+                    (
+                        (
+                            opened = 2
+                            AND (id_meal IS NOT NULL AND id_meal != 0)
+                        )
+                        AND (
+                            declined IS NULL OR declined = 0
+                        )
+                    )
+                )
+                AND opened != 0
+            ORDER BY id_table ASC
+        ', ['event_id' => $id]);
+
+        foreach ($guests as $guest) {
+
+            if ($guest->id_table != 0) {
+                $table = Table::where('id_table', $guest->id_table)->first();
+                if ($table)
+                    $guest->tablename = $table->name;
+            }
+            if ($guest->id_meal != null) {
+                $meal = Meal::where('id_meal', $guest->id_meal)->first();
+                if ($meal)
+                    $guest->mealName = $meal->name;
+            }
+            $guest->mainGuest = Guest::where('id_guest', $guest->parent_id_guest)->select('name')->first();
+        }
+
+        return response()->json([
+            'success' => true,
+            'guests' => $guests,
+            'message' => 'Guests Get Successfully!'
+        ]);
+    }
+
+    public function showReminderGuest($id)
+    {
+        // $guests = DB::select('
+        // SELECT *
+        //     FROM guests
+        //     WHERE (id_event = ' . $id . ') AND
+        //     (
+        //         ((checkin = 1) AND declined IS NULL AND ((id_meal IS NOT NULL) OR (opened = 2))) OR
+        //         (((opened = 2) OR (id_meal IS NOT NULL)) AND (declined IS NULL))
+        //     ) AND opened != 0
+        //     ORDER BY id_table ASC
+        // ');
+
+        $guests = DB::select('
+            SELECT *
+            FROM guests
+            WHERE
+                id_event = :event_id
+                AND (
+                    (
+                        checkin = 1
+                        AND declined IS NULL
+                        AND (
                             id_meal IS NOT NULL
                             OR opened = 2
                         )

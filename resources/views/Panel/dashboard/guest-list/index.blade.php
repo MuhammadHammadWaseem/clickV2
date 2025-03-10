@@ -1167,7 +1167,7 @@ function getTable() {
 
         function appendReminderGuests() {
             $.ajax({
-                url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
+                url: "{{ route('panel.event.get.reminder.guest', ['id' => $eventId]) }}",
                 type: 'GET',
                 success: function(response) {
                     response.guests.forEach(guest => {
