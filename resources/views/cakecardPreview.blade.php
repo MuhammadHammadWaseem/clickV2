@@ -191,7 +191,7 @@
         //       if (response) {
         //         //console.log('Data Received:', response.data);
         //         const file = response.data;
-        fetch(`/Json/${file}`)
+        fetch(`/Json/${file}?t=${new Date().getTime()}`)
             .then((res) => res.json())
             .then(function(data) {
                 const jsonData = data;
@@ -218,7 +218,7 @@
 
     var file = $('#id_event').val();
 
-    fetch(`/Json/${file}`)
+    fetch(`/Json/${file}?t=${new Date().getTime()}`)
         .then((res) => res.json())
         .then(function(data) {
             const jsonData = data;

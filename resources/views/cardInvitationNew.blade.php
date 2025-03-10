@@ -1041,7 +1041,7 @@
 
     var file = $('#id_event').val();
 
-    // fetch(`/Json/${file}`)
+    // fetch(`/Json/${file}?t=${new Date().getTime()}`)
     //     .then((res) => res.json())
     //     .then(function(data) {
     //         const jsonData = data;
