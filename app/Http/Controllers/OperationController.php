@@ -620,7 +620,7 @@ class OperationController extends Controller
                                                                     <p style="font-size:14px;text-align:center">' . $formattedDate . '</p>
                                                                     <p style="margin-top:20px"></p>
                                                                     <p style="text-align:center">
-                                                                    <a href="' . env('APP_URL') . '/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '"
+                                                                    <a href="' . config('app.url') . '/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '"
                                                                     style="text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
                                                                     target="_blank"
                                                                     onmouseover="this.style.backgroundColor=\'#333333\'; this.style.boxShadow=\'0 0 5px rgba(0, 0, 0, 0.5)\';"
@@ -628,9 +628,9 @@ class OperationController extends Controller
                                                                     Invitation</a>
                                                                     </p>
                                                                     <p style="text-align:center"><a
-                                                                            href="' . env('APP_URL') . '/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '"
+                                                                            href="' . config('app.url') . '/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guest->name . '/' . $lang . '"
                                                                             target="_blank"><img
-                                                                                src="' . env('APP_URL') . asset('card-images') . '/' . $event->id_event . '.png"
+                                                                                src="' . config('app.url') . asset('card-images') . '/' . $event->id_event . '.png"
                                                                                 border="0" style="margin-bottom:20px;max-width:100%"
                                                                                 class="CToWUd" data-bit="iit"></a>
                                                                     </p>
@@ -638,7 +638,7 @@ class OperationController extends Controller
                                                                         This email is personalized for you. Please do not forward.</p> <br />
 
                                                                     <p style="font-style:italic;font-size:13px;text-align:center">
-                                                                    <a href="' . env('APP_URL') . '/check-in/' . $cardId->id_card . '/' . $guest->code . '/' . $lang . '" style="margin-left:5px;color:#2bb573;text-decoration:none" target="_blank">
+                                                                    <a href="' . config('app.url') . '/check-in/' . $cardId->id_card . '/' . $guest->code . '/' . $lang . '" style="margin-left:5px;color:#2bb573;text-decoration:none" target="_blank">
                                                                     Check In</a>
                                                                     </p>
                                                                     <table width="70%" cellpadding="0" cellspacing="0"
