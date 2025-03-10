@@ -838,8 +838,7 @@
                 <div class="box-styling quick-actions">
                     <div class="row">
                         <div class="col-12 text-end totals">
-                            <p id="guestMemberTotal">TOTAL: ( {{ __('guestlistpage.members') }} -
-                                {{ __('guestlistpage.guests') }})</p>
+                            <p id="guestMemberTotal">TOTAL: ({{ __('guestlistpage.guests') }} - {{ __('guestlistpage.members') }})</p>
                         </div>
 
 
@@ -2065,10 +2064,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     // Update totals with a line break
                     $('#guestMemberTotal').html(
                         `TOTAL: ${totalGuests + totalMembers} ${br}
-                        ( {{ __('guestlistpage.members') }} ${totalGuests}  -
-                                {{ __('guestlistpage.guests') }}
-                                ${totalMembers}
-                        )
+                        ( {{ __('guestlistpage.guests') }} ${totalGuests}  -{{ __('guestlistpage.members') }} ${totalMembers} )
                         `
                     );
 
