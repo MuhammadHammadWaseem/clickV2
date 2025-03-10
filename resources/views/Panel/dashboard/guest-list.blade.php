@@ -2322,6 +2322,13 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 if (guest.opened == 2) {
                                     attendingGuestsCount++; // Count attending guest
                                 }
+
+                                guest.members.forEach(member => {
+                                    if (member.opened == 2) {
+                                        attendingMembersCount++; // Count attending members
+                                    }
+                                });
+
                                 var br = '<br>';
                                 // Update the totals display with separate checked-in counts for guests and members
                                 $('#guestMemberTotal').html(
@@ -2785,22 +2792,28 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         $("#check_all").attr("data-guests", JSON.stringify(guests));
                         var declinedGuestsCount = 0;
                         var declinedMembersCount = 0;
+                        var br = '<br>';
+                                $('#guestMemberTotal').html(
+                                    `TOTAL: ${declinedGuestsCount + declinedMembersCount} ${br} (guests ${declinedGuestsCount} - members ${declinedMembersCount})`
+                                );
                         guests.forEach(function(guest) {
-                            if (guest.declined == 1 || guest.members.some(member => member.declined ==
-                                    1)) {
-                                // Show guest and their members if the guest is checked in
-                                var declinedCount = guests.reduce(function(count, guest) {
-                                    return count + (guest.declined == 1 ? 1 : 0) +
-                                        (guest.members ? guest.members.filter(member => member
-                                            .declined == 1).length : 0);
-                                }, 0);
+                            if (guest.declined == 1 || guest.members.some(member => member.declined ==1)) {
 
+                                // Show guest and their members if the guest is checked in
+                                // var declinedCount = guests.reduce(function(count, guest) {
+                                //     return count + (guest.declined == 1 ? 1 : 0) +
+                                //         (guest.members ? guest.members.filter(member => member
+                                //             .declined == 1).length : 0);
+                                // }, 0);
+                                
                                 // Update totals
-                                if (guest.members && guest.members.some(member => member.declined ==
-                                        1)) {
-                                    declinedMembersCount += guest.members.filter(member => member
-                                        .declined == 1).length;
+                                if (guest && guest.declined == 1) {
+                                    declinedGuestsCount += 1;
                                 }
+                                if (guest.members && guest.members.some(member => member.declined ==1)) {
+                                    declinedMembersCount += guest.members.filter(member => member.declined == 1).length;
+                                }
+
                                 var br = '<br>';
                                 $('#guestMemberTotal').html(
                                     `TOTAL: ${declinedGuestsCount + declinedMembersCount} ${br} (guests ${declinedGuestsCount} - members ${declinedMembersCount})`
