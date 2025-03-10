@@ -954,7 +954,6 @@ function getTable() {
                         totalTables = 0;
                         $("#tableAppend").empty();
                         response.table.forEach(table => {
-                            console.log("table.guests",table.guests);
                             totalTables++;
                             $("#tableAppend").append(`
                                     <div class="td-boxes-down-align">
@@ -1199,7 +1198,6 @@ function getTable() {
                             uniqueIds.push(guest.id_guest);
                         }
                     });
-                    console.log("ss", uniqueIds);
 
                     $.ajax({
                         url: '{{ route('sendMealInvite') }}',
@@ -1266,7 +1264,6 @@ function getTable() {
                 url: "{{ route('panel.event.get.table.guest', ['id' => $eventId]) }}",
                 type: 'GET',
                 success: function(response) {
-                    console.log(response.guests);
                     $("#sub-main-content2").empty();
                     $("#closeSetTableModal2").click();
                     response.guests.forEach(guest => {
@@ -1300,9 +1297,7 @@ function getTable() {
 
         function appendGuests(data) {
             data.forEach(guest => {
-                console.log(guest.mainguest);
                 const isChecked = guest.id_table == tableId ? 'checked' : '';
-                console.log(guest.id_table , tableId,isChecked);
                 $("#sub-main-content").append(`
                 <div class="sub-main-content">
                     <label for="guest-checkbox-${guest.id_guest}" style="display: block !important;">
@@ -1336,8 +1331,6 @@ function getTable() {
             var seatId = $(this).data('seatid');
             var tableId = $(this).data('tableid');
             var guestId = $(this).data('guest-id');
-
-            console.log(seatId, tableId, guestId);
 
             $.ajax({
                 url: '{{ route('panel.event.settablesseat') }}',
@@ -1514,9 +1507,7 @@ function getTable() {
         });
 
         function guestCanSelectSeats(val) {
-            console.log("guestCanSelectSeats", val);
             var value = parseInt(val);
-            console.log("eventId", window.location.pathname.split("/")[2]);
             $.ajax({
                 type: "POST",
                 url: "{{ url('guestCanSelectSeats') }}",
@@ -1528,7 +1519,6 @@ function getTable() {
                     guestCanSelectSeats: value,
                 },
                 success: function(data) {
-                    console.log(data.guestCanSelectSeats);
                     if (data.guestCanSelectSeats == 1) {
                         var successModal = new bootstrap.Modal(document.getElementById(
                             'exampleModalCenter100'));
