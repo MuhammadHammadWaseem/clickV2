@@ -489,7 +489,7 @@ class OperationController extends Controller
 
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABO1l27v9q1oUuJeaO6tOVInp7ZAER2ynoNkqMyz9Urj7AD0FHLygxx573NU7XjpPmZBFmejtJQzkZA0bBYeFuPVKELAE5ZC9qC9txKFFEPpm5FbMs2vZAoHVSdrfybZBw1wu8J5Eiizoa6txwodgXQlVwtQMUs4W7CC4stuaz0rGtExMxVIiYh1HbzsVUZBNfCYVJADMiEtc7W1U', 'Content-Type: application/json'));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization:Bearer EAAJNk9TfhxABOyiE5t5N5BVIZBZCLCtQDXEqZCD9T8q4N7lUK9sE1DyMw11YMteUowLKKQBs6eszDod42etpO2XW1qeW30alZCUFiTbnhxYva3xfabqPag8ZCoYZAeYuvlnQyc1WI2jILxe62Sc8HOa24Ctkdk8vRU8QCixUPLiGykCbeIxzg16eugmNAUySJ0nP6Tw9bXbZB83IvoshbSPLRCb', 'Content-Type: application/json'));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $data3 = [
 
@@ -1063,7 +1063,7 @@ class OperationController extends Controller
                     $curl,
                     CURLOPT_HTTPHEADER,
                     array(
-                        'Authorization: Bearer EAAJNk9TfhxABO1l27v9q1oUuJeaO6tOVInp7ZAER2ynoNkqMyz9Urj7AD0FHLygxx573NU7XjpPmZBFmejtJQzkZA0bBYeFuPVKELAE5ZC9qC9txKFFEPpm5FbMs2vZAoHVSdrfybZBw1wu8J5Eiizoa6txwodgXQlVwtQMUs4W7CC4stuaz0rGtExMxVIiYh1HbzsVUZBNfCYVJADMiEtc7W1U',
+                        'Authorization: Bearer EAAJNk9TfhxABOyiE5t5N5BVIZBZCLCtQDXEqZCD9T8q4N7lUK9sE1DyMw11YMteUowLKKQBs6eszDod42etpO2XW1qeW30alZCUFiTbnhxYva3xfabqPag8ZCoYZAeYuvlnQyc1WI2jILxe62Sc8HOa24Ctkdk8vRU8QCixUPLiGykCbeIxzg16eugmNAUySJ0nP6Tw9bXbZB83IvoshbSPLRCb',
                         'Content-Type: application/json'
                     )
                 );
