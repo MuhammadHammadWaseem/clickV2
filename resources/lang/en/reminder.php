@@ -10,7 +10,7 @@ return[
 'subtitle' => 'Subtitle',
 'subtitle_placeholder' => 'Enter subtitle',
 'text' => 'Text',
-'upload_image' => 'Upload Image',
+'upload_image' => 'Upload Background',
 'text_placeholder' => 'Enter text',
 'save' => 'Save',
 'update_success' => 'Reminder Updated Successfully',

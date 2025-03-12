@@ -10,7 +10,7 @@ return [
     'subtitle' => 'Sous-titre',
     'subtitle_placeholder' => 'Entrez le sous-titre',
     'text' => 'Texte',
-    'upload_image' => 'Uploader une Image',
+    'upload_image' => 'Télécharger l\'arrière-plan',
     'text_placeholder' => 'Entrez le texte',
     'save' => 'Sauvegarder',
     'update_success' => 'Rappel Mis à Jour Avec Succès',
