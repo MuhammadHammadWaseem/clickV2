@@ -1524,7 +1524,7 @@
                     $scope.eg.whatsappguest = $scope.mygroup.whatsapp;
                     $scope.eg.notesguest = $scope.mygroup.notes;
                     $scope.eg.allergiesguest = $scope.mygroup.allergies;
-                    $scope.eg.idmealguest = $scope.mygroup.id_meal ? $scope.mygroup.id_meal : null;
+                    $scope.eg.idmealguest = $scope.mygroup.id_meal ? Number($scope.mygroup.id_meal) : null;
                     $scope.eg.membernumberguest = $scope.mygroup.members_number;
                     $scope.eg.parentidguest = $scope.mygroup.parent_id_guest;
                     $scope.eg.idguest = $scope.mygroup.id_guest;
