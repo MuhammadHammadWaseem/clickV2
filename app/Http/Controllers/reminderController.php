@@ -14,6 +14,7 @@ use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class reminderController extends Controller
 {
@@ -196,16 +197,42 @@ class reminderController extends Controller
 
                 if ($request->hasFile('aimage')) {
                     $image = $request->file('aimage');
-        
-                    // Ensure the directory exists
-                    $path = storage_path('app/public/uploads');
-                    if (!file_exists($path)) {
-                        mkdir($path, 0777, true); // Create directory if it does not exist
+                
+                    // Get user and event IDs
+                    $userId = auth()->id();
+                    $eventId = $request->idevent;
+                    
+                    // Define storage path
+                    $directory = "public/uploads/$userId/$eventId";
+                    $storagePath = storage_path("app/$directory");
+                
+                    // Ensure the directory exists using Laravel's built-in method
+                    if (!Storage::exists($directory)) {
+                        Storage::makeDirectory($directory);
                     }
-        
-                    // Move the file to storage with a fixed name
-                    $image->storeAs('public/uploads', 'acknowledgment.jpg');
+                
+                    // Retrieve event
+                    $event = Event::where('id_event', $eventId)->first();
+                
+                    // Delete the old image if it exists
+                    if ($event && $event->ack_image && Storage::exists("public/{$event->ack_image}")) {
+                        Storage::delete("public/{$event->ack_image}");
+                    }
+                
+                    // Generate a unique filename
+                    $filename = 'acknowledgment_' . time() . '.jpg';
+                
+                    // Store the new image
+                    $image->storeAs($directory, $filename);
+                
+                    // Save the new image path in the database
+                    if ($event) {
+                        $event->ack_image = "uploads/$userId/$eventId/$filename";
+                        $event->save();
+                    }
                 }
+                
+                
 
 
 
