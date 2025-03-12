@@ -72,6 +72,11 @@
                                                            font-size: 14px;
                                                            text-align: center;
                                                            color: white;"
+                                                           @else
+                                                           style="padding: 0px 15px 50px 0px;
+                                                                  font-family: 'Open Sans', Helvetica, Arial;
+                                                                  font-size: 14px;
+                                                                  text-align: center;"
                                                 @endif>
                                                 
                                                 
