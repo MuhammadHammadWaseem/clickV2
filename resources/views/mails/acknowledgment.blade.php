@@ -63,9 +63,9 @@
                                                            text-align: center;"
                                                 @endif> --}}
                                             
-                                                <td @if (!empty($event->ack_image) && file_exists(public_path($event->ack_image)))
+                                                <td @if (!empty($event->ack_image))
                                                     style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                                                           url('{{ asset($event->ack_image) }}') no-repeat center center;
+                                                           url('https://clickinvitation.com/{{ $event->ack_image }}') no-repeat center center;
                                                            background-size: cover;
                                                            padding: 0px 15px 50px 0px;
                                                            font-family: 'Open Sans', Helvetica, Arial;
@@ -78,6 +78,7 @@
                                                                   font-size: 14px;
                                                                   text-align: center;"
                                                 @endif>
+                                                
                                                 
                                                 
 
