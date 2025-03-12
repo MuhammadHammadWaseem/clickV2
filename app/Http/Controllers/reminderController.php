@@ -198,39 +198,29 @@ class reminderController extends Controller
                 if ($request->hasFile('aimage')) {
                     $image = $request->file('aimage');
                 
-                    // Get user and event IDs
                     $userId = auth()->id();
                     $eventId = $request->idevent;
-                    
-                    // Define storage path
-                    $directory = "public/uploads/$userId/$eventId";
-                    $storagePath = storage_path("app/$directory");
+                    $path = public_path("assets/uploads/$userId/$eventId");
                 
-                    // Ensure the directory exists using Laravel's built-in method
-                    if (!Storage::exists($directory)) {
-                        Storage::makeDirectory($directory);
-                    }
-                
-                    // Retrieve event
+                    // Delete old image if exists
                     $event = Event::where('id_event', $eventId)->first();
-                
-                    // Delete the old image if it exists
-                    if ($event && $event->ack_image && Storage::exists("public/{$event->ack_image}")) {
-                        Storage::delete("public/{$event->ack_image}");
+                    if ($event && !empty($event->ack_image) && file_exists(public_path($event->ack_image))) {
+                        unlink(public_path($event->ack_image));
                     }
                 
-                    // Generate a unique filename
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                
                     $filename = 'acknowledgment_' . time() . '.jpg';
+                    $image->move($path, $filename);
                 
-                    // Store the new image
-                    $image->storeAs($directory, $filename);
-                
-                    // Save the new image path in the database
                     if ($event) {
-                        $event->ack_image = "uploads/$userId/$eventId/$filename";
+                        $event->ack_image = "assets/uploads/$userId/$eventId/$filename";
                         $event->save();
                     }
                 }
+                
                 
                 
 
