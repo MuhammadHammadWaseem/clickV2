@@ -78,7 +78,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr>
+                                            {{-- <tr>
                                                 <td style="padding:0px 15px 50px 0px;font-family:"Open
                                                     Sans",Helvetica,Arial;font-size:14px;">
                                                     <center>
@@ -102,7 +102,7 @@
                                                     </a>
                                                 </center>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
 
                                             <tr>
                                                 <td
