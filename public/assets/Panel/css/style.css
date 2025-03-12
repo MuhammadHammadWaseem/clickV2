@@ -3461,3 +3461,380 @@ h5#exampleModalLongTitle {
 font-size: 20px;
 }
 }
+
+
+
+
+#txtTool h5 {
+  color: #7A7A7A !important;
+  font-size: 15px !important;
+  margin-bottom: 10px !important;
+  font-weight: 600 !important;
+  margin-top: 0px !important;
+}
+
+.other-editing-btn:hover {
+  color: white !important;
+  background-color: #c09d2a !important;
+}
+
+.three-things-align {
+  width: 100% !important;
+  padding: 0 15px;
+}
+
+#opacityRange2 {
+  width: -webkit-fill-available;
+}
+
+.color-picker-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  margin: 10px 0 !important;
+}
+
+label.color-picker-label {
+  margin: 0 !important;
+}
+
+.other-editing-btn {
+  background-color: #C9C9C9 !important;
+  color: #777777 !important;
+  font-size: 18px !important;
+  padding: 8px 25px !important;
+  border-radius: 10px !important;
+  transition: .3s !important;
+}
+
+.t-btn-styling {
+  background-color: #C09D2A !important;
+  border: 2px solid #AAAAAA !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+  display: block;
+  color: white;
+  transition: .3s;
+  font-size: 25px !important;
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.t-btn-styling:hover {
+  background-color: black !important;
+  border-color: black !important;
+  transition: .2s;
+
+}
+
+.btn-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.editing-options-box {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.font-color-styling input#colorPicker {
+  padding: 0 !important;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  background: transparent;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.font-color-styling input#colorPickersetting {
+  padding: 0 !important;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  background: transparent;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.font-color-styling input#canvasColor {
+  padding: 0 !important;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  background: transparent;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.font-color-styling h4 {
+  color: #7A7A7A;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  margin-top: 0px;
+}
+
+input#opacityRange {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.upload-container {
+  text-align: center;
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+.upload-container img {
+  width: 100px;
+  /* Adjust the size of the image */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.upload-container span {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Hide the actual file input */
+#uploadImage {
+  display: none;
+}
+
+
+.two-things-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+}
+
+.two-things-align div#txtTool .row img {
+  width: 100%;
+  height: 300px;
+}
+
+.two-things-align .two-btn-align {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.two-things-align .two-btn-align button {
+  margin: 0 !important;
+}
+
+.two-things-align div#txtTool {
+  height: 630px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 10px;
+  padding-top: 0px;
+  margin-top: 15px;
+}
+
+.two-outside-boxes .main-card-detaling-box {
+  height: 780px !important;
+}
+
+
+
+#editor .sidebaraddtext {
+  overflow-y: scroll;
+  height: 580px;
+  overflow-x: none !important;
+}
+
+#editor .sidebaraddtext::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+.two-outside-boxes {
+  margin-top: 20px
+}
+
+.two-outside-boxes .main-card-box {
+  height: 100%;
+}
+
+.edit-cards-boxes .card-styling-box a {
+  font-size: 12px !important;
+}
+
+
+#exampleModalCenter02 .modal-content form {
+  height: 500px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#exampleModalCenter02 .modal-content form::-webkit-scrollbar {
+  width: 5px;
+}
+
+#exampleModalCenter02 .modal-content {
+  border-radius: 15px;
+}
+
+
+
+
+@media only screen and (max-width: 1400px) {
+  .two-outside-boxes .main-card-box {
+      padding: 50px 20px !important;
+      position: relative;
+  }
+
+  .two-outside-boxes .main-card-detaling-box .text-styling-things ul {
+      display: flex;
+      column-gap: 30px;
+      flex-wrap: wrap;
+  }
+
+  .edit-cards-boxes .card-styling-box a {
+      text-align: center;
+
+  }
+
+  .two-outside-boxes {
+      column-gap: 20px !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .two-outside-boxes .main-card-box {
+      padding: 50px 10px !important;
+  }
+}
+
+
+
+@media only screen and (max-width: 991px) {
+  .edit-cards-boxes .card-styling-box {
+      width: 16.5% !important;
+  }
+
+  .edit-cards-boxes {
+      justify-content: center;
+  }
+
+  canvas#canvas {
+      width: 100% !important;
+  }
+
+  .two-outside-boxes .main-card-detaling-box {
+      padding: 15px !important;
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+  .edit-cards-boxes .card-styling-box {
+      width: 22% !important;
+  }
+
+  .edit-cards-boxes {
+      justify-content: center;
+  }
+
+}
+
+
+@media only screen and (max-width: 575px) {
+
+  .edit-cards-boxes {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: 10px;
+      row-gap: 10px;
+      justify-content: center;
+  }
+
+  .two-outside-boxes .main-card-box {
+      width: 100%;
+  }
+
+  .edit-cards-boxes {
+      column-gap: 10px !important;
+      row-gap: 10px !important;
+  }
+
+  .edit-cards-boxes .card-styling-box {
+      width: 30% !important;
+  }
+
+  .edit-cards-boxes .card-styling-box a {
+      height: 100px;
+      text-align: center !important;
+      font-size: 11px !important;
+  }
+
+  .box-styling .text p {
+      text-align: center !important;
+  }
+
+
+  #canvas {
+      position: absolute !important;
+      width: 388px !important;
+      height: 668px !important;
+      left: 0px !important;
+      top: 0px !important;
+      touch-action: none !important;
+      user-select: none !important;
+  }
+
+  .two-outside-boxes .main-card-box {
+      width: 100% !important;
+  }
+
+  #canvas {
+      position: absolute !important;
+      width: 280px !important;
+      height: 668px !important;
+      left: 0px !important;
+      top: 0px !important;
+      touch-action: none !important;
+      user-select: none !important;
+  }
+
+  .two-outside-boxes .main-card-box {
+      padding: 20px 10px !important;
+  }
+
+  .two-outside-boxes .main-card-box {
+      order: 2 !important;
+  }
+
+  #editor .sidebaraddtext {
+      overflow-y: scroll;
+      height: 580px;
+      overflow-x: none !important;
+      width: 100%;
+      padding-right: 5px;
+  }
+
+}

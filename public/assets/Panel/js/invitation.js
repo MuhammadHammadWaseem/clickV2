@@ -1490,6 +1490,21 @@ function sideimg1() {
 // }
 
 
+function sidebarbackaddimg() {
+
+  if(appLocale == "fr"){
+    document.querySelector("#dynamicHeading").innerText = "d'arrière-plan";
+  }else{
+    document.querySelector("#dynamicHeading").innerText = "Background Image";
+  }
+
+  document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
+  document.querySelector("#viewTemplates").style.display = "none";
+  document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "inline-block";
+  }
+
 
 function deleteSelected() {
   const obj = canv.getActiveObject();
@@ -1504,17 +1519,20 @@ function deleteImage() {
   canv.renderAll();
 }
 
+function showTxtTool() {
 
+  if(appLocale == "fr"){
+    document.querySelector("#dynamicHeading").innerText = "Options d'Édition";
+  }else{
+    document.querySelector("#dynamicHeading").innerText = "Editing Options";
+  }
 
-// function showTxtTool() {
-//   document.querySelector("#dynamicHeading").innerText = "Editing Options";
-
-//   document.querySelector(".sidebaraddtext").style.display = "inline-block";
-//   document.querySelector(".sidebaraddimg").style.display = "none";
-//   document.querySelector(".sidebar").style.display = "none";
-//   document.querySelector("#viewTemplates").style.display = "none";
-//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
-// }
+  document.querySelector(".sidebaraddtext").style.display = "inline-block";
+  document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
+  document.querySelector("#viewTemplates").style.display = "none";
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none";
+  }
 
 function increaseText() {
   var currentFontSize = selectedText.get("fontSize");
@@ -1893,16 +1911,21 @@ function stickerLoad(data) {
   document.getElementById("btnSearch").innerText = `Search`;
 
 }
-// function show() {
-//   document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
 
-//   sideshow.style.display = "inline-block";
+function show() {
+  if(appLocale == 'fr'){
+    document.querySelector("#dynamicHeading").innerText = "Personnaliser un autocollant";
+  }else{
+    document.querySelector("#dynamicHeading").innerText = "Customize a Sticker";
+  }
 
-//   document.querySelector("#viewTemplates").style.display = "none";
-//   document.querySelector(".sidebaraddimg").style.display = "none";
-//   document.querySelector(".sidebaraddtext").style.display = "none";
-//   document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
-// }
+  sideshow.style.display = "inline-block";
+
+  document.querySelector("#viewTemplates").style.display = "none";
+  document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+}
 
 function addStickerToCanvas(sticker) {
   fabric.Image.fromURL(
@@ -2468,6 +2491,22 @@ function closeSidebar() {
 
 // }
 
+function addTemplate() {
+
+  if(appLocale == "fr"){
+    document.querySelector("#dynamicHeading").innerText = "Personnalisez le modèle";
+  }else{
+    document.querySelector("#dynamicHeading").innerText = "Customize a Templates";
+  }
+
+  document.querySelector("#viewTemplates").style.display = "inline-block";
+  document.querySelector(".sidebaraddimg").style.display = "none";
+  document.querySelector(".sidebaraddtext").style.display = "none";
+  document.querySelector(".sidebar").style.display = "none";
+  document.querySelector("#sidebarbackgroundaddimg1").style.display = "none"
+
+  }
+
 function saveAnimation() {
   var id_animation = document.querySelector('input[name="id_animation"]:checked').value;
 
@@ -2744,6 +2783,24 @@ function toggleTwoSided(element) {
 //     handleJSONImport();
 //   }
 // }
+
+function toggleSide(element) {
+  if (element.id === 'front') {
+    if(appLocale == 'fr'){
+      $("#f_b_card").text("Recto");
+    }else{
+      $("#f_b_card").text("Front Card");
+    }
+      handleJSONImport();
+  } else if (element.id === 'back') {
+    if(appLocale == 'fr'){
+      $("#f_b_card").text("Verso");
+    }else{
+      $("#f_b_card").text("Back Card");
+    }
+      handleJSONImport();
+  }
+}
 
 
 function loadCanvasState(state) {
