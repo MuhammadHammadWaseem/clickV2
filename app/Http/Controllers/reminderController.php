@@ -267,8 +267,9 @@ class reminderController extends Controller
                 if ($event){
                     $ackImageUrl = null;
                     if (!empty($event->ack_image) && Storage::exists("public/$event->ack_image")) {
-                        $ackImageUrl = asset("storage/$event->ack_image");
+                        $ackImageUrl = url("storage/$event->ack_image"); // Use full URL
                     }
+
                     return view('mails.acknowledgment')->with('event', $event)->with('ackImageUrl', $ackImageUrl)->with('guest', $guest)->with('cardId', $cardId)->with('lang', $lang)->with('fake', 0);
                 }
                 else{
@@ -282,8 +283,9 @@ class reminderController extends Controller
             if ($event){
                 $ackImageUrl = null;
                     if (!empty($event->ack_image) && Storage::exists("public/$event->ack_image")) {
-                        $ackImageUrl = asset("storage/$event->ack_image");
+                        $ackImageUrl = url("storage/$event->ack_image"); // Use full URL
                     }
+
                 return view('mails.acknowledgment')->with('event', $event)->with('ackImageUrl', $ackImageUrl)->with('fake', 1);
             }
             else{
