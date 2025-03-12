@@ -1266,6 +1266,7 @@
                             }
                             $("#editNotes").text(response.notes);
                             $scope.selectedMeal = (response.id_meal == 0) ? null : response.id_meal;
+                            console.log($scope.selectedMeal);
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);
