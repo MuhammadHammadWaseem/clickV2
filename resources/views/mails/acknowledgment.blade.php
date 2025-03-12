@@ -48,11 +48,20 @@
                                             </tr>
                                             <tr>
                                                 <td @if ($imageUrl)
-                                                    style="background: url('{{ $imageUrl }}') no-repeat center center; background-size: cover;
-                                                        padding:0px 15px 50px 0px;font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-align:center;"
+                                                    style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ $imageUrl }}') no-repeat center center; 
+                                                        background-size: cover; 
+                                                        padding: 0px 15px 50px 0px; 
+                                                        font-family: 'Open Sans', Helvetica, Arial; 
+                                                        font-size: 14px; 
+                                                        text-align: center; 
+                                                        color: white;"
                                                 @else
-                                                    style="padding:0px 15px 50px 0px;font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-align:center;"
+                                                    style="padding: 0px 15px 50px 0px; 
+                                                        font-family: 'Open Sans', Helvetica, Arial; 
+                                                        font-size: 14px; 
+                                                        text-align: center;"
                                                 @endif>
+
                                                     <br>
                                                     <br>
                                                     <br>
