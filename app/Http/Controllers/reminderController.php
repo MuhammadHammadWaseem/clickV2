@@ -194,6 +194,19 @@ class reminderController extends Controller
             if ($request->has('mtext'))
                 $event->mtext = $request->mtext;
 
+                if ($request->hasFile('aimage')) {
+                    $image = $request->file('aimage');
+        
+                    // Ensure the directory exists
+                    $path = storage_path('app/public/uploads');
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true); // Create directory if it does not exist
+                    }
+        
+                    // Move the file to storage with a fixed name
+                    $image->storeAs('public/uploads', 'acknowledgment.jpg');
+                }
+
 
 
             // if ($request->photo) {

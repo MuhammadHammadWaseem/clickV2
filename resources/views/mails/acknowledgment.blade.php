@@ -12,6 +12,12 @@
 
 <body style="background:#fff;">
     <br><br>
+    
+    @php
+        $imagePath = 'storage/uploads/acknowledgment.jpg';
+        $fullPath = public_path($imagePath);
+        $imageUrl = asset($imagePath) . '?t=' . (file_exists($fullPath) ? filemtime($fullPath) : time());
+    @endphp
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tbody  width="100%">
@@ -41,8 +47,12 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:0px 15px 50px 0px;font-family:"Open
-                                                    Sans",Helvetica,Arial;font-size:14px; text-align:center;">
+                                                <td @if (file_exists($fullPath))
+                                                    style="background: url('{{ $imageUrl }}') no-repeat center center; background-size: cover;
+                                                        padding:0px 15px 50px 0px;font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-align:center;"
+                                                @else
+                                                    style="padding:0px 15px 50px 0px;font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-align:center;"
+                                                @endif>
                                                     <br>
                                                     <br>
                                                     <br>
@@ -75,10 +85,31 @@
                                                     <br>
                                                     <br>
                                                     <br>
+
+                                                    <center>
+
+                                                        @if (!$fake)
+                                                        <a style="font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
+                                                            href="{{ config('app.url') }}/add-photos/ack/{{ $cardId }}/{{ $guest->code }}/{{ $lang }}">
+                                                            Go to Gallery
+                                                        </a>
+                                                    @endif
+
+                                                    @if ($fake)
+                                                        <a style="font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
+                                                            href="">
+                                                            Go to Gallery
+                                                        </a>
+                                                    @endif
+                                                    <a style="font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-decoration:none;background-color:#242424;border-radius:5px;color:#ffffff;font-size:14px;padding:12px 30px;margin-bottom:10px;display:inline-block;text-transform:uppercase;white-space:nowrap"
+                                                        href="{{ config('app.url') }}/website/{{ $event->id_event }}">
+                                                        GO TO WEBSITE
+                                                    </a>
+                                                </center>
                                                 </td>
                                             </tr>
 
-                                            <tr>
+                                            {{-- <tr>
                                                 <td style="padding:0px 15px 50px 0px;font-family:"Open
                                                     Sans",Helvetica,Arial;font-size:14px;">
                                                     <center>
@@ -102,7 +133,7 @@
                                                     </a>
                                                 </center>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
 
                                             <tr>
                                                 <td

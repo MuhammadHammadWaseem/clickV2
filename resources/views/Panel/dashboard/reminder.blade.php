@@ -86,6 +86,10 @@
                             <label>{{ __('reminder.text') }}</label>
                             <textarea placeholder="{{ __('reminder.text_placeholder') }}" id="text">{{ $reminder[0]->atext }}</textarea> <!-- Use a textarea -->
                         </div>
+                        <div class="box">
+                            <label>{{ __('reminder.upload_image') }}</label>
+                            <input type="file" id="image" name="image" accept="image/*">
+                        </div>
                     </div>
                     <div class="text-right mt-3"> <!-- Aligns the button to the right -->
                         <button type="button" class="btn btn-success t-btn" id="save-btn" onclick="updateData()">{{ __('reminder.save') }}</button>
@@ -420,8 +424,9 @@
             const title = titleEditor.getData(); // Use the CKEditor instance for title
             const subtitle = subtitleEditor.getData(); // Use the CKEditor instance for subtitle
             const text = textEditor.getData();
+            const imageInput = document.getElementById('image'); // Get the file input element
+            const image = imageInput.files[0]
 
-            console.log("ddd", title);
             // Assuming you have a variable for the event ID
             const eventId = '{{ $reminder[0]->id_event }}'; // Replace with actual event ID as needed
 
@@ -431,6 +436,10 @@
             formData.append('asubtitle', subtitle);
             formData.append('atext', text);
             formData.append('idevent', {{ $eventId }});
+            if (image) {
+                formData.append('aimage', image);
+            }
+
             // Add other data as needed
             // If you want to send a photo, include it here as well
             // formData.append('photo', <your_photo_data>);
