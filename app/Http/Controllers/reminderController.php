@@ -264,18 +264,31 @@ class reminderController extends Controller
             $lang = App::getLocale();
             if ($guest && $guest->id_event == $request->route('idevent')) {
                 $event = Event::where('id_event', $request->route('idevent'))->first();
-                if ($event)
-                    return view('mails.acknowledgment')->with('event', $event)->with('guest', $guest)->with('cardId', $cardId)->with('lang', $lang)->with('fake', 0);
-                else
+                if ($event){
+                    $ackImageUrl = null;
+                    if (!empty($event->ack_image) && Storage::exists("public/$event->ack_image")) {
+                        $ackImageUrl = asset("storage/$event->ack_image");
+                    }
+                    return view('mails.acknowledgment')->with('event', $event)->with('ackImageUrl', $ackImageUrl)->with('guest', $guest)->with('cardId', $cardId)->with('lang', $lang)->with('fake', 0);
+                }
+                else{
                     return redirect('/');
-            } else
+                }
+            } else{
                 return redirect('/');
+            }
         } else {
             $event = Event::where('id_event', $request->route('idevent'))->first();
-            if ($event)
-                return view('mails.acknowledgment')->with('event', $event)->with('fake', 1);
-            else
+            if ($event){
+                $ackImageUrl = null;
+                    if (!empty($event->ack_image) && Storage::exists("public/$event->ack_image")) {
+                        $ackImageUrl = asset("storage/$event->ack_image");
+                    }
+                return view('mails.acknowledgment')->with('event', $event)->with('ackImageUrl', $ackImageUrl)->with('fake', 1);
+            }
+            else{
                 return redirect('/');
+            }
         }
     }
 
