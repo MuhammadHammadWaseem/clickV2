@@ -1265,7 +1265,7 @@
                                 $("#editAllergies").prop('checked', false);
                             }
                             $("#editNotes").text(response.notes);
-                            $scope.selectedMeal = response.id_meal ? response.id_meal : null;
+                            $scope.selectedMeal = (response.id_meal == 0) ? null : response.id_meal;
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);
