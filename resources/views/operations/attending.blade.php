@@ -1017,9 +1017,11 @@
             var url = '/cardInvitations/' + guestId + '/' + guestCode + '/' + guestName + '/' + languageCode;
 
             var backBtn = document.getElementById('backBtn');
-            backBtn.addEventListener('click', function() {
-                window.location.href = url;
-            })
+            if(backBtn){
+                backBtn.addEventListener('click', function() {
+                    window.location.href = url;
+                })
+            }
 
             var memberNumber;
             // Get the name field
