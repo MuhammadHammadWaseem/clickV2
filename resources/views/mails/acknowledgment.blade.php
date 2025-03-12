@@ -12,11 +12,11 @@
 
 <body style="background:#fff;">
     <br><br>
-    
+
     @php
         $imagePath = 'storage/uploads/acknowledgment.jpg';
         $fullPath = public_path($imagePath);
-        $imageUrl = asset($imagePath) . '?t=' . (file_exists($fullPath) ? filemtime($fullPath) : time());
+        $imageUrl = file_exists($fullPath) ? url($imagePath) . '?t=' . filemtime($fullPath) : '';
     @endphp
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -47,7 +47,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td @if (file_exists($fullPath))
+                                                <td @if ($imageUrl)
                                                     style="background: url('{{ $imageUrl }}') no-repeat center center; background-size: cover;
                                                         padding:0px 15px 50px 0px;font-family:'Open Sans',Helvetica,Arial;font-size:14px; text-align:center;"
                                                 @else
