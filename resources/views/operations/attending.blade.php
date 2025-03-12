@@ -835,7 +835,7 @@
                             {{-- use --}}
                             <select class="form-select mb-2" ng-model="eg.idmealguest">
                                 <option value="">{{ __('attending.Select meal') }}</option>
-                                <option ng-repeat="meal in meals" ng-value="meal.id_meal.toString()">@{{ meal.name }}</option>
+                                <option ng-repeat="meal in meals" ng-value="meal.id_meal" track by meal.id_meal">@{{ meal.name }}</option>
                                 {{-- <option ng-repeat="meal in meals" ng-value="meal.id_meal">@{{ meal.name }}</option> --}}
                             </select>
                             <div class="form-floating mb-2">
