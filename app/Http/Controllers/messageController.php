@@ -197,7 +197,7 @@ class messageController extends Controller
             $lang = App::getLocale();
             //---------- SMS ----------------------
             // $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $g->phone, 'Body' => $cardId->msgTitle . "\n\n" . "You Got a new Acknowledgement \n https://clickinvitation.com/mail-acknowledgment/" . $g->id_guest . "/" . $event->id_event];
-            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $g->phone, 'Body' => $cardId->msgTitle . "\n\n" . "*You Got the Message* \n\n Click on the link to know about your Host: https://clickinvitation.com/mail-message/fake/" . $event->id_event . "\n\n" . "Click here to know more - https://clickinvitation.com/"];
+            $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $g->phone, 'Body' => $cardId->msgTitle . "\n\n" . "*You Got a Message* \n\n Click on the link to know about your Host: https://clickinvitation.com/mail-message/fake/" . $event->id_event . "\n\n" . "Click here to know more - https://clickinvitation.com/"];
             /*}
             elseif ($lang == 'fr'){
                 $params=['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $g->phone, 'Body' => $cardId['msgTitle'] ."\n\n". 'Vous avez une invitation pour'.$event->name.' '.$event->type.' https://clickinvitation.com/cardInvitation/'.$cardId['id_card'].'/'.$g->code.'/'.$guestName.'/'.$lang];
