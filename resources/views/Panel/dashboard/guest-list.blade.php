@@ -4955,11 +4955,11 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                         // Set confirm (radio button)
                         if (response.opened == 1) {
-                            $('#edit_confirmYes').prop(
-                                'checked', true);
-                        } else {
-                            $('#edit_confirmNo').prop('checked',
-                                true);
+                            $('#edit_confirmYes').prop('checked', true);
+                        } else if(response.opened == 2) {
+                            $('#edit_confirmYes').prop('checked', true);
+                        }else{
+                            $('#edit_confirmNo').prop('checked', true);
                         }
 
                         // Store the guest ID in a hidden field (for submission)

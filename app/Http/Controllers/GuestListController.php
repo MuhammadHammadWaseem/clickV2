@@ -590,6 +590,8 @@ class GuestListController extends Controller
             $guest->members_number = $request->members ?? 0;
             if($guest->opened != null){
                 $guest->opened = ($request->confirm == "1") ? 2 : 0;
+            }else{
+                $guest->opened = ($request->confirm == "1") ? 2 : null;
             }
             $guest->save();
             
