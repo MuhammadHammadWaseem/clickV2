@@ -1527,7 +1527,7 @@
                     $scope.eg.notesguest = $scope.mygroup.notes;
                     $scope.eg.allergiesguest = $scope.mygroup.allergies;
                     $scope.eg.idmealguest = ($scope.mygroup.id_meal == 0) ? null : Number($scope.mygroup.id_meal);
-                    console.log($scope.eg.idmealguest);
+                    console.log("test",$scope.eg.idmealguest);
 
                     $scope.eg.membernumberguest = $scope.mygroup.members_number;
                     $scope.eg.parentidguest = $scope.mygroup.parent_id_guest;
