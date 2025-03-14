@@ -56,6 +56,7 @@ return[
     'declined' => 'DECLINED',
     'confirmed' => 'CONFIRMED',
     'not_open' => 'NOT OPEN',
+    'not_sent' => 'NOT SENT',
     'opened' => 'OPENED',
     'a_to_z' => 'A to Z',
     'z_to_a' => 'Z to A',

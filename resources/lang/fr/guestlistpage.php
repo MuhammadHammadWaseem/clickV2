@@ -55,6 +55,7 @@ return[
     'declined' => 'REFUSÉ',
     'confirmed' => 'CONFIRMÉ',
     'not_open' => 'NON OUVERT',
+    'not_sent' => 'NON ENVOYÉ',
     'opened' => 'OUVERT',
     'a_to_z' => 'A à Z',
     'z_to_a' => 'Z à A',

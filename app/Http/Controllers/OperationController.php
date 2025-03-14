@@ -28,8 +28,10 @@ class OperationController extends Controller
     {
         $guest = Guest::where('code', $request->route('guestcode'))->first();
         if ($guest) {
-            $guest->opened = 2;
-            $guest->save();
+            if($guest->declined != 1) {
+                $guest->opened = 2;
+                $guest->save();
+            }
             $event = Event::where('id_event', $guest->id_event)->first();
             $group = $guest;
             $added = Guest::where('parent_id_guest', $guest->id_guest)->count();
@@ -54,7 +56,7 @@ class OperationController extends Controller
     public function openedanswered(Request $request)
     {
         $guest = Guest::where('id_guest', $request->idguest)->first();
-        if ($guest->opened != 2) {
+        if ($guest->opened != 2 && $guest->declined != 1) {
             $guest->opened = $request->opened;
             $guest->save();
         }
@@ -210,9 +212,10 @@ class OperationController extends Controller
     {
         $guest = Guest::where('id_guest', $request->idguest)->first();
         if ($guest) {
-            $guest->opened = null;
             $guest->declined = 1;
+            $guest->opened = null;
             $guest->checkin = null;
+            $guest->id_table = 0;
             $guest->save();
             return 1;
         }
@@ -485,6 +488,13 @@ class OperationController extends Controller
         $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
 
         if (strlen($guest->whatsapp) > 0) {
+
+            if ($guest->opened == null) {
+                DB::table('guests')
+                    ->where('id_guest', $req->guestID)
+                    ->update(['opened' => 0]);
+            }
+
             $guestName = str_replace(" ", "+", $guest->name);
 
             $curl = curl_init();
@@ -558,6 +568,12 @@ class OperationController extends Controller
         $lang = App::getLocale();
 
         if (strlen($guest->email) > 0) {
+
+            if ($guest->opened === null) {
+                DB::table('guests')
+                    ->where('id_guest', $req->guestID)
+                    ->update(['opened' => 0]);
+            }
             $guestName = str_replace(" ", "+", $guest->name);
 
             $dateString = $event->date;
@@ -843,6 +859,11 @@ class OperationController extends Controller
         $guestName = str_replace(" ", "+", $guest->name);
 
         if (strlen($guest->phone) > 0) {
+            if ($guest->opened == null) {
+                DB::table('guests')
+                    ->where('id_guest', $req->guestID)
+                    ->update(['opened' => 0]);
+            }
             $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest->phone, 'Body' => $cardId->msgTitle . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guestName . '/' . $lang];
             if ($lang == 'en') {
                 $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest->phone, 'Body' => $cardId->msgTitle . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . $event->type . ' https://clickinvitation.com/cardInvitations/' . $cardId->id_card . '/' . $guest->code . '/' . $guestName . '/' . $lang];

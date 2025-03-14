@@ -115,6 +115,13 @@
                         canv.clear();
                         canv.loadFromJSON(jsonData, function() {
                             canv.renderAll();
+                            canv.forEachObject(function(obj) {
+                                obj.set({
+                                    selectable: false,
+                                    evented: false
+                                });
+                            });
+                            canv.selection = false;
                         });
                     }
                 });

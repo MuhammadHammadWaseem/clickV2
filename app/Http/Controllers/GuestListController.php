@@ -345,10 +345,10 @@ class GuestListController extends Controller
         }
 
         if ($request->filter == "not-open") {
-            $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->whereNull('declined')->whereNull('opened')->get();
+            $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->whereNull('declined')->whereNull('opened')->orWhere('opened', 0)->get();
             foreach ($guests as $g) {
                 $NotConfim = 0;
-                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('declined')->whereNull('opened')->get();
+                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('declined')->whereNull('opened')->orWhere('opened', 0)->get();
 
                 if ($g->opened) {
 
@@ -388,6 +388,49 @@ class GuestListController extends Controller
             ]);
         }
 
+        if ($request->filter == "not-sent") {
+            $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->whereNull('declined')->whereNull('opened')->orWhere('opened', 0)->get();
+            foreach ($guests as $g) {
+                $NotConfim = 0;
+                $g->members = Guest::where('id_event', $eventId)->where('mainguest', 0)->where('parent_id_guest', $g->id_guest)->whereNull('declined')->whereNull('opened')->orWhere('opened', 0)->get();
+
+                if ($g->opened) {
+
+                    $g->NotConfim = 1;
+                } else {
+                    $g->NotConfim = 0;
+                }
+
+                foreach ($g->members as $gm) {
+                    if ($gm->opened) {
+
+                        $gm->NotConfim = 1;
+                    } else {
+                        $gm->NotConfim = 0;
+                    }
+
+                    if ($gm->id_meal != 0)
+                        $gm->meal = Meal::where('id_meal', $gm->id_meal)->first();
+                }
+
+
+                foreach ($g->members as $gm) {
+                    if ($gm->id_table != 0)
+                        $gm->table = Table::where('id_table', $gm->id_table)->first();
+                }
+            }
+            foreach ($guests as $g) {
+                if ($g->id_meal != 0)
+                    $g->meal = Meal::where('id_meal', $g->id_meal)->first();
+            }
+            foreach ($guests as $g) {
+                if ($g->id_table != 0)
+                    $g->table = Table::where('id_table', $g->id_table)->first();
+            }
+            return response()->json([
+                'guests' => $guests,
+            ]);
+        }
 
         if ($request->filter == "opened") {
             $guests = Guest::where('id_event', $eventId)->where('mainguest', 1)->where('opened', 1)->get();
@@ -524,7 +567,6 @@ class GuestListController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         $guest = Guest::where('id_guest', $request->idguest)->first();
         $members = Guest::where('parent_id_guest', $request->idguest)->get();
 
@@ -546,7 +588,9 @@ class GuestListController extends Controller
             $guest->id_meal = $request->meal ?? 0;
             $guest->notes = $request->notes ?? '';
             $guest->members_number = $request->members ?? 0;
-            $guest->opened = ($request->confirm == "1") ? 2 : 0;
+            if($guest->opened != null){
+                $guest->opened = ($request->confirm == "1") ? 2 : 0;
+            }
             $guest->save();
             
             if($guest->opened == 1 || $guest->opened == 2){
@@ -956,6 +1000,11 @@ class GuestListController extends Controller
                 if ($request->formData && isset($request->formData['emailCheck'])) {
                     if ($guest['email']) {
 
+                        if($guest['opened'] == null){
+                            $guest['opened'] = 0;
+                            $guest->save();
+                        }
+
                         // if (!file_exists('/images/' . $guest['id_guest'] . $guest['code'] . '.png')) {
                         //     //Generate QR Code if not exists
                         //     $lang = Session('applocale');
@@ -1062,6 +1111,10 @@ class GuestListController extends Controller
                 //---------- SMS ----------------------
                 if ($request->formData && isset($request->formData['smsCheck'])) {
                     if ($guest['phone'] && $guest['phone'] != null && $guest['parent_id_guest'] == 0) {
+                        if($guest['opened'] == null){
+                            $guest['opened'] = 0;
+                            $guest->save();
+                        }
                         if ($event->type == "CORPORATE") {
                             if ($lang == 'en') {
                                 $params = ['MessagingServiceSid' => 'MGc3abea24552404515b56c737c2043952', 'To' => $guest['phone'], 'Body' => $cardId['msgTitle'] . "\n\n" . 'You Got Invitation For ' . $event->name . ' ' . config('app.url') . '/' . 'cardInvitations/' . $cardId['id_card'] . '/' . $guest['code'] . '/' . $guestName . '/' . $lang];
@@ -1121,10 +1174,13 @@ class GuestListController extends Controller
                     }
                 }
 
-
                 //---------- WHATSAPP ----------------------
                 if ($request->formData && isset($request->formData['whatsappCheck'])) {
                     if ($guest['whatsapp'] && $guest['whatsapp'] != 0 && $guest['parent_id_guest'] == 0) {
+                        if($guest['opened'] == null){
+                            $guest['opened'] = 0;
+                            $guest->save();
+                        }
                         $url = "https://graph.facebook.com/v16.0/112950588286835/messages";
 
                         $curl = curl_init();

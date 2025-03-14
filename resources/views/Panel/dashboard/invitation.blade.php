@@ -1058,7 +1058,7 @@
                 <div class="modal-body">
                     <div class="text">
                         <h2>{{ __('invitation.settings') }}</h2>
-                        <p>{{ __('invitation.lorem_ipsum_description') }}</p>
+                        {{-- <p>{{ __('invitation.lorem_ipsum_description') }}</p> --}}
                     </div>
                     <form>
                         <div class="two-inline-inputes">
