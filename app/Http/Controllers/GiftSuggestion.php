@@ -78,7 +78,21 @@ class GiftSuggestion extends Controller
 
 public function savetransfer(Request $request)
 {
-    $event=Event::where('id_event',$request->eventId)->first();
+    $validator = \Validator::make($request->all(), [
+        'transfertype' => 'required',
+        'transferlink' => 'required',
+    ],[
+        'transfertype.required' => 'Transfer Type is required',
+        'transferlink.required' => 'Transfer Link is required',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'success' => false,
+            'message' => $validator->errors()->first()
+        ]);
+    }
+    $event = Event::where('id_event',$request->eventId)->first();
     if($event){
         $event->transfer_type=$request->transfertype;
         $event->transfer_link=$request->transferlink;

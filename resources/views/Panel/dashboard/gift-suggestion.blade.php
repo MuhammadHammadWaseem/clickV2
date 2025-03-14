@@ -173,9 +173,7 @@
                         </div> --}}
                         <div class="payment-select-option">
                             <select id="transferType" required name="type">
-                                <option value="TRANSFER TYPE"
-                                    {{ $event->transfer_type == 'TRANSFER TYPE' ? 'selected' : '' }}>
-                                    {{ __('giftsuggestion.TRANSFER TYPE') }}</option>
+                                <option selected disabled>{{ __('giftsuggestion.TRANSFER TYPE') }}</option>
                                 <option value="PAYPAL" {{ $event->transfer_type == 'PAYPAL' ? 'selected' : '' }}>
                                     {{ __('giftsuggestion.paypal') }}</option>
                                 <option value="STRIPE" {{ $event->transfer_type == 'STRIPE' ? 'selected' : '' }}>
@@ -377,9 +375,7 @@
                         <form id="addGiftForm">
                             @csrf
                             <select id="transferType2" required name="type">
-                                <option value="TRANSFER TYPE"
-                                    {{ $event->transfer_type == 'TRANSFER TYPE' ? 'selected' : '' }}>
-                                    {{ __('giftsuggestion.TRANSFER TYPE') }}</option>
+                                <option disabled selected>{{ __('giftsuggestion.TRANSFER TYPE') }}</option>
                                 <option value="PAYPAL" {{ $event->transfer_type == 'PAYPAL' ? 'selected' : '' }}>
                                     {{ __('giftsuggestion.paypal') }}</option>
                                 <option value="STRIPE" {{ $event->transfer_type == 'STRIPE' ? 'selected' : '' }}>
@@ -873,7 +869,8 @@
                         $("#closePaymentModal2").click();
                         console.log(response.data);
                     } else {
-                        toastr.error('Failed to save transfer data. Please try again.');
+
+                        toastr.error(response.message);
                     }
                 },
                 error: function(xhr) {
@@ -908,7 +905,7 @@
                         $("#transferType2").val('');
                         $("#transferLink2").val('');
                     } else {
-                        toastr.error('Failed to save transfer data. Please try again.');
+                        toastr.error(response.message);
                     }
                 },
                 error: function(xhr) {

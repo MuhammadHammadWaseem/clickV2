@@ -564,7 +564,8 @@
                         $("#closeEditModal").click();
                     },
                     error: function(xhr) {
-                        alert('An error occurred while updating the meal');
+                        toastr.error(xhr.responseJSON.message);
+                        // alert('An error occurred while updating the meal');
                     }
                 });
             });

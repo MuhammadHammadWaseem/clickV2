@@ -74,7 +74,16 @@ class MealController extends Controller
             'namemeal' => 'required|string|max:25',
             'descriptionmeal' => 'nullable|string',
             'id_event' => 'required|integer', // Assuming you need an event ID
-        ]);
+        ],
+        [
+            'namemeal.required' => 'The name field is required.',
+            'namemeal.string' => 'The name field must be a string.',
+            'namemeal.max' => 'The name field must not exceed 25 characters.',
+            'descriptionmeal.string' => 'The description field must be a string.',
+            'id_event.required' => 'The event ID field is required.',
+            'id_event.integer' => 'The event ID field must be an integer.',
+        ]
+    );
 
         $meal = Meal::findOrFail($id);
         $meal->name = $request->namemeal; // Ensure this name matches your form's input name
