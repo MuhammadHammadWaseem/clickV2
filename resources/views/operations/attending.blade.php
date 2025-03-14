@@ -1265,7 +1265,7 @@
                                 $("#editAllergies").prop('checked', false);
                             }
                             $("#editNotes").text(response.notes);
-                            $scope.selectedMeal = (response.id_meal == 0) ? null : Number(response.id_meal);
+                            $scope.selectedMeal = (Number(response.id_meal) === 0) ? null : Number(response.id_meal);
                             console.log($scope.selectedMeal);
 
                         },
@@ -1527,7 +1527,6 @@
                     $scope.eg.notesguest = $scope.mygroup.notes;
                     $scope.eg.allergiesguest = $scope.mygroup.allergies;
                     $scope.eg.idmealguest = (Number($scope.mygroup.id_meal) === 0) ? null : Number($scope.mygroup.id_meal);
-
                     console.log("test",$scope.eg.idmealguest);
                     console.log("Value:", $scope.mygroup.id_meal, "Type:", typeof $scope.mygroup.id_meal);
 
