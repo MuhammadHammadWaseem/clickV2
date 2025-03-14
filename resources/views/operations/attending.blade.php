@@ -1425,7 +1425,7 @@
                             var NowGuests = TotalGuests + 1;
                             var remainingGuests = {{ $guest->members_number }} - NowGuests;
 
-                            if (NowGuests >= {{ $guest->members_number }}) {
+                            if (NowGuests >= {{ $guest->members_number ?? 0 }}) {
                                 console.log("Max number of guests reached");
                                 if (isMeal !== 0) {
                                     Swal.fire({
