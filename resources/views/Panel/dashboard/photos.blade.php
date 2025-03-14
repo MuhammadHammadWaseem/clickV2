@@ -49,7 +49,7 @@
             <div class="col-lg-12">
                 <div class="box-styling your-web-page">
                     <div class="text">
-                        <h2>{{ __('photos.table_management') }}</h2>
+                        <h2>{{ __('photos.event_photos_gallery') }}</h2>
                         <p>{{ __('photos.photo_gallery_intro') }}</p>
                         <p class="bold-text-color-change"> {{ __('photos.thank_you_email_reminder') }}</p>
                     </div>

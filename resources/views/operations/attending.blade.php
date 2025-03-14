@@ -403,6 +403,15 @@
 
                                     </button>
 
+                                    @if ($isCorporate)
+                                        <button style="width: 100%" class="btn t-btn" ng-show="guestCanSelectSeats == 1"
+                                            data-bs-toggle="modal" data-bs-target="#seatguestModal"
+                                            ng-click="selectSeat(mygroup.id_guest)">
+                                            <i class="fal fa-chair-office" style="color: #ffffff;" aria-hidden="true"></i>
+                                        <p>{{ __('attending.Select Seat') }}</p>
+                                        </button>
+                                    @endif
+
                                     @if ($guest->declined == 1)
                                         <button style="width: 100%" id="confirm" class="btn t-btn mb-1 mt-1"
                                             ng-click="confirmGuest({{ $guest->id_guest }},{{ $guest->members_number }})"
@@ -418,11 +427,6 @@
                                         </button>
                                     @endif
 
-                                    @if ($isCorporate)
-                                        <button class="btn btn-success" ng-show="guestCanSelectSeats == 1"
-                                            data-bs-toggle="modal" data-bs-target="#seatguestModal"
-                                            ng-click="selectSeat(mygroup.id_guest)">{{ __('attending.Select Seat') }}</button>
-                                    @endif
                                 </div>
                             </div>
                         </div>

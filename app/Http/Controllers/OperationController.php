@@ -1164,4 +1164,46 @@ class OperationController extends Controller
         ]);
         return $event;
     }
+
+    public function getSeats(Request $request){
+        return DB::table('seats')->where(['id_table'=> $request->idTable, 'id_guest' => '0'])->get();
+
+    }
+
+    public function saveSeats(Request $request){
+        //return $request;
+
+        $guest= Guest::where('id_guest',$request->idGuest)->first();
+                if($guest){
+                    $guest->id_table=$request->idTable;
+                    $guest->save();
+
+                    $old = DB::table('seats')->where('id_guest',$request->idGuest)->get();
+                    $old2 = DB::table('seats')->where('id',$request->idSeat)->get();
+                    //return $old2;
+                    if(count($old2) > 0 ){
+                        if($old2[0]->id_guest != 0){
+                            //DB::update("update guests set id_table = 0 where id =".$old2[0]->id_guest); 
+                            $guestOld=Guest::where('id_guest',$old2[0]->id_guest)->first();
+                            if($guestOld){
+                                $guestOld->id_table=0;
+                                $guestOld->save();
+                            }
+                        }
+                        
+                    }
+                    if(count($old) > 0){
+                        
+                        DB::update("update seats set id_guest = '0' where id =".$old[0]->id);    
+                        
+                    }
+                    
+                    
+                    DB::update('update seats set id_guest = '.$request->idGuest.' where id ='.$request->idSeat);
+
+                    
+                    return 1;
+                }
+                return 0;
+    }
 }

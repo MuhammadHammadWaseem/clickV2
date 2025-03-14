@@ -1267,13 +1267,14 @@ function getTable() {
                     $("#sub-main-content2").empty();
                     $("#closeSetTableModal2").click();
                     response.guests.forEach(guest => {
+                        console.log("guest", guest);
                         $("#sub-main-content2").append(`
                             <div class="sub-main-content">
                                 <ul>
                                     <li>${guest.titleGuest ?? ""} ${guest.name}</li>
                                     <li>${guest.mealName ?? "-"}</li>
                                     ${(guest.id_table != 0) ?
-                                        `<li class="text-success">${guest.tablename}</li>`
+                                        `<li class="${guest.id_table == tableId ? 'text-success' : 'text-danger'}">${guest.tablename ?? "Not Seated"}</li>`
                                         :
                                         `<li class="text-danger">Not Seated</li>`
                                     }

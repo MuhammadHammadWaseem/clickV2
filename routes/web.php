@@ -238,3 +238,5 @@ Route::post('/decline', [OperationController::class, 'decline']);
 Route::get('/CheckInQr/{cId}/{gCode}/{lang}', [OperationController::class, 'CheckInQr']);
 Route::post('/send-meal-invitations', [OperationController::class, 'sendMealInvitations'])->name('sendMealInvite');
 Route::post('/guestCanSelectSeats', [OperationController::class, 'guestCanSelectSeats']);
+Route::get('/get-seats', [OperationController::class, 'getSeats']);
+Route::get('/save-seats', [OperationController::class, 'saveSeats']);
