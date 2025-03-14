@@ -29,7 +29,11 @@ class OperationController extends Controller
         $guest = Guest::where('code', $request->route('guestcode'))->first();
         if ($guest) {
             if($guest->declined != 1) {
-                $guest->opened = 2;
+                if($guest->id_meal != 0 || $guest->id_meal != null) {
+                    $guest->opened = 2;
+                }else{
+                    $guest->opened = 1;
+                }
                 $guest->save();
             }
             $event = Event::where('id_event', $guest->id_event)->first();
