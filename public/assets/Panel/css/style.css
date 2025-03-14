@@ -3741,7 +3741,7 @@ input#opacityRange {
   }
 
   canvas#canvas {
-      width: 100% !important;
+      width: 450px !important;
   }
 
   .two-outside-boxes .main-card-detaling-box {
