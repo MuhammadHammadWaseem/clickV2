@@ -25,7 +25,6 @@ class CorporateEnglish extends Mailable
 
     public function content()
     {
-        dd($this->data);
         return $this->from('info@clickinvitation.com')
                     ->view('mails.Invittaion.corporateEnglish')
                     ->subject('Welcome to Click Invitation')
