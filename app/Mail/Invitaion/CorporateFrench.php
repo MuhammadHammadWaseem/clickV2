@@ -23,7 +23,7 @@ class CorporateFrench extends Mailable
     }
 
 
-    public function content()
+    public function build()
     {
         return $this->from('info@clickinvitation.com')
                     ->view('mails.Invittaion.corporateFrench')

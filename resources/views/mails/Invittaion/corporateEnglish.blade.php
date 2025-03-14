@@ -44,6 +44,7 @@
             width: 100%;
         }
 
+
         .header {
             background-color: #5a5a5a;
             text-align: center;
@@ -95,13 +96,15 @@
                                         <p style="font-size:16px; color:#333333;">
                                             {{ $data['cardId']['msgTitle'] ?? 'No Title Available' }}
                                         </p>
+                                        @if ($data['event']['type'] == 'CORPORATE')
+                                        <p style="font-size:16px; color:#333333;">
+                                            Your Are Invited To A Corporate Event
+                                        </p>
+                                        @else
                                         <p style="font-size:16px; color:#333333;">
                                             {{ ($data['event']['groomfname'] ?? '') . ' & ' . ($data['event']['bridefname'] ?? '') }}
-                                            {{-- {{ ($data['event']['name'] ?? '') }} --}}
-                                            {{-- {{ ($data['event']['groomfname'] ?? '') . ' ' . ($data['event']['groomlname'] ?? '') }}
-                                            &
-                                            {{ ($data['event']['bridefname'] ?? '') . ' ' . ($data['event']['bridelname'] ?? '') }} --}}
                                         </p>
+                                        @endif
                                         <p style="font-size:14px; color:#777;">
                                             {{ $data['formattedDate'] ?? 'Date not available' }}
                                         </p>
