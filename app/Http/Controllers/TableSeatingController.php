@@ -578,6 +578,8 @@ class TableSeatingController extends Controller
                 $guest->opened = 1;
                 $guest->save();
             }
+        }else{
+            abort(404, 'Guest data not found');
         }
 
         // Fetch animation data
