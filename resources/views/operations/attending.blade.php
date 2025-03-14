@@ -1056,7 +1056,7 @@
                 $scope.loading = 1;
                 $scope.saveyes = 0;
                 $scope.added = {{ $added }};
-                $scope.nummembers = {{ $guest->members_number }};
+                $scope.nummembers = {{ $guest->members_number ?? 0 }};
                 $scope.nm = [];
                 $scope.eg = [];
                 // $scope.nm.allergiesmember = 0;
