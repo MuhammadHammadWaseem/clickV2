@@ -1526,9 +1526,11 @@
                     $scope.eg.whatsappguest = $scope.mygroup.whatsapp;
                     $scope.eg.notesguest = $scope.mygroup.notes;
                     $scope.eg.allergiesguest = $scope.mygroup.allergies;
-                    $scope.eg.idmealguest = ($scope.mygroup.id_meal === 0) ? null : Number($scope.mygroup.id_meal);
+                    $scope.eg.idmealguest = (Number($scope.mygroup.id_meal) === 0) ? null : Number($scope.mygroup.id_meal);
 
                     console.log("test",$scope.eg.idmealguest);
+                    console.log("Value:", $scope.mygroup.id_meal, "Type:", typeof $scope.mygroup.id_meal);
+
 
                     $scope.eg.membernumberguest = $scope.mygroup.members_number;
                     $scope.eg.parentidguest = $scope.mygroup.parent_id_guest;
