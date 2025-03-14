@@ -1729,8 +1729,10 @@
         }
 
 
-        function onPlanImg() {
-            document.getElementById('btn-layout').style.display = "none";
+        if(document.getElementById('btn-layout') != null){
+            function onPlanImg() {
+                document.getElementById('btn-layout').style.display = "none";
+            }
         }
     </script>
     <script src="/assets/jspanel/bootstrap.min.js"></script>
