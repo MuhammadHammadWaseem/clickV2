@@ -1729,8 +1729,8 @@
         }
 
 
-        if(document.getElementById('btn-layout') != null){
-            function onPlanImg() {
+        function onPlanImg() {
+            if(document.getElementById('btn-layout') != null){
                 document.getElementById('btn-layout').style.display = "none";
             }
         }
