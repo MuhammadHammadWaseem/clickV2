@@ -206,6 +206,9 @@ class OperationController extends Controller
             if ($request->has('membersNumber')) {
                 $guest->members_number = $request->membersNumber;
             }
+            if ($request->has('idmealguest')) {
+                $guest->opened = 2;
+            }
             $guest->save();
             return 1;
         }
