@@ -890,11 +890,11 @@ function getTable() {
                                             <h5>${table.number}</h5>
                                         </div>
                                         <div class="box">
-                                            ${(table.guest_number - table.guests.length <= 0) ? `
-                                                                                                                                                                        <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                    ` : `
-                                                                                                                                                                        <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.guest_number}</h5>
-                                                                                                                                                                    `}
+                                            ${(table.seats.length - table.guests.length <= 0) ? `
+                                                <h5><span class="text-danger">CLOSED</span> ${table.guests.length}/${table.seats.length}</h5>
+                                            ` : `
+                                                <h5><span class="text-success">OPEN</span> ${table.guests.length}/${table.seats.length}</h5>
+                                            `}
                                         </div>
                                         <div class="box">
                                             <div class="three-action-align">
@@ -1463,6 +1463,7 @@ function getTable() {
                 url: url,
                 type: 'GET',
                 success: function(response) {
+                    console.log(response);
                     // Populate the form with the current table data
                     $('#editTableId').val(response.table.id_table);
                     $('#editTableName').val(response.table.name);
